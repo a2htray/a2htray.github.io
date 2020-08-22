@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="文献阅读，扩展知识面。 文章标题：特征降维技术的研究与进展 作者：黄铉    (西南交通大学信息科学与技术学院) 摘要 数据特征的质量会直接影响模型的准确度.在模式识别领域,特征降维技术一直受到研究者们的关注.随着大数据时代的到来,数据量巨增,数据维度不断升高.在处理高维数据时,传统的数据挖掘方法的性能降低甚至失效.实践表明,在数据分析前先对其特征进行降维是避免“维数灾难”的有效手段.降维技术在各">
+<meta property="og:type" content="article">
+<meta property="og:title" content="-走读- 特征降维技术的研究与进展">
+<meta property="og:url" content="http://yoursite.com/2020/04/01/ref-feature-dimensionality-reduction/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="文献阅读，扩展知识面。 文章标题：特征降维技术的研究与进展 作者：黄铉    (西南交通大学信息科学与技术学院) 摘要 数据特征的质量会直接影响模型的准确度.在模式识别领域,特征降维技术一直受到研究者们的关注.随着大数据时代的到来,数据量巨增,数据维度不断升高.在处理高维数据时,传统的数据挖掘方法的性能降低甚至失效.实践表明,在数据分析前先对其特征进行降维是避免“维数灾难”的有效手段.降维技术在各">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/04/01/ref-feature-dimensionality-reduction/QQ%E6%88%AA%E5%9B%BE20200401210226.png">
+<meta property="article:published_time" content="2020-04-01T12:32:35.000Z">
+<meta property="article:modified_time" content="2020-04-01T13:26:31.245Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Reference">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/01/ref-feature-dimensionality-reduction/QQ%E6%88%AA%E5%9B%BE20200401210226.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/01/ref-feature-dimensionality-reduction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>-走读- 特征降维技术的研究与进展 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/ref-feature-dimensionality-reduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          -走读- 特征降维技术的研究与进展
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-01 20:32:35 / Modified: 21:26:31" itemprop="dateCreated datePublished" datetime="2020-04-01T20:32:35+08:00">2020-04-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>文献阅读，扩展知识面。</p>
+<h3 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h3><p>标题：特征降维技术的研究与进展</p>
+<p>作者：黄铉    (西南交通大学信息科学与技术学院)</p>
+<p><strong>摘要</strong></p>
+<p>数据特征的质量会直接影响模型的准确度.在模式识别领域,特征降维技术一直受到研究者们的关注.随着大数据时代的到来,数据量巨增,数据维度不断升高.在处理高维数据时,传统的数据挖掘方法的性能降低甚至失效.实践表明,在数据分析前先对其特征进行降维是避免“维数灾难”的有效手段.降维技术在各领域被广泛应用,文中详细介绍了<strong>特征提取和特征选择</strong>两类不同的降维方法,并对其特点进行了比较.通过子集搜索策略和评价准则两个关键过程对特征选择中最具代表性的算法进行了总结和分析.最后从实际应用出发,探讨了特征降维技术值得关注的研究方向.</p>
+<a id="more"></a>
+
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p><u>为什么要进行降维处理？</u></p>
+<p>高维数据中包含大量的冗余特征,这些冗余特征会对后续的数据分析过程产生干扰,从而影响最后的结果;同时还会影响算法的复杂度,增加计算开销.若用传统的学习方法来处理高维数据,会使算法的学习性能降低甚至失效,从而导致数据资源成了“维数灾难”.</p>
+<p><u>针对维数灾难的两种处理方法：</u></p>
+<ol>
+<li>针对特定的高维数据重新设计新的算法来处理数据</li>
+<li>先对原始数据进行降维处理,再利用降维后的数据特征来进行后续分类或聚类学习</li>
+</ol>
+<p><u>特征提取是通过<strong>线性或非线性转</strong>换将原始数据的特征映射到低维子空间,同时在低维空间中保持大量原始数据相关信息的过程</u></p>
+<p><u>特征提取可分成：</u></p>
+<ol>
+<li>线性特征提取<ol>
+<li>主成分分析 PCA<ol>
+<li>擅长处理呈高斯分布的原始数据,通过协方差的度量最大限度地去除噪声和冗余,但它不能用于空间非线性的数据.</li>
+</ol>
+</li>
+<li>线性判别分析 LDA<ol>
+<li>LDA 是有监督的特征提取方法,它与 PCA 一样,适合处理高斯分布数</li>
+</ol>
+</li>
+<li>独立成分分析 ICA<ol>
+<li>与 PCA 一样,只能处理线性映射数,但 ICA 求解的是最能使数据相互独立的方向,它将原始数据分解为若干独立分量的线性组合,它更适合处理非高斯分布的情况</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>非线性特征提取<ol>
+<li>基于核方法,这类方法的主要思想是将非线性数据通过核函数投影到维度更高的核空间,使数据线性可<br>分<ol>
+<li>KPCA</li>
+<li>KLDA</li>
+</ol>
+</li>
+<li>基于流形学习的方法<ol>
+<li>流形学习方法假设数据点分布在一个嵌入高维空间的非线性低维流形上,它的目标是寻找一个转换矩阵,以将高维空间中的数据集投影到低维空间中,使得在高维空间中互为近邻的两点投影到低维空间后仍互为近邻</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><u>特征选择</u></p>
+<p>特征选择是根据特征的相关性和冗余度从原始数据特征集中选出一些特征,使其满足特定指标的过程,选出的特征是<br>原始特征的子集,因此也被称为<strong>特征子集选择</strong>。</p>
+<ol>
+<li>基于搜索策略的特征选择方法<ol>
+<li>全局最优搜索策略的特征选择方法<code>对于高维数据,其时间复杂度较高,在实际应用中很难应用</code><ol>
+<li>穷举法</li>
+<li>分支定界</li>
+</ol>
+</li>
+<li>随机搜索策略的特征选择方法<code>找到局部最优</code></li>
+<li>启发式搜索的特征选择方法<code>局部最优</code><ol>
+<li>序列前向搜索法<code>从空集出发，依次加特征</code></li>
+<li>序列后向搜索法<code>从全集出发，依次减特征</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>基于特征子集评价准则的特征选择方法<ol>
+<li>Filter</li>
+<li>Wrapper</li>
+<li>Embedded</li>
+</ol>
+</li>
+</ol>
+<p><u>Filter</u></p>
+<p>独立于具体的分类模型,它<strong>直接利用数据的统计特性来评价特征</strong>,并根据特征的重要程度来排序,进而去除得分较低的特征。<code>距离度量、相关性度量、一致性度量和信息度量的评估方法</code></p>
+<p><img src="/2020/04/01/ref-feature-dimensionality-reduction/QQ%E6%88%AA%E5%9B%BE20200401210226.png" alt="图1-度量"></p>
+<p><u>Wrapper</u><br>需要预先设定分类器学习模型,然后根据后续分类器的准确率对特征子集进行评价。</p>
+<p>计算速度慢，特别是在数据维度很大时会显著地增加计算的时间,而且<strong>泛化能力弱,不适合大数据</strong></p>
+<p><u>Embedded</u></p>
+<p>特征选择作为学习算法的一部分,它<strong>同时解决了特征选择和分类或者聚类</strong>等问题</p>
+<p>基于 Embedded 模型的特征选择方法同时具有 Filter 方法与 Wrapper 方法的优点,训练分类器与特征选择而且实现,不但提高了特征选择的速度,而且分类器的分类效果也更好;其缺点是<strong>损失函数的选择以及缩放参数的确定都需要相关背景知识和经验</strong>.</p>
+<h3 id="发展"><a href="#发展" class="headerlink" title="发展"></a>发展</h3><p><u>混合模型特征降维算法</u></p>
+<p>结合了 Wrapper 模型与 Filter 模型的特点,它兼具了 Filter 模型的高效性和 Wrapper 模型的准确性,在<strong>算法的不同搜索阶段采用不同的评价标准</strong>,计算性能较好。</p>
+<p><u>无监督的特征降维方法</u></p>
+<p><u>基于集成的特征降维方法</u></p>
+<p>通过训练多个子集来生成个体学习器,并将个体学习器的结果进行合成,以达到提高集成个体差异度的目的.</p>
+<p><u>高维小样本数据的特征降维</u><code>生物数据</code></p>
+<p><strong>特征维数远大于样本个数,数据维度过高会产生大量的冗余信息,从而造成“维度灾难”;同时,样本数量不足又容易导致学习过拟合</strong>,传统的降维方法在处理高维小样本数据时往往失效。</p>
+<p><u>深度学习的特征降维</u></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Reference/" rel="tag"># Reference</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/31/primer-on-python-decorators/" rel="prev" title="-翻译- Python 装饰器">
+      <i class="fa fa-chevron-left"></i> -翻译- Python 装饰器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/04/ref-abc/" rel="next" title="-走读- 人工蜂群算法">
+      -走读- 人工蜂群算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文章"><span class="nav-number">1.</span> <span class="nav-text">文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发展"><span class="nav-number">3.</span> <span class="nav-text">发展</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

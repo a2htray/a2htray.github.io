@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="了解与反射相关的基本知识。原文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang -官方文档阅读- Reflection 笔记">
+<meta property="og:url" content="http://yoursite.com/2020/08/18/golang-offical-blog-reflect/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="了解与反射相关的基本知识。原文">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-18T10:19:49.000Z">
+<meta property="article:modified_time" content="2020-08-18T12:07:23.890Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/08/18/golang-offical-blog-reflect/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Golang -官方文档阅读- Reflection 笔记 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/18/golang-offical-blog-reflect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Golang -官方文档阅读- Reflection 笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-18 18:19:49 / Modified: 20:07:23" itemprop="dateCreated datePublished" datetime="2020-08-18T18:19:49+08:00">2020-08-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>了解与反射相关的基本知识。<a href="https://blog.golang.org/laws-of-reflection" target="_blank" rel="noopener">原文</a></p>
+<a id="more"></a>
+
+<h4 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h4><p>Reflection in computing is the ability of a program to examine its own structure, particularly through types; <strong>it’s a form of metaprogramming（元编程）</strong>. It’s also a great source of confusion.</p>
+<p>In this article we attempt to clarify things by explaining how reflection works in Go. Each language’s reflection model is different (and many languages don’t support it at all), but this article is about Go, so for the rest of this article the word “reflection” should be taken to mean “reflection in Go”.</p>
+<h4 id="Types-and-interfaces"><a href="#Types-and-interfaces" class="headerlink" title="Types and interfaces"></a>Types and interfaces</h4><p>Because <strong>reflection builds on the type system（反射建立在类型系统之上）</strong>, let’s start with a refresher about types in Go.</p>
+<p>Go is statically typed. Every variable has a static type, that is, exactly one type known and fixed at compile time: <code>int</code>, <code>float32</code>, <code>*MyType</code>, <code>[]byte</code>, and so on. If we declare</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyInt <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> j MyInt</span><br></pre></td></tr></table></figure>
+
+<p>then <code>i</code> has type <code>int</code> and <code>j</code> has type <code>MyInt</code>. <strong>The variables <code>i</code> and <code>j</code> have distinct static types and, although they have the same underlying type（即使拥有相同的底层类型，<code>i</code> 和 <code>j</code> 依然是两种不同的类型，两者不能相互赋值）</strong>, they cannot be assigned to one another without a conversion.</p>
+<p>One important category of type is interface types, <strong>which represent fixed sets of methods（接口是方法的集合）</strong>. An interface variable can store any concrete (non-interface) value as long as that value implements the interface’s methods. A well-known pair of examples is <code>io.Reader</code> and <code>io.Writer</code>, the types <code>Reader</code> and <code>Writer</code> from the <a href="https://golang.org/pkg/io/" target="_blank" rel="noopener">io package</a>:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Reader is the interface that wraps the basic Read method.</span></span><br><span class="line"><span class="keyword">type</span> Reader <span class="keyword">interface</span> &#123;</span><br><span class="line">    Read(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Writer is the interface that wraps the basic Write method.</span></span><br><span class="line"><span class="keyword">type</span> Writer <span class="keyword">interface</span> &#123;</span><br><span class="line">    Write(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Any type that implements a <code>Read</code> (or <code>Write</code>) method with this signature is said to implement <code>io.Reader</code> (or <code>io.Writer</code>). For the purposes of this discussion, that means that a variable of type <code>io.Reader</code> can hold any value whose type has a <code>Read</code> method:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r io.Reader</span><br><span class="line">r = os.Stdin</span><br><span class="line">r = bufio.NewReader(r)</span><br><span class="line">r = <span class="built_in">new</span>(bytes.Buffer)</span><br><span class="line"><span class="comment">// and so on</span></span><br></pre></td></tr></table></figure>
+
+<p>It’s important to be clear that whatever concrete value <code>r</code> may hold, <code>r</code>‘s type is always <code>io.Reader</code>: Go is statically typed and the static type of <code>r</code> is <code>io.Reader</code>.</p>
+<p>An extremely important example of an interface type is the empty interface:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>It represents the empty set of methods and is satisfied by any value at all（空接口不包括任何方法，可以赋各种类型的值）</strong>, since any value has zero or more methods.</p>
+<p>Some people say that Go’s interfaces are dynamically typed, <strong>but that is misleading（Golang 中的接口并不是动态类型）</strong>. They are statically typed: a variable of interface type always has the same static type, and even t<strong>hough at run time the value stored in the interface variable may change type, that value will always satisfy the interface（即使在运行时，值发生了改变，改变后的值的类型也要符合接口的约束）</strong>.</p>
+<p>We need to be precise about all this because <strong>reflection and interfaces are closely related（反射与接口密切相关）</strong>.</p>
+<h4 id="The-representation-of-an-interface"><a href="#The-representation-of-an-interface" class="headerlink" title="The representation of an interface"></a>The representation of an interface</h4><p>Russ Cox has written a <a href="https://research.swtch.com/2009/12/go-data-structures-interfaces.html" target="_blank" rel="noopener">detailed blog post</a> about the representation of interface values in Go. It’s not necessary to repeat the full story here, but a simplified summary is in order.</p>
+<p>A variable of interface type stores a pair: <strong>the concrete value assigned to the variable, and that value’s type descriptor（接口保存了两种信息：具体的值以及值的类型描述符）</strong>. To be more precise, the value is the underlying concrete data item that implements the interface and the type describes the full type of that item. For instance, after</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r io.Reader</span><br><span class="line">tty, err := os.OpenFile(<span class="string">"/dev/tty"</span>, os.O_RDWR, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">&#125;</span><br><span class="line">r = tty</span><br></pre></td></tr></table></figure>
+
+<p><code>r</code> contains, schematically, the (value, type) pair, (<code>tty</code>, <code>*os.File</code>). Notice that the type <code>*os.File</code> implements methods other than <code>Read</code>; even though the interface value provides access only to the <code>Read</code> method, the value inside carries all the type information about that value. That’s why we can do things like this:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> w io.Writer</span><br><span class="line">w = r.(io.Writer)</span><br></pre></td></tr></table></figure>
+
+<p>The expression in this assignment is a <strong>type assertion（类型转换）</strong>; what it asserts is that the item inside <code>r</code> also implements <code>io.Writer</code>, and so we can assign it to <code>w</code>. After the assignment, <code>w</code> will contain the pair (<code>tty</code>, <code>*os.File</code>). That’s the same pair as was held in <code>r</code>. <strong>The static type of the interface determines what methods may be invoked with an interface variable（静态的接口类型决定了可以调用哪些方法）</strong>, even though the concrete value inside may have a larger set of methods.</p>
+<p>Continuing, we can do this:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> empty <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">empty = w</span><br></pre></td></tr></table></figure>
+
+<p>and our empty interface value <code>empty</code> will again contain that same pair, (<code>tty</code>, <code>*os.File</code>). That’s handy: <strong>an empty interface can hold any value and contains all the information we could ever need about that value（一个空接口类型的变量可以接收任意的值）</strong>.</p>
+<p>(We don’t need a type assertion here because it’s known statically that <code>w</code> satisfies the empty interface. In the example where we moved a value from a <code>Reader</code> to a <code>Writer</code>, we needed to be explicit and use a type assertion because <code>Writer</code>‘s methods are not a subset of <code>Reader</code>‘s.)<strong>（os.File 是同时实现 Reader 和 Writer 接口的）</strong></p>
+<p>One important detail is that the pair inside an interface always has <strong>the form (value, concrete type)（值与具体的类型）</strong> and cannot have the form (value, interface type). Interfaces do not hold interface values.</p>
+<p>Now we’re ready to reflect.</p>
+<h4 id="The-first-law-of-reflection"><a href="#The-first-law-of-reflection" class="headerlink" title="The first law of reflection"></a>The first law of reflection</h4><h4 id="1-Reflection-goes-from-interface-value-to-reflection-object"><a href="#1-Reflection-goes-from-interface-value-to-reflection-object" class="headerlink" title="1. Reflection goes from interface value to reflection object."></a>1. Reflection goes from interface value to reflection object.</h4><p>At the basic level, reflection is just a mechanism to examine the type and value pair stored inside an interface variable. To get started, there are two types we need to know about in <a href="https://golang.org/pkg/reflect/" target="_blank" rel="noopener">package reflect</a>: <a href="https://golang.org/pkg/reflect/#Type" target="_blank" rel="noopener">Type</a> and <a href="https://golang.org/pkg/reflect/#Value" target="_blank" rel="noopener">Value</a>. <strong>Those two types give access to the contents of an interface variable（Type 和 Value 可用于访问接口中的值与类型）</strong>, and two simple functions, called <code>reflect.TypeOf</code> and <code>reflect.ValueOf</code>, retrieve <code>reflect.Type</code> and <code>reflect.Value</code> pieces out of an interface value. (Also, from the <code>reflect.Value</code> it’s easy to get to the <code>reflect.Type</code>, but let’s keep the <code>Value</code> and <code>Type</code> concepts separate for now.)</p>
+<p>Let’s start with <code>TypeOf</code>:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">    fmt.Println(<span class="string">"type:"</span>, reflect.TypeOf(x))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This program prints</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span>: <span class="keyword">float64</span></span><br></pre></td></tr></table></figure>
+
+<p>You might be wondering where the interface is here, since the program looks like it’s passing the <code>float64</code> variable <code>x</code>, not an interface value, to <code>reflect.TypeOf</code>. But it’s there; as <a href="https://golang.org/pkg/reflect/#TypeOf" target="_blank" rel="noopener">godoc reports</a>, the signature of <code>reflect.TypeOf</code> includes an empty interface:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TypeOf returns the reflection Type of the value in the interface&#123;&#125;.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TypeOf</span><span class="params">(i <span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">Type</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>When we call <code>reflect.TypeOf(x)</code>, <code>x</code> is first stored in an empty interface, which is then passed as the argument（当调用 <code>reflect.TypeOf</code> 时，<code>x</code> 先保存在空的接口中，然后再做为参数进行传递）</strong>; <code>reflect.TypeOf</code> unpacks that <u>empty interface to recover the type information</u>.</p>
+<p>The <code>reflect.ValueOf</code> function, of course, recovers the value (from here on we’ll elide the boilerplate and focus just on the executable code):</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">fmt.Println(<span class="string">"value:"</span>, reflect.ValueOf(x).String())</span><br></pre></td></tr></table></figure>
+
+<p>prints</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value: &lt;<span class="keyword">float64</span> Value&gt;</span><br></pre></td></tr></table></figure>
+
+<p>(We call the <code>String</code> method explicitly because by default the <code>fmt</code> package digs into a <code>reflect.Value</code> to show the concrete value inside. The <code>String</code> method does not.)</p>
+<p>Both <code>reflect.Type</code> and <code>reflect.Value</code> have lots of methods to let us examine and manipulate them. <strong>One important example is that <code>Value</code> has a <code>Type</code> method that returns the <code>Type</code> of a <code>reflect.Value</code>.（Value 类型有一个 Type 方法）</strong> Another is that both <code>Type</code> and <code>Value</code> have a <code>Kind</code> method that returns a constant indicating what sort of item is stored: <code>Uint</code>, <code>Float64</code>, <code>Slice</code>, and so on. Also methods on <code>Value</code> with names like <code>Int</code> and <code>Float</code> let us grab values (as <code>int64</code> and <code>float64</code>) stored inside:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">v := reflect.ValueOf(x)</span><br><span class="line">fmt.Println(<span class="string">"type:"</span>, v.Type())</span><br><span class="line">fmt.Println(<span class="string">"kind is float64:"</span>, v.Kind() == reflect.Float64)</span><br><span class="line">fmt.Println(<span class="string">"value:"</span>, v.Float())</span><br></pre></td></tr></table></figure>
+
+<p>prints</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span>: <span class="keyword">float64</span></span><br><span class="line">kind is <span class="keyword">float64</span>: <span class="literal">true</span></span><br><span class="line">value: <span class="number">3.4</span></span><br></pre></td></tr></table></figure>
+
+<p>There are also methods like <code>SetInt</code> and <code>SetFloat</code> but to use them we need to understand settability, the subject of the third law of reflection, discussed below.</p>
+<p>The reflection library has a couple of properties worth singling out. First, to keep the API simple, the “getter” and “setter” methods of <code>Value</code> operate on the largest type that can hold the value: <code>int64</code> for all the signed integers, for instance. That is, the <code>Int</code> method of <code>Value</code> returns an <code>int64</code> and the <code>SetInt</code> value takes an <code>int64</code>; it may be necessary to convert to the actual type involved:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">uint8</span> = <span class="string">'x'</span></span><br><span class="line">v := reflect.ValueOf(x)</span><br><span class="line">fmt.Println(<span class="string">"type:"</span>, v.Type())                            <span class="comment">// uint8.</span></span><br><span class="line">fmt.Println(<span class="string">"kind is uint8: "</span>, v.Kind() == reflect.Uint8) <span class="comment">// true.</span></span><br><span class="line">x = <span class="keyword">uint8</span>(v.Uint())                                       <span class="comment">// v.Uint returns a uint64.</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>The second property is that the <code>Kind</code> of a reflection object describes the underlying type（Kind 方法返回底层类型）</strong>, not the static type. If a reflection object contains a value of a user-defined integer type, as in</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyInt <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> x MyInt = <span class="number">7</span></span><br><span class="line">v := reflect.ValueOf(x)</span><br></pre></td></tr></table></figure>
+
+<p>the <code>Kind</code> of <code>v</code> is still <code>reflect.Int</code>, even though the static type of <code>x</code> is <code>MyInt</code>, not <code>int</code>. In other words, the <code>Kind</code> cannot discriminate an int from a <code>MyInt</code> even though the <code>Type</code> can.</p>
+<h4 id="The-second-law-of-reflection"><a href="#The-second-law-of-reflection" class="headerlink" title="The second law of reflection"></a>The second law of reflection</h4><h4 id="2-Reflection-goes-from-reflection-object-to-interface-value"><a href="#2-Reflection-goes-from-reflection-object-to-interface-value" class="headerlink" title="2. Reflection goes from reflection object to interface value."></a>2. Reflection goes from reflection object to interface value.</h4><p>Like physical reflection, reflection in Go generates its own inverse.</p>
+<p>Given a <code>reflect.Value</code> we can recover an interface value using the <code>Interface</code> method; in effect the method packs the type and value information back into an interface representation and returns the result:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Interface returns v's value as an interface&#123;&#125;.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v Value)</span> <span class="title">Interface</span><span class="params">()</span> <span class="title">interface</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>As a consequence we can say</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y := v.Interface().(<span class="keyword">float64</span>) <span class="comment">// y will have type float64.</span></span><br><span class="line">fmt.Println(y)</span><br></pre></td></tr></table></figure>
+
+<p>to print the <code>float64</code> value represented by the reflection object <code>v</code>.</p>
+<p>We can do even better, though. The arguments to <code>fmt.Println</code>, <code>fmt.Printf</code> and so on are all passed as empty interface values, which are then unpacked by the <code>fmt</code> package internally just as we have been doing in the previous examples. Therefore all it takes to print the contents of a <code>reflect.Value</code> correctly is to pass the result of the <code>Interface</code> method to the formatted print routine:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(v.Interface())</span><br></pre></td></tr></table></figure>
+
+<p>(Why not <code>fmt.Println(v)</code>? Because <code>v</code> is a <code>reflect.Value</code>; we want the concrete value it holds.) Since our value is a <code>float64</code>, we can even use a floating-point format if we want:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.Printf(<span class="string">"value is %7.1e\n"</span>, v.Interface())</span><br></pre></td></tr></table></figure>
+
+<p>and get in this case</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.4e+00</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Again, there’s no need to type-assert the result of <code>v.Interface()</code> to <code>float64</code>; the empty interface value has the concrete value’s type information inside and <code>Printf</code> will recover it</strong>.</p>
+<p>In short, the <code>Interface</code> method is the inverse of the <code>ValueOf</code> function, except that its result is always of static type <code>interface{}</code>.</p>
+<p>Reiterating: Reflection goes from interface values to reflection objects and back again.</p>
+<h4 id="The-third-law-of-reflection"><a href="#The-third-law-of-reflection" class="headerlink" title="The third law of reflection"></a>The third law of reflection</h4><h4 id="3-To-modify-a-reflection-object-the-value-must-be-settable"><a href="#3-To-modify-a-reflection-object-the-value-must-be-settable" class="headerlink" title="3. To modify a reflection object, the value must be settable."></a>3. To modify a reflection object, the value must be settable.</h4><p>The third law is the most subtle and confusing, but it’s easy enough to understand if we start from first principles.</p>
+<p>Here is some code that does not work, but is worth studying.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">v := reflect.ValueOf(x)</span><br><span class="line">v.SetFloat(<span class="number">7.1</span>) <span class="comment">// Error: will panic.</span></span><br></pre></td></tr></table></figure>
+
+<p>If you run this code, it will panic with the cryptic message</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">panic</span>: reflect.Value.SetFloat using unaddressable value</span><br></pre></td></tr></table></figure>
+
+<p>The problem is not that the value <code>7.1</code> is not addressable; it’s that <code>v</code> is not settable. <strong>Settability is a property of a reflection <code>Value</code>, and not all reflection <code>Values</code> have it.</strong></p>
+<p><strong>The <code>CanSet</code> method of <code>Value</code> reports the settability of a <code>Value</code>（使用 CanSet 用于判断是可设置值）</strong>; in our case,</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">v := reflect.ValueOf(x)</span><br><span class="line">fmt.Println(<span class="string">"settability of v:"</span>, v.CanSet())</span><br></pre></td></tr></table></figure>
+
+<p>prints</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">settability of v: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>It is an error to call a <code>Set</code> method on an non-settable <code>Value</code>. But what is settability?</p>
+<p>Settability is a bit like addressability, but stricter. It’s the property that a reflection object can modify the actual storage that was used to create the reflection object. Settability is determined by whether the reflection object holds the original item. When we say</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">v := reflect.ValueOf(x)</span><br></pre></td></tr></table></figure>
+
+<p>we pass a copy of <code>x</code> to <code>reflect.ValueOf</code>, so the interface value created as the argument to <code>reflect.ValueOf</code> is a copy of <code>x</code>, not <code>x</code> itself. Thus, if the statement</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v.SetFloat(<span class="number">7.1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>were allowed to succeed, it would not update <code>x</code>, even though <code>v</code> looks like it was created from <code>x</code>. Instead, it would update the copy of <code>x</code> stored inside the reflection value and <code>x</code> itself would be unaffected. That would be confusing and useless, so it is illegal, and settability is the property used to avoid this issue.</p>
+<p>If this seems bizarre, it’s not. It’s actually a familiar situation in unusual garb. Think of passing <code>x</code> to a function:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(x)</span><br></pre></td></tr></table></figure>
+
+<p>We would not expect <code>f</code> to be able to modify <code>x</code> because we passed a copy of <code>x</code>‘s value, not <code>x</code> itself. If we want <code>f</code> to modify <code>x</code> directly we must pass our function the address of <code>x</code> (that is, a pointer to <code>x</code>):</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(&amp;x)</span><br></pre></td></tr></table></figure>
+
+<p>This is straightforward and familiar, and reflection works the same way. If we want to modify <code>x</code> by reflection, we must give the reflection library a pointer to the value we want to modify.</p>
+<p>Let’s do that. First we initialize <code>x</code> as usual and then create a reflection value that points to it, called <code>p</code>.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">p := reflect.ValueOf(&amp;x) <span class="comment">// Note: take the address of x.</span></span><br><span class="line">fmt.Println(<span class="string">"type of p:"</span>, p.Type())</span><br><span class="line">fmt.Println(<span class="string">"settability of p:"</span>, p.CanSet())</span><br></pre></td></tr></table></figure>
+
+<p>The output so far is</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> of p: *<span class="keyword">float64</span></span><br><span class="line">settability of p: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>The reflection object <code>p</code> isn’t settable, but it’s not <code>p</code> we want to set, it’s (in effect) <code>*p</code>. <strong>To get to what <code>p</code> points to, we call the <code>Elem</code> method of <code>Value</code></strong>, which indirects through the pointer, and save the result in a reflection <code>Value</code> called <code>v</code>:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v := p.Elem()</span><br><span class="line">fmt.Println(<span class="string">"settability of v:"</span>, v.CanSet())</span><br></pre></td></tr></table></figure>
+
+<p>Now <code>v</code> is a settable reflection object, as the output demonstrates,</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">settability of v: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>and since it represents <code>x</code>, we are finally able to use <code>v.SetFloat</code> to modify the value of <code>x</code>:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v.SetFloat(<span class="number">7.1</span>)</span><br><span class="line">fmt.Println(v.Interface())</span><br><span class="line">fmt.Println(x)</span><br></pre></td></tr></table></figure>
+
+<p>The output, as expected, is</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7.1</span></span><br><span class="line"><span class="number">7.1</span></span><br></pre></td></tr></table></figure>
+
+<p>Reflection can be hard to understand but it’s doing exactly what the language does, albeit through reflection <code>Types</code> and <code>Values</code> that can disguise what’s going on. <strong>Just keep in mind that reflection Values need the address of something in order to modify what they represent.（需要指针才能修改值）</strong></p>
+<h4 id="Structs"><a href="#Structs" class="headerlink" title="Structs"></a>Structs</h4><p>In our previous example <code>v</code> wasn’t a pointer itself, it was just derived from one. A common way for this situation to arise is <strong>when using reflection to modify the fields of a structure（修改一个结构类型变量的字段值）</strong>. As long as we have the address of the structure, we can modify its fields.</p>
+<p>Here’s a simple example that analyzes a struct value, <code>t</code>. We create the reflection object with the address of the struct because we’ll want to modify it later. Then we set <code>typeOfT</code> to its type and iterate over the fields using straightforward method calls (see <a href="https://golang.org/pkg/reflect/" target="_blank" rel="noopener">package reflect</a> for details). Note that we extract the names of the fields from the struct type, but the fields themselves are regular <code>reflect.Value</code> objects.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> T <span class="keyword">struct</span> &#123;</span><br><span class="line">    A <span class="keyword">int</span></span><br><span class="line">    B <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line">t := T&#123;<span class="number">23</span>, <span class="string">"skidoo"</span>&#125;</span><br><span class="line">s := reflect.ValueOf(&amp;t).Elem()</span><br><span class="line">typeOfT := s.Type()</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; s.NumField(); i++ &#123;</span><br><span class="line">    f := s.Field(i)</span><br><span class="line">    fmt.Printf(<span class="string">"%d: %s %s = %v\n"</span>, i,</span><br><span class="line">        typeOfT.Field(i).Name, f.Type(), f.Interface())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The output of this program is</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>: A <span class="keyword">int</span> = <span class="number">23</span></span><br><span class="line"><span class="number">1</span>: B <span class="keyword">string</span> = skidoo</span><br></pre></td></tr></table></figure>
+
+<p>There’s one more point about settability introduced in passing here: the field names of <code>T</code> are upper case (exported) because only exported fields of a struct are settable.</p>
+<p>Because <code>s</code> contains a settable reflection object, we can modify the fields of the structure.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s.Field(<span class="number">0</span>).SetInt(<span class="number">77</span>)</span><br><span class="line">s.Field(<span class="number">1</span>).SetString(<span class="string">"Sunset Strip"</span>)</span><br><span class="line">fmt.Println(<span class="string">"t is now"</span>, t)</span><br></pre></td></tr></table></figure>
+
+<p>And here’s the result:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t is now &#123;<span class="number">77</span> Sunset Strip&#125;</span><br></pre></td></tr></table></figure>
+
+<p>If we modified the program so that <code>s</code> was created from <code>t</code>, not <code>&amp;t</code>, the calls to <code>SetInt</code> and <code>SetString</code> would fail as the fields of <code>t</code> would not be settable.</p>
+<h4 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h4><p>Here again are the laws of reflection:</p>
+<ul>
+<li>Reflection goes from interface value to reflection object.</li>
+<li>Reflection goes from reflection object to interface value.</li>
+<li>To modify a reflection object, the value must be settable.</li>
+</ul>
+<p>Once you understand these laws reflection in Go becomes much easier to use, although it remains subtle. It’s a powerful tool that should be used with care and avoided unless strictly necessary.</p>
+<p>There’s plenty more to reflection that we haven’t covered — sending and receiving on channels, allocating memory, using slices and maps, calling methods and functions — but this post is long enough. We’ll cover some of those topics in a later article.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/18/golang-understand-channel-goroutine-block-deadlock/" rel="prev" title="Golang -翻译- 理解 channel buffer block deadlock">
+      <i class="fa fa-chevron-left"></i> Golang -翻译- 理解 channel buffer block deadlock
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/20/golang-generate-same-number-in-loop/" rel="next" title="Golang -随机数- 在循环中产生不同的值">
+      Golang -随机数- 在循环中产生不同的值 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Types-and-interfaces"><span class="nav-number">2.</span> <span class="nav-text">Types and interfaces</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-representation-of-an-interface"><span class="nav-number">3.</span> <span class="nav-text">The representation of an interface</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-first-law-of-reflection"><span class="nav-number">4.</span> <span class="nav-text">The first law of reflection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Reflection-goes-from-interface-value-to-reflection-object"><span class="nav-number">5.</span> <span class="nav-text">1. Reflection goes from interface value to reflection object.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-second-law-of-reflection"><span class="nav-number">6.</span> <span class="nav-text">The second law of reflection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Reflection-goes-from-reflection-object-to-interface-value"><span class="nav-number">7.</span> <span class="nav-text">2. Reflection goes from reflection object to interface value.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-third-law-of-reflection"><span class="nav-number">8.</span> <span class="nav-text">The third law of reflection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-To-modify-a-reflection-object-the-value-must-be-settable"><span class="nav-number">9.</span> <span class="nav-text">3. To modify a reflection object, the value must be settable.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structs"><span class="nav-number">10.</span> <span class="nav-text">Structs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conclusion"><span class="nav-number">11.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文中引入的包及使用到的函数均在 K-Means 聚类算法 有过叙述 在执行 K-Means 聚类算法之前，需要提前预设 K 值，而在现实问题中，对于未知的样本，我们并不知道数据集应该分成几类，所以如何确定 K 值也是被广泛讨论的一个话题。早在1998 年，Rezaee 等提出了最佳 K 值是在 (1, n^0.5) 范围内，n 为数据集大小。 接一下提供几确定 K 值的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K-Means 改进 - 确定 K 值">
+<meta property="og:url" content="http://yoursite.com/2020/03/18/k-means-enforcement-k/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="本文中引入的包及使用到的函数均在 K-Means 聚类算法 有过叙述 在执行 K-Means 聚类算法之前，需要提前预设 K 值，而在现实问题中，对于未知的样本，我们并不知道数据集应该分成几类，所以如何确定 K 值也是被广泛讨论的一个话题。早在1998 年，Rezaee 等提出了最佳 K 值是在 (1, n^0.5) 范围内，n 为数据集大小。 接一下提供几确定 K 值的方法。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319214940.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319215625.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319213126.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319220252.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319222230.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200320124925.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200320125119.png">
+<meta property="article:published_time" content="2020-03-17T17:15:41.000Z">
+<meta property="article:modified_time" content="2020-03-20T08:15:22.192Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Clustering">
+<meta property="article:tag" content="K-Means">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319214940.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/18/k-means-enforcement-k/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>K-Means 改进 - 确定 K 值 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/k-means-enforcement-k/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          K-Means 改进 - 确定 K 值
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-18 01:15:41" itemprop="dateCreated datePublished" datetime="2020-03-18T01:15:41+08:00">2020-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-20 16:15:22" itemprop="dateModified" datetime="2020-03-20T16:15:22+08:00">2020-03-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><code>本文中引入的包及使用到的函数均在</code> <a href="/2020/03/17/k-means/">K-Means 聚类算法</a> 有过叙述</p>
+<p>在执行 K-Means 聚类算法之前，需要提前预设 K 值，而在现实问题中，对于未知的样本，我们并不知道数据集应该分成几类，所以如何确定 K 值也是被广泛讨论的一个话题。早在1998 年，Rezaee 等提出了最佳 K 值是在 (1, n^0.5) 范围内，n 为数据集大小。</p>
+<p>接一下提供<strong>几</strong>确定 K 值的方法。</p>
+<a id="more"></a>
+
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>在做示例之间，首先使用<a href="/2020/03/17/k-means/">K-Means 聚类算法</a>模拟出可用的样本，生成模拟数据集的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">label0_dataset = random_sample([<span class="number">1</span>, <span class="number">1</span>], <span class="number">0.5</span>, <span class="number">20</span>, <span class="number">0</span>)</span><br><span class="line">label1_dataset = random_sample([<span class="number">2</span>, <span class="number">2</span>], <span class="number">0.5</span>, <span class="number">20</span>, <span class="number">1</span>)</span><br><span class="line">label2_dataset = random_sample([<span class="number">1</span>, <span class="number">2</span>], <span class="number">0.5</span>, <span class="number">20</span>, <span class="number">2</span>)</span><br><span class="line">label3_dataset = random_sample([<span class="number">2</span>, <span class="number">1</span>], <span class="number">0.5</span>, <span class="number">20</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">dataset = np.vstack((label0_dataset, label1_dataset, label2_dataset, label3_dataset))</span><br><span class="line">np.random.shuffle(dataset)</span><br></pre></td></tr></table></figure>
+
+<p>生成的数据大致如下：</p>
+<p><img src="/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319214940.png" alt="图1-模拟数据"></p>
+<p>接着，使用以下代码生成样本分布图2：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">colors = [<span class="string">'green'</span>, <span class="string">'blue'</span>, <span class="string">'cyan'</span>, <span class="string">'red'</span>]</span><br><span class="line"><span class="keyword">for</span> i, color <span class="keyword">in</span> enumerate(colors):</span><br><span class="line">    x = dataset[dataset[:,<span class="number">2</span>] == i][:,<span class="number">0</span>]</span><br><span class="line">    y = dataset[dataset[:,<span class="number">2</span>] == i][:,<span class="number">1</span>]</span><br><span class="line">    plt.scatter(x, y, c=color, label=<span class="string">'label %d'</span> % i)</span><br><span class="line">plt.legend(bbox_to_anchor=(<span class="number">1.05</span>, <span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319215625.png" alt="图2-样本分布"></p>
+<p>显然，这里的 K 是 4，我们要做的就是在不知道 K= 4 的情况下，通过某种方法来确定 K 就是应该等于 4。</p>
+<h3 id="肘点-1"><a href="#肘点-1" class="headerlink" title="肘点[1]"></a>肘点[1]</h3><p>通过刻画总误差平方 SSE 和与 K 值之间的关系，显然，随着 K 值的增大，SSE 将变小。当 K 值小于实际簇数时，随着 K 值的增大，SSE 会迅速变小，而当 K 值大于实际簇数时，随着 K 值的增大，SSE 呈现缓慢下降的趋势。</p>
+<p>肘点的定义则是当 SSE 迅速下降时，减小后 SSE 对应的 K 值，如图3：</p>
+<p><img src="/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319213126.png" alt="图3-关系图"></p>
+<p>而对于图3(b) 的情况，则根据 SSE 递减幅度足够小，从而确定 K 值。</p>
+<p>样本数为 80，则设：</p>
+<p><img src="/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319220252.png" alt="图4-最大 K 值"></p>
+<p>使用如下代码，作出 SSE 与 K 值的关系图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">X = dataset[:,<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">Y = dataset[:,<span class="number">2</span>]</span><br><span class="line">sses = []</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">2</span>, <span class="number">9</span>):</span><br><span class="line">    estimator = KMeans(n_clusters=k, init=<span class="string">'random'</span>, n_init=k, random_state=<span class="number">12</span>)</span><br><span class="line">    estimator.fit(X)</span><br><span class="line">    sses.append(estimator.inertia_)</span><br><span class="line">    </span><br><span class="line">plt.plot(list(range(<span class="number">2</span>, <span class="number">9</span>)), sses, c=<span class="string">'black'</span>)</span><br><span class="line">plt.scatter(list(range(<span class="number">2</span>, <span class="number">9</span>)), sses, marker=<span class="string">'o'</span>, c=<span class="string">'red'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'SSE'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'K value'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>得图5：</p>
+<p><img src="/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200319222230.png" alt="图5-SSE 与 K 值关系图"></p>
+<p>大致可以确定 K = 4 为数据集中簇的个数。</p>
+<h3 id="基于层次-K-均值聚类算法-2"><a href="#基于层次-K-均值聚类算法-2" class="headerlink" title="基于层次 K 均值聚类算法[2]"></a>基于层次 K 均值聚类算法[2]</h3><p>按参考[2]的描述，将其改进命名为”层次 K 均值聚类算法” 是有歧义的。原因有二：一，聚类算法的分类中已包含层次聚类算法，二，改进的实质是从最大直径的簇中取两个样本点重新作为中心，再进行聚类运算，不存在将一个簇一分为二的层次关系。</p>
+<p>该算法中使用<strong>均方差</strong>作为聚类度量函数，如下：</p>
+<p><img src="/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200320124925.png" alt="图6-聚类度量函数-均方差"></p>
+<p><img src="/2020/03/18/k-means-enforcement-k/QQ%E6%88%AA%E5%9B%BE20200320125119.png" alt="图7-算法过程"></p>
+<p>其中，关键的步骤是步骤3.1，说明了如何得到两个新的样本点。值得注意的一点，delta 是需要预先设置，作为算法结束的条件。</p>
+<p>整个执行过程如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cluster_radius</span><span class="params">(C)</span>:</span></span><br><span class="line">    <span class="string">"""计算簇的半径"""</span></span><br><span class="line">    c = np.mean(C, axis=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> max([euclidean(c, x) <span class="keyword">for</span> x <span class="keyword">in</span> C])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_centeriods</span><span class="params">(C, group)</span>:</span></span><br><span class="line">    <span class="string">"""计算簇 C 中距离距离最远的点和与该点最远的样本"""</span></span><br><span class="line">    c = np.mean(C, axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    euclideans1 = [euclidean(x, c) <span class="keyword">for</span> x <span class="keyword">in</span> C]</span><br><span class="line">    max_euclidean_index1 = euclideans1.index(max(euclideans1))</span><br><span class="line"></span><br><span class="line">    euclideans2 = [euclidean(x, C[max_euclidean_index1]) <span class="keyword">for</span> x <span class="keyword">in</span> C]</span><br><span class="line">    max_euclidean_index2 = euclideans2.index(max(euclideans2))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [group[max_euclidean_index1], group[max_euclidean_index2]]</span><br><span class="line"></span><br><span class="line">centriods = X[np.random.choice(np.arange(n), K)] <span class="comment"># 随机选择两个样本作为中心点</span></span><br><span class="line">groups = <span class="literal">None</span> <span class="comment"># 用于存储各个簇中样本在样本集中的下标索引</span></span><br><span class="line">mse = <span class="literal">None</span> <span class="comment"># 均方差</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">2</span>, <span class="number">9</span>):</span><br><span class="line">    print(<span class="string">'k = %d start'</span> % k)</span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> start &lt; <span class="number">10</span>:</span><br><span class="line">        groups = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(k)]</span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> enumerate(X):</span><br><span class="line">            euclideans = [euclidean(x, c) <span class="keyword">for</span> c <span class="keyword">in</span> centriods] <span class="comment"># 计算样本到各中心点的距离，取最小并计算属于第几个簇</span></span><br><span class="line">            _k = euclideans.index(min(euclideans))</span><br><span class="line">            groups[_k].append(i)</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># 重新计算中心点</span></span><br><span class="line">        centriods = np.array([centriod(X[group]) <span class="keyword">for</span> group <span class="keyword">in</span> groups])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> sse <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> sse == SSE([X[group] <span class="keyword">for</span> group <span class="keyword">in</span> groups]):</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        start = start + <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> mse <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        mse = math.sqrt(SSE([X[group] <span class="keyword">for</span> group <span class="keyword">in</span> groups])) / (n - <span class="number">1</span>)</span><br><span class="line">        print(<span class="string">'mse =%.8g'</span> % mse)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        mse_next = math.sqrt(SSE([X[group] <span class="keyword">for</span> group <span class="keyword">in</span> groups])) / (n - <span class="number">1</span>)</span><br><span class="line">        print(<span class="string">"""</span></span><br><span class="line"><span class="string">        mse = %.8g</span></span><br><span class="line"><span class="string">        mse_next = %.8g</span></span><br><span class="line"><span class="string">        J = %.8g</span></span><br><span class="line"><span class="string">        """</span> % (mse, mse_next, (mse_next - mse) / mse))</span><br><span class="line">        <span class="keyword">if</span> (mse_next - mse) / mse &lt; <span class="number">-0.2</span>:</span><br><span class="line">            print(<span class="string">'eventually: %d'</span> % k)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            mse = mse_next</span><br><span class="line">            <span class="comment"># 找到最大半径的簇</span></span><br><span class="line">    radiuses = [cluster_radius(X[group]) <span class="keyword">for</span> group <span class="keyword">in</span> groups]</span><br><span class="line">    max_radius_index = radiuses.index(max(radiuses))</span><br><span class="line">    c = X[groups[max_radius_index]] <span class="comment"># c 为最大半径的簇</span></span><br><span class="line"></span><br><span class="line">    new_centeriods = X[generate_centeriods(c, groups[max_radius_index])]</span><br><span class="line">    <span class="comment"># 将原先的中心点去除，并加新生找到的两个中心点</span></span><br><span class="line">    centriods = np.vstack((np.delete(centriods, max_radius_index, axis=<span class="number">0</span>), new_centeriods))</span><br></pre></td></tr></table></figure>
+
+<p>运行输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">k = <span class="number">2</span> start</span><br><span class="line">mse =<span class="number">0.1467106</span></span><br><span class="line">k = <span class="number">3</span> start</span><br><span class="line"></span><br><span class="line">        mse = <span class="number">0.1467106</span></span><br><span class="line">        mse_next = <span class="number">0.11806988</span></span><br><span class="line">        J = <span class="number">-0.19521916</span></span><br><span class="line">        </span><br><span class="line">k = <span class="number">4</span> start</span><br><span class="line"></span><br><span class="line">        mse = <span class="number">0.11806988</span></span><br><span class="line">        mse_next = <span class="number">0.091542466</span></span><br><span class="line">        J = <span class="number">-0.22467553</span></span><br><span class="line">        </span><br><span class="line">eventually: <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>重点</strong>：该方法的实际意义其实并不大。虽然不需要预设 K 值，但关于 delta 的取值还是需要提前人为设定。如果以该方法的逻辑，还不如直接让 K = 2，3，… 跑一遍，取总误差平方和最小一次 K 的取值即可。<strong>最终跑出结果为 4 也是设置了一个合适的 delta 值</strong></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><em>成卫青 卢艳红. “一种基于最大最小距离和SSE的自适应聚类算法.” 南京邮电大学学报：自然科学版 35(2015):107.</em></li>
+<li><em>胡伟. “改进的层次K均值聚类算法.” 计算机工程与应用 49.2(2013):157-159.</em></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Clustering/" rel="tag"># Clustering</a>
+              <a href="/tags/K-Means/" rel="tag"># K-Means</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/18/k-means-classical/" rel="prev" title="传统 K-Means 算法">
+      <i class="fa fa-chevron-left"></i> 传统 K-Means 算法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/18/k-means-enforcement-centroid/" rel="next" title="K-Means 改进 - 初始中心点的选取">
+      K-Means 改进 - 初始中心点的选取 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前提"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#肘点-1"><span class="nav-number">2.</span> <span class="nav-text">肘点[1]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于层次-K-均值聚类算法-2"><span class="nav-number">3.</span> <span class="nav-text">基于层次 K 均值聚类算法[2]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

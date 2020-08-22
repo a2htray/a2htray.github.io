@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="通过算法的实现，加深对算法、Golang 的理解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="感知器算法 Golang 实现">
+<meta property="og:url" content="http://yoursite.com/2020/04/20/golang-perceptron-algorithm/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="通过算法的实现，加深对算法、Golang 的理解。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/04/20/golang-perceptron-algorithm/QQ%E6%88%AA%E5%9B%BE20200420231436.png">
+<meta property="article:published_time" content="2020-04-20T15:10:24.000Z">
+<meta property="article:modified_time" content="2020-04-27T16:41:29.347Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="NN">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/20/golang-perceptron-algorithm/QQ%E6%88%AA%E5%9B%BE20200420231436.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/20/golang-perceptron-algorithm/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>感知器算法 Golang 实现 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/20/golang-perceptron-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          感知器算法 Golang 实现
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-20 23:10:24" itemprop="dateCreated datePublished" datetime="2020-04-20T23:10:24+08:00">2020-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-28 00:41:29" itemprop="dateModified" datetime="2020-04-28T00:41:29+08:00">2020-04-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>通过算法的实现，加深对算法、Golang 的理解。</p>
+<a id="more"></a>
+
+<p><img src="/2020/04/20/golang-perceptron-algorithm/QQ%E6%88%AA%E5%9B%BE20200420231436.png" alt="算法过程"></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"math/rand"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Samples 生成样本数据</span></span><br><span class="line"><span class="comment">// 因为感知器算法需要数据集线性可分</span></span><br><span class="line"><span class="comment">// 为方便起见，使用给定直接函数 f</span></span><br><span class="line"><span class="comment">// 若 f(x) &gt; 0 标记为 1</span></span><br><span class="line"><span class="comment">// 若 f(x) &lt; 0 标记为 -1</span></span><br><span class="line"><span class="comment">// * 10 的目的在于让数据稍微大一些</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Samples</span><span class="params">(n <span class="keyword">int</span>, m <span class="keyword">int</span>)</span> [][]<span class="title">float32</span></span> &#123;</span><br><span class="line">	<span class="comment">// 给定分隔数据集函数，用于判断</span></span><br><span class="line">    b := -rand.Float32() * <span class="number">10</span></span><br><span class="line">    w := <span class="built_in">make</span>([]<span class="keyword">float32</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; m; i++ &#123;</span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">            w = <span class="built_in">append</span>(w, rand.Float32() * <span class="number">10</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            w = <span class="built_in">append</span>(w, -rand.Float32() * <span class="number">10</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    f := <span class="function"><span class="keyword">func</span> <span class="params">(x ...<span class="keyword">float32</span>)</span> <span class="title">float32</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> result <span class="keyword">float32</span></span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; m; i++ &#123;</span><br><span class="line">            result += x[i] * w[i]</span><br><span class="line">        &#125;</span><br><span class="line">        result += b</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    samples := <span class="built_in">make</span>([][]<span class="keyword">float32</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">        sample := <span class="built_in">make</span>([]<span class="keyword">float32</span>, <span class="number">3</span>)</span><br><span class="line">        sample[<span class="number">0</span>] = rand.Float32() * <span class="number">10</span></span><br><span class="line">        sample[<span class="number">1</span>] = rand.Float32() * <span class="number">10</span></span><br><span class="line">        <span class="keyword">if</span> f(sample[<span class="number">0</span>:<span class="number">3</span>]...) &gt; <span class="number">0</span> &#123;</span><br><span class="line">            sample[<span class="number">2</span>] = <span class="number">1</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            sample[<span class="number">2</span>] = <span class="number">-1</span></span><br><span class="line">        &#125;</span><br><span class="line">        samples = <span class="built_in">append</span>(samples, sample)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> samples</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断算法是否结束</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsFinish</span><span class="params">(indicator []<span class="keyword">int</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> _, i := <span class="keyword">range</span> indicator &#123;</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指示器 Slice 全部设置为 0</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Zeros</span><span class="params">(indicator []<span class="keyword">int</span>)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i, _ := <span class="keyword">range</span> indicator &#123;</span><br><span class="line">        indicator[i] = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> indicator</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DisplayResult</span><span class="params">(samples [][]<span class="keyword">float32</span>, w []<span class="keyword">float32</span>, b <span class="keyword">float32</span>)</span></span>  &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"Finished: w1 = %f, w2 = %f, b = %f\n"</span>, w[<span class="number">0</span>], w[<span class="number">1</span>], b)</span><br><span class="line">    flag := <span class="string">"&gt;"</span></span><br><span class="line">    <span class="keyword">for</span> _, sample := <span class="keyword">range</span> samples &#123;</span><br><span class="line">        value := w[<span class="number">0</span>] * sample[<span class="number">0</span>] + w[<span class="number">1</span>] * sample[<span class="number">1</span>] + b</span><br><span class="line">        <span class="keyword">if</span> value &gt; <span class="number">0</span> &#123;</span><br><span class="line">            flag = <span class="string">"&gt;"</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            flag = <span class="string">"&lt;"</span></span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Printf(</span><br><span class="line">            <span class="string">"w1*x1 + w2*x2 + b = %f*%f + %f*%f + %f = %f %s 0, and y = %f\n"</span>,</span><br><span class="line">            w[<span class="number">0</span>], sample[<span class="number">0</span>], w[<span class="number">1</span>], sample[<span class="number">1</span>], b,</span><br><span class="line">            value, flag, sample[<span class="number">2</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">    samples := Samples(<span class="number">100</span>, <span class="number">2</span>)</span><br><span class="line">    indicator := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出数据集所有样本</span></span><br><span class="line">    <span class="keyword">for</span> _, sample := <span class="keyword">range</span> samples &#123;</span><br><span class="line">        fmt.Println(sample)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 随机生成权重和偏置</span></span><br><span class="line">    w := <span class="built_in">make</span>([]<span class="keyword">float32</span>, <span class="number">0</span>)</span><br><span class="line">    w = <span class="built_in">append</span>(w, rand.Float32())</span><br><span class="line">    w = <span class="built_in">append</span>(w, rand.Float32())</span><br><span class="line">    b := rand.Float32()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出初始权重与偏置</span></span><br><span class="line">    fmt.Printf(<span class="string">"initialized: w1 = %f, w2 = %f, b = %f\n"</span>, w[<span class="number">0</span>], w[<span class="number">1</span>], b)</span><br><span class="line"></span><br><span class="line">    i := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> samples[i][<span class="number">0</span>] * w[<span class="number">0</span>] + samples[i][<span class="number">1</span>] * w[<span class="number">1</span>] + b &gt; <span class="number">0</span> &amp;&amp; samples[i][<span class="number">2</span>] == <span class="number">-1</span> &#123;</span><br><span class="line">            w[<span class="number">0</span>] = w[<span class="number">0</span>] - samples[i][<span class="number">0</span>]</span><br><span class="line">            w[<span class="number">1</span>] = w[<span class="number">1</span>] - samples[i][<span class="number">1</span>]</span><br><span class="line">            b = b - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">100</span> &#123;</span><br><span class="line">                i = <span class="number">0</span></span><br><span class="line">            &#125;</span><br><span class="line">            indicator = Zeros(indicator)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> samples[i][<span class="number">0</span>] * w[<span class="number">0</span>] + samples[i][<span class="number">1</span>] * w[<span class="number">1</span>] + b &lt; <span class="number">0</span> &amp;&amp; samples[i][<span class="number">2</span>] == <span class="number">1</span> &#123;</span><br><span class="line">            w[<span class="number">0</span>] = w[<span class="number">0</span>] + samples[i][<span class="number">0</span>]</span><br><span class="line">            w[<span class="number">1</span>] = w[<span class="number">1</span>] + samples[i][<span class="number">1</span>]</span><br><span class="line">            b = b + <span class="number">1</span></span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">100</span> &#123;</span><br><span class="line">                i = <span class="number">0</span></span><br><span class="line">            &#125;</span><br><span class="line">            indicator = Zeros(indicator)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            indicator[i] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">100</span> &#123;</span><br><span class="line">                i = <span class="number">0</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> IsFinish(indicator) &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    DisplayResult(samples, w, b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Output</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br></pre></td><td class="code"><pre><span class="line">[4.377142 4.246375 1]</span><br><span class="line">[6.868231 0.6563702 1]</span><br><span class="line">[1.5651925 0.9696952 1]</span><br><span class="line">[3.0091188 5.1521263 -1]</span><br><span class="line">[8.136399 2.1426387 1]</span><br><span class="line">[3.806572 3.1805816 1]</span><br><span class="line">[4.688898 2.8303413 1]</span><br><span class="line">[2.9310184 6.790847 -1]</span><br><span class="line">[2.1855304 2.0318687 1]</span><br><span class="line">[3.608714 5.7067327 -1]</span><br><span class="line">[8.624914 2.9311423 1]</span><br><span class="line">[2.9708257 7.52573 -1]</span><br><span class="line">[2.0658267 8.65335 -1]</span><br><span class="line">[6.9671917 5.238203 1]</span><br><span class="line">[0.28303084 1.5832828 -1]</span><br><span class="line">[6.0725346 9.752416 -1]</span><br><span class="line">[0.79453623 5.948086 -1]</span><br><span class="line">[0.5912065 6.920246 -1]</span><br><span class="line">[3.0152268 1.7326623 1]</span><br><span class="line">[5.4109983 5.441556 1]</span><br><span class="line">[2.7850761 4.231522 -1]</span><br><span class="line">[5.305857 2.535405 1]</span><br><span class="line">[2.82081 7.8860493 -1]</span><br><span class="line">[3.6180546 8.805431 -1]</span><br><span class="line">[2.9711225 8.943617 -1]</span><br><span class="line">[0.97454613 9.769169 -1]</span><br><span class="line">[0.74290997 2.2228942 -1]</span><br><span class="line">[6.8107834 2.415151 1]</span><br><span class="line">[3.1152246 9.3284645 -1]</span><br><span class="line">[7.4184895 8.0105505 1]</span><br><span class="line">[7.3023148 1.8292491 1]</span><br><span class="line">[4.283571 8.969919 -1]</span><br><span class="line">[6.8265347 9.789293 -1]</span><br><span class="line">[9.222122 0.90837276 1]</span><br><span class="line">[4.9314203 9.269868 -1]</span><br><span class="line">[9.549455 3.4795399 1]</span><br><span class="line">[6.908388 7.109072 1]</span><br><span class="line">[5.637796 6.4948945 1]</span><br><span class="line">[5.51765 7.558235 -1]</span><br><span class="line">[4.038033 1.3065112 1]</span><br><span class="line">[9.859647 8.963417 1]</span><br><span class="line">[3.2208397 7.2114778 -1]</span><br><span class="line">[6.445398 0.85520506 1]</span><br><span class="line">[6.6957526 6.227283 1]</span><br><span class="line">[3.6969283 2.3682256 1]</span><br><span class="line">[5.352819 1.872461 1]</span><br><span class="line">[2.388407 6.280982 -1]</span><br><span class="line">[1.2675292 2.813303 -1]</span><br><span class="line">[4.1032286 4.349125 1]</span><br><span class="line">[6.25095 5.5014696 1]</span><br><span class="line">[6.2360883 7.2918077 1]</span><br><span class="line">[8.305339 0.005138155 1]</span><br><span class="line">[7.3606863 3.9998376 1]</span><br><span class="line">[4.978681 6.039781 1]</span><br><span class="line">[4.096183 0.29671282 1]</span><br><span class="line">[0.019038945 0.028430412 -1]</span><br><span class="line">[9.158213 5.898342 1]</span><br><span class="line">[5.5939245 8.154052 -1]</span><br><span class="line">[8.780118 4.584425 1]</span><br><span class="line">[6.001656 0.2626515 1]</span><br><span class="line">[8.458327 2.496932 1]</span><br><span class="line">[6.417843 2.474666 1]</span><br><span class="line">[1.7365584 5.9262376 -1]</span><br><span class="line">[8.143946 6.938381 1]</span><br><span class="line">[0.3032255 5.392101 -1]</span><br><span class="line">[9.756748 7.5076303 1]</span><br><span class="line">[2.9400632 7.5316124 -1]</span><br><span class="line">[1.5096405 3.5576727 -1]</span><br><span class="line">[8.319309 2.3183005 1]</span><br><span class="line">[6.278346 4.983943 1]</span><br><span class="line">[0.8983609 0.2519396 1]</span><br><span class="line">[3.9221618 5.893831 -1]</span><br><span class="line">[9.296116 5.720868 1]</span><br><span class="line">[5.885763 4.1176267 1]</span><br><span class="line">[5.525804 4.916074 1]</span><br><span class="line">[9.579539 7.9720855 1]</span><br><span class="line">[1.0738112 7.83035 -1]</span><br><span class="line">[3.93251 1.3041384 1]</span><br><span class="line">[1.9003277 7.3982577 -1]</span><br><span class="line">[6.540414 0.9838379 1]</span><br><span class="line">[5.2038026 0.99729663 1]</span><br><span class="line">[1.518434 0.76190263 1]</span><br><span class="line">[3.1520808 1.5965092 1]</span><br><span class="line">[1.3780406 3.2261066 -1]</span><br><span class="line">[5.390745 5.708516 1]</span><br><span class="line">[5.127817 6.841751 -1]</span><br><span class="line">[6.530402 5.244998 1]</span><br><span class="line">[6.5427012 7.163684 1]</span><br><span class="line">[6.3664417 0.1282591 1]</span><br><span class="line">[0.30682194 0.9803087 -1]</span><br><span class="line">[3.6911173 8.264541 -1]</span><br><span class="line">[3.4768171 3.4431503 1]</span><br><span class="line">[2.529998 2.1647115 1]</span><br><span class="line">[5.5500216 4.0207086 1]</span><br><span class="line">[5.064971 1.6867967 1]</span><br><span class="line">[3.3136826 8.279282 -1]</span><br><span class="line">[7.0028787 0.5792626 1]</span><br><span class="line">[9.991595 4.1154037 1]</span><br><span class="line">[1.1167464 7.807541 -1]</span><br><span class="line">[0.9211762 0.53494626 -1]</span><br><span class="line">initialized: w1 = 0.714696, w2 = 0.250762, b = 0.848633</span><br><span class="line">Finished: w1 = 93.505875, w2 = -68.393494, b = -50.151367</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*4.377142 + -68.393494*4.246375 + -50.151367 = 68.712677 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.868231 + -68.393494*0.656370 + -50.151367 = 547.177063 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*1.565192 + -68.393494*0.969695 + -50.151367 = 29.882477 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.009119 + -68.393494*5.152126 + -50.151367 = -121.153015 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*8.136399 + -68.393494*2.142639 + -50.151367 = 564.107239 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.806572 + -68.393494*3.180582 + -50.151367 = 88.254379 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*4.688898 + -68.393494*2.830341 + -50.151367 = 194.711212 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.931018 + -68.393494*6.790847 + -50.151367 = -240.533661 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.185530 + -68.393494*2.031869 + -50.151367 = 15.241974 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.608714 + -68.393494*5.706733 + -50.151367 = -103.018768 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*8.624914 + -68.393494*2.931142 + -50.151367 = 555.857727 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.970826 + -68.393494*7.525730 + -50.151367 = -287.072723 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.065827 + -68.393494*8.653350 + -50.151367 = -448.817261 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.967192 + -68.393494*5.238203 + -50.151367 = 243.062958 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.283031 + -68.393494*1.583283 + -50.151367 = -131.972565 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.072535 + -68.393494*9.752416 + -50.151367 = -149.335510 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.794536 + -68.393494*5.948086 + -50.151367 = -382.667908 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.591206 + -68.393494*6.920246 + -50.151367 = -468.169891 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.015227 + -68.393494*1.732662 + -50.151367 = 113.287231 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.410998 + -68.393494*5.441556 + -50.151367 = 83.641754 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.785076 + -68.393494*4.231522 + -50.151367 = -79.138947 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.305857 + -68.393494*2.535405 + -50.151367 = 272.572266 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.820810 + -68.393494*7.886049 + -50.151367 = -325.743500 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.618055 + -68.393494*8.805431 + -50.151367 = -314.076202 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.971123 + -68.393494*8.943617 + -50.151367 = -384.019135 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.974546 + -68.393494*9.769169 + -50.151367 = -627.173157 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.742910 + -68.393494*2.222894 + -50.151367 = -132.716415 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.810783 + -68.393494*2.415151 + -50.151367 = 421.516296 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.115225 + -68.393494*9.328465 + -50.151367 = -396.865845 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*7.418489 + -68.393494*8.010550 + -50.151367 = 95.651489 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*7.302315 + -68.393494*1.829249 + -50.151367 = 507.549194 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*4.283571 + -68.393494*8.969919 + -50.151367 = -263.096466 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.826535 + -68.393494*9.789293 + -50.151367 = -81.354248 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*9.222122 + -68.393494*0.908373 + -50.151367 = 750.044495 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*4.931420 + -68.393494*9.269868 + -50.151367 = -223.033264 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*9.549455 + -68.393494*3.479540 + -50.151367 = 604.800842 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.908388 + -68.393494*7.109072 + -50.151367 = 109.609192 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.637796 + -68.393494*6.494895 + -50.151367 = 32.807159 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.517650 + -68.393494*7.558235 + -50.151367 = -51.152771 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*4.038033 + -68.393494*1.306511 + -50.151367 = 238.071564 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*9.859647 + -68.393494*8.963417 + -50.151367 = 258.744080 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.220840 + -68.393494*7.211478 + -50.151367 = -242.202087 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.445398 + -68.393494*0.855205 + -50.151367 = 494.040710 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.695753 + -68.393494*6.227283 + -50.151367 = 150.035217 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.696928 + -68.393494*2.368226 + -50.151367 = 133.561920 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.352819 + -68.393494*1.872461 + -50.151367 = 322.304504 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.388407 + -68.393494*6.280982 + -50.151367 = -256.399597 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*1.267529 + -68.393494*2.813303 + -50.151367 = -124.041557 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*4.103229 + -68.393494*4.349125 + -50.151367 = 36.072754 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.250950 + -68.393494*5.501470 + -50.151367 = 158.084442 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.236088 + -68.393494*7.291808 + -50.151367 = 34.247345 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*8.305339 + -68.393494*0.005138 + -50.151367 = 726.095154 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*7.360686 + -68.393494*3.999838 + -50.151367 = 364.553162 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*4.978681 + -68.393494*6.039781 + -50.151367 = 2.302826 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*4.096183 + -68.393494*0.296713 + -50.151367 = 312.572571 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.019039 + -68.393494*0.028430 + -50.151367 = -50.315571 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*9.158213 + -68.393494*5.898342 + -50.151367 = 402.787079 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.593925 + -68.393494*8.154052 + -50.151367 = -84.770630 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*8.780118 + -68.393494*4.584425 + -50.151367 = 457.296417 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.001656 + -68.393494*0.262652 + -50.151367 = 493.075073 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*8.458327 + -68.393494*2.496932 + -50.151367 = 569.978027 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.417843 + -68.393494*2.474666 + -50.151367 = 380.703583 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*1.736558 + -68.393494*5.926238 + -50.151367 = -293.089050 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*8.143946 + -68.393494*6.938381 + -50.151367 = 236.815277 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.303225 + -68.393494*5.392101 + -50.151367 = -390.582611 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*9.756748 + -68.393494*7.507630 + -50.151367 = 348.688843 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.940063 + -68.393494*7.531612 + -50.151367 = -290.351471 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*1.509640 + -68.393494*3.557673 + -50.151367 = -152.312790 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*8.319309 + -68.393494*2.318300 + -50.151367 = 569.196289 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.278346 + -68.393494*4.983943 + -50.151367 = 196.041626 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.898361 + -68.393494*0.251940 + -50.151367 = 16.619629 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.922162 + -68.393494*5.893831 + -50.151367 = -86.505859 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*9.296116 + -68.393494*5.720868 + -50.151367 = 427.819946 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.885763 + -68.393494*4.117627 + -50.151367 = 218.583221 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.525804 + -68.393494*4.916074 + -50.151367 = 130.316315 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*9.579539 + -68.393494*7.972085 + -50.151367 = 300.353088 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*1.073811 + -68.393494*7.830350 + -50.151367 = -485.288696 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.932510 + -68.393494*1.304138 + -50.151367 = 228.366821 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*1.900328 + -68.393494*7.398258 + -50.151367 = -378.452271 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.540414 + -68.393494*0.983838 + -50.151367 = 494.127686 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.203803 + -68.393494*0.997297 + -50.151367 = 368.226135 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*1.518434 + -68.393494*0.761903 + -50.151367 = 39.721947 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.152081 + -68.393494*1.596509 + -50.151367 = 135.395859 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*1.378041 + -68.393494*3.226107 + -50.151367 = -141.941177 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.390745 + -68.393494*5.708516 + -50.151367 = 63.489624 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.127817 + -68.393494*6.841751 + -50.151367 = -38.601624 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.530402 + -68.393494*5.244998 + -50.151367 = 201.755890 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.542701 + -68.393494*7.163684 + -50.151367 = 71.680267 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*6.366442 + -68.393494*0.128259 + -50.151367 = 536.376221 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.306822 + -68.393494*0.980309 + -50.151367 = -88.508453 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.691117 + -68.393494*8.264541 + -50.151367 = -270.251007 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.476817 + -68.393494*3.443150 + -50.151367 = 39.462372 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*2.529998 + -68.393494*2.164711 + -50.151367 = 38.366135 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.550022 + -68.393494*4.020709 + -50.151367 = 193.817993 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*5.064971 + -68.393494*1.686797 + -50.151367 = 308.087280 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*3.313683 + -68.393494*8.279282 + -50.151367 = -306.551605 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*7.002879 + -68.393494*0.579263 + -50.151367 = 565.041138 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*9.991595 + -68.393494*4.115404 + -50.151367 = 602.654663 &gt; 0, and y = 1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*1.116746 + -68.393494*7.807541 + -50.151367 = -479.713989 &lt; 0, and y = -1.000000</span><br><span class="line">w1*x1 + w2*x2 + b = 93.505875*0.921176 + -68.393494*0.534946 + -50.151367 = -0.602829 &lt; 0, and y = -1.000000</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>用 Go 实现没有 Python 方便，但速度确实是快。</p>
+<p>感知机的算法比较简单，也易于实现。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/NN/" rel="tag"># NN</a>
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/20/db-rmdb-nosql/" rel="prev" title="RMDB 与 NoSQL 的比较">
+      <i class="fa fa-chevron-left"></i> RMDB 与 NoSQL 的比较
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/21/golang-build/" rel="next" title="go build 命令介绍">
+      go build 命令介绍 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

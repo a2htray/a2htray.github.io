@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="原文https:&#x2F;&#x2F;linguinecode.com&#x2F;post&#x2F;how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="翻译 React 如果避免组件重复渲染">
+<meta property="og:url" content="http://yoursite.com/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="原文https:&#x2F;&#x2F;linguinecode.com&#x2F;post&#x2F;how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/react-console-log-render-lifecycle.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/multiple-re-renders-output-example.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/avoid-re-render-shouldcomponentupdate-example-output.jpg">
+<meta property="article:published_time" content="2020-07-09T03:00:19.000Z">
+<meta property="article:modified_time" content="2020-07-16T07:16:50.664Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Translation">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/react-console-log-render-lifecycle.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>翻译 React 如果避免组件重复渲染 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          翻译 React 如果避免组件重复渲染
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-09 11:00:19" itemprop="dateCreated datePublished" datetime="2020-07-09T11:00:19+08:00">2020-07-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-16 15:16:50" itemprop="dateModified" datetime="2020-07-16T15:16:50+08:00">2020-07-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>原文<a href="https://linguinecode.com/post/how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate" target="_blank" rel="noopener">https://linguinecode.com/post/how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate</a></p>
+<a id="more"></a>
+
+<p>你有没有注意到组件与其子组件导致多次重复渲染？</p>
+<p>如果真是这样，对你来说就是个坏消息。</p>
+<p>下面我们来看下如下的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="keyword">this</span>.setState(&#123; <span class="attr">ruinPerformance</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">render() &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;SubComp&gt;</span><br><span class="line">      &lt;SubComp&gt;</span><br><span class="line">        &lt;SubComp&gt;</span><br><span class="line">          &lt;SubComp&gt;</span><br><span class="line">            Hello world :)</span><br><span class="line">          &lt;<span class="regexp">/SubComp&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>SubComp&gt;</span><br><span class="line">      &lt;<span class="regexp">/SubComp&gt;</span></span><br><span class="line"><span class="regexp">      &lt;SiblingComp /</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/SubComp&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果父组件的状态发生了改变，所有的子组件就会被重新渲染。</p>
+<p>如果我们不希望 <code>&lt;SiblingComp /&gt;</code> 被渲染，应该怎么做？幸运的是，React 给我们提供了针对特定组件避免其重复渲染的方法。</p>
+<p>但在开始之前，我们来学习下一些基本知识。</p>
+<h3 id="render-函数作用"><a href="#render-函数作用" class="headerlink" title="render 函数作用"></a>render 函数作用</h3><p><code>render</code> 函数是在组件生命周期中调用的一个函数，无论你创建何种形式的组件都需要包含 <code>render</code> 函数，它的返回值可以包含 <code>null</code>、<code>undefined</code> 或 <code>JSX 标签</code>。</p>
+<p><strong>我们应该避免在 <code>render</code> 函数中修改组件的状态。</strong></p>
+<p>修改组件状态的过程应该放在 <code>componentDidMount</code> 函数中。</p>
+<p>正因为如此，所以才会导致组件一直需要重新渲染。</p>
+<h3 id="组件何时进行渲染"><a href="#组件何时进行渲染" class="headerlink" title="组件何时进行渲染"></a>组件何时进行渲染</h3><p>组件的第一次渲染是在 <code>componentWillMount</code> 调用结束。</p>
+<p>然后会在调用 <code>componentWillUpdate</code> 结束后，再次渲染。</p>
+<p>当组件装载完成，React 会监听 <code>props</code> 或 <code>state</code> 是否被修改。</p>
+<p>一旦检测到相应的修改，默认情况下，React 会重新渲染组件及其各子组件。</p>
+<h3 id="同时渲染多个组件是好是坏"><a href="#同时渲染多个组件是好是坏" class="headerlink" title="同时渲染多个组件是好是坏"></a>同时渲染多个组件是好是坏</h3><p>可以是好，也可以是坏。</p>
+<p>理论上，同时渲染多个组件的开销是很大的，但 React 足够快，以致我们感觉不到性能上的区别。</p>
+<p>这更多是一个需要解决的优化问题。</p>
+<p>React 的性能分析可以使用 <a href="https://reactjs.org/docs/perf.html" target="_blank" rel="noopener">NPM 的模块工具</a>。</p>
+<p>所以你的下一个问题可能是，我们应该如果避免重复渲染。</p>
+<h3 id="什么时候应该使用-shouldComponentUpdate"><a href="#什么时候应该使用-shouldComponentUpdate" class="headerlink" title="什么时候应该使用 shouldComponentUpdate"></a>什么时候应该使用 <code>shouldComponentUpdate</code></h3><p>React 的 <code>shouldComponentUpdate</code> 更像是一个性能优化的方法，即使在 <code>props</code> 或 <code>state</code> 修改的情况下，该方法可以使 React 避免组件重新渲染。</p>
+<p>当一个组件是一个不需要修改的或纯的组件，就可以使用该方法。</p>
+<p><code>shouldComponentUpdate</code> 返回一个 <code>boolean</code> 类型的值。</p>
+<p><code>true</code> 表示需要重新渲染，反之为 <code>false</code>。</p>
+<h3 id="如何使用-shouldComponentUpdate"><a href="#如何使用-shouldComponentUpdate" class="headerlink" title="如何使用 shouldComponentUpdate"></a>如何使用 <code>shouldComponentUpdate</code></h3><p>下面是使用 <code>shouldCompoentUpdate</code> 的简单示例。</p>
+<p>首先，我们创建两个基本的组件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeting</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Greeting - Render lifecycle'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hi there, my name is Ruben!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'App - Render lifecycle'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Greeting</span> /&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/react-console-log-render-lifecycle.jpg" alt></p>
+<p>上图中，我已经创建两个 React 的组件。一个是 <code>greeting</code> 组件，另一个是 <code>app</code> 组件。每个组件的 <code>render</code> 方法中各有一句打印输出。接下来，我会增加组件的状态，并在 <code>componentDidMount</code> 方法中，修改组件的状态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  state = &#123;</span><br><span class="line">    greeted: <span class="literal">false</span>,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">greeted</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'App - Render lifecycle'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Greeting</span> /&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/multiple-re-renders-output-example.jpg" alt></p>
+<p>从控制台输出中可以看出，app 组件和 greeting 组件的 <code>render</code> 再次触发。这是因为对 <code>app</code> 的状态 <code>greeted:true</code> 做了修改，并同时渲染了其子组件。假设 <code>greeting</code> 组件是不被修改的，我们可以阻止其 <code>render</code> 方法触发。第一步，就是加一个 <code>shouldComponentUpdate</code>，并返回一个 <code>false</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeting</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  shouldComponentUpdate() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Greeting - shouldComponentUpdate lifecycle'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Greeting - Render lifecycle'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hi there, my name is Ruben!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，当代码执行到 <code>shouldComponentUpdate</code> 时，控制台会有打印输出。加了 <code>shouldComponentUpdate</code> 后，React 就不会渲染虚拟 DOM。</p>
+<p><img src="/2020/07/09/react-how-to-avoid-multiple-re-renders-in-react-shouldcomponentupdate/avoid-re-render-shouldcomponentupdate-example-output.jpg" alt></p>
+<p>由控制台输出得知，<code>app</code> 组件和 <code>greeting</code> 组件完成了了一次 <code>render</code> 调用。</p>
+<p>当 <code>app</code> 组件的状态被修改后，<code>app</code> 组件两次进行了渲染。</p>
+<p>但 <code>greeting</code> 组件并不没有被渲染。</p>
+<p>是不是很简单。</p>
+<p><code>shouldCompoentUpdate</code> 同样提供参数的调用，参数可以是 <code>props</code> 和 <code>state</code> 的组合。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps, nextState);</span><br></pre></td></tr></table></figure>
+
+<p>所以你可以在这里根据不同的 <code>props</code> 和 <code>state</code> 做一些逻辑操作，并决定是否进行更新。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>仅当你的程序性能遇到瓶颈时才需要考虑使用 <code>shouldComponentUpdate</code>。或者你的组件就是一直不会变。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Translation/" rel="tag"># Translation</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+              <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/09/react-component-vs-purecomponent/" rel="prev" title="翻译 React Component 和 PureComponent 的区别">
+      <i class="fa fa-chevron-left"></i> 翻译 React Component 和 PureComponent 的区别
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/15/note-mysql-replace-nbsp/" rel="next" title="MySQL 下替换 nbsp;">
+      MySQL 下替换 nbsp; <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#render-函数作用"><span class="nav-number">1.</span> <span class="nav-text">render 函数作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件何时进行渲染"><span class="nav-number">2.</span> <span class="nav-text">组件何时进行渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同时渲染多个组件是好是坏"><span class="nav-number">3.</span> <span class="nav-text">同时渲染多个组件是好是坏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候应该使用-shouldComponentUpdate"><span class="nav-number">4.</span> <span class="nav-text">什么时候应该使用 shouldComponentUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用-shouldComponentUpdate"><span class="nav-number">5.</span> <span class="nav-text">如何使用 shouldComponentUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="标题：Empirical study of particle swarm optimization 关键字：performance of PSO, improve PSO’s performance, adaptive inertia weight 作者：Y. Shi, R.C. Eberhart 期刊&#x2F;会议：Proceedings of the 1999 Congress on Evolutio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="参考文献">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/ref-read/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="标题：Empirical study of particle swarm optimization 关键字：performance of PSO, improve PSO’s performance, adaptive inertia weight 作者：Y. Shi, R.C. Eberhart 期刊&#x2F;会议：Proceedings of the 1999 Congress on Evolutio">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/03/16/ref-read/QQ%E6%88%AA%E5%9B%BE20200320155237.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/16/ref-read/QQ%E6%88%AA%E5%9B%BE20200320170138.png">
+<meta property="article:published_time" content="2020-03-16T14:30:26.000Z">
+<meta property="article:modified_time" content="2020-03-30T16:41:28.265Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Reference">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/16/ref-read/QQ%E6%88%AA%E5%9B%BE20200320155237.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/16/ref-read/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>参考文献 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/16/ref-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          参考文献
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-16 22:30:26" itemprop="dateCreated datePublished" datetime="2020-03-16T22:30:26+08:00">2020-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-31 00:41:28" itemprop="dateModified" datetime="2020-03-31T00:41:28+08:00">2020-03-31</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>标题：Empirical study of particle swarm optimization</p>
+<p>关键字：performance of PSO, improve PSO’s performance, adaptive inertia weight</p>
+<p>作者：Y. Shi, R.C. Eberhart</p>
+<p>期刊/<strong>会议</strong>：Proceedings of the 1999 Congress on Evolutionary Computation-CEC99 (Cat. No. 99TH8406)</p>
+<p>引用：Shi, Y., &amp; Eberhart, R. C. (1999, July). Empirical study of particle swarm optimization. In Proceedings of the 1999 Congress on Evolutionary Computation-CEC99 (Cat. No. 99TH8406) (Vol. 3, pp. 1945-1950). IEEE.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>Solve the problem that PSO may slow its convergence speed when it is near minimum.</li>
+<li>Four non-linear testing functions</li>
+</ol>
+<a id="more"></a>
+
+<hr>
+<p>标题：A New Optimizer Using Particle Swarm Theory</p>
+<p>关键字：optimization of nonlinear function, particle swarm methodology, locally oriented paradigm, artificial neural network weights</p>
+<p>作者：Russell Eberhart, James Kennedy</p>
+<p>期刊/<strong>会议</strong>：MHS’95. Proceedings of the Sixth International Symposium on Micro Machine and Human Science</p>
+<p>引用：Eberhart, R., &amp; Kennedy, J. (1995, October). A new optimizer using particle swarm theory. In MHS’95. Proceedings of the Sixth International Symposium on Micro Machine and Human Science (pp. 39-43). Ieee.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>Introduce a local version particl swarm optimization</li>
+<li>Use PSO to train weights of a nerual network for XOR problem</li>
+<li>Describe the differences between PSO and GA</li>
+</ol>
+<hr>
+<p>标题：A Hybrid Rice Optimization Algorithm</p>
+<p>关键字：Evolutionary Computation, HRO, three line rice hybridization, Hybridization-Selfing-Renewal</p>
+<p>作者：Zhiwei Ye, Lie Ma，Hongwei Chen</p>
+<p>期刊/<strong>会议</strong>：The 11th International Conference on Computer Science &amp; Education (ICCSE 2016) August 23-25, 2016. Nagoya University, Japan</p>
+<p>引用：Ye, Z., Ma, L., &amp; Chen, H. (2016, August). A hybrid rice optimization algorithm. In 2016 11th International Conference on Computer Science &amp; Education (ICCSE) (pp. 169-174). IEEE.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>propose a new evolutional algorithm called HRO inspired by the cultivation for three line </li>
+<li>describe the procedures of HRO. These procedures are hybridization, selfing and renewal</li>
+<li>six benchmark objective functions</li>
+</ol>
+<hr>
+<p>标题：SEQdata-BEACON: a comprehensive database of sequencing performance and statistical tools for performance evaluation and yield simulation in BGISEQ-500</p>
+<p>关键字：Linear regression, Production prediction, biodata</p>
+<p>作者：Yanqiu Zhou†, Chen Liu†, Rongfang Zhou†, Anzhi Lu, Biao Huang, Liling Liu, Ling Chen, Bei Luo, Jin Huang* and Zhijian Tian*</p>
+<p><strong>期刊</strong>/会议：BioData Mining</p>
+<p>引用：Zhou, Y., Liu, C., Zhou, R., Lu, A., Huang, B., Liu, L., … &amp; Tian, Z. (2019). SEQdata-BEACON: a comprehensive database of sequencing performance and statistical tools for performance evaluation and yield simulation in BGISEQ-500. BioRxiv, 652347.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>Prediction of machine production</li>
+<li>Linear regression</li>
+</ol>
+<hr>
+<p>标题：SMPSO: A New PSO-based Metaheuristic for Multi-objective Optimization</p>
+<p>关键字：Speed-constrained Multi-Object PSO (SMPSO), a velocity constriction mechanism</p>
+<p>作者：A.J. Nebro, J.J. Durillo, J. Garc´ıa-Nieto, C.A. Coello Coello, F. Luna and E. Alba</p>
+<p>期刊/<strong>会议</strong>：In 2009 IEEE Symposium on Computational Intelligence in Multi-Criteria Decision-Making (MCDM) </p>
+<p>引用：Nebro, A. J., Durillo, J. J., Garcia-Nieto, J., Coello, C. C., Luna, F., &amp; Alba, E. (2009, March). SMPSO: A new PSO-based metaheuristic for multi-objective optimization. In 2009 IEEE Symposium on Computational Intelligence in Multi-Criteria Decision-Making (MCDM) (pp. 66-73). IEEE.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>introduce a speed constrained mechanism to avoid the higher or lower speed</li>
+<li>Multiple-Object optimization</li>
+<li>the formulas that how the speed changes and how the position changes</li>
+<li>pbest and gbest definination</li>
+</ol>
+<hr>
+<p>标题：基于谱聚类的无监督特征选择算法</p>
+<p>关键字：谱聚类、基因表达数据、聚类算法比较、FSSC</p>
+<p>作者：谢娟英1, 丁丽娟1,3, 王明钊2</p>
+<p><strong>期刊</strong>/会议：软件学报</p>
+<p>引用：Xie JY, Ding LJ, Wang MZ. Spectral clustering based unsupervised feature selection algorithmsRuan Jian Xue<br>Bao/Journal of Software, 2020 (in Chinese). <a href="http://www.jos.org.cn/1000-9825/5927.htm" target="_blank" rel="noopener">http://www.jos.org.cn/1000-9825/5927.htm</a></p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>基于谱聚类的无监督特征选择</li>
+<li>特征的区分度与特征独立性的刻画</li>
+<li>FSSC-SD (FSSC based on standard deviation)</li>
+<li>FSSC-MD (FSSC based on mean distance)</li>
+<li>FSSC-ST (FSSC based on self-tuning)</li>
+</ol>
+<hr>
+<p>标题：多种群协同进化数值优化算法</p>
+<p>关键字：多种群进化算法、杂种优势、趋同</p>
+<p>作者：彭复明</p>
+<p><strong>期刊</strong>/会议：计算机应用</p>
+<p>引用：NA</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>多种群进化算法</li>
+<li>杂种优势的定义</li>
+<li>如果不同种群之间过早交配且趋异率高，就会破坏种群的多样性，多个种群就可能退化成单个较大的种群</li>
+<li>趋同是一个局部竞争的过程, 其结果是找到局部最优解;趋异是一个全局竞争的过程, 其结果是找到全局最优</li>
+<li>种群间存在交流，共享较优个体，可促进单个种群的多样性</li>
+</ol>
+<hr>
+<p>标题：Bibliometric analysis of support vector machines research trend: a case study in China</p>
+<p>关键字：SVM, Bibliometric analysis</p>
+<p>作者：Dejian Yu1 · Zeshui Xu2 · Xizhao Wang3</p>
+<p><strong>期刊</strong>/会议：International Journal of Machine Learning and Cybernetics</p>
+<p>引用：NA</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>国内 SVM 研究现状</li>
+<li>定量分析，叙述国内 SVG 相关文献及机构</li>
+<li>SVM 的应用领域主要是 Feature Selection 和 Classification</li>
+<li>已有的 SVM 相关研究，中国科学院的贡献最大</li>
+</ol>
+<hr>
+<p>标题：Multimodal Multi-objective Optimization: A Preliminary Study</p>
+<p>关键字：MOPs, algorithm comparison, niching, NSGAⅡ</p>
+<p>作者：JJ Liang, CT Yue, BY Qu</p>
+<p>期刊/<strong>会议</strong>：2016 IEEE Congress on Evolutionary Computation (CEC). IEEE, 2016</p>
+<p>引用：Liang, J. J., C. T. Yue, and B. Y. Qu. “Multimodal multi-objective optimization: A preliminary study.” 2016 IEEE Congress on Evolutionary Computation (CEC). IEEE, 2016.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>Pareto optimal Set (PS)，存在于决策空间 (decision space)</li>
+<li>Pareto Front(PF)，存在于目标空间 (objective space)</li>
+<li>多目标优化问题的数学描述 (该文章介绍得比较通俗易懂)</li>
+<li>多目标优化问题：决策空间到目标空间的映射</li>
+<li>若决策空间中存在两个或多个决策向量同时映射到同一个或相接近的目标向量时，传统多目标算法只会保留其中一个决策向量</li>
+<li>由于 (5) 的限制，需要获得尽可能多的 Parato Set</li>
+<li>使用 IGDX 来描述</li>
+</ol>
+<hr>
+<p>标题：Problem Definitions and Evaluation Criteria for the CEC Special Session on Multimodal Multiobjective Optimization</p>
+<p>关键字：MOPs, algorithm comparison, niching, NSGAⅡ</p>
+<p>作者：J Liang, BY Qu, D Gong, C Yue</p>
+<p><strong>期刊</strong>/会议：Computational Intelligence Laboratory</p>
+<p>引用：Liang, Jing, et al. “Problem definitions and evaluation criteria for the cec 2019 special session on multimodal multiobjective optimization.” Computational Intelligence Laboratory, Zhengzhou University. 2019.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>多目标函数集合</li>
+<li>多目标图像表示</li>
+</ol>
+<hr>
+<p>标题：Meta‐heuristic multi‐ and many‐objective optimization techniques for solution of machine learning problems</p>
+<p>关键字：approach classification, metaheuristic algorithm, EA in machine learning</p>
+<p>作者：Douglas Rodrigues1 | João P. Papa2 | Hojjat Adeli3</p>
+<p><strong>期刊</strong>/会议：Expert Systems</p>
+<p>引用：Rodrigues, Douglas , J. P. Papa , and H. Adeli . “Meta-heuristic Multi- and Many-objective Optimization Techniques for Solution of Machine Learning Problems.” Expert Systems 34.11(2017).</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>优化技术在各行各业的应用</li>
+<li>单目标与多目标问题的定义</li>
+<li>Pareto 最优的概念</li>
+<li>解决多目标问题的方法的分类，Non-Preference methods, Prior methods, Posterior methods, Interactive methods</li>
+<li>优化问题在机器学习中的体现：Feature extraction and selection, hyper-parameter optimization and model selection, Clustering</li>
+</ol>
+<hr>
+<p>标题：Antlion Optimizer Algorithm Based on Chaos Search and its Application</p>
+<p>关键字：Antlion Optimizer Algorithm, tent chaos strategy, algorithm comparsion</p>
+<p>作者：ZHANG Zhenxing1, YANG Rennong1, LI Huanyu1,*, FANG Yuhuan2, HUANG Zhenyu1, and ZHANG Ying1</p>
+<p><strong>期刊</strong>/会议： Journal of Systems Engineering and Electronics</p>
+<p>引用：Zhenxing, Zhang , et al. “Antlion optimizer algorithm based on chaos search and its application.” Journal of Systems Engineering and Electronics 30.02(2019):134-147.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>改进的 Antlion opitimizer algorithm (ALO) 算法</li>
+<li>引入混沌序列</li>
+<li>锦标赛式精英选择</li>
+</ol>
+<hr>
+<p>标题：基于混合ABC和CRO的高维特征选择方法</p>
+<p>关键字：特征选择、生物数据、分类器、KNN、SVM、进化算法</p>
+<p>作者：张戈，王建林</p>
+<p><strong>期刊</strong>/会议：计算机工程与应用</p>
+<p>引用：NA</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>二进制进化算法做特征选择，使用 Wrapper 方式做分类</li>
+<li>高维度小样本数据分类问题</li>
+<li>引入 ABC 算法增强收敛性，引入 CRO 算法增加随机性</li>
+<li>针对二分类问题，使用 TP、FP、TN、FN 来评估模型的性能</li>
+</ol>
+<hr>
+<p>标题：K-Means 聚类算法研究综述</p>
+<p>关键字：K-Means、聚类算法、优缺点，改进</p>
+<p>作者：杨俊闯，赵超</p>
+<p><strong>期刊</strong>/会议：计算机工程与应用</p>
+<p>引用：NA</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>传统 K-Means 算法介绍，利用欧式距离划分簇，样本间欧式距离越近相似度越高</li>
+<li>使用误差平方和 SSE 作为优化目标</li>
+<li>K-Means 的优缺点</li>
+<li>针对各缺点作出相应的改进<ol>
+<li>聚类数目 K 值的确定</li>
+<li>初始样本点的选取</li>
+<li>离群点的检测与去除</li>
+<li>距离与相似度的度量</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>标题：A survey on nature inspired metaheuristic algorithms for partitional clustering</p>
+<p>关键字：K-Means，进化算法改进版聚类，目标函数列表</p>
+<p>作者：Satyasai Jagannath Nanda, Ganapat iPanda</p>
+<p><strong>期刊</strong>/会议：Swarmand Evolutionary Computation</p>
+<p>引用：Nanda, Satyasai Jagannath, and Ganapati Panda. “A survey on nature inspired metaheuristic algorithms for partitional clustering.” <em>Swarm and Evolutionary computation</em> 16 (2014): 1-18.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>基于单目标优化算法的 K-Means 改进版本<ol>
+<li>PSO-based</li>
+<li>DE-based</li>
+<li>…</li>
+</ol>
+</li>
+<li>目标函数列表 <code>table 3</code></li>
+<li>定量评估聚类结果好坏的统计函数 <code>2.4 Cluster validity indices</code></li>
+</ol>
+<hr>
+<p>标题：一种基于最大最小距离和SSE的自适应聚类算法</p>
+<p>关键字：K-Means，K 值确定，SSE 与 K 值关系图</p>
+<p>作者：成卫青，卢艳红</p>
+<p><strong>期刊</strong>/会议：南京邮电大学学报</p>
+<p>引用：成卫青，卢艳红. 一种基于最大最小距离和SSE 的自适应聚类算法[J]. 南京邮电大学学报（自然科学版），2015，35（2）：102-107.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>通过 SSE 与 K 值的变化关系，确定 K 值</li>
+<li>当 SSE 呈明显下降趋势，确定 K 值</li>
+</ol>
+<hr>
+<p>标题：改进的层次K均值聚类算法</p>
+<p>关键字：K-Means，K 值确定，总体均方差，迭代输出</p>
+<p>作者：胡伟</p>
+<p><strong>期刊</strong>/会议：Computer Engineering and Applications 计算机工程与应用</p>
+<p>引用：胡伟. “改进的层次 K 均值聚类算法.” <em>计算机工程与应用</em> 49.2 (2013): 157-159.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>设置迭代结束条件，当满足结束条件时，输出当前的 K</li>
+<li>因为事先需要预设一个临界值，所以并不是一种实用的方法</li>
+<li>聚类性能的计算公式：<ol>
+<li>抱团性，即聚类结果中任意类中最远的两个<br>点的距离的最大值；</li>
+<li>分离性，即任意两个类中心的<br>距离中的最小值。假</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2020/03/16/ref-read/QQ%E6%88%AA%E5%9B%BE20200320155237.png" alt="聚类性能计算公式"></p>
+<hr>
+<p>标题：k-means++: The Advantages of Careful Seeding</p>
+<p>关键字：K-Means，K-Means++，initial centers, probability</p>
+<p>作者：David Arthur and Sergei Vassilvitskii</p>
+<p>期刊/<strong>会议</strong>：In Proceedings of the eighteenth annual ACM-SIAM symposium on Discrete algorithms</p>
+<p>引用：David Arthur and Sergei Vassilvitskii. 2007. K-means++: the advantages of careful seeding. In Proceedings of the eighteenth annual ACM-SIAM symposium on Discrete algorithms (<strong>SODA ’07</strong>). Society for Industrial and Applied Mathematics, USA, 1027–1035.</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>Optimize the process of inital K centers selection</li>
+<li>Roulette and probability</li>
+</ol>
+<p><img src="/2020/03/16/ref-read/QQ%E6%88%AA%E5%9B%BE20200320170138.png" alt></p>
+<hr>
+<p>标题：A Binary Clonal Flower Pollination for Feature Selection</p>
+<p>关键字：Feature Selection, Binary Evolutionary Algorithm, Optimum Path Forest (OPF)，BFPA, BCSA</p>
+<p>作者：</p>
+<p><strong>期刊</strong>/会议：</p>
+<p>引用：</p>
+<p><strong>读后感</strong></p>
+<ol>
+<li>二进制进化算法：Binary Cuckoo Search Algorithm (BCSA),Binary Bat Algorithm (BBA), Binary Differential Evolution Algorithm (BDEA) and Binary Flower Pollination Algorithm (BFPA).</li>
+<li>为什么要做特征选择？Nowadays, many applications, that are used in medicine and industry, depend on large datasets with a lot of features, some of these features may be considered irrelevant, high dimensional or noisy that will degrade the performance of the machine learn ing tasks.</li>
+<li>特征选择的作用？This task can be extremely useful in reducing the dimensional data to be processed by the classifier, reducing the execution time and enhancing the recognition rate of the classifier.</li>
+<li>使用进化算法做特征选择时，使用到的目标函数是什么? where the fitness function is the accuracy of the given classifier that may be maximized by the selected features.</li>
+<li>介绍 CSA 与 FPA 算法</li>
+<li>文章中要使用到两种进化算法，为什么要这样选择？结合两种算法各自的优势：The CSA has good exploitation characteristics via cloning of good solutions, in the other hand, the FPA has good exploration characteristics</li>
+<li>使用 sigmod 函数作为决策函数，实现实数到 01 的映射</li>
+<li>文章通过比较多种二进制进化算法对特征的不同选择方式，以 OPF 分类器分类准确率作为目标函数，求其最大值。使用的数据集为<code>Australian</code>、<code>Breast Cancer</code>、<code>German Numeric</code></li>
+<li>文章结构<ol>
+<li>背景介绍，说明特征提取的重要性，并指出特征提取就是一个优化问题，再列举进化算法在特征提取中的相关研究，并提出自己的想法</li>
+<li>算法介绍，CSA，BFPA，OPF 分类算法，以及作者提出的 BCFA</li>
+<li>实验结果<ol>
+<li>各算法参数设置</li>
+<li>数据比较包括：分类的准确率、选择的特征数和算法执行时间</li>
+</ol>
+</li>
+<li>结论与展望</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Reference/" rel="tag"># Reference</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/17/k-means/" rel="next" title="K-Means 聚类算法">
+      K-Means 聚类算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

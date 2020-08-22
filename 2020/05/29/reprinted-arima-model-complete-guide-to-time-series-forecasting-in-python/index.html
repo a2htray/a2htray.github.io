@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="原文地址：ARIMA Model – Complete Guide to Time Series Forecasting in Python 翻译的主要动力在于，该文章的实验结果比本人尝试的要好很多，所以下定决心要翻译一波。尽管文章的部分知识已经掌握，但由于本人做实验效果并不理想，希望带着问题看该文章，并从文章中找到答案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="-转载 翻译- ARIMA 模型">
+<meta property="og:url" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="原文地址：ARIMA Model – Complete Guide to Time Series Forecasting in Python 翻译的主要动力在于，该文章的实验结果比本人尝试的要好很多，所以下定决心要翻译一波。尽管文章的部分知识已经掌握，但由于本人做实验效果并不理想，希望带着问题看该文章，并从文章中找到答案。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200530172422.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200530173920.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200530174622.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531002416.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531002952.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531004314.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531005609.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531170620.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531171326.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531172314.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531220112.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531221032.png">
+<meta property="article:published_time" content="2020-05-29T07:00:58.000Z">
+<meta property="article:modified_time" content="2020-05-31T14:12:38.119Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Time Series">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200530172422.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>-转载 翻译- ARIMA 模型 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          -转载 翻译- ARIMA 模型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-29 15:00:58" itemprop="dateCreated datePublished" datetime="2020-05-29T15:00:58+08:00">2020-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-31 22:12:38" itemprop="dateModified" datetime="2020-05-31T22:12:38+08:00">2020-05-31</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>原文地址：<a href="https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/#:~:text=ARIMA%2C%20short%20for%20' target=" _blank" rel="noopener" auto%20regressive,used%20to%20forecast%20future%20values.">ARIMA Model – Complete Guide to Time Series Forecasting in Python</a></p>
+<p>翻译的主要动力在于，该文章的实验结果比本人尝试的要好很多，所以下定决心要翻译一波。尽管文章的部分知识已经掌握，但由于本人做实验效果并不理想，希望带着问题看该文章，并从文章中找到答案。</p>
+<a id="more"></a>
+
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
+<li><ol>
+<li>时间序列预测介绍</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>ARIMA 模型介绍</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>ARIMA 模型中 p, d, q 的含义</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>什么是 AR 模型和 MA 模型</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>查找合适的 ARIMA 模型差分阶数 d</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>查找合适的 AR 模型的阶数 p</li>
+</ol>
+</li>
+<li><ol start="7">
+<li>查找合适的 MA 模型的阶数 q</li>
+</ol>
+</li>
+<li><ol start="8">
+<li>如何处理一个时间序列稍微低于或超过偏差</li>
+</ol>
+</li>
+<li><ol start="9">
+<li>如何构建 ARIMA 模型</li>
+</ol>
+</li>
+<li><ol start="10">
+<li>最优 ARIMA 模型</li>
+</ol>
+</li>
+<li><ol start="11">
+<li>衡量时间序列预测的准确性</li>
+</ol>
+</li>
+<li><ol start="12">
+<li>自动化 ARIMA 模型</li>
+</ol>
+</li>
+<li><ol start="13">
+<li>如何解释 ARIMA 模型中的残差图</li>
+</ol>
+</li>
+<li><ol start="14">
+<li>如何动态构建 SARIMA 模型</li>
+</ol>
+</li>
+<li><ol start="15">
+<li>如何利用外生变量建立 SARIMAX 模型</li>
+</ol>
+</li>
+<li><ol start="16">
+<li>练习</li>
+</ol>
+</li>
+<li><ol start="17">
+<li>结论</li>
+</ol>
+</li>
+</ul>
+<h3 id="1-时间序列预测介绍"><a href="#1-时间序列预测介绍" class="headerlink" title="1. 时间序列预测介绍"></a>1. 时间序列预测介绍</h3><p>时间序列（或称动态数列）是指将同一统计指标的数值按其发生的时间先后顺序排列而成的数列。</p>
+<p>根据频率，即间隔时间的单位，时间序列可以分成按年的（年度预算）、按季的（季度支出）、按月的（航空交通）、按周的（销量）、按日的（天气）、按时的（股价）、按分的（脉搏跳动），甚至是按秒的（网站流量）。</p>
+<p>预测是通过处理已经得到的时间序列去估计在未来某一时刻可能的值。那我们为什么要做预测？因为时间序列的预测往往具有巨大的商业价值。</p>
+<p>在绝大多数的制造公司，预测扮演着驱动商业计划、采购及生产等活动的角色。任何错误的预测都将导致整个供应链或商业行为陷入困境。所以对于商业公司，通过提高预测的准确性来节约运营的成本是成功的关键，是极其重要的。</p>
+<p>这一现象不单单只存在于制造行业，蕴含在时间序列预测中的技术及本质在任何行业都是适用的。</p>
+<p>现在时间序列预测可以分成两种类型：单变量时间预测和多变量时间预测。</p>
+<p><strong>单变量时间预测</strong>是指仅使用一条时间序列的值去预测未来的值。<strong>多变量时间预测</strong>是指时间序列存在多条，结合多条序列的信息去预测未来的值。</p>
+<p>我们这篇文章关注的模型是 ARIMA 模型，全称为差分整合移动自回归模型，该模型通过挖掘过去时间序列的信息并去预测未来值的模型。</p>
+<h3 id="2-ARIMA-模型介绍"><a href="#2-ARIMA-模型介绍" class="headerlink" title="2. ARIMA 模型介绍"></a>2. ARIMA 模型介绍</h3><p>那问题来了，如何准确定义 ARIMA 模型呢？</p>
+<p>ARIMA 模型是时间序列预测模型的一种，而时间序列预测模型则是基于过去的值，也就是隐藏在过去值的中信息去预测未来的值，其推导出的公式则用来预测未来的值。</p>
+<p>任何“非季节性”的时间序列都可以使用 ARIMA 模型来建模。</p>
+<p>ARIMA 模型的三个代表参数为 <strong>p， d，q</strong>。其中，p 指的是 AR 模型的阶数，q 指的是 MA 模型的阶数，d 指的是保证时间序列为平稳时间序列的阶数。</p>
+<p>如果是一个带有季节性属性的时间序列，你就需要在额外附加一个季节性的参数，那么模型也就变成了 SARIMA。我们首先还是先学习完 ARIMA 模型，后者再做介绍。</p>
+<p>接下来，我们来考虑什么是 AR 模型的阶数，在这之前，我们先来看看参数 d 的含义。</p>
+<h3 id="3-ARIMA-模型中-p-d-q-的含义"><a href="#3-ARIMA-模型中-p-d-q-的含义" class="headerlink" title="3. ARIMA 模型中 p, d, q 的含义"></a>3. ARIMA 模型中 p, d, q 的含义</h3><p>处理时间序列的第一步就是使用时间序列变成平稳的时间序列。为什么我们要这么做？</p>
+<p>因为在 ARIMA 模型中，“自回归”这一术语就已说明该模型是一个线性模型，正我们所知，<strong>线性模型适用于相关性不强或不存在依赖的数据集</strong>。</p>
+<p>那么我们怎么实现时间序列的平稳化呢？</p>
+<p>最常用的方法就是利用<strong>差分</strong>，就是用当前值送去过去的值。有时，根据序列的复杂性，我们会进行多次的差分操作。<strong>d 的含义就是指使用序列变平稳所需要的最小差分次数</strong>。</p>
+<p>接下来，我们来说明什么是 p 和 q。</p>
+<p>p 是 AR 模型的阶数，指的是模型利用过去 p 天的数据来预测未来的值。q 是 MA 模型的阶数，指的是模型利用 q 天的滞后误差来预测未来的值。</p>
+<h3 id="4-什么是-AR-模型和-MA-模型"><a href="#4-什么是-AR-模型和-MA-模型" class="headerlink" title="4. 什么是 AR 模型和 MA 模型"></a>4. 什么是 AR 模型和 MA 模型</h3><p>什么是 AR 模型和 MA 模型？它们的数据公式又是如何表示？</p>
+<p>在 AR 模型中，t 时刻的值只依赖确定前 p 个时刻的值，第 t 时刻的值可以通过下面公式表示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y_t = a + b1 * Y_(t-1) + b2 * Y_(t-2) + ... + bp * Y_(t-p) + e_1</span><br></pre></td></tr></table></figure>
+
+<p>其中 Y_(t-1) 是 t 时刻延迟 1 的值，b1 为延迟 1 的参数，a 是截距，e_1 是<strong>预测误差</strong>。</p>
+<p>下面我们来看下 MA 模型，其公式为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y_t = a + e_t + o1 * e_(t-1) + o2 * e_(t-2) + ... + oq * e_(t-q)</span><br></pre></td></tr></table></figure>
+
+<p>其中各预测误差对应延迟时刻的对应误差。</p>
+<p>所以 ARIMA 模型是一个使用平衡时间序列并结合 AR 和 MA 模型的一个预测模型，其公式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y_t = a + b1 * Y_(t-1) + b2 * Y_(t-2) + ... + bp * Y_(t-p) + e_t + o1 * e_(t-1) + o2 * e_(t-2) + ... + oq * e_(t-q)</span><br></pre></td></tr></table></figure>
+
+<p>换言之，ARIMA 模型就是：一个常量 + p 个时刻值的线性组合 + q 个预测误差的线性组合。</p>
+<p>因此，我们的目标就是要如何确定 p，d，q 三个值。我们先来确认 d。</p>
+<h3 id="5-查找合适的-ARIMA-模型差分阶数-d"><a href="#5-查找合适的-ARIMA-模型差分阶数-d" class="headerlink" title="5. 查找合适的 ARIMA 模型差分阶数 d"></a>5. 查找合适的 ARIMA 模型差分阶数 d</h3><p>差分的目的是为了让序列变得平稳。</p>
+<p>但我们要注意，不要使用序列变得过于平稳。如果一个序列过于平稳，模型所得的参数会变得不准确。</p>
+<p>所以我们应该如何选择合适的差分次数呢？</p>
+<p>一个合适的 d 是指使序列变得平稳的最小差分次数，差分后的序列值在一个确定的平均值附近，且 ACF 曲线很快趋近于 0。</p>
+<p>对于多个延时时刻（10 个或更多）的序列的自相关系数都是正的，那么序列就需要进一步差分。同时，如果延时为 1 且相关系数越接近于 -1 ，那么序列就可能过于平稳了。</p>
+<p>如果对于两个差分后的序列，你无法确定，那么选择具有最小标准差的序列即可。</p>
+<p>让我们看一个示例。</p>
+<p>首先，我们使用<code>Augmented Dickey Fuller</code>判断序列是否平稳，可以使用 <code>statsmodels</code>包中的 <code>adfuller()</code>。为什么要进行判断？原因在于，如果序列本身就是平稳的，就没有必要进行差分，相应的 d 就是 0。</p>
+<p>进行 ADF 测试的前提假设是我们的序列是非平稳的。所以当计算出的 pvalue 小于显著性水平 0.05 时，我们拒绝该假设，此时对应的序列是平稳的。</p>
+<p>所以，在这个例子中，如果 pvalue &gt; 0.05，我们需要进行差分操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> statsmodels.tsa.stattools <span class="keyword">import</span> adfuller</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> log</span><br><span class="line">result = adfuller(df.value.dropna())</span><br><span class="line">print(<span class="string">'ADF Statistic: %f'</span> % result[<span class="number">0</span>])</span><br><span class="line">print(<span class="string">'p-value: %f'</span> % result[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ADF Statistic: -2.464240</span><br><span class="line">p-value: 0.124419</span><br></pre></td></tr></table></figure>
+
+<p>因为 pvalue 大于显著性水平，我们需要进行差分操作，并绘制自相关系数的图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> statsmodels.graphics.tsaplots <span class="keyword">import</span> plot_acf, plot_pacf</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rcParams.update(&#123;<span class="string">'figure.figsize'</span>:(<span class="number">9</span>,<span class="number">7</span>), <span class="string">'figure.dpi'</span>:<span class="number">120</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Import data</span></span><br><span class="line">df = pd.read_csv(<span class="string">'https://raw.githubusercontent.com/selva86/datasets/master/wwwusage.csv'</span>, names=[<span class="string">'value'</span>], header=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Original Series</span></span><br><span class="line">fig, axes = plt.subplots(<span class="number">3</span>, <span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axes[<span class="number">0</span>, <span class="number">0</span>].plot(df.value)</span><br><span class="line">axes[<span class="number">0</span>, <span class="number">0</span>].set_title(<span class="string">'Original Series'</span>)</span><br><span class="line">plot_acf(df.value, ax=axes[<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1st Differencing</span></span><br><span class="line">axes[<span class="number">1</span>, <span class="number">0</span>].plot(df.value.diff())</span><br><span class="line">axes[<span class="number">1</span>, <span class="number">0</span>].set_title(<span class="string">'1st Order Differencing'</span>)</span><br><span class="line">plot_acf(df.value.diff().dropna(), ax=axes[<span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2nd Differencing</span></span><br><span class="line">axes[<span class="number">2</span>, <span class="number">0</span>].plot(df.value.diff().diff())</span><br><span class="line">axes[<span class="number">2</span>, <span class="number">0</span>].set_title(<span class="string">'2nd Order Differencing'</span>)</span><br><span class="line">plot_acf(df.value.diff().diff().dropna(), ax=axes[<span class="number">2</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200530172422.png" alt></p>
+<p>针对上述的序列，需要进行两次差分的序列变得平稳。同时，我们也看到两次差分对应的自相关系数图趋于 0 的附近，这也说明序列可能过于平稳了。</p>
+<p>所以，尽管 1 次差分后所得到的序列并不是完全的平稳，但为了解决过于平稳的问题，这里选择 1 次差后的序列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pmdarima.arima.utils <span class="keyword">import</span> ndiffs</span><br><span class="line">df = pd.read_csv(<span class="string">'https://raw.githubusercontent.com/selva86/datasets/master/wwwusage.csv'</span>, names=[<span class="string">'value'</span>], header=<span class="number">0</span>)</span><br><span class="line">y = df.value</span><br><span class="line"></span><br><span class="line"><span class="comment">## Adf Test</span></span><br><span class="line">ndiffs(y, test=<span class="string">'adf'</span>)  <span class="comment"># 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># KPSS test</span></span><br><span class="line">ndiffs(y, test=<span class="string">'kpss'</span>)  <span class="comment"># 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PP test:</span></span><br><span class="line">ndiffs(y, test=<span class="string">'pp'</span>)  <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 0 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-查找合适的-AR-模型的阶数-p"><a href="#6-查找合适的-AR-模型的阶数-p" class="headerlink" title="6. 查找合适的 AR 模型的阶数 p"></a>6. 查找合适的 AR 模型的阶数 p</h3><p>现在我们要确定 AR 模型的阶数 p。我们可以使用绘制 <code>PACF</code> 图来确定 p。</p>
+<p>但什么是 PACF 呢？</p>
+<p>不考虑中间时滞的影响，部分自相关可以理解为序列与其滞后之间的相关关系。所以，PACF某种程度上传达了滞后和级数之间的纯粹相关性。这样，你就会知道在AR模型内是否需要这种延迟。</p>
+<p>那么如何用数学来表示部分自相关呢？</p>
+<p>通过加入足够多的AR项，可以校正平稳序列中的任何自相关。因此，我们首先取AR项的顺序，等于跨越PACF图中显著性限制的所有滞后时间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PACF plot of 1st differenced series</span></span><br><span class="line">plt.rcParams.update(&#123;<span class="string">'figure.figsize'</span>:(<span class="number">9</span>,<span class="number">3</span>), <span class="string">'figure.dpi'</span>:<span class="number">120</span>&#125;)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axes[<span class="number">0</span>].plot(df.value.diff())</span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">'1st Differencing'</span>)</span><br><span class="line">axes[<span class="number">1</span>].set(ylim=(<span class="number">0</span>,<span class="number">5</span>))</span><br><span class="line">plot_pacf(df.value.diff().dropna(), ax=axes[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200530173920.png" alt></p>
+<p>您可以观察到 PACF 图滞后1非常显著，因为它远远高于显著性线。滞后2也很显著，稍微超过了显著性极限(蓝色区域)。但我会保守一点，暂时把p设为1。</p>
+<h3 id="7-查找合适的-MA-模型的阶数-q"><a href="#7-查找合适的-MA-模型的阶数-q" class="headerlink" title="7. 查找合适的 MA 模型的阶数 q"></a>7. 查找合适的 MA 模型的阶数 q</h3><p>就像使用 PACF 确定 AR 的阶数 p，我们使用 ACF 确定 MA 的阶数 q。对于平稳序列，ACF 可以帮我们确定 MA 的项数。</p>
+<p>现在我们来看看差分的序列图及其对应的相关系数图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> statsmodels.graphics.tsaplots <span class="keyword">import</span> plot_acf, plot_pacf</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rcParams.update(&#123;<span class="string">'figure.figsize'</span>:(<span class="number">9</span>,<span class="number">3</span>), <span class="string">'figure.dpi'</span>:<span class="number">120</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Import data</span></span><br><span class="line">df = pd.read_csv(<span class="string">'https://raw.githubusercontent.com/selva86/datasets/master/austa.csv'</span>)</span><br><span class="line"></span><br><span class="line">fig, axes = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, sharex=<span class="literal">True</span>)</span><br><span class="line">axes[<span class="number">0</span>].plot(df.value.diff())</span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">'1st Differencing'</span>)</span><br><span class="line">axes[<span class="number">1</span>].set(ylim=(<span class="number">0</span>,<span class="number">1.2</span>))</span><br><span class="line">plot_acf(df.value.diff().dropna(), ax=axes[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200530174622.png" alt></p>
+<p>通过上图可行，1 和 2 对应的值大于所有蓝色区域的值。从简单入手，我们暂时把 q 设定为 2。</p>
+<h3 id="8-如何处理一个时间序列稍微低于或超过偏差"><a href="#8-如何处理一个时间序列稍微低于或超过偏差" class="headerlink" title="8. 如何处理一个时间序列稍微低于或超过偏差"></a>8. 如何处理一个时间序列稍微低于或超过偏差</h3><p>如果你遇到一个时间序列稍微低于或超过偏差，该如何处理？</p>
+<p>如果序列低于偏差，那么多加一个 AR 项来增加偏差，否则可以多加一个 MA 项来减少偏差。</p>
+<h3 id="9-如何构建-ARIMA-模型"><a href="#9-如何构建-ARIMA-模型" class="headerlink" title="9. 如何构建 ARIMA 模型"></a>9. 如何构建 ARIMA 模型</h3><p>我们已经确定了 p，d，q 的值，已经具备了训练模型的所有参数信息。现在就使用 <code>statsmodels</code> 包里的 <code>ARIMA</code> 进行实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> statsmodels.tsa.arima_model <span class="keyword">import</span> ARIMA</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1,1,2 ARIMA Model</span></span><br><span class="line">model = ARIMA(df.value, order=(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">model_fit = model.fit(disp=<span class="number">0</span>)</span><br><span class="line">print(model_fit.summary())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">                            ARIMA Model Results                              </span><br><span class="line">==============================================================================</span><br><span class="line">Dep. Variable:                D.value   No. Observations:                   99</span><br><span class="line">Model:                 ARIMA(1, 1, 2)   Log Likelihood                -253.790</span><br><span class="line">Method:                       css-mle   S.D. of innovations              3.119</span><br><span class="line">Date:                Wed, 06 Feb 2019   AIC                            517.579</span><br><span class="line">Time:                        23:32:56   BIC                            530.555</span><br><span class="line">Sample:                             1   HQIC                           522.829</span><br><span class="line"></span><br><span class="line">=================================================================================</span><br><span class="line">                    coef    std err          z      P&gt;|z|      [0.025      0.975]</span><br><span class="line">---------------------------------------------------------------------------------</span><br><span class="line">const             1.1202      1.290      0.868      0.387      -1.409       3.649</span><br><span class="line">ar.L1.D.value     0.6351      0.257      2.469      0.015       0.131       1.139</span><br><span class="line">ma.L1.D.value     0.5287      0.355      1.489      0.140      -0.167       1.224</span><br><span class="line">ma.L2.D.value    -0.0010      0.321     -0.003      0.998      -0.631       0.629</span><br><span class="line">                                    Roots                                    </span><br><span class="line">=============================================================================</span><br><span class="line">                  Real          Imaginary           Modulus         Frequency</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">AR.1            1.5746           +0.0000j            1.5746            0.0000</span><br><span class="line">MA.1           -1.8850           +0.0000j            1.8850            0.5000</span><br><span class="line">MA.2          545.3515           +0.0000j          545.3515            0.0000</span><br><span class="line">-----------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p><code>summary()</code> 方法显示了许多模型的内部信息。中间表格中的 <code>coef</code> 列就是模型计算出的各项的参数值。需要注意的是，在 MA 的第 2 项的系数已经趋于 0，且 pvalue 值非常显著。我们也知道需要使用 pvalue 小于 0.05，所以我们来重新构建一个没有 MA 第 2 项的模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1,1,1 ARIMA Model</span></span><br><span class="line">model = ARIMA(df.value, order=(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>))</span><br><span class="line">model_fit = model.fit(disp=<span class="number">0</span>)</span><br><span class="line">print(model_fit.summary())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">                             ARIMA Model Results                              </span><br><span class="line">==============================================================================</span><br><span class="line">Dep. Variable:                D.value   No. Observations:                   99</span><br><span class="line">Model:                 ARIMA(1, 1, 1)   Log Likelihood                -253.790</span><br><span class="line">Method:                       css-mle   S.D. of innovations              3.119</span><br><span class="line">Date:                Sat, 09 Feb 2019   AIC                            515.579</span><br><span class="line">Time:                        12:16:06   BIC                            525.960</span><br><span class="line">Sample:                             1   HQIC                           519.779</span><br><span class="line"></span><br><span class="line">=================================================================================</span><br><span class="line">                    coef    std err          z      P&gt;|z|      [0.025      0.975]</span><br><span class="line">---------------------------------------------------------------------------------</span><br><span class="line">const             1.1205      1.286      0.871      0.386      -1.400       3.641</span><br><span class="line">ar.L1.D.value     0.6344      0.087      7.317      0.000       0.464       0.804</span><br><span class="line">ma.L1.D.value     0.5297      0.089      5.932      0.000       0.355       0.705</span><br><span class="line">                                    Roots                                    </span><br><span class="line">=============================================================================</span><br><span class="line">                  Real          Imaginary           Modulus         Frequency</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">AR.1            1.5764           +0.0000j            1.5764            0.0000</span><br><span class="line">MA.1           -1.8879           +0.0000j            1.8879            0.5000</span><br><span class="line">-----------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>打印出的信息中，一个好消息是 AIC 的值变小了，并且 pvalue 值也得到相应的提升 （&lt;&lt; 0.05）。</p>
+<p>现在我们来绘制残差图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Plot residual errors</span></span><br><span class="line">residuals = pd.DataFrame(model_fit.resid)</span><br><span class="line">fig, ax = plt.subplots(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">residuals.plot(title=<span class="string">"Residuals"</span>, ax=ax[<span class="number">0</span>])</span><br><span class="line">residuals.plot(kind=<span class="string">'kde'</span>, title=<span class="string">'Density'</span>, ax=ax[<span class="number">1</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531002416.png" alt></p>
+<p>可以看出各残差值都在均值 0 的附近，下面我们使用 <code>plot_predict()</code> 方法来绘制预测的序列值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Actual vs Fitted</span></span><br><span class="line">model_fit.plot_predict(dynamic=<span class="literal">False</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531002952.png" alt></p>
+<p>设置 <code>dynamic=False</code> 是为了预测在已给定时刻下的值。</p>
+<p>现在我们已经训练好了模型，接下来就要使用该模型进行预测。从上图中，我已经得到一个相对较好的模型，但这个模型一定是最好的模型吗？</p>
+<p>现在下结论还为时过早，毕竟我们并没有把预测的值与真实值进行比较。所以我们现在要进行 <code>Out-of-Time</code> 交叉验证。</p>
+<h3 id="10-最优-ARIMA-模型"><a href="#10-最优-ARIMA-模型" class="headerlink" title="10. 最优 ARIMA 模型"></a>10. 最优 ARIMA 模型</h3><p>在 <code>Out-of-Time</code> 验证中，你需要将原序列拆分成按一定比例（如 75:25）的训练集和测试集。具体的比例可根据实际序列的长度来做进一步地确定。</p>
+<p>为什么我们不能随机地选择训练集和测试集？</p>
+<p>正是因为时间序列的特有属性是按序地进行训练和预测，所以我们不能使用随机选择的策略。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> statsmodels.tsa.stattools <span class="keyword">import</span> acf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create Training and Test</span></span><br><span class="line">train = df.value[:<span class="number">85</span>]</span><br><span class="line">test = df.value[<span class="number">85</span>:]</span><br></pre></td></tr></table></figure>
+
+<p>首先在训练集上训练模型，然后通过模型预测，最后进行作图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Build Model</span></span><br><span class="line"><span class="comment"># model = ARIMA(train, order=(3,2,1))  </span></span><br><span class="line">model = ARIMA(train, order=(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>))  </span><br><span class="line">fitted = model.fit(disp=<span class="number">-1</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># Forecast</span></span><br><span class="line">fc, se, conf = fitted.forecast(<span class="number">15</span>, alpha=<span class="number">0.05</span>)  <span class="comment"># 95% conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Make as pandas series</span></span><br><span class="line">fc_series = pd.Series(fc, index=test.index)</span><br><span class="line">lower_series = pd.Series(conf[:, <span class="number">0</span>], index=test.index)</span><br><span class="line">upper_series = pd.Series(conf[:, <span class="number">1</span>], index=test.index)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot</span></span><br><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">5</span>), dpi=<span class="number">100</span>)</span><br><span class="line">plt.plot(train, label=<span class="string">'training'</span>)</span><br><span class="line">plt.plot(test, label=<span class="string">'actual'</span>)</span><br><span class="line">plt.plot(fc_series, label=<span class="string">'forecast'</span>)</span><br><span class="line">plt.fill_between(lower_series.index, lower_series, upper_series, </span><br><span class="line">                 color=<span class="string">'k'</span>, alpha=<span class="number">.15</span>)</span><br><span class="line">plt.title(<span class="string">'Forecast vs Actuals'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'upper left'</span>, fontsize=<span class="number">8</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531004314.png" alt></p>
+<p>通过上图可知，模型的预测效果还算不错。绿色所代表的预测值在 95% 的可信区间内。但所有的预测都比真实值要小，<strong>这就意味着，向模型加入一个偏置，模型的效果会变好一些</strong>。所以接下来我要做的是，把差分的次数改成 2，p 改成 3。在进行此操作时，我将密切关注模型摘要中 AR 和 MA 项的 pvalue。它们应该接近于零，理想情况下，小于0.05。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Build Model</span></span><br><span class="line">model = ARIMA(train, order=(<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>))  </span><br><span class="line">fitted = model.fit(disp=<span class="number">-1</span>)  </span><br><span class="line">print(fitted.summary())</span><br><span class="line"></span><br><span class="line"><span class="comment"># Forecast</span></span><br><span class="line">fc, se, conf = fitted.forecast(<span class="number">15</span>, alpha=<span class="number">0.05</span>)  <span class="comment"># 95% conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Make as pandas series</span></span><br><span class="line">fc_series = pd.Series(fc, index=test.index)</span><br><span class="line">lower_series = pd.Series(conf[:, <span class="number">0</span>], index=test.index)</span><br><span class="line">upper_series = pd.Series(conf[:, <span class="number">1</span>], index=test.index)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot</span></span><br><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">5</span>), dpi=<span class="number">100</span>)</span><br><span class="line">plt.plot(train, label=<span class="string">'training'</span>)</span><br><span class="line">plt.plot(test, label=<span class="string">'actual'</span>)</span><br><span class="line">plt.plot(fc_series, label=<span class="string">'forecast'</span>)</span><br><span class="line">plt.fill_between(lower_series.index, lower_series, upper_series, </span><br><span class="line">                 color=<span class="string">'k'</span>, alpha=<span class="number">.15</span>)</span><br><span class="line">plt.title(<span class="string">'Forecast vs Actuals'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'upper left'</span>, fontsize=<span class="number">8</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">                             ARIMA Model Results                              </span><br><span class="line">==============================================================================</span><br><span class="line">Dep. Variable:               D2.value   No. Observations:                   83</span><br><span class="line">Model:                 ARIMA(3, 2, 1)   Log Likelihood                -214.248</span><br><span class="line">Method:                       css-mle   S.D. of innovations              3.153</span><br><span class="line">Date:                Sat, 09 Feb 2019   AIC                            440.497</span><br><span class="line">Time:                        12:49:01   BIC                            455.010</span><br><span class="line">Sample:                             2   HQIC                           446.327</span><br><span class="line"></span><br><span class="line">==================================================================================</span><br><span class="line">                     coef    std err          z      P&gt;|z|      [0.025      0.975]</span><br><span class="line">----------------------------------------------------------------------------------</span><br><span class="line">const              0.0483      0.084      0.577      0.565      -0.116       0.212</span><br><span class="line">ar.L1.D2.value     1.1386      0.109     10.399      0.000       0.924       1.353</span><br><span class="line">ar.L2.D2.value    -0.5923      0.155     -3.827      0.000      -0.896      -0.289</span><br><span class="line">ar.L3.D2.value     0.3079      0.111      2.778      0.007       0.091       0.525</span><br><span class="line">ma.L1.D2.value    -1.0000      0.035    -28.799      0.000      -1.068      -0.932</span><br><span class="line">                                    Roots                                    </span><br><span class="line">=============================================================================</span><br><span class="line">                  Real          Imaginary           Modulus         Frequency</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">AR.1            1.1557           -0.0000j            1.1557           -0.0000</span><br><span class="line">AR.2            0.3839           -1.6318j            1.6763           -0.2132</span><br><span class="line">AR.3            0.3839           +1.6318j            1.6763            0.2132</span><br><span class="line">MA.1            1.0000           +0.0000j            1.0000            0.0000</span><br><span class="line">-----------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531005609.png" alt></p>
+<p>注意到 AIC 值已经减少到 440，同时 pvalue 值也小于 0.05。</p>
+<p>理想情况下，你应该尝试不同多个时间点，比如使用不同季度的数据进行训练，看预测的结果是否符合。</p>
+<h3 id="11-衡量时间序列预测的准确性"><a href="#11-衡量时间序列预测的准确性" class="headerlink" title="11. 衡量时间序列预测的准确性"></a>11. 衡量时间序列预测的准确性</h3><p>下面给出预测准确性的衡量度量：</p>
+<ol>
+<li>平均绝对百分比误差 （MAPE）</li>
+<li>平均误差（ME）</li>
+<li>平均绝对误差（MAE）</li>
+<li>平均百分比误差（MPE）</li>
+<li>根均方误差（RMSE）</li>
+<li>滞后 1 自相关误差（ACF1）</li>
+<li>预测值与真实值的相关系数（CORR）</li>
+<li>最大最小误差（minmax）</li>
+</ol>
+<p>如果比较两个不同序列的预测，通常使用MAPE、相关系数及 minmax 度量。</p>
+<p>为什么不使用其它度量？</p>
+<p>因为上面三个度量的取值为 0 到 1，这么做的话，与原数据集的规模是无关的。</p>
+<p>其它的度量都是量化的，这就意味着，不同规模的数据集没有可比性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Accuracy metrics</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forecast_accuracy</span><span class="params">(forecast, actual)</span>:</span></span><br><span class="line">    mape = np.mean(np.abs(forecast - actual)/np.abs(actual))  <span class="comment"># MAPE</span></span><br><span class="line">    me = np.mean(forecast - actual)             <span class="comment"># ME</span></span><br><span class="line">    mae = np.mean(np.abs(forecast - actual))    <span class="comment"># MAE</span></span><br><span class="line">    mpe = np.mean((forecast - actual)/actual)   <span class="comment"># MPE</span></span><br><span class="line">    rmse = np.mean((forecast - actual)**<span class="number">2</span>)**<span class="number">.5</span>  <span class="comment"># RMSE</span></span><br><span class="line">    corr = np.corrcoef(forecast, actual)[<span class="number">0</span>,<span class="number">1</span>]   <span class="comment"># corr</span></span><br><span class="line">    mins = np.amin(np.hstack([forecast[:,<span class="literal">None</span>], actual[:,<span class="literal">None</span>]]), axis=<span class="number">1</span>)</span><br><span class="line">    maxs = np.amax(np.hstack([forecast[:,<span class="literal">None</span>], actual[:,<span class="literal">None</span>]]), axis=<span class="number">1</span>)</span><br><span class="line">    minmax = <span class="number">1</span> - np.mean(mins/maxs)             <span class="comment"># minmax</span></span><br><span class="line">    acf1 = acf(fc-test)[<span class="number">1</span>]                      <span class="comment"># ACF1</span></span><br><span class="line">    <span class="keyword">return</span>(&#123;<span class="string">'mape'</span>:mape, <span class="string">'me'</span>:me, <span class="string">'mae'</span>: mae, </span><br><span class="line">            <span class="string">'mpe'</span>: mpe, <span class="string">'rmse'</span>:rmse, <span class="string">'acf1'</span>:acf1, </span><br><span class="line">            <span class="string">'corr'</span>:corr, <span class="string">'minmax'</span>:minmax&#125;)</span><br><span class="line"></span><br><span class="line">forecast_accuracy(fc, test.values)</span><br><span class="line"></span><br><span class="line"><span class="comment">#&gt; &#123;'mape': 0.02250131357314834,</span></span><br><span class="line"><span class="comment">#&gt;  'me': 3.230783108990054,</span></span><br><span class="line"><span class="comment">#&gt;  'mae': 4.548322194530069,</span></span><br><span class="line"><span class="comment">#&gt;  'mpe': 0.016421001932706705,</span></span><br><span class="line"><span class="comment">#&gt;  'rmse': 6.373238534601827,</span></span><br><span class="line"><span class="comment">#&gt;  'acf1': 0.5105506325288692,</span></span><br><span class="line"><span class="comment">#&gt;  'corr': 0.9674576513924394,</span></span><br><span class="line"><span class="comment">#&gt;  'minmax': 0.02163154777672227&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在，你已经知道如何构建一个 ARIMA 模型。但在实际场景中，你需要同时处理多个时间序列的预测，工作其实是重复的，你需要更好一个处理流程。</p>
+<h3 id="12-自动化-ARIMA-模型"><a href="#12-自动化-ARIMA-模型" class="headerlink" title="12. 自动化 ARIMA 模型"></a>12. 自动化 ARIMA 模型</h3><p>就像 R 语言上的 <code>auto.arima()</code>，<code>pmdarima</code> 包提供了一个相似功能的 <code>auto_arima()</code>。</p>
+<p>使用 <code>auto_arima()</code> 可以帮助你测试多个 p，d，q 对，并从中选择 AIC 值最小的模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> statsmodels.tsa.arima_model <span class="keyword">import</span> ARIMA</span><br><span class="line"><span class="keyword">import</span> pmdarima <span class="keyword">as</span> pm</span><br><span class="line"></span><br><span class="line">df = pd.read_csv(<span class="string">'https://raw.githubusercontent.com/selva86/datasets/master/wwwusage.csv'</span>, names=[<span class="string">'value'</span>], header=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">model = pm.auto_arima(df.value, start_p=<span class="number">1</span>, start_q=<span class="number">1</span>,</span><br><span class="line">                      test=<span class="string">'adf'</span>,       <span class="comment"># use adftest to find optimal 'd'</span></span><br><span class="line">                      max_p=<span class="number">3</span>, max_q=<span class="number">3</span>, <span class="comment"># maximum p and q</span></span><br><span class="line">                      m=<span class="number">1</span>,              <span class="comment"># frequency of series</span></span><br><span class="line">                      d=<span class="literal">None</span>,           <span class="comment"># let model determine 'd'</span></span><br><span class="line">                      seasonal=<span class="literal">False</span>,   <span class="comment"># No Seasonality</span></span><br><span class="line">                      start_P=<span class="number">0</span>, </span><br><span class="line">                      D=<span class="number">0</span>, </span><br><span class="line">                      trace=<span class="literal">True</span>,</span><br><span class="line">                      error_action=<span class="string">'ignore'</span>,  </span><br><span class="line">                      suppress_warnings=<span class="literal">True</span>, </span><br><span class="line">                      stepwise=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">print(model.summary())</span><br><span class="line"></span><br><span class="line"><span class="comment">#&gt; Fit ARIMA: order=(1, 2, 1); AIC=525.586, BIC=535.926, Fit time=0.060 seconds</span></span><br><span class="line"><span class="comment">#&gt; Fit ARIMA: order=(0, 2, 0); AIC=533.474, BIC=538.644, Fit time=0.005 seconds</span></span><br><span class="line"><span class="comment">#&gt; Fit ARIMA: order=(1, 2, 0); AIC=532.437, BIC=540.192, Fit time=0.035 seconds</span></span><br><span class="line"><span class="comment">#&gt; Fit ARIMA: order=(0, 2, 1); AIC=525.893, BIC=533.648, Fit time=0.040 seconds</span></span><br><span class="line"><span class="comment">#&gt; Fit ARIMA: order=(2, 2, 1); AIC=515.248, BIC=528.173, Fit time=0.105 seconds</span></span><br><span class="line"><span class="comment">#&gt; Fit ARIMA: order=(2, 2, 0); AIC=513.459, BIC=523.798, Fit time=0.063 seconds</span></span><br><span class="line"><span class="comment">#&gt; Fit ARIMA: order=(3, 2, 1); AIC=512.552, BIC=528.062, Fit time=0.272 seconds</span></span><br><span class="line"><span class="comment">#&gt; Fit ARIMA: order=(3, 2, 0); AIC=515.284, BIC=528.209, Fit time=0.042 seconds</span></span><br><span class="line"><span class="comment">#&gt; Fit ARIMA: order=(3, 2, 2); AIC=514.514, BIC=532.609, Fit time=0.234 seconds</span></span><br><span class="line"><span class="comment">#&gt; Total fit time: 0.865 seconds</span></span><br><span class="line"><span class="comment">#&gt;                              ARIMA Model Results                              </span></span><br><span class="line"><span class="comment">#&gt; ==============================================================================</span></span><br><span class="line"><span class="comment">#&gt; Dep. Variable:                   D2.y   No. Observations:                   98</span></span><br><span class="line"><span class="comment">#&gt; Model:                 ARIMA(3, 2, 1)   Log Likelihood                -250.276</span></span><br><span class="line"><span class="comment">#&gt; Method:                       css-mle   S.D. of innovations              3.069</span></span><br><span class="line"><span class="comment">#&gt; Date:                Sat, 09 Feb 2019   AIC                            512.552</span></span><br><span class="line"><span class="comment">#&gt; Time:                        12:57:22   BIC                            528.062</span></span><br><span class="line"><span class="comment">#&gt; Sample:                             2   HQIC                           518.825</span></span><br><span class="line"><span class="comment">#&gt; </span></span><br><span class="line"><span class="comment">#&gt; ==============================================================================</span></span><br><span class="line"><span class="comment">#&gt;                  coef    std err          z      P&gt;|z|      [0.025      0.975]</span></span><br><span class="line"><span class="comment">#&gt; ------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#&gt; const          0.0234      0.058      0.404      0.687      -0.090       0.137</span></span><br><span class="line"><span class="comment">#&gt; ar.L1.D2.y     1.1586      0.097     11.965      0.000       0.969       1.348</span></span><br><span class="line"><span class="comment">#&gt; ar.L2.D2.y    -0.6640      0.136     -4.890      0.000      -0.930      -0.398</span></span><br><span class="line"><span class="comment">#&gt; ar.L3.D2.y     0.3453      0.096      3.588      0.001       0.157       0.534</span></span><br><span class="line"><span class="comment">#&gt; ma.L1.D2.y    -1.0000      0.028    -36.302      0.000      -1.054      -0.946</span></span><br><span class="line"><span class="comment">#&gt;                                     Roots                                    </span></span><br><span class="line"><span class="comment">#&gt; =============================================================================</span></span><br><span class="line"><span class="comment">#&gt;                   Real          Imaginary           Modulus         Frequency</span></span><br><span class="line"><span class="comment">#&gt; -----------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#&gt; AR.1            1.1703           -0.0000j            1.1703           -0.0000</span></span><br><span class="line"><span class="comment">#&gt; AR.2            0.3763           -1.5274j            1.5731           -0.2116</span></span><br><span class="line"><span class="comment">#&gt; AR.3            0.3763           +1.5274j            1.5731            0.2116</span></span><br><span class="line"><span class="comment">#&gt; MA.1            1.0000           +0.0000j            1.0000            0.0000</span></span><br><span class="line"><span class="comment">#&gt; -----------------------------------------------------------------------------</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="13-如何解释-ARIMA-模型中的残差图"><a href="#13-如何解释-ARIMA-模型中的残差图" class="headerlink" title="13. 如何解释 ARIMA 模型中的残差图"></a>13. 如何解释 ARIMA 模型中的残差图</h3><p>下面我们来绘制残差图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model.plot_diagnostics(figsize=(<span class="number">7</span>,<span class="number">5</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531170620.png" alt></p>
+<p>左上：残差的均值在 0 的附近</p>
+<p>右上：密度函数图显示均值在 0 的附近</p>
+<p>左下：大多数的蓝色的点在红线上，任何显著的偏差都意味着分布是倾斜的。</p>
+<p>右下：相关图(Correlogram, aka, ACF)显示残差不是自相关的。任何自相关都意味着在剩余误差中存在某种模式，而这种模式在模型中是无法解释的。因此，您需要为模型寻找更多的X(预测器)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Forecast</span></span><br><span class="line">n_periods = <span class="number">24</span></span><br><span class="line">fc, confint = model.predict(n_periods=n_periods, return_conf_int=<span class="literal">True</span>)</span><br><span class="line">index_of_fc = np.arange(len(df.value), len(df.value)+n_periods)</span><br><span class="line"></span><br><span class="line"><span class="comment"># make series for plotting purpose</span></span><br><span class="line">fc_series = pd.Series(fc, index=index_of_fc)</span><br><span class="line">lower_series = pd.Series(confint[:, <span class="number">0</span>], index=index_of_fc)</span><br><span class="line">upper_series = pd.Series(confint[:, <span class="number">1</span>], index=index_of_fc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot</span></span><br><span class="line">plt.plot(df.value)</span><br><span class="line">plt.plot(fc_series, color=<span class="string">'darkgreen'</span>)</span><br><span class="line">plt.fill_between(lower_series.index, </span><br><span class="line">                 lower_series, </span><br><span class="line">                 upper_series, </span><br><span class="line">                 color=<span class="string">'k'</span>, alpha=<span class="number">.15</span>)</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">"Final Forecast of WWW Usage"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531171326.png" alt></p>
+<h3 id="14-如何动态构建-SARIMA-模型"><a href="#14-如何动态构建-SARIMA-模型" class="headerlink" title="14. 如何动态构建 SARIMA 模型"></a>14. 如何动态构建 SARIMA 模型</h3><p>最初的 ARIMA 模型并不支持季节性（周期性）的数据，如果你的数据具有周期性，推荐你使用 <code>SARIMA</code> 模型。</p>
+<p>季节差分类似于常规差分，但是，不是减去连续的期限，而是减去前一个季节的值。</p>
+<p>所以 SARIMA 模型可以表示成 （p,d,q）x （P,D,Q），其中（P,D,Q）分别对应 SAR 的阶数、差分次数和 SMA 的阶数。</p>
+<p>这里给出一个实际的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Import</span></span><br><span class="line">data = pd.read_csv(<span class="string">'https://raw.githubusercontent.com/selva86/datasets/master/a10.csv'</span>, parse_dates=[<span class="string">'date'</span>], index_col=<span class="string">'date'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot</span></span><br><span class="line">fig, axes = plt.subplots(<span class="number">2</span>, <span class="number">1</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>), dpi=<span class="number">100</span>, sharex=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Usual Differencing</span></span><br><span class="line">axes[<span class="number">0</span>].plot(data[:], label=<span class="string">'Original Series'</span>)</span><br><span class="line">axes[<span class="number">0</span>].plot(data[:].diff(<span class="number">1</span>), label=<span class="string">'Usual Differencing'</span>)</span><br><span class="line">axes[<span class="number">0</span>].set_title(<span class="string">'Usual Differencing'</span>)</span><br><span class="line">axes[<span class="number">0</span>].legend(loc=<span class="string">'upper left'</span>, fontsize=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Seasinal Dei</span></span><br><span class="line">axes[<span class="number">1</span>].plot(data[:], label=<span class="string">'Original Series'</span>)</span><br><span class="line">axes[<span class="number">1</span>].plot(data[:].diff(<span class="number">12</span>), label=<span class="string">'Seasonal Differencing'</span>, color=<span class="string">'green'</span>)</span><br><span class="line">axes[<span class="number">1</span>].set_title(<span class="string">'Seasonal Differencing'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'upper left'</span>, fontsize=<span class="number">10</span>)</span><br><span class="line">plt.suptitle(<span class="string">'a10 - Drug Sales'</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531172314.png" alt></p>
+<p>正如你所看到的，使用常规差分的序列（上图黄色）依旧是非平稳的，因此需要使用季节差分的方式使序列平稳。</p>
+<p>现在我们使用 <code>auto_arima()</code> 来处理季节性的数据，设置 <code>seasonal=True</code> 即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !pip3 install pyramid-arima</span></span><br><span class="line"><span class="keyword">import</span> pmdarima <span class="keyword">as</span> pm</span><br><span class="line"></span><br><span class="line"><span class="comment"># Seasonal - fit stepwise auto-ARIMA</span></span><br><span class="line">smodel = pm.auto_arima(data, start_p=<span class="number">1</span>, start_q=<span class="number">1</span>,</span><br><span class="line">                         test=<span class="string">'adf'</span>,</span><br><span class="line">                         max_p=<span class="number">3</span>, max_q=<span class="number">3</span>, m=<span class="number">12</span>,</span><br><span class="line">                         start_P=<span class="number">0</span>, seasonal=<span class="literal">True</span>,</span><br><span class="line">                         d=<span class="literal">None</span>, D=<span class="number">1</span>, trace=<span class="literal">True</span>,</span><br><span class="line">                         error_action=<span class="string">'ignore'</span>,  </span><br><span class="line">                         suppress_warnings=<span class="literal">True</span>, </span><br><span class="line">                         stepwise=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">smodel.summary()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Fit ARIMA: order=(1, 0, 1) seasonal_order=(0, 1, 1, 12); AIC=534.818, BIC=551.105, Fit time=1.742 seconds</span><br><span class="line">Fit ARIMA: order=(0, 0, 0) seasonal_order=(0, 1, 0, 12); AIC=624.061, BIC=630.576, Fit time=0.028 seconds</span><br><span class="line">Fit ARIMA: order=(1, 0, 0) seasonal_order=(1, 1, 0, 12); AIC=596.004, BIC=609.034, Fit time=0.683 seconds</span><br><span class="line">Fit ARIMA: order=(0, 0, 1) seasonal_order=(0, 1, 1, 12); AIC=611.475, BIC=624.505, Fit time=0.709 seconds</span><br><span class="line">Fit ARIMA: order=(1, 0, 1) seasonal_order=(1, 1, 1, 12); AIC=557.501, BIC=577.046, Fit time=3.687 seconds</span><br><span class="line">(...TRUNCATED...)</span><br><span class="line">Fit ARIMA: order=(3, 0, 0) seasonal_order=(1, 1, 1, 12); AIC=554.570, BIC=577.372, Fit time=2.431 seconds</span><br><span class="line">Fit ARIMA: order=(3, 0, 0) seasonal_order=(0, 1, 0, 12); AIC=554.094, BIC=570.381, Fit time=0.220 seconds</span><br><span class="line">Fit ARIMA: order=(3, 0, 0) seasonal_order=(0, 1, 2, 12); AIC=529.502, BIC=552.305, Fit time=2.120 seconds</span><br><span class="line">Fit ARIMA: order=(3, 0, 0) seasonal_order=(1, 1, 2, 12); AIC=nan, BIC=nan, Fit time=nan seconds</span><br><span class="line">Total fit time: 31.613 seconds</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Forecast</span></span><br><span class="line">n_periods = <span class="number">24</span></span><br><span class="line">fitted, confint = smodel.predict(n_periods=n_periods, return_conf_int=<span class="literal">True</span>)</span><br><span class="line">index_of_fc = pd.date_range(data.index[<span class="number">-1</span>], periods = n_periods, freq=<span class="string">'MS'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># make series for plotting purpose</span></span><br><span class="line">fitted_series = pd.Series(fitted, index=index_of_fc)</span><br><span class="line">lower_series = pd.Series(confint[:, <span class="number">0</span>], index=index_of_fc)</span><br><span class="line">upper_series = pd.Series(confint[:, <span class="number">1</span>], index=index_of_fc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot</span></span><br><span class="line">plt.plot(data)</span><br><span class="line">plt.plot(fitted_series, color=<span class="string">'darkgreen'</span>)</span><br><span class="line">plt.fill_between(lower_series.index, </span><br><span class="line">                 lower_series, </span><br><span class="line">                 upper_series, </span><br><span class="line">                 color=<span class="string">'k'</span>, alpha=<span class="number">.15</span>)</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">"SARIMA - Final Forecast of a10 - Drug Sales"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531220112.png" alt></p>
+<h3 id="15-如何利用外生变量建立-SARIMAX-模型"><a href="#15-如何利用外生变量建立-SARIMAX-模型" class="headerlink" title="15. 如何利用外生变量建立 SARIMAX 模型"></a>15. 如何利用外生变量建立 SARIMAX 模型</h3><p>我们一般学到了 ARIMA 模型就可以结束了，但这里，我们来将学习一个带外生变量信息的模型 <code>SARIMAX</code>。</p>
+<p>引入额外的变量信息就势必要求我们在预测时也需要预测出这些额外变量信息。</p>
+<p>我想看看如果我们把最近的季节性模式加入到训练和预测中，模型会是什么样子。</p>
+<p>其次，这是一个很好的变量的演示目的。因此，您可以将此作为模板并将任何变量插入到代码中。季节指数是一个很好的外生变量，因为它重复每个频率周期，在本例中为12个月。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Import Data</span></span><br><span class="line">data = pd.read_csv(<span class="string">'https://raw.githubusercontent.com/selva86/datasets/master/a10.csv'</span>, parse_dates=[<span class="string">'date'</span>], index_col=<span class="string">'date'</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Compute Seasonal Index</span></span><br><span class="line"><span class="keyword">from</span> statsmodels.tsa.seasonal <span class="keyword">import</span> seasonal_decompose</span><br><span class="line"><span class="keyword">from</span> dateutil.parser <span class="keyword">import</span> parse</span><br><span class="line"></span><br><span class="line"><span class="comment"># multiplicative seasonal component</span></span><br><span class="line">result_mul = seasonal_decompose(data[<span class="string">'value'</span>][<span class="number">-36</span>:],   <span class="comment"># 3 years</span></span><br><span class="line">                                model=<span class="string">'multiplicative'</span>, </span><br><span class="line">                                extrapolate_trend=<span class="string">'freq'</span>)</span><br><span class="line"></span><br><span class="line">seasonal_index = result_mul.seasonal[<span class="number">-12</span>:].to_frame()</span><br><span class="line">seasonal_index[<span class="string">'month'</span>] = pd.to_datetime(seasonal_index.index).month</span><br><span class="line"></span><br><span class="line"><span class="comment"># merge with the base data</span></span><br><span class="line">data[<span class="string">'month'</span>] = data.index.month</span><br><span class="line">df = pd.merge(data, seasonal_index, how=<span class="string">'left'</span>, on=<span class="string">'month'</span>)</span><br><span class="line">df.columns = [<span class="string">'value'</span>, <span class="string">'month'</span>, <span class="string">'seasonal_index'</span>]</span><br><span class="line">df.index = data.index  <span class="comment"># reassign the index.</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pmdarima <span class="keyword">as</span> pm</span><br><span class="line"></span><br><span class="line"><span class="comment"># SARIMAX Model</span></span><br><span class="line">sxmodel = pm.auto_arima(df[[<span class="string">'value'</span>]], exogenous=df[[<span class="string">'seasonal_index'</span>]],</span><br><span class="line">                           start_p=<span class="number">1</span>, start_q=<span class="number">1</span>,</span><br><span class="line">                           test=<span class="string">'adf'</span>,</span><br><span class="line">                           max_p=<span class="number">3</span>, max_q=<span class="number">3</span>, m=<span class="number">12</span>,</span><br><span class="line">                           start_P=<span class="number">0</span>, seasonal=<span class="literal">True</span>,</span><br><span class="line">                           d=<span class="literal">None</span>, D=<span class="number">1</span>, trace=<span class="literal">True</span>,</span><br><span class="line">                           error_action=<span class="string">'ignore'</span>,  </span><br><span class="line">                           suppress_warnings=<span class="literal">True</span>, </span><br><span class="line">                           stepwise=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">sxmodel.summary()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Fit ARIMA: order=(1, 0, 1) seasonal_order=(0, 1, 1, 12); AIC=536.818, BIC=556.362, Fit time=2.083 seconds</span><br><span class="line">Fit ARIMA: order=(0, 0, 0) seasonal_order=(0, 1, 0, 12); AIC=626.061, BIC=635.834, Fit time=0.033 seconds</span><br><span class="line">Fit ARIMA: order=(1, 0, 0) seasonal_order=(1, 1, 0, 12); AIC=598.004, BIC=614.292, Fit time=0.682 seconds</span><br><span class="line">Fit ARIMA: order=(0, 0, 1) seasonal_order=(0, 1, 1, 12); AIC=613.475, BIC=629.762, Fit time=0.510 seconds</span><br><span class="line">Fit ARIMA: order=(1, 0, 1) seasonal_order=(1, 1, 1, 12); AIC=559.530, BIC=582.332, Fit time=3.129 seconds</span><br><span class="line">(...Truncated...)</span><br><span class="line">Fit ARIMA: order=(3, 0, 0) seasonal_order=(0, 1, 0, 12); AIC=556.094, BIC=575.639, Fit time=0.260 seconds</span><br><span class="line">Fit ARIMA: order=(3, 0, 0) seasonal_order=(0, 1, 2, 12); AIC=531.502, BIC=557.562, Fit time=2.375 seconds</span><br><span class="line">Fit ARIMA: order=(3, 0, 0) seasonal_order=(1, 1, 2, 12); AIC=nan, BIC=nan, Fit time=nan seconds</span><br><span class="line">Total fit time: 30.781 seconds</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Forecast</span></span><br><span class="line">n_periods = <span class="number">24</span></span><br><span class="line">fitted, confint = sxmodel.predict(n_periods=n_periods, </span><br><span class="line">                                  exogenous=np.tile(seasonal_index.value, <span class="number">2</span>).reshape(<span class="number">-1</span>,<span class="number">1</span>), </span><br><span class="line">                                  return_conf_int=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">index_of_fc = pd.date_range(data.index[<span class="number">-1</span>], periods = n_periods, freq=<span class="string">'MS'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># make series for plotting purpose</span></span><br><span class="line">fitted_series = pd.Series(fitted, index=index_of_fc)</span><br><span class="line">lower_series = pd.Series(confint[:, <span class="number">0</span>], index=index_of_fc)</span><br><span class="line">upper_series = pd.Series(confint[:, <span class="number">1</span>], index=index_of_fc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot</span></span><br><span class="line">plt.plot(data[<span class="string">'value'</span>])</span><br><span class="line">plt.plot(fitted_series, color=<span class="string">'darkgreen'</span>)</span><br><span class="line">plt.fill_between(lower_series.index, </span><br><span class="line">                 lower_series, </span><br><span class="line">                 upper_series, </span><br><span class="line">                 color=<span class="string">'k'</span>, alpha=<span class="number">.15</span>)</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">"SARIMAX Forecast of a10 - Drug Sales"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/29/reprinted-arima-model-complete-guide-to-time-series-forecasting-in-python/TIM%E6%88%AA%E5%9B%BE20200531221032.png" alt></p>
+<h3 id="16-练习"><a href="#16-练习" class="headerlink" title="16. 练习"></a>16. 练习</h3><p>在AirPassengers数据集中，返回12个月的时间并构建未来12个月的SARIMA预测。我们学习到以下内容。</p>
+<ol>
+<li><p>这个级数是静止的吗?如果不是，需要什么区别?</p>
+</li>
+<li><p>你的最佳模型的顺序是什么?</p>
+</li>
+<li><p>你的模型的AIC是什么?</p>
+</li>
+<li><p>在OOT交叉验证中MAPE实现了什么?</p>
+</li>
+<li><p>auto_arima()方法预测的最佳模型的顺序是什么?</p>
+</li>
+</ol>
+<h3 id="17-结论"><a href="#17-结论" class="headerlink" title="17. 结论"></a>17. 结论</h3><p>祝贺你达到了这个境界。如果你能完成练习，给自己一个大大的拥抱。</p>
+<p>我真的希望你觉得这有用?</p>
+<p>我们已经涵盖了很多概念，从最基本的预测开始，AR, MA, ARIMA, SARIMA，最后是SARIMAX模型。如果你有任何问题，请在评论部分留言。同时，我将致力于下一篇文章。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Time-Series/" rel="tag"># Time Series</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/29/time-series-forecast-arima/" rel="prev" title="时间序列预测 ARIMA 差分整合移动平均自回归模型">
+      <i class="fa fa-chevron-left"></i> 时间序列预测 ARIMA 差分整合移动平均自回归模型
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/01/time-series-forecast-var/" rel="next" title="时间序列预测 Vector Autoregression 向量自回归">
+      时间序列预测 Vector Autoregression 向量自回归 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-时间序列预测介绍"><span class="nav-number">2.</span> <span class="nav-text">1. 时间序列预测介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ARIMA-模型介绍"><span class="nav-number">3.</span> <span class="nav-text">2. ARIMA 模型介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-ARIMA-模型中-p-d-q-的含义"><span class="nav-number">4.</span> <span class="nav-text">3. ARIMA 模型中 p, d, q 的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-什么是-AR-模型和-MA-模型"><span class="nav-number">5.</span> <span class="nav-text">4. 什么是 AR 模型和 MA 模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-查找合适的-ARIMA-模型差分阶数-d"><span class="nav-number">6.</span> <span class="nav-text">5. 查找合适的 ARIMA 模型差分阶数 d</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-查找合适的-AR-模型的阶数-p"><span class="nav-number">7.</span> <span class="nav-text">6. 查找合适的 AR 模型的阶数 p</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-查找合适的-MA-模型的阶数-q"><span class="nav-number">8.</span> <span class="nav-text">7. 查找合适的 MA 模型的阶数 q</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-如何处理一个时间序列稍微低于或超过偏差"><span class="nav-number">9.</span> <span class="nav-text">8. 如何处理一个时间序列稍微低于或超过偏差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-如何构建-ARIMA-模型"><span class="nav-number">10.</span> <span class="nav-text">9. 如何构建 ARIMA 模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-最优-ARIMA-模型"><span class="nav-number">11.</span> <span class="nav-text">10. 最优 ARIMA 模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-衡量时间序列预测的准确性"><span class="nav-number">12.</span> <span class="nav-text">11. 衡量时间序列预测的准确性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-自动化-ARIMA-模型"><span class="nav-number">13.</span> <span class="nav-text">12. 自动化 ARIMA 模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-如何解释-ARIMA-模型中的残差图"><span class="nav-number">14.</span> <span class="nav-text">13. 如何解释 ARIMA 模型中的残差图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-如何动态构建-SARIMA-模型"><span class="nav-number">15.</span> <span class="nav-text">14. 如何动态构建 SARIMA 模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-如何利用外生变量建立-SARIMAX-模型"><span class="nav-number">16.</span> <span class="nav-text">15. 如何利用外生变量建立 SARIMAX 模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-练习"><span class="nav-number">17.</span> <span class="nav-text">16. 练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-结论"><span class="nav-number">18.</span> <span class="nav-text">17. 结论</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. 预测问题概述数据挖掘是指从大量的数据中通过算法搜索隐藏于其中信息的过程。数据挖掘通常与计算机科学有关，并通过统计、在线分析处理、情报检索、机器学习、专家系统（依靠过去的经验法则）和模式识别等诸多方法来实现上述目标。其中，预测作为数据挖掘分析的一种方法，通过分类或估值来进行，通过分类或估值的训练得出一个模型，如果对于检验样本组而言该模型具有较高的准确率，可将该模型用于对新样本的未知变量进行预测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析实例：阿里巴巴(BABA)股票预测">
+<meta property="og:url" content="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="1. 预测问题概述数据挖掘是指从大量的数据中通过算法搜索隐藏于其中信息的过程。数据挖掘通常与计算机科学有关，并通过统计、在线分析处理、情报检索、机器学习、专家系统（依靠过去的经验法则）和模式识别等诸多方法来实现上述目标。其中，预测作为数据挖掘分析的一种方法，通过分类或估值来进行，通过分类或估值的训练得出一个模型，如果对于检验样本组而言该模型具有较高的准确率，可将该模型用于对新样本的未知变量进行预测">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/feature_plot.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/QQ%E6%88%AA%E5%9B%BE20200513180305.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/D:%5Cworkspace%5CmyBlog%5Csource_posts%5Cpractice-kaggle-stock-prediction%5Cv2-3884f344d71e92d70ec3c44d2795141f_720w.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/D:%5Cworkspace%5CmyBlog%5Csource_posts%5Cpractice-kaggle-stock-prediction%5Cv2-206db7ba9d32a80ff56b6cc988a62440_r.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/D:%5Cworkspace%5CmyBlog%5Csource_posts%5Cpractice-kaggle-stock-prediction%5CQQ%E6%88%AA%E5%9B%BE20200517124740.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/s1.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/s2.png">
+<meta property="article:published_time" content="2020-05-13T02:44:46.000Z">
+<meta property="article:modified_time" content="2020-05-22T06:09:07.547Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="NN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/feature_plot.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>数据分析实例：阿里巴巴(BABA)股票预测 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据分析实例：阿里巴巴(BABA)股票预测
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-13 10:44:46" itemprop="dateCreated datePublished" datetime="2020-05-13T10:44:46+08:00">2020-05-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-22 14:09:07" itemprop="dateModified" datetime="2020-05-22T14:09:07+08:00">2020-05-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1-预测问题概述"><a href="#1-预测问题概述" class="headerlink" title="1. 预测问题概述"></a>1. 预测问题概述</h3><p>数据挖掘是指从大量的数据中通过算法搜索隐藏于其中信息的过程。数据挖掘通常与计算机科学有关，并通过统计、在线分析处理、情报检索、机器学习、专家系统（依靠过去的经验法则）和模式识别等诸多方法来实现上述目标。其中，预测作为数据挖掘分析的一种方法，通过分类或估值来进行，通过分类或估值的训练得出一个模型，如果对于检验样本组而言该模型具有较高的准确率，可将该模型用于对新样本的未知变量进行预测。</p>
+<a id="more"></a>
+
+<h3 id="2-数据集介绍"><a href="#2-数据集介绍" class="headerlink" title="2. 数据集介绍"></a>2. 数据集介绍</h3><p>数据集包括：</p>
+<ol>
+<li><code>BABA.csv</code>: 阿里巴巴 2018 年 5 月 12 日至 2020 年 5 月 14 日各个交易日的交易信息</li>
+<li><code>^IXIC.csv</code>: 纳斯达克 2018 年 5 月 12 日至 2020 年 5 月 14 日各个交易日的大盘指数信息</li>
+</ol>
+<p>上述两个文件可通过链接 <a href="https://finance.yahoo.com/quote/BABA/history?period1=1526169600&period2=1589328000&interval=1d&filter=history&frequency=1d" target="_blank" rel="noopener">雅虎财经</a> ，选择合适的时间范围，便可完成下载。</p>
+<p>两个数据集字段完全相同，就其中一个进行详细说明，代码实现请参照 5.2：</p>
+<p>表1. 字段说明</p>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Date</td>
+<td>日期</td>
+<td>2018-05-14</td>
+</tr>
+<tr>
+<td>Open</td>
+<td>开盘价</td>
+<td>195.899994</td>
+</tr>
+<tr>
+<td>High</td>
+<td>最高价</td>
+<td>200.000000</td>
+</tr>
+<tr>
+<td>Low</td>
+<td>最低价</td>
+<td>195.869995</td>
+</tr>
+<tr>
+<td>Close</td>
+<td>收盘价</td>
+<td>198.639999</td>
+</tr>
+<tr>
+<td>Adj Colse</td>
+<td>调整收盘价</td>
+<td>198.639999</td>
+</tr>
+<tr>
+<td>Volume</td>
+<td>交易量</td>
+<td>17627100</td>
+</tr>
+</tbody></table>
+<p>调整收盘收盘价：交易日当天 14:57 停止挂单，15:00正式停盘，但是还有没有完成的委托买进，卖出的交易还在进行.基本上15:01才结束。这时的收盘价才是标准的。已通过代码验证，两个数据集中收盘价与对应调整收盘价均相等，故可删除特征 <code>Adj Close</code>。</p>
+<p>表2. 阿里巴巴数据集各特征统计</p>
+<table>
+<thead>
+<tr>
+<th>指标\特征</th>
+<th>Open</th>
+<th>High</th>
+<th>Low</th>
+<th>Close</th>
+<th>Volume</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>平均值</td>
+<td>179.38934191</td>
+<td>181.45235186</td>
+<td>177.0184412</td>
+<td>179.26332037</td>
+<td>17657890.2584493</td>
+</tr>
+<tr>
+<td>方差</td>
+<td>4.58571248e+02</td>
+<td>4.56472643e+02</td>
+<td>4.60810901e+02</td>
+<td>4.59670928e+02</td>
+<td>6.29066672e+13</td>
+</tr>
+<tr>
+<td>中位数</td>
+<td>178.429993</td>
+<td>180.240005</td>
+<td>176.410004</td>
+<td>178.190002</td>
+<td>16164600</td>
+</tr>
+<tr>
+<td>分位数 Q1</td>
+<td>165.154999</td>
+<td>167.3499985</td>
+<td>162.989998</td>
+<td>164.75</td>
+<td>12333200</td>
+</tr>
+<tr>
+<td>分位数 Q2</td>
+<td>178.429993</td>
+<td>180.240005</td>
+<td>176.410004</td>
+<td>178.190002</td>
+<td>16164600</td>
+</tr>
+<tr>
+<td>分位数 Q3</td>
+<td>194.75</td>
+<td>196.7200015</td>
+<td>191.6800005</td>
+<td>194.7999955</td>
+<td>20782600</td>
+</tr>
+<tr>
+<td>分位距 IQR</td>
+<td>29.595001</td>
+<td>29.370003</td>
+<td>28.6900025</td>
+<td>30.0499955</td>
+<td>8449400</td>
+</tr>
+</tbody></table>
+<p>表3. 纳斯达克数据集各特征统计</p>
+<table>
+<thead>
+<tr>
+<th>指标\特征</th>
+<th>Open</th>
+<th>High</th>
+<th>Low</th>
+<th>Close</th>
+<th>Volume</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>平均值</td>
+<td>7.94517272e+03</td>
+<td>7.99910030e+03</td>
+<td>7.88862999e+03</td>
+<td>7.94757422e+03</td>
+<td>2.40301825e+09</td>
+</tr>
+<tr>
+<td>方差</td>
+<td>4.15639709e+05</td>
+<td>4.07280329e+05</td>
+<td>4.27147212e+05</td>
+<td>4.18254373e+05</td>
+<td>5.11108641e+17</td>
+</tr>
+<tr>
+<td>中位数</td>
+<td>7.89487012e+03</td>
+<td>7.93825977e+03</td>
+<td>7.84731982e+03</td>
+<td>7.89177978e+03</td>
+<td>2.22165000e+09</td>
+</tr>
+<tr>
+<td>分位数 Q1</td>
+<td>7.53970996e+03</td>
+<td>7.58604004e+03</td>
+<td>7.48219995e+03</td>
+<td>7.53226978e+03</td>
+<td>2.00897000e+09</td>
+</tr>
+<tr>
+<td>分位数 Q2</td>
+<td>7.89487012e+03</td>
+<td>7.93825977e+03</td>
+<td>7.84731982e+03</td>
+<td>7.89177978e+03</td>
+<td>2.22165000e+09</td>
+</tr>
+<tr>
+<td>分位数 Q3</td>
+<td>8.20008496e+03</td>
+<td>8.24355469e+03</td>
+<td>8.16301514e+03</td>
+<td>8.19525488e+03</td>
+<td>2.50135500e+09</td>
+</tr>
+<tr>
+<td>分位距 IQR</td>
+<td>6.60375000e+02</td>
+<td>6.57514649e+02</td>
+<td>6.80815186e+02</td>
+<td>6.62985108e+02</td>
+<td>4.92385000e+08</td>
+</tr>
+</tbody></table>
+<h4 id="2-1-实验设置"><a href="#2-1-实验设置" class="headerlink" title="2.1 实验设置"></a>2.1 实验设置</h4><p>因阿里巴巴数据集与纳斯达克数据集字段名相同，为便于叙述，作如下说明：</p>
+<ol>
+<li>阿里巴巴数据集各特征分别称 <code>BABA-Close</code>、<code>BABA-Open</code>、<code>BABA-High</code>、<code>BABA-Low</code>、<code>BABA-Volume</code></li>
+<li>纳斯达克数据集各特征分别称 <code>Nasdaq-Close</code>、<code>Nasdaq-Open</code>、<code>Nasdaq-High</code>、 <code>Nasdaq-Low</code>、<code>Nasdaq-Volume</code></li>
+<li>特征空间特征包含 <code>BABA-Open</code>、<code>BABA-High</code>、<code>BABA-Low</code>、<code>BABA-Volume</code>、<code>Nasdaq-Close</code>、<code>Nasdaq-Open</code>、<code>Nasdaq-High</code>、 <code>Nasdaq-Low</code>、<code>Nasdaq-Volume</code>，共 9 维。目标空间特征只包含 <code>BABA-Close</code>，共 1 维</li>
+<li>阿里巴巴数据集和纳斯达克数据集合称<code>数据集</code>，取数据集前 50% 个样本作为训练集，后 50% 个样本作为测试集</li>
+<li>使用均方误差 (MSE) 作为目标函数</li>
+</ol>
+<h3 id="3-特征选择"><a href="#3-特征选择" class="headerlink" title="3. 特征选择"></a>3. 特征选择</h3><p>我们的目的是通过 BABA-Open、BABA-High、BABA-Low、BABA-Volume、Nasdaq-Close、Nasdaq-Ope、Nasdaq-High、 Nasdaq-Low、Nasdaq-Volume 去预测 BABA-Close。通过表 2 的各项统计数据可知，BABA-Close 的各项指标与  BABA-Open 的各项指标较为接近，所以我们可以粗略地得出：<strong>一支股票开盘价在一定程度上决定了当天的收盘价</strong>。该结论在大盘指数上也有所体现。</p>
+<p>图1. 特征曲线</p>
+<p><img src="/2020/05/13/practice-kaggle-stock-prediction/feature_plot.png" alt="图1-特征曲线"></p>
+<p>由图1 得知，BABA-Open、BABA-High 和 BABA-Low 的曲线与 BABA-Close 的曲线趋势基本相同。当然其中可能包含以下两个原因：1) 作图粗粒度不够精细，尚未体现特征间的区别；2) 交易日当天各特征的值在一个较小的浮动范围内(即，[BABA-Low, BABA-High])。而对于交易量，可理解为：当天股价暴涨暴跌必然伴随着交易量的增加。在各别时间段确实可以明显地得出该结论。针对 BABA-Volmue、Nasdaq-Close、Nasdaq-Open、Nasdaq-High、Nasdaq-Low、Nasdaq-Volume 5 条曲线得出，这 6 个特征与 BABA-Close 的相关性不如 BABA-Open、BABA-High 和 BABA-Low。</p>
+<p>接下来会对各特征进行分析，针对不同的特征分析方案，使用 LSTM 和 Logistic 回归两个模型，对得出的结果进行比较分析。</p>
+<h4 id="3-1-特征选择"><a href="#3-1-特征选择" class="headerlink" title="3.1 特征选择"></a>3.1 特征选择</h4><p>特征选择是指对各项特征进行评估，根据评估结果，在保证精确度的情况下，选择特征集合的其中一个子集进行模型训练。进行特征选择有以下两个好处：</p>
+<ol>
+<li>避免维数灾难：能剔除不相关或冗余的数据，从而达到减少特征个数，提高模型精确度，减少模型训练时间</li>
+<li>降低学习任务难度：简化模型，帮助理解数据间关系</li>
+</ol>
+<p>特征选择方法可分为 3 个类型：过滤式(filter)、包裹式(wrapper)、嵌入式(embedded)，选择上述 3 种类型分别选择一种方案作为模型的输入。</p>
+<h5 id="3-1-1-过滤式-filter-Pearson相关系数"><a href="#3-1-1-过滤式-filter-Pearson相关系数" class="headerlink" title="3.1.1 过滤式(filter)-Pearson相关系数"></a>3.1.1 过滤式(filter)-Pearson相关系数</h5><p>Pearson 相关系数是用来衡量两个随机变量的相关性，相关系数的绝对值越大，相关性越强：相关系数越接近于 1或 -1，相关度越强，相关系数越接近于 0，相关度越弱。其计算公式如下：</p>
+<img src="/2020/05/13/practice-kaggle-stock-prediction/QQ截图20200513180305.png" alt="图2-Pearson相关系数" style="zoom: 150%;">
+
+<p>通过设置阈值，若某特征的 Pearson 相关系数绝对值大于阈值则选取该特征作为输入。在训练集上，通过程序所得如下：</p>
+<p>表4. pearson 相关系数</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>pearson 相关系数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BABA-Open</td>
+<td>0.9890610604245151</td>
+</tr>
+<tr>
+<td>BABA-High</td>
+<td>0.9954178173186491</td>
+</tr>
+<tr>
+<td>BABA-Low</td>
+<td>0.9961995180551552</td>
+</tr>
+<tr>
+<td>BABA-Volume</td>
+<td>-0.2220703427403118</td>
+</tr>
+<tr>
+<td>Nasdaq-Open</td>
+<td>0.5723816141927749</td>
+</tr>
+<tr>
+<td>Nasdaq-High</td>
+<td>0.566087023947722</td>
+</tr>
+<tr>
+<td>Nasdaq-Low</td>
+<td>0.6093822484037384</td>
+</tr>
+<tr>
+<td>Nasdaq-Close</td>
+<td>0.600307318494403</td>
+</tr>
+<tr>
+<td>Nasdaq-Volume</td>
+<td>-0.3987040299740344</td>
+</tr>
+</tbody></table>
+<p>这里我们设置阈值为 0.4，则确定<strong>方案一</strong>，使用 BABA-Open、BABA-High、BABA-Low、Nasdaq-Open、Nasdaq-High、Nasdaq-Low、Nasdaq-Close 7 个特征作为输入特征。</p>
+<h5 id="3-1-2-包裹式-wrapper"><a href="#3-1-2-包裹式-wrapper" class="headerlink" title="3.1.2 包裹式(wrapper)"></a>3.1.2 包裹式(wrapper)</h5><p>与过滤式方法不同，包裹式方法需要指定一个模型，通过不断迭代，选择出较优的特征集合的一个子集。包裹式方法相较于过滤式方法，得到的模型的性能更好，但也存在一些问题：1）需要迭代特征集合的子集，增加了计算时间；2）存在组合数过大，最终组合爆炸无法得到结果。在这里仅作为示例，指定<strong>多元线性回归模型</strong>做一次特征选择，再将选择出的特征组合作为后续两个模型的特征输入。</p>
+<p>序列前向搜索(SFS, Sequential Forward Selection)：假定初始输入特征集合为空集，基于贪心策略的思想，每次选择一个特征加入到输入特征集合，对模型进行训练，直至目标函数达到最优，最终输出模型使用的特征。</p>
+<p>选用的特征选择算法的步骤如下：</p>
+<ol>
+<li>设特征集合为 U，输入特征集合为 V</li>
+<li>在集合 U 中选择使模型最优的特征加入集合 V，并在 U 中删除该特征</li>
+<li>重复步骤 2 </li>
+<li>若无新加入特征使用模型达到最优，则结束特征选择过程</li>
+</ol>
+<p>由 5.4 特征选择-包裹式程序所得，特征最多，准确度越高，即得<strong>方案二</strong>，使用 BABA-Low、BABA-High、 BABA-Open、BABA-Volume、Nasdaq-Volume、Nasdaq-Close、Nasdaq-Low、Nasdaq-High、Nasdaq-Open 9 个特征作为输入特征。</p>
+<p>通常使用包裹式的方法选择出的特征最优，但计算量大，花费的时间较长，不适用于特征较多的数据集。</p>
+<h5 id="3-1-3-嵌入式-embedded"><a href="#3-1-3-嵌入式-embedded" class="headerlink" title="3.1.3 嵌入式(embedded)"></a>3.1.3 嵌入式(embedded)</h5><p>嵌入式特征选择为过滤式与包裹式的中和，保证模型的准确性，并同时减少特征选择的计算量。这里略。</p>
+<h5 id="3-1-4-小结"><a href="#3-1-4-小结" class="headerlink" title="3.1.4 小结"></a>3.1.4 小结</h5><p>使用过滤式与包裹式的方法，我们选择出两种方案：</p>
+<ol>
+<li>方案一：使用 BABA-Open、BABA-High、BABA-Low、Nasdaq-Open、Nasdaq-High、Nasdaq-Low、Nasdaq-Close 7 个特征作为输入特征</li>
+<li>方案二：使用 BABA-Low、BABA-High、 BABA-Open、BABA-Volume、Nasdaq-Volume、Nasdaq-Close、Nasdaq-Low、Nasdaq-High、Nasdaq-Open 9 个特征作为输入特征</li>
+</ol>
+<p>在第 4 节中，将使用长短期记忆网络（LSTM）对分别对两种特征选择方案进行测试。</p>
+<h3 id="4-RNN"><a href="#4-RNN" class="headerlink" title="4. RNN"></a>4. RNN</h3><p>在介绍 LSTM 前，我们需要先了解下循环神经网络（RNN）。循环神经网络（Recurrent Neural Network, RNN）是一类以序列（sequence）数据为输入，在序列的演进方向进行递归（recursion）且所有节点（循环单元）按链式连接的递归神经网络（recursive neural network）。</p>
+<p>图2. RNN 神经元</p>
+<p><img src="/2020/05/13/practice-kaggle-stock-prediction/D:%5Cworkspace%5CmyBlog%5Csource_posts%5Cpractice-kaggle-stock-prediction%5Cv2-3884f344d71e92d70ec3c44d2795141f_720w.jpg" alt="图2. RNN 神经元"></p>
+<p>循环神经网络的隐藏层的值s不仅仅取决于当前这次的输入x，还取决于上一次隐藏层的值s。权重矩阵 W就是隐藏层上一次的值作为这一次的输入的权重。</p>
+<p>图3. 计算隐层输出</p>
+<p><img src="/2020/05/13/practice-kaggle-stock-prediction/D:%5Cworkspace%5CmyBlog%5Csource_posts%5Cpractice-kaggle-stock-prediction%5Cv2-206db7ba9d32a80ff56b6cc988a62440_r.jpg" alt="图3. 计算隐层输出"></p>
+<h4 id="4-1-LSTM"><a href="#4-1-LSTM" class="headerlink" title="4.1 LSTM"></a>4.1 LSTM</h4><p>长短期记忆（Long short-term memory, LSTM）是一种特殊的 RNN，主要是为了解决长序列训练过程中的梯度消失和梯度爆炸问题。简单来说，就是相比普通的RNN，LSTM能够在更长的序列中有更好的表现。LSTMs的结构如下图所示。</p>
+<p><img src="/2020/05/13/practice-kaggle-stock-prediction/D:%5Cworkspace%5CmyBlog%5Csource_posts%5Cpractice-kaggle-stock-prediction%5CQQ%E6%88%AA%E5%9B%BE20200517124740.png" alt></p>
+<p>LSTM内部主要有三个阶段：</p>
+<ol>
+<li>忘记阶段。这个阶段主要是对上一个节点传进来的输入进行选择性忘记。简单来说就是会 “忘记不重要的，记住重要的”。</li>
+<li>选择记忆阶段。这个阶段将这个阶段的输入有选择性地进行“记忆”。</li>
+<li>输出阶段。这个阶段将决定哪些将会被当成当前状态的输出。</li>
+</ol>
+<p>通过门控状态来控制传输状态，记住需要长时间记忆的，忘记不重要的信息；而不像普通的 RNN 那样只能够“呆萌”地仅有一种记忆叠加方式。对很多需要“长期记忆”的任务来说，尤其好用。</p>
+<h4 id="4-2-网络结构"><a href="#4-2-网络结构" class="headerlink" title="4.2 网络结构"></a>4.2 网络结构</h4><p>这里的网络结构十分简单，包括一个 LSTM 层和一个全连接层。针对上述的两种方案，唯一的不同在于输入的个数，其它条件均相同。具体代码实现可看<code>6.5 LSTM 模型</code>。</p>
+<h3 id="5-实验结果"><a href="#5-实验结果" class="headerlink" title="5. 实验结果"></a>5. 实验结果</h3><p>方案一，测试集预测结果如下图：</p>
+<p><img src="/2020/05/13/practice-kaggle-stock-prediction/s1.png" alt></p>
+<p>方案二，测试集预测结果如下图：</p>
+<p><img src="/2020/05/13/practice-kaggle-stock-prediction/s2.png" alt></p>
+<p>由两个特征选择的方案可知，两者的效果必无较大差别。</p>
+<h3 id="6-代码"><a href="#6-代码" class="headerlink" title="6. 代码"></a>6. 代码</h3><h4 id="6-1-包引入及数据读取"><a href="#6-1-包引入及数据读取" class="headerlink" title="6.1 包引入及数据读取"></a>6.1 包引入及数据读取</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> LSTM, Dense</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line">np.set_printoptions(suppress=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">df_original = pd.read_csv(<span class="string">'./BABA.csv'</span>)</span><br><span class="line">df_nasdaq = pd.read_csv(<span class="string">'./^IXIC.csv'</span>)</span><br><span class="line">dataset = pd.concat(</span><br><span class="line">    [</span><br><span class="line">        df_original[[<span class="string">'Date'</span>, <span class="string">'Close'</span>, <span class="string">'Open'</span>, <span class="string">'High'</span>, <span class="string">'Low'</span>, <span class="string">'Volume'</span>]],</span><br><span class="line">        df_nasdaq[[<span class="string">'Open'</span>, <span class="string">'High'</span>, <span class="string">'Low'</span>, <span class="string">'Close'</span>, <span class="string">'Volume'</span>]]</span><br><span class="line">    ], axis=<span class="number">1</span>)</span><br><span class="line">dataset.columns = [</span><br><span class="line">    <span class="string">'Date'</span>,</span><br><span class="line">    <span class="string">'BABA-Close'</span>, <span class="string">'BABA-Open'</span>, <span class="string">'BABA-High'</span>, <span class="string">'BABA-Low'</span>, <span class="string">'BABA-Volume'</span>,</span><br><span class="line">    <span class="string">'Nasdaq-Open'</span>, <span class="string">'Nasdaq-High'</span>, <span class="string">'Nasdaq-Low'</span>, <span class="string">'Nasdaq-Close'</span>, <span class="string">'Nasdaq-Volume'</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2-统计代码"><a href="#6-2-统计代码" class="headerlink" title="6.2 统计代码"></a>6.2 统计代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_quartile</span><span class="params">(arr)</span>:</span></span><br><span class="line">    qs = np.percentile(arr, [<span class="number">25</span>, <span class="number">50</span>, <span class="number">75</span>])</span><br><span class="line">    qs = np.append(qs, qs[<span class="number">2</span>] - qs[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">return</span> qs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分位数及分位距集合</span></span><br><span class="line"><span class="comment"># [[Q1,Q2,Q3,IQR], ...]</span></span><br><span class="line">quartiles = np.array([compute_quartile(df_original[column]) </span><br><span class="line">                      <span class="keyword">for</span> column <span class="keyword">in</span> df_original.columns[<span class="number">1</span>:]])</span><br><span class="line"><span class="comment"># 方差集合</span></span><br><span class="line">variances = np.var(df_original[df_original.columns[<span class="number">1</span>:]].values, axis=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 均值集合</span></span><br><span class="line">means = np.mean(df_original[df_original.columns[<span class="number">1</span>:]].values, axis=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 中位数集合</span></span><br><span class="line">medians = np.median(df_original[df_original.columns[<span class="number">1</span>:]].values, axis=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 比较收盘价与调整收盘价是否全部相同</span></span><br><span class="line">print((df_original[<span class="string">'Close'</span>] == df_original[<span class="string">'Adj Close'</span>]).all(), </span><br><span class="line">      (df_nasdaq[<span class="string">'Close'</span>] == df_nasdaq[<span class="string">'Adj Close'</span>]).all())</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-3-作图代码"><a href="#6-3-作图代码" class="headerlink" title="6.3 作图代码"></a>6.3 作图代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制图1 特征曲线</span></span><br><span class="line">plt.figure(figsize=(<span class="number">16</span>, <span class="number">24</span>))</span><br><span class="line">plt.title(<span class="string">'BABA: 特征曲线'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, column <span class="keyword">in</span> enumerate([<span class="string">'Close'</span>, <span class="string">'Open'</span>, <span class="string">'High'</span>, <span class="string">'Low'</span>, <span class="string">'Volume'</span>]):</span><br><span class="line">    ax = plt.subplot(<span class="number">10</span>, <span class="number">1</span>, i+<span class="number">1</span>)</span><br><span class="line">    ax.plot(df_original[column], label=<span class="string">'BABA-&#123;column&#125;'</span>.format(column=column), c=<span class="string">'orange'</span>)</span><br><span class="line">    ax.set_title(<span class="string">'BABA-&#123;column&#125;'</span>.format(column=column))</span><br><span class="line">    ax.legend()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, column <span class="keyword">in</span> enumerate([<span class="string">'Close'</span>, <span class="string">'Open'</span>, <span class="string">'High'</span>, <span class="string">'Low'</span>, <span class="string">'Volume'</span>]):</span><br><span class="line">    ax = plt.subplot(<span class="number">10</span>, <span class="number">1</span>, i+<span class="number">6</span>)</span><br><span class="line">    ax.plot(df_nasdaq[column], label=column, c=<span class="string">'r'</span>)</span><br><span class="line">    ax.set_title(<span class="string">'Nasdaq-&#123;column&#125;'</span>.format(column=column))</span><br><span class="line">    ax.legend()</span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(hspace=<span class="number">0.3</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-4-特征选择"><a href="#6-4-特征选择" class="headerlink" title="6.4 特征选择"></a>6.4 特征选择</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 过滤式</span></span><br><span class="line"><span class="comment"># 计算 pearson 相关系数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stat_pearson</span><span class="params">(dataset, columns, target_column)</span>:</span></span><br><span class="line">    pearson_matrix = [np.corrcoef(dataset[column], dataset[target_column]) <span class="keyword">for</span> column <span class="keyword">in</span> columns]</span><br><span class="line">    <span class="keyword">return</span> list(zip(columns, [p[<span class="number">0</span>][<span class="number">1</span>] <span class="keyword">for</span> p <span class="keyword">in</span> pearson_matrix]))</span><br><span class="line"></span><br><span class="line">print(stat_pearson(train_dataset, train_dataset.columns[<span class="number">2</span>:], <span class="string">'BABA-Close'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 包裹式</span></span><br><span class="line">U = train_dataset.columns[<span class="number">2</span>:].values.tolist()</span><br><span class="line">V = []</span><br><span class="line"></span><br><span class="line">stop = <span class="literal">False</span></span><br><span class="line">score = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> len(U) != <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> stop:</span><br><span class="line">    c = <span class="string">''</span></span><br><span class="line">    inner_score = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> column <span class="keyword">in</span> U:</span><br><span class="line">        linreg = LinearRegression()</span><br><span class="line">        linreg.fit(</span><br><span class="line">            train_dataset[V + [column]].values, </span><br><span class="line">            train_dataset[<span class="string">'BABA-Close'</span>].values[:,np.newaxis]</span><br><span class="line">        )</span><br><span class="line">        train_score = linreg.score(</span><br><span class="line">            train_dataset[V + [column]].values,</span><br><span class="line">            train_dataset[<span class="string">'BABA-Close'</span>].values[:,np.newaxis])</span><br><span class="line">        <span class="keyword">if</span> train_score &gt; inner_score:</span><br><span class="line">            c = column</span><br><span class="line">            inner_score = train_score</span><br><span class="line">    <span class="keyword">if</span> inner_score &gt; score:</span><br><span class="line">        score = inner_score</span><br><span class="line">        V.append(c)</span><br><span class="line">        U.remove(c)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        stop = <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">print(V)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-5-LSTM-模型"><a href="#6-5-LSTM-模型" class="headerlink" title="6.5 LSTM 模型"></a>6.5 LSTM 模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方案一</span></span><br><span class="line">features1 = [</span><br><span class="line">    <span class="string">'BABA-Open'</span>, <span class="string">'BABA-High'</span>, <span class="string">'BABA-Low'</span>, </span><br><span class="line">    <span class="string">'Nasdaq-Open'</span>, <span class="string">'Nasdaq-High'</span>, <span class="string">'Nasdaq-Low'</span>, <span class="string">'Nasdaq-Close'</span></span><br><span class="line">]</span><br><span class="line">train_X_1, train_Y_1, test_X_1, test_Y_1 = (</span><br><span class="line">    train_dataset[features1].values, train_dataset[<span class="string">'BABA-Close'</span>].values, </span><br><span class="line">    test_dataset[features1].values, test_dataset[<span class="string">'BABA-Close'</span>].values)</span><br><span class="line"><span class="comment"># 规一化</span></span><br><span class="line">scaler = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">scaled_train_X_1 = scaler.fit_transform(train_X_1)</span><br><span class="line">scaled_test_X_1 = scaler.fit_transform(test_X_1)</span><br><span class="line">train_X_1 = scaled_train_X_1.reshape((scaled_train_X_1.shape[<span class="number">0</span>], <span class="number">1</span>, scaled_train_X_1.shape[<span class="number">1</span>]))</span><br><span class="line">test_X_1 = scaled_test_X_1.reshape((scaled_test_X_1.shape[<span class="number">0</span>], <span class="number">1</span>, scaled_test_X_1.shape[<span class="number">1</span>]))</span><br><span class="line">model1 = Sequential()</span><br><span class="line">model1.add(LSTM(<span class="number">50</span>, input_shape=(train_X_1.shape[<span class="number">1</span>], train_X_1.shape[<span class="number">2</span>])))</span><br><span class="line">model1.add(Dense(<span class="number">1</span>))</span><br><span class="line">model1.compile(loss=<span class="string">'mse'</span>, optimizer=<span class="string">'sgd'</span>)</span><br><span class="line">model1.fit(train_X_1, train_Y_1, epochs=<span class="number">50</span>, batch_size=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>训练输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">Epoch 1/50</span><br><span class="line">252/252 [==============================] - 1s 3ms/step - loss: 570.9301</span><br><span class="line">Epoch 2/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 21.9412</span><br><span class="line">Epoch 3/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 15.9400</span><br><span class="line">Epoch 4/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 11.7743</span><br><span class="line">Epoch 5/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 10.6438</span><br><span class="line">Epoch 6/50</span><br><span class="line">252/252 [==============================] - 0s 2ms/step - loss: 10.5726</span><br><span class="line">Epoch 7/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 8.9162</span><br><span class="line">Epoch 8/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 8.1793</span><br><span class="line">Epoch 9/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 7.0807</span><br><span class="line">Epoch 10/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 7.4825</span><br><span class="line">Epoch 11/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 6.6002</span><br><span class="line">Epoch 12/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 6.1597</span><br><span class="line">Epoch 13/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 7.1020</span><br><span class="line">Epoch 14/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.9662</span><br><span class="line">Epoch 15/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.6719</span><br><span class="line">Epoch 16/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 6.0709</span><br><span class="line">Epoch 17/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.9084</span><br><span class="line">Epoch 18/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.0226</span><br><span class="line">Epoch 19/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.9551</span><br><span class="line">Epoch 20/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.4996</span><br><span class="line">Epoch 21/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.5181</span><br><span class="line">Epoch 22/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.3186</span><br><span class="line">Epoch 23/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.3641</span><br><span class="line">Epoch 24/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.0301</span><br><span class="line">Epoch 25/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.8772</span><br><span class="line">Epoch 26/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.9782</span><br><span class="line">Epoch 27/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.9455</span><br><span class="line">Epoch 28/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.0968</span><br><span class="line">Epoch 29/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.8708</span><br><span class="line">Epoch 30/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.0982</span><br><span class="line">Epoch 31/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.1785</span><br><span class="line">Epoch 32/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.7980</span><br><span class="line">Epoch 33/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.7601</span><br><span class="line">Epoch 34/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.0263</span><br><span class="line">Epoch 35/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.0670</span><br><span class="line">Epoch 36/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.8621</span><br><span class="line">Epoch 37/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.8671</span><br><span class="line">Epoch 38/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.6243</span><br><span class="line">Epoch 39/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.8980</span><br><span class="line">Epoch 40/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.9160</span><br><span class="line">Epoch 41/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.5018</span><br><span class="line">Epoch 42/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.5275</span><br><span class="line">Epoch 43/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.8431</span><br><span class="line">Epoch 44/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.1985</span><br><span class="line">Epoch 45/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.4256</span><br><span class="line">Epoch 46/50</span><br><span class="line">252/252 [==============================] - 0s 2ms/step - loss: 3.5891</span><br><span class="line">Epoch 47/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.2997</span><br><span class="line">Epoch 48/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.5120</span><br><span class="line">Epoch 49/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.2040</span><br><span class="line">Epoch 50/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.0948</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方案二</span></span><br><span class="line">features1 = [</span><br><span class="line">    <span class="string">'BABA-Low'</span>, <span class="string">'BABA-High'</span>, <span class="string">'BABA-Open'</span>, </span><br><span class="line">    <span class="string">'BABA-Volume'</span>, <span class="string">'Nasdaq-Volume'</span>, <span class="string">'Nasdaq-Close'</span>, </span><br><span class="line">    <span class="string">'Nasdaq-Low'</span>, <span class="string">'Nasdaq-High'</span>, <span class="string">'Nasdaq-Open'</span>,</span><br><span class="line">]</span><br><span class="line">train_X_1, train_Y_1, test_X_1, test_Y_1 = (</span><br><span class="line">    train_dataset[features1].values, train_dataset[<span class="string">'BABA-Close'</span>].values, </span><br><span class="line">    test_dataset[features1].values, test_dataset[<span class="string">'BABA-Close'</span>].values)</span><br><span class="line"><span class="comment"># 规一化</span></span><br><span class="line">scaler = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">scaled_train_X_1 = scaler.fit_transform(train_X_1)</span><br><span class="line">scaled_test_X_1 = scaler.fit_transform(test_X_1)</span><br><span class="line"></span><br><span class="line">train_X_1 = scaled_train_X_1.reshape((scaled_train_X_1.shape[<span class="number">0</span>], <span class="number">1</span>, scaled_train_X_1.shape[<span class="number">1</span>]))</span><br><span class="line">test_X_1 = scaled_test_X_1.reshape((scaled_test_X_1.shape[<span class="number">0</span>], <span class="number">1</span>, scaled_test_X_1.shape[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">model1 = Sequential()</span><br><span class="line">model1.add(LSTM(<span class="number">50</span>, input_shape=(train_X_1.shape[<span class="number">1</span>], train_X_1.shape[<span class="number">2</span>])))</span><br><span class="line">model1.add(Dense(<span class="number">1</span>))</span><br><span class="line">model1.compile(loss=<span class="string">'mse'</span>, optimizer=<span class="string">'sgd'</span>)</span><br><span class="line">model1.fit(train_X_1, train_Y_1, epochs=<span class="number">50</span>, batch_size=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>训练输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">Epoch 1/50</span><br><span class="line">252/252 [==============================] - 1s 3ms/step - loss: 592.0021</span><br><span class="line">Epoch 2/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 16.8226</span><br><span class="line">Epoch 3/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 16.1311</span><br><span class="line">Epoch 4/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 11.6678</span><br><span class="line">Epoch 5/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 12.0733</span><br><span class="line">Epoch 6/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 11.6642</span><br><span class="line">Epoch 7/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 8.8611</span><br><span class="line">Epoch 8/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 8.3419</span><br><span class="line">Epoch 9/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 7.8116</span><br><span class="line">Epoch 10/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 6.9925</span><br><span class="line">Epoch 11/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 6.9929</span><br><span class="line">Epoch 12/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 7.4626</span><br><span class="line">Epoch 13/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 7.1185</span><br><span class="line">Epoch 14/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.9623</span><br><span class="line">Epoch 15/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.6488</span><br><span class="line">Epoch 16/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.4057</span><br><span class="line">Epoch 17/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.3524</span><br><span class="line">Epoch 18/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.0557</span><br><span class="line">Epoch 19/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.7617</span><br><span class="line">Epoch 20/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 5.1460</span><br><span class="line">Epoch 21/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.3869</span><br><span class="line">Epoch 22/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.8052</span><br><span class="line">Epoch 23/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.7524</span><br><span class="line">Epoch 24/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.4368</span><br><span class="line">Epoch 25/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.3167</span><br><span class="line">Epoch 26/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.5929</span><br><span class="line">Epoch 27/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.3434</span><br><span class="line">Epoch 28/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.4152</span><br><span class="line">Epoch 29/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.8215</span><br><span class="line">Epoch 30/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.5884</span><br><span class="line">Epoch 31/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.6906</span><br><span class="line">Epoch 32/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.0243</span><br><span class="line">Epoch 33/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.7945</span><br><span class="line">Epoch 34/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 4.0253</span><br><span class="line">Epoch 35/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.7365</span><br><span class="line">Epoch 36/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.1787</span><br><span class="line">Epoch 37/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.1924</span><br><span class="line">Epoch 38/50</span><br><span class="line">252/252 [==============================] - 0s 2ms/step - loss: 3.8351</span><br><span class="line">Epoch 39/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.7456</span><br><span class="line">Epoch 40/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.4666</span><br><span class="line">Epoch 41/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.2283</span><br><span class="line">Epoch 42/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.0648</span><br><span class="line">Epoch 43/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.7092</span><br><span class="line">Epoch 44/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.3129</span><br><span class="line">Epoch 45/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.7291</span><br><span class="line">Epoch 46/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.1337</span><br><span class="line">Epoch 47/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 2.9071</span><br><span class="line">Epoch 48/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.0326</span><br><span class="line">Epoch 49/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 3.1272</span><br><span class="line">Epoch 50/50</span><br><span class="line">252/252 [==============================] - 0s 1ms/step - loss: 2.8253</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-参考"><a href="#7-参考" class="headerlink" title="7. 参考"></a>7. 参考</h3><ol>
+<li><a href="https://baike.baidu.com/item/数据挖掘/216477?fr=aladdin#5" target="_blank" rel="noopener">https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/216477?fr=aladdin#5</a></li>
+<li><a href="https://finance.yahoo.com/quote/BABA/history?period1=1526169600&period2=1589328000&interval=1d&filter=history&frequency=1d" target="_blank" rel="noopener">雅虎财经</a></li>
+<li><a href="https://blog.csdn.net/hellowuxia/article/details/86529575" target="_blank" rel="noopener">https://blog.csdn.net/hellowuxia/article/details/86529575</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/30844905" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30844905</a></li>
+<li><a href="https://www.jianshu.com/p/95d5c461924c" target="_blank" rel="noopener">https://www.jianshu.com/p/95d5c461924c</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/32085405" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32085405</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/NN/" rel="tag"># NN</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/01/experiment-svm/" rel="prev" title="-实验- SVM 应用蘑菇种类预测">
+      <i class="fa fa-chevron-left"></i> -实验- SVM 应用蘑菇种类预测
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/14/python-tip-string-concate/" rel="next" title="Python 技巧：字符串连接">
+      Python 技巧：字符串连接 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-预测问题概述"><span class="nav-number">1.</span> <span class="nav-text">1. 预测问题概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据集介绍"><span class="nav-number">2.</span> <span class="nav-text">2. 数据集介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-实验设置"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 实验设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-特征选择"><span class="nav-number">3.</span> <span class="nav-text">3. 特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-特征选择"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-过滤式-filter-Pearson相关系数"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 过滤式(filter)-Pearson相关系数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-包裹式-wrapper"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 包裹式(wrapper)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-嵌入式-embedded"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 嵌入式(embedded)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-4-小结"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4 小结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-RNN"><span class="nav-number">4.</span> <span class="nav-text">4. RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-LSTM"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 LSTM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-网络结构"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 网络结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-实验结果"><span class="nav-number">5.</span> <span class="nav-text">5. 实验结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-代码"><span class="nav-number">6.</span> <span class="nav-text">6. 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-包引入及数据读取"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 包引入及数据读取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-统计代码"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 统计代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-作图代码"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 作图代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-特征选择"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 特征选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5-LSTM-模型"><span class="nav-number">6.5.</span> <span class="nav-text">6.5 LSTM 模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-参考"><span class="nav-number">7.</span> <span class="nav-text">7. 参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

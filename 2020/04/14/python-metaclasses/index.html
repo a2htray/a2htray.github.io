@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="翻译文章 原文 https:&#x2F;&#x2F;realpython.com&#x2F;python-metaclasses&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="-翻译- Python Metaclass">
+<meta property="og:url" content="http://yoursite.com/2020/04/14/python-metaclasses/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="翻译文章 原文 https:&#x2F;&#x2F;realpython.com&#x2F;python-metaclasses&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/04/14/python-metaclasses/QQ%E6%88%AA%E5%9B%BE20200414142702.png">
+<meta property="article:published_time" content="2020-04-14T02:57:07.000Z">
+<meta property="article:modified_time" content="2020-04-14T06:31:07.762Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Translation">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/14/python-metaclasses/QQ%E6%88%AA%E5%9B%BE20200414142702.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/14/python-metaclasses/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>-翻译- Python Metaclass | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/14/python-metaclasses/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          -翻译- Python Metaclass
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-14 10:57:07 / Modified: 14:31:07" itemprop="dateCreated datePublished" datetime="2020-04-14T10:57:07+08:00">2020-04-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>翻译文章</p>
+<p>原文 <a href="https://realpython.com/python-metaclasses/" target="_blank" rel="noopener">https://realpython.com/python-metaclasses/</a></p>
+<a id="more"></a>
+
+<p>元编程指的是程序自身有获得认识的潜力或可自我维护。Python 提供了实现元编程了一种格式，即元类 <code>metaclass</code>。</p>
+<p><code>metaclass</code> 依然继承了 <code>OOP</code> 思想，隐藏了元编程的具体实现。只有在极少数的情况下，才有可能使用到 <code>metaclass</code>，绝大部分情况下，你都不需要考虑 <code>metaclass</code>。</p>
+<p>When the need arises, however, Python provides a capability that not all object-oriented languages support: you can get under the hood and define custom metaclasses. The use of custom metaclasses is somewhat controversial, as suggested by the following quote from Tim Peters, the Python guru who authored the <a href="https://www.python.org/dev/peps/pep-0020" target="_blank" rel="noopener">Zen of Python</a>:</p>
+<blockquote>
+<p>“Metaclasses are deeper magic than 99% of users should ever worry about. If you wonder whether you need them, you don’t (the people who actually need them know with certainty that they need them, and don’t need an explanation about why).”</p>
+<p>— <em>Tim Peters</em></p>
+</blockquote>
+<p>There are Pythonistas (as Python aficionados are known) who believe that you should never use custom metaclasses. That might be going a bit far, but it is probably true that custom metaclasses mostly aren’t necessary. If it isn’t pretty obvious that a problem calls for them, then it will probably be cleaner and more readable if solved in a simpler way.</p>
+<p>纵使如此，领会 <code>metaclass</code> 依然是非常有意义的一件事。因为学习 <code>metaclass</code> 这一过程能够有助于更好理解 Python 中类的内部机理。你不曾想，或许有一天，当你置身于困境之时，<code>metaclass</code> 可能成为你的“救命稻草”，即解决方案。</p>
+<h3 id="旧式类-old-style-class-vs-new-style-class-新式类"><a href="#旧式类-old-style-class-vs-new-style-class-新式类" class="headerlink" title="旧式类 old-style class vs new-style class 新式类"></a>旧式类 old-style class vs new-style class 新式类</h3><p>在 Python 实践中，一个类具有两种变体。目前，官方并没有给出具体命名，我们姑且称为 <strong>旧式类</strong> 和 <strong>新式类</strong>。</p>
+<h3 id="旧式类-old-style-class"><a href="#旧式类-old-style-class" class="headerlink" title="旧式类 old-style class"></a>旧式类 old-style class</h3><p>With old-style classes, class and type are not quite the same thing. An instance of an old-style class is always implemented from a single built-in type called <code>instance</code>. If <code>obj</code> is an instance of an old-style class, <code>obj.__class__</code> designates the class, but <code>type(obj)</code> is always <code>instance</code>. The following example is taken from Python 2.7:</p>
+<p>在旧式类中，类和类型并不是一个东西。一个旧式类的实例总是实现于一个内置的类型 <code>instance</code>。如果对象是一个旧式类实例，则 <code>obj.__class__</code> 包含了其类信息，但 <code>type(obj)</code> 总是一个 <code>instance</code>。请看下面的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.__class__</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> <span class="title">__main__</span>.<span class="title">Foo</span> <span class="title">at</span> 0<span class="title">x000000000535CC48</span>&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">type</span><span class="params">(x)</span></span></span><br><span class="line"><span class="class">&lt;<span class="title">type</span> '<span class="title">instance</span>'&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="新式类-new-style-class"><a href="#新式类-new-style-class" class="headerlink" title="新式类 new-style class"></a>新式类 new-style class</h3><p>新式类统一了类和类型的概率。如果对象是新式类的实例，那 <code>type(obj)</code> 与 <code>obj.__class__</code> 则一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>obj = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>obj.__class__</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">__main__</span>.<span class="title">Foo</span>'&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">type</span><span class="params">(obj)</span></span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">__main__</span>.<span class="title">Foo</span>'&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">obj</span>.<span class="title">__class__</span> <span class="title">is</span> <span class="title">type</span><span class="params">(obj)</span></span></span><br><span class="line"><span class="class"><span class="title">True</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>n = <span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = &#123; <span class="string">'x'</span> : <span class="number">1</span>, <span class="string">'y'</span> : <span class="number">2</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = Foo()</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> obj <span class="keyword">in</span> (n, d, x):</span><br><span class="line"><span class="meta">... </span>    print(type(obj) <span class="keyword">is</span> obj.__class__)</span><br><span class="line">...</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="类型与类"><a href="#类型与类" class="headerlink" title="类型与类"></a>类型与类</h2><p>在 Python 3 中，所有的类都是新式类。因此在 Python 3 中对于对象的类型与对象的类处理得更合理</p>
+<p>记住，在 Python 中，任何东西都是对象。类也是对象，这就意味着，一个类也必须有一个类型。那类的类型是什么呢？</p>
+<p>考虑以下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = Foo()</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(x)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">__main__</span>.<span class="title">Foo</span>'&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">type</span><span class="params">(Foo)</span></span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">type</span>'&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>x</code> 的类型是类 <code>Foo</code>，与我们所想的一致。而 <code>Foo</code> 的类型是 <code>type</code>。更通俗的解释是，所有新式类的类型都是 <code>type</code>。</p>
+<p>同样的，这些内置类的类型也是 <code>type</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> t <span class="keyword">in</span> int, float, dict, list, tuple:</span><br><span class="line"><span class="meta">... </span>    print(type(t))</span><br><span class="line">...</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">type</span>'&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">type</span>'&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">type</span>'&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">type</span>'&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">type</span>'&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>关于这些内容，我们还需要知道 <code>type</code> 的类型也是 <code>type</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(type)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">type</span>'&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>type</code> 是一个实例是类的元类。就好像一个十进制对象是一个类的实例，任何新式类的是 <code>type</code> 元类的实例。</p>
+<p>在上述例子中：</p>
+<ul>
+<li><code>x</code> 是类 <code>Foo</code> 的实例</li>
+<li><code>Foo</code> 是元类 <code>metaclass</code> 的实例</li>
+<li><code>type</code> 同样也是元类 <code>type</code> 的实例，它的实例就是本身</li>
+</ul>
+<p>[<img src="/2020/04/14/python-metaclasses/QQ%E6%88%AA%E5%9B%BE20200414142702.png" alt="Python class chain"></p>
+<h2 id="动态定义类"><a href="#动态定义类" class="headerlink" title="动态定义类"></a>动态定义类</h2><p>The built-in <code>type()</code> function, when passed one argument, returns the type of an object. For new-style classes, that is generally the same as the <a href="https://docs.python.org/3/library/stdtypes.html#instance.__class__" target="_blank" rel="noopener">object’s <code>__class__</code> attribute</a>:</p>
+<p>传递一个参数到内置的 <code>type()</code> 函数，可以返回一个对象。对于新式类而言，<code>type()</code> 的作用与 <code>obj.__class__</code> 属性相同。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(<span class="number">3</span>)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">int</span>'&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">type</span><span class="params">([<span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="string">'baz'</span>])</span></span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">list</span>'&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line">&gt;&gt;&gt; t = (1, 2, 3, 4, 5)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(t)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">tuple</span>'&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">class</span> <span class="title">Foo</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(Foo())</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">__main__</span>.<span class="title">Foo</span>'&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>同样的，你可以传递三个参数：</p>
+<ul>
+<li>`` specifies the class name. This becomes the <code>__name__</code> attribute of the class.</li>
+<li></li>
+<li>`` specifies a tuple of the base classes from which the class inherits. This becomes the <code>__bases__</code> attribute of the class.</li>
+<li>`` specifies a namespace dictionary containing definitions for the class body. This becomes the <code>__dict__</code> attribute of the class.</li>
+</ul>
+<p>Calling <code>type()</code> in this manner creates a new instance of the <code>type</code> metaclass. In other words, it dynamically creates a new class.</p>
+<p>In each of the following examples, the top snippet defines a class dynamically with <code>type()</code>, while the snippet below it defines the class the usual way, with the <code>class</code> statement. In each case, the two snippets are functionally equivalent.</p>
+<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a>Example 1</h3><p>In this first example, the <code>and</code> arguments passed to <code>type()</code> are both empty. No inheritance from any parent class is specified, and nothing is initially placed in the namespace dictionary. This is the simplest class definition possible:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; Foo = type(<span class="string">'Foo'</span>, (), &#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x</span><br><span class="line">&lt;__main_<span class="number">_</span>.Foo object at <span class="number">0x04CFAD50</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">...     pass</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x</span><br><span class="line">&lt;__main_<span class="number">_</span>.Foo object at <span class="number">0x0370AD50</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2"></a>Example 2</h3><p>Here, `` is a tuple with a single element <code>Foo</code>, specifying the parent class that <code>Bar</code> inherits from. An attribute, <code>attr</code>, is initially placed into the namespace dictionary:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; Bar = type(<span class="string">'Bar'</span>, (Foo,), dict(attr=<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x = Bar()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.__class_<span class="number">_</span></span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">__main__</span>.<span class="title">Bar</span>'&gt;</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.__class_<span class="number">_</span>.__bases_<span class="number">_</span></span><br><span class="line">(&lt;<span class="class"><span class="keyword">class</span> '<span class="title">__main__</span>.<span class="title">Foo</span>'&gt;,)</span></span><br></pre></td></tr></table></figure>
+
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="class"><span class="keyword">class</span> <span class="title">Bar</span>(<span class="title">Foo</span>):</span></span><br><span class="line">...     attr = <span class="number">100</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x = Bar()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.__class_<span class="number">_</span></span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">__main__</span>.<span class="title">Bar</span>'&gt;</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.__class_<span class="number">_</span>.__bases_<span class="number">_</span></span><br><span class="line">(&lt;<span class="class"><span class="keyword">class</span> '<span class="title">__main__</span>.<span class="title">Foo</span>'&gt;,)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example 3"></a>Example 3</h3><p>This time, <code>is again empty. Two objects are placed into the namespace dictionary via the</code> argument. The first is an attribute named <code>attr</code> and the second a function named <code>attr_val</code>, which becomes a method of the defined class:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Foo = type(</span><br><span class="line"><span class="meta">... </span>    <span class="string">'Foo'</span>,</span><br><span class="line"><span class="meta">... </span>    (),</span><br><span class="line"><span class="meta">... </span>    &#123;</span><br><span class="line"><span class="meta">... </span>        <span class="string">'attr'</span>: <span class="number">100</span>,</span><br><span class="line"><span class="meta">... </span>        <span class="string">'attr_val'</span>: <span class="keyword">lambda</span> x : x.attr</span><br><span class="line"><span class="meta">... </span>    &#125;</span><br><span class="line"><span class="meta">... </span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.attr_val()</span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">...     attr = <span class="number">100</span></span><br><span class="line">...     <span class="function"><span class="keyword">def</span> <span class="title">attr_val</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">...         <span class="keyword">return</span> <span class="keyword">self</span>.attr</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.attr_val()</span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Example-4"><a href="#Example-4" class="headerlink" title="Example 4"></a>Example 4</h3><p>Only very simple functions can be defined with <a href="https://dbader.org/blog/python-lambda-functions" target="_blank" rel="noopener"><code>lambda</code> in Python</a>. In the following example, a slightly more complex function is defined externally then assigned to <code>attr_val</code> in the namespace dictionary via the name <code>f</code>:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(obj)</span>:</span></span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'attr ='</span>, obj.attr)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Foo = type(</span><br><span class="line"><span class="meta">... </span>    <span class="string">'Foo'</span>,</span><br><span class="line"><span class="meta">... </span>    (),</span><br><span class="line"><span class="meta">... </span>    &#123;</span><br><span class="line"><span class="meta">... </span>        <span class="string">'attr'</span>: <span class="number">100</span>,</span><br><span class="line"><span class="meta">... </span>        <span class="string">'attr_val'</span>: f</span><br><span class="line"><span class="meta">... </span>    &#125;</span><br><span class="line"><span class="meta">... </span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.attr_val()</span><br><span class="line">attr = <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(obj)</span></span><span class="symbol">:</span></span><br><span class="line">...     print(<span class="string">'attr ='</span>, obj.attr)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">...     attr = <span class="number">100</span></span><br><span class="line">...     attr_val = f</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.attr_val()</span><br><span class="line">attr = <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Custom-Metaclasses"><a href="#Custom-Metaclasses" class="headerlink" title="Custom Metaclasses"></a>Custom Metaclasses</h2><p>Consider again this well-worn example:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">...     pass</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; f = Foo()</span><br></pre></td></tr></table></figure>
+
+<p>The expression <code>Foo()</code> creates a new instance of class <code>Foo</code>. When the interpreter encounters <code>Foo()</code>, the following occurs:</p>
+<ul>
+<li>The <code>__call__()</code> method of <code>Foo</code>’s parent class is called. Since <code>Foo</code> is a standard new-style class, its parent class is the <code>type</code> metaclass, so <code>type</code>’s <code>__call__()</code> method is invoked.</li>
+<li>That <code>__call__()</code> method in turn invokes the following:<ul>
+<li><code>__new__()</code></li>
+<li><code>__init__()</code></li>
+</ul>
+</li>
+</ul>
+<p>If <code>Foo</code> does not define <code>__new__()</code> and <code>__init__()</code>, default methods are inherited from <code>Foo</code>’s ancestry. But if <code>Foo</code> does define these methods, they override those from the ancestry, which allows for customized behavior when instantiating <code>Foo</code>.</p>
+<p>In the following, a custom method called <code>new()</code> is defined and assigned as the <code>__new__()</code> method for <code>Foo</code>:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="function"><span class="keyword">def</span> <span class="title">new</span><span class="params">(cls)</span></span><span class="symbol">:</span></span><br><span class="line">...     x = object.__new_<span class="number">_</span>(cls)</span><br><span class="line">...     x.attr = <span class="number">100</span></span><br><span class="line">...     <span class="keyword">return</span> x</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; Foo.__new_<span class="number">_</span> = new</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; f = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; f.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; g = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; g.attr</span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p>This modifies the instantiation behavior of class <code>Foo</code>: each time an instance of <code>Foo</code> is created, by default it is initialized with an attribute called <code>attr</code>, which has a value of <code>100</code>. (Code like this would more usually appear in the <code>__init__()</code> method and not typically in <code>__new__()</code>. This example is contrived for demonstration purposes.)</p>
+<p>Now, as has already been reiterated, classes are objects too. Suppose you wanted to similarly customize instantiation behavior when creating a class like <code>Foo</code>. If you were to follow the pattern above, you’d again define a custom method and assign it as the <code>__new__()</code> method for the class of which <code>Foo</code> is an instance. <code>Foo</code> is an instance of the <code>type</code> metaclass, so the code looks something like this:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># <span class="type">Spoiler</span> alert:  <span class="type">This</span> doesn<span class="symbol">'t</span> work!</span><br><span class="line">&gt;&gt;&gt; <span class="function"><span class="keyword">def</span> <span class="title">new</span></span>(cls):</span><br><span class="line">...     x = <span class="class"><span class="keyword">type</span>.<span class="title">__new__</span>(<span class="params">cls</span>)</span></span><br><span class="line"><span class="class">...     <span class="title">x</span>.<span class="title">attr</span> </span>= <span class="number">100</span></span><br><span class="line">...     <span class="keyword">return</span> x</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; <span class="class"><span class="keyword">type</span>.<span class="title">__new__</span> </span>= <span class="keyword">new</span></span><br><span class="line"><span class="type">Traceback</span> (most recent call last):</span><br><span class="line">  <span class="type">File</span> <span class="string">"&lt;pyshell#77&gt;"</span>, line <span class="number">1</span>, in &lt;module&gt;</span><br><span class="line">    <span class="class"><span class="keyword">type</span>.<span class="title">__new__</span> </span>= <span class="keyword">new</span></span><br><span class="line"><span class="type">TypeError</span>: can<span class="symbol">'t</span> set attributes of built-in/extension <span class="class"><span class="keyword">type</span> '<span class="title">type</span>'</span></span><br></pre></td></tr></table></figure>
+
+<p>Except, as you can see, you can’t reassign the <code>__new__()</code> method of the <code>type</code> metaclass. Python doesn’t allow it.</p>
+<p>This is probably just as well. <code>type</code> is the metaclass from which all new-style classes are derived. You really shouldn’t be mucking around with it anyway. But then what recourse is there, if you want to customize instantiation of a class?</p>
+<p>One possible solution is a custom metaclass. Essentially, instead of mucking around with the <code>type</code> metaclass, you can define your own metaclass, which derives from <code>type</code>, and then you can muck around with that instead.</p>
+<p>The first step is to define a metaclass that derives from <code>type</code>, as follows:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="keyword">class</span> <span class="constructor">Meta(<span class="params">type</span>)</span>:</span><br><span class="line">...     def <span class="constructor">__new__(<span class="params">cls</span>, <span class="params">name</span>, <span class="params">bases</span>, <span class="params">dct</span>)</span>:</span><br><span class="line">...         x = super<span class="literal">()</span>.<span class="constructor">__new__(<span class="params">cls</span>, <span class="params">name</span>, <span class="params">bases</span>, <span class="params">dct</span>)</span></span><br><span class="line">...         x.attr = <span class="number">100</span></span><br><span class="line">...         return x</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>The definition header <code>class Meta(type):</code> specifies that <code>Meta</code> derives from <code>type</code>. Since <code>type</code> is a metaclass, that makes <code>Meta</code> a metaclass as well.</p>
+<p>Note that a custom <code>__new__()</code> method has been defined for <code>Meta</code>. It wasn’t possible to do that to the <code>type</code> metaclass directly. The <code>__new__()</code> method does the following:</p>
+<ul>
+<li>Delegates via <code>super()</code> to the <code>__new__()</code> method of the parent metaclass (<code>type</code>) to actually create a new class</li>
+<li>Assigns the custom attribute <code>attr</code> to the class, with a value of <code>100</code></li>
+<li>Returns the newly created class</li>
+</ul>
+<p>Now the other half of the voodoo: Define a new class <code>Foo</code> and specify that its metaclass is the custom metaclass <code>Meta</code>, rather than the standard metaclass <code>type</code>. This is done using the <code>metaclass</code> keyword in the class definition as follows:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(metaclass=Meta)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Foo.attr</span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Voila!</em> <code>Foo</code> has picked up the <code>attr</code> attribute automatically from the <code>Meta</code> metaclass. Of course, any other classes you define similarly will do likewise:</p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Bar</span><span class="params">(metaclass=Meta)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Qux</span><span class="params">(metaclass=Meta)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Bar.attr, Qux.attr</span><br><span class="line">(<span class="number">100</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+
+<p>In the same way that a class functions as a template for the creation of objects, a metaclass functions as a template for the creation of classes. Metaclasses are sometimes referred to as <a href="https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)" target="_blank" rel="noopener">class factories</a>.</p>
+<p>Compare the following two examples:</p>
+<p><strong>Object Factory:</strong></p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; <span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">...     <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">...         <span class="keyword">self</span>.attr = <span class="number">100</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; x.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; y = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; y.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; z = Foo()</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; z.attr</span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Class Factory:</strong></p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Meta</span><span class="params">(type)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="meta">... </span>        cls, name, bases, dct</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="meta">... </span>    )</span>:</span></span><br><span class="line"><span class="meta">... </span>        cls.attr = <span class="number">100</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">X</span><span class="params">(metaclass=Meta)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Y</span><span class="params">(metaclass=Meta)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Y.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Z</span><span class="params">(metaclass=Meta)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Z.attr</span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Is-This-Really-Necessary"><a href="#Is-This-Really-Necessary" class="headerlink" title="Is This Really Necessary?"></a>Is This Really Necessary?</h2><p>As simple as the above class factory example is, it is the essence of how metaclasses work. They allow customization of class instantiation.</p>
+<p>Still, this is a lot of fuss just to bestow the custom attribute <code>attr</code> on each newly created class. Do you really need a metaclass just for that?</p>
+<p>In Python, there are at least a couple other ways in which effectively the same thing can be accomplished:</p>
+<p><strong>Simple Inheritance:</strong></p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Base</span>:</span></span><br><span class="line"><span class="meta">... </span>    attr = <span class="number">100</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">X</span><span class="params">(Base)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Y</span><span class="params">(Base)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Z</span><span class="params">(Base)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Y.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Z.attr</span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Class Decorator:</strong></p>
+<p>&gt;&gt;&gt;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(cls)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="class"><span class="keyword">class</span> <span class="title">NewClass</span><span class="params">(cls)</span>:</span></span><br><span class="line"><span class="meta">... </span>        attr = <span class="number">100</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> NewClass</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>@decorator</span><br><span class="line"><span class="meta">... </span><span class="class"><span class="keyword">class</span> <span class="title">X</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>@decorator</span><br><span class="line"><span class="meta">... </span><span class="class"><span class="keyword">class</span> <span class="title">Y</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>@decorator</span><br><span class="line"><span class="meta">... </span><span class="class"><span class="keyword">class</span> <span class="title">Z</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>X.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Y.attr</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Z.attr</span><br><span class="line"><span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>As Tim Peters suggests, <strong>metaclasses</strong> can easily veer into the realm of being a “solution in search of a problem.” It isn’t typically necessary to create custom metaclasses. If the problem at hand can be solved in a simpler way, it probably should be. Still, it is beneficial to understand metaclasses so that you understand <a href="https://realpython.com/python3-object-oriented-programming/" target="_blank" rel="noopener">Python classes</a> in general and can recognize when a metaclass really is the appropriate tool to use.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Translation/" rel="tag"># Translation</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/13/leetcode-3/" rel="prev" title="LeetCode - 3 - 无重复最长子串长度">
+      <i class="fa fa-chevron-left"></i> LeetCode - 3 - 无重复最长子串长度
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/15/statistic-wrap-up/" rel="next" title="统计学习方法总结">
+      统计学习方法总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#旧式类-old-style-class-vs-new-style-class-新式类"><span class="nav-number">1.</span> <span class="nav-text">旧式类 old-style class vs new-style class 新式类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旧式类-old-style-class"><span class="nav-number">2.</span> <span class="nav-text">旧式类 old-style class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新式类-new-style-class"><span class="nav-number">3.</span> <span class="nav-text">新式类 new-style class</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型与类"><span class="nav-number"></span> <span class="nav-text">类型与类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态定义类"><span class="nav-number"></span> <span class="nav-text">动态定义类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-1"><span class="nav-number">1.</span> <span class="nav-text">Example 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-2"><span class="nav-number">2.</span> <span class="nav-text">Example 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-3"><span class="nav-number">3.</span> <span class="nav-text">Example 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-4"><span class="nav-number">4.</span> <span class="nav-text">Example 4</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Custom-Metaclasses"><span class="nav-number"></span> <span class="nav-text">Custom Metaclasses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Is-This-Really-Necessary"><span class="nav-number"></span> <span class="nav-text">Is This Really Necessary?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number"></span> <span class="nav-text">Conclusion</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

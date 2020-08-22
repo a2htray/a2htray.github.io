@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="This cheat sheet demonstrates 11 different classical time series forecasting methods; they are:  Autoregression (AR) Moving Average (MA) Autoregressive Moving Average (ARMA) Autoregressive Integrated">
+<meta property="og:type" content="article">
+<meta property="og:title" content="-笔记- 时间序列预测方法">
+<meta property="og:url" content="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="This cheat sheet demonstrates 11 different classical time series forecasting methods; they are:  Autoregression (AR) Moving Average (MA) Autoregressive Moving Average (ARMA) Autoregressive Integrated">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/Minimum-Daily-Temperature-Dataset-Lag-Plot.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526111035.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526111835.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526112318.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526150836.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526145350.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526202533.png">
+<meta property="article:published_time" content="2020-05-26T02:08:17.000Z">
+<meta property="article:modified_time" content="2020-05-28T14:10:25.925Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/Minimum-Daily-Temperature-Dataset-Lag-Plot.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>-笔记- 时间序列预测方法 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          -笔记- 时间序列预测方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-26 10:08:17" itemprop="dateCreated datePublished" datetime="2020-05-26T10:08:17+08:00">2020-05-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-28 22:10:25" itemprop="dateModified" datetime="2020-05-28T22:10:25+08:00">2020-05-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This cheat sheet demonstrates 11 different classical time series forecasting methods; they are:</p>
+<ol>
+<li>Autoregression (AR)</li>
+<li>Moving Average (MA)</li>
+<li>Autoregressive Moving Average (ARMA)</li>
+<li>Autoregressive Integrated Moving Average (ARIMA)</li>
+<li>Seasonal Autoregressive Integrated Moving-Average (SARIMA)</li>
+<li>Seasonal Autoregressive Integrated Moving-Average with Exogenous Regressors (SARIMAX)</li>
+<li>Vector Autoregression (VAR)</li>
+<li>Vector Autoregression Moving-Average (VARMA)</li>
+<li>Vector Autoregression Moving-Average with Exogenous Regressors (VARMAX)</li>
+<li>Simple Exponential Smoothing (SES)</li>
+<li>Holt Winter’s Exponential Smoothing (HWES)</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="AutoRegression"><a href="#AutoRegression" class="headerlink" title="AutoRegression"></a>AutoRegression</h3><p>从而建立前期数据为自变量，后期数据为因变量的模型，达到预测的目的</p>
+<p>Autoregression is a time series model that uses observations from previous time steps as input to a regression equation to predict the value at the next time step.</p>
+<p>This technique can be used on time series where input variables are taken as observations at previous time steps, called lag variables.</p>
+<p>For example, we can predict the value for the next time step (t+1) given the observations at the last two time steps (t-1 and t-2). As a regression model, this would look as follows:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X(t+1) = b0 + b1*X(t-1) + b2*X(t-2)</span><br></pre></td></tr></table></figure>
+
+<p><strong>An autoregression model makes an assumption that the observations at previous time steps are useful to predict the value at the next time step.</strong></p>
+<p>【查看是否存在自相关】There is a quick, visual check that we can do to see if there is <strong>an autocorrelation</strong> in our time series dataset: We can plot the observation at the previous time step (t-1) with the observation at the next time step (t+1) as a scatter plot.</p>
+<p><img src="/2020/05/26/notebook-time-series-forecast-methods/Minimum-Daily-Temperature-Dataset-Lag-Plot.png" alt></p>
+<p><img src="/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526111035.png" alt></p>
+<p><strong>Autocorrelation Plots</strong></p>
+<p>We can plot the correlation coefficient for each lag variable.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.plotting.autocorrelation_plot(data)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526111835.png" alt></p>
+<p>使用 statsmodels 作相关系数图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> statsmodels.graphics.tsaplots <span class="keyword">import</span> plot_acf</span><br><span class="line">plot_acf(data, lags=<span class="number">44</span>) <span class="comment"># 44：最大的延时数</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526112318.png" alt></p>
+<h4 id="AR-示例"><a href="#AR-示例" class="headerlink" title="AR 示例"></a>AR 示例</h4><p>超参只有一个 <code>lags</code>，即系数的个数（不包截距）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> statsmodels.tsa.ar_model <span class="keyword">import</span> AutoReg</span><br><span class="line"><span class="keyword">from</span> statsmodels.graphics.tsaplots <span class="keyword">import</span> plot_acf</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">'../daily-min-temperatures.csv'</span>, index_col=<span class="number">0</span>, parse_dates=<span class="literal">True</span>, squeeze=<span class="literal">True</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Date</span><br><span class="line">1981-01-01    20.7</span><br><span class="line">1981-01-02    17.9</span><br><span class="line">1981-01-03    18.8</span><br><span class="line">1981-01-04    14.6</span><br><span class="line">1981-01-05    15.8</span><br><span class="line">Name: Temp, dtype: float64</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = data.values</span><br><span class="line">X</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array([20.7, 17.9, 18.8, ..., 13.5, 15.7, 13. ])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取最后 7 个样本作为测试集</span></span><br><span class="line">train, test = X[<span class="number">0</span>:len(X)<span class="number">-7</span>], X[len(X)<span class="number">-7</span>:]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 作图：训练集中关于 lags 的相关系数图</span></span><br><span class="line">plot_acf(train, lags=<span class="number">10</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526150836.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 训练</span></span><br><span class="line"><span class="comment"># lags=29 表示使用前 29 个值预测下一个样本的值</span></span><br><span class="line">model = AutoReg(train, lags=<span class="number">29</span>)</span><br><span class="line">model_fit = model.fit()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输出系数</span></span><br><span class="line"><span class="comment"># 因为指定 lags 为 29</span></span><br><span class="line"><span class="comment"># 根据 AutoRegression 定义，可得到 30 个系数</span></span><br><span class="line">params = model_fit.params</span><br><span class="line">print(len(params), params)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">30 [ 0.5597728   0.58866203 -0.09081226  0.04816399  0.03999111  0.03936764</span><br><span class="line">  0.02594672  0.04467485  0.01314313  0.03714477 -0.00064057  0.00493921</span><br><span class="line">  0.01802399  0.02696084  0.00062344  0.02445702  0.00735302  0.00992487</span><br><span class="line">  0.03438475 -0.00909555  0.02416519  0.01856562  0.01229534 -0.01851848</span><br><span class="line"> -0.00171714  0.01671254  0.019966    0.00963099  0.00636304 -0.0015663 ]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测后 7 个值</span></span><br><span class="line">predict = model_fit.predict(start=len(X)<span class="number">-7</span>, end=len(X)<span class="number">-1</span>)</span><br><span class="line">predict</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([11.87216021, 13.05570396, 13.53180951, 13.24259049, 13.09156377,</span><br><span class="line">       13.14608181, 13.17649241])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 真实值与预测值</span></span><br><span class="line"><span class="keyword">for</span> t, p <span class="keyword">in</span> zip(test, predict):</span><br><span class="line">    print(<span class="string">'truth: &#123;truth&#125;, prediction: &#123;prediction&#125;'</span>.format(truth=t, prediction=p))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">truth: 12.9, prediction: 11.872160209672339</span><br><span class="line">truth: 14.6, prediction: 13.055703960083862</span><br><span class="line">truth: 14.0, prediction: 13.531809505246487</span><br><span class="line">truth: 13.6, prediction: 13.242590491060591</span><br><span class="line">truth: 13.5, prediction: 13.091563770347403</span><br><span class="line">truth: 15.7, prediction: 13.146081811767841</span><br><span class="line">truth: 13.0, prediction: 13.176492408631857</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 作折线图</span></span><br><span class="line">plt.plot(np.linspace(len(X)<span class="number">-7</span>, len(X)<span class="number">-1</span>, <span class="number">7</span>), test, c=<span class="string">'r'</span>, label=<span class="string">'truth'</span>)</span><br><span class="line">plt.plot(np.linspace(len(X)<span class="number">-7</span>, len(X)<span class="number">-1</span>, <span class="number">7</span>), predict, c=<span class="string">'b'</span>, label=<span class="string">'prediction'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526145350.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输出均方差</span></span><br><span class="line">mean_squared_error(test, predict)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.5012452323028362</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输出标准差</span></span><br><span class="line">sqrt(mean_squared_error(test, predict))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.2252531298890186</span><br></pre></td></tr></table></figure>
+
+<p>The statsmodels API does not make it easy to update the model as new observations become available.</p>
+<p>【对于持续输出的样本救命，通过保存已求得的系数以达到预测的目的，手动计算预测值】One way would be to re-train the AutoReg model each day as new observations become available, and that may be a valid approach, if not computationally expensive.</p>
+<p>An alternative would be to use the learned coefficients and manually make predictions. This requires that the history of 29 prior observations be kept and that the coefficients be retrieved from the model and used in the regression equation to come up with new forecasts.</p>
+<h3 id="Moving-Average-MA"><a href="#Moving-Average-MA" class="headerlink" title="Moving Average (MA)"></a>Moving Average (MA)</h3><p>The moving average (MA) method models the next step in the sequence as a linear function of the residual errors from a mean(平均的) process at prior time steps.</p>
+<p>The method is suitable for univariate time series without trend and seasonal components.</p>
+<p>【该方法适用于没有趋势和季节成分的单变量时间序列。】</p>
+<p>We can use the ARMA class to create an MA model and setting a zeroth-order AR model. We must specify the order of the MA model in the order argument.</p>
+<p><strong>移动平均（Moving Average，MA）</strong>，又称移动平均线，简称均线。作为技术分析中一种分析时间序列的常用工具，常被应用于股票价格序列。移动平均可过滤高频噪声，反映出中长期低频趋势。对原序列有修匀或平滑的作用。移动平均法是一种简单平滑预测技术，它的基本思想是：根据时间序列资料、逐项推移，依次计算包含一定项数的序时平均值，以反映长期趋势的方法。【可作为趋势线】</p>
+<p><strong>简单移动平均（Simple Moving Average, SMA）</strong>就是对时间序列直接求<strong>等权重均值</strong>，因此使用简单。但其最令人诟病的就是它的<strong>滞后性</strong>。<strong>事实上，任何移动平均算法都会呈现一定的滞后性。它以滞后性的代价换来了平滑性，移动平均必须在平滑性和滞后性之间取舍。</strong></p>
+<p><strong>移动平均的本质是一种低通滤波。它的目的是过滤掉时间序列中的高频扰动，保留有用的低频趋势。</strong></p>
+<p><strong>没有未来数据便是滞后的根本原因。</strong></p>
+<p><img src="/2020/05/26/notebook-time-series-forecast-methods/TIM%E6%88%AA%E5%9B%BE20200526202533.png" alt></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://machinelearningmastery.com/time-series-forecasting-methods-in-python-cheat-sheet/" target="_blank" rel="noopener">11 Classical Time Series Forecasting Methods in Python (Cheat Sheet)</a></li>
+<li><a href="https://machinelearningmastery.com/autoregression-models-time-series-forecasting-python/" target="_blank" rel="noopener">Autoregression Models for Time Series Forecasting With Python</a></li>
+<li><a href="https://blog.csdn.net/FrankieHello/article/details/85938381" target="_blank" rel="noopener">移动平均（Moving Average）</a></li>
+<li><a href="[https://baike.baidu.com/item/%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E6%B3%95/10785547?fr=aladdin](https://baike.baidu.com/item/移动平均法/10785547?fr=aladdin)">移动平均法</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/22/ubuntu-install-ssh/" rel="prev" title="Ubuntu 18.04 ssh 的使用">
+      <i class="fa fa-chevron-left"></i> Ubuntu 18.04 ssh 的使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/26/time-series-forecast-auto-regression/" rel="next" title="时间序列预测 自回归模型 Auto Regression Model">
+      时间序列预测 自回归模型 Auto Regression Model <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoRegression"><span class="nav-number">1.</span> <span class="nav-text">AutoRegression</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AR-示例"><span class="nav-number">1.1.</span> <span class="nav-text">AR 示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Moving-Average-MA"><span class="nav-number">2.</span> <span class="nav-text">Moving Average (MA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

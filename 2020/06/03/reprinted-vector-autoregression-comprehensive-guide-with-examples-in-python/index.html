@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="最近在学习时间序列预测，翻译一篇关于多变量时间预测 VAR 模型的文章。 原文章地址 Vector Autoregression (VAR) – Comprehensive Guide with Examples in Python  向量自回归模型 （VAR）作为一个预测模型，可以用应用于存在两个或多个时间序列的预测场景。也就是说，多个时间序列存在双向的关系，相互影响，相互作用。在本文中，我们将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="-转载 翻译- VAR 模型">
+<meta property="og:url" content="http://yoursite.com/2020/06/03/reprinted-vector-autoregression-comprehensive-guide-with-examples-in-python/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="最近在学习时间序列预测，翻译一篇关于多变量时间预测 VAR 模型的文章。 原文章地址 Vector Autoregression (VAR) – Comprehensive Guide with Examples in Python  向量自回归模型 （VAR）作为一个预测模型，可以用应用于存在两个或多个时间序列的预测场景。也就是说，多个时间序列存在双向的关系，相互影响，相互作用。在本文中，我们将">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/06/03/reprinted-vector-autoregression-comprehensive-guide-with-examples-in-python/TIM%E6%88%AA%E5%9B%BE20200603152030.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/03/reprinted-vector-autoregression-comprehensive-guide-with-examples-in-python/TIM%E6%88%AA%E5%9B%BE20200603153518.png">
+<meta property="article:published_time" content="2020-06-03T02:34:43.000Z">
+<meta property="article:modified_time" content="2020-06-03T08:00:26.826Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Time Series">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/06/03/reprinted-vector-autoregression-comprehensive-guide-with-examples-in-python/TIM%E6%88%AA%E5%9B%BE20200603152030.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/03/reprinted-vector-autoregression-comprehensive-guide-with-examples-in-python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>-转载 翻译- VAR 模型 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/reprinted-vector-autoregression-comprehensive-guide-with-examples-in-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          -转载 翻译- VAR 模型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-03 10:34:43 / Modified: 16:00:26" itemprop="dateCreated datePublished" datetime="2020-06-03T10:34:43+08:00">2020-06-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近在学习<code>时间序列预测</code>，翻译一篇关于多变量时间预测 VAR 模型的文章。</p>
+<p>原文章地址 <a href="https://www.machinelearningplus.com/time-series/vector-autoregression-examples-python/" target="_blank" rel="noopener">Vector Autoregression (VAR) – Comprehensive Guide with Examples in Python</a></p>
+<blockquote>
+<p>向量自回归模型 （VAR）作为一个预测模型，可以用应用于存在两个或多个时间序列的预测场景。也就是说，多个时间序列存在双向的关系，相互影响，相互作用。在本文中，我们将学习到隐藏在模型中概念、原理，并掌握使用 <code>statsmodels</code>  中的 VAR 模型去训练和预测。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ol>
+<li><a href="#1-介绍">介绍</a></li>
+<li><a href="#2-模型公式">模型公式</a></li>
+<li><a href="#3-构建模型">构建模型</a></li>
+<li><a href="#4-数据导入">数据导入</a></li>
+<li><a href="#5-图形化序列">图形化序列</a></li>
+<li><a href="#6-格兰杰因果关系检验">格兰杰因果关系检验</a></li>
+<li><a href="#7-协整检验">协整检验</a></li>
+<li><a href="#8-拆分数据集">拆分数据集</a></li>
+<li><a href="#9-序列平稳化">序列平稳化</a></li>
+<li><a href="#10-阶数p的选择">阶数p的选择</a></li>
+<li><a href="#11-训练模型">训练模型</a></li>
+<li><a href="#12-残差相关性">残差相关性</a></li>
+<li><a href="#13-模型预测">模型预测</a></li>
+</ol>
+<h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h3><p>首先，什么是 VAR以及什么时候使用 VAR？</p>
+<p>VAR 是一种多变量的预测模型，适用于多条时间序列数据相互影响的场景。</p>
+<p>这意味着，使用 VAR 需要满足以下两点：</p>
+<ol>
+<li>至少需要两条时间序列数据</li>
+<li>序列间存在相互影响的关系</li>
+</ol>
+<p>那为什么又被称为 “自回归” 呢？</p>
+<p>之所以称为自回归模型，因为要对过去每一条时间序列进行建模，这也就是说预测的因素只是序列的滞后时间。</p>
+<blockquote>
+<p>each variable (Time Series) is modeled as a function of the past values, that is the predictors are nothing but the lags (time delayed value) of the series.</p>
+</blockquote>
+<p>VAR 与其它自回归模型，如 AR、ARMA、ARIMA ，有什么的不同？最主要的不同是其它自回归模型都是单向的，而 VAR 是双向的，序列间存在相互影响。(ps：如何理解模型的单向和双向？)</p>
+<p>在下一个小节，我们将更详尽地进行说明。</p>
+<p>在本文中，你将对 VAR 有一个清晰的理解：</p>
+<ol>
+<li>VAR 的数学公式</li>
+<li>使用格兰杰因果关系验证序列间的双向关系</li>
+<li>使用 Python 构建 VAR 模型</li>
+<li>确定 VAR 的阶数</li>
+<li>结果说明</li>
+<li>如何去序列数据作出预测</li>
+</ol>
+<h3 id="2-模型公式"><a href="#2-模型公式" class="headerlink" title="2. 模型公式"></a>2. 模型公式</h3><p>你应该还记得 AR 模型，使用时间序列数据建模成一个包括滞后时间的线性结合，并会序列的过去值去预测未来的值。</p>
+<p>一个 p 阶的 AR 模型的公式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y_t = a + b1 * Y_(t-1) + b2 * Y_(t-2) + ... + bp * Y_(t-p) + e_t</span><br></pre></td></tr></table></figure>
+
+<p>其中 a 是常量，表示截距，b1、b2 到 bp 是 p 阶 AR 模型的各项系数。</p>
+<p>阶数 p 表示，预测模型公式使用前 p 天的数据进行表示，e 是白噪声。</p>
+<p>那 VAR 模型的数学公式又如何？</p>
+<p>在 VAR 模型中，每一条时间序列数据都会建模成基于过去值的线性结合。由于包含多条相互影响的时间序列，所以每一个变量对应的公式要构建一个方程组。</p>
+<p>如果你有 5 条时间序列数据，就需要构造一个包含 5 个方程的方程组。</p>
+<p>那应该如何正确地构造方程？</p>
+<p>假设你有两个时间序列变量 Y1 和 Y2，你需要同时预测出这两个变量的值。</p>
+<p>为了预测 t 时刻的 Y1，VAR 会同时使用到 Y1 和 Y2 的过去值。同样的，为了预测 Y2，VAR 也会使用到 Y1 和 Y2 的过去值。</p>
+<p>比如，包含两条时间序列的 VAR 模型（滞后为 2）的方程如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Y_(1,t) = a + b11,1 * Y_(1,t-1) + b12,2 * Y_(2,t-2) + e_(1,t)</span><br><span class="line">Y_(2,t) = a + b21,1 * Y_(2,t-1) + b22,2 * Y_(2,t-2) + e_(2,t)</span><br></pre></td></tr></table></figure>
+
+<p>其中，Y_(1,t-1) 和 Y_(2,t-1) 分别是序列 Y1 和 Y2 滞后一天的值。</p>
+<p>因为 Y （Y1,Y2）相互关联，称为内生变量，而不是作为一个外生的预测值。</p>
+<h3 id="3-构建模型"><a href="#3-构建模型" class="headerlink" title="3. 构建模型"></a>3. 构建模型</h3><p>构建 VAR 模型的步骤如下：</p>
+<ol>
+<li>分析时间序列的特点</li>
+<li>测试序列间的因果关系</li>
+<li>平稳性测试</li>
+<li>序列平稳化</li>
+<li>选择合适的阶数 p</li>
+<li>准备训练与测试数据</li>
+<li>逆向转换</li>
+<li>模型验证</li>
+<li>预测</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="comment"># Import Statsmodels</span></span><br><span class="line"><span class="keyword">from</span> statsmodels.tsa.api <span class="keyword">import</span> VAR</span><br><span class="line"><span class="keyword">from</span> statsmodels.tsa.stattools <span class="keyword">import</span> adfuller</span><br><span class="line"><span class="keyword">from</span> statsmodels.tools.eval_measures <span class="keyword">import</span> rmse, aic</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-数据导入"><a href="#4-数据导入" class="headerlink" title="4. 数据导入"></a>4. 数据导入</h3><p>使用的数据出自 Yash P Mehra 1994 年的文章 “Wage Growth and the Inflation Process: An Empirical Approach” 。</p>
+<p>数据集包括下面 8 个按季的时间序列：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. rgnp  : Real GNP.</span><br><span class="line">2. pgnp  : Potential real GNP.</span><br><span class="line">3. ulc   : Unit labor cost.</span><br><span class="line">4. gdfco : Fixed weight deflator <span class="keyword">for</span> personal consumption expenditure excluding food and energy.</span><br><span class="line">5. gdf   : Fixed weight GNP deflator.</span><br><span class="line">6. gdfim : Fixed weight import deflator.</span><br><span class="line">7. gdfcf : Fixed weight deflator <span class="keyword">for</span> food <span class="keyword">in</span> personal consumption expenditure.</span><br><span class="line">8. gdfce : Fixed weight deflator <span class="keyword">for</span> energy <span class="keyword">in</span> personal consumption expenditure.</span><br></pre></td></tr></table></figure>
+
+<p>下面我们导入数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">filepath = <span class="string">'https://raw.githubusercontent.com/selva86/datasets/master/Raotbl6.csv'</span></span><br><span class="line">df = pd.read_csv(filepath, parse_dates=[<span class="string">'date'</span>], index_col=<span class="string">'date'</span>)</span><br><span class="line">print(df.shape)  <span class="comment"># (123, 8)</span></span><br><span class="line">df.tail()</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-图形化序列"><a href="#5-图形化序列" class="headerlink" title="5. 图形化序列"></a>5. 图形化序列</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Plot</span></span><br><span class="line">fig, axes = plt.subplots(nrows=4, ncols=2, dpi=120, figsize=(10,6))</span><br><span class="line"><span class="keyword">for</span> i, ax <span class="keyword">in</span> enumerate(axes.flatten()):</span><br><span class="line">    data = df[df.columns[i]]</span><br><span class="line">    ax.plot(data, color=<span class="string">'red'</span>, linewidth=1)</span><br><span class="line">    <span class="comment"># Decorations</span></span><br><span class="line">    ax.set_title(df.columns[i])</span><br><span class="line">    ax.xaxis.set_ticks_position(<span class="string">'none'</span>)</span><br><span class="line">    ax.yaxis.set_ticks_position(<span class="string">'none'</span>)</span><br><span class="line">    ax.spines[<span class="string">"top"</span>].set_alpha(0)</span><br><span class="line">    ax.tick_params(labelsize=6)</span><br><span class="line"></span><br><span class="line">plt.tight_layout();</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/03/reprinted-vector-autoregression-comprehensive-guide-with-examples-in-python/TIM%E6%88%AA%E5%9B%BE20200603152030.png" alt></p>
+<p>除了 gdfce 和 gdfim 在 1980 后出现了不同趋势，每一条时间序列的趋势大抵相同。</p>
+<p>好了，下面我们需要使用<strong>格兰杰因果关系检验</strong>和<strong>协整检验</strong>进行序列间的因果关系的验证。</p>
+<h3 id="6-格兰杰因果关系检验"><a href="#6-格兰杰因果关系检验" class="headerlink" title="6. 格兰杰因果关系检验"></a>6. 格兰杰因果关系检验</h3><p>在 VAR 中，序列间存在着相互影响的关系，也就是说你可以利用这些序列过去值去预测序列未来值。</p>
+<p>序列间的关系可以使用格兰杰因果关系检验进行验证。</p>
+<p>那格兰杰因果关系检验的结果又能说明什么问题？</p>
+<p>格兰杰因果关系检验了回归方程中过去值的系数为零的原假设。</p>
+<p>通俗地说，就是时间序列 X 并不会影响时间序列 Y 。所以如果计算面得的 pvalue 小于显著性水平  0.05，你应该拒绝原假设。</p>
+<p>下面是针对数据集格兰杰因果关系检验的实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> statsmodels.tsa.stattools <span class="keyword">import</span> grangercausalitytests</span><br><span class="line">maxlag=<span class="number">12</span></span><br><span class="line">test = <span class="string">'ssr_chi2test'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">grangers_causation_matrix</span><span class="params">(data, variables, test=<span class="string">'ssr_chi2test'</span>, verbose=False)</span>:</span>    </span><br><span class="line">    <span class="string">"""Check Granger Causality of all possible combinations of the Time series.</span></span><br><span class="line"><span class="string">    The rows are the response variable, columns are predictors. The values in the table </span></span><br><span class="line"><span class="string">    are the P-Values. P-Values lesser than the significance level (0.05), implies </span></span><br><span class="line"><span class="string">    the Null Hypothesis that the coefficients of the corresponding past values is </span></span><br><span class="line"><span class="string">    zero, that is, the X does not cause Y can be rejected.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    data      : pandas dataframe containing the time series variables</span></span><br><span class="line"><span class="string">    variables : list containing names of the time series variables.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    df = pd.DataFrame(np.zeros((len(variables), len(variables))), columns=variables, index=variables)</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> df.columns:</span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> df.index:</span><br><span class="line">            test_result = grangercausalitytests(data[[r, c]], maxlag=maxlag, verbose=<span class="literal">False</span>)</span><br><span class="line">            p_values = [round(test_result[i+<span class="number">1</span>][<span class="number">0</span>][test][<span class="number">1</span>],<span class="number">4</span>) <span class="keyword">for</span> i <span class="keyword">in</span> range(maxlag)]</span><br><span class="line">            <span class="keyword">if</span> verbose: print(<span class="string">f'Y = <span class="subst">&#123;r&#125;</span>, X = <span class="subst">&#123;c&#125;</span>, P Values = <span class="subst">&#123;p_values&#125;</span>'</span>)</span><br><span class="line">            min_p_value = np.min(p_values)</span><br><span class="line">            df.loc[r, c] = min_p_value</span><br><span class="line">    df.columns = [var + <span class="string">'_x'</span> <span class="keyword">for</span> var <span class="keyword">in</span> variables]</span><br><span class="line">    df.index = [var + <span class="string">'_y'</span> <span class="keyword">for</span> var <span class="keyword">in</span> variables]</span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line">grangers_causation_matrix(df, variables = df.columns)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/03/reprinted-vector-autoregression-comprehensive-guide-with-examples-in-python/TIM%E6%88%AA%E5%9B%BE20200603153518.png" alt></p>
+<p>如何解读上面的结果？</p>
+<p>看到第 1 行第 2 列的 0.0003，表示 pgnp_x 影响 rgnp_y 的 pvalue 值。因此，第 2 行第 1 列的 0.000 表示 rgnp_y 影响 pgnp_x 的 pvalue 值。</p>
+<p>那如何解释 pvalue ？</p>
+<p>如果一个 pvalue 值小于显著性水平 0.05，那某行 X 影响着对应列 Y。</p>
+<p>第 1 行第 2 列 0.0003 小于 0.05，所以我们拒绝原假设，接受 pgnp_x 影响着 rgnp_y。</p>
+<p>再看上表中的 pvalue，可以清楚地看到，所有的变量间都存在着相互影响。</p>
+<p>这就需要对所有的这些序列构建模型并做预测。</p>
+<h3 id="7-协整检验"><a href="#7-协整检验" class="headerlink" title="7. 协整检验"></a>7. 协整检验</h3><p>协整检验可以直观给出序列间的统计信息。但是协整检验又是什么呢？</p>
+<p>为了理解协整检验，首先，我们需要了解差分阶数 d。</p>
+<p>差分阶数 d 表示使序列平稳的最小差分次数。</p>
+<p>当你有两条或多条序列进，每条序列包含一个差分阶数 d，计算每个差分阶数就是协整检验。</p>
+<p>TODO</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Time-Series/" rel="tag"># Time Series</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/02/golang-web-app-deployment-ubuntu/" rel="prev" title="Golang Web 应用部署 Ubuntu 18.04">
+      <i class="fa fa-chevron-left"></i> Golang Web 应用部署 Ubuntu 18.04
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/09/windows-kill-process-by-port/" rel="next" title="Windows 下结束占用特定端口的进程">
+      Windows 下结束占用特定端口的进程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-介绍"><span class="nav-number">2.</span> <span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-模型公式"><span class="nav-number">3.</span> <span class="nav-text">2. 模型公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-构建模型"><span class="nav-number">4.</span> <span class="nav-text">3. 构建模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-数据导入"><span class="nav-number">5.</span> <span class="nav-text">4. 数据导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-图形化序列"><span class="nav-number">6.</span> <span class="nav-text">5. 图形化序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-格兰杰因果关系检验"><span class="nav-number">7.</span> <span class="nav-text">6. 格兰杰因果关系检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-协整检验"><span class="nav-number">8.</span> <span class="nav-text">7. 协整检验</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

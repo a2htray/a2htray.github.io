@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="原文地址 Golang — Understanding channel, buffer, blocking, deadlock and happy groutines">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang -翻译- 理解 channel buffer block deadlock">
+<meta property="og:url" content="http://yoursite.com/2020/08/18/golang-understand-channel-goroutine-block-deadlock/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="原文地址 Golang — Understanding channel, buffer, blocking, deadlock and happy groutines">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-17T17:31:08.000Z">
+<meta property="article:modified_time" content="2020-08-17T18:03:36.105Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Translation">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/08/18/golang-understand-channel-goroutine-block-deadlock/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Golang -翻译- 理解 channel buffer block deadlock | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/18/golang-understand-channel-goroutine-block-deadlock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Golang -翻译- 理解 channel buffer block deadlock
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-18 01:31:08 / Modified: 02:03:36" itemprop="dateCreated datePublished" datetime="2020-08-18T01:31:08+08:00">2020-08-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>原文地址 <a href="https://gist.github.com/YumaInaura/8d52e73dac7dc361745bf568c3c4ba37" target="_blank" rel="noopener">Golang — Understanding channel, buffer, blocking, deadlock and happy groutines</a></p>
+<a id="more"></a>
+
+<p>I was so confused to understand behaviior of Golang channels, buffer, blocking, deadlocking and groutines.</p>
+<p>过去，我对 channel、buffer、blocking、deadlocking 和 goroutine 的执行过程感到很困惑。</p>
+<p>所以我阅读了官方的示例：</p>
+<ul>
+<li><a href="https://gobyexample.com/channels" target="_blank" rel="noopener">Go by Example: Channels</a></li>
+<li><a href="https://gobyexample.com/channel-buffering" target="_blank" rel="noopener">Go by Example: Channel Buffering</a></li>
+</ul>
+<p>但我依然遇到以下一些问题：</p>
+<ol>
+<li>首先，什么是 channel</li>
+<li>带缓冲的 channel 如何工作</li>
+<li>什么是 channel 的死锁</li>
+<li>为什么主进程要使用带缓冲的 channel</li>
+<li>协程中没有带缓冲的 channel，但它不会死锁</li>
+</ol>
+<p>我将尝试对这些知识点建立关联。</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>如果你发现文章中有错误，请评论指正。</p>
+<h3 id="什么-channel"><a href="#什么-channel" class="headerlink" title="什么 channel"></a>什么 channel</h3><p>Golang 中的 channel 是程序中各协程进行相互通信的管道。通过 channel，协程间可收发消息。</p>
+<p>在这篇文章中，仅以数值作为消息。</p>
+<p>我是说，channel 更像一个通信的仓库，管道或者桥梁。</p>
+<h3 id="理解协程"><a href="#理解协程" class="headerlink" title="理解协程"></a>理解协程</h3><p>在理解 channel 前，要先理解协程。</p>
+<p>主函数可以创建多个协程，其中主函数也作为一个协程。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"runtime"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// Goroutine num includes main processing</span></span><br><span class="line">    fmt.Println(runtime.NumGoroutine()) <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Spawn two goroutines</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;&#125;()</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;&#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Total three goroutines run</span></span><br><span class="line">    fmt.Println(runtime.NumGoroutine()) <span class="comment">// 3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我知道，channel 并不会理会各协程间的区别，不管是主协程，亦或是创建出的协程，channel 对它们一视同仁。</p>
+<h3 id="收发消息"><a href="#收发消息" class="headerlink" title="收发消息"></a>收发消息</h3><p>一个协程可以发送消息给一个 channel，同时其它协程可以从 channel 中收到消息，协程间的通信就此建立，就好像一个协程马上给另一个协程发送了消息。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    messages := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Send message</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; messages &lt;- <span class="string">"Hello"</span> &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Receive message</span></span><br><span class="line">    fmt.Println(&lt;-messages) <span class="comment">// Hello</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="阻塞-blocking"><a href="#阻塞-blocking" class="headerlink" title="阻塞 blocking"></a>阻塞 blocking</h3><p>当一个协程尝试从一个 channel 中接收消息，但该 channel 是空的，同时其它协程正在运行，就会发生阻塞。</p>
+<p>在这种情况下，收消息的行为被阻塞了，则该协程会一直等 channel 中有值。而此时其它协程正在运行，且有可能向 channel 中发送消息。</p>
+<h4 id="示例：延迟发送"><a href="#示例：延迟发送" class="headerlink" title="示例：延迟发送"></a>示例：延迟发送</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"time"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    messages := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// In spawned goroutine</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Send message to channel</span></span><br><span class="line">    <span class="comment">// But before do it sleep for a while</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(<span class="number">1000</span> * time.Millisecond)</span><br><span class="line">        messages &lt;- <span class="string">"Hello"</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// In main goroutine</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Receive message from channel</span></span><br><span class="line">    <span class="comment">// Message appears after spawned goroutine awaked from sleeping</span></span><br><span class="line">    <span class="comment">// Channel is empty until other goroutine send message</span></span><br><span class="line">    <span class="comment">// So this receiving will be blocked for a while</span></span><br><span class="line">    fmt.Println(&lt;-messages) <span class="comment">// Hello</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="示例：延迟接收"><a href="#示例：延迟接收" class="headerlink" title="示例：延迟接收"></a>示例：延迟接收</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"time"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    messages := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Receiver</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Receiver : I am waiting for your message."</span>)</span><br><span class="line">        msg := &lt;-messages</span><br><span class="line">        fmt.Println(<span class="string">"Receiver : I got a mail."</span>)</span><br><span class="line">        fmt.Println(msg)</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Sender</span></span><br><span class="line">    time.Sleep(<span class="number">2000</span> * time.Millisecond)</span><br><span class="line">    messages &lt;- <span class="string">"Message : Do you like go langage?"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Wait spawned goroutine process</span></span><br><span class="line">    time.Sleep(<span class="number">1000</span> * time.Millisecond)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="死锁-deadlock"><a href="#死锁-deadlock" class="headerlink" title="死锁 deadlock"></a>死锁 deadlock</h3><p>什么时候会发生死锁？</p>
+<p>当有多个协程都在等待对方处理完，但没有一个协程能完成处理，则发生死锁。</p>
+<p>比如：当一个协程尝试从 channel 中接收消息，但 channel 是空的，且其它协程并没有在运行。</p>
+<p>在这种情况下，负责接收的协程将不会收到消息，所以选择放弃接收则发生死锁。</p>
+<h4 id="示例：没有发送者"><a href="#示例：没有发送者" class="headerlink" title="示例：没有发送者"></a>示例：没有发送者</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    messages := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Do nothing spawned goroutine</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;&#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// A groutine ( main groutine ) trying to send message to channel</span></span><br><span class="line">    <span class="comment">// But no other groutine runnning</span></span><br><span class="line">    <span class="comment">// And channel has no buffers</span></span><br><span class="line">    <span class="comment">// So it raises deadlock error</span></span><br><span class="line">    messages &lt;- <span class="string">"I wanna tell you."</span> <span class="comment">// fatal error: all goroutines are asleep - deadlock!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="示例：没有接收者"><a href="#示例：没有接收者" class="headerlink" title="示例：没有接收者"></a>示例：没有接收者</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    messages := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Do nothing spawned goroutine</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;&#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// A groutine ( main groutine ) trying to receive message from channel</span></span><br><span class="line">    <span class="comment">// But channel has no messages, it is empty.</span></span><br><span class="line">    <span class="comment">// And no other groutine running. ( means no "Sender" exists )</span></span><br><span class="line">    <span class="comment">// So channel will be deadlocking</span></span><br><span class="line">    &lt;-messages <span class="comment">// fatal error: all goroutines are asleep - deadlock!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="示例：没能完成处理"><a href="#示例：没能完成处理" class="headerlink" title="示例：没能完成处理"></a>示例：没能完成处理</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 两个协程运行中，但发生死锁</span></span><br><span class="line"><span class="comment">// Output example</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Try to receive message</span></span><br><span class="line"><span class="comment">// Try to receive message</span></span><br><span class="line"><span class="comment">// fatal error: all goroutines are asleep - deadlock!</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    messages := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Try to receive message"</span>) <span class="comment">// Printing</span></span><br><span class="line">        &lt;-messages                            <span class="comment">// Blocking</span></span><br><span class="line">        fmt.Println(<span class="string">"Receive message"</span>)        <span class="comment">// Never reached</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">"Try to receive message"</span>) <span class="comment">// Printing</span></span><br><span class="line">    &lt;-messages                            <span class="comment">// Blocking</span></span><br><span class="line">    fmt.Println(<span class="string">"Receive message"</span>)        <span class="comment">// Never reached</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><p><strong>为什么在创建生成的协程中不会发生死锁？</strong></p>
+<p>I think that reason is ….</p>
+<p>Because “main goroutine” always running. So until main groutine finishes, it means, one or more groutine running anytime.</p>
+<p>When main groutine finishes, it is end of process, means end of all groutines. So even if spawned groutine meets blocking, does not meet deadlock error.</p>
+<p>我想原因是：主程序总是在运行的，所以当主程序结束时，不会有其它协程正在运行。当生成的协程发生了阻塞，也不会遇到死锁的问题。（<strong>ps：这里其实是存疑的</strong>）</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Translation/" rel="tag"># Translation</a>
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/17/frontend-how-to-create-a-dragable-page/" rel="prev" title="Frontend -可拖拽元素- 如何创建可拖拽页面">
+      <i class="fa fa-chevron-left"></i> Frontend -可拖拽元素- 如何创建可拖拽页面
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/18/golang-offical-blog-reflect/" rel="next" title="Golang -官方文档阅读- Reflection 笔记">
+      Golang -官方文档阅读- Reflection 笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明"><span class="nav-number">1.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么-channel"><span class="nav-number">2.</span> <span class="nav-text">什么 channel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解协程"><span class="nav-number">3.</span> <span class="nav-text">理解协程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#收发消息"><span class="nav-number">4.</span> <span class="nav-text">收发消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞-blocking"><span class="nav-number">5.</span> <span class="nav-text">阻塞 blocking</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例：延迟发送"><span class="nav-number">5.1.</span> <span class="nav-text">示例：延迟发送</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例：延迟接收"><span class="nav-number">5.2.</span> <span class="nav-text">示例：延迟接收</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁-deadlock"><span class="nav-number">6.</span> <span class="nav-text">死锁 deadlock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#示例：没有发送者"><span class="nav-number">6.1.</span> <span class="nav-text">示例：没有发送者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例：没有接收者"><span class="nav-number">6.2.</span> <span class="nav-text">示例：没有接收者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例：没能完成处理"><span class="nav-number">6.3.</span> <span class="nav-text">示例：没能完成处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他问题"><span class="nav-number">7.</span> <span class="nav-text">其他问题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
