@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Sass (Syntactically Awesome StyleSheets) 工作中有需要用到 Sass，前端代码不好写，能写但写得不好，希望能模块化编写样式，所以需要了解一些 CSS 预处理器相关的知识。 做点储备。也许以后还会学点其他预处理器语法，但希望用不到，用好一个，到哪都任意跑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sass 学习">
+<meta property="og:url" content="http://yoursite.com/2019/04/23/frontend-sass-learn-in-15-minutes/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="Sass (Syntactically Awesome StyleSheets) 工作中有需要用到 Sass，前端代码不好写，能写但写得不好，希望能模块化编写样式，所以需要了解一些 CSS 预处理器相关的知识。 做点储备。也许以后还会学点其他预处理器语法，但希望用不到，用好一个，到哪都任意跑。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-04-23T02:57:46.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:25:49.534Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Frontend">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/04/23/frontend-sass-learn-in-15-minutes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Sass 学习 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/frontend-sass-learn-in-15-minutes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Sass 学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-23 10:57:46" itemprop="dateCreated datePublished" datetime="2019-04-23T10:57:46+08:00">2019-04-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:25:49" itemprop="dateModified" datetime="2020-08-23T22:25:49+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Sass (Syntactically Awesome StyleSheets)</p>
+<p>工作中有需要用到 Sass，前端代码不好写，能写但写得不好，希望能模块化编写样式，所以需要了解一些 CSS 预处理器相关的知识。</p>
+<p>做点储备。也许以后还会学点其他预处理器语法，但希望用不到，用好一个，到哪都任意跑。</p>
+<a id="more"></a>
+
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用 <code>npm</code>，全局安装即可，使用淘宝的源，安装速度有提升</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm --registry https://registry.npm.taobao.org install -g sass</span><br></pre></td></tr></table></figure>
+
+<h3 id="命令行介绍"><a href="#命令行介绍" class="headerlink" title="命令行介绍"></a>命令行介绍</h3><p>完成安装后，在命令行下，输入 <code>sass</code> 查看工具的使用说明，感觉比较重要的选项有:</p>
+<ul>
+<li><code>--[no-]source-map</code> 是否生成 source map 文件</li>
+<li><code>--watch</code> 监听文件改动，及时编译</li>
+<li><code>--[no-]stop-on-error</code> 有错误发生时，立即停止</li>
+</ul>
+<p>选项还有比较多，会使用 <code>sass --watch source.scss destination.css</code> 即可，再说前端开发框架中也会集成 sass 预处理器，很少有自己输样式编译指令的机会。</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><h4 id="import"><a href="#import" class="headerlink" title="@import"></a>@import</h4><p>可用于引入字体文件，或其它样式文件</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> url(https://fonts.googleapis.com/css?family=Pacifico);</span><br></pre></td></tr></table></figure>
+
+<h4 id="变量-variable"><a href="#变量-variable" class="headerlink" title="变量 variable"></a>变量 variable</h4><p>使用 <code>$</code> 符号标识变量，以 <code>;</code> 结束声明:</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$color-primary</span>: <span class="number">#5254e1</span>;</span><br><span class="line"><span class="variable">$color-secondary</span>: <span class="number">#8e90fb</span>;</span><br><span class="line"><span class="variable">$color-success</span>: <span class="number">#acf082</span>;</span><br><span class="line"><span class="variable">$color-info</span>: <span class="number">#82b6f0</span>;</span><br><span class="line"><span class="variable">$color-warning</span>: <span class="number">#e7cc28</span>;</span><br><span class="line"><span class="variable">$color-error</span>: <span class="number">#f22c09</span>;</span><br></pre></td></tr></table></figure>
+
+<p>之后的色值可使用变量进行代替，相当于提取了公共配置，对于更新主题等操作相当便利，改一处，编译后全局有效。</p>
+<p><strong>测试</strong></p>
+<p>做一次尝试: 如果重新声明变量的声明，以哪一个为准。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$font-small</span>: <span class="number">0.3em</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-primary</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color-primary</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="variable">$font-small</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$color-primary</span>: <span class="number">#3b47f6</span>;</span><br></pre></td></tr></table></figure>
+
+<p>编译后的 css 如下:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn-primary</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#5254e1</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0.3em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可知，距离应用该变量最近的声明的值会被编译成真正的色值。(ps: 所以就想到一个疑问，样式框架中是如果做到通过改变变量值而编译出全新的样式?)</p>
+<h4 id="混合-mixins"><a href="#混合-mixins" class="headerlink" title="混合 mixins"></a>混合 mixins</h4><p>使用 <code>@mixin</code> 指令，用于声明一个 <code>mixin</code>，可在 <code>mixin</code> 的代码块中加入所需要的样式，在其它地方使用 <code>@include</code> 指定加以应用:</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> title-small(<span class="variable">$color</span>) &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="variable">$font-small</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="variable">$color</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.nav-bar__title</span> &#123;</span><br><span class="line">    <span class="keyword">@include</span> title-small(<span class="variable">$color-info</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以向函数一样接收参数，从而通过传参应用不同的样式，在 <code>mixin</code> 中的变量作用域与 js，链式向上寻找，找到即应用。</p>
+<p><strong>用处: 不同浏览器的兼容性处理</strong></p>
+<p>在不同的浏览器下，使用统一的 <code>mixin</code> 对样式进行兼容处理</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> transform-tilt() &#123;</span><br><span class="line">    <span class="variable">$tilt</span>: rotate(<span class="number">15deg</span>);</span><br><span class="line">    -webkit-<span class="attribute">transform</span>: <span class="variable">$tilt</span>;</span><br><span class="line">        -ms-<span class="attribute">transform</span>: <span class="variable">$tilt</span>;</span><br><span class="line">            <span class="attribute">transform</span>: <span class="variable">$tilt</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.profile-info-avatar</span><span class="selector-pseudo">:hover</span> &#123; </span><br><span class="line">    <span class="keyword">@include</span> transform-tilt; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="扩展-extend"><a href="#扩展-extend" class="headerlink" title="扩展 extend"></a>扩展 extend</h4><p>使用 <code>@extend</code> 指令可以将一个选择器的样式应用到指定的选择器，则多个样式中可统一使用由某个样式所定义的内容</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn-text</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="variable">$font-small</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-outline</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="variable">$color-primary</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-info</span> &#123;</span><br><span class="line">    <span class="keyword">@extend</span> .btn-outline;</span><br><span class="line">    <span class="keyword">@extend</span> .btn-text;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$color-info</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后的 css 代码如下:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn-text</span>, <span class="selector-class">.btn-info</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0.3em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-outline</span>, <span class="selector-class">.btn-info</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#3b47f6</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-info</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#82b6f0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="嵌套-nesting"><a href="#嵌套-nesting" class="headerlink" title="嵌套 nesting"></a>嵌套 nesting</h4><p>sass 允许使用嵌套结构来编写，具有层次结构的样式，如一个列表 <code>ul</code>，每一项 <code>li</code>，则可以在同一代码块中编写</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="selector-tag">li</span> &#123;</span><br><span class="line">        <span class="attribute">display</span>: block;</span><br><span class="line">        <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="variable">$color-primary</span>;</span><br><span class="line">        <span class="selector-tag">a</span> &#123;</span><br><span class="line">            <span class="attribute">color</span>: <span class="variable">$color-primary</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后的 css</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ul</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#3b47f6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ul</span> <span class="selector-tag">li</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#3b47f6</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="属性嵌套"><a href="#属性嵌套" class="headerlink" title="属性嵌套"></a>属性嵌套</h5><p>如 <code>background</code>、<code>margin</code>、<code>padding</code> 等多种通用前缀的属性，可以使用嵌套结构减少代码量</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: &#123;</span><br><span class="line">        color: <span class="variable">$color-success</span>;</span><br><span class="line">        <span class="attribute">position</span>-x: <span class="number">0%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#acf082</span>;</span><br><span class="line">  <span class="attribute">background-position-x</span>: <span class="number">0%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="运算-operation"><a href="#运算-operation" class="headerlink" title="运算 operation"></a>运算 operation</h4><p>可以使用运算符对变量值进行求值操作</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$large-wide</span>: <span class="number">800px</span>;</span><br><span class="line"><span class="variable">$medium-wide</span>: <span class="variable">$large-wide</span> / <span class="number">2</span>;</span><br><span class="line"><span class="variable">$small-wide</span>: <span class="variable">$medium-wide</span> / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.block</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">$medium-wide</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.block</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="占位符-amp-和"><a href="#占位符-amp-和" class="headerlink" title="占位符 &amp; 和 %"></a>占位符 &amp; 和 %</h4><p>使用 <code>&amp;</code> 可实现对父选择器的复用，简单的如下:</p>
+<p>对于通用的 <code>.btn</code> 的色值为 <code>#3b47f6</code>，但对 <code>.btn-error</code> 的色值则为 <code>#f22c09</code></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#3b47f6</span>;</span><br><span class="line">    &amp;-error &#123;</span><br><span class="line">        <span class="attribute">border-color</span>: <span class="number">#f22c09</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#3b47f6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-error</span> &#123;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#f22c09</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>%</code> 不能在编译中的 css 样式块中插入，但会在后续的样式中，生成所声明的样式，可减少样式间的耦合性</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%btn &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">4px</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-large</span> &#123;</span><br><span class="line">    <span class="keyword">@extend</span> %btn;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#cccccc</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn-large</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">4px</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-large</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#cccccc</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="条件判断-if"><a href="#条件判断-if" class="headerlink" title="条件判断 @if"></a>条件判断 @if</h4><p>Sass 使用 <code>@if、@else if @else</code>同支持条件编译</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$font-size</span>: <span class="number">12px</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="keyword">@if</span> (<span class="variable">$font-size</span> == <span class="string">"12"</span>) &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">@else</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="for-指定"><a href="#for-指定" class="headerlink" title="@for 指定"></a>@for 指定</h4><p><code>@for</code> 指令用于迭代生成，如</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.col</span> &#123;</span><br><span class="line">    <span class="keyword">@for</span> <span class="variable">$i</span> from <span class="number">1</span> through <span class="number">12</span> &#123;</span><br><span class="line">        &amp;-#&#123;<span class="variable">$i</span>&#125; &#123;</span><br><span class="line">            <span class="attribute">width</span>: (<span class="number">100</span> / <span class="number">12</span>) * <span class="number">1%</span> * <span class="variable">$i</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.col-1</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">8.3333333333%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-2</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">16.6666666667%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-3</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">25%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-4</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">33.3333333333%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-5</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">41.6666666667%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-6</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-7</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">58.3333333333%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-8</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">66.6666666667%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-9</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">75%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-10</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">83.3333333333%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-11</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">91.6666666667%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-12</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="key-valur-pair-each"><a href="#key-valur-pair-each" class="headerlink" title="key-valur pair @each"></a>key-valur pair @each</h4><p>以键值对的形式访问</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">    <span class="keyword">@each</span> <span class="variable">$key</span>, <span class="variable">$value</span> in <span class="variable">$font-collection</span> &#123;</span><br><span class="line">        &amp;-#&#123;<span class="variable">$key</span>&#125; &#123;</span><br><span class="line">            <span class="attribute">font</span>: &#123;</span><br><span class="line">                size: <span class="variable">$value</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            &amp;__active &#123;</span><br><span class="line">                <span class="attribute">font</span>: &#123;</span><br><span class="line">                    size: <span class="variable">$value</span> + <span class="number">2</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn-smaller</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-smaller__active</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-small</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-small__active</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-normal</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-normal__active</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-large</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-large__active</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-larger</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-larger__active</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">22px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数-function"><a href="#函数-function" class="headerlink" title="函数 function"></a>函数 function</h4><p>sass 内置了多种方法</p>
+<p><a href="http://sass-lang.com/documentation/Sass/Script/Functions.html" target="_blank" rel="noopener">函数大全</a></p>
+<p>不太明白为什么会有这么多的内置函数的实现，写样式实在用不了这么多。即然后提供了，那在写实现时，优先查一查有没有相应函即可。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>除了知道 Sass 的语法格式，也需要了解前端样式开发的框架设计。</p>
+<p>Sass 有 </p>
+<ul>
+<li><code>变量</code></li>
+<li><code>@mixin 和 @include</code></li>
+<li><code>@extend</code></li>
+<li><code>运算操作</code></li>
+<li><code>嵌套 nesting</code></li>
+<li><code>内置函数</code></li>
+</ul>
+<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><ul>
+<li><a href="https://tutorialzine.com/2016/01/learn-sass-in-15-minutes" target="_blank" rel="noopener">十五分钟学 sass</a></li>
+<li><a href="https://www.oddbird.net/susy/" target="_blank" rel="noopener">基于 sass 的网格工具</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Frontend/" rel="tag"># Frontend</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/23/algo-cpp-examine-number-in-loop/" rel="prev" title="算法练习 -CPP- 报圈出数">
+      <i class="fa fa-chevron-left"></i> 算法练习 -CPP- 报圈出数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/20/algo-java-algo-race-01/" rel="next" title="算法练习 -Java- 算法竞赛入门经典示例及习题 1">
+      算法练习 -Java- 算法竞赛入门经典示例及习题 1 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行介绍"><span class="nav-number">2.</span> <span class="nav-text">命令行介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">3.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#import"><span class="nav-number">3.1.</span> <span class="nav-text">@import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量-variable"><span class="nav-number">3.2.</span> <span class="nav-text">变量 variable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#混合-mixins"><span class="nav-number">3.3.</span> <span class="nav-text">混合 mixins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展-extend"><span class="nav-number">3.4.</span> <span class="nav-text">扩展 extend</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#嵌套-nesting"><span class="nav-number">3.5.</span> <span class="nav-text">嵌套 nesting</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#属性嵌套"><span class="nav-number">3.5.1.</span> <span class="nav-text">属性嵌套</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算-operation"><span class="nav-number">3.6.</span> <span class="nav-text">运算 operation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#占位符-amp-和"><span class="nav-number">3.7.</span> <span class="nav-text">占位符 &amp; 和 %</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件判断-if"><span class="nav-number">3.8.</span> <span class="nav-text">条件判断 @if</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for-指定"><span class="nav-number">3.9.</span> <span class="nav-text">@for 指定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#key-valur-pair-each"><span class="nav-number">3.10.</span> <span class="nav-text">key-valur pair @each</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数-function"><span class="nav-number">3.11.</span> <span class="nav-text">函数 function</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源"><span class="nav-number">5.</span> <span class="nav-text">资源</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

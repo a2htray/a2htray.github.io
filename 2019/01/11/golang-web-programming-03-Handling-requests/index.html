@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="net&#x2F;http、handle、ServerMux Gets into the details of handling HTTP requests using the net&#x2F;http package. You’ll learn how to write a Go web server to listen to HTTP requests and how to incorporate handle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang -Go Web Programming- 03 Handling requests">
+<meta property="og:url" content="http://yoursite.com/2019/01/11/golang-web-programming-03-Handling-requests/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="net&#x2F;http、handle、ServerMux Gets into the details of handling HTTP requests using the net&#x2F;http package. You’ll learn how to write a Go web server to listen to HTTP requests and how to incorporate handle">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-11T02:59:21.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:06:28.219Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/11/golang-web-programming-03-Handling-requests/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Golang -Go Web Programming- 03 Handling requests | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/11/golang-web-programming-03-Handling-requests/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Golang -Go Web Programming- 03 Handling requests
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-11 10:59:21" itemprop="dateCreated datePublished" datetime="2019-01-11T10:59:21+08:00">2019-01-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:06:28" itemprop="dateModified" datetime="2020-08-23T22:06:28+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><code>net/http</code>、<code>handle</code>、<code>ServerMux</code></p>
+<p>Gets into the details of handling HTTP requests using the <code>net/http</code> package. You’ll learn how to write a Go web server to listen to HTTP requests and how to incorporate handlers and handler functions that process those requests</p>
+<p><code>主要内容</code></p>
+<ul>
+<li>Using the Go <code>net/http</code> library</li>
+<li>Understanding handlers and handler functions</li>
+<li>Working with multiplexers</li>
+</ul>
+<p>The brains of the web application: the handlers that receive and process requests from the client.<code>Web程序的中枢</code></p>
+<a id="more"></a>
+
+<h2 id="The-Go-net-http-library"><a href="#The-Go-net-http-library" class="headerlink" title="The Go net/http library"></a>The Go net/http library</h2><p><code>学会使用框架，更要理解原理</code></p>
+<p>HTTP is a connection-less protocol, and each call to the server has no stored knowledge of the previous call. </p>
+<p>This uniform interface is based on the conventions of a specific framework, though, and such practices might or might not be consistent across all frameworks. </p>
+<p>it’s important to understand the underlying concepts infrastructure that these frameworks are built on. </p>
+<p>The <code>net/http</code> library is divided into two parts, with various structs and functions supporting either one or both：</p>
+<ul>
+<li><em>Client</em>—Client, Response, Header, Request, Cookie</li>
+<li><em>Server</em>—Server, ServeMux, Handler/HandleFunc, ResponseWriter, Header, Request, Cookie</li>
+</ul>
+<p>we’ll talk about how Go handles requests from the client. </p>
+<h2 id="Serving-Go"><a href="#Serving-Go" class="headerlink" title="Serving Go"></a>Serving Go</h2><p>The <code>net/http</code> library handles requests and sends responses to those requests. It also provides an interface for a multiplexer and a default multiplexer.</p>
+<h3 id="The-Go-web-server"><a href="#The-Go-web-server" class="headerlink" title="The Go web server"></a>The Go web server</h3><p>Go provides a set of libraries to create a web server. <code>多种创建web服务的方法</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 默认端口为80</span></span><br><span class="line">    <span class="comment">// 使用 DefaultServeMux</span></span><br><span class="line">    http.ListenAndServe(<span class="string">""</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Go also provides a <code>Server</code> struct that’s essentially a server configuration.<code>可进行服务器配置</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    server := http.Server&#123;</span><br><span class="line">        Addr: <span class="string">"127.0.0.1:8080"</span>,</span><br><span class="line">        Handler: <span class="literal">nil</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    server.ListenAndServe()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Serving-through-HTTPS"><a href="#Serving-through-HTTPS" class="headerlink" title="Serving through HTTPS"></a>Serving through HTTPS</h3><p>Use HTTPS to encrypt and protect the communications between the client and the server when confidential information like passwords and credit card information is shared.<code>HTTPS用处</code>HTTPS is nothing more than layering HTTP on top of SSL (actually, Transport Security Layer [TLS])<code>架在SSL上的HTTP</code></p>
+<ul>
+<li>SSL (Secure Socket Layer) is a protocol that provides data encryption and authentication between two parties<code>提供加密和验证</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    server := http.Server&#123;</span><br><span class="line">        Addr: <span class="string">"127.0.0.1:8080"</span>,</span><br><span class="line">        Handler: <span class="literal">nil</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    server.ListenAndServeTLS(<span class="string">"cert.pem"</span>, <span class="string">"key.pem"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>In the previous listing, the cert.pem file is the SSL certificate whereas key.pem is the private key for the server.<code>提供.pem文件启用HTTPS</code></p>
+<h2 id="Handlers-and-handler-functions"><a href="#Handlers-and-handler-functions" class="headerlink" title="Handlers and handler functions"></a>Handlers and handler functions</h2><h3 id="Handling-requests"><a href="#Handling-requests" class="headerlink" title="Handling requests"></a>Handling requests</h3><p>The default multiplexer that will be used if the handler parameter is nil can’t find any handlers.<code>没有什么东西就返回404</code>To do any work, we need to have handlers.</p>
+<h3 id="Handling-requests-1"><a href="#Handling-requests-1" class="headerlink" title="Handling requests"></a>Handling requests</h3><p>a handler is an interface that has a method named <em>ServeHTTP</em> with two parameters: an <em>HTTPResponseWriter</em> interface and a pointer to a <em>Request</em> struct. In other words, anything that has a method called <strong>ServeHTTP</strong> with this method signature is a handler: <code>只要有ServeHTTP方法都可以成为一个handle</code></p>
+<p>Most of the time we want the server to respond to more than one request, depending on the request URL. So we normally need to use a multiplexer.<code>为什么要使用multiplexer</code></p>
+<h3 id="More-handlers"><a href="#More-handlers" class="headerlink" title="More handlers"></a>More handlers</h3><p>we use the <code>http.Handle</code> function to attach a handler to DefaultServeMux. These functions are actually convenience functions; calling them simply calls DefaultServeMux’s corresponding functions. <code>使用函数的方法创建与DefaultServeMux对象相关的Handlle</code>If you call http.Handle you’re actually calling DefaultServeMux’s Handle method.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> HelloHandler <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *HelloHandler)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	fmt.Fprintf(w, <span class="string">"Hello!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> WorldHandler <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h *WorldHandler)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	fmt.Fprintf(w, <span class="string">"World!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	hello := HelloHandler&#123;&#125;</span><br><span class="line">	world := WorldHandler&#123;&#125;</span><br><span class="line">	server := http.Server&#123;</span><br><span class="line">		Addr: <span class="string">"127.0.0.1:8080"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	http.Handle(<span class="string">"/hello"</span>, &amp;hello)</span><br><span class="line">	http.Handle(<span class="string">"/world"</span>, &amp;world)</span><br><span class="line">	server.ListenAndServe()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Handler-functions"><a href="#Handler-functions" class="headerlink" title="Handler functions"></a>Handler functions</h3><p><code>多种途径创建handler</code></p>
+<p>Handler functions are functions that behave like handlers. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">hello</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	fmt.Fprintf(w, <span class="string">"Hello!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">world</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	fmt.Fprintf(w, <span class="string">"World!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	server := http.Server&#123;</span><br><span class="line">		Addr: <span class="string">"127.0.0.1:8080"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	http.HandleFunc(<span class="string">"/hello"</span>, hello)</span><br><span class="line">	http.HandleFunc(<span class="string">"/world"</span>, world)</span><br><span class="line">	server.ListenAndServe()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Go has a function type named HandlerFunc, which will adapt a function f with the appropriate signature into a Handler with a method f. For example, take the hello function: <code>内置的HandlerFunc结构帮助我们通过一个函数生成对应的Handler</code></p>
+<p>the HandleFunc function converts the hello function into a Handler and registers it to DefaultServeMux.</p>
+<h3 id="Chaining-handlers-and-handler-functions"><a href="#Chaining-handlers-and-handler-functions" class="headerlink" title="Chaining handlers and handler functions"></a>Chaining handlers and handler functions</h3><p><code>通过传递函数类型的参数，进行链式的内部调用</code></p>
+<p>Although Go isn’t considered a functional language, it has some features that are common to functional languages, including function types, anonymous functions, and closures.<code>包含函数类型、匿名函数、闭包</code></p>
+<h3 id="ServeMux-and-DefaultServeMux"><a href="#ServeMux-and-DefaultServeMux" class="headerlink" title="ServeMux and DefaultServeMux"></a>ServeMux and DefaultServeMux</h3><p>ServeMux is an HTTP request multiplexer. It accepts an HTTP request and redirects it to the correct handler according to the URL in the request. It’s also a handler because it has a ServeHTTP method. ServeMux’s ServeHTTP method finds the URL most closely matching the requested one and calls the corresponding handler’s ServeHTTP.<code>ServeMux也有ServeHTTP方法，其作用为找到相应的handler</code></p>
+<p>DefaultServeMux is an instance of ServeMux that’s publicly available to the application that imports the net/http library. It’s also the instance of ServeMux that’s used when no handler is provided to the Server struct.<code>DefaultServeMux是ServeMux的实例</code></p>
+<p>If we register the root URL (/), any URLs that don’t match will fall through the hierarchy and land on the root URL.</p>
+<p>For any registered URLs that don’t end with a slash (/), ServeMux will try to match the exact URL pattern. If the URL ends with a slash (/), ServeMux will see if the requested URL starts with any registered URL.<code>注册的URL带斜线与不带斜线的区别</code></p>
+<h3 id="Other-multiplexers"><a href="#Other-multiplexers" class="headerlink" title="Other multiplexers"></a>Other multiplexers</h3><p>第三方Web开发工具包</p>
+<ul>
+<li><a href="www.gorillatoolkit.org">www.gorillatoolkit.org</a></li>
+<li><a href="https://github.com/julienschmidt/httprouter" target="_blank" rel="noopener">https://github.com/julienschmidt/httprouter</a></li>
+</ul>
+<p><em>HttpRouter</em></p>
+<p>One of the main complaints about ServeMux is that it doesn’t support variables in its pattern matching against the URL. <code>默认的ServeMux不支持参数匹配</code></p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>Go has full-fledged standard libraries for building web applications<code>全面</code></li>
+<li>it is important to learn the basics of web programming before using them.<code>会用框架还不够</code></li>
+<li>Handlers and handler functions can be chained to allow modular processing of requests through separation of concerns.<code>链式内部操作</code></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/10/golang-web-programming-02-title-Go-ChitChat/" rel="prev" title="Golang -Go Web Programming- 02 Go ChitChat">
+      <i class="fa fa-chevron-left"></i> Golang -Go Web Programming- 02 Go ChitChat
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/11/golang-web-programming-04-Processing-requests/" rel="next" title="Golang -Go Web Programming- 04 Processing requests">
+      Golang -Go Web Programming- 04 Processing requests <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Go-net-http-library"><span class="nav-number">1.</span> <span class="nav-text">The Go net&#x2F;http library</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Serving-Go"><span class="nav-number">2.</span> <span class="nav-text">Serving Go</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Go-web-server"><span class="nav-number">2.1.</span> <span class="nav-text">The Go web server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serving-through-HTTPS"><span class="nav-number">2.2.</span> <span class="nav-text">Serving through HTTPS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handlers-and-handler-functions"><span class="nav-number">3.</span> <span class="nav-text">Handlers and handler functions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Handling-requests"><span class="nav-number">3.1.</span> <span class="nav-text">Handling requests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Handling-requests-1"><span class="nav-number">3.2.</span> <span class="nav-text">Handling requests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#More-handlers"><span class="nav-number">3.3.</span> <span class="nav-text">More handlers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Handler-functions"><span class="nav-number">3.4.</span> <span class="nav-text">Handler functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chaining-handlers-and-handler-functions"><span class="nav-number">3.5.</span> <span class="nav-text">Chaining handlers and handler functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServeMux-and-DefaultServeMux"><span class="nav-number">3.6.</span> <span class="nav-text">ServeMux and DefaultServeMux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-multiplexers"><span class="nav-number">3.7.</span> <span class="nav-text">Other multiplexers</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">4.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

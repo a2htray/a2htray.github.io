@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="text&#x2F;template、html&#x2F;template 说明：所有两个花括号间有\，均是没有该符号!!!  Templates and template engines The Go template libraries text&#x2F;template and html&#x2F;template Actions, pipelines, and functions in templates Nesting of">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang -Go Web Programming- 05 Displaying content">
+<meta property="og:url" content="http://yoursite.com/2019/01/13/golang-web-programming-05-Displaying-content/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="text&#x2F;template、html&#x2F;template 说明：所有两个花括号间有\，均是没有该符号!!!  Templates and template engines The Go template libraries text&#x2F;template and html&#x2F;template Actions, pipelines, and functions in templates Nesting of">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-13T05:32:24.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:07:10.577Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/13/golang-web-programming-05-Displaying-content/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Golang -Go Web Programming- 05 Displaying content | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/13/golang-web-programming-05-Displaying-content/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Golang -Go Web Programming- 05 Displaying content
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-13 13:32:24" itemprop="dateCreated datePublished" datetime="2019-01-13T13:32:24+08:00">2019-01-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:07:10" itemprop="dateModified" datetime="2020-08-23T22:07:10+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><code>text/template</code>、<code>html/template</code></p>
+<p>说明：所有两个花括号间有<code>\</code>，均是没有该符号!!!</p>
+<ul>
+<li>Templates and template engines</li>
+<li>The Go template libraries <code>text/template</code> and <code>html/template</code></li>
+<li>Actions, pipelines, and functions in templates</li>
+<li>Nesting of templates and layouts</li>
+</ul>
+<p><code>模板引擎的介绍</code></p>
+<p>Web template engines are an important part of any web application framework, and most if not all full-fledged frameworks have one. <code>模板引擎很重要</code></p>
+<a id="more"></a>
+
+<h2 id="Templates-and-template-engines"><a href="#Templates-and-template-engines" class="headerlink" title="Templates and template engines"></a>Templates and template engines</h2><p>Web template engines evolved from server-side includes (SSIs), which eventually branched out into web programming languages like PHP, ColdFusion, and JSP. <code>模板引擎的历史</code>there are roughly two ideal types of template engines, at opposite ends of the spectrum:<code>两种意识形态：是否包含业务逻辑</code></p>
+<ul>
+<li>Logic-less template engines: Dynamic data is substituted into the templates at specified placeholders. <code>处理好的数据填充到占位符</code></li>
+<li>Embedded logic template engines: Programming language code is embedded into the template and executed during runtime by the template engine, including substitutions. <code>内嵌程序代码</code></li>
+</ul>
+<p>Logic-less template engines are usually faster to render because less processing is involved. <code>微逻辑模板引擎速度更快点</code>Go’s template engine, mostly in text/template and the HTML-specific bits in html/template, is such a hybrid.<code>Go语言的模板引擎是两种都包含的混合体</code></p>
+<h2 id="The-Go-template-engine"><a href="#The-Go-template-engine" class="headerlink" title="The Go template engine"></a>The Go template engine</h2><p>In a web app, the handler normally triggers the template engine. The template engine then generates the HTML and writes it to the ResponseWriter, which adds it to the HTTP response sent back to the client.<code>模板引擎生成HTML代码通过ResponseWriter返回给客户端</code></p>
+<p>In the Go template engine, a template is text that has embedded actions. The text is parsed and executed by the template engine to produce another piece of text.<code>模板文件是文本形式的，解析模板文本生成HTML</code></p>
+<p><code>text/template 用于任何形式的文本</code></p>
+<p><code>html/template 用于HTML</code></p>
+<p>Actions are added between two double braces, <code>{\{</code> and <code>}\}</code>.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Go Web Programming<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        &#123;&#123; . &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Template files must be in a readable text format but can have any extension.<code>必须可读，但不限扩展名</code>.The dot is an action, and it’s a command for the template engine to replace it with a value when the template is executed. <code>(.)表示有数据填充</code></p>
+<p>两步：</p>
+<ul>
+<li>Parse the text-formatted template source, which can be a string or from a template file, to create a parsed template struct.<code>将模板文件解析成template结构</code></li>
+<li>Execute the parsed template, passing a ResponseWriter and some data to it. </li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"html/template"</span></span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">process</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用template.ParseFiles解析模板文件，返回Template结构</span></span><br><span class="line">	t, _ := template.ParseFiles(<span class="string">"tmpl.html"</span>)</span><br><span class="line">	t.Execute(w, <span class="string">"Hello World!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	server := http.Server&#123;</span><br><span class="line">		Addr: <span class="string">"127.0.0.1:8080"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	http.HandleFunc(<span class="string">"/process"</span>, process)</span><br><span class="line">	server.ListenAndServe()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Parsing-templates"><a href="#Parsing-templates" class="headerlink" title="Parsing templates"></a>Parsing templates</h3><p>Another way to parse files is to use the ParseGlob function, which uses pattern matching instead of specific files.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t, _ := template.ParseFiles(<span class="string">"tmpl.html"</span>)</span><br><span class="line"><span class="comment">// OR</span></span><br><span class="line">t, _ := template.ParseGlob(<span class="string">"*.html"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>In fact, all other ways of parsing templates ultimately call the <code>Parse</code> method to parse the template. <code>所有的解析操作内部都是调用Parse方法解析字符串</code></p>
+<h3 id="Executing-templates"><a href="#Executing-templates" class="headerlink" title="Executing templates"></a>Executing templates</h3><p>The usual way to execute a template is to call the Execute function on a template, passing it the ResponseWriter and the data. <code>调用Execute方法，并将结果传递给ResponseWriter</code></p>
+<p>ExecuteTemplate method</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.ExecuteTemplate(w, <span class="string">"t2.html"</span>, <span class="string">"Hello World!"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h2><p><code>介绍模板引擎的语法</code></p>
+<p><em>actions</em> are embedded commands in Go templates, placed between a set of double braces, <code>{\{</code> and <code>}\}</code>. </p>
+<h3 id="Conditional-actions"><a href="#Conditional-actions" class="headerlink" title="Conditional actions"></a>Conditional actions</h3><p><code>if else</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; <span class="keyword">if</span> arg &#125;&#125;</span><br><span class="line">  some content</span><br><span class="line">&#123;&#123; end &#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#123; <span class="keyword">if</span> arg &#125;&#125;</span><br><span class="line">  some content</span><br><span class="line">&#123;&#123; <span class="keyword">else</span> &#125;&#125;</span><br><span class="line">  other content</span><br><span class="line">&#123;&#123; end &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The arg in both formats is the argument to the action. <code>arg是传入的参数</code></p>
+<h3 id="Iterator-actions"><a href="#Iterator-actions" class="headerlink" title="Iterator actions"></a>Iterator actions</h3><p><code>range</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; <span class="keyword">range</span> array &#125;&#125;</span><br><span class="line">  Dot is set to the element &#123;&#123; . &#125;&#125;</span><br><span class="line">&#123;&#123; end &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Go Web Programming<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      &#123;&#123; range . &#125;&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; . &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      &#123;&#123; else &#125;&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span> Nothing to show <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      &#123;&#123; end &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>In the listing the content after <code>{\{</code> else <code>}\}</code> and before <code>{\{</code> end <code>}\}</code> will be displayed if the dot (.) is nil. <code>当.为nil时，输出else下的内容</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Go Web Programming<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>The dot is &#123;&#123; . &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      &#123;&#123; with "world"&#125;&#125;</span><br><span class="line">        Now the dot is set to &#123;&#123; . &#125;&#125;</span><br><span class="line">      &#123;&#123; end &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>The dot is &#123;&#123; . &#125;&#125; again<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">process</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    t, _ := template.ParseFiles(<span class="string">"tmpl.html"</span>)</span><br><span class="line">    t.Execute(w,<span class="string">"hello"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一个点是<code>hello</code></li>
+<li>第二个点是<code>world</code></li>
+<li>第三个点是<code>hello</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; with arg &#125;&#125;</span><br><span class="line">  Dot is set to arg</span><br><span class="line">&#123;&#123; <span class="keyword">else</span> &#125;&#125;</span><br><span class="line">  Fallback <span class="keyword">if</span> arg is empty</span><br><span class="line">&#123;&#123; end &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>with</code>可以和<code>else</code>搭配</p>
+<h3 id="Include-actions"><a href="#Include-actions" class="headerlink" title="Include actions"></a>Include actions</h3><p><code>模板包含模板操作</code>、<code>template</code></p>
+<p>allow us to include a template in another template. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; template <span class="string">"t2.html"</span> &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">process</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    t, _ := template.ParseFiles(<span class="string">"t1.html"</span>, <span class="string">"t2.html"</span>)</span><br><span class="line">    t.Execute(w, <span class="string">"Hello World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>we need to parse both the template files that we’re going to use. <code>需要解析用到的两个模板文件，这个非常重要!</code></p>
+<p>there’s a variant of the include action that allows this:  <code>{\{</code> template “name” arg <code>}\}</code> , where arg is the argument you want to pass on to the included template. <code>向内嵌的模板传入参数</code></p>
+<h2 id="Arguments-variables-and-pipelines"><a href="#Arguments-variables-and-pipelines" class="headerlink" title="Arguments, variables, and pipelines"></a>Arguments, variables, and pipelines</h2><p>An argument is a value that’s used in a template. It can be a Boolean, integer, string, and so on. It can also be a struct, or a field of a struct, or the key of an array. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; <span class="keyword">if</span> arg &#125;&#125;</span><br><span class="line">    some content</span><br><span class="line">&#123;&#123; end &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>We can also set variables in the action. Variables start with the dollar sign ($) and look like this:<code>在action中以$开头</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板文件中</span></span><br><span class="line"></span><br><span class="line">$variable := value</span><br><span class="line"></span><br><span class="line">&#123;&#123; <span class="keyword">range</span> $key, $value := . &#125;&#125;</span><br><span class="line">    The key is &#123;&#123; $key &#125;&#125; and the value is &#123;&#123; $value &#125;&#125;</span><br><span class="line">&#123;&#123; end &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Pipelines are arguments, functions, and methods chained together in a sequence.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板文件中，p1、p2、p3可以是参数或函数</span></span><br><span class="line">&#123;&#123; p1 | p2 | p3 &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><p><code>自定义模板函数</code></p>
+<p>To define custom functions, you need to:</p>
+<ul>
+<li>Create a <em>FuncMap</em> map, which has the name of the function as the key and the actual function as the value.</li>
+<li>Attach the <em>FuncMap</em> to the template.</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">formatDate</span><span class="params">(t time.Time)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    layout := <span class="string">"2006-01-02"</span></span><br><span class="line">    <span class="keyword">return</span> t.Format(layout)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">process</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    funcMap := template.FuncMap &#123; <span class="string">"fdate"</span>: formatDate &#125;</span><br><span class="line">    t := template.New(<span class="string">"tmpl.html"</span>).Funcs(funcMap)</span><br><span class="line">    t, _ = t.ParseFiles(<span class="string">"tmpl.html"</span>)</span><br><span class="line">    t.Execute(w, time.Now())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># template中</span><br><span class="line">&lt;div&gt;The date/time is &#123;&#123; . | fdate &#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;div&gt;The date/time is &#123;&#123; fdate . &#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Context-awareness"><a href="#Context-awareness" class="headerlink" title="Context awareness"></a>Context awareness</h2><p><code>根据模板中参数的所在位置进行相应的编码</code></p>
+<p>The content that’s displayed changes depending on where you place it within the document; that is, the display of the content is context-aware. </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div&gt;&#123;&#123; . &#125;&#125;&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;&lt;a href="/&#123;&#123; . &#125;&#125;"&gt;Path&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;&lt;a href="/?q=&#123;&#123; . &#125;&#125;"&gt;Query&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div&gt;&lt;a onclick="f('&#123;&#123; . &#125;&#125;')"&gt;Onclick&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<p><em>this feature can be used to defend against XSS (cross-site scripting) attacks.</em></p>
+<h3 id="Defending-against-XSS-attacks"><a href="#Defending-against-XSS-attacks" class="headerlink" title="Defending against XSS attacks"></a>Defending against XSS attacks</h3><p><code>显示了用户提供的数据</code></p>
+<p><code>向网页中注入了其他用户不可见的代码</code></p>
+<p>A common XSS attack is the persistent XSS vulnerability. This happens when data provided by an attacker is saved to the server and then displayed to other users as it is.</p>
+<p>malicious code is executed with the user’s permissions but without the user’s knowledge.</p>
+<p> Go allows us to escape from being context-aware if we really want to.</p>
+<h3 id="Unescaping-HTML"><a href="#Unescaping-HTML" class="headerlink" title="Unescaping HTML"></a>Unescaping HTML</h3><p>Go provides a mechanism to “unescape” HTML. Just cast your input string to template.HTML and use that instead, and our code is happily unescaped. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">process</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    t, _ := template.ParseFiles(<span class="string">"tmpl.html"</span>)</span><br><span class="line">    t.Execute(w, template.HTML(r.FormValue(<span class="string">"comment"</span>)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>If you really want to stop the browser from protecting you from XSS attacks, you simply need to set a response header in our handler:<code>通过设置Header头，关闭浏览器的XSS保护</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">process</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"X-XSS-Protection"</span>, <span class="string">"0"</span>)</span><br><span class="line">    t, _ := template.ParseFiles(<span class="string">"tmpl.html"</span>)</span><br><span class="line">    t.Execute(w, template.HTML(r.FormValue(<span class="string">"comment"</span>)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nesting-templates"><a href="#Nesting-templates" class="headerlink" title="Nesting templates"></a>Nesting templates</h2><p><code>布局</code>、</p>
+<p>Show you how you can use layouts in your web app.</p>
+<p><em>Layouts</em> are fixed patterns in web page design that can be reused for multiple pages. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板中</span></span><br><span class="line">&#123;&#123; template <span class="string">"name"</span> . &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; define <span class="string">"layout"</span> &#125;&#125;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html;charset=utf-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;Go Web Programming&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &#123;&#123; template <span class="string">"content"</span> &#125;&#125;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&#123;&#123; end &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Notice that we start the file with <code>{\{</code> define “layout” <code>}\}</code> and end it with <code>{\{</code> end <code>}\}</code>. Anything within these two action tags is considered part of the layout template.</p>
+<h2 id="Using-the-block-action-to-define-default-templates"><a href="#Using-the-block-action-to-define-default-templates" class="headerlink" title="Using the block action to define default templates"></a>Using the block action to define default templates</h2><p><code>block的作用在于是否传递了要在layout中显示的内容，如果没有则显示默认的</code></p>
+<p>Allows you to define a template and use it at the same time.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; block arg &#125;&#125;</span><br><span class="line">  Dot is set to arg</span><br><span class="line">&#123;&#123; end &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The block action effectively defines a template named content and also places it in the layout. If no content template is available when the overall template is executed, the content template defined by the block will be used instead.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>Go’s standard template engine is in the html/template package.</li>
+<li>Actions are instructions about how data is to be combined with the template. Go has an extensive and powerful set of actions</li>
+<li>Customized functions can also be created by making a function map and attaching it to the template.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-09/" rel="prev" title="Linux -Linux Shell 脚本攻略- 09 管理重任">
+      <i class="fa fa-chevron-left"></i> Linux -Linux Shell 脚本攻略- 09 管理重任
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/13/golang-web-programming-06-Storing-data/" rel="next" title="Golang -Go Web Programming- 06 Storing data">
+      Golang -Go Web Programming- 06 Storing data <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Templates-and-template-engines"><span class="nav-number">1.</span> <span class="nav-text">Templates and template engines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Go-template-engine"><span class="nav-number">2.</span> <span class="nav-text">The Go template engine</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parsing-templates"><span class="nav-number">2.1.</span> <span class="nav-text">Parsing templates</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Executing-templates"><span class="nav-number">2.2.</span> <span class="nav-text">Executing templates</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Actions"><span class="nav-number">3.</span> <span class="nav-text">Actions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-actions"><span class="nav-number">3.1.</span> <span class="nav-text">Conditional actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterator-actions"><span class="nav-number">3.2.</span> <span class="nav-text">Iterator actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Include-actions"><span class="nav-number">3.3.</span> <span class="nav-text">Include actions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arguments-variables-and-pipelines"><span class="nav-number">4.</span> <span class="nav-text">Arguments, variables, and pipelines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functions"><span class="nav-number">5.</span> <span class="nav-text">Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Context-awareness"><span class="nav-number">6.</span> <span class="nav-text">Context awareness</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Defending-against-XSS-attacks"><span class="nav-number">6.1.</span> <span class="nav-text">Defending against XSS attacks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unescaping-HTML"><span class="nav-number">6.2.</span> <span class="nav-text">Unescaping HTML</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nesting-templates"><span class="nav-number">7.</span> <span class="nav-text">Nesting templates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-the-block-action-to-define-default-templates"><span class="nav-number">8.</span> <span class="nav-text">Using the block action to define default templates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">9.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

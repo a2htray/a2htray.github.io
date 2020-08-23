@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Linux文本操作，grep、egrep、awk、sed、正则表达式  grep egrep：在文件中搜索文本 cut：文本分割 paste：按列合并文本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux -Linux Shell 脚本攻略- 04 让文本飞">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/linux-shell-tactics-04/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="Linux文本操作，grep、egrep、awk、sed、正则表达式  grep egrep：在文件中搜索文本 cut：文本分割 paste：按列合并文本">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-12T14:02:30.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:15:53.603Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/12/linux-shell-tactics-04/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Linux -Linux Shell 脚本攻略- 04 让文本飞 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux -Linux Shell 脚本攻略- 04 让文本飞
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-12 22:02:30" itemprop="dateCreated datePublished" datetime="2019-01-12T22:02:30+08:00">2019-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:15:53" itemprop="dateModified" datetime="2020-08-23T22:15:53+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Linux文本操作，<code>grep</code>、<code>egrep</code>、<code>awk</code>、<code>sed</code>、<code>正则表达式</code></p>
+<ul>
+<li><code>grep egrep</code>：在文件中搜索文本</li>
+<li><code>cut</code>：文本分割</li>
+<li><code>paste</code>：按列合并文本</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="正则表达式入门"><a href="#正则表达式入门" class="headerlink" title="正则表达式入门"></a>正则表达式入门</h2><p><code>没有介绍较深的知识</code></p>
+<p>正则表达式是基于文本匹配的文本处理技术的关键所在，是用于绝大多数文本处理工具的一种语言</p>
+<p>正则表达式的基本组成部分</p>
+<table>
+<thead>
+<tr>
+<th>正则表达式</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>^</td>
+<td>行起始标记</td>
+<td>^tux匹配以tux起始的行</td>
+</tr>
+<tr>
+<td>$</td>
+<td>行尾标记</td>
+<td>tux$匹配以tux结尾的行</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配任意字符</td>
+<td>tux.可以匹配tux1、tux2，但不能匹配tux12</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配包含在[字符]之中的任意字符</td>
+<td>tux[12]匹配tux1、tux2</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>匹配除[^字符]之外的任意一个字符</td>
+<td>tux[^12]匹配tux3，但不匹配tux1</td>
+</tr>
+<tr>
+<td>[-]</td>
+<td>匹配<strong>指定范围</strong>内的任意字符</td>
+<td>tux[1-5]匹配tux3，但不匹配tux6</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配之前项0次或1次</td>
+<td>tux?x匹配tux、tuxx</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配之前项1次或多次</td>
+<td>tux+匹配tux、tuxx、tuxxx</td>
+</tr>
+<tr>
+<td>()</td>
+<td>用于创建匹配的子串</td>
+<td>(tux)+匹配tux、tuxtux</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配之前的项n次</td>
+<td>tu{3}x匹配tuuux</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>匹配之前的项n次或多于n次</td>
+<td>tux{3,}匹配tuxxx、tuxxxxxx</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>匹配之前的项n次到m次</td>
+<td>tux{2,4}匹配tuxx、tuxxx、tuxxxx</td>
+</tr>
+<tr>
+<td>|</td>
+<td>交替匹配|两边的任意一项</td>
+<td>tu(x|y)匹配tux、tuy</td>
+</tr>
+<tr>
+<td>\</td>
+<td>对特殊字符进行转义</td>
+<td>\?tux匹配?tux</td>
+</tr>
+</tbody></table>
+<p>元字符是一种Perl风格的正则表达式</p>
+<table>
+<thead>
+<tr>
+<th>正则表达式</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\b</td>
+<td>单词边界</td>
+<td>\btux\b匹配tux，但不匹配ytuxy</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>非单词边界</td>
+<td>\Btux匹配atux，但不匹配tux</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>单个数字字符</td>
+<td>\dtux匹配1tux</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>单个非数字字符</td>
+<td>\Dtux匹配atux</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>单个字符(字母、数字、_)</td>
+<td>\wtux匹配atux</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>单个非字符</td>
+<td>\Wtux匹配&amp;tux</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行符</td>
+<td></td>
+</tr>
+<tr>
+<td>\s</td>
+<td>单个空白字符</td>
+<td>t\sux匹配t ux，但不匹配tux</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>单个非空白字符</td>
+<td>t\Sux匹配taux，但不匹配tux</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>回车</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="使用-grep-在文件中搜索文本"><a href="#使用-grep-在文件中搜索文本" class="headerlink" title="使用 grep 在文件中搜索文本"></a>使用 <code>grep</code> 在文件中搜索文本</h2><p><code>grep</code> 可以接受正则和通配符</p>
+<p>格式：<code>grep [选项] 正则 文件</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在文件中搜索特定词</span></span><br><span class="line">$ grep hello hello_world.go</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ grep <span class="string">"hello"</span> hello_world.go</span><br><span class="line"><span class="comment"># 也可以在stdin中读取</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"hello world"</span> | grep <span class="string">"hello"</span></span><br><span class="line"><span class="comment"># 一个grep命令可以对多个文本进行匹配</span></span><br><span class="line">$ grep <span class="string">"hello"</span> hello_world2.go hello_world2.go hello_world2.go</span><br><span class="line"><span class="comment"># 使用正则</span></span><br><span class="line">$ grep -E <span class="string">"h[a-z]&#123;3&#125;o"</span> hello_world.go</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ egrep <span class="string">"h[a-z]&#123;3&#125;o"</span> hello_world.go</span><br><span class="line"><span class="comment"># 只输出匹配到的文本</span></span><br><span class="line">$ grep -o -E <span class="string">"h[a-z]&#123;3&#125;o"</span> hello_world.go</span><br><span class="line"><span class="comment"># 打印除匹配行之外的所有行</span></span><br><span class="line">$ grep -v -E <span class="string">"h[a-z]&#123;3&#125;o"</span> hello_world.go</span><br><span class="line"><span class="comment"># 统计匹配到行的行数，不能输出匹配的次数</span></span><br><span class="line">$ grep -c -E <span class="string">"h[a-z]&#123;3&#125;o"</span> hello_world.go</span><br><span class="line"><span class="comment"># 结合wc输出匹配项的次数</span></span><br><span class="line">$ grep -o <span class="string">"hello"</span> hello_world.go | wc -l</span><br><span class="line"><span class="comment"># 递归搜索文件</span></span><br><span class="line">$ grep <span class="string">"hello"</span> . -R -n</span><br><span class="line"><span class="comment"># -i忽略大小写</span></span><br><span class="line">$ grep -i <span class="string">"hello"</span> hello_world.go</span><br><span class="line"><span class="comment"># 同时匹配多个样式</span></span><br><span class="line">$ grep -e <span class="string">"hello"</span> -e <span class="string">"world"</span> hello_world.go</span><br><span class="line"><span class="comment"># abc.&#123;cpp,go&#125;会被扩展成abc.cpp、abc.go</span></span><br><span class="line"><span class="comment"># --include只在特定文件中查找</span></span><br><span class="line">$ grep <span class="string">"hello"</span> -r --include *.&#123;cpp,go&#125;</span><br><span class="line"><span class="comment"># --exclude-from从文本读取要排除特定文件列表</span></span><br><span class="line">$ grep <span class="string">"hello"</span> --exclude-from exclude_list.txt</span><br><span class="line"><span class="comment"># --exclude、--exclude-dir用于排除特定文件或目录</span></span><br><span class="line">$ grep <span class="string">"hello"</span> --exclude hello_world.cpp</span><br><span class="line">$ grep <span class="string">"hello"</span> --exclude-dir hello_world_dir</span><br><span class="line"><span class="comment"># 使用-q选项，可以进行判断操作，文本中是否匹配到</span></span><br><span class="line">$ grep -q <span class="string">"hello"</span> hello_world.go</span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line"><span class="comment"># -A 打印匹配到行前n行</span></span><br><span class="line"><span class="comment"># -B 打印匹配到行后n行</span></span><br><span class="line"><span class="comment"># -C 打印匹配到行前后n行</span></span><br><span class="line">$ grep <span class="string">"hello"</span> hello_world.go -A 10</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-cut-按列切分文件"><a href="#使用-cut-按列切分文件" class="headerlink" title="使用 cut 按列切分文件"></a>使用 <code>cut</code> 按列切分文件</h2><p><code>cut</code> 命令是一个帮助我们将文本按列进行切分的小工具。它也可以指定分隔每列的定界符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -f 指定要显示的列</span></span><br><span class="line">$ cut -f 1,2,3 file_name</span><br><span class="line"><span class="comment"># --complement 对显示的列的进行补集操作</span></span><br><span class="line"><span class="comment"># 不显示1，2，3列</span></span><br><span class="line">$ cut -f 1,2,3 --complement file_name</span><br><span class="line"><span class="comment"># 使用-d指定定界符</span></span><br><span class="line">$ cut -f 1,2 -d <span class="string">","</span> file_name</span><br></pre></td></tr></table></figure>
+
+<h2 id="sed-入门"><a href="#sed-入门" class="headerlink" title="sed 入门"></a><code>sed</code> 入门</h2><p><code>浅尝辄止，找本书吧</code></p>
+<p><code>sed</code> 是 <code>stream editor</code> 的缩写</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 利用正则表达式进行替换 s，只能替换每一行的第一处</span></span><br><span class="line">$ sed <span class="string">'s/he[a-z]&#123;2&#125;o/world/'</span> hello_world.go</span><br><span class="line"><span class="comment"># 利用-i选项将替换结果应用于原文件</span></span><br><span class="line">$ sed -i <span class="string">'s/he[a-z]&#123;2&#125;o/world/'</span> hello_world.go</span><br><span class="line"><span class="comment"># 如果希望替换全部，加 g</span></span><br><span class="line">$ sed -i <span class="string">'s/he[a-z]&#123;2&#125;o/world/g'</span> hello_world.go</span><br><span class="line"><span class="comment"># 指定对第N个后进行替换</span></span><br><span class="line"><span class="comment"># 从第3个开始替换，包括第3个</span></span><br><span class="line">$ sed <span class="string">'s/he[a-z]&#123;2&#125;o/world/2g'</span> hello_world.go</span><br><span class="line"><span class="comment"># 使用sed移除空白行，删除 d，/pattern/d 会删除匹配行</span></span><br><span class="line">$ sed <span class="string">'/^$/d'</span> file</span><br><span class="line"><span class="comment"># 捕获已经匹配到的项，使用 &amp;</span></span><br><span class="line">$ sed <span class="string">'s/hello/&amp; world/g'</span> hello_world.go</span><br></pre></td></tr></table></figure>
+
+<p>当定界符出现在样式内，需要用转义字符 <code>\</code></p>
+<p>当使用双引号时，可以对引号中的变量进行求值操作</p>
+<h2 id="按列合并文本-paste"><a href="#按列合并文本-paste" class="headerlink" title="按列合并文本 paste"></a>按列合并文本 <code>paste</code></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ paste file1 file2 file3</span><br><span class="line"><span class="comment"># 使用-d指定定界符</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="awk入门"><a href="#awk入门" class="headerlink" title="awk入门"></a><code>awk</code>入门</h2><p>TODO：后面加个链接哈</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-03/" rel="prev" title="Linux -Linux Shell 脚本攻略- 03 以文件之名">
+      <i class="fa fa-chevron-left"></i> Linux -Linux Shell 脚本攻略- 03 以文件之名
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-05/" rel="next" title="Linux -Linux Shell 脚本攻略- 05 没这么事">
+      Linux -Linux Shell 脚本攻略- 05 没这么事 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式入门"><span class="nav-number">1.</span> <span class="nav-text">正则表达式入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-grep-在文件中搜索文本"><span class="nav-number">2.</span> <span class="nav-text">使用 grep 在文件中搜索文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-cut-按列切分文件"><span class="nav-number">3.</span> <span class="nav-text">使用 cut 按列切分文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sed-入门"><span class="nav-number">4.</span> <span class="nav-text">sed 入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按列合并文本-paste"><span class="nav-number">5.</span> <span class="nav-text">按列合并文本 paste</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk入门"><span class="nav-number">6.</span> <span class="nav-text">awk入门</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

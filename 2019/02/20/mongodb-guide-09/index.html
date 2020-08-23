@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="副本集的概念 副本集的创建方法 副本集成员的可用选项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB 09 创建副本集">
+<meta property="og:url" content="http://yoursite.com/2019/02/20/mongodb-guide-09/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="副本集的概念 副本集的创建方法 副本集成员的可用选项">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-02-20T00:06:25.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:22:17.892Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="DB">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/02/20/mongodb-guide-09/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>MongoDB 09 创建副本集 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/mongodb-guide-09/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB 09 创建副本集
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-02-20 08:06:25" itemprop="dateCreated datePublished" datetime="2019-02-20T08:06:25+08:00">2019-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:22:17" itemprop="dateModified" datetime="2020-08-23T22:22:17+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>副本集的概念</li>
+<li>副本集的创建方法</li>
+<li>副本集成员的可用选项</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="复制简介"><a href="#复制简介" class="headerlink" title="复制简介"></a>复制简介</h2><p>使用 <strong>复制</strong> 可以将数据副本保存到多台服务器上</p>
+<p>使用复制功能的前提是需要创建一个副本集。副本集是一组服务器，其中有一个主服务器，用于处理客户端请求，还有多个备份服务器，用于保存主服务器的数据副本</p>
+<h3 id="建立副本集"><a href="#建立副本集" class="headerlink" title="建立副本集"></a>建立副本集</h3><p>副本集最好始终有奇数个成员</p>
+<p>在本地机器建立三个副本集</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mongo --nodb</span><br><span class="line"><span class="comment"># 三个副本集</span></span><br><span class="line">&gt; replicaSet = new ReplSetTest(&#123;<span class="string">"nodes"</span>: 3&#125;)</span><br><span class="line"><span class="comment"># 启动三个 mongodb 进程</span></span><br><span class="line">&gt; replicaSet.startSet()</span><br><span class="line"><span class="comment"># 配置复制功能</span></span><br><span class="line">&gt; replicaSet.initiate()</span><br></pre></td></tr></table></figure>
+
+<p>再看一个 shell 窗口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ mongo --nodb</span><br><span class="line"><span class="comment"># 连接 Mongo 进程</span></span><br><span class="line">&gt; conn1 = new Mongo(<span class="string">"localhost:20000"</span>)</span><br><span class="line">connection to localhost:20000</span><br><span class="line"><span class="comment"># 选择一个数据库</span></span><br><span class="line">&gt; db20000test = conn1.getDB(<span class="string">"test"</span>)</span><br><span class="line"><span class="comment"># 可查看是否是主节点，用于接收用户的请求</span></span><br><span class="line">&gt; db20000test.isMaster()</span><br></pre></td></tr></table></figure>
+
+<p>向主节点插入 1000 条数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">for</span> (i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">    db20000test.testCollection.insert(&#123;<span class="string">"number"</span>: i&#125;);</span><br><span class="line">&#125;</span><br><span class="line">WriteResult(&#123; <span class="string">"nInserted"</span> : 1 &#125;)</span><br><span class="line"><span class="comment"># 查看是否已经插入</span></span><br><span class="line">&gt; db20000test.testCollection.count()</span><br><span class="line">1000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接一个从结点</span></span><br><span class="line">&gt; conn2 = new Mongo(<span class="string">"localhost:20001"</span>)</span><br><span class="line">&gt; db20001test = conn2.getDB(<span class="string">"test"</span>)</span><br><span class="line"><span class="comment"># 设置从节点状态为 true</span></span><br><span class="line">&gt; conn2.setSlaveOk()</span><br><span class="line"><span class="comment"># 说明插入到主节点的数据已经同步到从节点</span></span><br><span class="line">&gt; db20001test.testCollection.count()</span><br><span class="line">1000</span><br></pre></td></tr></table></figure>
+
+<p>从节点只能通过复制写入数据，不接受客户端的写入请求，不能能从节点执行写操作</p>
+<p>当主节点挂了之后，会自动把其中一个从节点选取为主节点</p>
+<p><strong>默认情况下，客户端不能从备份节点中读取数据。在备份节点上显式地执行 <code>setSlaveOk</code> 之后，客户端就可以从备份节点中读取数据</strong></p>
+<h2 id="配置副本集"><a href="#配置副本集" class="headerlink" title="配置副本集"></a>配置副本集</h2><p>假设有三台服务器 <code>server1</code>、<code>server2</code>、<code>server3</code>，都安装了 MongoDB，利用这三台服务器，可以配置<code>主从副本集</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server1$ mongo --replSet app --fork</span><br><span class="line">server2$ mongo --replSet app --fork</span><br><span class="line">server3$ mongo --replSet app --fork</span><br></pre></td></tr></table></figure>
+
+<p>进入其中一台实例，创建配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server1$ mongo --nodb</span><br><span class="line">&gt; config = &#123;</span><br><span class="line">    <span class="string">"_id"</span>: <span class="string">"app"</span>,</span><br><span class="line">    <span class="string">"members"</span>: [</span><br><span class="line">        &#123;<span class="string">"_id"</span>: 0, <span class="string">"host"</span>: <span class="string">"server1:27017"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"_id"</span>: 1, <span class="string">"host"</span>: <span class="string">"server2:27017"</span>&#125;,</span><br><span class="line">        &#123;<span class="string">"_id"</span>: 2, <span class="string">"host"</span>: <span class="string">"server3:27017"</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&gt; db = (new Mongo(<span class="string">"server1:27017"</span>)).getDB(<span class="string">"test"</span>)</span><br><span class="line">app:PRIMARY&gt; rs.initiate(config)</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>s.initiate(config)</code>，会将配置信息广播给其他节点，经过选取，从三个节点中选出主节点</p>
+<h2 id="全局变量-rs"><a href="#全局变量-rs" class="headerlink" title="全局变量 rs"></a>全局变量 <code>rs</code></h2><p>当 <code>db</code> 变量被赋值后，全局变量 <code>rs</code> 的各个方法可以被使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加新的副本集</span></span><br><span class="line">&gt; rs.add(<span class="string">"server4:27017"</span>)</span><br><span class="line"><span class="comment"># 删除副本集</span></span><br><span class="line">&gt; rs.remove(<span class="string">"server4:27017"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>重新配置副本集时，主节点需要先退化为普通的备份节点，以便接受新的配置</p>
+<h2 id="选取机制"><a href="#选取机制" class="headerlink" title="选取机制"></a>选取机制</h2><p>当一个备份节点无法与主节点相连通时，就会联系并请求其他的副本集成员将自己选举为主节点。</p>
+<p>其他成员会作以下检查：</p>
+<ul>
+<li>自身是否与主节点连通</li>
+<li>希望被选举为主节点的备份节点数据是否最新</li>
+<li>还有没有其他节点</li>
+</ul>
+<p>数据备份节点可以没有索引，可以指定成员信息中的 <code>buildIndexs</code> 为 <code>false</code> 即可</p>
+<h3 id="仲裁者"><a href="#仲裁者" class="headerlink" title="仲裁者"></a>仲裁者</h3><p>MongoDB 支持一种特殊类型的成员，称为仲裁者，仲裁者的唯一作用就是参与选举。仲裁者并不保存数据，也不会保存客户端：只是为了凑齐 “<strong>大多数</strong>“ 的要求</p>
+<p><strong>最多只能使用一个仲裁者</strong></p>
+<p>两种加入仲裁者的方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; rs.addArb(<span class="string">"server5:27017"</span>)</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">&gt; rs.add(&#123;<span class="string">"_id"</span>: 4, <span class="string">"host"</span>: <span class="string">"server5:27017"</span>, <span class="string">"arbiterOnly"</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置选举的优先级"><a href="#设置选举的优先级" class="headerlink" title="设置选举的优先级"></a>设置选举的优先级</h3><p>优先级用于表示一个成员渴望成为主节点的程度。优先级的取值范围可以是 <code>0~100</code>，默认为 <code>1</code>。优先级为 <code>0</code>的成员永远不能够成为主节点。</p>
+<p>在 <code>rs.add</code> 方法中设置 <code>priority</code> 字段可以设置数据备份节点的优先级</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DB/" rel="tag"># DB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/02/20/mongodb-guide-08/" rel="prev" title="MongoDB 08 应用程序设计">
+      <i class="fa fa-chevron-left"></i> MongoDB 08 应用程序设计
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/02/20/mongodb-guide-10/" rel="next" title="MongoDB 10 副本集的组成">
+      MongoDB 10 副本集的组成 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#复制简介"><span class="nav-number">1.</span> <span class="nav-text">复制简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立副本集"><span class="nav-number">1.1.</span> <span class="nav-text">建立副本集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置副本集"><span class="nav-number">2.</span> <span class="nav-text">配置副本集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局变量-rs"><span class="nav-number">3.</span> <span class="nav-text">全局变量 rs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选取机制"><span class="nav-number">4.</span> <span class="nav-text">选取机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#仲裁者"><span class="nav-number">4.1.</span> <span class="nav-text">仲裁者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置选举的优先级"><span class="nav-number">4.2.</span> <span class="nav-text">设置选举的优先级</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

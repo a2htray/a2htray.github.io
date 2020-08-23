@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Introduces using Go for web applications, and discusses why it is a good choice for writing web applications. You’ll also learn about key concepts of what web applications are, including a brief intro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang -Go Web Programming- 01 Go and web applications">
+<meta property="og:url" content="http://yoursite.com/2019/01/10/golang-web-programming-01-title-Go-and-web-applications/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="Introduces using Go for web applications, and discusses why it is a good choice for writing web applications. You’ll also learn about key concepts of what web applications are, including a brief intro">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-10T07:45:04.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:04:48.919Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/10/golang-web-programming-01-title-Go-and-web-applications/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Golang -Go Web Programming- 01 Go and web applications | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/golang-web-programming-01-title-Go-and-web-applications/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Golang -Go Web Programming- 01 Go and web applications
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-10 15:45:04" itemprop="dateCreated datePublished" datetime="2019-01-10T15:45:04+08:00">2019-01-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:04:48" itemprop="dateModified" datetime="2020-08-23T22:04:48+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Introduces using Go for web applications, and discusses why it is a good choice for writing web applications. You’ll also learn about key concepts of what web applications are, including a brief introduction to HTTP<code>为什么学习网页开发、Web应用的基本概念</code></p>
+<p><strong>Concepts</strong></p>
+<ul>
+<li>Defining web applications<code>定义</code></li>
+<li>Using Go to write web applications: the advantages<code>优势</code></li>
+<li>Understanding the basics of web application programming<code>基础</code></li>
+<li>Writing the simplest possible web application in Go<code>简单实现</code></li>
+</ul>
+<a id="more"></a>
+
+
+<h2 id="Using-Go-for-web-applications"><a href="#Using-Go-for-web-applications" class="headerlink" title="Using Go for web applications"></a>Using Go for web applications</h2><p><code>开发大规模网站要注意以下几点，以及 Go 是如何解决这些问题的</code></p>
+<p>Large-scale web applications typically need to be</p>
+<ul>
+<li>Scalable</li>
+<li>Modular</li>
+<li>Maintainable</li>
+<li>High-performance</li>
+</ul>
+<h3 id="Scalable-web-applications-and-Go"><a href="#Scalable-web-applications-and-Go" class="headerlink" title="Scalable web applications and Go"></a>Scalable web applications and Go</h3><p><code>伸缩性</code></p>
+<p>We can look at scaling in two ways:</p>
+<ul>
+<li><strong>Vertical scaling(垂直扩展)</strong>, or increasing the amount of CPUs or capacity in a single machine<code>单机硬件扩展</code></li>
+<li><strong>Horizontal scaling(水平扩展)</strong>, or increasing the number of machines to expand capacity<code>直接主机扩展</code></li>
+</ul>
+<p>Go scales well <em>vertically</em> with its excellent support for concurrent programming(并发编程). A single Go web application with <em>a single OS thread</em> can be scheduled to run hundreds of thousands of <strong>goroutines</strong> with efficiency and performance.<code>单核单线程也能发挥并发优势</code>、<code>利用Go语言的优势</code></p>
+<p>Go can scale well <strong>horizontally</strong> as well as by layering a proxy above a number of instances of a Go web app. <code>多个站点共用一套代码</code>、<code>可通过配置Web Server实现</code></p>
+<h3 id="Modular-web-applications-and-Go"><a href="#Modular-web-applications-and-Go" class="headerlink" title="Modular web applications and Go"></a>Modular web applications and Go</h3><p><code>模块化</code>、<code>微服务</code>、<code>大项目拆微服务-微服务组大项目</code></p>
+<p>This approach allows you to add, remove, or modify features easily and gives you the flexibility to meet the changing needs of the application. </p>
+<p>Go implements a number of features usually associated with functional programming, including function types, functions as values, and closures. </p>
+<p>Go is also often used to create <em>microservices</em>. In microservice architecture large-scale applications can be created by composing smaller independent services. By creating multiple small Go services and composing them into a single web application, you enable these capabilities to be swappable and therefore more modular.</p>
+<h3 id="Maintainable-web-applications-and-Go"><a href="#Maintainable-web-applications-and-Go" class="headerlink" title="Maintainable web applications and Go"></a>Maintainable web applications and Go</h3><p><code>可维护性</code>、<code>可读性</code>、<code>正确性</code>、<code>灵活</code>、<code>测试</code></p>
+<p><code>每一种开发语言都是这么说的，实际编码还是看个人、团队、规范</code></p>
+<p>Complex, unwieldy code takes a long time to change and is fraught with risk of something breaking, so it makes sense to keep the source code well organized and maintainable.<code>更好的组织及维护</code></p>
+<p>It has a clean and simple syntax that’s very readable. Go’s package system is flexible and unambiguous, and there’s a good set of tools to enhance the development experience and help programmers to write more readable code.<code>代码是否可读性还是要规范才行!!</code></p>
+<p>The Go documentation tool (<code>godoc</code>) parses Go source code, including <em>comments</em>, and creates documentation in a variety of formats such as HTML and plain text. <code>通过godoc工具，生成说明文档</code></p>
+<p><code>gotest</code> discovers test cases built into the same package and<br>runs functional and performance testing. Go also provides web application testing tools by emulating a web client and recording responses generated by the server.</p>
+<h3 id="High-performing-web-applications-and-Go"><a href="#High-performing-web-applications-and-Go" class="headerlink" title="High performing web applications and Go"></a>High performing web applications and Go</h3><p><code>性能</code>、<code>想与C比肩</code></p>
+<p>High performance means being able to process a large volume of requests within a short period of time. It also means being able to respond to the client quickly and making operations faster for end users.</p>
+<p>One of Go’s design goals is to approach the performance of C, and although it hasn’t reached this goal, the current results are quite competitive. Go also has great concurrency support with <code>goroutines</code>, <em>which allows multiple requests to be processed at the same time</em>. <code>支持多请求</code></p>
+<h2 id="How-web-applications-work"><a href="#How-web-applications-work" class="headerlink" title="How web applications work"></a>How web applications work</h2><p>An application is a software program that interacts with a user and helps the user to perform an activity. A web application is then an application that’s deployed and used through the web.<code>与用户交换信息、交互</code></p>
+<p>In other words, a program needs to fulfill only two criteria to be considered a web app:</p>
+<ul>
+<li>The program must return HTML to a calling client that renders HTML and displays to a user.<code>返回HTML</code></li>
+<li>The data must be transported to the client through HTTP.<code>返回数据 web services</code></li>
+</ul>
+<p>How HTTP came to be the way it is today.</p>
+<h2 id="A-quick-introduction-to-HTTP"><a href="#A-quick-introduction-to-HTTP" class="headerlink" title="A quick introduction to HTTP"></a>A quick introduction to HTTP</h2><p><code>应用级别通信协议</code></p>
+<p>HTTP is the application-level communications protocol that powers the World Wide Web. </p>
+<p>The first version of HTTP (HTTP 0.9) allows a client to open a connection to a server, issue an ASCII character string request, and terminate with a carriage return (CRLF)</p>
+<p><em>HTTP</em> is a stateless, text-based, request-response protocol that uses the client-server computing model.<code>无状态、基于文本、请求响应协议</code> In HTTP, the client is also known as the <em>user-agent</em>. The server is often called the <em>web server</em>.<code>用户代理、Web服务</code></p>
+<p>Subsequent requests to the same server have absolutely no idea what happened before.<code>无状态</code> In comparison, connection-oriented protocols like FTP or Telnet (also request-response and client-server) create a persistent channel between the client and the server.</p>
+<h2 id="The-coming-of-web-applications"><a href="#The-coming-of-web-applications" class="headerlink" title="The coming of web applications"></a>The coming of web applications</h2><p><code>如何动态创建内容</code>、<code>CGI</code>、<code>SSI</code></p>
+<p>One of the early attempts to do this was the <em>Common Gateway Interface</em> (CGI). <em>CGI</em> is a simple interface that allows a web server to interface with a program that’s running separately and externally to the web server process.</p>
+<p>Another technology from the same period is <em>server-side includes</em> (SSI), which are directives you can include in an HTML file.</p>
+<p>The eventual evolution of SSI was to include more complex code in the HTML and use more powerful interpreters. This pattern grew into highly successful engines for building sophisticated web applications such as <em>PHP, ASP, JSP, and ColdFusion</em>.<code>基于SSI方式的开发语言，内嵌服务端代码</code></p>
+<h2 id="HTTP-request"><a href="#HTTP-request" class="headerlink" title="HTTP request"></a>HTTP request</h2><p>Any HTTP message consists：</p>
+<ul>
+<li>Request-line</li>
+<li>Zero or more request headers</li>
+<li>An empty line</li>
+<li>The message body (optional)</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/Protocols/rfc2616/rfc2616.html</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: www.w3.org</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0</span><br><span class="line">(empty line)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Request-methods"><a href="#Request-methods" class="headerlink" title="Request methods"></a>Request methods</h3><p><code>GET</code>、<code>HEAD</code>、<code>POST</code>、<code>PUT</code>、<code>DELETE</code>、<code>TRACE</code>、<code>OPTIONS</code>、<code>CONNECT</code>、<code>PATCH</code></p>
+<p><code>当然是GET POST用得最多了</code></p>
+<ul>
+<li><em>GET</em>—Tells the server to return the specified resource.<code>取特定资源</code></li>
+<li><em>HEAD*—The same as *GET</em> except that the server must not return a message body. This method is often used to get the response headers without carrying the weight of the rest of the message body over the network.<code>可以不要消息体，只要消息头</code></li>
+<li><em>POST</em>—Tells the server that the data in the message body should be passed to the resource identified by the URI. What the server does with the message body is up to the server.</li>
+<li><em>PUT</em>—Tells the server that the data in the message body should be the resource at the given URI. If data already exists at the resource identified by the URI, that data is replaced. Otherwise, a new resource is created at the place where the URI is.</li>
+<li><em>DELETE</em>—Tells the server to remove the resource identified by the URI.</li>
+<li><em>TRACE</em>—Tells the server to return the request. This way, the client can see what the intermediate servers did to the request.</li>
+<li><em>OPTIONS</em>—Tells the server to return a list of HTTP methods that the server supports.</li>
+<li><em>CONNECT</em>—Tells the server to set up a network connection with the client. This method is used mostly for setting up SSL tunneling (to enable HTTPS).</li>
+<li><em>PATCH</em>—Tells the server that the data in the message body modifies the resource identified by the URI.</li>
+</ul>
+<h3 id="Safe-request-methods"><a href="#Safe-request-methods" class="headerlink" title="Safe request methods"></a>Safe request methods</h3><p><code>对服务器资源不作修改的方法</code></p>
+<p>A method is considered safe if it doesn’t change the state of the server—that is, the server provides only information and nothing else. GET, HEAD, OPTIONS, and TRACE are safe methods because they aren’t supposed to change anything on the server. In comparison, POST, PUT, and DELETE methods do change the state of the server; for example, after a POST request is sent, data at the server is supposed to be changed</p>
+<h3 id="Idempotent-request-methods"><a href="#Idempotent-request-methods" class="headerlink" title="Idempotent request methods"></a>Idempotent request methods</h3><p>A method is considered idempotent if the state of the server doesn’t change the second time the method is called with the same data.</p>
+<p>POST is neither a safe nor an idempotent method because subsequent POST requests to the server might (or might not) result in a state change, depending on the server. </p>
+<h3 id="Browser-support-for-request-methods"><a href="#Browser-support-for-request-methods" class="headerlink" title="Browser support for request methods"></a>Browser support for request methods</h3><p><code>HTML只支持GET POST</code>、<code>使用XHR</code></p>
+<p>HTML doesn’t support any other HTTP methods besides GET and POST. To support PUT and DELETE, you can use XMLHttpRequest (XHR). </p>
+<h3 id="Request-headers"><a href="#Request-headers" class="headerlink" title="Request headers"></a>Request headers</h3><p><code>name-value</code></p>
+<p>Request headers are colon-separated name-value pairs in plain text, terminated by a carriage return (CR) and line feed (LF).</p>
+<p>In the past, nonstandard HTTP request fields conventionally started with X-, but this practice has been <em>discontinued</em>.</p>
+<h2 id="HTTP-response"><a href="#HTTP-response" class="headerlink" title="HTTP response"></a>HTTP response</h2><p>the HTTP response consists：</p>
+<ul>
+<li>A status line</li>
+<li>Zero or more response headers</li>
+<li>An empty line</li>
+<li>The message body (optional)</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">200 OK</span><br><span class="line"><span class="attribute">Date</span>: Sat, 22 Nov 2014 12:58:58 GMT</span><br><span class="line"><span class="attribute">Server</span>: Apache/2</span><br><span class="line"><span class="attribute">Last-Modified</span>: Thu, 28 Aug 2014 21:01:33 GMT</span><br><span class="line"><span class="attribute">Content-Length</span>: 33115</span><br><span class="line"><span class="attribute">Content-Type</span>: text/html; charset=iso-8859-1</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/</span><br><span class="line">TR/xhtml1/DTD/xhtml1-strict.dtd"&gt; &lt;html xmlns='http://www.w3.org/1999/</span><br><span class="line">xhtml'&gt; &lt;head&gt;&lt;title&gt;Hypertext Transfer Protocol -- HTTP/1.1&lt;/title&gt;&lt;/</span><br><span class="line"><span class="attribute">head&gt;&lt;body&gt;…&lt;/body&gt;&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Response-status-code"><a href="#Response-status-code" class="headerlink" title="Response status code"></a>Response status code</h3><p><code>1XX</code>、<code>2XX</code>、<code>3XX</code>、<code>4XX</code>、<code>5XX</code></p>
+<ul>
+<li>1XX Informational. This tells the client that the server has already received the request and is processing it.<code>消息</code></li>
+<li>2XX Success. This is what clients want; the server has received the request and has processed it successfully. The standard response in this class is 200 OK.<code>成功</code></li>
+<li>3XX Redirection. This tells the client that the request is received and processed but the client needs to do more to complete the action. Most of the status codes in this class are for URL redirection.<code>重定向</code></li>
+<li>4XX Client Error. This tells the client that there’s something wrong with the request. The most widely known status in this class is 404 Not Found, where the server tells the client that the resource it’s trying to get isn’t found at that URL.<code>客户端错误</code></li>
+<li>5XX Server Error. This tells the client that there’s something wrong with the request but it’s the server’s fault. The generic status code in this class is 500 Internal Server Error.<code>服务器端错误</code></li>
+<li></li>
+</ul>
+<h3 id="Response-headers"><a href="#Response-headers" class="headerlink" title="Response headers"></a>Response headers</h3><p><code>name-value</code></p>
+<p>colonseparated name-value pairs in plain text, terminated by a CR and LF.</p>
+<h2 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h2><p><code>资源在互联网的表示方法</code></p>
+<p>a location string representing a resource on the internet.</p>
+<h2 id="Introducing-HTTP-2"><a href="#Introducing-HTTP-2" class="headerlink" title="Introducing HTTP/2"></a>Introducing HTTP/2</h2><p><code>性能</code>、<code>基于SPDY/2</code></p>
+<p>HTTP/2, the new version of HTTP, focuses on performance. HTTP/2 is based on SPDY/2, an open networking protocol developed primarily at Google for transporting web content, though over time there have been a number of changes.</p>
+<p>Unlike HTTP/1.x, which only allows a single request on a connection at a time, HTTP/2 is fully <em>multiplexed</em>. </p>
+<p>In Go 1.6, if you’re using HTTPS, you’ll be automatically using HTTP/2.</p>
+<h2 id="Parts-of-a-web-app"><a href="#Parts-of-a-web-app" class="headerlink" title="Parts of a web app"></a>Parts of a web app</h2><p><code>处理者</code>、<code>模板引擎</code></p>
+<p>there are two distinct parts of a web app: the handlers and the template engine.</p>
+<h3 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h3><p>A handler receives and processes the HTTP request sent from the client. It also calls the template engine to generate the HTML and finally bundles data into the HTTP response to be sent back to the client. <code>接收处理请求、调用模板引擎生成HTML</code></p>
+<p>the controller would be thin, with only routing and HTTP message unpacking and packing logic. <code>在MVC中，Controller仅包含消息处理逻辑</code></p>
+<h3 id="Template-engine"><a href="#Template-engine" class="headerlink" title="Template engine"></a>Template engine</h3><p>A template is code that can be converted into HTML that’s sent back to the client in an HTTP response message. </p>
+<p>different design philosophies:<code>两种思路</code></p>
+<ul>
+<li>Static templates or logic-less templates <code>静态模板</code></li>
+<li>Active templates often contain HTML too, but in addition to placeholder tokens<code>动态模板</code></li>
+</ul>
+<h2 id="Hello-Go"><a href="#Hello-Go" class="headerlink" title="Hello Go"></a>Hello Go</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 包名</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入包</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span> <span class="comment">// IO处理</span></span><br><span class="line">	<span class="string">"net/http"</span> <span class="comment">// HTTP处理</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 处理函数、函数定义</span></span><br><span class="line">	handle := <span class="function"><span class="keyword">func</span><span class="params">(writer http.ResponseWriter, request *http.Request)</span></span> &#123;</span><br><span class="line">		fmt.Fprint(writer, <span class="string">"hello world %s!"</span>, request.URL.Path[<span class="number">1</span>:])</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 注册</span></span><br><span class="line">	http.HandleFunc(<span class="string">"/"</span>, handle)</span><br><span class="line">	<span class="comment">// 接口并服务</span></span><br><span class="line">	http.ListenAndServe(<span class="string">":8888"</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>fmt</em>, which allows formatted I/O (allowing you to do stuff like Fprintf)</li>
+<li><em>http</em>, which is the main package for interacting with HTTP</li>
+</ul>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>Go is a programming language that is well suited for web programming<code>适合</code></li>
+<li>HTTP is a simple, <em>stateless</em>, <em>text-based</em> client-server protocol used in exchanging data between a client and a server</li>
+<li>There are two major parts of any web application that correspond to requests and responses—handlers and the template engine.<code>处理与模板引擎</code></li>
+<li>Handlers receive HTTP requests and process them<code>处理</code></li>
+<li>The template engine generates HTML that is sent back as part of the HTTP response<code>生成HTML</code></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/10/golang-web-programming-02-title-Go-ChitChat/" rel="next" title="Golang -Go Web Programming- 02 Go ChitChat">
+      Golang -Go Web Programming- 02 Go ChitChat <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Go-for-web-applications"><span class="nav-number">1.</span> <span class="nav-text">Using Go for web applications</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scalable-web-applications-and-Go"><span class="nav-number">1.1.</span> <span class="nav-text">Scalable web applications and Go</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modular-web-applications-and-Go"><span class="nav-number">1.2.</span> <span class="nav-text">Modular web applications and Go</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maintainable-web-applications-and-Go"><span class="nav-number">1.3.</span> <span class="nav-text">Maintainable web applications and Go</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High-performing-web-applications-and-Go"><span class="nav-number">1.4.</span> <span class="nav-text">High performing web applications and Go</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-web-applications-work"><span class="nav-number">2.</span> <span class="nav-text">How web applications work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-quick-introduction-to-HTTP"><span class="nav-number">3.</span> <span class="nav-text">A quick introduction to HTTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-coming-of-web-applications"><span class="nav-number">4.</span> <span class="nav-text">The coming of web applications</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-request"><span class="nav-number">5.</span> <span class="nav-text">HTTP request</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Request-methods"><span class="nav-number">5.1.</span> <span class="nav-text">Request methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Safe-request-methods"><span class="nav-number">5.2.</span> <span class="nav-text">Safe request methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Idempotent-request-methods"><span class="nav-number">5.3.</span> <span class="nav-text">Idempotent request methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Browser-support-for-request-methods"><span class="nav-number">5.4.</span> <span class="nav-text">Browser support for request methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Request-headers"><span class="nav-number">5.5.</span> <span class="nav-text">Request headers</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-response"><span class="nav-number">6.</span> <span class="nav-text">HTTP response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Response-status-code"><span class="nav-number">6.1.</span> <span class="nav-text">Response status code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Response-headers"><span class="nav-number">6.2.</span> <span class="nav-text">Response headers</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URI"><span class="nav-number">7.</span> <span class="nav-text">URI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introducing-HTTP-2"><span class="nav-number">8.</span> <span class="nav-text">Introducing HTTP&#x2F;2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parts-of-a-web-app"><span class="nav-number">9.</span> <span class="nav-text">Parts of a web app</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Handler"><span class="nav-number">9.1.</span> <span class="nav-text">Handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Template-engine"><span class="nav-number">9.2.</span> <span class="nav-text">Template engine</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-Go"><span class="nav-number">10.</span> <span class="nav-text">Hello Go</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">11.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

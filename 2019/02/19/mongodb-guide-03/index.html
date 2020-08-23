@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="内容  添加新文档 insert 删除文档 remove、drop 更新文档 update、$inc、$set、$push、$slice、$sort、$pop、$addToSet、$each、$pull、findAndModify、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB 03 创建、更新和删除文档">
+<meta property="og:url" content="http://yoursite.com/2019/02/19/mongodb-guide-03/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="内容  添加新文档 insert 删除文档 remove、drop 更新文档 update、$inc、$set、$push、$slice、$sort、$pop、$addToSet、$each、$pull、findAndModify、">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-02-19T14:53:23.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:21:51.385Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="DB">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/02/19/mongodb-guide-03/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>MongoDB 03 创建、更新和删除文档 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/mongodb-guide-03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB 03 创建、更新和删除文档
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-02-19 22:53:23" itemprop="dateCreated datePublished" datetime="2019-02-19T22:53:23+08:00">2019-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:21:51" itemprop="dateModified" datetime="2020-08-23T22:21:51+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>内容</p>
+<ul>
+<li>添加新文档 <code>insert</code></li>
+<li>删除文档 <code>remove</code>、<code>drop</code></li>
+<li>更新文档 <code>update</code>、<code>$inc</code>、<code>$set</code>、<code>$push</code>、<code>$slice</code>、<code>$sort</code>、<code>$pop</code>、<code>$addToSet</code>、<code>$each</code>、<code>$pull</code>、<code>findAndModify</code>、</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="插入并保存文档"><a href="#插入并保存文档" class="headerlink" title="插入并保存文档"></a>插入并保存文档</h2><h3 id="批量插入-insert"><a href="#批量插入-insert" class="headerlink" title="批量插入 insert"></a>批量插入 <code>insert</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加</span></span><br><span class="line">&gt; db.task.insert(&#123;</span><br><span class="line">    <span class="string">"title"</span>: <span class="string">"complete analysis"</span>,  </span><br><span class="line">    <span class="string">"date"</span>: new Date(),  </span><br><span class="line">    <span class="string">"expired_date"</span>: new Date(<span class="string">"2019-01-18T06:01:17Z"</span>), <span class="string">"progress"</span>: 0 </span><br><span class="line">&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nInserted"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.insert(&#123;</span><br><span class="line">    <span class="string">"title"</span>: <span class="string">"complete analysis"</span>,  </span><br><span class="line">    <span class="string">"date"</span>: new Date(),  </span><br><span class="line">    <span class="string">"expired_date"</span>: new Date(<span class="string">"2019-01-18T06:01:17Z"</span>), <span class="string">"progress"</span>: 0, </span><br><span class="line">    <span class="string">"_id"</span>: ObjectId()</span><br><span class="line">&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nInserted"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.find()</span><br><span class="line">&#123; </span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>), </span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>, </span><br><span class="line">    <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T17:44:14.907Z"</span>), </span><br><span class="line">    <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>), </span><br><span class="line">    <span class="string">"progress"</span> : 0 </span><br><span class="line">&#125;</span><br><span class="line">&#123; </span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3ccaa0cdaa4a7ef12b91c1"</span>), </span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>, </span><br><span class="line">    <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T17:45:04.337Z"</span>), </span><br><span class="line">    <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>), </span><br><span class="line">    <span class="string">"progress"</span> : 0 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果没有指定 <code>_id</code> ，全自动生成一个</p>
+<p>如果向集合中插入多个文档，使用批量插入会快点，可以将一组文档传递给数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.t.insert([</span><br><span class="line">    &#123;<span class="string">"_id"</span>: ObjectId()&#125;, </span><br><span class="line">    &#123;<span class="string">"_id"</span>: ObjectId()&#125;, </span><br><span class="line">    &#123;<span class="string">"_id"</span>: ObjectId()&#125;</span><br><span class="line">])</span><br><span class="line">BulkWriteResult(&#123;</span><br><span class="line">    <span class="string">"writeErrors"</span> : [ ],</span><br><span class="line">    <span class="string">"writeConcernErrors"</span> : [ ],</span><br><span class="line">    <span class="string">"nInserted"</span> : 3,</span><br><span class="line">    <span class="string">"nUpserted"</span> : 0,</span><br><span class="line">    <span class="string">"nMatched"</span> : 0,</span><br><span class="line">    <span class="string">"nModified"</span> : 0,</span><br><span class="line">    <span class="string">"nRemoved"</span> : 0,</span><br><span class="line">    <span class="string">"upserted"</span> : [ ]</span><br><span class="line">&#125;)</span><br><span class="line">&gt; db.t.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3ccb93cdaa4a7ef12b91c2"</span>) &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3ccb93cdaa4a7ef12b91c3"</span>) &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3ccb93cdaa4a7ef12b91c4"</span>) &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除文档-remove、drop"><a href="#删除文档-remove、drop" class="headerlink" title="删除文档 remove、drop"></a>删除文档 <code>remove</code>、<code>drop</code></h2><p><code>remove</code> 函数接受一个查询文档作为可选参数，给定这个参数以后，只有符合条件的文档才被删除，删除数据是永久性，不能撤销，也不能恢复</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.t.remove(&#123;<span class="string">"_id"</span>: ObjectId(<span class="string">"5c3ccb93cdaa4a7ef12b91c2"</span>)&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nRemoved"</span> : 1 &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>drop</code> 在不指定限定文档的条件下，将删除整个集合及其元数据</p>
+<h2 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.task.findOne()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>),</span><br><span class="line">	<span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">	<span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T17:44:14.907Z"</span>),</span><br><span class="line">	<span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>),</span><br><span class="line">	<span class="string">"progress"</span> : 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将 <code>date</code> 和 <code>expired_date</code> 进行组合成 <code>relation_date</code> ，并将原来的替换，可以在 <code>shell</code> 中实现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&gt; task.relation_date = &#123;</span><br><span class="line">    <span class="string">"date"</span>: task.date, </span><br><span class="line">    <span class="string">"expired_date"</span>: task.expired_date</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T17:44:14.907Z"</span>),</span><br><span class="line">    <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>)</span><br><span class="line">&#125;</span><br><span class="line">&gt; delete task.date</span><br><span class="line"><span class="literal">true</span></span><br><span class="line">&gt; delete task.expired_date</span><br><span class="line"><span class="literal">true</span></span><br><span class="line">&gt; db.task.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span>: task._id <span class="comment"># 限定条件</span></span><br><span class="line">    &#125;, </span><br><span class="line">    task <span class="comment"># 新的文档</span></span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>),</span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">    <span class="string">"progress"</span> : 0,</span><br><span class="line">    <span class="string">"relation_date"</span> : &#123;</span><br><span class="line">        <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T17:44:14.907Z"</span>),</span><br><span class="line">        <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键：确保指定一个唯一的 <code>&quot;_id&quot;</code></p>
+<h3 id="使用修改器"><a href="#使用修改器" class="headerlink" title="使用修改器"></a>使用修改器</h3><p>可以使用原子性的更新修改器(update modifier)，指定对文档中的某些字段进行更新。更新修改器是种特殊的键</p>
+<h4 id="set-修改器"><a href="#set-修改器" class="headerlink" title="$set 修改器"></a><code>$set</code> 修改器</h4><p><code>$set</code> 用于指定一个字段的值，如果这个字段不存在，则创建它。可用于修改或增加字段</p>
+<p>为上述中的<code>task</code>增加一个<code>operator</code>字段，并设置为<code>J4K</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.task.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span>: ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>)</span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$set</span>"</span>: &#123; <span class="string">"operator"</span>: <span class="string">"J4K"</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.find(&#123;<span class="string">"_id"</span>:ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>)&#125;)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>), </span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>, </span><br><span class="line">    <span class="string">"progress"</span> : 0, </span><br><span class="line">    <span class="string">"relation_date"</span> : &#123; </span><br><span class="line">        <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T17:44:14.907Z"</span>), </span><br><span class="line">        <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>) </span><br><span class="line">    &#125;, </span><br><span class="line">    <span class="string">"operator"</span> : <span class="string">"J4K"</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>$set</code> 修改内嵌文档，用 <code>field1.field2</code>，如下，将 <code>relation_date.date</code> 更新当前时间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.task.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span>:ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>)</span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$set</span>"</span>: &#123;<span class="string">"relation_date.date"</span>: new ISODate()&#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>),</span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">    <span class="string">"progress"</span> : 0,</span><br><span class="line">    <span class="string">"relation_date"</span> : &#123;</span><br><span class="line">        <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-15T15:05:08.587Z"</span>),</span><br><span class="line">        <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"operator"</span> : <span class="string">"J4K"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="inc-增加或减少"><a href="#inc-增加或减少" class="headerlink" title="$inc 增加或减少"></a><code>$inc</code> 增加或减少</h4><p><code>$inc</code> 修改器用来增加已有键的值，或者该键不存在那就创建一个</p>
+<p><code>$inc</code>只能用于整型、长整型或双精度浮点型的值，其值必须为数字，指定负数即减少</p>
+<p>假设上述的任务已经完成了30%，使用 <code>$inc</code> 就可以完成操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.task.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span>:ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>)</span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$inc</span>"</span>: &#123; <span class="string">"progress"</span>: 30 &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>),</span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">    <span class="string">"progress"</span> : 30,</span><br><span class="line">    <span class="string">"relation_date"</span> : &#123;</span><br><span class="line">        <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-15T15:05:08.587Z"</span>),</span><br><span class="line">        <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"operator"</span> : <span class="string">"J4K"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="push-each-数组修改器"><a href="#push-each-数组修改器" class="headerlink" title="$push $each 数组修改器"></a><code>$push</code> <code>$each</code> 数组修改器</h4><p><code>$push</code> 会向已有的数组末尾加入一个元素，要是没有就创建一个新的数组</p>
+<p>对任务 task 进行评价，可以有多个评价，新增<code>comments</code>字段</p>
+<p><code>$each</code>子操作可以通过<code>$push</code>向数组添加多个值</p>
+<p><code>$slice</code>子操作可以用于控制数组长度，只能是负数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.task.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span>: ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>)</span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$push</span>"</span>: &#123; <span class="string">"comments"</span>: <span class="string">"做的还行"</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>),</span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">    <span class="string">"progress"</span> : 30,</span><br><span class="line">    <span class="string">"relation_date"</span> : &#123;</span><br><span class="line">        <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-15T15:05:08.587Z"</span>),</span><br><span class="line">        <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"operator"</span> : <span class="string">"J4K"</span>,</span><br><span class="line">    <span class="string">"comments"</span> : [</span><br><span class="line">        <span class="string">"做的还行"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 再对其进行评价</span></span><br><span class="line">&gt; db.task.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span>: ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>)</span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$push</span>"</span>: &#123;<span class="string">"comments"</span>: <span class="string">"再接再厉"</span>&#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>),</span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">    <span class="string">"progress"</span> : 30,</span><br><span class="line">    <span class="string">"relation_date"</span> : &#123;</span><br><span class="line">        <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-15T15:05:08.587Z"</span>),</span><br><span class="line">        <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"operator"</span> : <span class="string">"J4K"</span>,</span><br><span class="line">    <span class="string">"comments"</span> : [</span><br><span class="line">        <span class="string">"做的还行"</span>,</span><br><span class="line">        <span class="string">"再接再厉"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 使用`$each`子操作</span></span><br><span class="line">&gt; db.task.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span>:ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>)</span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$push</span>"</span>: &#123;</span><br><span class="line">            <span class="string">"comments"</span>: &#123;</span><br><span class="line">                <span class="string">"<span class="variable">$each</span>"</span>: [ <span class="string">"这点要改"</span>, <span class="string">"可以使用下go"</span> ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cca6ecdaa4a7ef12b91c0"</span>),</span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">    <span class="string">"progress"</span> : 30,</span><br><span class="line">    <span class="string">"relation_date"</span> : &#123;</span><br><span class="line">        <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-15T15:05:08.587Z"</span>),</span><br><span class="line">        <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"operator"</span> : <span class="string">"J4K"</span>,</span><br><span class="line">    <span class="string">"comments"</span> : [</span><br><span class="line">        <span class="string">"做的还行"</span>,</span><br><span class="line">        <span class="string">"再接再厉"</span>,</span><br><span class="line">        <span class="string">"这点要改"</span>,</span><br><span class="line">        <span class="string">"可以使用下go"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="将数组作为数据集使用"><a href="#将数组作为数据集使用" class="headerlink" title="将数组作为数据集使用"></a>将数组作为数据集使用</h4><p>可以保证数组内的元素不会重复</p>
+<p>假设一个流程有多个成员，在 <code>db.process</code> 集合中有下面一组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.process.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3e064acdaa4a7ef12b91cb"</span>),</span><br><span class="line">    <span class="string">"name"</span> : <span class="string">"RD"</span>,</span><br><span class="line">    <span class="string">"members"</span> : [</span><br><span class="line">        <span class="string">"J4K"</span>,</span><br><span class="line">        <span class="string">"J4A"</span>,</span><br><span class="line">        <span class="string">"J42"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>欲再次将 <code>J4K</code> 加入，为保证元素不重复，可以如下操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.process.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"name"</span>:<span class="string">"RD"</span>, </span><br><span class="line">        <span class="string">"members"</span>: &#123; <span class="string">"<span class="variable">$ne</span>"</span>: <span class="string">"J4K"</span> &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$push</span>"</span>: &#123; <span class="string">"members"</span>: <span class="string">"J4K"</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 0, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 0 &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>$ne</code>，即 <code>not equal</code>，因为 <code>&quot;name&quot;:&quot;RD&quot;</code> 的 <code>process</code> 中的 <code>members</code> 中已经有一个 <code>J4K</code> 了，所以查不到相匹配的文档，即<code>&quot;nMatched&quot; : 0</code>。其实还是一个查找匹配的问题</p>
+<p>有时候更适合使用 <code>$addToSet</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.process.update(</span><br><span class="line">    &#123; <span class="string">"name"</span>: <span class="string">"RD"</span> &#125;,</span><br><span class="line">    &#123; <span class="string">"<span class="variable">$addToSet</span>"</span>: &#123; <span class="string">"members"</span>: <span class="string">"J4K"</span> &#125; &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 0 &#125;)</span><br><span class="line">&gt; db.process.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3e064acdaa4a7ef12b91cb"</span>),</span><br><span class="line">    <span class="string">"name"</span> : <span class="string">"RD"</span>,</span><br><span class="line">    <span class="string">"members"</span> : [</span><br><span class="line">        <span class="string">"J4K"</span>,</span><br><span class="line">        <span class="string">"J4A"</span>,</span><br><span class="line">        <span class="string">"J42"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将 <code>$addToSet</code> 与 <code>$each</code> 相结合，可以加入多个值，并且不会产生重复</p>
+<h4 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h4><p>使用 <code>$pop</code> 修改器可以从数组的任何一端删除元素，<code>{&quot;$pop&quot;: {&quot;key&quot;: 1}}</code> 从数组的末尾删除，<code>{&quot;$pop&quot;: {&quot;key&quot;: -1}}</code> 从数组的头部删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.process.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3e064acdaa4a7ef12b91cb"</span>)</span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$pop</span>"</span>: &#123; <span class="string">"members"</span>: 1 &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.process.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3e064acdaa4a7ef12b91cb"</span>),</span><br><span class="line">    <span class="string">"name"</span> : <span class="string">"RD"</span>,</span><br><span class="line">    <span class="string">"members"</span> : [</span><br><span class="line">        <span class="string">"J4K"</span>,</span><br><span class="line">        <span class="string">"J4A"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>$pull</code> 删除数组中匹配的元素</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.process.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3e064acdaa4a7ef12b91cb"</span>)</span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$pull</span>"</span>: &#123; <span class="string">"members"</span>: <span class="string">"J4K"</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.process.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3e064acdaa4a7ef12b91cb"</span>),</span><br><span class="line">    <span class="string">"name"</span> : <span class="string">"RD"</span>,</span><br><span class="line">    <span class="string">"members"</span> : [</span><br><span class="line">        <span class="string">"J4A"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="基于位置的数组修改器"><a href="#基于位置的数组修改器" class="headerlink" title="基于位置的数组修改器"></a>基于位置的数组修改器</h4><p>有两种方法操作数组中的值：通过<code>位置</code>或<code>定位操作符$</code></p>
+<p>直接使用数组下标进行修改，将上述的成员<code>J4A</code>修改成<code>J4B</code>，使用下标0</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.process.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3e064acdaa4a7ef12b91cb"</span>)</span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$set</span>"</span>: &#123; <span class="string">"members.0"</span>: <span class="string">"J4B"</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.process.findOne()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"_id"</span> : ObjectId(<span class="string">"5c3e064acdaa4a7ef12b91cb"</span>),</span><br><span class="line">	<span class="string">"name"</span> : <span class="string">"RD"</span>,</span><br><span class="line">	<span class="string">"members"</span> : [</span><br><span class="line">		<span class="string">"J4B"</span></span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>加入新成员<code>J4C</code>后，希望通过位置操作符<code>$</code>将其修改为<code>J4D</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.process.update(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"members"</span>: <span class="string">"J4C"</span></span><br><span class="line">    &#125;, </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"<span class="variable">$set</span>"</span>: &#123; <span class="string">"members.$"</span>: <span class="string">"J4D"</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.process.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3e064acdaa4a7ef12b91cb"</span>),</span><br><span class="line">    <span class="string">"name"</span> : <span class="string">"RD"</span>,</span><br><span class="line">    <span class="string">"members"</span> : [</span><br><span class="line">        <span class="string">"J4B"</span>,</span><br><span class="line">        <span class="string">"J4D"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改器的速度"><a href="#修改器的速度" class="headerlink" title="修改器的速度"></a>修改器的速度</h4><p>数组修改器可能会改变文档的大小，就会慢一些，因为要移动文档</p>
+<h3 id="upsert"><a href="#upsert" class="headerlink" title="upsert"></a>upsert</h3><p><code>update</code> 的第三个参数</p>
+<p>upsert是一种特殊的更新，要是没有找到符合更新条件的文档，就会以这个条件和更新文档为基础创建一个新的文档</p>
+<p>同一套代码既可以用于创建文档又可以用于更新文档</p>
+<p>使用upsert的方法，就是指定 <code>update</code> 方法的第三个参数，将其设置为 <code>true</code></p>
+<h3 id="更新多个文档"><a href="#更新多个文档" class="headerlink" title="更新多个文档"></a>更新多个文档</h3><p><code>update</code> 的第四个参数</p>
+<p>默认情况下，更新只能对符合匹配条件的第一个文档执行操作，要指明对多个文档进行修改，可将 <code>update</code> 的第四个参数设置为 <code>true</code> </p>
+<h3 id="返回被更新的文档"><a href="#返回被更新的文档" class="headerlink" title="返回被更新的文档"></a>返回被更新的文档</h3><p><code>findAndModify</code>命令能够在一个操作中返回匹配结果并且进行更新</p>
+<!-- TODO：再写一个合适的例子 -->
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DB/" rel="tag"># DB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/02/19/mongodb-guide-02/" rel="prev" title="MongoDB 02 基础知识">
+      <i class="fa fa-chevron-left"></i> MongoDB 02 基础知识
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/02/19/mongodb-guide-04/" rel="next" title="MongoDB 04 查询">
+      MongoDB 04 查询 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#插入并保存文档"><span class="nav-number">1.</span> <span class="nav-text">插入并保存文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#批量插入-insert"><span class="nav-number">1.1.</span> <span class="nav-text">批量插入 insert</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文档-remove、drop"><span class="nav-number">2.</span> <span class="nav-text">删除文档 remove、drop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新文档"><span class="nav-number">3.</span> <span class="nav-text">更新文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用修改器"><span class="nav-number">3.1.</span> <span class="nav-text">使用修改器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#set-修改器"><span class="nav-number">3.1.1.</span> <span class="nav-text">$set 修改器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inc-增加或减少"><span class="nav-number">3.1.2.</span> <span class="nav-text">$inc 增加或减少</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#push-each-数组修改器"><span class="nav-number">3.1.3.</span> <span class="nav-text">$push $each 数组修改器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将数组作为数据集使用"><span class="nav-number">3.1.4.</span> <span class="nav-text">将数组作为数据集使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除元素"><span class="nav-number">3.1.5.</span> <span class="nav-text">删除元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于位置的数组修改器"><span class="nav-number">3.1.6.</span> <span class="nav-text">基于位置的数组修改器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改器的速度"><span class="nav-number">3.1.7.</span> <span class="nav-text">修改器的速度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upsert"><span class="nav-number">3.2.</span> <span class="nav-text">upsert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新多个文档"><span class="nav-number">3.3.</span> <span class="nav-text">更新多个文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回被更新的文档"><span class="nav-number">3.4.</span> <span class="nav-text">返回被更新的文档</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

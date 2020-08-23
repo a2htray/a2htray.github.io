@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="压缩及解压缩操作，tar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux -Linux Shell 脚本攻略- 06 B计划">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/linux-shell-tactics-06/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="压缩及解压缩操作，tar">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-12T14:04:29.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:16:02.382Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/12/linux-shell-tactics-06/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Linux -Linux Shell 脚本攻略- 06 B计划 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux -Linux Shell 脚本攻略- 06 B计划
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-12 22:04:29" itemprop="dateCreated datePublished" datetime="2019-01-12T22:04:29+08:00">2019-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:16:02" itemprop="dateModified" datetime="2020-08-23T22:16:02+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>压缩及解压缩操作，<code>tar</code></p>
+<a id="more"></a>
+
+<h2 id="用-tar-进行归档"><a href="#用-tar-进行归档" class="headerlink" title="用 tar 进行归档"></a>用 <code>tar</code> 进行归档</h2><p>格式：<code>tar 选项 包名 文件列表</code></p>
+<p><code>tar</code>命令用于归档文件，可以将多个文件或目录保存成单个文件，同时还能保留所有的文件属性</p>
+<p><code>A c d r u x f v</code></p>
+<ul>
+<li><code>-c</code>：表示创建文件</li>
+<li><code>-f</code>：指定创建文件的文件名</li>
+<li><code>-v</code>或<code>-vv</code>：显示具体信息</li>
+</ul>
+<p>如果有需要创建文件，则<code>f</code>必为最后一项</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -cf tmp.tar file1 file2 file3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-r</code>：追加文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -crf tmp.tar file4</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-x</code>：用于提取文件</li>
+<li><code>-C</code>：指定提取到的目录</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xf tmp.tar -C /tmp</span><br><span class="line"><span class="comment"># 提取特定文件</span></span><br><span class="line"><span class="comment"># file3将不被提取</span></span><br><span class="line">$ tar -xvf tmp.tar file1 file2</span><br><span class="line"><span class="comment"># 指定stdout作为输出文件</span></span><br><span class="line"><span class="comment"># 第一个 -f 指定stdout作为输出文件</span></span><br><span class="line"><span class="comment"># 第二个 -f 指定stdin作为输入文件</span></span><br><span class="line">$ tar -cf - file1 file2 file3 | tar -xvf - -C /tmp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-A</code>：合并两个tar包</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将tmp2.tar中的内容合并到tmp1.tar中</span></span><br><span class="line">$ tar -Af tmp1.tar tmp2.tar</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-t</code>：查看tar包内容</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -tvf tmp1.tar</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-u</code>：通过检查时间戳来更新归档文件中的内容，只比归档文件中内容新才被加进去</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ tar -tvvf tmp1.tar</span><br><span class="line">file1</span><br><span class="line">file2</span><br><span class="line">file3</span><br><span class="line"><span class="comment"># 如果file1比tmp1.tar中的file1新，则加入</span></span><br><span class="line">$ tar -uvvf tmp1.tar file1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>--delete</code>：从给定的归档文件中删除文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar -f tmp.tar --delete file1 file2</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ tar --delete --file tmp.tar file1 file2</span><br></pre></td></tr></table></figure>
+
+<p>不同的tar选项可以用来指定不同的压缩格式</p>
+<ul>
+<li><code>-j</code>：指定bunzip2格式</li>
+<li><code>-z</code>：指定gzip格式</li>
+<li><code>--lzma</code>：指定lzma格式</li>
+<li><code>-a</code>或<code>--auto-compress</code>：根据文件文件名自动识别压缩格式</li>
+<li><code>--exclude</code>：通过指定样式排除匹配通配符的文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ tar -cvvf tmp.tar ./ --exclude <span class="string">"*.go"</span></span><br><span class="line"><span class="comment"># -a 根据扩展名进行自动判断</span></span><br><span class="line">$ tar -cavvf archive.tar.gz file1 file2 file3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-X</code>：若文件列表记录在某文件中，可使用该选项对记录的文件进行排除</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat file.list</span><br><span class="line">hello.go</span><br><span class="line">world.go</span><br><span class="line">main.go</span><br><span class="line">$ tar -cvvf tmp.tar ./ -X file.list</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>--exclude-cvs</code>：不对用于管理版本的目录进行归档</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar --exclude-cvs -czvvf code.tar.gz source_code_dir</span><br></pre></td></tr></table></figure>
+
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -czvvf archive.tar.gz file1 file2 file3</span><br></pre></td></tr></table></figure>
+
+<h2 id="用-gunzip-或-gzip-压缩"><a href="#用-gunzip-或-gzip-压缩" class="headerlink" title="用 gunzip 或 gzip 压缩"></a>用 <code>gunzip</code> 或 <code>gzip</code> 压缩</h2><p><code>gzip</code>只能压缩单个文件，无法对目录和多个文件进行压缩</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ls -alh 5*</span><br><span class="line">-rw-r--r--  1 a2htray  staff   1.3K Mar 13  2018 5.dat</span><br><span class="line">$ ls -alh 5.dat.gz</span><br><span class="line">-rw-r--r--  1 a2htray  staff    39B Mar 13  2018 5.dat.gz</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-l</code>：列出压缩文件属性</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩后大小、压缩前大小、压缩率、原文件名</span></span><br><span class="line">$ gzip -l 5.dat.gz</span><br><span class="line">    compressed uncompressed  ratio uncompressed_name</span><br><span class="line">            39         1380  97.2% 5.dat</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-c</code>：利用 stdout 进行压缩，与重定向 <code>&gt;</code> 配合</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat 5.dat | gzip -c &gt; 5.bat.gz</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>--fast</code> 或 <code>--best</code>：指定最低或最高压缩比</li>
+</ul>
+<p><code>zcat</code>命令无需解压缩，直接从<code>.gz</code>文件中提取内容，并打印到stdout</p>
+<h2 id="用-bunzip-或-bzip-压缩"><a href="#用-bunzip-或-bzip-压缩" class="headerlink" title="用 bunzip 或 bzip 压缩"></a>用 <code>bunzip</code> 或 <code>bzip</code> 压缩</h2><p><code>bunzip2</code> 是另一种与 <code>gzip</code> 类似的压缩技术，生成的文件比 <code>gzip</code> 更小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ls -alh test.awk</span><br><span class="line">-rw-r--r--  1 a2htray  staff   143B Mar 13  2018 test.awk</span><br><span class="line"><span class="comment"># 会删除原文件</span></span><br><span class="line">$ bzip2 test.awk</span><br><span class="line">$ ls -alh test.awk.bz2</span><br><span class="line">-rw-r--r--  1 a2htray  staff   126B Mar 13  2018 test.awk.bz2</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-c</code>：利用 stdout 进行压缩，与重定向 <code>&gt;</code> 配合</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 该方法可以保留原文件</span></span><br><span class="line">$ cat test.awk | bzip2 -c &gt; test.awk.bz2</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-k</code>：不进行文件删除的操作</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ls test.awk*</span><br><span class="line">test.awk.bz2</span><br><span class="line">$ bunzip2 test.awk.bz2 -k</span><br><span class="line">$ ls <span class="built_in">test</span>.*</span><br><span class="line">test.awk     test.awk.bz2</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用lzma压缩"><a href="#使用lzma压缩" class="headerlink" title="使用lzma压缩"></a>使用<code>lzma</code>压缩</h2><p>与 <code>gzip</code> 和 <code>bzip2</code> 相比，<code>lzma</code>是一个相对较新的压缩工具，它提供了比 <code>gzip</code> 和 <code>bzip2</code> 更好的压缩率</p>
+<p><code>lzma</code> 会删除原文件，使用 <code>-c</code> 配合定向符 <code>&gt;</code> 保留原文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ lzma test.awk</span><br><span class="line">$ ls -alh <span class="built_in">test</span>.*</span><br><span class="line">-rw-r--r--  1 a2htray  staff   118B Jan 12 11:46 test.awk.lzma</span><br><span class="line">$ unlzma test.awk.lzma</span><br><span class="line">$ ls -alh <span class="built_in">test</span>.*</span><br><span class="line">-rw-r--r--  1 a2htray  staff   143B Jan 12 11:46 test.awk</span><br><span class="line">$ cat test.awk | lzma -c &gt; test.awk.lzma</span><br><span class="line">$ ls -alh <span class="built_in">test</span>.*</span><br><span class="line">-rw-r--r--  1 a2htray  staff   143B Jan 12 11:46 test.awk</span><br><span class="line">-rw-r--r--  1 a2htray  staff   118B Jan 12 11:56 test.awk.lzma</span><br></pre></td></tr></table></figure>
+
+<p>两种创建 <code>lzma</code> 压缩文件的方法，只使用 <code>tar</code> 和配合使用 <code>tar</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ tar -cvvf --lzma tmp.tar.lzma .</span><br><span class="line">$ tar -cavvf tmp.tar.lzma .</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">$ tar -cvvf tmp.tar .</span><br><span class="line">$ lzma tmp.tar</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-k</code>：不进行文件删除的操作</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ unlzma test.awk.lzma -k</span><br><span class="line">$ ls -alh <span class="built_in">test</span>.*</span><br><span class="line">-rw-r--r--  1 a2htray  staff   143B Jan 12 11:56 test.awk</span><br><span class="line">-rw-r--r--  1 a2htray  staff   118B Jan 12 11:56 test.awk.lzma</span><br></pre></td></tr></table></figure>
+
+<h2 id="用-zip-进行压缩"><a href="#用-zip-进行压缩" class="headerlink" title="用 zip 进行压缩"></a>用 <code>zip</code> 进行压缩</h2><p>完成压缩和解压缩不会删除文件</p>
+<ul>
+<li><code>-r</code>：进行递归操作</li>
+<li><code>-u</code>：用于更新文件操作</li>
+<li><code>-d</code>：从压缩文件中删除文件</li>
+<li><code>-l</code>：显示压缩文件中的内容</li>
+</ul>
+<h2 id="用-rsync-备份系统快照"><a href="#用-rsync-备份系统快照" class="headerlink" title="用 rsync 备份系统快照"></a>用 <code>rsync</code> 备份系统快照</h2><p>备份数据是多数系统管理员的日常工作。我们可能要备份 Web服务器 上的数据，也可能要备份远端数据。<code>rsync</code> 可以对位于不同位置的文件和目录进行备份，它可以借助差异计算以及压缩技术来最小化数据传输量。</p>
+<p>它还支持网络数据传输，在进行复制的同时，<code>rsync</code> 会比较源端和目的端的文件，只有文件有更新时才进行复制</p>
+<p>使用 <code>SSH</code> 连接远程主机</p>
+<ul>
+<li><code>-a</code>：进行归档</li>
+<li><code>-v</code>：显示详细信息</li>
+<li><code>-z</code>：传输时进行压缩</li>
+</ul>
+<p>路径信息可以是本地路径，也可以是远端服务器路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rsync -zav source_path destination_path</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>--exclude</code>：排除特定文件，利用通配符</li>
+<li><code>--delete</code>：删除在源端已经不存在的文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rsync -avz source_path destination_path --delete</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-05/" rel="prev" title="Linux -Linux Shell 脚本攻略- 05 没这么事">
+      <i class="fa fa-chevron-left"></i> Linux -Linux Shell 脚本攻略- 05 没这么事
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-07/" rel="next" title="Linux -Linux Shell 脚本攻略- 07 无网不利">
+      Linux -Linux Shell 脚本攻略- 07 无网不利 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用-tar-进行归档"><span class="nav-number">1.</span> <span class="nav-text">用 tar 进行归档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-gunzip-或-gzip-压缩"><span class="nav-number">2.</span> <span class="nav-text">用 gunzip 或 gzip 压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-bunzip-或-bzip-压缩"><span class="nav-number">3.</span> <span class="nav-text">用 bunzip 或 bzip 压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用lzma压缩"><span class="nav-number">4.</span> <span class="nav-text">使用lzma压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-zip-进行压缩"><span class="nav-number">5.</span> <span class="nav-text">用 zip 进行压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-rsync-备份系统快照"><span class="nav-number">6.</span> <span class="nav-text">用 rsync 备份系统快照</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

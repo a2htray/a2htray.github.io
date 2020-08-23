@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="cat、find、xargs、tr、md5sum、sort、uniq、split、%、#  cat：读取、显示或拼接文件内容 find：文件查找 xargs：使用 stdin 并提供命令行参数来执行其他命令 tr：替换、删除以及压缩操作 translate md5sum、md5deep：用于文件完整性测试的特定密钥就被称为校验和 sort：对文件和标准输出进行排序操作 uniq：唯一行操作 spl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux -Linux Shell 脚本攻略- 02 命令之乐">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/linux-shell-tactics-02/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="cat、find、xargs、tr、md5sum、sort、uniq、split、%、#  cat：读取、显示或拼接文件内容 find：文件查找 xargs：使用 stdin 并提供命令行参数来执行其他命令 tr：替换、删除以及压缩操作 translate md5sum、md5deep：用于文件完整性测试的特定密钥就被称为校验和 sort：对文件和标准输出进行排序操作 uniq：唯一行操作 spl">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-12T13:59:54.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:15:43.716Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/12/linux-shell-tactics-02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Linux -Linux Shell 脚本攻略- 02 命令之乐 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux -Linux Shell 脚本攻略- 02 命令之乐
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-12 21:59:54" itemprop="dateCreated datePublished" datetime="2019-01-12T21:59:54+08:00">2019-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:15:43" itemprop="dateModified" datetime="2020-08-23T22:15:43+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><code>cat</code>、<code>find</code>、<code>xargs</code>、<code>tr</code>、<code>md5sum</code>、<code>sort</code>、<code>uniq</code>、<code>split</code>、<code>%</code>、<code>#</code></p>
+<ul>
+<li><code>cat</code>：读取、显示或拼接文件内容</li>
+<li><code>find</code>：文件查找</li>
+<li><code>xargs</code>：使用 stdin 并提供命令行参数来执行其他命令</li>
+<li><code>tr</code>：替换、删除以及压缩操作 <code>translate</code></li>
+<li><code>md5sum、md5deep</code>：用于文件完整性测试的特定密钥就被称为校验和</li>
+<li><code>sort</code>：对文件和标准输出进行排序操作</li>
+<li><code>uniq</code>：唯一行操作</li>
+<li><code>split</code>：文件分割操作</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h2><p><code>cat</code> 命令简约却不失优美，通常用于读取、显示或拼接文件内容，还能从标准输入中读取</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -al | cat - file.txt</span><br></pre></td></tr></table></figure>
+
+<p><code>-</code> 作为标准输入的文件名，将 <code>ls -al</code> 的标准输出与 <code>file.txt</code> 中内容拼接起来</p>
+<p>选项</p>
+<ul>
+<li><code>-s</code> ：压缩连续的空白行成一个空白行</li>
+<li><code>-n</code> ：打印行号</li>
+<li><code>-T</code>：显示制表符</li>
+<li><code>-c-N</code>：提出每行前N个字符</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat -c-5 hello_world.go</span><br></pre></td></tr></table></figure>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>过滤条件包括：<strong>文件名、路径名、目录深度、文件类型、文件时间、文件大小等</strong></p>
+<p>格式：<code>find 目录 [选项]</code></p>
+<p><code>find</code> 命令的工作方式如下：沿着文件层次结构向下遍历，匹配符合条件的文件，并执行相应的操作</p>
+<ul>
+<li>-print：使用 <code>\n</code> 连接条目</li>
+<li>-print0：使用 <code>\0</code> 连接条目</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出当前目录及子目录下所有的文件和文件夹</span></span><br><span class="line">$ find .</span><br><span class="line">$ find . -<span class="built_in">print</span></span><br><span class="line">$ find . -print0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-name</code>：用于指定文件名必须匹配的字符串，<code>通配符</code></li>
+<li><code>-iname</code>：与 <code>-name</code> 一样，但会忽略大小写，<code>通配符</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ find . -name <span class="string">"cs*"</span></span><br><span class="line">./css</span><br><span class="line">$ find . -iname <span class="string">"*S*"</span></span><br><span class="line">./css</span><br><span class="line">./js</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>-o</code> 进行<strong>或条件</strong>匹配</li>
+<li>使用 <code>-a</code> 进行<strong>与条件</strong>匹配</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># or</span></span><br><span class="line">$ find . -name <span class="string">"cs*"</span> -o -name <span class="string">"j*"</span></span><br><span class="line">./css</span><br><span class="line">./js</span><br><span class="line"><span class="comment"># and</span></span><br><span class="line">$ find . -name <span class="string">"cs*"</span> -a -name <span class="string">"*"</span></span><br><span class="line">./css</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>-path</code> 可以对路径和文件进行匹配，使用通配符，<code>-name</code> 只对文件名有效</li>
+<li>使用 <code>-regex</code> 基于正则进行匹配</li>
+<li>使用 <code>-iregex</code> 基于正则进行匹配，忽略大小写</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ find /Users/a2htray/workspace/yaf/public -path <span class="string">"*a2h*"</span> -<span class="built_in">print</span></span><br><span class="line">/Users/a2htray/workspace/yaf/public/css</span><br><span class="line">/Users/a2htray/workspace/yaf/public/js</span><br><span class="line">/Users/a2htray/workspace/yaf/public/img</span><br><span class="line">$ find /Users/a2htray/workspace/yaf/public -regex <span class="string">".*a2h.*"</span> -<span class="built_in">print</span></span><br><span class="line">/Users/a2htray/workspace/yaf/public/css</span><br><span class="line">/Users/a2htray/workspace/yaf/public/js</span><br><span class="line">/Users/a2htray/workspace/yaf/public/img</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>!</code> 进行否定</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find /Users/a2htray/workspace/yaf/public ! -regex <span class="string">".*a2h.*"</span> -<span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>-maxdepth</code>、<code>-mindepth</code> 选项限制遍历的深度</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ find . -maxdepth 1 -mindepth 1 -name <span class="string">"*.php"</span></span><br><span class="line">./bootstrap.php</span><br><span class="line">./cli-config.php</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-type</code>：指定文件类型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>文件类型</th>
+<th>类型参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>普通文件</td>
+<td>f</td>
+</tr>
+<tr>
+<td>符号链接</td>
+<td>l</td>
+</tr>
+<tr>
+<td>目录</td>
+<td>d</td>
+</tr>
+<tr>
+<td>字符设备</td>
+<td>c</td>
+</tr>
+<tr>
+<td>块设备</td>
+<td>b</td>
+</tr>
+<tr>
+<td>套接字</td>
+<td>s</td>
+</tr>
+<tr>
+<td>Filo</td>
+<td>p</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ find . -<span class="built_in">type</span> d</span><br><span class="line">$ find . -<span class="built_in">type</span> l</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>-atime</code>，用户最近一次访问文件的时间</li>
+<li>使用 <code>-mtime</code>，文件内容最后一次修改的时间</li>
+<li>使用 <code>-ctime</code>，文件元数据最后一次改变的时间</li>
+</ul>
+<p>文件元数据包括：权限或所有权</p>
+<p>上述三个选项，基于的时间单位为天，还有基于秒的，如下</p>
+<ul>
+<li>使用 <code>-amin</code>，用户最近一次访问文件的时间</li>
+<li>使用 <code>-mmin</code>，文件内容最后一次修改的时间</li>
+<li>使用 <code>-cmin</code>，文件元数据最后一次改变的时间</li>
+</ul>
+<p><code>+</code> 表示大于，<code>-</code> 表示小于</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印出7天内访问过的文件</span></span><br><span class="line">$ find . -<span class="built_in">type</span> f -atime -7 -<span class="built_in">print</span></span><br><span class="line"><span class="comment"># 打印出恰好在7天前访问过的文件</span></span><br><span class="line">$ find . -<span class="built_in">type</span> f -atime 7 -<span class="built_in">print</span></span><br><span class="line"><span class="comment"># 打印出超过7天前访问过的文件</span></span><br><span class="line">$ find . -<span class="built_in">type</span> f -atime -7 -<span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>-newer</code> 选项，指定一个文件作为比较时间</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find . -newer ./file.php -<span class="built_in">type</span> f -<span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>-size</code> 选项，过滤文件大小，<code>+</code> 大于，<code>-</code> 小于</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>b</td>
+<td>块(512字节)</td>
+</tr>
+<tr>
+<td>c</td>
+<td>字节</td>
+</tr>
+<tr>
+<td>w</td>
+<td>字(2字节)</td>
+</tr>
+<tr>
+<td>k</td>
+<td>千字节</td>
+</tr>
+<tr>
+<td>M</td>
+<td>兆字节</td>
+</tr>
+<tr>
+<td>G</td>
+<td>吉字节</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找大于2k的</span></span><br><span class="line"><span class="variable">$find</span> . -size +2k</span><br><span class="line"><span class="comment"># 小于1k</span></span><br><span class="line">$ find . -maxdepth 1 -mindepth 1 -name <span class="string">"*.php"</span> -size -1k</span><br><span class="line"><span class="comment"># 正好等于1k</span></span><br><span class="line">$ find . -maxdepth 1 -mindepth 1 -name <span class="string">"*.php"</span> -size 1k</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-delete</code>：用于删除匹配到的文件</li>
+<li><code>-perm</code>：基于文件权限进行匹配</li>
+<li><code>-user</code>：指定用户</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除权限值为666的文件</span></span><br><span class="line">$ find . -user a2htray -perm 666 -delete</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-prune</code>：跳过特定的文件或目录</li>
+<li><code>-d</code>: 执行深度优先查找并显示</li>
+</ul>
+<h2 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2><p><code>xargs</code>是构建单行命令的重要组件之一</p>
+<p><code>xargs</code>命令应该紧跟在管道操作符之后，<strong>它以标准输入作为主要的源数据流</strong>，并使用 stdin 并提供命令行参数来执行其他命令</p>
+<p>格式：<code>command | xargs</code></p>
+<ul>
+<li><strong>将多行输入转换成单行输出</strong></li>
+<li>将单行转换成多行输出，<code>-n</code> 每行最大个数</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cat file.txt</span><br><span class="line">1 2 3</span><br><span class="line">4 5 6</span><br><span class="line">$ cat file.txt | xargs</span><br><span class="line">1 2 3 4 5 6</span><br><span class="line">$ cat file.txt | xargs | xargs -n 2</span><br><span class="line">1 2</span><br><span class="line">3 4</span><br><span class="line">5 6</span><br></pre></td></tr></table></figure>
+
+<p><code>xargs</code> 有一个选项 <code>-I</code>，指定一个替换字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat args.txt | xargs -I &#123;&#125; ./script.sh -p &#123;&#125; -l</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>结合 <code>find</code> 使用 <code>xargs</code>，用于删除文件</li>
+<li>结合 <code>find</code> 使用 <code>xargs</code>，统计代码行数</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ find . -<span class="built_in">type</span> f -name <span class="string">"*.txt"</span> -print0 | xargs -0 rm -f</span><br><span class="line">$ find . -<span class="built_in">type</span> f -name <span class="string">"*.c"</span> -print0 | xargs -0 wc -l</span><br></pre></td></tr></table></figure>
+
+<h2 id="tr"><a href="#tr" class="headerlink" title="tr"></a>tr</h2><p><code>tr</code>(translate) 可以对来自标准输入的字符进行<strong>替换、删除以及压缩，只能通过stdin</strong></p>
+<p>通过在 <code>tr</code> 中使用集合的概念，我们可以轻松地将字符从<strong>一个集合映射到另一个集合</strong></p>
+<ul>
+<li>将输入字符由大写转换成小写</li>
+<li>进行数字加密和解密</li>
+<li>完成替换功能</li>
+<li>完成删除功能 <code>-d</code></li>
+<li><code>-c</code> 定义一个补集</li>
+<li>使用 <code>tr -s</code> 进行压缩字符</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将输入字符由大写转换成小写</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"HELLO WORLD"</span> | tr <span class="string">'A-Z'</span> <span class="string">'a-z'</span></span><br><span class="line">hello world</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"HELLO WORLD"</span> | tr <span class="string">"A-Z"</span> <span class="string">"a-z"</span></span><br><span class="line">hello world</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"HELLO WORLD"</span> | tr A-Z a-z</span><br><span class="line">hello world</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行数字加密和解密</span></span><br><span class="line">$ <span class="built_in">echo</span> 12345 | tr 0-9 <span class="string">'987654321'</span></span><br><span class="line">87654</span><br><span class="line">$ <span class="built_in">echo</span> 87654 | tr <span class="string">'987654321'</span> 0-9 </span><br><span class="line">12345</span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成替换功能</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"ABC"</span> | tr A O</span><br><span class="line">OBC</span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成删除功能`-d`</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"ABC123"</span> | tr -d <span class="string">"A-Z"</span></span><br><span class="line">123</span><br><span class="line"></span><br><span class="line"><span class="comment"># `-c`定义一个补集</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"ABC123"</span> | tr -d -c <span class="string">"A-Z"</span></span><br><span class="line">ABC</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 tr -s 进行压缩字符</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"hello      world,     hello     you"</span> | tr -s <span class="string">" "</span></span><br><span class="line">hello world, hello you</span><br></pre></td></tr></table></figure>
+
+<p>使用到的字符类</p>
+<table>
+<thead>
+<tr>
+<th>字符类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>alnum</td>
+<td>字母和数字</td>
+</tr>
+<tr>
+<td>alpha</td>
+<td>字母</td>
+</tr>
+<tr>
+<td>cntrl</td>
+<td>控制字符</td>
+</tr>
+<tr>
+<td>digit</td>
+<td>数字</td>
+</tr>
+<tr>
+<td>graph</td>
+<td>图形字符</td>
+</tr>
+<tr>
+<td>lower</td>
+<td>小写字母</td>
+</tr>
+<tr>
+<td>print</td>
+<td>可打印字符</td>
+</tr>
+<tr>
+<td>punct</td>
+<td>标点符号</td>
+</tr>
+<tr>
+<td>space</td>
+<td>空白字符</td>
+</tr>
+<tr>
+<td>upper</td>
+<td>大写字符</td>
+</tr>
+<tr>
+<td>xdigit</td>
+<td>十六进制字符</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"HELLO WORLD"</span> | tr <span class="string">"[:upper:]"</span> <span class="string">"[:lower:]"</span></span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+
+<h2 id="md5sum、md5deep"><a href="#md5sum、md5deep" class="headerlink" title="md5sum、md5deep"></a>md5sum、md5deep</h2><p>用于文件完整性测试的特定密钥就被称为校验和</p>
+<p>有 <code>md5sum</code>、<code>sha1sum</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ md5sum file</span><br></pre></td></tr></table></figure>
+
+<p>对目录进行校验，使用 <code>md5deep</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -r使用递归目录</span></span><br><span class="line"><span class="comment"># -l表示使用相对路径</span></span><br><span class="line">$ md5deep -rl directory_path &gt; directory.md5</span><br></pre></td></tr></table></figure>
+
+<h2 id="sort、uniq、"><a href="#sort、uniq、" class="headerlink" title="sort、uniq、"></a>sort、uniq、</h2><p><code>sort</code> 命令可以帮助我们对文件和标准输出进行排序操作</p>
+<p><code>uniq</code> 命令通常与 <code>sort</code> 命令一同使用，作用是从文本或stdin中提取单一的行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ cat t.txt</span><br><span class="line">any</span><br><span class="line">much</span><br><span class="line">few</span><br><span class="line">any</span><br><span class="line">more</span><br><span class="line">little</span><br><span class="line">more</span><br><span class="line">little</span><br><span class="line">$ cat t.txt | sort</span><br><span class="line">any</span><br><span class="line">any</span><br><span class="line">few</span><br><span class="line">little</span><br><span class="line">little</span><br><span class="line">more</span><br><span class="line">more</span><br><span class="line">much</span><br><span class="line">$ cat t.txt | sort | uniq</span><br><span class="line">any</span><br><span class="line">few</span><br><span class="line">little</span><br><span class="line">more</span><br><span class="line">much</span><br></pre></td></tr></table></figure>
+
+<p><code>sort</code>，选项可配合使用，如果要明确采用数字顺序排序，应该明确指定 <code>-n</code></p>
+<ul>
+<li><code>-n</code> 按数字进行排序</li>
+<li><code>-r</code> 按逆序进行排序</li>
+<li><code>-C</code> 用于检测文件是否以排序<ul>
+<li><code>-C</code> 是否排序</li>
+<li><code>-nC</code> 是否按数字排序</li>
+</ul>
+</li>
+<li><code>-k</code> 多列时，指定k值，按某列进行排序</li>
+<li><code>-b</code>忽略文件中的前导空白字符</li>
+<li><code>-d</code> 用于指明以字典序进行排序</li>
+</ul>
+<p><code>uniq</code>，通过消除重复内容，从给定输入中找出单一的行，也可以用来找输入中出现的重复行，<strong>只能用于排过序的数据输入</strong></p>
+<ul>
+<li><code>-u</code> 只显示唯一的行</li>
+<li><code>-c</code> 显示出现的次数</li>
+<li><code>-d</code> 找出重复的行</li>
+<li>结合 <code>-s</code> 和 <code>-w</code> 来指定键<ul>
+<li><code>-s</code> 指定可以跳过前N个字符</li>
+<li><code>-w</code> 指定用于比较的最大字符(Mac中没有)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ cat t.txt</span><br><span class="line">a:1:any</span><br><span class="line">a:2:much</span><br><span class="line">a:5:few</span><br><span class="line">a:1:any</span><br><span class="line">a:2:more</span><br><span class="line">$ cat t.txt | sort | uniq -s 2</span><br><span class="line">a:1:any</span><br><span class="line">a:2:more</span><br><span class="line">a:2:much</span><br><span class="line">a:5:few</span><br></pre></td></tr></table></figure>
+
+<h2 id="split"><a href="#split" class="headerlink" title="split"></a>split</h2><ul>
+<li><code>-b</code> 指定文件大小</li>
+<li><code>-a</code> 指定后缀长度</li>
+<li>命令最后一个参数指定前缀</li>
+<li><code>-l</code>按行数进行分割</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ split -b 10k file.dat</span><br><span class="line"><span class="comment"># 指定后缀长度</span></span><br><span class="line">$ split -a 4 -b 10k file.dat</span><br><span class="line"><span class="comment"># 指定前缀</span></span><br><span class="line">$ split -l 100 -a 4 file.dat prefix_</span><br></pre></td></tr></table></figure>
+
+<p><code>csplit</code>，基于文件内容进行分割，能根据指定的条件和字符串匹配选项对文件进行分割</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ csplit server.log /SERVER/ -n 2 -s &#123;*&#125; -f server -b <span class="string">"%0.2d.log"</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>/SERVER/</code>：用来匹配某一行，分割过程从该行开始</li>
+<li><code>{*}</code> 匹配重复分割的次数，<code>*</code> 表示到文件结尾，<code>{整数}</code> 匹配的次数</li>
+<li><code>-s</code> 静默模式，不打印信息</li>
+<li><code>-n</code> 指定分割后数字的个数</li>
+<li><code>-f</code> 指定前缀</li>
+<li><code>-b</code> 指定后缀格式</li>
+</ul>
+<h2 id="提取文件名，或扩展名"><a href="#提取文件名，或扩展名" class="headerlink" title="提取文件名，或扩展名"></a>提取文件名，或扩展名</h2><p><code>%</code>、<code>#</code>、<code>%%</code>、<code>##</code> 均是用于删除匹配结果</p>
+<p>借助 <code>%</code> 或 <code>#</code> 操作符，可以将名称部分从 <code>名称.扩展名</code> 格式中提取文件名或扩展名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ file_jpg=sample.jpg</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;file_jpg%.*&#125;</span></span><br><span class="line">sample</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;file_jpg#*.&#125;</span></span><br><span class="line">jpg</span><br></pre></td></tr></table></figure>
+
+<p><code>${VAR%.*}</code></p>
+<ul>
+<li><code>%</code> 用于删除<strong>右边通配符匹配的字符</strong>，非贪婪模式，匹配最短的，从左到右进行匹配</li>
+<li><code>%%</code> 贪婪模式，匹配最长的，从右到左进行匹配</li>
+</ul>
+<p><code>${VAR#*.}</code></p>
+<ul>
+<li>删除位于 <code>#</code> 右侧通配符匹配项，从左到右</li>
+<li><code>##</code>用于贪婪匹配</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-01/" rel="prev" title="Linux -Linux Shell 脚本攻略- 01 小试牛刀">
+      <i class="fa fa-chevron-left"></i> Linux -Linux Shell 脚本攻略- 01 小试牛刀
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-03/" rel="next" title="Linux -Linux Shell 脚本攻略- 03 以文件之名">
+      Linux -Linux Shell 脚本攻略- 03 以文件之名 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cat"><span class="nav-number">1.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number">2.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xargs"><span class="nav-number">3.</span> <span class="nav-text">xargs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tr"><span class="nav-number">4.</span> <span class="nav-text">tr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#md5sum、md5deep"><span class="nav-number">5.</span> <span class="nav-text">md5sum、md5deep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort、uniq、"><span class="nav-number">6.</span> <span class="nav-text">sort、uniq、</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#split"><span class="nav-number">7.</span> <span class="nav-text">split</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提取文件名，或扩展名"><span class="nav-number">8.</span> <span class="nav-text">提取文件名，或扩展名</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

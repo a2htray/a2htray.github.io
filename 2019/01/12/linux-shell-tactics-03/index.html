@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="UNIX系统将操作系统中的一切都视为文件。文件与每一个操作息息相关，而我们可以利用它们进行与系统或进程相关的处理工作  dd：生成任意大小的文件 comm：求文件的交集和并集 mkdir：创建目录 mkdir：创建文件 touch：创建空白文件 diff patch：文件差异、打补丁 head tail：输出文件首、尾 wc：统计行数、单词数、字符数 pushd popd：以栈的形式操作目录，进行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux -Linux Shell 脚本攻略- 03 以文件之名">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/linux-shell-tactics-03/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="UNIX系统将操作系统中的一切都视为文件。文件与每一个操作息息相关，而我们可以利用它们进行与系统或进程相关的处理工作  dd：生成任意大小的文件 comm：求文件的交集和并集 mkdir：创建目录 mkdir：创建文件 touch：创建空白文件 diff patch：文件差异、打补丁 head tail：输出文件首、尾 wc：统计行数、单词数、字符数 pushd popd：以栈的形式操作目录，进行">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-12T14:00:48.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:15:49.450Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/12/linux-shell-tactics-03/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Linux -Linux Shell 脚本攻略- 03 以文件之名 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux -Linux Shell 脚本攻略- 03 以文件之名
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-12 22:00:48" itemprop="dateCreated datePublished" datetime="2019-01-12T22:00:48+08:00">2019-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:15:49" itemprop="dateModified" datetime="2020-08-23T22:15:49+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>UNIX系统将操作系统中的一切都视为文件。文件与每一个操作息息相关，而我们可以利用它们进行与系统或进程相关的处理工作</p>
+<ul>
+<li><code>dd</code>：生成任意大小的文件</li>
+<li><code>comm</code>：求文件的交集和并集</li>
+<li><code>mkdir</code>：创建目录</li>
+<li><code>mkdir</code>：创建文件</li>
+<li><code>touch</code>：创建空白文件</li>
+<li><code>diff patch</code>：文件差异、打补丁</li>
+<li><code>head tail</code>：输出文件首、尾</li>
+<li><code>wc</code>：统计行数、单词数、字符数</li>
+<li><code>pushd popd</code>：以栈的形式操作目录，进行前效切换</li>
+<li><code>tree</code>：打印目录树</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="生成任意大小的文件-dd"><a href="#生成任意大小的文件-dd" class="headerlink" title="生成任意大小的文件 dd"></a>生成任意大小的文件 <code>dd</code></h2><p><code>dd</code> 命令会克隆给定的输入内容，然后将一模一样的一份副本写入到输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=junk.dat bs=1M count=1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>if</code> 指出输入文件 <code>input file</code></li>
+<li><code>of</code> 指出输出文件 <code>output file</code></li>
+<li><code>bs</code> 指出每块大小 <code>block size</code></li>
+<li><code>count</code> 指出复制的次数</li>
+<li><code>/dev/zero</code> 是一个字符设备，会不断返回0值字节<code>\0</code></li>
+</ul>
+<h2 id="文本文件的交集和并集comm"><a href="#文本文件的交集和并集comm" class="headerlink" title="文本文件的交集和并集comm"></a>文本文件的交集和并集<code>comm</code></h2><p><code>comm</code> 命令<strong>只能用于排序后的文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ cat a.txt</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">$ cat t.txt</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">8</span><br><span class="line">$ comm a.txt t.txt</span><br><span class="line">1</span><br><span class="line">                2</span><br><span class="line">                3</span><br><span class="line">                4</span><br><span class="line">                5</span><br><span class="line">6       6</span><br><span class="line">        8</span><br></pre></td></tr></table></figure>
+
+<p>第1列只在 <code>a.txt</code> 中出现，第2列只在 <code>t.txt</code> 中出现，第3列表示两个文件都有，<strong>使用 <code>-1</code>、<code>-2</code>、<code>-3</code> 选项可以删除对应列的打印</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 求交集，即第3列</span></span><br><span class="line">$ comm -1 -2 a.txt t.txt</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line"><span class="comment"># 求并集，comm出不来结果，那就用sort uniq吧</span></span><br><span class="line">$ sort a.txt t.txt | uniq</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">8</span><br><span class="line"><span class="comment"># 求a.txt的差集</span></span><br><span class="line">$ comm -2 -3 a.txt t.txt</span><br><span class="line">1</span><br><span class="line">6</span><br><span class="line"><span class="comment"># 同理求b.txt的差集</span></span><br><span class="line">$ comm -2 -3 t.txt a.txt</span><br><span class="line">6</span><br><span class="line">8</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建长路径目录-mkdir"><a href="#创建长路径目录-mkdir" class="headerlink" title="创建长路径目录 mkdir"></a>创建长路径目录 <code>mkdir</code></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 判断文件或目录是否存在</span></span><br><span class="line"><span class="keyword">if</span> [ -e /dir ]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># do something</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用-p参数创建长路径目录</span></span><br><span class="line">mkdir -p /deep1/deep2/deep3</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件权限、所有权和粘滞位"><a href="#文件权限、所有权和粘滞位" class="headerlink" title="文件权限、所有权和粘滞位"></a>文件权限、所有权和粘滞位</h2><p>三类权限：用户 <code>user</code>、用户组 <code>group</code>、其他 <code>others</code></p>
+<p>解释<code>---------</code></p>
+<p>前三位对应用户权限、中间三位对应用户组权限、后三位对应其他用户权限</p>
+<ul>
+<li>r:设置读权限</li>
+<li>w:设置修改(写)权限</li>
+<li>x:设置可执行权限</li>
+</ul>
+<p>如<code>rwx------</code></p>
+<p>其中用户还有一个称为 <code>setuid(S)</code> 的特殊权限，它出现在执行权限 <code>(x)</code>，setuid权限允许用户以其拥有都的权限来执行可执行文件。</p>
+<p>组权限有一个 <code>setgid</code> 位，它允许以该目录拥有者所在组相同的有效组权限来允许可执行文件</p>
+<p>其他用户权限没有 <code>setuid</code> 和 <code>setgid</code></p>
+<p><strong>目录</strong>有一个特殊的权限，叫做粘滞位 <code>sticky bit</code>，目录设置了粘滞位，<strong>只有创建该目录的用户才能删除目录中的文件</strong>。如果目录没有执行权限，显示 <code>t</code>，有执行权限，显示 <code>T</code>。</p>
+<p>粘滞位属于一种写保护</p>
+<ul>
+<li><code>-R</code>：递归操作</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置权限</span></span><br><span class="line">$ chmod u=rwx g=rw o=r filename</span><br><span class="line"><span class="comment"># 单个设置</span></span><br><span class="line">$ chmod u+x filename</span><br><span class="line">$ chmod g+x filename</span><br><span class="line"><span class="comment"># 使用八进制数</span></span><br><span class="line">$ chmod 776 filename</span><br><span class="line"><span class="comment"># 更改文件的所有权，用户及用户组</span></span><br><span class="line">$ chmod user.group filename</span><br><span class="line"><span class="comment"># 设置粘滞位，只对目录有效</span></span><br><span class="line">$ chmod a+t directory_path</span><br><span class="line"><span class="comment"># 对于可执行文件，设置s位</span></span><br><span class="line"><span class="comment"># 其他用户执行时，可按文件所有都的权限进行执行</span></span><br><span class="line">$ chmod +s script.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建空文件-touch"><a href="#创建空文件-touch" class="headerlink" title="创建空文件 touch"></a>创建空文件 <code>touch</code></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> &#123;1..10&#125;.txt</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    touch <span class="variable">$item</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p><code>{1..10}</code> 扩展成字符串 <code>1,2,3,4,5,6,7,8,9,10</code>，其他形式还有 <code>{a..z}</code>、<code>{10..20}</code></p>
+<p><strong>对于已经存在的文件</strong>，使用 <code>-a</code> 更改文件访问时间，<code>-m</code> 更改文件内容修改时间，还可以使用 <code>-d</code> 指定具体时间</p>
+<h2 id="符号链接文件"><a href="#符号链接文件" class="headerlink" title="符号链接文件"></a>符号链接文件</h2><p>符号链接只不过是指向其他文件的指针。</p>
+<p><strong>使用readlink查看链接文件的指向</strong>，也可以使用 <code>ls -al file</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对于查找而言，简单可以使用</span></span><br><span class="line">$ find . -<span class="built_in">type</span> l -<span class="built_in">print</span></span><br><span class="line"><span class="comment"># 使用readlink查看链接文件的指向</span></span><br><span class="line">$ readlink web</span><br><span class="line">/var/www</span><br><span class="line"><span class="comment"># 利用awk查看指向</span></span><br><span class="line">$ ls -l web | aws <span class="string">'&#123;print $9&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="文件差异diff、patch"><a href="#文件差异diff、patch" class="headerlink" title="文件差异diff、patch"></a>文件差异<code>diff</code>、<code>patch</code></h2><p>使用<code>diff</code>生成差异文件，使用<code>patch</code>进行打补丁操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 是否加`-u`的区别</span></span><br><span class="line">$ diff a1.txt a2.txt -u</span><br><span class="line">--- a1.txt      2019-01-11 19:39:26.000000000 +0800</span><br><span class="line">+++ a2.txt      2019-01-11 19:39:38.000000000 +0800</span><br><span class="line">@@ -1,6 +1,6 @@</span><br><span class="line"> 1</span><br><span class="line"> 2</span><br><span class="line"> 3</span><br><span class="line">-4</span><br><span class="line">+0000</span><br><span class="line"> 5</span><br><span class="line">-6</span><br><span class="line">\ No newline at end of file</span><br><span class="line">+0000</span><br><span class="line">\ No newline at end of file</span><br><span class="line">$ diff a1.txt a2.txt</span><br><span class="line">4c4</span><br><span class="line">&lt; 4</span><br><span class="line">---</span><br><span class="line">&gt; 0000</span><br><span class="line">6c6</span><br><span class="line">&lt; 6</span><br><span class="line">\ No newline at end of file</span><br><span class="line">---</span><br><span class="line">&gt; 0000</span><br><span class="line">\ No newline at end of file</span><br></pre></td></tr></table></figure>
+
+<p>将差异输出重定向到一个文件，并使用 <code>patch</code> 命令对 <code>a1.txt</code> 进行打补丁操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ diff a1.txt a2.txt -u &gt; difference.patch</span><br><span class="line">$ patch -p1 a1.txt &lt; difference.patch</span><br><span class="line">missing header <span class="keyword">for</span> unified diff at line 3 of patch</span><br><span class="line">patching file a1.txt</span><br></pre></td></tr></table></figure>
+
+<p>操作过后，<code>a1.txt</code> 的内容将与 <code>a2.txt</code> 相同</p>
+<p>回溯操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行相同的命令后，进行回溯</span></span><br><span class="line"><span class="comment"># -R 选项强制执行</span></span><br><span class="line">$ patch -p1 a1.txt &lt; difference.patch</span><br><span class="line">missing header <span class="keyword">for</span> unified diff at line 3 of patch</span><br><span class="line">patching file a1.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="head-与-tail"><a href="#head-与-tail" class="headerlink" title="head 与 tail"></a><code>head</code> 与 <code>tail</code></h2><p>比较常用的命令，常用于查看日志文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看前10条</span></span><br><span class="line">head -n 10 access.log</span><br><span class="line"><span class="comment"># 查看除最后10行的所有行</span></span><br><span class="line">head -n -10</span><br><span class="line"><span class="comment"># 查看最后10行</span></span><br><span class="line">tail -n 10 access.log</span><br><span class="line"><span class="comment"># 持续输出打印-f</span></span><br><span class="line">tail -f access.log</span><br></pre></td></tr></table></figure>
+
+<h2 id="只列出目录"><a href="#只列出目录" class="headerlink" title="只列出目录"></a>只列出目录</h2><p><code>-d</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -d .</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-pushd-和-popd"><a href="#使用-pushd-和-popd" class="headerlink" title="使用 pushd 和 popd"></a>使用 <code>pushd</code> 和 <code>popd</code></h2><p><code>pushd</code> 和 <code>popd</code> 可以用于在多个目录之间进行切换而无需复制并粘贴目录路径，对路径进行入栈、出栈操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前栈中的路径</span></span><br><span class="line"><span class="built_in">dirs</span></span><br><span class="line"><span class="comment"># 跳过栈第4个</span></span><br><span class="line"><span class="built_in">pushd</span> +3</span><br><span class="line"><span class="comment"># 同理popd</span></span><br></pre></td></tr></table></figure>
+
+<p>对于只涉及到两个路径的操作，直接使用 <code>cd -</code> 进行切换</p>
+<h2 id="统计文本-wc"><a href="#统计文本-wc" class="headerlink" title="统计文本 wc"></a>统计文本 <code>wc</code></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接使用wc将输出文件的行数、单词数和字符数，使用制表符分割</span></span><br><span class="line">$ wc array.sh</span><br><span class="line">      29      52     508 array.sh</span><br><span class="line"><span class="comment"># -l 打印行数 -w单词数 -c字符数</span></span><br><span class="line">$ wc -l array.sh</span><br><span class="line">      29 array.sh</span><br><span class="line">$ wc -l -c array.sh</span><br><span class="line">      29     508 array.sh</span><br><span class="line"><span class="comment"># -L打印最长行的长度 (Mac中没有)</span></span><br><span class="line">$ wc -L array.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="打印目录树-tree"><a href="#打印目录树-tree" class="headerlink" title="打印目录树 tree"></a>打印目录树 <code>tree</code></h2><p>有可能需要另外安装</p>
+<ul>
+<li><code>-P</code>：使用通配符进行匹配</li>
+<li><code>-H</code>：<strong>目录树输出为HTML</strong></li>
+<li><code>-h</code>：显示大小</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-02/" rel="prev" title="Linux -Linux Shell 脚本攻略- 02 命令之乐">
+      <i class="fa fa-chevron-left"></i> Linux -Linux Shell 脚本攻略- 02 命令之乐
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-04/" rel="next" title="Linux -Linux Shell 脚本攻略- 04 让文本飞">
+      Linux -Linux Shell 脚本攻略- 04 让文本飞 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成任意大小的文件-dd"><span class="nav-number">1.</span> <span class="nav-text">生成任意大小的文件 dd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本文件的交集和并集comm"><span class="nav-number">2.</span> <span class="nav-text">文本文件的交集和并集comm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建长路径目录-mkdir"><span class="nav-number">3.</span> <span class="nav-text">创建长路径目录 mkdir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件权限、所有权和粘滞位"><span class="nav-number">4.</span> <span class="nav-text">文件权限、所有权和粘滞位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建空文件-touch"><span class="nav-number">5.</span> <span class="nav-text">创建空文件 touch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号链接文件"><span class="nav-number">6.</span> <span class="nav-text">符号链接文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件差异diff、patch"><span class="nav-number">7.</span> <span class="nav-text">文件差异diff、patch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head-与-tail"><span class="nav-number">8.</span> <span class="nav-text">head 与 tail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#只列出目录"><span class="nav-number">9.</span> <span class="nav-text">只列出目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-pushd-和-popd"><span class="nav-number">10.</span> <span class="nav-text">使用 pushd 和 popd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计文本-wc"><span class="nav-number">11.</span> <span class="nav-text">统计文本 wc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打印目录树-tree"><span class="nav-number">12.</span> <span class="nav-text">打印目录树 tree</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

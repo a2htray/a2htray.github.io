@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="打开终端后，就会出现一个提示符号，# 表示超级用户 (root user) ，$ 表示普通用户，超级用户是 Linux 系统中权限最高的用户 shell脚本通常以 #! 起始，如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux -Linux Shell 脚本攻略- 01 小试牛刀">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/linux-shell-tactics-01/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="打开终端后，就会出现一个提示符号，# 表示超级用户 (root user) ，$ 表示普通用户，超级用户是 Linux 系统中权限最高的用户 shell脚本通常以 #! 起始，如">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-12T13:57:15.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:15:35.956Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/12/linux-shell-tactics-01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Linux -Linux Shell 脚本攻略- 01 小试牛刀 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux -Linux Shell 脚本攻略- 01 小试牛刀
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-12 21:57:15" itemprop="dateCreated datePublished" datetime="2019-01-12T21:57:15+08:00">2019-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:15:35" itemprop="dateModified" datetime="2020-08-23T22:15:35+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>打开终端后，就会出现一个提示符号，# 表示超级用户 <code>(root user)</code> ，$ 表示普通用户，超级用户是 Linux 系统中权限最高的用户</p>
+<p>shell脚本通常以 <code>#!</code> 起始，如</p>
+<a id="more"></a>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br></pre></td></tr></table></figure>
+
+<p><code>/bin/bash</code> 是Bash的路径</p>
+<p>运行脚本的两种方式：</p>
+<ol>
+<li>将脚本作为命令行参数</li>
+<li>将脚本作为具有执行权限的可执行文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1</span></span><br><span class="line">$ sh script.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line">$ chmod a+x script.sh</span><br><span class="line">$ ./script.sh <span class="comment"># 使用相对路径</span></span><br><span class="line">$ /root/home/script.sh <span class="comment"># 使用绝对路径</span></span><br></pre></td></tr></table></figure>
+
+<p>最终执行的逻辑会查找文件中的 <code>/bin/bash</code> ，并在内部执行如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /bin/bash script.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>~/.bashrc</code> 文件：包含定义诸如提示文本、颜色等各类设置的一组命令</li>
+<li><code>~/.bash_history</code> 文件：用于保存用户执行过的命令</li>
+</ul>
+<p>在 Bash 中使用分号或换行符来分隔每个命令，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line">cmd1; cmd2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line">cmd1</span><br><span class="line">cmd2</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>#</code> 用于注释</p>
+<h2 id="终端打印"><a href="#终端打印" class="headerlink" title="终端打印"></a>终端打印</h2><p><code>echo</code>、<code>printf</code></p>
+<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a><code>echo</code></h3><p>终端作为交互式工具，用户可以通过它与shell环境进行交互，<code>echo</code> 命令用于终端打印的基本命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用双引号，OK</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"hello world"</span></span><br><span class="line">hello world</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不使用双引号，OK</span></span><br><span class="line">$ <span class="built_in">echo</span> hello world</span><br><span class="line">hello world</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用单引号，OK</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'hello world'</span></span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+
+<p>在双引号中打印特殊字符需要在字符前加转义字符 <code>\</code>，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"hello world\!"</span></span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+
+<p>在shell脚本中，可通过设置 <code>set +H</code> 来显示 <code>!</code>，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># set_h.sh</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> +H</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"hello world!"</span></span><br></pre></td></tr></table></figure>
+
+<p>在使用单引号的情况下，若字符串包含变量 <code>$var</code>，则原样打印，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'hello world $var'</span></span><br><span class="line">hello world <span class="variable">$var</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a><code>printf</code></h3><p><code>printf</code> 使用的参数和C语言中的 <code>printf</code> 函数一样</p>
+<p>格式：<code>printf FOMART_STR STR</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">printf</span> <span class="string">"hello world"</span></span><br></pre></td></tr></table></figure>
+
+<p>可用于格式化输出，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># printf.sh</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span> <span class="string">"%-5s %-10s %-4s\n"</span> No Name Mark</span><br><span class="line"><span class="built_in">printf</span> <span class="string">"%-5s %-10s %-4.2f\n"</span> 1 John 89.999</span><br></pre></td></tr></table></figure>
+
+<p>执行输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./printf.sh</span><br><span class="line">No    Name       Mark</span><br><span class="line">1     John       90.00</span><br></pre></td></tr></table></figure>
+
+<h2 id="变量和环境变量"><a href="#变量和环境变量" class="headerlink" title="变量和环境变量"></a>变量和环境变量</h2><p>在 Bash 中，每一个变量都是字符串</p>
+<p>使用 <code>env</code> 命令查看当前终端进程所使用到的环境变量，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ env</span><br><span class="line">TMPDIR=/var/folders/1n/8t5fdjrd4mj1qn_13qwzcny80000gn/T/</span><br><span class="line">__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0</span><br><span class="line">SHELL=/bin/zsh</span><br><span class="line">HOME=/Users/a2htray</span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/bin:/usr/bin:/bin:/usr/sbin:/sbin</span><br><span class="line">LOGNAME=a2htray</span><br><span class="line">XPC_SERVICE_NAME=0</span><br><span class="line">USER=a2htray</span><br><span class="line">XPC_FLAGS=0x0</span><br><span class="line">LC_CTYPE=en_US.UTF-8</span><br><span class="line">LESS=-R</span><br><span class="line">LSCOLORS=Gxfxcxdxbxegedabagacad</span><br><span class="line">SHLVL=1</span><br><span class="line">ZSH=/Users/a2htray/.oh-my-zsh</span><br><span class="line">TERM_PROGRAM=vscode</span><br><span class="line">TERM_PROGRAM_VERSION=1.30.1</span><br><span class="line">LANG=en_US.UTF-8</span><br><span class="line">TERM=xterm-256color</span><br><span class="line">_=/usr/bin/env</span><br></pre></td></tr></table></figure>
+
+<p>一个变量可通过以下方式进行赋值，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 等号两边不能有空格，正确</span></span><br><span class="line">var=value <span class="comment"># 赋值操作</span></span><br><span class="line"><span class="comment"># 错误</span></span><br><span class="line">var = value <span class="comment"># 判断相等操作</span></span><br></pre></td></tr></table></figure>
+
+<p>如需打印变量，在变量名前加 <code>$</code>，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ var=value</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$var</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;var&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在打印命令中引用该变量</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"the <span class="variable">$&#123;var&#125;</span> of world is the <span class="variable">$var</span>"</span></span><br><span class="line">the value of world is the value</span><br></pre></td></tr></table></figure>
+
+<h3 id="额外"><a href="#额外" class="headerlink" title="额外"></a>额外</h3><p>使用 <code>#</code>，可获取字符串的长度</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取字符串长度</span></span><br><span class="line">$ var=value</span><br><span class="line">$ length=<span class="variable">$&#123;#var&#125;</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;#var&#125;</span> <span class="variable">$length</span></span><br><span class="line">5 5</span><br><span class="line"></span><br><span class="line"><span class="comment"># 识别当前的shell版本</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br><span class="line">/bin/zsh</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$0</span></span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+
+<p>根据 <code>root</code> 用户的 <code>UID</code> 为 <code>0</code> 可判断当前用户是否为 <code>root用户</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># is_root.sh</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> +H</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$UID</span> -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"non root"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"root"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$UID</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>执行输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./is_root.sh</span><br><span class="line">non root</span><br><span class="line">501</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过shell进行数学运算"><a href="#通过shell进行数学运算" class="headerlink" title="通过shell进行数学运算"></a>通过shell进行数学运算</h2><p>可以使用 <code>let</code>、<code>(())</code>、<code>[]</code> 执行基本的算数操作，进行高级运算时，可使用<code>expr</code>或<code>bc</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#operation.sh</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># nu1与nu2均为字符串</span></span><br><span class="line">nu1=5</span><br><span class="line">nu2=6</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> nu1++ <span class="comment"># nu1自加1</span></span><br><span class="line"><span class="built_in">let</span> nu2-- <span class="comment"># nu2自减1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$nu1</span> <span class="variable">$nu2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># let简写形式</span></span><br><span class="line"><span class="built_in">let</span> nu1+=7 <span class="comment"># nu1加7</span></span><br><span class="line"><span class="built_in">let</span> nu2-=2 <span class="comment"># nu2减2</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$nu1</span> <span class="variable">$nu2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用[]</span></span><br><span class="line">result1=$[ nu1 + nu2 ]</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用(())</span></span><br><span class="line">result2=$(( nu1 + nu2 ))</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用expr</span></span><br><span class="line">result3=$(expr <span class="variable">$nu1</span> + <span class="variable">$nu2</span>)</span><br><span class="line">result4=`expr 3 + 4`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result3</span> <span class="variable">$result4</span></span><br></pre></td></tr></table></figure>
+
+<p>上述操作只适用于整数，若需浮点数支持，则使用<code>bc</code></p>
+<h2 id="文件描述符和重定向"><a href="#文件描述符和重定向" class="headerlink" title="文件描述符和重定向"></a>文件描述符和重定向</h2><p><code>&gt;</code>、<code>&gt;&gt;</code></p>
+<p>文件描述符是与文件输入、输出相关联的整数，最常见的文件描述符是<code>标准输入stdin</code>、<code>标准输出stdout</code>与<code>标准错误stderr</code></p>
+<table>
+<thead>
+<tr>
+<th>数值</th>
+<th>描述符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>stdin</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>1</td>
+<td>stdout</td>
+<td>标准输出</td>
+</tr>
+<tr>
+<td>2</td>
+<td>stderr</td>
+<td>标准错误</td>
+</tr>
+</tbody></table>
+<p>使用<code>&gt;</code>，通过截取的方式，将输出文本存储到文件<code>tmp.txt</code>中，<code>tmp.txt</code>文件中的内容将被清空</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"hello world"</span> &gt; tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>&gt;&gt;</code>，<code>tmp.txt</code>文件不会被清空，而是以追加到现有文件的尾部</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"hello world"</span> &gt;&gt; tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>当使用重定向操作符时，重定向的内容不会出现在终端，而是直接导入文件</p>
+<p>重定向操作符的默认是标准输出，若希望使用特定的描述符，必须将描述符置于操作符之前</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1&gt; <span class="comment"># 等价于 &gt;</span></span><br><span class="line">2&gt;</span><br><span class="line">1&gt;&gt; <span class="comment"># 等价于 &gt;&gt;</span></span><br><span class="line">2&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>成功与不成功命令的区别在于是否返回 <code>0</code> ：成功返回 <code>0</code> ，不成功返回非 <code>0</code> ，返回值可通过特殊变量 <code>$?</code> 获得</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ls +</span><br><span class="line">ls: +: No such file or directory</span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line">1</span><br><span class="line">$ ls + 2&gt; tmp.txt <span class="comment"># 使用描述符将标准错误导入tmp.txt</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可以将stderr单独导入到一个文件，stdin单独导入到另一个文件 </span></span><br><span class="line">$ cmd 1&gt; in.txt 2&gt; err.txt</span><br><span class="line"><span class="comment"># 将stderr转换成stdout，导入到同一个文件</span></span><br><span class="line">$ cmd 2&gt;&amp;1 all.txt</span><br></pre></td></tr></table></figure>
+
+<p>常用作法是将stderr重定向到 <code>/dev/null</code> 设备文件，该文件收到的任何数据都将丢弃</p>
+<p>管道符<code>|</code></p>
+<p>使用 <code>tee</code> 命令结合管道符<code>|</code>，一方面可以将数据重定向到文件，另一方面还可以提供一份重定向数据的副本作为后续命令的 <code>stdin</code> ，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tee 接受stdout的作为输入</span></span><br><span class="line">$ ls + | tee out.txt</span><br><span class="line">ls: +: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>借助重定向，可以像使用stdin那样从文件中读取数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cmd &lt; FILE</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用别名"><a href="#使用别名" class="headerlink" title="使用别名"></a>使用别名</h2><p>使用<code>alias</code>命令，如果别名已经存在，会将原别名取代</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">alias</span> new_command=<span class="string">'command sequence'</span></span><br><span class="line"><span class="comment"># 为保持别名持续有效，将其写入~/.bashrc</span></span><br><span class="line">$ <span class="built_in">echo</span> new_command=<span class="string">'command sequence'</span> &gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取终端信息"><a href="#获取终端信息" class="headerlink" title="获取终端信息"></a>获取终端信息</h2><p><code>tput</code>、<code>stty</code>是两款终端处理工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本用不到</span></span><br><span class="line">tput cols <span class="comment"># 输出当前终端列数</span></span><br><span class="line">tput lines <span class="comment"># 输出当前终端行数</span></span><br><span class="line">tput longname <span class="comment"># 输出当前终端名</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="获取、设置日期和延时"><a href="#获取、设置日期和延时" class="headerlink" title="获取、设置日期和延时"></a>获取、设置日期和延时</h2><p>使用<code>date</code>命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># date.sh 获取程序运行的时间</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">start=$(date +%s)</span><br><span class="line">cmd</span><br><span class="line">cmd</span><br><span class="line">...</span><br><span class="line">end=$(date +%s)</span><br><span class="line"></span><br><span class="line">duration=$((end - start))</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>sleep</code>生成延时</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sleep 5 <span class="comment"># 延时5秒</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="调试脚本set-x"><a href="#调试脚本set-x" class="headerlink" title="调试脚本set -x"></a>调试脚本<code>set -x</code></h2><p>运行带 <code>-x</code> 的脚本能打印出所执行的每一行命令以及当前状态</p>
+<p>在脚本文件中可心使用 <code>set</code> 命令进行设置</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set -x</td>
+<td>在执行时显示参数和命令</td>
+</tr>
+<tr>
+<td>set +x</td>
+<td>禁止调试</td>
+</tr>
+<tr>
+<td>set -v</td>
+<td>当命令进行读取时显示输入</td>
+</tr>
+<tr>
+<td>set +v</td>
+<td>禁止打印输入</td>
+</tr>
+</tbody></table>
+<p><strong>技巧</strong>，通过设置变量决定是否开启调试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># debug.sh</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if statement</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$_DEBUG</span> == <span class="string">"on"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"debug"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>调用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ _DEBUG=on ./debug.sh</span><br></pre></td></tr></table></figure>
+
+<p>将 <code>#!/bin/bash</code> 修改为 <code>#!/bin/bash -xv</code> ，这样就不用其他选项就可以启用调试功能</p>
+<h2 id="函数与参数"><a href="#函数与参数" class="headerlink" title="函数与参数"></a>函数与参数</h2><p>定义函数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> func1()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"func1"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func1</span><br><span class="line"></span><br><span class="line">func2()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"func2"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func2</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> func3()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func3 <span class="string">"func3"</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$1 是第一个参数</li>
+<li>$2 是第二个参数</li>
+<li>$n 是第n个参数</li>
+<li>$@ 扩展成”$1” “$2” “$3”等</li>
+<li>$* 扩展成”$1c$2c$3”等</li>
+</ul>
+<p>使用$@最多</p>
+<p>函数也能像环境变量一样用<code>export</code>导出，则函数的作用域可以扩展到子进程中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> -f fname</span><br></pre></td></tr></table></figure>
+
+<h2 id="读取命令序列输出"><a href="#读取命令序列输出" class="headerlink" title="读取命令序列输出"></a>读取命令序列输出</h2><p>输入通常是通过stdin或参数传递给命令，输出要么出现在stderr，要么出现在stdout</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd1 | cmd2 | cmd3</span><br></pre></td></tr></table></figure>
+
+<p><code>cat -n</code> 将输出加上行号</p>
+<p>读取命令序列的输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cmd_output=$(ls | cat -n)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$cmd_output</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">cmd_output=`ls | cat -n` <span class="comment"># 使用反引用</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$cmd_output</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ cat text.txt</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">$ out=$(cat text.txt)</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">$ out=<span class="string">"<span class="variable">$(cat text.txt)</span>"</span></span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<h2 id="读取字符"><a href="#读取字符" class="headerlink" title="读取字符"></a>读取字符</h2><p>下面语句从输入中读取n个字符并存入变量variable_name</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> -n number_of_chars variable_name</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ 使用定界符:</span><br><span class="line">$ <span class="built_in">read</span> -d <span class="string">":"</span> var</span><br><span class="line">hello:</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$var</span></span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+
+<h2 id="字段分隔符和迭代器"><a href="#字段分隔符和迭代器" class="headerlink" title="字段分隔符和迭代器"></a>字段分隔符和迭代器</h2><p>IFS：内部字段分隔符，默认值为空白字符(换行符、制表符或空格)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ifs.sh</span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">data=<span class="string">"name,gender,age,location"</span></span><br><span class="line"></span><br><span class="line">oldIFS=<span class="variable">$IFS</span></span><br><span class="line">IFS=,</span><br><span class="line"></span><br><span class="line"><span class="comment"># for循环不错</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="variable">$data</span>;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> Item: <span class="variable">$item</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">IFS=<span class="variable">$oldIFS</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="比较与测试"><a href="#比较与测试" class="headerlink" title="比较与测试"></a>比较与测试</h2><p>文件系统相关</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[ -f $var ]</td>
+<td>正常文件名或路径，返回真</td>
+</tr>
+<tr>
+<td>[ -x $var ]</td>
+<td>文件可执行，返回真</td>
+</tr>
+<tr>
+<td>[ -d $var ]</td>
+<td>正常目录，返回真</td>
+</tr>
+<tr>
+<td>[ -e $var ]</td>
+<td>文件存在，返回真</td>
+</tr>
+<tr>
+<td>[ -c $var ]</td>
+<td>一个字符设备文件的路径，返回真</td>
+</tr>
+<tr>
+<td>[ -b $var ]</td>
+<td>一个块设备文件路径，返回真</td>
+</tr>
+<tr>
+<td>[ -w $var ]</td>
+<td>可写，返回真</td>
+</tr>
+<tr>
+<td>[ -r $var ]</td>
+<td>可读，返回真</td>
+</tr>
+<tr>
+<td>[ -L $var ]</td>
+<td>符号链接，返回真</td>
+</tr>
+</tbody></table>
+<p>字符串比较</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[[ $str1 = $str2 ]]</td>
+<td>相等为真</td>
+</tr>
+<tr>
+<td>[[ $str1 == $str2 ]]</td>
+<td>相等为真</td>
+</tr>
+<tr>
+<td>[[ $str1 != $str2 ]]</td>
+<td>不相等为真</td>
+</tr>
+<tr>
+<td>[[ $str1 &gt; $str2 ]]</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>[[ $str1 &lt; $str2 ]]</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>[[ -z $str1 ]]</td>
+<td>字符串包含空格字符，返回真</td>
+</tr>
+<tr>
+<td>[[ -n $str1 ]]</td>
+<td>非空字符串，返回真</td>
+</tr>
+</tbody></table>
+<p>使用逻辑运算符将代码简洁一点，减少<code>if else</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ condition ] &amp;&amp; action <span class="comment"># 如果为真则执行</span></span><br><span class="line">[ condition ] || action <span class="comment"># 如果为假则执行</span></span><br></pre></td></tr></table></figure>
+
+<p>结合多个条件进行测试</p>
+<ul>
+<li><code>-a</code>： 逻辑与</li>
+<li><code>-o</code>： 逻辑或</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 0 &lt; $var and $var &lt; 10</span></span><br><span class="line">[ <span class="variable">$var</span> -gt 0 -a <span class="variable">$var</span> -lt 10 ]</span><br><span class="line"><span class="comment"># $var &lt; 0 or $var &gt; 10</span></span><br><span class="line">[ <span class="variable">$var</span> -lt 0 -o <span class="variable">$var</span> -gt 10 ]</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/11/golang-web-programming-04-Processing-requests/" rel="prev" title="Golang -Go Web Programming- 04 Processing requests">
+      <i class="fa fa-chevron-left"></i> Golang -Go Web Programming- 04 Processing requests
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/12/linux-shell-tactics-02/" rel="next" title="Linux -Linux Shell 脚本攻略- 02 命令之乐">
+      Linux -Linux Shell 脚本攻略- 02 命令之乐 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#终端打印"><span class="nav-number">1.</span> <span class="nav-text">终端打印</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#echo"><span class="nav-number">1.1.</span> <span class="nav-text">echo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#printf"><span class="nav-number">1.2.</span> <span class="nav-text">printf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量和环境变量"><span class="nav-number">2.</span> <span class="nav-text">变量和环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#额外"><span class="nav-number">2.1.</span> <span class="nav-text">额外</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过shell进行数学运算"><span class="nav-number">3.</span> <span class="nav-text">通过shell进行数学运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件描述符和重定向"><span class="nav-number">4.</span> <span class="nav-text">文件描述符和重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">4.1.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用别名"><span class="nav-number">5.</span> <span class="nav-text">使用别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取终端信息"><span class="nav-number">6.</span> <span class="nav-text">获取终端信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取、设置日期和延时"><span class="nav-number">7.</span> <span class="nav-text">获取、设置日期和延时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试脚本set-x"><span class="nav-number">8.</span> <span class="nav-text">调试脚本set -x</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数与参数"><span class="nav-number">9.</span> <span class="nav-text">函数与参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取命令序列输出"><span class="nav-number">10.</span> <span class="nav-text">读取命令序列输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取字符"><span class="nav-number">11.</span> <span class="nav-text">读取字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字段分隔符和迭代器"><span class="nav-number">12.</span> <span class="nav-text">字段分隔符和迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较与测试"><span class="nav-number">13.</span> <span class="nav-text">比较与测试</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

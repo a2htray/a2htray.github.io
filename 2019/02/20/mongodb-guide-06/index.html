@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="用于类似队列数据的固定集合 用于缓存的 TTL 索引 简单字符串搜索的全文本索引 用于二维平面和球体空间的地埋空间索引 用于存储大文件的 GridFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB 06 特殊的索引和集合">
+<meta property="og:url" content="http://yoursite.com/2019/02/20/mongodb-guide-06/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="用于类似队列数据的固定集合 用于缓存的 TTL 索引 简单字符串搜索的全文本索引 用于二维平面和球体空间的地埋空间索引 用于存储大文件的 GridFS">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-02-20T00:03:45.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:22:04.382Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="DB">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/02/20/mongodb-guide-06/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>MongoDB 06 特殊的索引和集合 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/mongodb-guide-06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB 06 特殊的索引和集合
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-02-20 08:03:45" itemprop="dateCreated datePublished" datetime="2019-02-20T08:03:45+08:00">2019-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:22:04" itemprop="dateModified" datetime="2020-08-23T22:22:04+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>用于类似队列数据的固定集合</li>
+<li>用于缓存的 TTL 索引</li>
+<li>简单字符串搜索的全文本索引</li>
+<li>用于二维平面和球体空间的地埋空间索引</li>
+<li>用于存储大文件的 GridFS</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="固定集合"><a href="#固定集合" class="headerlink" title="固定集合"></a>固定集合</h2><p>固定集合需要事先创建好，而且大小是固定的，其行为类似于循环队列。如果没有空间，老的数据将会被删除</p>
+<p>虽然可以在创建时指定集合的大小，但无法控制什么时候数据会被覆盖</p>
+<h3 id="创建固定集合"><a href="#创建固定集合" class="headerlink" title="创建固定集合"></a>创建固定集合</h3><p>方法 1</p>
+<p><code>createCollection</code> 函数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 100000 个字节的固定集合</span></span><br><span class="line">&gt; db.createCollection(<span class="string">"static_collection"</span>, &#123;<span class="string">"capped"</span>: <span class="literal">true</span>, <span class="string">"size"</span>: 100000&#125;)</span><br><span class="line">&#123; <span class="string">"ok"</span> : 1 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>固定集合创建后，就不能改变，如果需要修改集合的属性，只能将其删除，再创建新的固定集合</p>
+<p>为固定集合指定文档数量时，也必须指定固定集合的大小，使用 <code>max</code> 字段，即 <code>{&quot;capped&quot;: true, &quot;size&quot;: 100000: &quot;max&quot;: 10000}</code></p>
+<p>方法 2</p>
+<p>将一个常规的集合转换成固定集合，使用 <code>convertToCapped</code> 命令实现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.runCommand(&#123;</span><br><span class="line">    <span class="string">"convertToCapped"</span>: <span class="string">"go2do"</span>,  <span class="comment"># 集合名</span></span><br><span class="line">    <span class="string">"size"</span>: 100000  <span class="comment"># 集合大小</span></span><br><span class="line">&#125;)</span><br><span class="line">&#123; <span class="string">"ok"</span> : 1 &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自然排序"><a href="#自然排序" class="headerlink" title="自然排序"></a>自然排序</h3><p>对固定集合可以进行一种特殊的排序，称为自然排序 <code>natural sort</code>。自然排序返回结果集中文档的顺序就是文档在磁盘中的顺序</p>
+<p>基于固定集合插入文档的顺序，自然顺序返回的就是文档插入的顺序。自然排序得到的文档顺序就是从旧到新的文档顺序</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从旧到新</span></span><br><span class="line">&gt; db.static_collection.find().sort(&#123;<span class="string">"<span class="variable">$natural</span>"</span>: 1&#125;)</span><br><span class="line"><span class="comment"># 从新到旧</span></span><br><span class="line">&gt; db.static_collection.find().sort(&#123;<span class="string">"<span class="variable">$natural</span>"</span>: -1&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="循环游标"><a href="#循环游标" class="headerlink" title="循环游标"></a>循环游标</h3><p>循环游标 <code>(tailable cursor)</code> 是一种特殊的游标，当循环游标的结果集被取光时，游标不会关闭，当有新的文档插入到集合中时，循环游标会继续取到结果。由于普通集合并不维护文档的插入顺序，所以循环游标只能用在固定集合中</p>
+<h3 id="没有-id-索引的集合"><a href="#没有-id-索引的集合" class="headerlink" title="没有 _id 索引的集合"></a>没有 <code>_id</code> 索引的集合</h3><p>默认情况下，每一个集合都有一个 <code>&quot;_id&quot;</code> 索引，但是，如果调用 <code>createCollection</code> 创建集合时指定 <code>autoIndexId</code> 选项为 <code>false</code>，创建集合时就不会自动在 <code>&quot;_id&quot;</code> 上加索引。</p>
+<p><code>_id</code> 索引必须是唯一索引，<strong><code>_id</code> 索引一经创建无法删除</strong></p>
+<p>对于只做插入操作的集合，可以设置不在 <code>_id</code> 上自动加索引，对性能会是不错的提升</p>
+<h2 id="TTL-索引"><a href="#TTL-索引" class="headerlink" title="TTL 索引"></a>TTL 索引</h2><p>TTL 索引：<code>time to live index</code>，具有生命周期的索引，这种索引允许为每一个文档设置一个在存活时间。如果一个文档过了时间差值超过这个存活时间就会被删除</p>
+<p>在 <code>ensureIndex</code> 中指定 <code>expireAfterSecs</code> 选项就可以创建一个 <code>TTL</code> 索引</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对 sessions 集合中的 lastUpdated 字段设置一个 TTL 索引</span></span><br><span class="line"><span class="comment"># 当服务器时间减去 lastupdated 字段的时间大于 60 * 60 * 24 秒时，该文档将会删除</span></span><br><span class="line">&gt; db.sessions.ensureIndex(&#123;<span class="string">"lastUpdated"</span>: 1&#125;, &#123;<span class="string">"expireAfterSeconds"</span>: 60 * 60 * 24&#125;)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"createdCollectionAutomatically"</span> : <span class="literal">false</span>,</span><br><span class="line">	<span class="string">"numIndexesBefore"</span> : 1,</span><br><span class="line">	<span class="string">"numIndexesAfter"</span> : 2,</span><br><span class="line">	<span class="string">"ok"</span> : 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="全文本索引"><a href="#全文本索引" class="headerlink" title="全文本索引"></a>全文本索引</h2><p>MongoDB 有一个特殊类型的索引用于在文档中搜索文本，创建全文本索引的成本比一般的索引成本更高</p>
+<h2 id="地理空间索引"><a href="#地理空间索引" class="headerlink" title="地理空间索引"></a>地理空间索引</h2><p>MongoDB 支持几种类型的地理空间索引，常用的有 <code>2dsphere</code> 索引和 <code>2d</code> 索引</p>
+<p><code>2dsphere</code> 索引允许使用 <code>GeoJSON</code> 格式指定点、线和多边形</p>
+<p><strong>点</strong></p>
+<p>使用一个数组 <code>[longitude, latitude]</code> ([经度、纬度])，其中包含两个元素</p>
+<p><strong>线</strong></p>
+<p>由一个由点组成的数组</p>
+<p><strong>多边形</strong></p>
+<p>表示方式和 <code>线</code> 一样，但类型 <code>type</code> 不同</p>
+<p>使用 <code>ensureIndex</code> 中的 <code>2dsphere</code> 选项就可以创建 <code>2dsphere</code> 地理空间索引</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.users.ensureIndex(&#123;<span class="string">"loc"</span>: <span class="string">"2dsphere"</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>ensureIndex</code> 中的 <code>2d</code> 选项就可以创建 <code>2d</code> 地理空间索引</p>
+<h2 id="使用-GridFS-存储文件"><a href="#使用-GridFS-存储文件" class="headerlink" title="使用 GridFS 存储文件"></a>使用 GridFS 存储文件</h2><p><code>GridFS</code> 是 MongoDB 的一种存储机制，用来存储大型二进制文件</p>
+<p>缺点：</p>
+<ul>
+<li>性能低，不如直接访问文件系统</li>
+<li>修改文件时，只能先删除旧再保存修改后的文件</li>
+</ul>
+<p>如果有一些不需要经常改动的文件，使用 <code>GridFS</code> 就比较好</p>
+<p>使用 <code>mongofiles</code> 命令操作 <code>GridFS</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mongofiles put test.fs</span><br><span class="line">2019-01-20T11:11:08.060+0000	connected to: localhost</span><br><span class="line">2019-01-20T11:11:08.060+0000	added file: test.fs</span><br></pre></td></tr></table></figure>
+
+<p><code>mongofiles</code> 支持的基本操作</p>
+<p><code>list</code>、<code>search</code>、<code>put</code>、<code>get</code>、<code>delete</code></p>
+<ul>
+<li>list      - list all files; ‘filename’ is an optional prefix which listed filenames must begin with</li>
+<li>search    - search all files; ‘filename’ is a substring which listed filenames must contain</li>
+<li>put       - add a file with filename ‘filename’</li>
+<li>put_id    - add a file with filename ‘filename’ and a given ‘_id’</li>
+<li>get       - get a file with filename ‘filename’</li>
+<li>get_id    - get a file with the given ‘_id’</li>
+<li>delete    - delete all files with filename ‘filename’</li>
+<li>delete_id - delete a file with the given ‘_id’</li>
+</ul>
+<p><code>GridFS</code> 是一种轻量级的文件存储规范，用于存储 MongoDB 中的普通文档</p>
+<p><code>GridFS</code> 背后的理念是：可以将大文件分割成多个比较大的块，将每个块作为独立的文档进行存储</p>
+<p><code>GridFS</code> 中的块会被存储到专用的集合中，块默认使用的集合是 <code>fs.chunks</code>，<strong>不过可以修改为其他集合</strong></p>
+<p>每一个文件的元信息被保存在一个单独的集合中，默认情况下这个集合是 <code>fs.files</code></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DB/" rel="tag"># DB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/02/20/mongodb-guide-05/" rel="prev" title="MongoDB 05 索引">
+      <i class="fa fa-chevron-left"></i> MongoDB 05 索引
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/02/20/mongodb-guide-07/" rel="next" title="MongoDB 07 聚合">
+      MongoDB 07 聚合 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#固定集合"><span class="nav-number">1.</span> <span class="nav-text">固定集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建固定集合"><span class="nav-number">1.1.</span> <span class="nav-text">创建固定集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自然排序"><span class="nav-number">1.2.</span> <span class="nav-text">自然排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环游标"><span class="nav-number">1.3.</span> <span class="nav-text">循环游标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#没有-id-索引的集合"><span class="nav-number">1.4.</span> <span class="nav-text">没有 _id 索引的集合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TTL-索引"><span class="nav-number">2.</span> <span class="nav-text">TTL 索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文本索引"><span class="nav-number">3.</span> <span class="nav-text">全文本索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地理空间索引"><span class="nav-number">4.</span> <span class="nav-text">地理空间索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-GridFS-存储文件"><span class="nav-number">5.</span> <span class="nav-text">使用 GridFS 存储文件</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

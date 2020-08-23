@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Using RESTful web services Creating and parsing XML with Go Creating and parsing JSON with Go Writing Go web services  介绍Go语言在处理XML和JSON时的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang -Go Web Programming- 07 Go web services">
+<meta property="og:url" content="http://yoursite.com/2019/01/14/golang-web-programming-07-Go-web-services/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="Using RESTful web services Creating and parsing XML with Go Creating and parsing JSON with Go Writing Go web services  介绍Go语言在处理XML和JSON时的使用">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-14T03:19:16.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:08:41.804Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/14/golang-web-programming-07-Go-web-services/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Golang -Go Web Programming- 07 Go web services | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/golang-web-programming-07-Go-web-services/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Golang -Go Web Programming- 07 Go web services
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-14 11:19:16" itemprop="dateCreated datePublished" datetime="2019-01-14T11:19:16+08:00">2019-01-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:08:41" itemprop="dateModified" datetime="2020-08-23T22:08:41+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>Using RESTful web services</li>
+<li>Creating and parsing <em>XML</em> with Go</li>
+<li>Creating and parsing <em>JSON</em> with Go</li>
+<li>Writing Go web services</li>
+</ul>
+<p>介绍<code>Go语言</code>在处理<code>XML</code>和<code>JSON</code>时的使用</p>
+<a id="more"></a>
+
+<p>How to create and parse <em>XML</em> and <em>JSON</em> first?</p>
+<h2 id="Introducing-web-services"><a href="#Introducing-web-services" class="headerlink" title="Introducing web services"></a>Introducing web services</h2><p><em>Web services</em>, at a basic level, are software programs that interact with other software programs. <code>与其他软件程序交互的软件程序</code></p>
+<p>there are different types of web services, including <em>SOAP-based</em>, <em>REST-based</em>, and <em>XML-RPCbased</em>. <code>不同类型的 Web 服务</code></p>
+<ul>
+<li><em>SOAP-based</em>：多运用于企业内部</li>
+<li><em>REST-based</em>：对外</li>
+<li><em>XML-RPCbased</em></li>
+</ul>
+<p><em>SOAP-based</em> web services are mostly being used in <em>enterprise systems</em>; <em>REST-based</em> web services are more popular in <em>publicly available web services</em>.</p>
+<p><em>SOAP-based</em> services are robust, are explicitly described using <em>WSDL</em> (Web Service Definition Language), and have built-in error handling. Together with <em>UDDI</em> (Universal Description, Discovery, and Integration—a directory service), <em>SOAP-based</em> services can also be discovered</p>
+<ul>
+<li><code>WSDL</code>：Web Service Definition Language</li>
+<li><code>UDDI</code>：Universal Description, Discovery, and Integration</li>
+</ul>
+<p><em>REST-based</em> web services are a lot more flexible. REST isn’t an architecture in itself but a design philosophy. It doesn’t require XML, and very often <em>REST-based</em> web services use simpler data formats like JSON, resulting in speedier web services. REST-based web services are often much simpler than <em>SOAP-based</em> ones.<code>REST-based比SOAP-based简单,常使用JSON作为传输格式</code></p>
+<p>Another difference between the two is that SOAP-based web services are <em>function-driven</em>; REST-based web services are <em>data-driven</em>.<code>SOAP是功能驱动、REST是数据驱动</code></p>
+<p>SOAP-based web services tend to be RPC (Remote Procedure Call)<code>远程程序调用 RPC</code> styled; REST-based web services, as described earlier, focus on resources, and HTTP methods are the verbs working on those resources.<code>SOAP-based类似于远程程序的调用，而HTTP类似于资源的获取</code></p>
+<p><code>SOAP-based</code>与<code>REST-based</code>区别在于</p>
+<ul>
+<li>定义明确</li>
+<li>以功能为驱动</li>
+<li>设计过重</li>
+<li>结构性</li>
+</ul>
+<h2 id="Introducing-SOAP-based-web-services"><a href="#Introducing-SOAP-based-web-services" class="headerlink" title="Introducing SOAP-based web services"></a>Introducing SOAP-based web services</h2><p><code>Simple Object Access Protocol</code>、<code>引入SOAP，企业内部</code></p>
+<p>SOAP ( <em>Simple Object Access Protocol</em> ) is a protocol for exchanging structured data that’s defined in XML. SOAP is <em>highly structured</em> and <em>heavily defined</em>, and the <em>XML</em> used for the transportation of the data can be complex. The <em>WSDL</em> is the contract between the client and the server, defining what the service provides and how it’s provided.</p>
+<h2 id="Introducing-REST-based-web-services"><a href="#Introducing-REST-based-web-services" class="headerlink" title="Introducing REST-based web services"></a>Introducing REST-based web services</h2><p><a href="/2019/01/13/rest-api-excerpt/">REST API 的基本介绍</a></p>
+<h3 id="Convert-action-to-a-resource"><a href="#Convert-action-to-a-resource" class="headerlink" title="Convert action to a resource"></a>Convert action to a resource</h3><p>you can convert the activate action to a resource activation. Doing this also gives the added advantage of giving the activation resource additional properties. </p>
+<h3 id="Make-the-action-a-property-of-the-resource"><a href="#Make-the-action-a-property-of-the-resource" class="headerlink" title="Make the action a property of the resource"></a>Make the action a property of the resource</h3><p>you can simply make the action a property of the resource</p>
+<h2 id="Parsing-and-creating-XML-with-Go"><a href="#Parsing-and-creating-XML-with-Go" class="headerlink" title="Parsing and creating XML with Go"></a>Parsing and creating XML with Go</h2><p>look at how Go can be used to create and consume them.</p>
+<p>XML is a popular markup language (HTML is another example of a markup language)<code>标记性语言</code> that’s used to represent data in a structured way.<code>结构化展示数据</code>XML is a formal recommendation from the W3C, and it’s defined by W3C’s XML 1.0 specification.<code>规范化</code></p>
+<p>RSS：XML-based</p>
+<p>To manipulate XML or JSON, you can use the corresponding XML or JSON subpackages of the encoding library. For XML, it’s in the <code>encoding/xml</code> library.</p>
+<h3 id="Parsing-XML"><a href="#Parsing-XML" class="headerlink" title="Parsing XML"></a>Parsing XML</h3><p>In Go, you parse the XML into structs, which you can subsequently extract the data from.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">post</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">content</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">content</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span>Sau Sheong<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">post</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"encoding/xml"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"io/ioutil"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Post <span class="keyword">struct</span> &#123; <span class="comment">//#A</span></span><br><span class="line">    XMLName xml.Name <span class="string">`xml:"post"`</span></span><br><span class="line">    Id <span class="keyword">string</span> <span class="string">`xml:"id,attr"`</span></span><br><span class="line">    Content <span class="keyword">string</span> <span class="string">`xml:"content"`</span></span><br><span class="line">    Author Author <span class="string">`xml:"author"`</span></span><br><span class="line">    Xml <span class="keyword">string</span> <span class="string">`xml:",innerxml"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Author <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id <span class="keyword">string</span> <span class="string">`xml:"id,attr"`</span></span><br><span class="line">    Name <span class="keyword">string</span> <span class="string">`xml:",chardata"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    xmlFile, err := os.Open(<span class="string">"post.xml"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Error opening XML file:"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">defer</span> xmlFile.Close()</span><br><span class="line">    </span><br><span class="line">    xmlData, err := ioutil.ReadAll(xmlFile)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Error reading XML data:"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> post Post</span><br><span class="line">    xml.Unmarshal(xmlData, &amp;post)</span><br><span class="line">    fmt.Println(post)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Struct tags<code>结构标签</code> are strings after each field that are a key-value pair. The key is a string and must not have a space, a quote (<code>&quot;</code>), or a colon (<code>:</code>). The value must be a string between double quotes (<code>&quot;&quot;</code>). For XML, the key must always be xml.</p>
+<p>strings in Go are created using the double quotes (<code>&quot;</code>) and backticks (`).</p>
+<p>the struct and all the fields in the struct that you create must be public, which means the names need to be capitalized.<code>字段属性必须是公开的</code></p>
+<p>Here are some rules for the XML struct tags:</p>
+<ul>
+<li><code>保存标签名</code> To store the name of the XML element itself (normally the name of the struct is the name of the element), add a field named XMLName with the type <code>xml.Name</code>. The name of the element will be stored in that field.</li>
+<li><code>保存标签的属性</code> To store the attribute of an XML element, define a field with the same name as that attribute and use the struct tag <code>xml:&quot;&lt;name&gt;,attr&quot;</code>, where <name> is the name of the XML attribute.</name></li>
+<li><code>保存标签内字符数据</code> To store the character data value of the XML element, define a field with the same name as the XML element tag, and use the struct tag <code>xml:&quot;,chardata&quot;</code>.</li>
+<li><code>保存未被处理的标签内数据</code>To get the raw XML from the XML element, define a field (using any name) and use the struct tag <code>xml:&quot;,innerxml&quot;</code>.</li>
+<li><code>在没有指定结构标签的情况下</code> If there are no mode flags (like ,attr or ,chardata or ,innerxml) the struct field will be matched with an XML element that has the same name as the struct’s name.</li>
+<li><code>不需要全文转换成树的情况下</code>  To get to an XML element directly without specifying the tree structure to get to that element, use the struct tag <code>xml:&quot;a&gt;b&gt;c&quot;</code>, where a and b are the intermediate elements and c is the node that you want to get to.</li>
+</ul>
+<p>再举一例子：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">post</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">content</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">content</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span>Sau Sheong<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">comments</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">comment</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">content</span>&gt;</span>Have a great day!<span class="tag">&lt;/<span class="name">content</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"3"</span>&gt;</span>Adam<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">comment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">comment</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">content</span>&gt;</span>How are you today?<span class="tag">&lt;/<span class="name">content</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"4"</span>&gt;</span>Betty<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">comment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">comments</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">post</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Post <span class="keyword">struct</span> &#123;</span><br><span class="line">    XMLName xml.Name <span class="string">`xml:"post"`</span></span><br><span class="line">    Id <span class="keyword">string</span> <span class="string">`xml:"id,attr"`</span></span><br><span class="line">    Content <span class="keyword">string</span> <span class="string">`xml:"content"`</span></span><br><span class="line">    Author Author <span class="string">`xml:"author"`</span></span><br><span class="line">    Xml <span class="keyword">string</span> <span class="string">`xml:",innerxml"`</span></span><br><span class="line">    Comments []Comment <span class="string">`xml:"comments&gt;comment"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用<code>Decoder</code>手动解析XML</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    xmlFile, err := os.Open(<span class="string">"post.xml"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Error opening XML file:"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">defer</span> xmlFile.Close()</span><br><span class="line">    </span><br><span class="line">    decoder := xml.NewDecoder(xmlFile)</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        t, err := decoder.Token()</span><br><span class="line">        <span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"Error decoding XML into tokens:"</span>, err)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">switch</span> se := t.(<span class="keyword">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> xml.StartElement:</span><br><span class="line">            <span class="keyword">if</span> se.Name.Local == <span class="string">"comment"</span> &#123;</span><br><span class="line">                <span class="keyword">var</span> comment Comment</span><br><span class="line">                decoder.DecodeElement(&amp;comment, &amp;se)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Creating-XML"><a href="#Creating-XML" class="headerlink" title="Creating XML"></a>Creating XML</h3><p>Creating XML is the reverse of parsing XML. Where you unmarshal XML into Go structs, you now marshal Go structs into XML. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"encoding/xml"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"io/ioutil"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> Post <span class="keyword">struct</span> &#123;</span><br><span class="line">    XMLName xml.Name <span class="string">`xml:"post"`</span></span><br><span class="line">    Id <span class="keyword">string</span> <span class="string">`xml:"id,attr"`</span></span><br><span class="line">    Content <span class="keyword">string</span> <span class="string">`xml:"content"`</span></span><br><span class="line">    Author Author <span class="string">`xml:"author"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Author <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id <span class="keyword">string</span> <span class="string">`xml:"id,attr"`</span></span><br><span class="line">    Name <span class="keyword">string</span> <span class="string">`xml:",chardata"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    post := Post&#123;</span><br><span class="line">        Id: <span class="string">"1"</span>,</span><br><span class="line">        Content: <span class="string">" Hello World!"</span>,</span><br><span class="line">        Author: Author&#123;</span><br><span class="line">            Id: <span class="string">"2"</span>,</span><br><span class="line">            Name: <span class="string">"Sau Sheong"</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    output, err := xml.Marshal(&amp;post)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Error marshalling to XML:"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    err = ioutil.WriteFile(<span class="string">"post.xml"</span>, output, <span class="number">0644</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Error writing XML to file:"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">post</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span><span class="tag">&lt;<span class="name">content</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">content</span>&gt;</span><span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span>Sau Sheong</span><br><span class="line"><span class="tag">&lt;/<span class="name">author</span>&gt;</span><span class="tag">&lt;/<span class="name">post</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果使用<code>output, err := xml.MarshalIndent(&amp;post, &quot;&quot;, &quot;\t&quot;)</code>，则格式化显示</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">post</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">content</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">content</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">author</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span>Sau Sheong<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">post</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Parsing-and-creating-JSON-with-Go"><a href="#Parsing-and-creating-JSON-with-Go" class="headerlink" title="Parsing and creating JSON with Go"></a>Parsing and creating JSON with Go</h2><p><em>JavaScript Serialized Object Notation</em> (JSON) is a lightweight, text-based data format based on JavaScript. The main idea behind JSON is that it’s easily read by both humans and machines.<code>人和机器都能很好的识别</code> JSON is popularly used in REST-based web services, although they don’t necessarily need to accept or return JSON data.</p>
+<p>Go is also used to create web services for Internet of Things (IoT) and wearables such as smart watches.<code>说明下应用场景</code></p>
+<p>Go’s support for JSON is from the <code>encoding/json</code> library.</p>
+<h3 id="Parsing-JSON"><a href="#Parsing-JSON" class="headerlink" title="Parsing JSON"></a>Parsing JSON</h3><ul>
+<li>Create structs to contain the JSON data.</li>
+<li>Use json.Unmarshal to unmarshal the JSON data into the structs</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"id"</span> : <span class="number">1</span>,</span><br><span class="line">  <span class="string">"content"</span> : <span class="string">"Hello World!"</span>,</span><br><span class="line">  <span class="string">"author"</span> : &#123;</span><br><span class="line">    <span class="string">"id"</span> : <span class="number">2</span>,</span><br><span class="line">    <span class="string">"name"</span> : <span class="string">"Sau Sheong"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"comments"</span> : [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"id"</span> : <span class="number">3</span>,</span><br><span class="line">      <span class="string">"content"</span> : <span class="string">"Have a great day!"</span>,</span><br><span class="line">      <span class="string">"author"</span> : <span class="string">"Adam"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"id"</span> : <span class="number">4</span>,</span><br><span class="line">      <span class="string">"content"</span> : <span class="string">"How are you today?"</span>,</span><br><span class="line">      <span class="string">"author"</span> : <span class="string">"Betty"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"encoding/json"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"io/ioutil"</span></span><br><span class="line">    <span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> Post <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id <span class="keyword">int</span> <span class="string">`json:"id"`</span></span><br><span class="line">    Content <span class="keyword">string</span> <span class="string">`json:"content"`</span></span><br><span class="line">    Author Author <span class="string">`json:"author"`</span></span><br><span class="line">    Comments []Comment <span class="string">`json:"comments"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Author <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id <span class="keyword">int</span> <span class="string">`json:"id"`</span></span><br><span class="line">    Name <span class="keyword">string</span> <span class="string">`json:"name"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Comment <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id <span class="keyword">int</span> <span class="string">`json:"id"`</span></span><br><span class="line">    Content <span class="keyword">string</span> <span class="string">`json:"content"`</span></span><br><span class="line">    Author <span class="keyword">string</span> <span class="string">`json:"author"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    jsonFile, err := os.Open(<span class="string">"post.json"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Error opening JSON file:"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">defer</span> jsonFile.Close()</span><br><span class="line">    </span><br><span class="line">    jsonData, err := ioutil.ReadAll(jsonFile)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Error reading JSON data:"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> post Post</span><br><span class="line">    json.Unmarshal(jsonData, &amp;post)</span><br><span class="line">    fmt.Println(post)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Creating-JSON"><a href="#Creating-JSON" class="headerlink" title="Creating JSON"></a>Creating JSON</h3><p>Creating JSON is also is similar to creating XML </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"encoding/json"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"io/ioutil"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> Post <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id <span class="keyword">int</span> <span class="string">`json:"id"`</span></span><br><span class="line">    Content <span class="keyword">string</span> <span class="string">`json:"content"`</span></span><br><span class="line">    Author Author <span class="string">`json:"author"`</span></span><br><span class="line">    Comments []Comment <span class="string">`json:"comments"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Author <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id <span class="keyword">int</span> <span class="string">`json:"id"`</span></span><br><span class="line">    Name <span class="keyword">string</span> <span class="string">`json:"name"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Comment <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id <span class="keyword">int</span> <span class="string">`json:"id"`</span></span><br><span class="line">    Content <span class="keyword">string</span> <span class="string">`json:"content"`</span></span><br><span class="line">    Author <span class="keyword">string</span> <span class="string">`json:"author"`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    post := Post&#123;</span><br><span class="line">        Id: <span class="number">1</span>,</span><br><span class="line">            Content: <span class="string">"Hello World!"</span>,</span><br><span class="line">            Author: Author&#123;</span><br><span class="line">            Id: <span class="number">2</span>,</span><br><span class="line">            Name: <span class="string">"Sau Sheong"</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        Comments: []Comment&#123;</span><br><span class="line">            Comment&#123;</span><br><span class="line">                Id: <span class="number">3</span>,</span><br><span class="line">                Content: <span class="string">"Have a great day!"</span>,</span><br><span class="line">                Author: <span class="string">"Adam"</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            Comment&#123;</span><br><span class="line">                Id: <span class="number">4</span>,</span><br><span class="line">                Content: <span class="string">"How are you today?"</span>,</span><br><span class="line">                Author: <span class="string">"Betty"</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    output, err := json.MarshalIndent(&amp;post, <span class="string">""</span>, <span class="string">"\t\t"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Error marshalling to JSON:"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    err = ioutil.WriteFile(<span class="string">"post.json"</span>, output, <span class="number">0644</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"Error writing JSON to file:"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>There are mainly two types of web services: SOAP-based and REST-based web services</li>
+<li>Creating and parsing XML and JSON are similar and involve creating a struct and either generating (unmarshaling) XML or JSON from it, or creating a struct and extracting (marshaling) XML or JSON into it.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/13/golang-web-programming-06-Storing-data/" rel="prev" title="Golang -Go Web Programming- 06 Storing data">
+      <i class="fa fa-chevron-left"></i> Golang -Go Web Programming- 06 Storing data
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/14/golang-web-programming-08-Testing-your-application/" rel="next" title="Golang -Go Web Programming- 08 Testing your application">
+      Golang -Go Web Programming- 08 Testing your application <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introducing-web-services"><span class="nav-number">1.</span> <span class="nav-text">Introducing web services</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introducing-SOAP-based-web-services"><span class="nav-number">2.</span> <span class="nav-text">Introducing SOAP-based web services</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introducing-REST-based-web-services"><span class="nav-number">3.</span> <span class="nav-text">Introducing REST-based web services</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convert-action-to-a-resource"><span class="nav-number">3.1.</span> <span class="nav-text">Convert action to a resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Make-the-action-a-property-of-the-resource"><span class="nav-number">3.2.</span> <span class="nav-text">Make the action a property of the resource</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parsing-and-creating-XML-with-Go"><span class="nav-number">4.</span> <span class="nav-text">Parsing and creating XML with Go</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parsing-XML"><span class="nav-number">4.1.</span> <span class="nav-text">Parsing XML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-XML"><span class="nav-number">4.2.</span> <span class="nav-text">Creating XML</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parsing-and-creating-JSON-with-Go"><span class="nav-number">5.</span> <span class="nav-text">Parsing and creating JSON with Go</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parsing-JSON"><span class="nav-number">5.1.</span> <span class="nav-text">Parsing JSON</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-JSON"><span class="nav-number">5.2.</span> <span class="nav-text">Creating JSON</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">6.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

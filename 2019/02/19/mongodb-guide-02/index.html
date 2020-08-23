@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="基本概念  文档document 是 MongoDB 中数据的基本单元 集合collection 可以看作是一个拥有 动态模式(dynamic schema) 的表 一个实例拥有多个独立的 数据库database，每一个数据库都拥有自己的集合 每一个文档都有一个特殊的键 _id，且是唯一的 自带了简单但强大的 JavaScript shell，可用于管理 MongoDB 实例或数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB 02 基础知识">
+<meta property="og:url" content="http://yoursite.com/2019/02/19/mongodb-guide-02/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="基本概念  文档document 是 MongoDB 中数据的基本单元 集合collection 可以看作是一个拥有 动态模式(dynamic schema) 的表 一个实例拥有多个独立的 数据库database，每一个数据库都拥有自己的集合 每一个文档都有一个特殊的键 _id，且是唯一的 自带了简单但强大的 JavaScript shell，可用于管理 MongoDB 实例或数据库">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-02-19T14:52:16.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:21:47.527Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="DB">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/02/19/mongodb-guide-02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>MongoDB 02 基础知识 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/mongodb-guide-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB 02 基础知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-02-19 22:52:16" itemprop="dateCreated datePublished" datetime="2019-02-19T22:52:16+08:00">2019-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:21:47" itemprop="dateModified" datetime="2020-08-23T22:21:47+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>基本概念</p>
+<ul>
+<li><code>文档document</code> 是 MongoDB 中数据的基本单元</li>
+<li><code>集合collection</code> 可以看作是一个拥有 <code>动态模式(dynamic schema)</code> 的表</li>
+<li>一个实例拥有多个独立的 <code>数据库database</code>，每一个数据库都拥有自己的集合</li>
+<li>每一个文档都有一个特殊的键 <code>_id</code>，且是唯一的</li>
+<li>自带了简单但强大的 <code>JavaScript shell</code>，可用于管理 MongoDB 实例或数据库</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p>文档是键值对的有序集，类似于JavaScript中的对象，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"go2do based on Golang"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>文档的键是字符串，除了少数例外情况，键可以使用任意的 <code>UTF-8字符</code> ，文档中不能有重复的键</p>
+<ul>
+<li>键不能含有 <code>\0</code> 字符，该字符表示键 <code>(字符串)</code> 的结尾</li>
+<li><code>.</code> 和 <code>$</code> 具有特殊意义，被保留</li>
+</ul>
+<p>MongoDB 区分类型，也区分大小写，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"go2do based on Golang"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 不同</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"Name"</span>: <span class="string">"go2do based on Golang"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 与</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"counter"</span>: <span class="number">5</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 不同</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"counter"</span>: <span class="string">"5"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>集合是一组文档，相当于一个表</p>
+<h3 id="动态模式"><a href="#动态模式" class="headerlink" title="动态模式"></a>动态模式</h3><p>集合是动态的，如下面两个文档可在一个集合中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"go2do based on Golang"</span></span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"counter"</span>: <span class="number">5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>集合里面可以放置任何文档</p>
+<h3 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h3><p>集合名满足：</p>
+<ul>
+<li>不能是空字符串</li>
+<li>不能包含 <code>\0</code> 字符</li>
+<li>不能以 <code>system.</code> 开头</li>
+<li>用户创建的集合名不能包含 <code>$</code></li>
+</ul>
+<p>子集合：<code>高效组织数据</code></p>
+<p>组织集合的惯例是使用 <code>.</code> 分隔不同命名空间的子集合</p>
+<ul>
+<li><code>GridFS</code> (一种存储大文件的协议) 使用子集合来存储文件的元数据</li>
+<li>大多数驱动程序都提供了一些语法糖</li>
+</ul>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>一个 MongoDB 实例可以承载多个数据库 Database ，每个数据库拥有0个或者多个集合 <code>Collection</code> ，每个数据库都有独立的权限，不同的数据库也放置在不同的文件中</p>
+<p>数据库的命名满足：</p>
+<ul>
+<li>不能使用空字符</li>
+<li>只能使用<code>ASCII</code>中的字母和数字</li>
+<li>数据库<code>区分大小写</code>，数据库名应<code>全部小写</code></li>
+<li>数据库名最多<code>64字节</code></li>
+</ul>
+<p>保留的数据库名：<code>admin</code>、<code>local</code>、<code>config</code></p>
+<p>把数据库名添加到集合名前，得到集合的 <code>完全限定名</code>，即 <code>命名空间(namespace)</code></p>
+<h2 id="MongoDB-shell-简介"><a href="#MongoDB-shell-简介" class="headerlink" title="MongoDB shell 简介"></a>MongoDB shell 简介</h2><p>在 <code>JavaScript shell</code> 中使用命令行与 MongoDB 实例交互</p>
+<p>可以使用 <code>docker</code> 下载 <code>mongo镜像</code> ，即可以体验 <code>JavaScript shell</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name <span class="built_in">test</span>-mongo -d mongo</span><br><span class="line">$ docker <span class="built_in">exec</span> -it <span class="built_in">test</span>-mongo &#123;container_id&#125;</span><br><span class="line"><span class="comment"># 进入容器后</span></span><br><span class="line">$ mongo</span><br></pre></td></tr></table></figure>
+
+<p>进入 <code>JavaScript shell</code> 后，可以使用一个功能完备的 <code>JavaScript</code> 解释器，可以运行任意的 <code>JavaScript</code> 程序</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前指向哪个数据库</span></span><br><span class="line">&gt; db</span><br><span class="line"><span class="built_in">test</span></span><br><span class="line"><span class="comment"># 选择数据库，如果数据库不存在则创建</span></span><br><span class="line">&gt; use foobar</span><br><span class="line">switched to db foobar</span><br></pre></td></tr></table></figure>
+
+<h3 id="shell-中的基本操作"><a href="#shell-中的基本操作" class="headerlink" title="shell 中的基本操作"></a>shell 中的基本操作</h3><p>创建、读取、更新、删除 <code>CURD 操作</code></p>
+<p><code>insert</code>、<code>find</code>、<code>findOne</code>、<code>update</code>、<code>remove</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&gt; task = &#123; </span><br><span class="line">    <span class="string">"title"</span>: <span class="string">"complete analysis"</span>, </span><br><span class="line">    <span class="string">"date"</span>: new Date(), </span><br><span class="line">    <span class="string">"expired_date"</span>: new Date(<span class="string">"2019-01-18T06:01:17Z"</span>),</span><br><span class="line">    <span class="string">"progress"</span>: 0</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">    <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T16:42:38.549Z"</span>),</span><br><span class="line">    <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>),</span><br><span class="line">    <span class="string">"progress"</span> : 0</span><br><span class="line">&#125;</span><br><span class="line">&gt; db.task.insert(task)</span><br><span class="line">WriteResult(&#123; <span class="string">"nInserted"</span> : 1 &#125;)</span><br><span class="line"><span class="comment"># find() 和 findOne() 方法可以用于查询集合里的文档</span></span><br><span class="line">&gt; db.task.find()</span><br><span class="line">&#123; </span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cbc347049e0b167d97e10"</span>), </span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>, </span><br><span class="line">    <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T16:42:38.549Z"</span>), </span><br><span class="line">    <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>), </span><br><span class="line">    <span class="string">"progress"</span> : 0 </span><br><span class="line">&#125;</span><br><span class="line">&gt; db.task.findOne()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cbc347049e0b167d97e10"</span>),</span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">    <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T16:42:38.549Z"</span>),</span><br><span class="line">    <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>),</span><br><span class="line">    <span class="string">"progress"</span> : 0</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># update 用户于更新文档，至少接收两个参数</span></span><br><span class="line">&gt; task.create_user = <span class="string">"a2htray"</span> <span class="comment"># 修改 task 变量，增加 create_user 字段</span></span><br><span class="line">a2htray</span><br><span class="line">&gt; db.task.update(&#123;<span class="string">"title"</span>:<span class="string">"complete analysis"</span>&#125;, task)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : 1, <span class="string">"nUpserted"</span> : 0, <span class="string">"nModified"</span> : 1 &#125;)</span><br><span class="line">&gt; db.task.findOne() </span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5c3cbc347049e0b167d97e10"</span>),</span><br><span class="line">    <span class="string">"title"</span> : <span class="string">"complete analysis"</span>,</span><br><span class="line">    <span class="string">"date"</span> : ISODate(<span class="string">"2019-01-14T16:42:38.549Z"</span>),</span><br><span class="line">    <span class="string">"expired_date"</span> : ISODate(<span class="string">"2019-01-18T06:01:17Z"</span>),</span><br><span class="line">    <span class="string">"progress"</span> : 0,</span><br><span class="line">    <span class="string">"create_user"</span> : <span class="string">"a2htray"</span> <span class="comment"># 已更新</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 删除，接收一个限定条件作为参数</span></span><br><span class="line">&gt; db.task.remove(&#123;<span class="string">"title"</span>:<span class="string">"complete analysis"</span>&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nRemoved"</span> : 1 &#125;)</span><br><span class="line"><span class="comment"># 获取当前数据库的所有集合</span></span><br><span class="line">&gt; db.getCollectionNames()</span><br><span class="line">[ <span class="string">"task"</span> ]</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>MongoDB 在保留 JSON 的 <code>key-value</code> 的基础上，添加了其他一些数据类型</p>
+<p>下列为 MongoDB 支持的通用型类型</p>
+<ul>
+<li>null</li>
+<li>布尔值 <code>true</code> <code>false</code></li>
+<li>数值</li>
+<li>字符串</li>
+<li>日期 <code>new Date()</code></li>
+<li>正则表达式 <code>{ &quot;x&quot;: /foobar/i }</code></li>
+<li>数组 <code>{&quot;x&quot;: [1, 2, 3]}</code></li>
+<li>内嵌文档 <code>{ &quot;x&quot;: { &quot;y&quot;: 1 } }</code></li>
+<li>对象id：是一个12字节的ID，是文档的唯一值 <code>{ &quot;_id&quot;: ObjectId() }</code></li>
+<li>二进制数据</li>
+<li>代码：查询和文档中可以包括任意的JavaScript代码 <code>{&quot;x&quot;: function () { /* ... */ }}</code></li>
+</ul>
+<h3 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h3><p>使用 <code>new Date()</code> ，如果使用 <code>Date()</code> 将返回日期的字符串表示</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组内元素可以包括不同类型的值</p>
+<h3 id="内嵌文档"><a href="#内嵌文档" class="headerlink" title="内嵌文档"></a>内嵌文档</h3><p>文档可以作为键的值，这样的文档就是内嵌文档</p>
+<h3 id="id-和-ObjectId"><a href="#id-和-ObjectId" class="headerlink" title="_id 和 ObjectId"></a><code>_id</code> 和 <code>ObjectId</code></h3><p>MongoDB 中存储的文档必须有一个 <code>_id</code> 键，这个键的值可以是任意类型的，默认是 <code>ObjectId</code> 对象</p>
+<p>在一个集合中，<code>_id</code> 键的值是唯一的</p>
+<p>TODO: <code>ObjectId()</code>唯一值生成的原理?</p>
+<h2 id="使用-MongoDB-shell"><a href="#使用-MongoDB-shell" class="headerlink" title="使用 MongoDB shell"></a>使用 MongoDB shell</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接远程 MongoDB 实例</span></span><br><span class="line">$ mongo hostname:30000/dbname</span><br><span class="line"><span class="comment"># 启动时不连接数据库 --nodb</span></span><br><span class="line">$ mongo --nodb</span><br><span class="line"><span class="comment"># 在不连接数据库的情况下，进行连接</span></span><br><span class="line">&gt; conn = new Mongo(<span class="string">"hostname:30000"</span>)</span><br><span class="line">connection to hostname:30000</span><br><span class="line">&gt; db = conn.getDB(<span class="string">"dbname"</span>)</span><br><span class="line">dbname</span><br><span class="line"><span class="comment"># 显示帮助、数据库级别帮助、集合级别帮助</span></span><br><span class="line">&gt; <span class="built_in">help</span></span><br><span class="line">&gt; db.help()</span><br><span class="line">&gt; db.foobar.help()</span><br><span class="line"><span class="comment"># 函数名显示函数实现</span></span><br><span class="line">&gt; db.foobar.find</span><br><span class="line"><span class="comment"># 执行 js 代码 使用 --quiet 不显示版本信息</span></span><br><span class="line">$ mongo --quiet script.js</span><br><span class="line"><span class="comment"># 在 shell 中加载 js 执行</span></span><br><span class="line">&gt; load(<span class="string">"script.js"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>script.js</code> 之类的脚本文件中，可以访问 <code>db</code> 等其它全局变量，与 shell 中相等价的函数有</p>
+<ul>
+<li><code>db.getSisterDB(&quot;foobar&quot;) == use foobar</code></li>
+<li><code>db.getMongo.getDBs() == show dbs</code></li>
+<li><code>db.getCollectionNames() == show collections</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 shell 中执行 bash 命令，但不支持管道操作</span></span><br><span class="line">&gt; run(<span class="string">"ls"</span>, <span class="string">"-al"</span>, <span class="string">"."</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="mongorc-js-文件"><a href="#mongorc-js-文件" class="headerlink" title=".mongorc.js 文件"></a><code>.mongorc.js</code> 文件</h3><p>如果某些脚本会被频繁加载，可以将它们添加到 <code>.momgorc.js</code> 文件中，这个文件会在启动 shell 时自动运行</p>
+<!-- TODO：关于如何配置 `.mongorc.js` ? -->
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DB/" rel="tag"># DB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/02/19/mongodb-guide-01/" rel="prev" title="MongoDB 01 简介">
+      <i class="fa fa-chevron-left"></i> MongoDB 01 简介
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/02/19/mongodb-guide-03/" rel="next" title="MongoDB 03 创建、更新和删除文档">
+      MongoDB 03 创建、更新和删除文档 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文档"><span class="nav-number">1.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合"><span class="nav-number">2.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态模式"><span class="nav-number">2.1.</span> <span class="nav-text">动态模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名"><span class="nav-number">2.2.</span> <span class="nav-text">命名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库"><span class="nav-number">3.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB-shell-简介"><span class="nav-number">4.</span> <span class="nav-text">MongoDB shell 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell-中的基本操作"><span class="nav-number">4.1.</span> <span class="nav-text">shell 中的基本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">5.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日期"><span class="nav-number">5.1.</span> <span class="nav-text">日期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">5.2.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内嵌文档"><span class="nav-number">5.3.</span> <span class="nav-text">内嵌文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#id-和-ObjectId"><span class="nav-number">5.4.</span> <span class="nav-text">_id 和 ObjectId</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-MongoDB-shell"><span class="nav-number">6.</span> <span class="nav-text">使用 MongoDB shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongorc-js-文件"><span class="nav-number">6.1.</span> <span class="nav-text">.mongorc.js 文件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="shows you how to build a typical web application with Go, taking you step by step through the creation of a simple internet forum web  Introducing Go web programming Designing a typical Go web applica">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang -Go Web Programming- 02 Go ChitChat">
+<meta property="og:url" content="http://yoursite.com/2019/01/10/golang-web-programming-02-title-Go-ChitChat/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="shows you how to build a typical web application with Go, taking you step by step through the creation of a simple internet forum web  Introducing Go web programming Designing a typical Go web applica">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-10T14:06:34.000Z">
+<meta property="article:modified_time" content="2020-08-23T14:06:00.500Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/10/golang-web-programming-02-title-Go-ChitChat/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Golang -Go Web Programming- 02 Go ChitChat | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/golang-web-programming-02-title-Go-ChitChat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Golang -Go Web Programming- 02 Go ChitChat
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-10 22:06:34" itemprop="dateCreated datePublished" datetime="2019-01-10T22:06:34+08:00">2019-01-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:06:00" itemprop="dateModified" datetime="2020-08-23T22:06:00+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>shows you how to build a typical web application with Go, taking you step by step through the creation of a simple internet forum web</p>
+<ul>
+<li>Introducing Go web programming</li>
+<li>Designing a typical Go web application</li>
+<li>Writing a complete Go web application</li>
+<li>Understanding the parts of a Go web application</li>
+</ul>
+<a id="more"></a>
+
+<p>We’ll be building a simple internet forum web application—one that allows users to log in and create conversations and respond to conversation topics.</p>
+<h2 id="Let’s-ChitChat"><a href="#Let’s-ChitChat" class="headerlink" title="Let’s ChitChat"></a>Let’s ChitChat</h2><p><a href="https://github.com/sausheong/gwp/tree/master/Chapter_2_Go_ChitChat" target="_blank" rel="noopener">人家的代码</a></p>
+<p>In this chapter, we’ll develop a simple internet forum called ChitChat. </p>
+<h2 id="Application-design"><a href="#Application-design" class="headerlink" title="Application design"></a>Application design</h2><p>ChitChat’s application logic is coded in the server. For ChitChat, we’ll be using the following format: <code>http://&lt;servername&gt;/&lt;handlername&gt;?&lt;parameters&gt;</code></p>
+<p>The handler name is hierarchical: the root of the handler name is the module that’s being called, the second part the submodule, and so on, until it hits the leaf, which is the handler of the request within that submodule. <code>代码分层的思想</code></p>
+<p>When the request reaches the server, a <em>multiplexer</em> will inspect the URL being requested and redirect the request to the correct handler. <code>处理请求，查找对应的handle</code></p>
+<h2 id="Data-model"><a href="#Data-model" class="headerlink" title="Data model"></a>Data model</h2><p>In ChitChat, we store the data in a relational database (we use PostgreSQL in this book) and use SQL to interact with the database<code>数据库、模型</code></p>
+<ul>
+<li>User—Representing the forum user’s information</li>
+<li>Session—Representing a user’s current login session</li>
+<li>Thread—Representing a forum thread (a conversation among forum users)</li>
+<li>Post—Representing a post (a message added by a forum user) within a thread</li>
+</ul>
+<p>To simplify the application, we’ll have only one type of user<code>简单点就一种用户类型</code></p>
+<h2 id="Receiving-and-processing-requests"><a href="#Receiving-and-processing-requests" class="headerlink" title="Receiving and processing requests"></a>Receiving and processing requests</h2><p>Receiving and processing requests is the heart of any web application.<code>请求处理是核心</code></p>
+<h3 id="The-multiplexer"><a href="#The-multiplexer" class="headerlink" title="The multiplexer"></a>The multiplexer</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 创建 multiplexer</span></span><br><span class="line">    mux := http.NewServeMux()</span><br><span class="line">    <span class="comment">// 处理静态文件</span></span><br><span class="line">    files := http.FileServer(http.Dir(<span class="string">"/public"</span>))</span><br><span class="line">    mux.Handle(<span class="string">"/static/"</span>, http.StripPrefix(<span class="string">"/static/"</span>, files))</span><br><span class="line">    <span class="comment">// 重定向根路径</span></span><br><span class="line">    mux.HandleFunc(<span class="string">"/"</span>, index)</span><br><span class="line">    </span><br><span class="line">    server := &amp;http.Server&#123;</span><br><span class="line">        Addr: <span class="string">"0.0.0.0:8080"</span>,</span><br><span class="line">        Handler: mux,</span><br><span class="line">    &#125;</span><br><span class="line">    server.ListenAndServe()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>HandleFunc</em> takes the <em>URL</em> as the first parameter, and the name of <em>the handler function</em> as the second parameter<code>重定向根路径</code></li>
+<li>all handler functions take ResponseWriter as the first parameter and a pointer to Request as the second parameter<code>所有handle第一个参数类型为ResponseWriter，第二个参数类型为Request指针</code></li>
+<li>handlers and handler functions are not the same, though they provide the same results in the end.<code>殊途同归</code></li>
+</ul>
+<h3 id="Serving-static-files"><a href="#Serving-static-files" class="headerlink" title="Serving static files"></a>Serving static files</h3><p>Use the multiplexer to serve static files. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">files := http.FileServer(http.Dir(<span class="string">"/public"</span>))</span><br><span class="line">mux.Handle(<span class="string">"/static/"</span>, http.StripPrefix(<span class="string">"/static/"</span>, files))</span><br></pre></td></tr></table></figure>
+
+<p>you’re telling the server that for all request URLs starting with <em>/static/</em>, strip off the string <em>/static/</em> from the URL, and then look for a file with the name starting at the public directory.<code>访问静态资源对应服务器端目录</code></p>
+<h3 id="Creating-the-handler-function"><a href="#Creating-the-handler-function" class="headerlink" title="Creating the handler function"></a>Creating the handler function</h3><p>split the definition of the handler functions in other files (please refer to the code in the GitHub repository) <code>将handle拆分到多个文件</code></p>
+<p>you can place them in a separate package and import them. We’ll use this strategy when connecting with the database, as you’ll see later<code>以包的方式处理源代码文件</code></p>
+<h3 id="Access-control-using-cookies"><a href="#Access-control-using-cookies" class="headerlink" title="Access control using cookies"></a>Access control using cookies</h3><p>To indicate in subsequent requests that the user has already logged in, you write a cookie to the response header, which goes back to the client and is saved at the browser<code>使用Cookie保存用户登录信息</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">authenticate</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	r.ParseForm()</span><br><span class="line">	user, _ := data.UserByEmail(r.PostFormValue(<span class="string">"email"</span>))</span><br><span class="line">	<span class="keyword">if</span> user.Password == data.Encrypt(r.PostFormValue(<span class="string">"password"</span>)) &#123;</span><br><span class="line">		session := user.CreateSession()</span><br><span class="line">		cookie := http.Cookie&#123;</span><br><span class="line">			Name:     <span class="string">"_cookie"</span>,</span><br><span class="line">			Value:    session.Uuid,</span><br><span class="line">			HttpOnly: <span class="literal">true</span>,</span><br><span class="line">		&#125;</span><br><span class="line">		http.SetCookie(w, &amp;cookie)</span><br><span class="line">		http.Redirect(w, r, <span class="string">"/"</span>, <span class="number">302</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		http.Redirect(w, r, <span class="string">"/login"</span>, <span class="number">302</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Once the user is authenticated, you create a Session struct using user.CreateSession, a method on the User struct. Session looks like this:<code>登录成功后，生成一个session</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Session <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id        <span class="keyword">int</span></span><br><span class="line">	Uuid      <span class="keyword">string</span></span><br><span class="line">	Email     <span class="keyword">string</span></span><br><span class="line">	UserId    <span class="keyword">int</span></span><br><span class="line">	CreatedAt time.Time</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Once you have the session record created, you create the Cookie struct:<code>创建session后，再创建cookie</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cookie := http.Cookie&#123;</span><br><span class="line">	Name: <span class="string">"_cookie"</span>,</span><br><span class="line">	Value: session.Uuid,</span><br><span class="line">	HttpOnly: <span class="literal">true</span>, <span class="comment">// 只有HTTP或HTTPS才能访问</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You don’t set the expiry date so that the cookie becomes a session cookie and it’s automatically removed when the browser shuts down.<code>没有设置过期时间，浏览器关闭才会清除cookie</code></p>
+<h2 id="Generating-HTML-responses-with-templates"><a href="#Generating-HTML-responses-with-templates" class="headerlink" title="Generating HTML responses with templates"></a>Generating HTML responses with templates</h2><p>The three files are HTML files with certain embedded commands, called actions, very similar to other template engines like Mustache or CTemplate.</p>
+<p>Each template file defines a template.</p>
+<p>actions:</p>
+<ul>
+<li><code>{\{ define &quot;layout&quot; }\}</code></li>
+<li><code>{\{ template &quot;navbar&quot; . }\}</code></li>
+<li><code>{\{ end }\}</code></li>
+</ul>
+<p><strong>上述中\是没有，只是hexo解析两个花括号报错，故加</strong></p>
+<p>The dot (.) that follows the name of the template to be included is the data passed into the template. <code>有数据要传入</code></p>
+<p>the dot (.) represents the data that’s passed into the template </p>
+<h3 id="Tidying-up"><a href="#Tidying-up" class="headerlink" title="Tidying up"></a>Tidying up</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// data 空接口类型</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">generateHTML</span><span class="params">(w http.ResponseWriter, data <span class="keyword">interface</span>&#123;&#125;, fn ...<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> files []<span class="keyword">string</span></span><br><span class="line">    <span class="keyword">for</span> _, file := <span class="keyword">range</span> fn &#123;</span><br><span class="line">        files = <span class="built_in">append</span>(files, fmt.Sprintf(<span class="string">"templates/%s.html"</span>, file))</span><br><span class="line">    &#125;</span><br><span class="line">    templates := template.Must(template.ParseFiles(files...))</span><br><span class="line">    templates.ExecuteTemplate(writer, <span class="string">"layout"</span>, data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>The data parameter is the empty interface type, which means it can take in any type. <code>data可以接收任意类型的参数</code></li>
+<li>Interfaces in Go are constructs that are sets of methods and are also types.<code>接口是一堆方法的集合也是类型</code></li>
+<li>The last parameter in the function starts with … (three dots). This indicates that the generateHTML function is a variadic function, meaning it can take zero or more parameters in that last variadic parameter. <code>...接收0到多个参数</code></li>
+</ul>
+<h2 id="Installing-PostgreSQL"><a href="#Installing-PostgreSQL" class="headerlink" title="Installing PostgreSQL"></a>Installing PostgreSQL</h2><p>略</p>
+<h2 id="Interfacing-with-the-database"><a href="#Interfacing-with-the-database" class="headerlink" title="Interfacing with the database"></a>Interfacing with the database</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> data</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Thread <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id <span class="keyword">int</span></span><br><span class="line">    Uuid <span class="keyword">string</span></span><br><span class="line">    Topic <span class="keyword">string</span></span><br><span class="line">    UserId <span class="keyword">int</span></span><br><span class="line">    CreatedAt time.Time</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>If you want to use the Thread struct you must use <code>data.Thread</code> instead of just Thread alone. </p>
+<p>The Thread struct should correspond to the DDL (Data Definition Language, the subset of SQL) that’s used to create the relational database table called threads. <code>Model与数据库字段相对应</code></p>
+<p>create a global variable, Db, which is a pointer to sql.DB, a representation of a pool of database connections. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局变量，指针</span></span><br><span class="line">Var Db *sql.DB</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> err error</span><br><span class="line">    Db, err = sql.Open(<span class="string">"postgres"</span>, <span class="string">"dbname=chitchat sslmode=disable"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Methods are functions that are attached to any named types (except a pointer or an interface), including structs. </p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>Receiving and processing requests are the heart of any web application.</li>
+<li>The multiplexer redirects HTTP requests to the correct handler for processing, including static files</li>
+<li>Cookies can be used as a mechanism for access control.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/10/golang-web-programming-01-title-Go-and-web-applications/" rel="prev" title="Golang -Go Web Programming- 01 Go and web applications">
+      <i class="fa fa-chevron-left"></i> Golang -Go Web Programming- 01 Go and web applications
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/11/golang-web-programming-03-Handling-requests/" rel="next" title="Golang -Go Web Programming- 03 Handling requests">
+      Golang -Go Web Programming- 03 Handling requests <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Let’s-ChitChat"><span class="nav-number">1.</span> <span class="nav-text">Let’s ChitChat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application-design"><span class="nav-number">2.</span> <span class="nav-text">Application design</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-model"><span class="nav-number">3.</span> <span class="nav-text">Data model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Receiving-and-processing-requests"><span class="nav-number">4.</span> <span class="nav-text">Receiving and processing requests</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-multiplexer"><span class="nav-number">4.1.</span> <span class="nav-text">The multiplexer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serving-static-files"><span class="nav-number">4.2.</span> <span class="nav-text">Serving static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-the-handler-function"><span class="nav-number">4.3.</span> <span class="nav-text">Creating the handler function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-control-using-cookies"><span class="nav-number">4.4.</span> <span class="nav-text">Access control using cookies</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generating-HTML-responses-with-templates"><span class="nav-number">5.</span> <span class="nav-text">Generating HTML responses with templates</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tidying-up"><span class="nav-number">5.1.</span> <span class="nav-text">Tidying up</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-PostgreSQL"><span class="nav-number">6.</span> <span class="nav-text">Installing PostgreSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interfacing-with-the-database"><span class="nav-number">7.</span> <span class="nav-text">Interfacing with the database</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">8.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
