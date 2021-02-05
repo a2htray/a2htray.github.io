@@ -145,7 +145,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-04/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/15/golang-web-programming-10-Deploying-Go/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/12/linux-shell-tactics-04/" class="post-title-link" itemprop="url">Linux -Linux Shell 脚本攻略- 04 让文本飞</a>
+            <a href="/2019/01/15/golang-web-programming-10-Deploying-Go/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 10 Deploying Go</a>
         </h2>
 
         <div class="post-meta">
@@ -169,14 +169,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-01-12 22:02:30" itemprop="dateCreated datePublished" datetime="2019-01-12T22:02:30+08:00">2019-01-12</time>
+              <time title="Created: 2019-01-15 14:21:09" itemprop="dateCreated datePublished" datetime="2019-01-15T14:21:09+08:00">2019-01-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-23 22:15:53" itemprop="dateModified" datetime="2020-08-23T22:15:53+08:00">2020-08-23</time>
+                <time title="Modified: 2020-08-23 22:09:00" itemprop="dateModified" datetime="2020-08-23T22:09:00+08:00">2020-08-23</time>
               </span>
 
           
@@ -190,15 +190,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Linux文本操作，<code>grep</code>、<code>egrep</code>、<code>awk</code>、<code>sed</code>、<code>正则表达式</code></p>
-<ul>
-<li><code>grep egrep</code>：在文件中搜索文本</li>
-<li><code>cut</code>：文本分割</li>
-<li><code>paste</code>：按列合并文本</li>
+          <ul>
+<li>Deploying Go web apps to standalone servers</li>
 </ul>
+<p>Deploying web applications is quite different from deploying other types of applications.</p>
+<p>Deploying Go web apps can be simple because the executable program is compiled into a single binary file. <code>一个文件、简单</code>Also, because Go programs can be compiled into a statically linked binary file that doesn’t need any other libraries, they can be a single executable file.<code>静态库，打包成单个可执行文件</code></p>
+<p>The processes are usually a lot more involved in a production environment, which includes additiona tasks like running test suites, continual integration, staging servers, and so on.<code>环境变量、持续集成</code></p>
+<p><code>其实该章没太多内容...</code></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/12/linux-shell-tactics-04/#more" rel="contents">
+              <a class="btn" href="/2019/01/15/golang-web-programming-10-Deploying-Go/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -222,7 +223,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-03/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/golang-web-programming-09-Leveraging-Go-concurrency/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -236,7 +237,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/12/linux-shell-tactics-03/" class="post-title-link" itemprop="url">Linux -Linux Shell 脚本攻略- 03 以文件之名</a>
+            <a href="/2019/01/14/golang-web-programming-09-Leveraging-Go-concurrency/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 09 Leveraging Go concurrency</a>
         </h2>
 
         <div class="post-meta">
@@ -246,14 +247,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-01-12 22:00:48" itemprop="dateCreated datePublished" datetime="2019-01-12T22:00:48+08:00">2019-01-12</time>
+              <time title="Created: 2019-01-14 16:21:44" itemprop="dateCreated datePublished" datetime="2019-01-14T16:21:44+08:00">2019-01-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-23 22:15:49" itemprop="dateModified" datetime="2020-08-23T22:15:49+08:00">2020-08-23</time>
+                <time title="Modified: 2020-08-23 22:08:54" itemprop="dateModified" datetime="2020-08-23T22:08:54+08:00">2020-08-23</time>
               </span>
 
           
@@ -267,22 +268,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>UNIX系统将操作系统中的一切都视为文件。文件与每一个操作息息相关，而我们可以利用它们进行与系统或进程相关的处理工作</p>
-<ul>
-<li><code>dd</code>：生成任意大小的文件</li>
-<li><code>comm</code>：求文件的交集和并集</li>
-<li><code>mkdir</code>：创建目录</li>
-<li><code>mkdir</code>：创建文件</li>
-<li><code>touch</code>：创建空白文件</li>
-<li><code>diff patch</code>：文件差异、打补丁</li>
-<li><code>head tail</code>：输出文件首、尾</li>
-<li><code>wc</code>：统计行数、单词数、字符数</li>
-<li><code>pushd popd</code>：以栈的形式操作目录，进行前效切换</li>
-<li><code>tree</code>：打印目录树</li>
+          <ul>
+<li>了解 <code>concurrency</code> 和 <code>parallelism</code> 的基本概念</li>
+<li>介绍 <code>goroutines</code> 和 <code>channels</code></li>
+<li>在 Web 应用中使用 <code>concurrency</code></li>
 </ul>
+<p>介绍 <code>concurrency</code> 和讨论 Go 中 <code>concurrency</code> 的模型及设计</p>
+<p>讨论两种由 Go 提供的 <code>concurrency</code> 特性: <code>goroutines</code> 和 <code>channels</code></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/12/linux-shell-tactics-03/#more" rel="contents">
+              <a class="btn" href="/2019/01/14/golang-web-programming-09-Leveraging-Go-concurrency/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -306,7 +301,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-02/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/golang-web-programming-08-Testing-your-application/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -320,7 +315,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/12/linux-shell-tactics-02/" class="post-title-link" itemprop="url">Linux -Linux Shell 脚本攻略- 02 命令之乐</a>
+            <a href="/2019/01/14/golang-web-programming-08-Testing-your-application/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 08 Testing your application</a>
         </h2>
 
         <div class="post-meta">
@@ -330,14 +325,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-01-12 21:59:54" itemprop="dateCreated datePublished" datetime="2019-01-12T21:59:54+08:00">2019-01-12</time>
+              <time title="Created: 2019-01-14 14:48:57" itemprop="dateCreated datePublished" datetime="2019-01-14T14:48:57+08:00">2019-01-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-23 22:15:43" itemprop="dateModified" datetime="2020-08-23T22:15:43+08:00">2020-08-23</time>
+                <time title="Modified: 2020-08-23 22:08:47" itemprop="dateModified" datetime="2020-08-23T22:08:47+08:00">2020-08-23</time>
               </span>
 
           
@@ -351,20 +346,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><code>cat</code>、<code>find</code>、<code>xargs</code>、<code>tr</code>、<code>md5sum</code>、<code>sort</code>、<code>uniq</code>、<code>split</code>、<code>%</code>、<code>#</code></p>
-<ul>
-<li><code>cat</code>：读取、显示或拼接文件内容</li>
-<li><code>find</code>：文件查找</li>
-<li><code>xargs</code>：使用 stdin 并提供命令行参数来执行其他命令</li>
-<li><code>tr</code>：替换、删除以及压缩操作 <code>translate</code></li>
-<li><code>md5sum、md5deep</code>：用于文件完整性测试的特定密钥就被称为校验和</li>
-<li><code>sort</code>：对文件和标准输出进行排序操作</li>
-<li><code>uniq</code>：唯一行操作</li>
-<li><code>split</code>：文件分割操作</li>
+          <ul>
+<li>The Go <code>testing</code> libraries</li>
+<li>Unit testing</li>
+<li>HTTP testing</li>
+<li>Testing with <em>dependency injection</em></li>
+<li>Using third-party testing libraries</li>
 </ul>
+<p>Testing is one of the main critical activities in programming, but often it’s neglected or left as an afterthought. Go supplies the tools to create <em>the automated tests</em> you need as a programmer. <code>以编程的方式自动创建测试</code></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/12/linux-shell-tactics-02/#more" rel="contents">
+              <a class="btn" href="/2019/01/14/golang-web-programming-08-Testing-your-application/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -388,7 +380,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-01/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/golang-web-programming-07-Go-web-services/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -402,7 +394,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/12/linux-shell-tactics-01/" class="post-title-link" itemprop="url">Linux -Linux Shell 脚本攻略- 01 小试牛刀</a>
+            <a href="/2019/01/14/golang-web-programming-07-Go-web-services/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 07 Go web services</a>
         </h2>
 
         <div class="post-meta">
@@ -412,14 +404,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-01-12 21:57:15" itemprop="dateCreated datePublished" datetime="2019-01-12T21:57:15+08:00">2019-01-12</time>
+              <time title="Created: 2019-01-14 11:19:16" itemprop="dateCreated datePublished" datetime="2019-01-14T11:19:16+08:00">2019-01-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-23 22:15:35" itemprop="dateModified" datetime="2020-08-23T22:15:35+08:00">2020-08-23</time>
+                <time title="Modified: 2020-08-23 22:08:41" itemprop="dateModified" datetime="2020-08-23T22:08:41+08:00">2020-08-23</time>
               </span>
 
           
@@ -433,11 +425,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>打开终端后，就会出现一个提示符号，# 表示超级用户 <code>(root user)</code> ，$ 表示普通用户，超级用户是 Linux 系统中权限最高的用户</p>
-<p>shell脚本通常以 <code>#!</code> 起始，如</p>
+          <ul>
+<li>Using RESTful web services</li>
+<li>Creating and parsing <em>XML</em> with Go</li>
+<li>Creating and parsing <em>JSON</em> with Go</li>
+<li>Writing Go web services</li>
+</ul>
+<p>介绍<code>Go语言</code>在处理<code>XML</code>和<code>JSON</code>时的使用</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/12/linux-shell-tactics-01/#more" rel="contents">
+              <a class="btn" href="/2019/01/14/golang-web-programming-07-Go-web-services/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -461,7 +458,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/11/golang-web-programming-04-Processing-requests/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/13/golang-web-programming-06-Storing-data/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -475,7 +472,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/11/golang-web-programming-04-Processing-requests/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 04 Processing requests</a>
+            <a href="/2019/01/13/golang-web-programming-06-Storing-data/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 06 Storing data</a>
         </h2>
 
         <div class="post-meta">
@@ -485,14 +482,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-01-11 14:58:26" itemprop="dateCreated datePublished" datetime="2019-01-11T14:58:26+08:00">2019-01-11</time>
+              <time title="Created: 2019-01-13 16:13:28" itemprop="dateCreated datePublished" datetime="2019-01-13T16:13:28+08:00">2019-01-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-23 22:06:50" itemprop="dateModified" datetime="2020-08-23T22:06:50+08:00">2020-08-23</time>
+                <time title="Modified: 2020-08-23 22:08:33" itemprop="dateModified" datetime="2020-08-23T22:08:33+08:00">2020-08-23</time>
               </span>
 
           
@@ -506,17 +503,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><code>Request</code>、<code>ResponseWriter</code>、<code>Cookies</code>、<code>返回Json</code>、</p>
+          <p><em>Data persistence</em> is technically not part of web application programming, but it’s often considered as the third pillar of any web application—the other two pillars are templates and handlers. <code>数据持久化、模板、处理：三架马车</code></p>
+<p>I’m generalizing but here are the places where you can store data:<code>内存、文件、数据库</code></p>
 <ul>
-<li>Using Go requests and responses</li>
-<li>Processing HTML forms with Go</li>
-<li>Sending responses back to the client with ResponseWriter</li>
-<li>Working with cookies</li>
-<li>Implementing flash messages with cookies</li>
+<li>In memory (while the program is running)</li>
+<li>In files on the filesystem</li>
+<li>In a database, fronted by a server program</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/11/golang-web-programming-04-Processing-requests/#more" rel="contents">
+              <a class="btn" href="/2019/01/13/golang-web-programming-06-Storing-data/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -540,7 +536,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/11/golang-web-programming-03-Handling-requests/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/13/golang-web-programming-05-Displaying-content/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -554,7 +550,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/11/golang-web-programming-03-Handling-requests/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 03 Handling requests</a>
+            <a href="/2019/01/13/golang-web-programming-05-Displaying-content/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 05 Displaying content</a>
         </h2>
 
         <div class="post-meta">
@@ -564,14 +560,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-01-11 10:59:21" itemprop="dateCreated datePublished" datetime="2019-01-11T10:59:21+08:00">2019-01-11</time>
+              <time title="Created: 2019-01-13 13:32:24" itemprop="dateCreated datePublished" datetime="2019-01-13T13:32:24+08:00">2019-01-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-23 22:06:28" itemprop="dateModified" datetime="2020-08-23T22:06:28+08:00">2020-08-23</time>
+                <time title="Modified: 2020-08-23 22:07:10" itemprop="dateModified" datetime="2020-08-23T22:07:10+08:00">2020-08-23</time>
               </span>
 
           
@@ -585,18 +581,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><code>net/http</code>、<code>handle</code>、<code>ServerMux</code></p>
-<p>Gets into the details of handling HTTP requests using the <code>net/http</code> package. You’ll learn how to write a Go web server to listen to HTTP requests and how to incorporate handlers and handler functions that process those requests</p>
-<p><code>主要内容</code></p>
+          <p><code>text/template</code>、<code>html/template</code></p>
+<p>说明：所有两个花括号间有<code>\</code>，均是没有该符号!!!</p>
 <ul>
-<li>Using the Go <code>net/http</code> library</li>
-<li>Understanding handlers and handler functions</li>
-<li>Working with multiplexers</li>
+<li>Templates and template engines</li>
+<li>The Go template libraries <code>text/template</code> and <code>html/template</code></li>
+<li>Actions, pipelines, and functions in templates</li>
+<li>Nesting of templates and layouts</li>
 </ul>
-<p>The brains of the web application: the handlers that receive and process requests from the client.<code>Web程序的中枢</code></p>
+<p><code>模板引擎的介绍</code></p>
+<p>Web template engines are an important part of any web application framework, and most if not all full-fledged frameworks have one. <code>模板引擎很重要</code></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/11/golang-web-programming-03-Handling-requests/#more" rel="contents">
+              <a class="btn" href="/2019/01/13/golang-web-programming-05-Displaying-content/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -620,7 +617,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/golang-web-programming-02-title-Go-ChitChat/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-09/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -634,7 +631,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/10/golang-web-programming-02-title-Go-ChitChat/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 02 Go ChitChat</a>
+            <a href="/2019/01/12/linux-shell-tactics-09/" class="post-title-link" itemprop="url">Linux -Linux Shell 脚本攻略- 09 管理重任</a>
         </h2>
 
         <div class="post-meta">
@@ -644,14 +641,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-01-10 22:06:34" itemprop="dateCreated datePublished" datetime="2019-01-10T22:06:34+08:00">2019-01-10</time>
+              <time title="Created: 2019-01-12 22:07:03" itemprop="dateCreated datePublished" datetime="2019-01-12T22:07:03+08:00">2019-01-12</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-23 22:06:00" itemprop="dateModified" datetime="2020-08-23T22:06:00+08:00">2020-08-23</time>
+                <time title="Modified: 2020-08-23 22:16:16" itemprop="dateModified" datetime="2020-08-23T22:16:16+08:00">2020-08-23</time>
               </span>
 
           
@@ -665,16 +662,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>shows you how to build a typical web application with Go, taking you step by step through the creation of a simple internet forum web</p>
-<ul>
-<li>Introducing Go web programming</li>
-<li>Designing a typical Go web application</li>
-<li>Writing a complete Go web application</li>
-<li>Understanding the parts of a Go web application</li>
-</ul>
+          <p><code>GUN/Linux</code> 的生态系统是由运行的程序、服务、连接的设备、文件系统、用户等组成，需要对各类信息进行管理、监控</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/10/golang-web-programming-02-title-Go-ChitChat/#more" rel="contents">
+              <a class="btn" href="/2019/01/12/linux-shell-tactics-09/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -698,7 +689,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/golang-web-programming-01-title-Go-and-web-applications/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-08/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -712,7 +703,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/10/golang-web-programming-01-title-Go-and-web-applications/" class="post-title-link" itemprop="url">Golang -Go Web Programming- 01 Go and web applications</a>
+            <a href="/2019/01/12/linux-shell-tactics-08/" class="post-title-link" itemprop="url">Linux -Linux Shell 脚本攻略- 08 当个好管家</a>
         </h2>
 
         <div class="post-meta">
@@ -722,14 +713,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-01-10 15:45:04" itemprop="dateCreated datePublished" datetime="2019-01-10T15:45:04+08:00">2019-01-10</time>
+              <time title="Created: 2019-01-12 22:06:15" itemprop="dateCreated datePublished" datetime="2019-01-12T22:06:15+08:00">2019-01-12</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-23 22:04:48" itemprop="dateModified" datetime="2020-08-23T22:04:48+08:00">2020-08-23</time>
+                <time title="Modified: 2020-08-23 22:16:12" itemprop="dateModified" datetime="2020-08-23T22:16:12+08:00">2020-08-23</time>
               </span>
 
           
@@ -743,17 +734,154 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Introduces using Go for web applications, and discusses why it is a good choice for writing web applications. You’ll also learn about key concepts of what web applications are, including a brief introduction to HTTP<code>为什么学习网页开发、Web应用的基本概念</code></p>
-<p><strong>Concepts</strong></p>
-<ul>
-<li>Defining web applications<code>定义</code></li>
-<li>Using Go to write web applications: the advantages<code>优势</code></li>
-<li>Understanding the basics of web application programming<code>基础</code></li>
-<li>Writing the simplest possible web application in Go<code>简单实现</code></li>
-</ul>
+          <p>监视系统活动的各种命令 <code>df</code>、<code>du</code>、<code>watch</code>、<code>ps</code></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/10/golang-web-programming-01-title-Go-and-web-applications/#more" rel="contents">
+              <a class="btn" href="/2019/01/12/linux-shell-tactics-08/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-07/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/12/linux-shell-tactics-07/" class="post-title-link" itemprop="url">Linux -Linux Shell 脚本攻略- 07 无网不利</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-12 22:05:13" itemprop="dateCreated datePublished" datetime="2019-01-12T22:05:13+08:00">2019-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:16:06" itemprop="dateModified" datetime="2020-08-23T22:16:06+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>关于网络的知识，这本书介绍的不太具体，找好书看。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/12/linux-shell-tactics-07/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/linux-shell-tactics-06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/12/linux-shell-tactics-06/" class="post-title-link" itemprop="url">Linux -Linux Shell 脚本攻略- 06 B计划</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-12 22:04:29" itemprop="dateCreated datePublished" datetime="2019-01-12T22:04:29+08:00">2019-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 22:16:02" itemprop="dateModified" datetime="2020-08-23T22:16:02+08:00">2020-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>压缩及解压缩操作，<code>tar</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/12/linux-shell-tactics-06/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -776,7 +904,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span>
+    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -842,14 +970,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">188</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -887,7 +1015,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

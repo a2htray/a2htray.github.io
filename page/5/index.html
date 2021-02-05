@@ -145,7 +145,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/08/golang-gin-multitemplate/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/frontend-how-to-create-a-dragable-page/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/08/golang-gin-multitemplate/" class="post-title-link" itemprop="url">Golang gin 下简单多模板包开发</a>
+            <a href="/2020/08/17/frontend-how-to-create-a-dragable-page/" class="post-title-link" itemprop="url">Frontend -可拖拽元素- 如何创建可拖拽页面</a>
         </h2>
 
         <div class="post-meta">
@@ -170,7 +170,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-08 00:30:13 / Modified: 02:08:48" itemprop="dateCreated datePublished" datetime="2020-08-08T00:30:13+08:00">2020-08-08</time>
+              <time title="Created: 2020-08-17 17:09:38 / Modified: 18:09:01" itemprop="dateCreated datePublished" datetime="2020-08-17T17:09:38+08:00">2020-08-17</time>
             </span>
 
           
@@ -184,11 +184,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在网站开发过程中，需要使用到模板技术，便于有组织地管理代码，并实现代码的复用，从而减少代码的开发量。</p>
-<p>在 go 中的 <code>html/template</code> 包中，帮我们实现了基本的模板管理，其中 <code>html/template</code> 中的 <code>Template</code> 结构包含了 <code>text/template</code> 中的 <code>Template</code> 结构。</p>
+          <p>在编码时，使用到了其他作者开发的可拖拽组件，对其中实现不是很熟悉，故打算原理相关 API，并使用纯 HTML 进行实现。进一步还会使用 React 组件开发的方式编写一个可拖拽的容器组件。</p>
+<p>Start ….</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/08/golang-gin-multitemplate/#more" rel="contents">
+              <a class="btn" href="/2020/08/17/frontend-how-to-create-a-dragable-page/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -212,7 +212,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/07/leetcode-100/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/react-input-checkbox-defaultchecked/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -226,7 +226,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/07/leetcode-100/" class="post-title-link" itemprop="url">LeetCode - 100. 检查相同的树</a>
+            <a href="/2020/08/17/react-input-checkbox-defaultchecked/" class="post-title-link" itemprop="url">React -Checkbox- checked 属性与 defaultChecked 属性</a>
         </h2>
 
         <div class="post-meta">
@@ -237,7 +237,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-07 03:37:07 / Modified: 17:21:13" itemprop="dateCreated datePublished" datetime="2020-08-07T03:37:07+08:00">2020-08-07</time>
+              <time title="Created: 2020-08-17 12:51:06 / Modified: 13:43:41" itemprop="dateCreated datePublished" datetime="2020-08-17T12:51:06+08:00">2020-08-17</time>
             </span>
 
           
@@ -251,11 +251,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="https://leetcode-cn.com/problems/same-tree/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/same-tree/</a></p>
-<p>利用广度优先搜索，查询出各结点的值，并通过比较相等判断树结构是否相同。</p>
+          <p>今天遇到了和参考 2 中相同的问题，即在 react 中设置 checkbox 的 checked 属性后，无法在页面中与该 checkbox 进行交互。先看下如下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"checkboxWrapper"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> wrapper = <span class="built_in">document</span>.getElementById(<span class="string">'checkboxWrapper'</span>)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> checkbox = <span class="built_in">document</span>.createElement(<span class="string">'input'</span>)</span></span><br><span class="line"><span class="actionscript">            checkbox.type = <span class="string">'checkbox'</span></span></span><br><span class="line"><span class="actionscript">            checkbox.checked = <span class="literal">true</span></span></span><br><span class="line">            wrapper.appendChild(checkbox)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/08/17/react-input-checkbox-defaultchecked/checkboxes.png" alt></p>
+<p>在编写 html 代码时，上述的 checkbox 可以交互，即可进行选中与取消。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/07/leetcode-100/#more" rel="contents">
+              <a class="btn" href="/2020/08/17/react-input-checkbox-defaultchecked/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -279,7 +282,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/06/golang-import-cycle-not-allowed/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/14/react-how-to-use-awesome-icon/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -293,7 +296,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/06/golang-import-cycle-not-allowed/" class="post-title-link" itemprop="url">Golang Import cycle not allowed</a>
+            <a href="/2020/08/14/react-how-to-use-awesome-icon/" class="post-title-link" itemprop="url">React -awesome ico- 如何使用 awesome icon</a>
         </h2>
 
         <div class="post-meta">
@@ -304,7 +307,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-06 13:54:52 / Modified: 14:06:10" itemprop="dateCreated datePublished" datetime="2020-08-06T13:54:52+08:00">2020-08-06</time>
+              <time title="Created: 2020-08-14 21:47:44 / Modified: 22:22:10" itemprop="dateCreated datePublished" datetime="2020-08-14T21:47:44+08:00">2020-08-14</time>
             </span>
 
           
@@ -318,12 +321,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>开发时，遇到报错<code>import cycle not allowed</code>，出现该问题的原因在于 <code>Go</code> 不支持循环引入包。</p>
-<p>在项目中，存在以下 3 个包：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">parent/model</span><br><span class="line">parent/service</span><br><span class="line">parent/store</span><br></pre></td></tr></table></figure>
+          <p>结合 <code>typescript</code>，一步步使用 <code>awesome icon</code>。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/06/golang-import-cycle-not-allowed/#more" rel="contents">
+              <a class="btn" href="/2020/08/14/react-how-to-use-awesome-icon/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -347,7 +348,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/06/golang-sql-rows/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/14/typescript-how-to-declare-a-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -361,7 +362,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/06/golang-sql-rows/" class="post-title-link" itemprop="url">Golang 解析查询结果</a>
+            <a href="/2020/08/14/typescript-how-to-declare-a-function/" class="post-title-link" itemprop="url">TypeSript 如何定义一个函数</a>
         </h2>
 
         <div class="post-meta">
@@ -372,7 +373,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-06 00:15:22 / Modified: 00:36:00" itemprop="dateCreated datePublished" datetime="2020-08-06T00:15:22+08:00">2020-08-06</time>
+              <time title="Created: 2020-08-14 21:01:05 / Modified: 21:46:28" itemprop="dateCreated datePublished" datetime="2020-08-14T21:01:05+08:00">2020-08-14</time>
             </span>
 
           
@@ -386,10 +387,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在 <code>database/sql</code> 包中，<code>sql.Row</code> 结构与 <code>sql.Rows</code> 结构在源码实现中是一个包含的关系。</p>
+          <p>记录在编码过程中遇到的问题。</p>
+<p>今天在码代码时，对于 typescript 如何定义方法不是很清楚，所以查阅教程、资料，对这一块进行补充。</p>
+<p>当时就什么问题不明白，细想还真想不起是哪一点，可能是如何优雅地定义函数吧。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/06/golang-sql-rows/#more" rel="contents">
+              <a class="btn" href="/2020/08/14/typescript-how-to-declare-a-function/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -413,7 +416,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/04/golang-bufio-scanner-token-too-long/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/golang-grpc-tutorial-repeatly/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -427,7 +430,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/04/golang-bufio-scanner-token-too-long/" class="post-title-link" itemprop="url">Golang Error - bufio.Scanner-token too long</a>
+            <a href="/2020/08/13/golang-grpc-tutorial-repeatly/" class="post-title-link" itemprop="url">Goang -gRPC- 教程代码重现</a>
         </h2>
 
         <div class="post-meta">
@@ -437,14 +440,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-08-04 09:06:42" itemprop="dateCreated datePublished" datetime="2020-08-04T09:06:42+08:00">2020-08-04</time>
+              <time title="Created: 2020-08-13 11:24:15" itemprop="dateCreated datePublished" datetime="2020-08-13T11:24:15+08:00">2020-08-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-13 01:22:19" itemprop="dateModified" datetime="2020-08-13T01:22:19+08:00">2020-08-13</time>
+                <time title="Modified: 2020-08-14 21:01:43" itemprop="dateModified" datetime="2020-08-14T21:01:43+08:00">2020-08-14</time>
               </span>
 
           
@@ -458,17 +461,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> lines []<span class="keyword">string</span></span><br><span class="line">scanner := bufio.NewScanner(file)</span><br><span class="line"><span class="keyword">for</span> scanner.Scan() &#123;</span><br><span class="line">    lines = <span class="built_in">append</span>(lines, scanner.Text())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>读取文件行信息，报 <code>bufio.Scanner: token too long</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/04/golang-bufio-scanner-token-too-long/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          
       
     </div>
 
@@ -487,7 +480,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/03/golang-how-to-best-empty-a-slice/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/golang-rpc-tutorial-repeatly/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -501,73 +494,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/03/golang-how-to-best-empty-a-slice/" class="post-title-link" itemprop="url">Golang 如果清空一个 slice</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-08-03 20:11:49 / Modified: 20:21:49" itemprop="dateCreated datePublished" datetime="2020-08-03T20:11:49+08:00">2020-08-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>清空 slice 的两种方式</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/03/golang-how-to-best-empty-a-slice/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/golang-sqlx-mysql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="a2htray">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A2H&MKVSDK">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/29/golang-sqlx-mysql/" class="post-title-link" itemprop="url">Golang sql 及 sqlx 包使用问题整理</a>
+            <a href="/2020/08/13/golang-rpc-tutorial-repeatly/" class="post-title-link" itemprop="url">Golang -RPC- 教程代码重现</a>
         </h2>
 
         <div class="post-meta">
@@ -577,14 +504,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-07-29 19:54:08" itemprop="dateCreated datePublished" datetime="2020-07-29T19:54:08+08:00">2020-07-29</time>
+              <time title="Created: 2020-08-13 11:21:02" itemprop="dateCreated datePublished" datetime="2020-08-13T11:21:02+08:00">2020-08-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-02 00:11:32" itemprop="dateModified" datetime="2020-09-02T00:11:32+08:00">2020-09-02</time>
+                <time title="Modified: 2020-08-16 02:09:35" itemprop="dateModified" datetime="2020-08-16T02:09:35+08:00">2020-08-16</time>
               </span>
 
           
@@ -598,10 +525,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><code>sqlx</code> 是 go 标准库 <code>database/sql</code> 扩展，提供简单易用的 sql 操作。</p>
+          <p>RPC (Remote Procedure Call) 一种基于网络程序间通信并远程调用的协议，允许本地客户端远程调用服务器端的服务，是一种 C/S 模型。在 go 中，RPC 服务架设在 <code>net/http</code> 包之上，使用 <code>encoding/gob</code> 包进行序列化及反序列化操作。</p>
+<p><strong>目前，基于 go 的 rpc 服务只能由 go 编写的客户端所访问。</strong></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/07/29/golang-sqlx-mysql/#more" rel="contents">
+              <a class="btn" href="/2020/08/13/golang-rpc-tutorial-repeatly/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -625,7 +553,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/21/note-mongodb-commom-usages/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/nginx-client-intended-to-send-too-large-body/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -639,7 +567,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/21/note-mongodb-commom-usages/" class="post-title-link" itemprop="url">MongoDB 常用查询操作汇总</a>
+            <a href="/2020/08/13/nginx-client-intended-to-send-too-large-body/" class="post-title-link" itemprop="url">Nginx - Client intended to send too large body</a>
         </h2>
 
         <div class="post-meta">
@@ -648,10 +576,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-07-21 15:53:57 / Modified: 16:13:57" itemprop="dateCreated datePublished" datetime="2020-07-21T15:53:57+08:00">2020-07-21</time>
+              <time title="Created: 2020-08-13 07:13:15" itemprop="dateCreated datePublished" datetime="2020-08-13T07:13:15+08:00">2020-08-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-05 14:44:44" itemprop="dateModified" datetime="2021-02-05T14:44:44+08:00">2021-02-05</time>
+              </span>
 
           
 
@@ -664,10 +598,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>罗列平时常用的 Q。</p>
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">2020/08/13 07:07:36 [error] 27095<span class="comment">#27095: *89 client intended to send too large body:</span></span><br><span class="line">1324367 bytes, client: xxx.xxx.xxx.xxx, server: xxxxxxxx, request: <span class="string">"POST /api/species/ </span></span><br><span class="line"><span class="string">HTTP/1.1"</span>, host: <span class="string">"xxx.xxx.xxx.xxx"</span>, referrer: <span class="string">"http://xxx.xxx.xxx.xxx/admin/species?</span></span><br><span class="line"><span class="string">accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTcyODQwMjAsImlhdCI6MTU5NzI3</span></span><br><span class="line"><span class="string">MzIyMCwidHlwZSI6ImFjY2Vzc1Rva2VuIiwidXNlcm5hbWUiOiJ6anVhZG1pbiJ9.KIYDrO7AVl7SCMhE68otv1TD</span></span><br><span class="line"><span class="string">xeFbKLuCsE4UGeLXKXY"</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/07/21/note-mongodb-commom-usages/#more" rel="contents">
+              <a class="btn" href="/2020/08/13/nginx-client-intended-to-send-too-large-body/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -691,7 +625,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/20/golang-gin-download-file/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/golang-gin-save-some-variables-with-one-request/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -705,7 +639,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/20/golang-gin-download-file/" class="post-title-link" itemprop="url">Golang gin 下载文件</a>
+            <a href="/2020/08/13/golang-gin-save-some-variables-with-one-request/" class="post-title-link" itemprop="url">Golang -gin 框架- 在当前请求中保存变量信息</a>
         </h2>
 
         <div class="post-meta">
@@ -716,7 +650,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-07-20 16:51:51 / Modified: 16:57:23" itemprop="dateCreated datePublished" datetime="2020-07-20T16:51:51+08:00">2020-07-20</time>
+              <time title="Created: 2020-08-13 02:32:27 / Modified: 02:50:12" itemprop="dateCreated datePublished" datetime="2020-08-13T02:32:27+08:00">2020-08-13</time>
             </span>
 
           
@@ -730,10 +664,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Golang 下使用 gin 下载文件代码示例</p>
+          <p>由于 http 是无状态的，所以一般在需要验证用户信息的请求上会带上一些额外的验证信息，比如<code>JWT</code> 或自定义的一些 <code>access_token</code>，并通过这些信息具体到某一用户，在后续的处理中使用该用户的信息。gin 中提供的 <code>c.Set</code> 方法用于处理这类事务。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/07/20/golang-gin-download-file/#more" rel="contents">
+              <a class="btn" href="/2020/08/13/golang-gin-save-some-variables-with-one-request/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -757,7 +691,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/16/php-drupal-db-select-groupby/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/golang-time-formatting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -771,7 +705,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/16/php-drupal-db-select-groupby/" class="post-title-link" itemprop="url">Drupal 7 下 SQL GroupBy 操作</a>
+            <a href="/2020/08/13/golang-time-formatting/" class="post-title-link" itemprop="url">Golang -摘记- 时间格式化</a>
         </h2>
 
         <div class="post-meta">
@@ -782,7 +716,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-07-16 14:31:30 / Modified: 14:37:13" itemprop="dateCreated datePublished" datetime="2020-07-16T14:31:30+08:00">2020-07-16</time>
+              <time title="Created: 2020-08-13 02:14:02 / Modified: 02:33:01" itemprop="dateCreated datePublished" datetime="2020-08-13T02:14:02+08:00">2020-08-13</time>
             </span>
 
           
@@ -796,10 +730,76 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>记录下 Drupal 7 <code>Group By</code> 的基本过程。</p>
+          <p>时间格式处理。Copy from public resources.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/07/16/php-drupal-db-select-groupby/#more" rel="contents">
+              <a class="btn" href="/2020/08/13/golang-time-formatting/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/golang-add-travis-ci-support/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/13/golang-add-travis-ci-support/" class="post-title-link" itemprop="url">为 Golang 项目增加 Travis CI 支持</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-13 01:21:14 / Modified: 01:39:03" itemprop="dateCreated datePublished" datetime="2020-08-13T01:21:14+08:00">2020-08-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>记录使用 <code>Travis CI</code> 服务。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/13/golang-add-travis-ci-support/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -822,7 +822,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -888,14 +888,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">188</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -933,7 +933,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -145,7 +145,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/30/golang-difference-between-rlock-and-lock/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/time-series-forecast-moving-average/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/30/golang-difference-between-rlock-and-lock/" class="post-title-link" itemprop="url">Golang RLock 和 Lock 的区别</a>
+            <a href="/2020/05/26/time-series-forecast-moving-average/" class="post-title-link" itemprop="url">时间序列预测 Moving Average 移动平均</a>
         </h2>
 
         <div class="post-meta">
@@ -169,14 +169,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-30 00:21:56" itemprop="dateCreated datePublished" datetime="2020-04-30T00:21:56+08:00">2020-04-30</time>
+              <time title="Created: 2020-05-26 20:19:41" itemprop="dateCreated datePublished" datetime="2020-05-26T20:19:41+08:00">2020-05-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-01 00:38:28" itemprop="dateModified" datetime="2020-05-01T00:38:28+08:00">2020-05-01</time>
+                <time title="Modified: 2020-05-29 15:23:12" itemprop="dateModified" datetime="2020-05-29T15:23:12+08:00">2020-05-29</time>
               </span>
 
           
@@ -190,11 +190,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在看 <code>go-cache</code> 源码时，注意到代码中同时使用到了 <code>RLock</code> 和 <code>Lock</code>，不太明白两者的区别，所以通过搜索引擎记录下两者的区别，巩固使用<code>锁</code>的<code>能力</code>。</p>
-<p>在存在并发请求的场景下，为保证并发读写数据的一致性，需要使用到锁机制。</p>
+          <h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h3><p>通过对参考 [1] 的阅读，深入学习 11 种时间序列预测方法，整理成笔记，并通过实际编程将模型实现。</p>
+<p>使用到的数据集为阿里巴巴 2018-05-14 到 2020-05-12 的股票数据。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/30/golang-difference-between-rlock-and-lock/#more" rel="contents">
+              <a class="btn" href="/2020/05/26/time-series-forecast-moving-average/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -218,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/29/leetcode-29/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/time-series-forecast-auto-regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -232,7 +232,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/29/leetcode-29/" class="post-title-link" itemprop="url">LeetCode - 29. 两数相除</a>
+            <a href="/2020/05/26/time-series-forecast-auto-regression/" class="post-title-link" itemprop="url">时间序列预测 自回归模型 Auto Regression Model</a>
         </h2>
 
         <div class="post-meta">
@@ -242,14 +242,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-29 23:29:44" itemprop="dateCreated datePublished" datetime="2020-04-29T23:29:44+08:00">2020-04-29</time>
+              <time title="Created: 2020-05-26 17:26:35" itemprop="dateCreated datePublished" datetime="2020-05-26T17:26:35+08:00">2020-05-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-30 00:14:28" itemprop="dateModified" datetime="2020-04-30T00:14:28+08:00">2020-04-30</time>
+                <time title="Modified: 2020-05-29 15:24:52" itemprop="dateModified" datetime="2020-05-29T15:24:52+08:00">2020-05-29</time>
               </span>
 
           
@@ -263,10 +263,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>题目<a href="https://leetcode-cn.com/problems/divide-two-integers/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/divide-two-integers/</a></p>
+          <h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h3><p>通过对参考 [1] 的阅读，深入学习 11 种时间序列预测方法，整理成笔记，并通过实际编程将模型实现。</p>
+<p>使用到的数据集为阿里巴巴 2018-05-14 到 2020-05-12 的股票数据。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/29/leetcode-29/#more" rel="contents">
+              <a class="btn" href="/2020/05/26/time-series-forecast-auto-regression/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -290,7 +291,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/29/leetcode-35/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/notebook-time-series-forecast-methods/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -304,7 +305,92 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/29/leetcode-35/" class="post-title-link" itemprop="url">LeetCode - 35. 搜索插入位置</a>
+            <a href="/2020/05/26/notebook-time-series-forecast-methods/" class="post-title-link" itemprop="url">-笔记- 时间序列预测方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-26 10:08:17" itemprop="dateCreated datePublished" datetime="2020-05-26T10:08:17+08:00">2020-05-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-28 22:10:25" itemprop="dateModified" datetime="2020-05-28T22:10:25+08:00">2020-05-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>This cheat sheet demonstrates 11 different classical time series forecasting methods; they are:</p>
+<ol>
+<li>Autoregression (AR)</li>
+<li>Moving Average (MA)</li>
+<li>Autoregressive Moving Average (ARMA)</li>
+<li>Autoregressive Integrated Moving Average (ARIMA)</li>
+<li>Seasonal Autoregressive Integrated Moving-Average (SARIMA)</li>
+<li>Seasonal Autoregressive Integrated Moving-Average with Exogenous Regressors (SARIMAX)</li>
+<li>Vector Autoregression (VAR)</li>
+<li>Vector Autoregression Moving-Average (VARMA)</li>
+<li>Vector Autoregression Moving-Average with Exogenous Regressors (VARMAX)</li>
+<li>Simple Exponential Smoothing (SES)</li>
+<li>Holt Winter’s Exponential Smoothing (HWES)</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/26/notebook-time-series-forecast-methods/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/ubuntu-install-ssh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/22/ubuntu-install-ssh/" class="post-title-link" itemprop="url">Ubuntu 18.04 ssh 的使用</a>
         </h2>
 
         <div class="post-meta">
@@ -315,7 +401,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-29 23:16:51 / Modified: 23:26:53" itemprop="dateCreated datePublished" datetime="2020-04-29T23:16:51+08:00">2020-04-29</time>
+              <time title="Created: 2020-05-22 14:26:49 / Modified: 14:32:00" itemprop="dateCreated datePublished" datetime="2020-05-22T14:26:49+08:00">2020-05-22</time>
             </span>
 
           
@@ -329,10 +415,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>题目<a href="https://leetcode-cn.com/problems/search-insert-position/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/search-insert-position/</a></p>
+          <p>常规记录。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/29/leetcode-35/#more" rel="contents">
+              <a class="btn" href="/2020/05/22/ubuntu-install-ssh/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -356,7 +442,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/29/leetcode-28/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/python-lstm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -370,7 +456,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/29/leetcode-28/" class="post-title-link" itemprop="url">LeetCode - 28. 实现 strStr()</a>
+            <a href="/2020/05/21/python-lstm/" class="post-title-link" itemprop="url">python-lstm</a>
         </h2>
 
         <div class="post-meta">
@@ -379,9 +465,8 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-04-29 22:25:17 / Modified: 23:17:00" itemprop="dateCreated datePublished" datetime="2020-04-29T22:25:17+08:00">2020-04-29</time>
+              <time title="Created: 2020-05-21 14:01:06" itemprop="dateCreated datePublished" datetime="2020-05-21T14:01:06+08:00">2020-05-21</time>
             </span>
 
           
@@ -395,15 +480,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>题目 <a href="https://leetcode-cn.com/problems/implement-strstr/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/implement-strstr/</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/29/leetcode-28/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          
       
     </div>
 
@@ -422,7 +499,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/28/golang-source-code-go-cache/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/19/golang-mongodb-query/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -436,7 +513,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/28/golang-source-code-go-cache/" class="post-title-link" itemprop="url">go-cache 源码中文注释</a>
+            <a href="/2020/05/19/golang-mongodb-query/" class="post-title-link" itemprop="url">Golang Mongodb 查询示例及 shell 对比</a>
         </h2>
 
         <div class="post-meta">
@@ -446,14 +523,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-28 15:06:38" itemprop="dateCreated datePublished" datetime="2020-04-28T15:06:38+08:00">2020-04-28</time>
+              <time title="Created: 2020-05-19 15:11:15" itemprop="dateCreated datePublished" datetime="2020-05-19T15:11:15+08:00">2020-05-19</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-29 10:54:50" itemprop="dateModified" datetime="2020-04-29T10:54:50+08:00">2020-04-29</time>
+                <time title="Modified: 2020-05-22 17:51:23" itemprop="dateModified" datetime="2020-05-22T17:51:23+08:00">2020-05-22</time>
               </span>
 
           
@@ -467,10 +544,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Github  <code>go-cache</code> 源码学习。</p>
+          <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
+<li>windows 10</li>
+<li>虚拟机 ubuntu 18.04 desktop<ul>
+<li>换中科大源 <a href="https://www.linuxidc.com/Linux/2018-08/153709.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2018-08/153709.htm</a></li>
+<li>使用桥接模式，使宿主机与虚拟机处于同一局域网</li>
+<li>关闭防火墙<ul>
+<li><code>sudo ufw disable</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>docker <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noopener">https://docs.docker.com/engine/install/ubuntu/</a><ul>
+<li>镜像 <a href="https://hub.docker.com/_/mongo" target="_blank" rel="noopener">https://hub.docker.com/_/mongo</a></li>
+</ul>
+</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/28/golang-source-code-go-cache/#more" rel="contents">
+              <a class="btn" href="/2020/05/19/golang-mongodb-query/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -494,7 +586,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/28/golang-file-cache-implement/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/golang-link-reverse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -508,7 +600,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/28/golang-file-cache-implement/" class="post-title-link" itemprop="url">Golang 文件缓存实现</a>
+            <a href="/2020/05/14/golang-link-reverse/" class="post-title-link" itemprop="url">Golang 实现链表逆序实现</a>
         </h2>
 
         <div class="post-meta">
@@ -519,7 +611,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-28 00:38:12 / Modified: 00:43:46" itemprop="dateCreated datePublished" datetime="2020-04-28T00:38:12+08:00">2020-04-28</time>
+              <time title="Created: 2020-05-14 14:25:47 / Modified: 16:35:05" itemprop="dateCreated datePublished" datetime="2020-05-14T14:25:47+08:00">2020-05-14</time>
             </span>
 
           
@@ -533,10 +625,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Golang 文件缓存实现，简单项目直接用。</p>
+          <p>链接逆序的多种实现。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/28/golang-file-cache-implement/#more" rel="contents">
+              <a class="btn" href="/2020/05/14/golang-link-reverse/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -560,7 +652,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/golang-basic-type-convert/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/python-tip-string-concate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -574,7 +666,74 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/27/golang-basic-type-convert/" class="post-title-link" itemprop="url">Golang 基本类型转换</a>
+            <a href="/2020/05/14/python-tip-string-concate/" class="post-title-link" itemprop="url">Python 技巧：字符串连接</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-14 00:21:21 / Modified: 00:47:37" itemprop="dateCreated datePublished" datetime="2020-05-14T00:21:21+08:00">2020-05-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天看到一个关于 Python 字符串连接操作的技巧，原来自己之前的效率是如此之低。若程序中出现大量字符串连接操作，性能想势必很差。</p>
+<p>先给结论：优先使用 join 方法连接字符串</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/14/python-tip-string-concate/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/13/practice-kaggle-stock-prediction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/13/practice-kaggle-stock-prediction/" class="post-title-link" itemprop="url">数据分析实例：阿里巴巴(BABA)股票预测</a>
         </h2>
 
         <div class="post-meta">
@@ -584,14 +743,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-27 23:50:44" itemprop="dateCreated datePublished" datetime="2020-04-27T23:50:44+08:00">2020-04-27</time>
+              <time title="Created: 2020-05-13 10:44:46" itemprop="dateCreated datePublished" datetime="2020-05-13T10:44:46+08:00">2020-05-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-28 14:43:21" itemprop="dateModified" datetime="2020-04-28T14:43:21+08:00">2020-04-28</time>
+                <time title="Modified: 2020-05-22 14:09:07" itemprop="dateModified" datetime="2020-05-22T14:09:07+08:00">2020-05-22</time>
               </span>
 
           
@@ -605,10 +764,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Golang 基本类型转换记录，方便查看。</p>
+          <h3 id="1-预测问题概述"><a href="#1-预测问题概述" class="headerlink" title="1. 预测问题概述"></a>1. 预测问题概述</h3><p>数据挖掘是指从大量的数据中通过算法搜索隐藏于其中信息的过程。数据挖掘通常与计算机科学有关，并通过统计、在线分析处理、情报检索、机器学习、专家系统（依靠过去的经验法则）和模式识别等诸多方法来实现上述目标。其中，预测作为数据挖掘分析的一种方法，通过分类或估值来进行，通过分类或估值的训练得出一个模型，如果对于检验样本组而言该模型具有较高的准确率，可将该模型用于对新样本的未知变量进行预测。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/27/golang-basic-type-convert/#more" rel="contents">
+              <a class="btn" href="/2020/05/13/practice-kaggle-stock-prediction/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -632,7 +791,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/ref-the-feature-selection-problem-traditional-methods-and-a-new-algorithm/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/experiment-svm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -646,7 +805,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/24/ref-the-feature-selection-problem-traditional-methods-and-a-new-algorithm/" class="post-title-link" itemprop="url">-走读- 特征选择 Relief 算法</a>
+            <a href="/2020/05/01/experiment-svm/" class="post-title-link" itemprop="url">-实验- SVM 应用蘑菇种类预测</a>
         </h2>
 
         <div class="post-meta">
@@ -657,7 +816,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-24 10:05:45 / Modified: 10:09:35" itemprop="dateCreated datePublished" datetime="2020-04-24T10:05:45+08:00">2020-04-24</time>
+              <time title="Created: 2020-05-01 20:39:41 / Modified: 20:53:08" itemprop="dateCreated datePublished" datetime="2020-05-01T20:39:41+08:00">2020-05-01</time>
             </span>
 
           
@@ -671,158 +830,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>读懂一篇文献，每天进步一点。</p>
-<p>Kira, Kenji, and Larry A. Rendell. “The feature selection problem: Traditional methods and a new algorithm.” <em>Aaai</em>. Vol. 2. 1992.</p>
+          <p>作业记录</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/04/24/ref-the-feature-selection-problem-traditional-methods-and-a-new-algorithm/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/ref-an-adaptation-of-relief-for-attribute-estimation-in-regression/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="a2htray">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A2H&MKVSDK">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/24/ref-an-adaptation-of-relief-for-attribute-estimation-in-regression/" class="post-title-link" itemprop="url">-走读- 适用于回归问题的 Relief 算法改造 - RReliefF</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-24 09:41:06 / Modified: 09:51:47" itemprop="dateCreated datePublished" datetime="2020-04-24T09:41:06+08:00">2020-04-24</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>读懂一篇文献，一点一点的进步。</p>
-<p>Robnik-Šikonja, Marko, and Igor Kononenko. “An adaptation of Relief for attribute estimation in regression.” <em>Machine Learning: Proceedings of the Fourteenth International Conference (ICML’97)</em>. Vol. 5. 1997.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/24/ref-an-adaptation-of-relief-for-attribute-estimation-in-regression/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/feature-selection-rrelieff-for-regresion/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="a2htray">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="A2H&MKVSDK">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/24/feature-selection-rrelieff-for-regresion/" class="post-title-link" itemprop="url">特征选择 RReliefF 算法 Golang 实现</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-24 09:26:57" itemprop="dateCreated datePublished" datetime="2020-04-24T09:26:57+08:00">2020-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-02 17:10:10" itemprop="dateModified" datetime="2020-06-02T17:10:10+08:00">2020-06-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="1-文章关键句"><a href="#1-文章关键句" class="headerlink" title="1. 文章关键句"></a>1. 文章关键句</h3><p>Heuristic measures for estimating the quality of attributes mostly assume the independence of attributes<br>so in domains with strong dependencies between attributes their performance is poor.</p>
-<p><strong>启发式特征选择算法假设特征间是独立无关的，但启发式特征选择算法并不适用于一些特征强相关的数据集。</strong></p>
-<p>Relief and its extension ReliefF are capable of correctly estimating the quality of attributes in classification problems with strong dependencies between attributes.</p>
-<p><strong>Relief 及其扩展 ReliefF 可以有效的处理具有强相关特征的分类问题。</strong></p>
-<p>The problem of estimating the quality of attributes seems to be an important issue in both classification and regression and in machine learning in general.</p>
-<p><strong>一般来说，在机器学习的分类和回归问题中，评估特征间的特性一直都是一个重要的且急需解决的问题。</strong></p>
-<p><strong>RReliefF 是 ReliefF 算法的扩展，适用于回归问题。</strong></p>
-<p>Relief has commonly been viewed as a feature selection method that is applied in a prepossessing step before the model is learned, however it has recently also been used during the learning process to select splits in the building phase of decision tree.</p>
-<p><strong>通常情况下，Relief 算法应用于模型学习之前，作为数据预处理其中一个步骤。然而，该算法也可以应用于模型构建，比如决策树的生成过程就可以使用到 Relief 算法。</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/24/feature-selection-rrelieff-for-regresion/#more" rel="contents">
+              <a class="btn" href="/2020/05/01/experiment-svm/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -845,7 +856,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -911,14 +922,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">188</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -956,7 +967,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
