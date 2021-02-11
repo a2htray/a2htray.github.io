@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="PostgreSQL 支持在同一个数据库下创建多个不同名的 schema，一个 schema 下创建多个不同名的 table，且支持在不同 schema 下创建同名的 table。 尝试了网上的三种方式：  实现 Tabler 接口的 TableName 方法 使用 NamingStrategy 结合 db.Scopes 方法 使用 db.Table 方法  发现只有第 3 种方式有效。 创建数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang Gorm 下 PostgreSQL 的 schema 切换操作">
+<meta property="og:url" content="http://yoursite.com/2021/02/11/golang-gorm-postgres-schema/index.html">
+<meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="PostgreSQL 支持在同一个数据库下创建多个不同名的 schema，一个 schema 下创建多个不同名的 table，且支持在不同 schema 下创建同名的 table。 尝试了网上的三种方式：  实现 Tabler 接口的 TableName 方法 使用 NamingStrategy 结合 db.Scopes 方法 使用 db.Table 方法  发现只有第 3 种方式有效。 创建数据">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/02/11/golang-gorm-postgres-schema/QQ%E6%88%AA%E5%9B%BE20210211193906.png">
+<meta property="og:image" content="http://yoursite.com/2021/02/11/golang-gorm-postgres-schema/QQ%E6%88%AA%E5%9B%BE20210211194541.png">
+<meta property="article:published_time" content="2021-02-11T08:50:58.000Z">
+<meta property="article:modified_time" content="2021-02-11T11:47:34.200Z">
+<meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Golang">
+<meta property="article:tag" content="PostgreSQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/02/11/golang-gorm-postgres-schema/QQ%E6%88%AA%E5%9B%BE20210211193906.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/02/11/golang-gorm-postgres-schema/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Golang Gorm 下 PostgreSQL 的 schema 切换操作 | A2H&MKVSDK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">A2H&MKVSDK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nada, always nada</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/11/golang-gorm-postgres-schema/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="a2htray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="A2H&MKVSDK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Golang Gorm 下 PostgreSQL 的 schema 切换操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-11 16:50:58 / Modified: 19:47:34" itemprop="dateCreated datePublished" datetime="2021-02-11T16:50:58+08:00">2021-02-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>PostgreSQL 支持在同一个数据库下创建多个不同名的 <code>schema</code>，一个 <code>schema</code> 下创建多个不同名的 <code>table</code>，且支持在不同 <code>schema</code> 下创建同名的 <code>table</code>。</p>
+<p>尝试了网上的三种方式：</p>
+<ol>
+<li>实现 <code>Tabler</code> 接口的 <code>TableName</code> 方法</li>
+<li>使用 <code>NamingStrategy</code> 结合 <code>db.Scopes</code> 方法</li>
+<li>使用 <code>db.Table</code> 方法</li>
+</ol>
+<p>发现只有第 3 种方式有效。</p>
+<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> testapp;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>testapp</code> 下创建两个 <code>shcema</code>，并创建不同 <code>schema</code>  同名的 <code>table</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">testapp=<span class="comment"># CREATE SCHEMA stat;</span></span><br><span class="line">CREATE SCHEMA</span><br><span class="line">testapp=<span class="comment"># CREATE SCHEMA app;</span></span><br><span class="line">CREATE SCHEMA</span><br><span class="line">testapp=<span class="comment"># CREATE TABLE IF NOT EXISTS app.workflows (id serial, name varchar(255));</span></span><br><span class="line">CREATE TABLE</span><br><span class="line">testapp=<span class="comment"># CREATE TABLE IF NOT EXISTS stat.workflows (id serial, name varchar(255));</span></span><br><span class="line">CREATE TABLE</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现-Tabler-接口"><a href="#实现-Tabler-接口" class="headerlink" title="实现 Tabler 接口"></a>实现 <code>Tabler</code> 接口</h3><p>模型定义如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Workflow <span class="keyword">struct</span> &#123;</span><br><span class="line">	Schema <span class="keyword">string</span> <span class="string">`gorm:-`</span></span><br><span class="line">	ID <span class="keyword">int</span></span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w *Workflow)</span> <span class="title">TableName</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> w.Schema + <span class="string">".workflows"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>希望是通过设置不同的 <code>schema</code> 值，在调用 <code>TableName</code> 方法时，能够返回正常的带 <code>schema</code> 的表名。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestTabler_TableName</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    dsn := <span class="string">"host=localhost user=postgres password=你的密码 dbname=testapp port=5432 sslmode=disable TimeZone=Asia/Shanghai"</span></span><br><span class="line">	db, err := gorm.Open(postgres.Open(dsn), &amp;gorm.Config&#123;&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	tx := db.Create(&amp;Workflow&#123;</span><br><span class="line">		Schema: <span class="string">"stat"</span>,</span><br><span class="line">		Name: <span class="string">"stat workflow"</span>,</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> tx.Error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(tx.Error.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	tx = db.Create(&amp;Workflow&#123;</span><br><span class="line">		Schema: <span class="string">"app"</span>,</span><br><span class="line">		Name: <span class="string">"app workflow"</span>,</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> tx.Error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(tx.Error.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行出错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">=== RUN   TestTabler_TableName</span><br><span class="line"></span><br><span class="line">2021/02/11 18:52:42 D:/workspace/reproblem/GolangGormPostgreSQLSchema/tabler_test.go:19 错误: 长度为0的分隔标示符 在 <span class="string">""</span><span class="string">""</span> 或附近的 (SQLSTATE 42601)</span><br><span class="line">[4.989ms] [rows:0] INSERT INTO <span class="string">""</span>.<span class="string">"workflows"</span> (<span class="string">"name"</span>) VALUES (<span class="string">'stat workflow'</span>) RETURNING <span class="string">"id"</span></span><br><span class="line">错误: 长度为0的分隔标示符 在 <span class="string">""</span><span class="string">""</span> 或附近的 (SQLSTATE 42601)</span><br><span class="line"></span><br><span class="line">2021/02/11 18:52:42 D:/workspace/reproblem/GolangGormPostgreSQLSchema/tabler_test.go:28 错误: 长度为0的分隔标示符 在 <span class="string">""</span><span class="string">""</span> 或附近的 (SQLSTATE 42601)</span><br><span class="line">[1.992ms] [rows:0] INSERT INTO <span class="string">""</span>.<span class="string">"workflows"</span> (<span class="string">"name"</span>) VALUES (<span class="string">'app workflow'</span>) RETURNING <span class="string">"id"</span></span><br><span class="line">错误: 长度为0的分隔标示符 在 <span class="string">""</span><span class="string">""</span> 或附近的 (SQLSTATE 42601)</span><br><span class="line">--- PASS: TestTabler_TableName (23.59s)</span><br><span class="line">PASS</span><br></pre></td></tr></table></figure>
+
+<p>显示在返回表名时，<code>Model.Schema</code> 值是一个空字符串。查看 <code>gorm.schema</code> 包下的 <code>Parse</code> 方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Parse</span><span class="params">(dest <span class="keyword">interface</span>&#123;&#125;, cacheStore *sync.Map, namer Namer)</span> <span class="params">(*Schema, error)</span></span> &#123;</span><br><span class="line">	...</span><br><span class="line">    modelType := reflect.ValueOf(dest).Type()</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">	modelValue := reflect.New(modelType)</span><br><span class="line">	tableName := namer.TableName(modelType.Name())</span><br><span class="line">	<span class="keyword">if</span> tabler, ok := modelValue.Interface().(Tabler); ok &#123;</span><br><span class="line">		tableName = tabler.TableName()</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在源码中使用 <code>reflect.New</code> 实例化了模型，但并没有字段 <code>Schema</code> 进行赋值操作，所以 <code>Schema</code> 值为默认空字符串。那在调用 <code>TableName</code> 方法时，返回了不正确的表名。</p>
+<h3 id="使用-NamingStrategy-结合-db-Scopes"><a href="#使用-NamingStrategy-结合-db-Scopes" class="headerlink" title="使用 NamingStrategy 结合 db.Scopes"></a>使用 NamingStrategy 结合 db.Scopes</h3><p>在表名的解析中，为避免干扰，重新定义模型如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Workflow <span class="keyword">struct</span> &#123;</span><br><span class="line">	Schema <span class="keyword">string</span> <span class="string">`gorm:-`</span></span><br><span class="line">	ID <span class="keyword">int</span></span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再定义两个 <code>db.Scopes</code> 方法的回调方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">schemaApp</span><span class="params">(db *gorm.DB)</span> *<span class="title">gorm</span>.<span class="title">DB</span></span> &#123;</span><br><span class="line">	db.Config.NamingStrategy = schema.NamingStrategy&#123;</span><br><span class="line">		TablePrefix: <span class="string">"app."</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> db</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">schemaStat</span><span class="params">(db *gorm.DB)</span> *<span class="title">gorm</span>.<span class="title">DB</span></span> &#123;</span><br><span class="line">	db.Config.NamingStrategy = schema.NamingStrategy&#123;</span><br><span class="line">		TablePrefix: <span class="string">"stat."</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> db</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写测试函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestNaming_TableName</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	dsn := <span class="string">"host=localhost user=postgres password=你的密码 dbname=testapp port=5432 sslmode=disable TimeZone=Asia/Shanghai"</span></span><br><span class="line">	db, err := gorm.Open(postgres.Open(dsn), &amp;gorm.Config&#123;&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	tx := db.Scopes(schemaStat).Create(&amp;Workflow&#123;</span><br><span class="line">		Name: <span class="string">"stat workflow"</span>,</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> tx.Error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(tx.Error.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	tx = db.Scopes(schemaApp).Create(&amp;Workflow&#123;</span><br><span class="line">		Name: <span class="string">"app workflow"</span>,</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> tx.Error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(tx.Error.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看数据是否插入成功，发现只有在 <code>stat</code> Schema 下插入了数据，而且还是两条，而 <code>app</code> Schema 下没有数据。</p>
+<p><img src="/2021/02/11/golang-gorm-postgres-schema/QQ%E6%88%AA%E5%9B%BE20210211193906.png" alt></p>
+<p>从结果上，使用 <code>NamingStrategy</code> 是不行的。原因在找。</p>
+<h3 id="db-Table"><a href="#db-Table" class="headerlink" title="db.Table"></a>db.Table</h3><p>定义模型：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Workflow <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID <span class="keyword">int</span></span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestTable_TableName</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	dsn := <span class="string">"host=localhost user=postgres password=你的密码 dbname=testapp port=5432 sslmode=disable TimeZone=Asia/Shanghai"</span></span><br><span class="line">	db, err := gorm.Open(postgres.Open(dsn), &amp;gorm.Config&#123;&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	tx := db.Table(<span class="string">"stat.workflows"</span>).Create(&amp;Workflow&#123;</span><br><span class="line">		Name: <span class="string">"stat workflow"</span>,</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> tx.Error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(tx.Error.Error())</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	tx = db.Table(<span class="string">"app.workflows"</span>).Create(&amp;Workflow&#123;</span><br><span class="line">		Name: <span class="string">"app workflow"</span>,</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> tx.Error != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(tx.Error.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>按预期成功插入了数据。</p>
+<p><img src="/2021/02/11/golang-gorm-postgres-schema/QQ%E6%88%AA%E5%9B%BE20210211194541.png" alt></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>在 PostgreSQL 下要切换 Schema，使用 <code>db.Table</code> 方法。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+              <a href="/tags/PostgreSQL/" rel="tag"># PostgreSQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/11/golang-design-pattern-factory-method/" rel="prev" title="设计模式 Golang 简单工厂方法模式">
+      <i class="fa fa-chevron-left"></i> 设计模式 Golang 简单工厂方法模式
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库"><span class="nav-number">1.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-Tabler-接口"><span class="nav-number">2.</span> <span class="nav-text">实现 Tabler 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-NamingStrategy-结合-db-Scopes"><span class="nav-number">3.</span> <span class="nav-text">使用 NamingStrategy 结合 db.Scopes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#db-Table"><span class="nav-number">4.</span> <span class="nav-text">db.Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">a2htray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">205</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a2htray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a2htray" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/a2htray@outlook.com" title="E-Mail → a2htray@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a2htray</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
