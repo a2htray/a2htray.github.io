@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://yoursite.com/2021/02/06/golang-migrate-usage-with-postgresql/QQ%E6%88%AA%E5%9B%BE20210206193403.png">
 <meta property="og:image" content="http://yoursite.com/2021/02/06/golang-migrate-usage-with-postgresql/QQ%E6%88%AA%E5%9B%BE20210206194808.png">
 <meta property="article:published_time" content="2021-02-06T10:19:24.000Z">
-<meta property="article:modified_time" content="2021-02-06T12:24:17.704Z">
+<meta property="article:modified_time" content="2021-02-12T13:51:49.429Z">
 <meta property="article:author" content="a2htray">
 <meta property="article:tag" content="Golang">
 <meta property="article:tag" content="PostgreSQL">
@@ -177,10 +177,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-02-06 18:19:24 / Modified: 20:24:17" itemprop="dateCreated datePublished" datetime="2021-02-06T18:19:24+08:00">2021-02-06</time>
+              <time title="Created: 2021-02-06 18:19:24" itemprop="dateCreated datePublished" datetime="2021-02-06T18:19:24+08:00">2021-02-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-12 21:51:49" itemprop="dateModified" datetime="2021-02-12T21:51:49+08:00">2021-02-12</time>
+              </span>
 
           
 
@@ -239,7 +245,7 @@
 <p>在命令行输入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">migrate -database postgres://postgres:******@localhost:5432/testapp?sslmode=<span class="built_in">disable</span> -path ./migrations up</span><br></pre></td></tr></table></figure>
 
-<p>在 PostgreSQL 交互终端查看 <code>users</code> 表是否创建。</p>
+<p>默认在创建的迁移记录表为 <code>schema_migrations</code>，可以在连接字符串中使用 <code>x-migrations-table</code> 指定 。还可以结合 <code>search_schema</code> 指定 PostgreSQL 的 Schema [2]。在 PostgreSQL 交互终端查看 <code>users</code> 表是否创建。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">testapp=<span class="comment"># \d</span></span><br><span class="line">                     关联列表</span><br><span class="line"> 架构模式 |       名称        |  类型  |  拥有者</span><br><span class="line">----------+-------------------+--------+----------</span><br><span class="line"> public   | schema_migrations | 数据表 | postgres</span><br><span class="line"> public   | users             | 数据表 | postgres</span><br><span class="line"> public   | users_id_seq      | 序列数 | postgres</span><br><span class="line">(3 行记录)</span><br></pre></td></tr></table></figure>
 
 <p>加退操作，只要把 <code>up</code> 改为 <code>down</code> 即可，与其他数据库迁移工具大同小异。</p>
@@ -255,6 +261,7 @@
 
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
 <li><a href="https://github.com/golang-migrate/migrate/blob/master/database/postgres/TUTORIAL.md" target="_blank" rel="noopener">https://github.com/golang-migrate/migrate/blob/master/database/postgres/TUTORIAL.md</a></li>
+<li><a href="https://github.com/golang-migrate/migrate/tree/master/database/postgres" target="_blank" rel="noopener">https://github.com/golang-migrate/migrate/tree/master/database/postgres</a></li>
 </ol>
 
     </div>
