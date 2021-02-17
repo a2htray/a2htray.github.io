@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="关于数组、字符串和切片的一些细节。">
+  <meta name="description" content="关于数组、字符串和切片的一些细节。 数组：  不同长度的同类型元素的数组是不同的类型 可以通过索引的方式初始化数组 数组作为函数参数传值为值复制 可以使用数组指针，从而达到在函数内部修改外部数组的需求 数组的 len() 和 cap() 总是相同的  字符串：  字符串的长度不是字符串类型的一部分  切片：  切片可以和 nil 比较 在容量不足的情况下，append() 操作会导致重新分配内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang 数组 字符串 切片">
 <meta property="og:url" content="http://yoursite.com/2021/01/08/golang-array-string-slice/index.html">
 <meta property="og:site_name" content="A2H&amp;MKVSDK">
-<meta property="og:description" content="关于数组、字符串和切片的一些细节。">
+<meta property="og:description" content="关于数组、字符串和切片的一些细节。 数组：  不同长度的同类型元素的数组是不同的类型 可以通过索引的方式初始化数组 数组作为函数参数传值为值复制 可以使用数组指针，从而达到在函数内部修改外部数组的需求 数组的 len() 和 cap() 总是相同的  字符串：  字符串的长度不是字符串类型的一部分  切片：  切片可以和 nil 比较 在容量不足的情况下，append() 操作会导致重新分配内存">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-08T05:32:58.000Z">
-<meta property="article:modified_time" content="2021-01-08T06:05:05.889Z">
+<meta property="article:modified_time" content="2021-02-16T17:17:20.277Z">
 <meta property="article:author" content="a2htray">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-01-08 13:32:58 / Modified: 14:05:05" itemprop="dateCreated datePublished" datetime="2021-01-08T13:32:58+08:00">2021-01-08</time>
+              <time title="Created: 2021-01-08 13:32:58" itemprop="dateCreated datePublished" datetime="2021-01-08T13:32:58+08:00">2021-01-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-17 01:17:20" itemprop="dateModified" datetime="2021-02-17T01:17:20+08:00">2021-02-17</time>
+              </span>
 
           
 
@@ -190,6 +196,23 @@
 
       
         <p>关于数组、字符串和切片的一些细节。</p>
+<p>数组：</p>
+<ol>
+<li>不同长度的同类型元素的数组是不同的类型</li>
+<li>可以通过索引的方式初始化数组</li>
+<li>数组作为函数参数传值为值复制</li>
+<li>可以使用数组指针，从而达到在函数内部修改外部数组的需求</li>
+<li>数组的 len() 和 cap() 总是相同的</li>
+</ol>
+<p>字符串：</p>
+<ol>
+<li>字符串的长度不是字符串类型的一部分</li>
+</ol>
+<p>切片：</p>
+<ol>
+<li>切片可以和 <code>nil</code> 比较</li>
+<li>在容量不足的情况下，<code>append()</code> 操作会导致重新分配内存</li>
+</ol>
 <a id="more"></a>
 
 <h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p><strong>不同长度的同类型元素的数组是不同的类型</strong></p>
@@ -232,7 +255,24 @@
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p><strong>字符串长度不是字符串类型的一部分</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	str1 := <span class="string">"123"</span></span><br><span class="line">	str2 := <span class="string">"1234"</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(reflect.TypeOf(str1) == reflect.TypeOf(str2))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><p><strong>切片可以和 nil 比较</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	fmt.Println(slice1 == <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在容量不足的情况下，<code>append()</code> 操作会导致重新分配内存</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice1 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">	slice2 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">0</span>, <span class="number">100000</span>)</span><br><span class="line"></span><br><span class="line">	start := time.Now()</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++ &#123;</span><br><span class="line">		slice1 = <span class="built_in">append</span>(slice1, i)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(time.Now().Sub(start))</span><br><span class="line"></span><br><span class="line">	start = time.Now()</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++ &#123;</span><br><span class="line">		slice2 = <span class="built_in">append</span>(slice2, i)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(time.Now().Sub(start))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4.9873ms</span><br><span class="line">997.4µs</span><br></pre></td></tr></table></figure>
+
+
+
+
     </div>
 
     
@@ -315,7 +355,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">2.</span> <span class="nav-text">字符串</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切片"><span class="nav-number">3.</span> <span class="nav-text">切片</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -329,7 +369,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">212</span>
+          <span class="site-state-item-count">214</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

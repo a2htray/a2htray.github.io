@@ -20,15 +20,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="golang-design-pattern-decorator">
+  <meta name="description" content="装饰器模式：允许在封装对象 A 中内嵌新对象 B，从而赋予对象 A 新的行为。 装饰器：封装器包含与目标对象相同的一系列方法， 它会将所有接收到的请求委派给目标对象。 但是， 封装器可以在将请求委派给目标前后对其进行处理，从而改变对象最终行为。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式 Golang 装饰器模式">
 <meta property="og:url" content="http://yoursite.com/2021/02/16/golang-design-pattern-decorator/index.html">
 <meta property="og:site_name" content="A2H&amp;MKVSDK">
+<meta property="og:description" content="装饰器模式：允许在封装对象 A 中内嵌新对象 B，从而赋予对象 A 新的行为。 装饰器：封装器包含与目标对象相同的一系列方法， 它会将所有接收到的请求委派给目标对象。 但是， 封装器可以在将请求委派给目标前后对其进行处理，从而改变对象最终行为。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2021/02/16/golang-design-pattern-decorator/QQ%E6%88%AA%E5%9B%BE20210217154823.png">
 <meta property="article:published_time" content="2021-02-16T14:41:23.000Z">
-<meta property="article:modified_time" content="2021-02-16T14:41:23.394Z">
+<meta property="article:modified_time" content="2021-02-17T07:50:26.701Z">
 <meta property="article:author" content="a2htray">
+<meta property="article:tag" content="Golang">
+<meta property="article:tag" content="Design Pattern">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/02/16/golang-design-pattern-decorator/QQ%E6%88%AA%E5%9B%BE20210217154823.png">
 
 <link rel="canonical" href="http://yoursite.com/2021/02/16/golang-design-pattern-decorator/">
 
@@ -43,7 +49,7 @@
   };
 </script>
 
-  <title>golang-design-pattern-decorator | A2H&MKVSDK</title>
+  <title>设计模式 Golang 装饰器模式 | A2H&MKVSDK</title>
   
 
 
@@ -161,7 +167,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          golang-design-pattern-decorator
+          设计模式 Golang 装饰器模式
         </h1>
 
         <div class="post-meta">
@@ -173,6 +179,13 @@
 
               <time title="Created: 2021-02-16 22:41:23" itemprop="dateCreated datePublished" datetime="2021-02-16T22:41:23+08:00">2021-02-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-17 15:50:26" itemprop="dateModified" datetime="2021-02-17T15:50:26+08:00">2021-02-17</time>
+              </span>
 
           
 
@@ -185,7 +198,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>装饰器模式：允许在封装对象 A 中内嵌新对象 B，从而赋予对象 A 新的行为。</p>
+<p>装饰器：封装器包含与目标对象相同的一系列方法， 它会将所有接收到的请求委派给目标对象。 但是， 封装器可以在将请求委派给目标前后对其进行处理，从而改变对象最终行为。</p>
+<a id="more"></a>
+
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>输出请求的浏览器信息，即 <code>User-Agent</code>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不同浏览器处理</span></span><br><span class="line"><span class="keyword">type</span> BrowserHandler <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *BrowserHandler)</span> <span class="title">Handle</span><span class="params">(r *http.Request)</span></span> &#123;</span><br><span class="line">	fmt.Println(r.Header[<span class="string">"User-Agent"</span>])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	browserHandler := &amp;BrowserHandler&#123;&#125;</span><br><span class="line">	http.HandleFunc(<span class="string">"/welcome"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">		browserHandler.Handle(r)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err := http.ListenAndServe(<span class="string">"127.0.0.1:8080"</span>, <span class="literal">nil</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="新需求"><a href="#新需求" class="headerlink" title="新需求"></a>新需求</h3><p>在不修改 <code>BrowserHandler.Handle</code> 方法的情况下，要求输出请求的参数信息，即 <code>Query Parameters</code> 字符串。</p>
+<p>新增一个接口：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Handler <span class="keyword">interface</span> &#123;</span><br><span class="line">	Handle(r *http.Request)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新增一个处理参数信息的结构：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> QueryHandler <span class="keyword">struct</span> &#123;</span><br><span class="line">	wrapper Handler</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(q *QueryHandler)</span> <span class="title">Handle</span><span class="params">(r *http.Request)</span></span> &#123;</span><br><span class="line">	q.wrapper.Handle(r)</span><br><span class="line">	fmt.Println(r.URL.RawQuery)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时，<code>main</code> 方法的实现如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	browserHandler := &amp;BrowserHandler&#123;&#125;</span><br><span class="line">	queryHandler := &amp;QueryHandler&#123;</span><br><span class="line">		wrapper: browserHandler,</span><br><span class="line">	&#125;</span><br><span class="line">	http.HandleFunc(<span class="string">"/welcome"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">		queryHandler.Handle(r)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err := http.ListenAndServe(<span class="string">"127.0.0.1:8080"</span>, <span class="literal">nil</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Handler <span class="keyword">interface</span> &#123;</span><br><span class="line">	Handle(r *http.Request)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不同浏览器处理</span></span><br><span class="line"><span class="keyword">type</span> BrowserHandler <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *BrowserHandler)</span> <span class="title">Handle</span><span class="params">(r *http.Request)</span></span> &#123;</span><br><span class="line">	fmt.Println(r.Header[<span class="string">"User-Agent"</span>])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> QueryHandler <span class="keyword">struct</span> &#123;</span><br><span class="line">	wrapper Handler</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(q *QueryHandler)</span> <span class="title">Handle</span><span class="params">(r *http.Request)</span></span> &#123;</span><br><span class="line">	q.wrapper.Handle(r)</span><br><span class="line">	fmt.Println(r.URL.RawQuery)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	browserHandler := &amp;BrowserHandler&#123;&#125;</span><br><span class="line">	queryHandler := &amp;QueryHandler&#123;</span><br><span class="line">		wrapper: browserHandler,</span><br><span class="line">	&#125;</span><br><span class="line">	http.HandleFunc(<span class="string">"/welcome"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">		queryHandler.Handle(r)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err := http.ListenAndServe(<span class="string">"127.0.0.1:8080"</span>, <span class="literal">nil</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时，程序已具备同时处理 <code>User-Agent</code> 和 <code>Query Parameter</code> 的功能。</p>
+<h3 id="UML-图"><a href="#UML-图" class="headerlink" title="UML 图"></a>UML 图</h3><p><img src="/2021/02/16/golang-design-pattern-decorator/QQ%E6%88%AA%E5%9B%BE20210217154823.png" alt></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>装饰器模式的本质还是一个组合模式，在原有行为的基础上，向前或向后执行新增的行为。</p>
+
     </div>
 
     
@@ -193,6 +228,10 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+              <a href="/tags/Design-Pattern/" rel="tag"># Design Pattern</a>
+          </div>
 
         
 
@@ -203,7 +242,10 @@
     <a href="/2021/02/15/golang-design-pattern-composite/" rel="prev" title="设计模式 Golang 组合模式">
       <i class="fa fa-chevron-left"></i> 设计模式 Golang 组合模式
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/17/leetcode-566/" rel="next" title="LeetCode - 566. 重塑矩阵">
+      LeetCode - 566. 重塑矩阵 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -262,6 +304,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新需求"><span class="nav-number">2.</span> <span class="nav-text">新需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整代码"><span class="nav-number">3.</span> <span class="nav-text">完整代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UML-图"><span class="nav-number">4.</span> <span class="nav-text">UML 图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -275,7 +318,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">212</span>
+          <span class="site-state-item-count">214</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
