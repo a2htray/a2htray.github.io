@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/20/postgres-json-jsonb-operations/" class="post-title-link" itemprop="url">postgres-json-jsonb-operations</a>
+            <a href="/2021/02/20/postgres-json-jsonb-operations/" class="post-title-link" itemprop="url">PostgreSQL JSON JSONB 操作符</a>
         </h2>
 
         <div class="post-meta">
@@ -171,6 +171,13 @@
 
               <time title="Created: 2021-02-20 16:34:08" itemprop="dateCreated datePublished" datetime="2021-02-20T16:34:08+08:00">2021-02-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-21 23:36:38" itemprop="dateModified" datetime="2021-02-21T23:36:38+08:00">2021-02-21</time>
+              </span>
 
           
 
@@ -183,7 +190,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h3 id="JSON-与-JSONB-的区别"><a href="#JSON-与-JSONB-的区别" class="headerlink" title="JSON 与 JSONB 的区别"></a>JSON 与 JSONB 的区别</h3><p>PostgreSQL 支持两种 JSON 数据类型：JSON 和 JSONB，而两者唯一的区别在于效率,。JSON 是对输入的完整拷贝，使用时再去解析，所以它会保留输入的空格，重复键以及顺序等。而 JSONB 是解析输入后保存的二进制，它在解析时会删除不必要的空格和重复的键，顺序和输入可能也不相同。使用时不用再次解析。两者对重复键的处理都是保留最后一个键值对。效率的差别：JSON 类型存储快，使用慢，JSONB 类型存储稍慢，使用较快。<strong>[1]</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/20/postgres-json-jsonb-operations/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
