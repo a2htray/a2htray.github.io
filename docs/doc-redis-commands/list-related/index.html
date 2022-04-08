@@ -1,0 +1,520 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="teal"
+  >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>列表值相关 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/images/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="Redis 服务器中与列表值相关的命令。" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="列表值相关">
+<meta itemprop="description" content="Redis 服务器中与列表值相关的命令。"><meta itemprop="datePublished" content="2022-03-27T05:32:39+08:00" />
+<meta itemprop="dateModified" content="2022-03-27T05:32:39+08:00" />
+<meta itemprop="wordCount" content="1222">
+<meta itemprop="keywords" content="Redis," /><meta property="og:title" content="列表值相关" />
+<meta property="og:description" content="Redis 服务器中与列表值相关的命令。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/doc-redis-commands/list-related/" /><meta property="article:section" content="doc-redis-commands" />
+<meta property="article:published_time" content="2022-03-27T05:32:39+08:00" />
+<meta property="article:modified_time" content="2022-03-27T05:32:39+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="列表值相关"/>
+<meta name="twitter:description" content="Redis 服务器中与列表值相关的命令。"/>
+<meta name="twitter:site" content="@yourtwitterusername"/>
+<meta property="og:image" content="/false"/>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.4cba4804642c4367bc038524f0dac8b28d92f466414252349b9285f1af94269e.css" integrity="sha256-TLpIBGQsQ2e8A4Uk8NrIso2S9GZBQlI0m5KF8a+UJp4=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="/">Mozart&#39;s Sheet
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=%e5%88%97%e8%a1%a8%e5%80%bc%e7%9b%b8%e5%85%b3&url=%2fdoc-redis-commands%2flist-related%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fdoc-redis-commands%2flist-related%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">设置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+<div class="setting">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="modeSwitcher">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="蓝色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="蓝灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="绿色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="红色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="蓝绿色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黄色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 复制链接
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item dropdown">
+          <a class="nav-link" id="navbarDropdownDocument" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-fw fa-chevron-circle-down"></i>文档
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownDocument"><li>
+              <a class="dropdown-item"
+                href="/doc-redis-commands/introduction/">
+                Redis 命令手册
+              </a>
+            </li></ul>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/series/">
+            <i class="fas fa-fw fa-columns"></i>专栏
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>归档
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-fw fa-folder"></i>分类
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="fas fa-fw fa-tags"></i>标签
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content"><button class="catalog-toggle d-lg-none position-fixed top-0 left-0 h-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target=".docs-catalog" aria-expanded="false" aria-controls="collapseCatalog">
+    <i class="catalog-toggle-icon fas fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+</button>
+<aside class="docs-catalog col-lg-2 collapse collapse-horizontal catalog-collapse" tabindex="-1" data-bs-hide="focusout">
+  <div class="container px-0 px-lg-1">
+    <div class="row card component">
+      <div class="card-body">
+        <ul class="list-unstyled mb-2"><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/introduction/">介绍</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/key-related/">键相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/string-related/">字符串值相关</a>
+        </li><li class="mb-2 active text-accent" tabindex="-1">
+          <a href="/doc-redis-commands/list-related/">列表值相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/set-related/">集合相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/zset-related/">有序集合相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/server-related/">服务相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <div class="catalog-section py-1 d-flex justify-content-between align-items-center px-2 bg-background text-on-background">
+            <a href="/doc-redis-commands/examples/">示例</a>
+            <a class="btn-toggle collapsed ms-1" role="button" data-bs-toggle="collapse"
+              data-bs-target="#catalog-8a9a2207fbbe1324820b6a1e32b149de" aria-expanded="false" aria-controls="catalog-8a9a2207fbbe1324820b6a1e32b149de">
+              <i class="btn-toggle-icon fas fa-chevron-circle-down ms-auto" data-fa-transform="rotate-270"></i>
+            </a>
+          </div>
+          <div class="mt-2 border-start collapse" id="catalog-8a9a2207fbbe1324820b6a1e32b149de">
+            <ul class="btn-toggle-nav list-unstyled fw-normal ms-2">
+              <ul class="list-unstyled mb-2"><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列</a>
+        </li></ul>
+            </ul>
+          </div>
+        </li></ul>
+      </div>
+    </div>
+  </div>
+</aside><div class="col-lg-7 ms-auto">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/doc-redis-commands/">Redis 命令手册</a></li><li class="breadcrumb-item active">列表值相关</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    
+    <a class="action d-lg-none" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+<div class="card-header ">
+    <h1 class="card-title post-title">列表值相关
+</h1>
+</div>
+<div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-03-27 05:32:39 &#43;0800 CST。">
+    2022-03-27
+  </span><span class="post-reading-time">
+    3 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E9%9B%86/" class="badge post-taxonomy">数据集</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+</div>
+<div class="post-content mb-3"><p>Redis 服务器中与列表值相关的命令。</p>
+<h2 id="lpush向列表左端添加元素">LPUSH：向列表左端添加元素<a class="anchor ms-1" href="#lpush向列表左端添加元素"><i class="fas fa-link"></i></a></h2>
+<p><code>LPUSH</code> 返回添加元素后列表的长度。</p>
+<p>格式：<code>LPUSH key element [element ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LPUSH colors green yellow red blue gray
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">5</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时列表为 [gray blue yellow red green]</span>
+</span></span></code></pre></div><h2 id="lpushx向列表左端添加元素">LPUSHX：向列表左端添加元素<a class="anchor ms-1" href="#lpushx向列表左端添加元素"><i class="fas fa-link"></i></a></h2>
+<p><code>LPUSHX</code> 与 <code>LPUSH</code> 类似，但只有在 key 存在的情况，操作才有效。</p>
+<p>格式：<code>LPUSHX key element [element ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; KEYS colors
+</span></span><span class="line"><span class="cl"><span class="o">(</span>empty array<span class="o">)</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LPUSHX colors red green blue
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span></code></pre></div><h2 id="rpush向列表右端添加元素">RPUSH：向列表右端添加元素<a class="anchor ms-1" href="#rpush向列表右端添加元素"><i class="fas fa-link"></i></a></h2>
+<p><code>RPUSH</code> 返回添加元素后列表的长度。</p>
+<p>格式：<code>RPUSH key element [element ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; RPUSH colors lightgreen lightyellow lightred lightblue
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">9</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时列表为 [gray blue yellow red green</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># lightgreen lightyellow lightred lightblue]</span>
+</span></span></code></pre></div><h2 id="rpushx向列表右端添加元素">RPUSHX：向列表右端添加元素<a class="anchor ms-1" href="#rpushx向列表右端添加元素"><i class="fas fa-link"></i></a></h2>
+<p><code>RPUSHX</code> 与 <code>RPUSH</code> 类似，但只能存在的键有效。</p>
+<p>格式：<code>RPUSHX key element [element ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; KEYS colors
+</span></span><span class="line"><span class="cl"><span class="o">(</span>empty array<span class="o">)</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; RPUSHX colors red green blue
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; KEYS colors
+</span></span><span class="line"><span class="cl"><span class="o">(</span>empty array<span class="o">)</span>
+</span></span></code></pre></div><h2 id="lpop从列表左端弹出元素">LPOP：从列表左端弹出元素<a class="anchor ms-1" href="#lpop从列表左端弹出元素"><i class="fas fa-link"></i></a></h2>
+<p><code>LPOP</code> 返回弹出的元素。</p>
+<p>格式：<code>LPOP key [count]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LPOP colors <span class="m">2</span>
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;gray&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;blue&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时列表为 [yellow red green</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># lightgreen lightyellow lightred lightblue]</span>
+</span></span></code></pre></div><h2 id="rpop从列表右端弹出元素">RPOP：从列表右端弹出元素<a class="anchor ms-1" href="#rpop从列表右端弹出元素"><i class="fas fa-link"></i></a></h2>
+<p><code>RPOP</code> 返回弹出的元素。</p>
+<p>格式：<code>RPOP key [count]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; RPOP colors <span class="m">2</span>
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;lightblue&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;lightred&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时列表为 [yellow red green</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># lightgreen lightyellow]</span>
+</span></span></code></pre></div><h2 id="llen获取列表中元素的个数">LLEN：获取列表中元素的个数<a class="anchor ms-1" href="#llen获取列表中元素的个数"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>LLEN key</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LLEN colors
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">5</span>
+</span></span></code></pre></div><h2 id="lrange获取列表指定区间上的元素">LRANGE：获取列表指定区间上的元素<a class="anchor ms-1" href="#lrange获取列表指定区间上的元素"><i class="fas fa-link"></i></a></h2>
+<p><code>LRANGE</code> 指定的区间包括两端。</p>
+<p>格式：<code>LRANGE key start stop</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE colors <span class="m">2</span> -1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;green&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;lightgreen&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;lightyellow&#34;</span>
+</span></span></code></pre></div><h2 id="lrem删除列表中前-count-个指定的元素">LREM：删除列表中前 count 个指定的元素<a class="anchor ms-1" href="#lrem删除列表中前-count-个指定的元素"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>LREM key count element</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LPUSH colors yellow yellow yellow
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">8</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时列表为 [yellow yellow yellow yellow red green</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># lightgreen lightyellow]</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LREM colors <span class="m">3</span> yellow
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时列表为 [yellow red green</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># lightgreen lightyellow]</span>
+</span></span></code></pre></div><h2 id="lindex获取指定位置上的元素">LINDEX：获取指定位置上的元素<a class="anchor ms-1" href="#lindex获取指定位置上的元素"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>LINDEX key index</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LINDEX colors <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;green&#34;</span>
+</span></span></code></pre></div><h2 id="lset设置列表中指定位置上元素的值">LSET：设置列表中指定位置上元素的值<a class="anchor ms-1" href="#lset设置列表中指定位置上元素的值"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>LSET key index element</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LSET colors <span class="m">0</span> blue
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时列表为 [blue red green</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># lightgreen lightyellow]</span>
+</span></span></code></pre></div><h2 id="ltrim对列表进行裁剪">LTRIM：对列表进行裁剪<a class="anchor ms-1" href="#ltrim对列表进行裁剪"><i class="fas fa-link"></i></a></h2>
+<p><code>LTRIM</code> 裁剪列表并保存到原有列表中。</p>
+<p>格式：<code>LTRIM key start stop</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LTRIM colors <span class="m">0</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl"><span class="c1"># 列表只保留了前 3 个元素</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE colors <span class="m">0</span> <span class="m">9</span>
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;blue&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;yellow&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;green&#34;</span>
+</span></span></code></pre></div><h2 id="linsert向列表插入元素">LINSERT：向列表插入元素<a class="anchor ms-1" href="#linsert向列表插入元素"><i class="fas fa-link"></i></a></h2>
+<p><code>LINSERT</code> 用于在列表元素前或后插入指定元素。</p>
+<p>格式：<code>LINSERT key BEFORE|AFTER pivot element</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LINSERT colors BEFORE blue red
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE colors <span class="m">0</span> -1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;red&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;blue&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;yellow&#34;</span>
+</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;green&#34;</span>
+</span></span></code></pre></div><h2 id="rpoplpush操作两个列表对元素进行弹出再推入">RPOPLPUSH：操作两个列表，对元素进行弹出再推入<a class="anchor ms-1" href="#rpoplpush操作两个列表对元素进行弹出再推入"><i class="fas fa-link"></i></a></h2>
+<p><code>RPOPLPUSH</code> 返回值为第 1 个列表弹出的元素。</p>
+<p>格式：<code>RPOPLPUSH source destination</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; RPOPLPUSH colors other:colors
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;green&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE colors <span class="m">0</span> -1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;red&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;blue&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;yellow&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE other:colors <span class="m">0</span> -1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;green&#34;</span>
+</span></span></code></pre></div><h2 id="blpop阻塞式从列表左端弹出元素">BLPOP：阻塞式从列表左端弹出元素<a class="anchor ms-1" href="#blpop阻塞式从列表左端弹出元素"><i class="fas fa-link"></i></a></h2>
+<p><code>BLPOP</code> 同样用于从列表左端弹出元素，但是当列表为空，该命令会阻塞列表直到超时或列表有元素可弹出，超时时间单位为秒。</p>
+<p>格式：<code>BLPOP key [key ...] timeout</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; BLPOP mock:list <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>nil<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>2.06s<span class="o">)</span>
+</span></span></code></pre></div><h2 id="brpop阻塞式从列表右端弹出元素">BRPOP：阻塞式从列表右端弹出元素<a class="anchor ms-1" href="#brpop阻塞式从列表右端弹出元素"><i class="fas fa-link"></i></a></h2>
+<p><code>BRPOP</code> 同样用于从列表右端弹出元素，但是当列表为空，该命令会阻塞列表直到超时或列表有元素可弹出，超时时间单位为秒。</p>
+<p>格式：<code>BRPOP key [key ...] timeout</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; BRPOP mock:list 2<span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>nil<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>2.05s<span class="o">)</span>
+</span></span></code></pre></div><h2 id="rpushx向已存在的列表右端添加元素">RPUSHX：向已存在的列表右端添加元素<a class="anchor ms-1" href="#rpushx向已存在的列表右端添加元素"><i class="fas fa-link"></i></a></h2>
+<p><code>RPUSHX</code> 用于将一个或多个元素添加到已存在列表，若列表不存在，则操作无效。</p>
+<p>格式：<code>RPUSHX key element [element ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE colors <span class="m">0</span> -1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;red&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;blue&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;yellow&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; RPUSHX colors green
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE colors <span class="m">0</span> -1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;red&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;blue&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;yellow&#34;</span>
+</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;green&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; RPUSHX not:exists:colors green
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span></code></pre></div><h2 id="brpoplpush操作两个列表对元素进行弹出再推入">BRPOPLPUSH：操作两个列表，对元素进行弹出再推入<a class="anchor ms-1" href="#brpoplpush操作两个列表对元素进行弹出再推入"><i class="fas fa-link"></i></a></h2>
+<p><code>BRPOPLPUSH</code> 与 <code>RPOPLPUSH</code> 类似，但如果列表中没有元素会阻塞直到等待超时或有元素弹出，超时时间的单位为秒。</p>
+<p>格式：<code>BRPOPLPUSH source destination timeout</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; RPUSH colors red green yellow
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; BRPOPLPUSH colors dest:colors <span class="m">10</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;yellow&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE colors <span class="m">0</span> -1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;red&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;green&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE dest:colors <span class="m">0</span> -1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;yellow&#34;</span>
+</span></span></code></pre></div></div><div class="alert alert-warning" role="alert">
+    如果文章存在错误或存在歧义的地方，烦请<a target="_blank" href="https://github.com/a2htray/a2htray.github.io/issues/new"><strong>批评指正</strong></a>。
+</div></div>
+<div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/doc-redis-commands/string-related/">字符串值相关
+</a>
+  </div><div class="post-nav post-next">
+    <a href="/doc-redis-commands/set-related/">集合相关
+</a>
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
+    </div>
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
+</a>
+
+
+    </div>
+</div></div>
+</div><aside class="sidebar d-flex docs-sidebar col-lg-3 position-sticky">
+  <div class="container">
+    
+    <div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#lpush向列表左端添加元素">LPUSH：向列表左端添加元素</a></li>
+    <li><a href="#lpushx向列表左端添加元素">LPUSHX：向列表左端添加元素</a></li>
+    <li><a href="#rpush向列表右端添加元素">RPUSH：向列表右端添加元素</a></li>
+    <li><a href="#rpushx向列表右端添加元素">RPUSHX：向列表右端添加元素</a></li>
+    <li><a href="#lpop从列表左端弹出元素">LPOP：从列表左端弹出元素</a></li>
+    <li><a href="#rpop从列表右端弹出元素">RPOP：从列表右端弹出元素</a></li>
+    <li><a href="#llen获取列表中元素的个数">LLEN：获取列表中元素的个数</a></li>
+    <li><a href="#lrange获取列表指定区间上的元素">LRANGE：获取列表指定区间上的元素</a></li>
+    <li><a href="#lrem删除列表中前-count-个指定的元素">LREM：删除列表中前 count 个指定的元素</a></li>
+    <li><a href="#lindex获取指定位置上的元素">LINDEX：获取指定位置上的元素</a></li>
+    <li><a href="#lset设置列表中指定位置上元素的值">LSET：设置列表中指定位置上元素的值</a></li>
+    <li><a href="#ltrim对列表进行裁剪">LTRIM：对列表进行裁剪</a></li>
+    <li><a href="#linsert向列表插入元素">LINSERT：向列表插入元素</a></li>
+    <li><a href="#rpoplpush操作两个列表对元素进行弹出再推入">RPOPLPUSH：操作两个列表，对元素进行弹出再推入</a></li>
+    <li><a href="#blpop阻塞式从列表左端弹出元素">BLPOP：阻塞式从列表左端弹出元素</a></li>
+    <li><a href="#brpop阻塞式从列表右端弹出元素">BRPOP：阻塞式从列表右端弹出元素</a></li>
+    <li><a href="#rpushx向已存在的列表右端添加元素">RPUSHX：向已存在的列表右端添加元素</a></li>
+    <li><a href="#brpoplpush操作两个列表对元素进行弹出再推入">BRPOPLPUSH：操作两个列表，对元素进行弹出再推入</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    
+<section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="/doc-redis-commands/server-related/">服务相关
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/introduction/">介绍
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/zset-related/">有序集合相关
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/set-related/">集合相关
+</a>
+      </li></ul>
+  </div>
+</section>
+
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><div class="copyright mb-2">
+  Copyright © 2016-2022 a2htray. All Rights Reserved.
+</div>
+<div class="powered-by mb-2">
+  Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
+</div>
+
+</footer>
+<script src="/assets/main/bundle.min.954a425fbcd82d8daa4a6e88fd4f5d12619f640fc7495a4ad66102c277e5139d.js" integrity="sha256-lUpCX7zYLY2qSm6I/U9dEmGfZA/HSVpK1mECwnflE50=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('\/service-worker.min.js').then(function(reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  });
+}
+</script><script src="/assets/viewer/bundle.min.3ce688736c8224a9cd6b3104011fc2a816428f07c0fa226359736f33f0c593de.js" integrity="sha256-POaIc2yCJKnNazEEAR/CqBZCjwfA&#43;iJjWXNvM/DFk94=" crossorigin="anonymous" defer></script>
+</body>
+</html>

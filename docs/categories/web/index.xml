@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web on Mozart&#39;s Sheet</title>
+    <link>/categories/web/</link>
+    <description>Recent content in Web on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Thu, 31 Mar 2022 10:40:58 +0800</lastBuildDate><atom:link href="/categories/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go 1.16 运行 Revel 项目</title>
+      <link>/posts/go-revel-run-require-packages/</link>
+      <pubDate>Thu, 31 Mar 2022 10:40:58 +0800</pubDate>
+      
+      <guid>/posts/go-revel-run-require-packages/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://revel.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Revel&lt;/a&gt; 是一个以高效率、高性能著称的 Go Web 框架，提供了路由、参数解析和验证、会话机制、模板机制、缓存和任务管理等诸多常用的 Web 开发功能。同时作为一个全栈的 MVC 框架， Revel 通过模块实现了组件的复用，因此可以大大提高开发者的效率。其高性能则是依托 Go 语言的性能，相信这个不必多说。但相较于其它职责相对单一的 Web 框架（如 Gin、go-restful），Revel 只能说是在保证性能的基础上尽可能地对开发者友好。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>同源策略 Same-Origin Policy</title>
+      <link>/posts/web-same-origin-policy/</link>
+      <pubDate>Tue, 29 Mar 2022 15:56:02 +0800</pubDate>
+      
+      <guid>/posts/web-same-origin-policy/</guid>
+      <description>&lt;p&gt;同源策略（Same-Origin Policy，SOP）是一种保护 Web 资源的安全机制，它限制了不同源之间的资源访问。需要说明的是，SOP 只作用于应用脚本，这意味着在 HTML 标签中可以引入不同源的图片、CSS 文件或动态加载的脚本文件（见&lt;a href=&#34;/posts/web-same-origin-policy/#%e9%aa%8c%e8%af%81-1&#34;&gt;验证 1&lt;/a&gt;）。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

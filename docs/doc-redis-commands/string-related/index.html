@@ -1,0 +1,582 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="teal"
+  >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>字符串值相关 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/images/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="Redis 服务器中与字符串值相关的命令。" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="字符串值相关">
+<meta itemprop="description" content="Redis 服务器中与字符串值相关的命令。"><meta itemprop="datePublished" content="2022-03-27T04:59:49+08:00" />
+<meta itemprop="dateModified" content="2022-03-27T04:59:49+08:00" />
+<meta itemprop="wordCount" content="1688">
+<meta itemprop="keywords" content="Redis," /><meta property="og:title" content="字符串值相关" />
+<meta property="og:description" content="Redis 服务器中与字符串值相关的命令。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/doc-redis-commands/string-related/" /><meta property="article:section" content="doc-redis-commands" />
+<meta property="article:published_time" content="2022-03-27T04:59:49+08:00" />
+<meta property="article:modified_time" content="2022-03-27T04:59:49+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="字符串值相关"/>
+<meta name="twitter:description" content="Redis 服务器中与字符串值相关的命令。"/>
+<meta name="twitter:site" content="@yourtwitterusername"/>
+<meta property="og:image" content="/false"/>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.4cba4804642c4367bc038524f0dac8b28d92f466414252349b9285f1af94269e.css" integrity="sha256-TLpIBGQsQ2e8A4Uk8NrIso2S9GZBQlI0m5KF8a+UJp4=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="/">Mozart&#39;s Sheet
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%80%bc%e7%9b%b8%e5%85%b3&url=%2fdoc-redis-commands%2fstring-related%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fdoc-redis-commands%2fstring-related%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">设置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+<div class="setting">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="modeSwitcher">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="蓝色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="蓝灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="绿色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="红色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="蓝绿色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黄色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 复制链接
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item dropdown">
+          <a class="nav-link" id="navbarDropdownDocument" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-fw fa-chevron-circle-down"></i>文档
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownDocument"><li>
+              <a class="dropdown-item"
+                href="/doc-redis-commands/introduction/">
+                Redis 命令手册
+              </a>
+            </li></ul>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/series/">
+            <i class="fas fa-fw fa-columns"></i>专栏
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>归档
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-fw fa-folder"></i>分类
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="fas fa-fw fa-tags"></i>标签
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content"><button class="catalog-toggle d-lg-none position-fixed top-0 left-0 h-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target=".docs-catalog" aria-expanded="false" aria-controls="collapseCatalog">
+    <i class="catalog-toggle-icon fas fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+</button>
+<aside class="docs-catalog col-lg-2 collapse collapse-horizontal catalog-collapse" tabindex="-1" data-bs-hide="focusout">
+  <div class="container px-0 px-lg-1">
+    <div class="row card component">
+      <div class="card-body">
+        <ul class="list-unstyled mb-2"><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/introduction/">介绍</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/key-related/">键相关</a>
+        </li><li class="mb-2 active text-accent" tabindex="-1">
+          <a href="/doc-redis-commands/string-related/">字符串值相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/list-related/">列表值相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/set-related/">集合相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/zset-related/">有序集合相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/server-related/">服务相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <div class="catalog-section py-1 d-flex justify-content-between align-items-center px-2 bg-background text-on-background">
+            <a href="/doc-redis-commands/examples/">示例</a>
+            <a class="btn-toggle collapsed ms-1" role="button" data-bs-toggle="collapse"
+              data-bs-target="#catalog-8a9a2207fbbe1324820b6a1e32b149de" aria-expanded="false" aria-controls="catalog-8a9a2207fbbe1324820b6a1e32b149de">
+              <i class="btn-toggle-icon fas fa-chevron-circle-down ms-auto" data-fa-transform="rotate-270"></i>
+            </a>
+          </div>
+          <div class="mt-2 border-start collapse" id="catalog-8a9a2207fbbe1324820b6a1e32b149de">
+            <ul class="btn-toggle-nav list-unstyled fw-normal ms-2">
+              <ul class="list-unstyled mb-2"><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列</a>
+        </li></ul>
+            </ul>
+          </div>
+        </li></ul>
+      </div>
+    </div>
+  </div>
+</aside><div class="col-lg-7 ms-auto">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/doc-redis-commands/">Redis 命令手册</a></li><li class="breadcrumb-item active">字符串值相关</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    
+    <a class="action d-lg-none" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+<div class="card-header ">
+    <h1 class="card-title post-title">字符串值相关
+</h1>
+</div>
+<div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-03-27 04:59:49 &#43;0800 CST。">
+    2022-03-27
+  </span><span class="post-reading-time">
+    4 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E9%9B%86/" class="badge post-taxonomy">数据集</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+</div>
+<div class="post-content mb-3"><p>Redis 服务器中与字符串值相关的命令。</p>
+<h2 id="set设置键值对">SET：设置键值对<a class="anchor ms-1" href="#set设置键值对"><i class="fas fa-link"></i></a></h2>
+<p><code>SET</code> 用于设置单个值为字符串的健值对。</p>
+<p>格式：<code>SET key value</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SET user:1:name xiaoming
+</span></span><span class="line"><span class="cl">OK
+</span></span></code></pre></div><h2 id="setnx键不存在时才设置值">SETNX：键不存在时才设置值<a class="anchor ms-1" href="#setnx键不存在时才设置值"><i class="fas fa-link"></i></a></h2>
+<p><code>SETNX</code> 只有在键不存在的情况下，才可以设置值。</p>
+<p>格式：<code>SETNX key value</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SET user:1:name xiaoming
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; SETNX user:1:name xiaohong
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此处设置不成功</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:1:name
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;xiaoming&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; EXISTS user:1:email
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 键 user:1:email 不存在</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; SETNX user:1:email foo@bar.com
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置成功</span>
+</span></span></code></pre></div><h2 id="setex设置具有生存时间的键值对">SETEX：设置具有生存时间的键值对<a class="anchor ms-1" href="#setex设置具有生存时间的键值对"><i class="fas fa-link"></i></a></h2>
+<p><code>SETEX</code> 可以设置一个具有生存时间的键值对，过期时间的单位为秒。</p>
+<p>格式：<code>SETEX key seconds value</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SETEX user:1:name <span class="m">10</span> xiaoming
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:1:name
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;xiaoming&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 10 秒内访问</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:1:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>nil<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 10 秒外访问</span>
+</span></span></code></pre></div><h2 id="psetex设置具有过期时间的键值对">PSETEX：设置具有过期时间的键值对<a class="anchor ms-1" href="#psetex设置具有过期时间的键值对"><i class="fas fa-link"></i></a></h2>
+<p><code>PSETEX</code> 与 <code>SETEX</code> 类似，但其生存时间的单位为微秒。</p>
+<p>格式：<code>PSETEX key millIseconds value</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; PSETEX user:1:name <span class="m">10000</span> xiaoming
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:1:name
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;xiaoming&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 10 秒内访问</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:1:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>nil<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 10 秒外访问</span>
+</span></span></code></pre></div><h2 id="get取特定键对应的值">GET：取特定键对应的值<a class="anchor ms-1" href="#get取特定键对应的值"><i class="fas fa-link"></i></a></h2>
+<p><code>GET</code> 用于获取获取特定键对应的值。</p>
+<p>格式：<code>GET key</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:1:name
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;xiaoming&#34;</span>
+</span></span></code></pre></div><h2 id="getset设置值并返回旧值">GETSET：设置值并返回旧值<a class="anchor ms-1" href="#getset设置值并返回旧值"><i class="fas fa-link"></i></a></h2>
+<p><code>GETSET</code> 可以为设置一个值并返回 key 的旧值，若 key 不存在则返回 <code>nil</code>。</p>
+<p>格式：<code>GETSET key value</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SET user:1:name xiaoming
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GETSET user:1:name xiaohong
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;xiaoming&#34;</span>
+</span></span></code></pre></div><h2 id="getrange返回字符串值的字符子串">GETRANGE：返回字符串值的字符子串<a class="anchor ms-1" href="#getrange返回字符串值的字符子串"><i class="fas fa-link"></i></a></h2>
+<p><code>GETRANGE</code> 用于返回字符串值的字符子串，包括两端。</p>
+<p>格式：<code>GETRANGE key start end</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SET user:1:name xiaoming
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GETRANGE user:1:name <span class="m">2</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;ao&#34;</span>
+</span></span></code></pre></div><h2 id="setrange给字符串值的指定位置设置新字符">SETRANGE：给字符串值的指定位置设置新字符<a class="anchor ms-1" href="#setrange给字符串值的指定位置设置新字符"><i class="fas fa-link"></i></a></h2>
+<p><code>SETRANGE</code> 给字符串值的指定位置设置新字符并返回新字符串的长度。</p>
+<p>格式：<code>SETRANGE key offset value</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SET user:1:name xiaoming
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; SETRANGE user:1:name <span class="m">4</span> hong
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">8</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:1:name
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;xiaohong&#34;</span>
+</span></span></code></pre></div><h2 id="mset同时设置多个键值对">MSET：同时设置多个键值对<a class="anchor ms-1" href="#mset同时设置多个键值对"><i class="fas fa-link"></i></a></h2>
+<p><code>MSET</code> 用于设置多个键值对。</p>
+<p>格式：<code>MSET key value [key value ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; MSET user:1:age <span class="m">18</span> user:1:gender male
+</span></span><span class="line"><span class="cl">OK
+</span></span></code></pre></div><h2 id="msetnx同时设置多个键值对">MSETNX：同时设置多个键值对<a class="anchor ms-1" href="#msetnx同时设置多个键值对"><i class="fas fa-link"></i></a></h2>
+<p><code>MSETNX</code> 用于同时设置多个键值对，当有一个键是存在时，该命令其它键的赋值也不会生效。</p>
+<p>格式：<code>MSETNX key value [key value ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; KEYS user*
+</span></span><span class="line"><span class="cl"><span class="o">(</span>empty array<span class="o">)</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; SET user:1:name xiaoming
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; MSETNX user:1:name xiaoming user:2:name xiaohong
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 因为 user:1:name 存在，所以 user:2:name 没能被赋值</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; EXISTS user:1:name user:2:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; EXISTS user:1:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; EXISTS user:2:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:2:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>nil<span class="o">)</span>
+</span></span></code></pre></div><h2 id="mget同时取多个值">MGET：同时取多个值<a class="anchor ms-1" href="#mget同时取多个值"><i class="fas fa-link"></i></a></h2>
+<p><code>MGET</code> 用于同时取多个值。</p>
+<p>格式：<code>MGET key [key ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; MGET user:1:age user:1:gender
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;18&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;male&#34;</span>
+</span></span></code></pre></div><h2 id="strlen获取字符串的长度">STRLEN：获取字符串的长度<a class="anchor ms-1" href="#strlen获取字符串的长度"><i class="fas fa-link"></i></a></h2>
+<p><code>STRLEN</code> 可以获取指定键对应字符串值的长度。</p>
+<p>格式：<code>STRLEN key</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; STRLEN user:1:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">8</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; SET welcome 你好
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; STRLEN welcome
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">6</span>
+</span></span></code></pre></div><h2 id="append追加字符串返回追加后字符串的长度">APPEND：追加字符串，返回追加后字符串的长度<a class="anchor ms-1" href="#append追加字符串返回追加后字符串的长度"><i class="fas fa-link"></i></a></h2>
+<p><code>APPEND</code> 可以向字符串值追加新的字符，返回值为追加后新字符串的长度。</p>
+<p>格式：<code>APPEND key value</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; APPEND user:1:name Li
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:1:name
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;xiaomingLi&#34;</span>
+</span></span></code></pre></div><h2 id="getbit获取字符串值指定位置上的二进制值">GETBIT：获取字符串值指定位置上的二进制值<a class="anchor ms-1" href="#getbit获取字符串值指定位置上的二进制值"><i class="fas fa-link"></i></a></h2>
+<p>指定位置指的是字符串的二进制存储形式中从左至右的偏移量，以 0 开始计数。</p>
+<p>格式：<code>GETBIT key offset</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SET user:2:name abc
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl"><span class="c1"># abc 的二进制存储形式为</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># a: 01100001</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># b: 01100010</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># c: 01100011</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; BITCOUNT user:2:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">GETBIT user:2:name <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span></code></pre></div><h2 id="setbit设置字符串值指定位置上的二进制值">SETBIT：设置字符串值指定位置上的二进制值<a class="anchor ms-1" href="#setbit设置字符串值指定位置上的二进制值"><i class="fas fa-link"></i></a></h2>
+<p>返回值为原指定位置上的二进制值</p>
+<p>格式：<code>SETBIT key offset value</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SETBIT user:2:name <span class="m">6</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时 a 已变成 c</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET user:2:name
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;cbc&#34;</span>
+</span></span></code></pre></div><h2 id="bitcount返回字符串类型值的二进制值中-1-的个数">BITCOUNT：返回字符串类型值的二进制值中 1 的个数<a class="anchor ms-1" href="#bitcount返回字符串类型值的二进制值中-1-的个数"><i class="fas fa-link"></i></a></h2>
+<p>下标指的字符在字符串中的位置，而不是字符串二进制形式的比特位置。</p>
+<p>格式：<code>BITCOUNT key [start end]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SET user:2:name abc
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; BITCOUNT user:2:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; BITCOUNT user:2:name <span class="m">0</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; BITCOUNT user:2:name <span class="m">1</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 实际取的字符 b 的二进制形式中 1 的个数</span>
+</span></span></code></pre></div><h2 id="bitop对多个字符串类型值进行位运算">BITOP：对多个字符串类型值进行位运算<a class="anchor ms-1" href="#bitop对多个字符串类型值进行位运算"><i class="fas fa-link"></i></a></h2>
+<p><code>BITOP</code> 支持的运算符包括 <code>AND</code>、<code>OR</code>、<code>XOR</code> 和 <code>NOT</code>，并将运算结果保存到目标 key 中。</p>
+<p>格式：<code>BITOP operation destkey key [key ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SET char:1 a
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; SET char:2 z
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; BITOP AND char:1:2:and:result char:1 char:2
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET char:1:2:and:result
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;`&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; BITOP XOR char:1:2:xor:result char:1 char:2
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; GET char:1:2:xor:result
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;\x1b&#34;</span>
+</span></span></code></pre></div><h2 id="bitpos获取字符串类型值的二进制中第一个是-0-或-1-的位置">BITPOS：获取字符串类型值的二进制中第一个是 0 或 1 的位置<a class="anchor ms-1" href="#bitpos获取字符串类型值的二进制中第一个是-0-或-1-的位置"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>BITPOS key bit [start] [end]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; BITPOS char:1 <span class="m">0</span> <span class="m">0</span> <span class="m">7</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 字符 a 的二进制形式的第 0 位为 0</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; BITPOS char:1 <span class="m">1</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 字符 a 的二进制形式的第 1 位为 1</span>
+</span></span></code></pre></div><h2 id="incr数值递增">INCR：数值递增<a class="anchor ms-1" href="#incr数值递增"><i class="fas fa-link"></i></a></h2>
+<p><code>INCR</code> 返回递增后的数值，若指定的 key 不存在，则先对其初始化为 0，再进行数值递增。</p>
+<p>格式：<code>INCR key</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; SET job:crash:count <span class="m">100</span>
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; INCR job:crash:count
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">101</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; INCR job🏃count
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时键 job🏃count 并不存在</span>
+</span></span></code></pre></div><h2 id="incrby以指定数值对键值进行递增">INCRBY：以指定数值对键值进行递增<a class="anchor ms-1" href="#incrby以指定数值对键值进行递增"><i class="fas fa-link"></i></a></h2>
+<p><code>INCRBY</code> 返回递增后的数值，若指定的 key 不存在，则先对其初始化为 0，再进行数值递增。支持负值操作。</p>
+<p>格式：<code>INCRBY key increment</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; INCRBY job:crash:count <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">103</span>
+</span></span></code></pre></div><h2 id="decr数值递减">DECR：数值递减<a class="anchor ms-1" href="#decr数值递减"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>DECR key</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; DECR job:crash:count
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">102</span>
+</span></span></code></pre></div><h2 id="decrby以指定数值对键值进行递减">DECRBY：以指定数值对键值进行递减<a class="anchor ms-1" href="#decrby以指定数值对键值进行递减"><i class="fas fa-link"></i></a></h2>
+<p><code>DECRBY</code> 支持负值操作。</p>
+<p>格式：<code>DECRBY key decrement</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; DECRBY job:crash:count <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">100</span>
+</span></span></code></pre></div><h2 id="incrbyfloat以指定浮点数值对键值进行递增">INCRBYFLOAT：以指定浮点数值对键值进行递增<a class="anchor ms-1" href="#incrbyfloat以指定浮点数值对键值进行递增"><i class="fas fa-link"></i></a></h2>
+<p><code>INCRBYFLOAT</code> 可通过指定浮点数对键值进行加减，若指定 key 不存在，则先进行创建。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; INCRBYFLOAT job:1:weight 0.4
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;0.4&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; INCRBYFLOAT job:1:weight 0.4
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;0.4&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; INCRBYFLOAT job:1:weight -0.2
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;0.2&#34;</span>
+</span></span></code></pre></div></div><div class="alert alert-warning" role="alert">
+    如果文章存在错误或存在歧义的地方，烦请<a target="_blank" href="https://github.com/a2htray/a2htray.github.io/issues/new"><strong>批评指正</strong></a>。
+</div></div>
+<div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/doc-redis-commands/key-related/">键相关
+</a>
+  </div><div class="post-nav post-next">
+    <a href="/doc-redis-commands/list-related/">列表值相关
+</a>
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
+    </div>
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
+</a>
+
+
+    </div>
+</div></div>
+</div><aside class="sidebar d-flex docs-sidebar col-lg-3 position-sticky">
+  <div class="container">
+    
+    <div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#set设置键值对">SET：设置键值对</a></li>
+    <li><a href="#setnx键不存在时才设置值">SETNX：键不存在时才设置值</a></li>
+    <li><a href="#setex设置具有生存时间的键值对">SETEX：设置具有生存时间的键值对</a></li>
+    <li><a href="#psetex设置具有过期时间的键值对">PSETEX：设置具有过期时间的键值对</a></li>
+    <li><a href="#get取特定键对应的值">GET：取特定键对应的值</a></li>
+    <li><a href="#getset设置值并返回旧值">GETSET：设置值并返回旧值</a></li>
+    <li><a href="#getrange返回字符串值的字符子串">GETRANGE：返回字符串值的字符子串</a></li>
+    <li><a href="#setrange给字符串值的指定位置设置新字符">SETRANGE：给字符串值的指定位置设置新字符</a></li>
+    <li><a href="#mset同时设置多个键值对">MSET：同时设置多个键值对</a></li>
+    <li><a href="#msetnx同时设置多个键值对">MSETNX：同时设置多个键值对</a></li>
+    <li><a href="#mget同时取多个值">MGET：同时取多个值</a></li>
+    <li><a href="#strlen获取字符串的长度">STRLEN：获取字符串的长度</a></li>
+    <li><a href="#append追加字符串返回追加后字符串的长度">APPEND：追加字符串，返回追加后字符串的长度</a></li>
+    <li><a href="#getbit获取字符串值指定位置上的二进制值">GETBIT：获取字符串值指定位置上的二进制值</a></li>
+    <li><a href="#setbit设置字符串值指定位置上的二进制值">SETBIT：设置字符串值指定位置上的二进制值</a></li>
+    <li><a href="#bitcount返回字符串类型值的二进制值中-1-的个数">BITCOUNT：返回字符串类型值的二进制值中 1 的个数</a></li>
+    <li><a href="#bitop对多个字符串类型值进行位运算">BITOP：对多个字符串类型值进行位运算</a></li>
+    <li><a href="#bitpos获取字符串类型值的二进制中第一个是-0-或-1-的位置">BITPOS：获取字符串类型值的二进制中第一个是 0 或 1 的位置</a></li>
+    <li><a href="#incr数值递增">INCR：数值递增</a></li>
+    <li><a href="#incrby以指定数值对键值进行递增">INCRBY：以指定数值对键值进行递增</a></li>
+    <li><a href="#decr数值递减">DECR：数值递减</a></li>
+    <li><a href="#decrby以指定数值对键值进行递减">DECRBY：以指定数值对键值进行递减</a></li>
+    <li><a href="#incrbyfloat以指定浮点数值对键值进行递增">INCRBYFLOAT：以指定浮点数值对键值进行递增</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    
+<section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="/doc-redis-commands/server-related/">服务相关
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/introduction/">介绍
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/zset-related/">有序集合相关
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/set-related/">集合相关
+</a>
+      </li></ul>
+  </div>
+</section>
+
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><div class="copyright mb-2">
+  Copyright © 2016-2022 a2htray. All Rights Reserved.
+</div>
+<div class="powered-by mb-2">
+  Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
+</div>
+
+</footer>
+<script src="/assets/main/bundle.min.954a425fbcd82d8daa4a6e88fd4f5d12619f640fc7495a4ad66102c277e5139d.js" integrity="sha256-lUpCX7zYLY2qSm6I/U9dEmGfZA/HSVpK1mECwnflE50=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('\/service-worker.min.js').then(function(reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  });
+}
+</script><script src="/assets/viewer/bundle.min.3ce688736c8224a9cd6b3104011fc2a816428f07c0fa226359736f33f0c593de.js" integrity="sha256-POaIc2yCJKnNazEEAR/CqBZCjwfA&#43;iJjWXNvM/DFk94=" crossorigin="anonymous" defer></script>
+</body>
+</html>
