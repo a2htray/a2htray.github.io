@@ -1,0 +1,769 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="teal"
+  >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Protocol Buffer 语法 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/images/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="Protocol Buffer（Protobuf） 是一种高效的数据结构序列化的机制，同时也是一种结构化数据的存储格式。 序列化与反序列化 序列化：将数据结构或对" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="Protocol Buffer 语法">
+<meta itemprop="description" content="Protocol Buffer（Protobuf） 是一种高效的数据结构序列化的机制，同时也是一种结构化数据的存储格式。 序列化与反序列化 序列化：将数据结构或对"><meta itemprop="datePublished" content="2022-04-08T16:33:52+08:00" />
+<meta itemprop="dateModified" content="2022-04-08T16:33:52+08:00" />
+<meta itemprop="wordCount" content="1549">
+<meta itemprop="keywords" content="protocol buffer," /><meta property="og:title" content="Protocol Buffer 语法" />
+<meta property="og:description" content="Protocol Buffer（Protobuf） 是一种高效的数据结构序列化的机制，同时也是一种结构化数据的存储格式。 序列化与反序列化 序列化：将数据结构或对" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/protocol-buffer-syntax/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-08T16:33:52+08:00" />
+<meta property="article:modified_time" content="2022-04-08T16:33:52+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Protocol Buffer 语法"/>
+<meta name="twitter:description" content="Protocol Buffer（Protobuf） 是一种高效的数据结构序列化的机制，同时也是一种结构化数据的存储格式。 序列化与反序列化 序列化：将数据结构或对"/>
+<meta name="twitter:site" content="@yourtwitterusername"/>
+<meta property="og:image" content="/false"/>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.4cba4804642c4367bc038524f0dac8b28d92f466414252349b9285f1af94269e.css" integrity="sha256-TLpIBGQsQ2e8A4Uk8NrIso2S9GZBQlI0m5KF8a+UJp4=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="/">Mozart&#39;s Sheet
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=Protocol%20Buffer%20%e8%af%ad%e6%b3%95&url=%2fposts%2fprotocol-buffer-syntax%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fposts%2fprotocol-buffer-syntax%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">设置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+<div class="setting">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="modeSwitcher">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="蓝色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="蓝灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="绿色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="红色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="蓝绿色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黄色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 复制链接
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item dropdown">
+          <a class="nav-link" id="navbarDropdownDocument" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-fw fa-chevron-circle-down"></i>文档
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownDocument"><li>
+              <a class="dropdown-item"
+                href="/doc-redis-commands/introduction/">
+                Redis 命令手册
+              </a>
+            </li></ul>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/series/">
+            <i class="fas fa-fw fa-columns"></i>专栏
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>归档
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-fw fa-folder"></i>分类
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="fas fa-fw fa-tags"></i>标签
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/posts/">Posts</a></li><li class="breadcrumb-item active">Protocol Buffer 语法</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    
+    <a class="action" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+  <div class="card-header ">
+    <h1 class="card-title post-title">Protocol Buffer 语法
+</h1>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-08 16:33:52 &#43;0800 CST。">
+    2022-04-08
+  </span><span class="post-reading-time">
+    4 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/protocol-buffer/" class="badge post-taxonomy">protocol buffer</a></span>
+</div>
+<div class="post-content mb-3"><p>Protocol Buffer（Protobuf） 是一种高效的数据结构序列化的机制，同时也是一种结构化数据的存储格式。</p>
+<blockquote>
+<p>序列化与反序列化</p>
+<ul>
+<li>序列化：将数据结构或对象转换成二进制串的过程；</li>
+<li>反序列化：将序列化后的二进制串转换成数据结构或对象的过程；</li>
+</ul>
+</blockquote>
+<!-- more -->
+<h2 id="语法">语法<a class="anchor ms-1" href="#语法"><i class="fas fa-link"></i></a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 语法
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 指定 Protobuf 解析使用的版本，可以是 proto3 或 proto2
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="n">syntax</span> <span class="o">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* message 定义中的每一个字段都有一个唯一标识，该标识用于在二进制格式中识别字段
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 字段的标识一旦使用就不要进行修改
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 当标识为 1 到 15 时，使用一个字节进行编码，字节信息中包含字段的标识以及类型
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 当标识为 16 到 2047 时，使用两个字节进行编码
+</span></span></span><span class="line"><span class="cl"><span class="cm">* Field numbers in the range 16 through 2047 take two bytes. So you should reserve the numbers 1 through 15 for very frequently occurring message elements.
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 在编码的过程中，标识使用应当留有余地，便于将来扩展
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 标识最小的值是 1，最大的值为 2^29-1
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 不能使用的标识为 19000 到 19999
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 不能再使用已经被 reserved 的标识
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">定义 message 的语法：
+</span></span></span><span class="line"><span class="cl"><span class="cm">    message ${MessageName} {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        ${Scalar Value Type} ${FieldName1} = ${Tag Number1};
+</span></span></span><span class="line"><span class="cl"><span class="cm">                .
+</span></span></span><span class="line"><span class="cl"><span class="cm">                .
+</span></span></span><span class="line"><span class="cl"><span class="cm">                .
+</span></span></span><span class="line"><span class="cl"><span class="cm">        ${Scalar Value Type} ${FieldNameN} = ${Tag NumberN};
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">MessageTypes</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    * 标量值类型
+</span></span></span><span class="line"><span class="cl"><span class="cm">    */</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">stringType</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 字符串可以是 UTF-8 编码，也可以是一个 7 比特的 ASCII 字符，默认为“”
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 数值类型，默认为 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int32</span> <span class="n">int32Type</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// 使用变量长度进行编码，如果是负数，请使用 sint32
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int64</span> <span class="n">int64Type</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// 使用变量长度进行编码，如果是负数，请使用 sint64
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint32</span> <span class="n">uInt32Type</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// 使用变量长度进行编码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64</span> <span class="n">uInt64Type</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// 使用变量长度进行编码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">sint32</span> <span class="n">sInt32Type</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="c1">// 使用变量长度进行编码，处理负数更高效
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">sint64</span> <span class="n">sInt64Type</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span> <span class="c1">// 使用变量长度进行编码，处理负数更高效
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">fixed32</span> <span class="n">fixed32Type</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span> <span class="c1">// 变量总是占 4 个字节，当值大于 2^28 时，比使用 uint32 更有效率
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">fixed64</span> <span class="n">fixed64Type</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span> <span class="c1">// 变量总是占 8 个字节，当值大于 2^56 时，比使用 uint64 更有效率
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">sfixed32</span> <span class="n">sfixed32Type</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// 变量总是占 4 个字节
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">sfixed64</span> <span class="n">sfixed64Type</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span> <span class="c1">// 变量总是占 8 个字节
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">bool</span> <span class="n">boolType</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span> <span class="c1">// 布尔类型，默认为 false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">bytes</span> <span class="n">bytesType</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span> <span class="c1">// 可包含任意长度的字节数组，默认为长度为 0 的字节数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">double</span> <span class="n">doubleType</span> <span class="o">=</span> <span class="mi">14</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">float</span> <span class="n">floatType</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kd">enum</span> <span class="n">Week</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="n">UNDEFINED</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 第 1 个值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">SUNDAY</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="n">MONDAY</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="n">TUESDAY</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="n">WEDNESDAY</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="n">THURSDAY</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="n">FRIDAY</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="n">SATURDAY</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">Week</span> <span class="n">wkDayType</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    * 定义标量值类型的集合
+</span></span></span><span class="line"><span class="cl"><span class="cm">    * Syntax: repeated ${ScalarType} ${name} = TagValue
+</span></span></span><span class="line"><span class="cl"><span class="cm">    */</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="k">repeated</span> <span class="kt">string</span> <span class="n">listOfString</span> <span class="o">=</span> <span class="mi">17</span><span class="p">;</span> <span class="c1">// List[String]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 在其它 message 中使用已定义的 message
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">Person</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">fname</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">sname</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">City</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 嵌套的 message 定义
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">NestedMessages</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kd">message</span> <span class="nc">FirstLevelNestedMessage</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="kt">string</span> <span class="n">firstString</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="kd">message</span> <span class="nc">SecondLevelNestedMessage</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>            <span class="kt">string</span> <span class="n">secondString</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">FirstLevelNestedMessage</span> <span class="n">msg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">FirstLevelNestedMessage.SecondLevelNestedMessage</span> <span class="n">msg2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* .proto 文件的引入
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">// one.proto
+</span></span></span><span class="line"><span class="cl"><span class="c1">// message One {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     string oneMsg = 1;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">// two.proto
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  import &#34;myproject/one.proto&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  message Two {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//       string twoMsg = 2;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 高级知识点
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* message 发生改变时，永远不要修改或使用已经删除字段的标识
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 使用 reserved 保留已删除的标识或字段名
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">ReservedMessage</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">reserved</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="k">to</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// 这里的标识不可再使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">reserved</span> <span class="s">&#34;firstMsg&#34;</span><span class="p">,</span> <span class="s">&#34;secondMsg&#34;</span><span class="p">,</span> <span class="s">&#34;thirdMsg&#34;</span><span class="p">;</span> <span class="c1">// 这里的字段名不可再使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 引用其它文件中定义的 message
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">import</span> <span class="s">&#34;google/protobuf/any.proto&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">AnySampleMessage</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="k">repeated</span> <span class="n">google.protobuf.Any.details</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">*  OneOf
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 相同于 union，只能是其中一个
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 使用 oneof 的 message 不能被 repeated
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">OneOfMessage</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="k">oneof</span> <span class="n">msg</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="kt">string</span> <span class="n">fname</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="kt">string</span> <span class="n">sname</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">};</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* Maps
+</span></span></span><span class="line"><span class="cl"><span class="cm">* map 字段不能被 repeated
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">MessageWithMaps</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">mapOfMessages</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* Packages
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 声明一个包名，防止同名的 message
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 语法:
+</span></span></span><span class="line"><span class="cl"><span class="cm">    package ${packageName};
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">    访问方式
+</span></span></span><span class="line"><span class="cl"><span class="cm">    ${packageName}.${messageName} = ${tagNumber};
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">* 在 RPC 系统中使用，其中可以定义方法
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">SearchRequest</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">queryString</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">SearchResponse</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">queryResponse</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">service</span> <span class="n">SearchService</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="k">rpc</span> <span class="n">Search</span> <span class="p">(</span><span class="n">SearchRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">SearchResponse</span><span class="p">);</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></div><h3 id="数据类型">数据类型<a class="anchor ms-1" href="#数据类型"><i class="fas fa-link"></i></a></h3>
+<p>Protobuf 内置的数据类型以及在 Go 中对应的数据类型：</p>
+<table>
+<thead>
+<tr>
+<th>Protobuf</th>
+<th>Go</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>double</td>
+<td>float64</td>
+</tr>
+<tr>
+<td>float</td>
+<td>float32</td>
+</tr>
+<tr>
+<td>int32</td>
+<td>int32</td>
+</tr>
+<tr>
+<td>int64</td>
+<td>int64</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>uint32</td>
+</tr>
+<tr>
+<td>uint64</td>
+<td>uint64</td>
+</tr>
+<tr>
+<td>sint32</td>
+<td>int32</td>
+</tr>
+<tr>
+<td>sint64</td>
+<td>int64</td>
+</tr>
+<tr>
+<td>fixed32</td>
+<td>uint32</td>
+</tr>
+<tr>
+<td>fixed64</td>
+<td>uint64</td>
+</tr>
+<tr>
+<td>sfixed64</td>
+<td>int64</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>string</td>
+<td>string</td>
+</tr>
+<tr>
+<td>bytes</td>
+<td>[]byte</td>
+</tr>
+</tbody>
+</table>
+<h2 id="书写规范">书写规范<a class="anchor ms-1" href="#书写规范"><i class="fas fa-link"></i></a></h2>
+<p>代码编写要遵循某种特定的规则，如 Python 的 PEP8，<code>.proto</code> 文件的内容也应该按照统一的格式，这样才能规范团队编码风格，易于他人理解。</p>
+<ul>
+<li>message 采用驼峰命名法且首字母大写；</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="kd">message</span> <span class="nc">UserConfig</span> <span class="p">{}</span> <span class="c1">// 符合
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">user_config</span> <span class="p">{}</span> <span class="c1">// 不符合
+</span></span></span></code></pre></div><ul>
+<li>字段名采用下划线分隔命名法且均小写；</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="kd">message</span> <span class="nc">Product</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">fasta_origin</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span> <span class="c1">// 符合
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">Product</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">FastaOrigin</span> <span class="o">=</span> <span class="mi">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span> <span class="c1">// 不符合
+</span></span></span></code></pre></div><ul>
+<li>枚举型命名格式与 message 相同，枚举值全部大写，并且用下划线分隔命名法；</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="kd">enum</span> <span class="n">Week</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">MY_MONDAY</span> <span class="o">=</span> <span class="mi">0</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span> <span class="c1">// 符合
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">enum</span> <span class="n">Week</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">MyMonday</span> <span class="o">=</span> <span class="mi">0</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span> <span class="c1">// 不符合
+</span></span></span></code></pre></div><ul>
+<li>service 和方法名都采用驼峰命名法，并且首字母大写；</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="kd">service</span> <span class="n">Greeter</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="k">rpc</span> <span class="n">SayHello</span><span class="p">(</span><span class="n">HelloRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">HelloReply</span><span class="p">);</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span> <span class="c1">// 符合
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">service</span> <span class="n">Greeter</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="k">rpc</span> <span class="n">say_hello</span><span class="p">(</span><span class="n">HelloRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">HelloReply</span><span class="p">);</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span> <span class="c1">// 不符合
+</span></span></span></code></pre></div><h2 id="与-json-的区别">与 JSON 的区别<a class="anchor ms-1" href="#与-json-的区别"><i class="fas fa-link"></i></a></h2>
+<table>
+<thead>
+<tr>
+<th>Protobuf</th>
+<th>JSON</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>由 Google 开发、用于序列化和反序列化结构化数据的高效编码方式</td>
+<td>轻量型的数据交换格式</td>
+</tr>
+<tr>
+<td>可自定义规则、方法的消息格式</td>
+<td>仅仅只是一种消息格式</td>
+</tr>
+<tr>
+<td>二进制格式</td>
+<td>文本格式</td>
+</tr>
+<tr>
+<td>支持的语言有限</td>
+<td>绝大部分语言都支持</td>
+</tr>
+<tr>
+<td>微服务间数据传输的格式</td>
+<td>WEB 应用与服务器间的传输格式</td>
+</tr>
+<tr>
+<td>相同数据序列化后的数据量较小</td>
+<td>相同数据序列化后的数据量较大</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考">参考<a class="anchor ms-1" href="#参考"><i class="fas fa-link"></i></a></h2>
+<ol>
+<li><a href="https://learnxinyminutes.com/docs/protocol-buffer-3/" target="_blank" rel="noopener noreferrer">https://learnxinyminutes.com/docs/protocol-buffer-3/</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/95869546" target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/95869546</a></li>
+</ol>
+</div><div class="alert alert-warning" role="alert">
+    如果文章存在错误或存在歧义的地方，烦请<a target="_blank" href="https://github.com/a2htray/a2htray.github.io/issues/new"><strong>批评指正</strong></a>。
+</div></div>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/posts/python-matplotlib-bar-tips/">Matplotlib Bar 图常规编码
+</a>
+  </div><div class="post-nav post-next">
+    <a href="/posts/protocol-buffer-reduce-data-size/">Protocol Buffer 减少传输数据的大小
+</a>
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
+    </div>
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
+</a>
+
+
+    </div>
+</div><section class="related-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">相关文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="/posts/python-matplotlib-bar-tips/">Matplotlib Bar 图常规编码
+</a>
+          <span class="float-end post-date">2022-04-05
+</span>
+        </li><li>
+          <a href="/posts/data-analysis-kmeans/">K-Means 基本原理及其实现
+</a>
+          <span class="float-end post-date">2022-04-02
+</span>
+        </li><li>
+          <a href="/posts/go-revel-run-require-packages/">Go 1.16 运行 Revel 项目
+</a>
+          <span class="float-end post-date">2022-03-31
+</span>
+        </li><li>
+          <a href="/posts/redis-master-slave-replication-deployment/">Redis 主从复制配置过程
+</a>
+          <span class="float-end post-date">2022-03-30
+</span>
+        </li><li>
+          <a href="/posts/web-same-origin-policy/">同源策略 Same-Origin Policy
+</a>
+          <span class="float-end post-date">2022-03-29
+</span>
+        </li></ul>
+    </div>
+  </section></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container d-flex flex-column">
+    
+    <div class="profile profile-compact card row component">
+  <div class="col-lg-5 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="a2htray" src="/images/profile.jpg" loading="lazy" data-viewer-invisible
+   width="460" height="460"
+   />
+</div>
+  <div class="col-lg-7 profile-meta"><div class="profile-name">a2htray</div><div class="profile-bio">Gopher and Student</div><nav class="social-links nav justify-content-center"><a class="nav-link social-link" href="mailto:a2htray@outlook.com" title="Email">
+      <i class="fas fa-fw fa-2x fa-envelope"></i>
+    </a><a class="nav-link social-link" target="_blank" href="https://github.com/a2htray" title="GitHub" rel="noopener noreferrer">
+        <i class="fa-fw fa-2x fab fa-github"></i>
+      </a><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+</div>
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#语法">语法</a>
+      <ul>
+        <li><a href="#数据类型">数据类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#书写规范">书写规范</a></li>
+    <li><a href="#与-json-的区别">与 JSON 的区别</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+  </div>
+</div><section class="featured-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">精选文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="/posts/redis-master-slave-replication-deployment/">Redis 主从复制配置过程
+</a>
+        </li><li>
+          <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列
+</a>
+        </li><li>
+          <a href="/doc-redis-commands/server-related/">服务相关
+</a>
+        </li><li>
+          <a href="/doc-redis-commands/zset-related/">有序集合相关
+</a>
+        </li><li>
+          <a href="/doc-redis-commands/set-related/">集合相关
+</a>
+        </li></ul>
+    </div>
+  </section><section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="/posts/protocol-buffer-reduce-data-size/">Protocol Buffer 减少传输数据的大小
+</a>
+      </li><li>
+        <a href="/posts/protocol-buffer-syntax/">Protocol Buffer 语法
+</a>
+      </li><li>
+        <a href="/posts/python-matplotlib-bar-tips/">Matplotlib Bar 图常规编码
+</a>
+      </li><li>
+        <a href="/posts/data-analysis-kmeans/">K-Means 基本原理及其实现
+</a>
+      </li><li>
+        <a href="/posts/go-revel-run-require-packages/">Go 1.16 运行 Revel 项目
+</a>
+      </li></ul>
+  </div>
+</section><section class="series-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/series">专栏</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge rounded post-taxonomy" title="Redis 命令手册">
+            Redis 命令手册</a></div>
+      </div>
+    </section><section class="categories-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/categories">分类</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge rounded post-taxonomy" title="数据库">
+            数据库</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
+            Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
+            Python</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Web</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            可视化</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            数据挖掘</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge rounded post-taxonomy" title="运维">
+            运维</a></div>
+      </div>
+    </section><section class="tags-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/tags">标签</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
+            Redis</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
+            protocol buffer</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
+            k-means</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            Matplotlib</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
+            Revel</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            Web 安全</a><a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="badge rounded post-taxonomy" title="文件操作">
+            文件操作</a></div>
+      </div>
+    </section>
+    
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><div class="copyright mb-2">
+  Copyright © 2016-2022 a2htray. All Rights Reserved.
+</div>
+<div class="powered-by mb-2">
+  Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
+</div>
+
+</footer>
+<script src="/assets/main/bundle.min.954a425fbcd82d8daa4a6e88fd4f5d12619f640fc7495a4ad66102c277e5139d.js" integrity="sha256-lUpCX7zYLY2qSm6I/U9dEmGfZA/HSVpK1mECwnflE50=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('\/service-worker.min.js').then(function(reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  });
+}
+</script><script src="/assets/viewer/bundle.min.3ce688736c8224a9cd6b3104011fc2a816428f07c0fa226359736f33f0c593de.js" integrity="sha256-POaIc2yCJKnNazEEAR/CqBZCjwfA&#43;iJjWXNvM/DFk94=" crossorigin="anonymous" defer></script>
+</body>
+</html>

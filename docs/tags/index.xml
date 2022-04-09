@@ -6,7 +6,16 @@
     <description>Recent content in 标签 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 05 Apr 2022 10:11:12 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Apr 2022 15:01:17 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>protocol buffer</title>
+      <link>/tags/protocol-buffer/</link>
+      <pubDate>Sat, 09 Apr 2022 15:01:17 +0800</pubDate>
+      
+      <guid>/tags/protocol-buffer/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Matplotlib</title>
       <link>/tags/matplotlib/</link>

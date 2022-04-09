@@ -8,7 +8,7 @@ reward: false
 toc: true
 pinned: false
 categories:
-  - "数据集"
+  - "数据库"
 tags:
   - "Redis"
 series:
