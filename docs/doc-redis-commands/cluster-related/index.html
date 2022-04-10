@@ -3,24 +3,30 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Redis 命令手册 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+    <title>集群相关 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
 <link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
 <link rel="icon" href="/images/icons/favicon.ico">
 <link rel="manifest" href="/manifest.json">
-<meta name="keywords" content="Hugo, Bootstrap, 博客主题" />
-<meta name="description" content="一个快速、响应式和功能丰富的 Hugo 博客主题" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="Redis 命令手册">
-<meta itemprop="description" content="一个快速、响应式和功能丰富的 Hugo 博客主题"><meta property="og:title" content="Redis 命令手册" />
-<meta property="og:description" content="一个快速、响应式和功能丰富的 Hugo 博客主题" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/doc-redis-commands/" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+<meta name="keywords" content="" />
+<meta name="description" content="Redis 服务器中与服务相关的命令，集群的配置过程可参考《Redis 集群配置过程》。" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="集群相关">
+<meta itemprop="description" content="Redis 服务器中与服务相关的命令，集群的配置过程可参考《Redis 集群配置过程》。"><meta itemprop="datePublished" content="2022-04-10T11:34:31+08:00" />
+<meta itemprop="dateModified" content="2022-04-10T11:34:31+08:00" />
+<meta itemprop="wordCount" content="219">
+<meta itemprop="keywords" content="Redis," /><meta property="og:title" content="集群相关" />
+<meta property="og:description" content="Redis 服务器中与服务相关的命令，集群的配置过程可参考《Redis 集群配置过程》。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/doc-redis-commands/cluster-related/" /><meta property="article:section" content="doc-redis-commands" />
+<meta property="article:published_time" content="2022-04-10T11:34:31+08:00" />
+<meta property="article:modified_time" content="2022-04-10T11:34:31+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Redis 命令手册"/>
-<meta name="twitter:description" content="一个快速、响应式和功能丰富的 Hugo 博客主题"/>
+<meta name="twitter:title" content="集群相关"/>
+<meta name="twitter:description" content="Redis 服务器中与服务相关的命令，集群的配置过程可参考《Redis 集群配置过程》。"/>
 <meta name="twitter:site" content="@yourtwitterusername"/>
 <meta property="og:image" content="/false"/>
-  <meta name="twitter:image" content="/false"/><link rel="alternate" type="application/rss+xml" href="/doc-redis-commands/index.xml" title="Mozart's Sheet" /><link rel="stylesheet" href="/assets/main/bundle.min.4cba4804642c4367bc038524f0dac8b28d92f466414252349b9285f1af94269e.css" integrity="sha256-TLpIBGQsQ2e8A4Uk8NrIso2S9GZBQlI0m5KF8a+UJp4=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.4cba4804642c4367bc038524f0dac8b28d92f466414252349b9285f1af94269e.css" integrity="sha256-TLpIBGQsQ2e8A4Uk8NrIso2S9GZBQlI0m5KF8a+UJp4=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
   <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -37,11 +43,11 @@
   </div>
   <div class="offcanvas-body">
     <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
-      target="_blank" href="https://twitter.com/intent/tweet?title=Redis%20%e5%91%bd%e4%bb%a4%e6%89%8b%e5%86%8c&url=%2fdoc-redis-commands%2f">
+      target="_blank" href="https://twitter.com/intent/tweet?title=%e9%9b%86%e7%be%a4%e7%9b%b8%e5%85%b3&url=%2fdoc-redis-commands%2fcluster-related%2f">
       <i class="fab fa-fw fa-twitter"></i> Twitter
     </a>
     <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
-      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fdoc-redis-commands%2f">
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fdoc-redis-commands%2fcluster-related%2f">
       <i class="fab fa-fw fa-facebook-f"></i> Facebook
     </a>
   </div>
@@ -199,7 +205,7 @@
           <a href="/doc-redis-commands/zset-related/">有序集合相关</a>
         </li><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/server-related/">服务相关</a>
-        </li><li class="mb-2" tabindex="-1">
+        </li><li class="mb-2 active text-accent" tabindex="-1">
           <a href="/doc-redis-commands/cluster-related/">集群相关</a>
         </li><li class="mb-2" tabindex="-1">
           <div class="catalog-section py-1 d-flex justify-content-between align-items-center px-2 bg-background text-on-background">
@@ -223,184 +229,118 @@
 </aside><div class="col-lg-7 ms-auto">
   <div class="container"><nav class="row card component" aria-label="breadcrumb">
   <div class="card-body">
-    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item active">Redis 命令手册</li></ol>
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/doc-redis-commands/">Redis 命令手册</a></li><li class="breadcrumb-item active">集群相关</li></ol>
   </div>
-</nav><div class="post-sections row component">
-  <ul class="nav nav-pills justify-content-evenly"><li class="nav-item post-section">
-      <a class="nav-link" href="/doc-redis-commands/examples/">示例</a>
-    </li></ul>
-</div><div class="posts mb-4"><article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
 </a>
-    </h2>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    
+    <a class="action d-lg-none" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
   </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 06:05:41 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
 </div>
-<div class="post-summary">
-      <p>栈（Stack）和队列（Queue）是编程中常用的两种数据结构，下面通过 Redis 的列表（List）类型来实现栈和队列。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/examples/stack-and-queue/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/cluster-related/">集群相关
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
+<article class="row card component mb-4 post">
+<div class="card-header ">
+    <h1 class="card-title post-title">集群相关
+</h1>
+</div>
+<div class="card-body"><div class="post-meta">
   <span class="post-date" title="创建于 2022-04-10 11:34:31 &#43;0800 CST。">
     2022-04-10
   </span><span class="post-reading-time">
     1 分钟阅读
   </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
 </div>
-<div class="post-summary">
-      <p>Redis 服务器中与服务相关的命令，集群的配置过程可参考<a href="/posts/redis-cluster-deployment/">《Redis 集群配置过程》</a>。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/cluster-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/server-related/">服务相关
+<div class="post-content mb-3"><p>Redis 服务器中与服务相关的命令，集群的配置过程可参考<a href="/posts/redis-cluster-deployment/">《Redis 集群配置过程》</a>。</p>
+<h2 id="cluster-nodes显示集群主从关系">CLUSTER nodes：显示集群主从关系<a class="anchor ms-1" href="#cluster-nodes显示集群主从关系"><i class="fas fa-link"></i></a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6380&gt; CLUSTER nodes
+</span></span><span class="line"><span class="cl">ac3f5aaae24bcd142b8303abedc5f57187ebc20e 127.0.0.1:6385@16385 slave 82ac1fe6c0af98d252ea96d4e84e7315eff31f8c <span class="m">0</span> <span class="m">1649562125672</span> <span class="m">2</span> connected
+</span></span><span class="line"><span class="cl">9242c455757da4ad2f5aa818d75d12cde38231c2 127.0.0.1:6383@16383 slave 9a91b1be7a42e1bfe4b03deaa200c0e72fcf9b8e <span class="m">0</span> <span class="m">1649562126000</span> <span class="m">3</span> connected
+</span></span><span class="line"><span class="cl">5cc9ed2602986aeffaf9997f3c38c675092a4810 127.0.0.1:6384@16384 slave 92a1fd50a1c8dc003e905ac828b0db64773d6b66 <span class="m">0</span> <span class="m">1649562126674</span> <span class="m">1</span> connected
+</span></span><span class="line"><span class="cl">9a91b1be7a42e1bfe4b03deaa200c0e72fcf9b8e 127.0.0.1:6382@16382 master - <span class="m">0</span> <span class="m">1649562124670</span> <span class="m">3</span> connected 10923-16383
+</span></span><span class="line"><span class="cl">92a1fd50a1c8dc003e905ac828b0db64773d6b66 127.0.0.1:6380@16380 myself,master - <span class="m">0</span> <span class="m">1649562122000</span> <span class="m">1</span> connected 0-5460
+</span></span><span class="line"><span class="cl">82ac1fe6c0af98d252ea96d4e84e7315eff31f8c 127.0.0.1:6381@16381 master - <span class="m">0</span> <span class="m">1649562125000</span> <span class="m">2</span> connected 5461-10922
+</span></span></code></pre></div><h2 id="cluster-slots显示哈希槽分配信息">CLUSTER slots：显示哈希槽分配信息<a class="anchor ms-1" href="#cluster-slots显示哈希槽分配信息"><i class="fas fa-link"></i></a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6380&gt; CLUSTER slots
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">5460</span>
+</span></span><span class="line"><span class="cl">   3<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">6380</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;92a1fd50a1c8dc003e905ac828b0db64773d6b66&#34;</span>
+</span></span><span class="line"><span class="cl">   4<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">6384</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;5cc9ed2602986aeffaf9997f3c38c675092a4810&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> 1<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">5461</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">10922</span>
+</span></span><span class="line"><span class="cl">   3<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">6381</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;82ac1fe6c0af98d252ea96d4e84e7315eff31f8c&#34;</span>
+</span></span><span class="line"><span class="cl">   4<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">6385</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;ac3f5aaae24bcd142b8303abedc5f57187ebc20e&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> 1<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">10923</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">16383</span>
+</span></span><span class="line"><span class="cl">   3<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">6382</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;9a91b1be7a42e1bfe4b03deaa200c0e72fcf9b8e&#34;</span>
+</span></span><span class="line"><span class="cl">   4<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">6383</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;9242c455757da4ad2f5aa818d75d12cde38231c2&#34;</span>
+</span></span></code></pre></div><h2 id="cluster-keyslot显示-key-对应的哈希槽">CLUSTER keyslot：显示 key 对应的哈希槽<a class="anchor ms-1" href="#cluster-keyslot显示-key-对应的哈希槽"><i class="fas fa-link"></i></a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6380&gt; CLUSTER keyslot user:1:name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">12440</span>
+</span></span></code></pre></div></div><div class="alert alert-warning" role="alert">
+    如果文章存在错误或存在歧义的地方，烦请<a target="_blank" href="https://github.com/a2htray/a2htray.github.io/issues/new"><strong>批评指正</strong></a>。
+</div></div>
+<div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/doc-redis-commands/server-related/">服务相关
 </a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-30 09:24:49 &#43;0800 CST。">
-    2022-03-30
-  </span><span class="post-reading-time">
-    1 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与服务相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/server-related/">阅读更多</a></div>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
     </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/zset-related/">有序集合相关
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
 </a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:45:52 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与有序集合相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/zset-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/set-related/">集合相关
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:41:15 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与集合相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/set-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/list-related/">列表值相关
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:32:39 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    3 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与列表值相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/list-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/string-related/">字符串值相关
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 04:59:49 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    4 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与字符串值相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/string-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/key-related/">键相关
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 04:59:48 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    3 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与 key 相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/key-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/introduction/">介绍
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:56:48 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    1 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 是开源的、高性能的数据结构存储系统，在框架设计中常常被当作缓存服务器。不同于传统的关系型数据库（如 MySQL、PostgreSQL），Redis 将数据以键值对的方式存储于内存并且支持数据持久化。尽管 Redis 采用了单线程模型来处理请求，但其通过 I/O 多路复用技术做到了应用级别的异步，运行的性能也十分良好。
-根据操作对象的不同，可将 Redis 中的命令分成以下几类：
- 键相关命令 字符串值相关命令 列表值相关命令 集合值相关命令 有序集合值相关命令 流类型值相关命令 服务相关命令  介绍完命令后，本文还会通过以下几个示例更一步说明命令的用法：
- 列表模拟栈和队  </p>
-    </div>
-  </div>
-</article>
-</div><div class="row table-responsive mb-3"></div>
-</div>
 
+
+    </div>
+</div></div>
 </div><aside class="sidebar d-flex docs-sidebar col-lg-3 position-sticky">
   <div class="container">
     
-    
+    <div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#cluster-nodes显示集群主从关系">CLUSTER nodes：显示集群主从关系</a></li>
+    <li><a href="#cluster-slots显示哈希槽分配信息">CLUSTER slots：显示哈希槽分配信息</a></li>
+    <li><a href="#cluster-keyslot显示-key-对应的哈希槽">CLUSTER keyslot：显示 key 对应的哈希槽</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
     
 <section class="recent-posts row card component">
   <div class="card-header">
