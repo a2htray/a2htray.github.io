@@ -13,7 +13,7 @@ tags:
   - "Redis"
 series:
   - "Redis 命令手册"
-weight: 15
+weight: 16
 type: "docs"
 ---
 
