@@ -8,6 +8,7 @@ categories:
  - Go
 tags:
  - gRPC
+ - rpc
 ---
 
 [gRPC](https://grpc.io/) 是开源的高性能的远程过程调用（Remote Procedure Call，RPC）框架，

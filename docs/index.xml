@@ -6,7 +6,7 @@
     <description>Recent content on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 10 Apr 2022 12:11:38 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Apr 2022 16:37:30 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis 主从复制配置过程</title>
       <link>/posts/redis-master-slave-replication-deployment/</link>
@@ -99,6 +99,15 @@
       
       <guid>/doc-redis-commands/introduction/</guid>
       <description>Redis 是开源的、高性能的数据结构存储系统，在框架设计中常常被当作缓存服务器。不同于传统的关系型数据库（如 MySQL、PostgreSQL），Re</description>
+    </item>
+    
+    <item>
+      <title>Go 内置的 RPC 包</title>
+      <link>/posts/go-built-in-rpc-package/</link>
+      <pubDate>Sun, 10 Apr 2022 16:37:30 +0800</pubDate>
+      
+      <guid>/posts/go-built-in-rpc-package/</guid>
+      <description>在网络或 I/O 连接中，可以使用 net/rpc 包实现对一个对象的导出方法的调用，即远程过程调用（Remote Procedure Call，RPC）。通过向 RPC 服务注册一个对象，使</description>
     </item>
     
     <item>

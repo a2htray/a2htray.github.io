@@ -186,6 +186,28 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Go 内置的 RPC 包" src="/images/operating-system-remote-procedure-call-1.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-10 16:37:30 &#43;0800 CST。">
+    2022-04-10
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/rpc/" class="badge post-taxonomy">rpc</a><a href="/tags/jsonrpc/" class="badge post-taxonomy">jsonrpc</a></span>
+</div>
+<div class="post-summary">
+      <p>在网络或 I/O 连接中，可以使用 net/rpc 包实现对一个对象的导出方法的调用，即远程过程调用（Remote Procedure Call，RPC）。通过向 RPC 服务注册一个对象，使其可被远程调用，进而实现一些复杂的业务逻辑。
+项目结构 示例项目的结构如下：
+client - client.go - json_client.go models - greeting.go server - json_server.go - server.go 注册服务 一个可被远程调用的方法须满足以下条件：
+ 方法所属结构是公开的； 方法是分开的； 方法的参数类型是分开的； 方法带两个参数，第 2 个参数为指针； 方法返回值为 error ...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-built-in-rpc-package/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/go-1.18-release-features/">Go 1.18 特性 - 泛型
 </a>
     </h2>
@@ -312,6 +334,9 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
+</a>
+      </li><li>
         <a href="/posts/go-1.18-release-features/">Go 1.18 特性 - 泛型
 </a>
       </li><li>
@@ -322,9 +347,6 @@
 </a>
       </li><li>
         <a href="/posts/protocol-buffer-syntax/">Protocol Buffer 语法
-</a>
-      </li><li>
-        <a href="/posts/python-matplotlib-bar-tips/">Matplotlib Bar 图常规编码
 </a>
       </li></ul>
   </div>
@@ -364,10 +386,12 @@
         <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
             Redis</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
-            Go 1.18</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
+            Go 1.18</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
+            jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
             Matplotlib</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
-            Revel</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="rpc">
+            rpc</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
             Web 安全</a><a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="badge rounded post-taxonomy" title="文件操作">
             文件操作</a></div>
       </div>

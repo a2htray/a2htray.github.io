@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rpc on Mozart&#39;s Sheet</title>
+    <link>/tags/rpc/</link>
+    <description>Recent content in rpc on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Sun, 10 Apr 2022 16:37:30 +0800</lastBuildDate><atom:link href="/tags/rpc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go 内置的 RPC 包</title>
+      <link>/posts/go-built-in-rpc-package/</link>
+      <pubDate>Sun, 10 Apr 2022 16:37:30 +0800</pubDate>
+      
+      <guid>/posts/go-built-in-rpc-package/</guid>
+      <description>在网络或 I/O 连接中，可以使用 net/rpc 包实现对一个对象的导出方法的调用，即远程过程调用（Remote Procedure Call，RPC）。通过向 RPC 服务注册一个对象，使</description>
+    </item>
+    
+  </channel>
+</rss>
