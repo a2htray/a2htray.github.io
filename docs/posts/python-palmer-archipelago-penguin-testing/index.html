@@ -1,0 +1,805 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="teal"
+  >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>帕尔默企鹅数据集测试 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/images/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。 数据" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="帕尔默企鹅数据集测试">
+<meta itemprop="description" content="今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。 数据"><meta itemprop="datePublished" content="2022-04-11T13:28:26+08:00" />
+<meta itemprop="dateModified" content="2022-04-11T13:28:26+08:00" />
+<meta itemprop="wordCount" content="2106"><meta itemprop="image" content="/images/Palmer-Archipelago-Antarctica-penguin-data.webp">
+<meta itemprop="keywords" content="Matplotlib,sklearn," /><meta property="og:title" content="帕尔默企鹅数据集测试" />
+<meta property="og:description" content="今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。 数据" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/python-palmer-archipelago-penguin-testing/" /><meta property="og:image" content="/images/Palmer-Archipelago-Antarctica-penguin-data.webp" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-11T13:28:26+08:00" />
+<meta property="article:modified_time" content="2022-04-11T13:28:26+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/images/Palmer-Archipelago-Antarctica-penguin-data.webp"/>
+
+<meta name="twitter:title" content="帕尔默企鹅数据集测试"/>
+<meta name="twitter:description" content="今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。 数据"/>
+<meta name="twitter:site" content="@yourtwitterusername"/>
+<link rel="stylesheet" href="/assets/main/bundle.min.4cba4804642c4367bc038524f0dac8b28d92f466414252349b9285f1af94269e.css" integrity="sha256-TLpIBGQsQ2e8A4Uk8NrIso2S9GZBQlI0m5KF8a+UJp4=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/katex/bundle.min.296b3af66a8d4b3d015c51870cbc64549488fd9ee8187d7bbf867713d390890b.css" integrity="sha256-KWs69mqNSz0BXFGHDLxkVJSI/Z7oGH17v4Z3E9OQiQs=" crossorigin="anonymous">
+<link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="/">Mozart&#39;s Sheet
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=%e5%b8%95%e5%b0%94%e9%bb%98%e4%bc%81%e9%b9%85%e6%95%b0%e6%8d%ae%e9%9b%86%e6%b5%8b%e8%af%95&url=%2fposts%2fpython-palmer-archipelago-penguin-testing%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fposts%2fpython-palmer-archipelago-penguin-testing%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">设置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+<div class="setting">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="modeSwitcher">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="蓝色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="蓝灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="绿色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="红色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="蓝绿色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黄色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 复制链接
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item dropdown">
+          <a class="nav-link" id="navbarDropdownDocument" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-fw fa-chevron-circle-down"></i>文档
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownDocument"><li>
+              <a class="dropdown-item"
+                href="/doc-redis-commands/introduction/">
+                Redis 命令手册
+              </a>
+            </li></ul>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/series/">
+            <i class="fas fa-fw fa-columns"></i>专栏
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>归档
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-fw fa-folder"></i>分类
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="fas fa-fw fa-tags"></i>标签
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/posts/">Posts</a></li><li class="breadcrumb-item active">帕尔默企鹅数据集测试</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    
+    <a class="action" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+  <div class="card-header ">
+    <h1 class="card-title post-title">帕尔默企鹅数据集测试
+</h1>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-11 13:28:26 &#43;0800 CST。">
+    2022-04-11
+  </span><span class="post-reading-time">
+    5 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge post-taxonomy">可视化</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge post-taxonomy">数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge post-taxonomy">机器学习</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge post-taxonomy">统计学</a><a href="/tags/matplotlib/" class="badge post-taxonomy">Matplotlib</a><a href="/tags/sklearn/" class="badge post-taxonomy">sklearn</a></span>
+</div>
+<img class="post-featured-img w-100 mb-3" alt="帕尔默企鹅数据集测试" src="/images/Palmer-Archipelago-Antarctica-penguin-data.webp" loading="lazy"/><div class="post-content mb-3"><p>今天导师在群里分享了一个链接 <a href="https://www.infoq.cn/article/lx2t3k4fp2qmtudt0huo" target="_blank" rel="noopener noreferrer">23 个优秀的机器学习训练公共数据集</a>，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。</p>
+<!-- more -->
+<h2 id="数据集介绍">数据集介绍<a class="anchor ms-1" href="#数据集介绍"><i class="fas fa-link"></i></a></h2>
+<p>数据集是在 <a href="https://www.kaggle.com/datasets/parulpandey/palmer-archipelago-antarctica-penguin-data?resource=download" target="_blank" rel="noopener noreferrer">Kaggle</a> 下载的，包含两个文件：</p>
+<ol>
+<li>penguins_lter.csv：原始数据文件；</li>
+<li>penguins_size.csv：特征约简后的数据文件；</li>
+</ol>
+<p>本次分析使用的是简化后的数据集 <code>penguins_size.csv</code>。数据集共 344 个样本，特征信息如下表：</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>species</td>
+<td>离散值</td>
+<td>标签信息，值为 Adelie|Chinstrap|Gentoo 之一</td>
+</tr>
+<tr>
+<td>island</td>
+<td>离散值</td>
+<td>岛屿，值为 Torgersen|Biscoe|Dream 之一</td>
+</tr>
+<tr>
+<td>culmen_length_mm</td>
+<td>连续值</td>
+<td>喙的长度（mm）</td>
+</tr>
+<tr>
+<td>culmen_depth_mm</td>
+<td>连续值</td>
+<td>喙的高度（mm）</td>
+</tr>
+<tr>
+<td>flipper_length_mm</td>
+<td>连续值</td>
+<td>脚蹼长度（mm）</td>
+</tr>
+<tr>
+<td>body_mass_g</td>
+<td>连续值</td>
+<td>体重（克）</td>
+</tr>
+<tr>
+<td>sex</td>
+<td>离散值</td>
+<td>性别，值为 MALE| FEMALE 之一</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>数据集包含缺失数据，用 NA 表示特征值缺失，其中第 337 样本的 sex 特征值为“.”，在此也认为是缺失值。</p>
+</blockquote>
+<p>使用 <code>pandas</code> 查看数据集的统计信息：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nx">pandas</span> <span class="nx">as</span> <span class="nx">pd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">df</span> <span class="p">=</span> <span class="nx">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="err">&#39;</span><span class="p">.</span><span class="o">/</span><span class="nx">dataset</span><span class="o">/</span><span class="nx">penguins_size</span><span class="p">.</span><span class="nx">csv</span><span class="err">&#39;</span><span class="p">,</span> <span class="nx">na_values</span><span class="p">=[</span><span class="err">&#39;</span><span class="nx">NA</span><span class="err">&#39;</span><span class="p">,</span> <span class="sc">&#39;.&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nx">df</span><span class="p">.</span><span class="nf">describe</span><span class="p">())</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">	culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g
+</span></span><span class="line"><span class="cl">count        342.000000       342.000000         342.000000   342.000000
+</span></span><span class="line"><span class="cl">mean          43.921930        17.151170         200.915205  4201.754386
+</span></span><span class="line"><span class="cl">std            5.459584         1.974793          14.061714   801.954536
+</span></span><span class="line"><span class="cl">min           32.100000        13.100000         172.000000  2700.000000
+</span></span><span class="line"><span class="cl">25%           39.225000        15.600000         190.000000  3550.000000
+</span></span><span class="line"><span class="cl">50%           44.450000        17.300000         197.000000  4050.000000
+</span></span><span class="line"><span class="cl">75%           48.500000        18.700000         213.000000  4750.000000
+</span></span><span class="line"><span class="cl">max           59.600000        21.500000         231.000000  6300.000000
+</span></span></code></pre></div><p>显然，统计信息中并不包含离散特征。</p>
+<h3 id="缺失数据">缺失数据<a class="anchor ms-1" href="#缺失数据"><i class="fas fa-link"></i></a></h3>
+<p>对数据集的缺失数据进行一次统计。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 打印出不完整样本在数据集中的下标</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="k">lambda</span> <span class="n">not_exist</span><span class="p">:</span> <span class="n">not_exist</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Int64Index<span class="o">([</span>3, 8, 9, 10, 11, 47, 246, 286, 324, 336, 339<span class="o">]</span>, <span class="nv">dtype</span><span class="o">=</span><span class="s1">&#39;int64&#39;</span><span class="o">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 打印出缺失特征值个数统计</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">species               <span class="m">0</span>
+</span></span><span class="line"><span class="cl">island                <span class="m">0</span>
+</span></span><span class="line"><span class="cl">culmen_length_mm      <span class="m">2</span>
+</span></span><span class="line"><span class="cl">culmen_depth_mm       <span class="m">2</span>
+</span></span><span class="line"><span class="cl">flipper_length_mm     <span class="m">2</span>
+</span></span><span class="line"><span class="cl">body_mass_g           <span class="m">2</span>
+</span></span><span class="line"><span class="cl">sex                  <span class="m">11</span>
+</span></span><span class="line"><span class="cl">dtype: int64
+</span></span></code></pre></div><p>使用 <code>missingno</code> 包来查看缺失数据分布：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">missingno</span> <span class="k">as</span> <span class="nn">msno</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">msno</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span></code></pre></div><p><img class="img-fluid" alt="" src="/posts/python-palmer-archipelago-penguin-testing/missing-matrix.png" loading="lazy"
+  
+   />
+
+</p>
+<p>综上，得到以下结论：</p>
+<ol>
+<li>存在两个样本的 culmen_length_mm、culmen_depth_mm、flipper_length_mm、body_mass_g 和  sex 特征值缺失，编号分别为 3 和  339（以 0 为开始计数）；</li>
+<li>缺失值主要集中在 sex 特征中，共有 11 个样本存在缺失；</li>
+</ol>
+<h2 id="预测企鹅性别">预测企鹅性别<a class="anchor ms-1" href="#预测企鹅性别"><i class="fas fa-link"></i></a></h2>
+<p>预测企鹅性别中，sex 为目标特征，所以先计算连续型特征与目标特征的 <a href="https://en.wikipedia.org/wiki/Point-biserial_correlation_coefficient" target="_blank" rel="noopener noreferrer">Point-biserial 相关系数</a> $r_{pb} (r_{pb} \in [0, 1])$。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 剔除数据集中不完整样本</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_com</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">246</span><span class="p">,</span> <span class="mi">286</span><span class="p">,</span> <span class="mi">324</span><span class="p">,</span> <span class="mi">336</span><span class="p">,</span> <span class="mi">339</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算 Point-biserial 相关系数</span>
+</span></span><span class="line"><span class="cl"><span class="n">series_sex</span> <span class="o">=</span> <span class="n">df_com</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">series_sex</span><span class="p">[</span><span class="n">series_sex</span> <span class="o">==</span> <span class="s1">&#39;MALE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">series_sex</span><span class="p">[</span><span class="n">series_sex</span> <span class="o">==</span> <span class="s1">&#39;FEMALE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Point-biserial&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df_com</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cor</span><span class="p">,</span> <span class="n">pvalue</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">pointbiserialr</span><span class="p">(</span><span class="n">series_sex</span><span class="p">,</span> <span class="n">df_com</span><span class="p">[</span><span class="n">column</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="s2">&#34;&lt;=&gt;&#34;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;correlation: &#34;</span><span class="p">,</span> <span class="n">cor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;pvalue: &#34;</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">()</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Point-biserial
+</span></span><span class="line"><span class="cl">culmen_length_mm &lt;<span class="o">=</span>&gt; sex
+</span></span><span class="line"><span class="cl">correlation:  -0.34407778223748564
+</span></span><span class="line"><span class="cl">pvalue:  1.0942555387200282e-10
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">culmen_depth_mm &lt;<span class="o">=</span>&gt; sex
+</span></span><span class="line"><span class="cl">correlation:  -0.37267328821677664
+</span></span><span class="line"><span class="cl">pvalue:  2.0664103457552388e-12
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">flipper_length_mm &lt;<span class="o">=</span>&gt; sex
+</span></span><span class="line"><span class="cl">correlation:  -0.2551688758106061
+</span></span><span class="line"><span class="cl">pvalue:  2.3910970925543724e-06
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">body_mass_g &lt;<span class="o">=</span>&gt; sex
+</span></span><span class="line"><span class="cl">correlation:  -0.4249869909039952
+</span></span><span class="line"><span class="cl">pvalue:  4.897246751596804e-16
+</span></span></code></pre></div><p>$r_{pb}$ 值为负，表示当目标特征 sex 为 0，特征（culmen_length_mm、culmen_depth_mm、flipper_length_mm、body_mass_g）趋向高于 sex 为 1 时对应的值。同时，4 个 p 值均小于 0.05，所以在统计意义上是显著的。</p>
+<p>然后计算离散型特征与目标特征的相关性，使用卡方检测进行判断，计算过程可看<a href="/posts/python-chi-square-test/">《卡方检验 - 检验特征对是否相关》</a>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">chi_significance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;计算离散特征对卡方检验的显著性&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">columns</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">count_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">counts</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">x</span><span class="o">==</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">columns</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">count_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">columns</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">rows_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">count_matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cols_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">count_matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">total</span> <span class="o">=</span> <span class="n">count_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">estimated_count_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">estimated_count_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">rows_total</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">cols_total</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">total</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">chi</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">count_matrix</span> <span class="o">-</span> <span class="n">estimated_count_matrix</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">estimated_count_matrix</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">degree</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">chi</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="s1">&#39;island&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="s2">&#34;&lt;=&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;sex&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;pvalue: &#34;</span><span class="p">,</span> <span class="n">chi_significance</span><span class="p">(</span><span class="n">df_com</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">df_com</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">species &lt;<span class="o">=</span>&gt; sex
+</span></span><span class="line"><span class="cl">pvalue:  0.9759893689765846
+</span></span><span class="line"><span class="cl">island &lt;<span class="o">=</span>&gt; sex
+</span></span><span class="line"><span class="cl">pvalue:  0.971611229281065
+</span></span></code></pre></div><p>从两对特征的 p 值可知，特征 species、island 与目标特征 sex 的相关性并不显著，所以排除相关。</p>
+<h3 id="构建预测模型">构建预测模型<a class="anchor ms-1" href="#构建预测模型"><i class="fas fa-link"></i></a></h3>
+<p>从前文的相关性计算可知，目标特征 sex 与特征 species、island 不相关，但是与特征 culmen_length_mm、culmen_depth_mm、flipper_length_mm、body_mass_g 的相关性显著，所以在构建预测模型中不考虑特征 species 和 island。</p>
+<p>下面使用支持向量机（Support Vector Machine，SVM）对未知目标特征进行预测，采用 10-Fold 进行交叉验证：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">clf</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="n">SVC</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gamma</span><span class="o">=</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">C</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tol</span><span class="o">=</span><span class="mf">0.00001</span>
+</span></span><span class="line"><span class="cl"><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;accuracy: </span><span class="si">%.3f</span><span class="s1"> (</span><span class="si">%.3f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">accuracy: 0.904 <span class="o">(</span>0.047<span class="o">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test_X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">246</span><span class="p">,</span> <span class="mi">286</span><span class="p">,</span> <span class="mi">324</span><span class="p">,</span> <span class="mi">336</span><span class="p">],:][[</span><span class="s1">&#39;culmen_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;culmen_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;body_mass_g&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_X</span><span class="p">)))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span><span class="s1">&#39;MALE&#39;</span> <span class="s1">&#39;MALE&#39;</span> <span class="s1">&#39;MALE&#39;</span> <span class="s1">&#39;MALE&#39;</span> <span class="s1">&#39;MALE&#39;</span> <span class="s1">&#39;MALE&#39;</span> <span class="s1">&#39;MALE&#39;</span> <span class="s1">&#39;MALE&#39;</span> <span class="s1">&#39;MALE&#39;</span><span class="o">]</span>
+</span></span></code></pre></div><p>上述完成了以下几件事：</p>
+<ol>
+<li>将特征  culmen_length_mm、culmen_depth_mm、flipper_length_mm、body_mass_g 作为输入，特征 sex 作为预测值；</li>
+<li>对输入做标准化处理；</li>
+<li>采用 10-Fold 交叉验证，输出准确率为 0.907；</li>
+<li>训练模型；</li>
+<li>预测目标特征；</li>
+</ol>
+<p>预测结果如下表：</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>sex 预测值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>MALE</td>
+</tr>
+<tr>
+<td>9</td>
+<td>MALE</td>
+</tr>
+<tr>
+<td>10</td>
+<td>MALE</td>
+</tr>
+<tr>
+<td>11</td>
+<td>MALE</td>
+</tr>
+<tr>
+<td>47</td>
+<td>MALE</td>
+</tr>
+<tr>
+<td>246</td>
+<td>MALE</td>
+</tr>
+<tr>
+<td>286</td>
+<td>MALE</td>
+</tr>
+<tr>
+<td>324</td>
+<td>MALE</td>
+</tr>
+<tr>
+<td>336</td>
+<td>MALE</td>
+</tr>
+</tbody>
+</table>
+<p>从预测结果来看，怎么都是 MALE，本能地选择不相信模型结果 -|_|-。</p>
+<h2 id="完整代码">完整代码<a class="anchor ms-1" href="#完整代码"><i class="fas fa-link"></i></a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">missingno</span> <span class="k">as</span> <span class="nn">msno</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./dataset/penguins_size.csv&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 打印出不完整样本在数据集中的下标</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="k">lambda</span> <span class="n">not_exist</span><span class="p">:</span> <span class="n">not_exist</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 打印出缺失特征值个数统计</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">msno</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 剔除数据集中不完整样本</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_com</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">246</span><span class="p">,</span> <span class="mi">286</span><span class="p">,</span> <span class="mi">324</span><span class="p">,</span> <span class="mi">336</span><span class="p">,</span> <span class="mi">339</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算 Point-biserial 相关系数</span>
+</span></span><span class="line"><span class="cl"><span class="n">series_sex</span> <span class="o">=</span> <span class="n">df_com</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">series_sex</span><span class="p">[</span><span class="n">series_sex</span> <span class="o">==</span> <span class="s1">&#39;MALE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">series_sex</span><span class="p">[</span><span class="n">series_sex</span> <span class="o">==</span> <span class="s1">&#39;FEMALE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Point-biserial&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df_com</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cor</span><span class="p">,</span> <span class="n">pvalue</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">pointbiserialr</span><span class="p">(</span><span class="n">series_sex</span><span class="p">,</span> <span class="n">df_com</span><span class="p">[</span><span class="n">column</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="s2">&#34;&lt;=&gt;&#34;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;correlation: &#34;</span><span class="p">,</span> <span class="n">cor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;pvalue: &#34;</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">chi_significance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;计算离散特征对卡方检验的显著性&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">columns</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">count_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">counts</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">x</span><span class="o">==</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">columns</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">count_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">columns</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">rows_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">count_matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cols_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">count_matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">total</span> <span class="o">=</span> <span class="n">count_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">estimated_count_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">estimated_count_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">rows_total</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">cols_total</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">total</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">chi</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">count_matrix</span> <span class="o">-</span> <span class="n">estimated_count_matrix</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">estimated_count_matrix</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">degree</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">chi</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="s1">&#39;island&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="s2">&#34;&lt;=&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;sex&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;pvalue: &#34;</span><span class="p">,</span> <span class="n">chi_significance</span><span class="p">(</span><span class="n">df_com</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">df_com</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df_com</span><span class="p">[[</span><span class="s1">&#39;culmen_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;culmen_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;body_mass_g&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_com</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">clf</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="n">SVC</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gamma</span><span class="o">=</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">C</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tol</span><span class="o">=</span><span class="mf">0.00001</span>
+</span></span><span class="line"><span class="cl"><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;accuracy: </span><span class="si">%.3f</span><span class="s1"> (</span><span class="si">%.3f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test_X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">246</span><span class="p">,</span> <span class="mi">286</span><span class="p">,</span> <span class="mi">324</span><span class="p">,</span> <span class="mi">336</span><span class="p">],:][[</span><span class="s1">&#39;culmen_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;culmen_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;body_mass_g&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_X</span><span class="p">)))</span>
+</span></span></code></pre></div><h2 id="总结">总结<a class="anchor ms-1" href="#总结"><i class="fas fa-link"></i></a></h2>
+<ol>
+<li>离散型特征与连续型特征的相关性可以通过 Point-biserial 相关系数进行衡量；</li>
+<li>根据卡方检验判断离散型特征间是否相关；</li>
+<li>预测模型为 SVM，采用 10-Fold 交叉验证的方式，预测出目标特征 sex；</li>
+</ol>
+<h2 id="参考">参考<a class="anchor ms-1" href="#参考"><i class="fas fa-link"></i></a></h2>
+<ol>
+<li><a href="https://allisonhorst.github.io/palmerpenguins/" target="_blank" rel="noopener noreferrer">palmerpenguins</a></li>
+<li><a href="http://www.ce.memphis.edu/7012/L17_CategoricalVariableAssociation.pdf" target="_blank" rel="noopener noreferrer">特征间相关系数.pdf</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html" target="_blank" rel="noopener noreferrer">sklearn.svm.SVC</a></li>
+</ol>
+</div><div class="alert alert-warning" role="alert">
+    如果文章存在错误或存在歧义的地方，烦请<a target="_blank" href="https://github.com/a2htray/a2htray.github.io/issues/new"><strong>批评指正</strong></a>。
+</div></div>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
+</a>
+  </div><div class="post-nav post-next">
+    <a href="/posts/python-chi-square-test/">卡方检验 - 检验特征对是否相关
+</a>
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
+    </div>
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
+</a>
+
+
+    </div>
+</div><section class="related-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">相关文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="/posts/python-matplotlib-bar-tips/">Matplotlib Bar 图常规编码
+</a>
+          <span class="float-end post-date">2022-04-05
+</span>
+        </li><li>
+          <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
+</a>
+          <span class="float-end post-date">2022-04-10
+</span>
+        </li><li>
+          <a href="/posts/go-1.18-release-features/">Go 1.18 特性 - 泛型
+</a>
+          <span class="float-end post-date">2022-04-10
+</span>
+        </li><li>
+          <a href="/posts/protocol-buffer-reduce-data-size/">Protocol Buffer 减少传输数据的大小
+</a>
+          <span class="float-end post-date">2022-04-09
+</span>
+        </li><li>
+          <a href="/posts/protocol-buffer-syntax/">Protocol Buffer 语法
+</a>
+          <span class="float-end post-date">2022-04-08
+</span>
+        </li></ul>
+    </div>
+  </section></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container d-flex flex-column">
+    
+    <div class="profile profile-compact card row component">
+  <div class="col-lg-5 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="a2htray" src="/images/profile.jpg" loading="lazy" data-viewer-invisible
+   width="460" height="460"
+   />
+</div>
+  <div class="col-lg-7 profile-meta"><div class="profile-name">a2htray</div><div class="profile-bio">Gopher and Student</div><nav class="social-links nav justify-content-center"><a class="nav-link social-link" href="mailto:a2htray@outlook.com" title="Email">
+      <i class="fas fa-fw fa-2x fa-envelope"></i>
+    </a><a class="nav-link social-link" target="_blank" href="https://github.com/a2htray" title="GitHub" rel="noopener noreferrer">
+        <i class="fa-fw fa-2x fab fa-github"></i>
+      </a><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+</div>
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#数据集介绍">数据集介绍</a>
+      <ul>
+        <li><a href="#缺失数据">缺失数据</a></li>
+      </ul>
+    </li>
+    <li><a href="#预测企鹅性别">预测企鹅性别</a>
+      <ul>
+        <li><a href="#构建预测模型">构建预测模型</a></li>
+      </ul>
+    </li>
+    <li><a href="#完整代码">完整代码</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+  </div>
+</div><section class="featured-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">精选文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="/posts/redis-master-slave-replication-deployment/">Redis 主从复制配置过程
+</a>
+        </li><li>
+          <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列
+</a>
+        </li><li>
+          <a href="/doc-redis-commands/cluster-related/">集群相关
+</a>
+        </li><li>
+          <a href="/doc-redis-commands/server-related/">服务相关
+</a>
+        </li><li>
+          <a href="/doc-redis-commands/zset-related/">有序集合相关
+</a>
+        </li></ul>
+    </div>
+  </section><section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="/posts/python-chi-square-test/">卡方检验 - 检验特征对是否相关
+</a>
+      </li><li>
+        <a href="/posts/python-palmer-archipelago-penguin-testing/">帕尔默企鹅数据集测试
+</a>
+      </li><li>
+        <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
+</a>
+      </li><li>
+        <a href="/posts/go-1.18-release-features/">Go 1.18 特性 - 泛型
+</a>
+      </li><li>
+        <a href="/posts/protocol-buffer-reduce-data-size/">Protocol Buffer 减少传输数据的大小
+</a>
+      </li></ul>
+  </div>
+</section><section class="series-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/series">专栏</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge rounded post-taxonomy" title="Redis 命令手册">
+            Redis 命令手册</a></div>
+      </div>
+    </section><section class="categories-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/categories">分类</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge rounded post-taxonomy" title="数据库">
+            数据库</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
+            Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
+            Python</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            数据挖掘</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Web</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            可视化</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
+            统计学</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
+            机器学习</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge rounded post-taxonomy" title="运维">
+            运维</a></div>
+      </div>
+    </section><section class="tags-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/tags">标签</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
+            Redis</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
+            protocol buffer</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
+            Chi-Square</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
+            Go 1.18</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
+            jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
+            k-means</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
+            Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="rpc">
+            rpc</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
+            scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
+            sklearn</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            Web 安全</a><a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="badge rounded post-taxonomy" title="文件操作">
+            文件操作</a></div>
+      </div>
+    </section>
+    
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><div class="copyright mb-2">
+  Copyright © 2016-2022 a2htray. All Rights Reserved.
+</div>
+<div class="powered-by mb-2">
+  Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
+</div>
+
+</footer>
+<script src="/assets/main/bundle.min.f3cd9bcde4a08cbc0f3f3127f17108eea43431f7c3f9473f4bffac328a91b8d1.js" integrity="sha256-882bzeSgjLwPPzEn8XEI7qQ0MffD&#43;Uc/S/&#43;sMoqRuNE=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('\/service-worker.min.js').then(function(reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  });
+}
+</script><script src="/assets/viewer/bundle.min.3ce688736c8224a9cd6b3104011fc2a816428f07c0fa226359736f33f0c593de.js" integrity="sha256-POaIc2yCJKnNazEEAR/CqBZCjwfA&#43;iJjWXNvM/DFk94=" crossorigin="anonymous" defer></script><script defer src="/assets/katex/bundle.min.eecca32478d064564eebc1d1b39821fb35e8533a08a7d1b509259424bdc99540.js" integrity="sha256-7syjJHjQZFZO68HRs5gh&#43;zXoUzoIp9G1CSWUJL3JlUA=" crossorigin="anonymous"></script>
+
+</body>
+</html>

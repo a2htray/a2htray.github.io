@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 10 Apr 2022 16:37:30 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Apr 2022 18:57:39 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis 主从复制配置过程</title>
       <link>/posts/redis-master-slave-replication-deployment/</link>
@@ -18,6 +18,24 @@
 &lt;li&gt;单机配置一主二从的主从复制服务&lt;/li&gt;
 &lt;li&gt;服务验证；&lt;/li&gt;
 &lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>卡方检验 - 检验特征对是否相关</title>
+      <link>/posts/python-chi-square-test/</link>
+      <pubDate>Mon, 11 Apr 2022 18:57:39 +0800</pubDate>
+      
+      <guid>/posts/python-chi-square-test/</guid>
+      <description>在本文开头，贴一段百科对卡方检验基本原理的介绍： 卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离</description>
+    </item>
+    
+    <item>
+      <title>帕尔默企鹅数据集测试</title>
+      <link>/posts/python-palmer-archipelago-penguin-testing/</link>
+      <pubDate>Mon, 11 Apr 2022 13:28:26 +0800</pubDate>
+      
+      <guid>/posts/python-palmer-archipelago-penguin-testing/</guid>
+      <description>今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。 数据</description>
     </item>
     
     <item>

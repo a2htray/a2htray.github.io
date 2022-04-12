@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>统计学 on Mozart&#39;s Sheet</title>
+    <link>/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/</link>
+    <description>Recent content in 统计学 on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Mon, 11 Apr 2022 18:57:39 +0800</lastBuildDate><atom:link href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>卡方检验 - 检验特征对是否相关</title>
+      <link>/posts/python-chi-square-test/</link>
+      <pubDate>Mon, 11 Apr 2022 18:57:39 +0800</pubDate>
+      
+      <guid>/posts/python-chi-square-test/</guid>
+      <description>在本文开头，贴一段百科对卡方检验基本原理的介绍： 卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离</description>
+    </item>
+    
+    <item>
+      <title>帕尔默企鹅数据集测试</title>
+      <link>/posts/python-palmer-archipelago-penguin-testing/</link>
+      <pubDate>Mon, 11 Apr 2022 13:28:26 +0800</pubDate>
+      
+      <guid>/posts/python-palmer-archipelago-penguin-testing/</guid>
+      <description>今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。 数据</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -208,6 +208,51 @@
 </article>
 <article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/python-chi-square-test/">卡方检验 - 检验特征对是否相关
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="卡方检验 - 检验特征对是否相关" src="/images/chi-square-test.webp" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-11 18:57:39 &#43;0800 CST。">
+    2022-04-11
+  </span><span class="post-reading-time">
+    3 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge post-taxonomy">数据挖掘</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge post-taxonomy">统计学</a><a href="/tags/chi-square/" class="badge post-taxonomy">Chi-Square</a><a href="/tags/scipy/" class="badge post-taxonomy">scipy</a><a href="/tags/numpy/" class="badge post-taxonomy">NumPy</a><a href="/tags/pandas/" class="badge post-taxonomy">Pandas</a></span>
+</div>
+<div class="post-summary">
+      <p>在本文开头，贴一段百科对卡方检验基本原理的介绍：
+卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，如果卡方值越大，二者偏差程度越大；反之，二者偏差越小；若两个值完全相等时，卡方值就为 0，表明理论值完全符合。
+由此可见，卡方检验刻画的是一种偏离程度。那么在相关性计算中也可以利用卡方检验计算出显著性来判断两个特征是否相关。
+卡方检验 卡方检验的步骤如下：
+ 定义 H0 和 H1 假设； 根据领域知识定义显著性水平 $\alpha$，一般取 0.05，表示有 5% 的容错； 计算卡方值； 计算显著性水平，小于 $\alpha$ 则拒绝 H0 接受 H1；...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-chi-square-test/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/python-palmer-archipelago-penguin-testing/">帕尔默企鹅数据集测试
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="帕尔默企鹅数据集测试" src="/images/Palmer-Archipelago-Antarctica-penguin-data.webp" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-11 13:28:26 &#43;0800 CST。">
+    2022-04-11
+  </span><span class="post-reading-time">
+    5 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge post-taxonomy">可视化</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge post-taxonomy">数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge post-taxonomy">机器学习</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge post-taxonomy">统计学</a><a href="/tags/matplotlib/" class="badge post-taxonomy">Matplotlib</a><a href="/tags/sklearn/" class="badge post-taxonomy">sklearn</a></span>
+</div>
+<div class="post-summary">
+      <p>今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。
+数据集介绍 数据集是在 Kaggle 下载的，包含两个文件：
+ penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的数据文件；  本次分析使用的是简化后的数据集 penguins_size.csv。数据集共 344 个样本，特征信息如下表：
+   特征 数据类型 说明     species 离散值 标签信息，值为 Adelie|Chinstrap|Gentoo...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-palmer-archipelago-penguin-testing/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
 </a>
     </h2>
@@ -234,7 +279,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </a>
     </h2>
   </div>
-  <div class="card-body"><div class="post-meta">
+  <div class="card-body">
+  <img class="img-fluid" alt="Go 1.18 特性 - 泛型" src="/images/golang-1.18-release.png" loading="lazy"/><div class="post-meta">
   <span class="post-date" title="创建于 2022-04-10 12:11:38 &#43;0800 CST。">
     2022-04-10
   </span><span class="post-reading-time">
@@ -344,43 +390,27 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/web-same-origin-policy/">同源策略 Same-Origin Policy
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-29 15:56:02 &#43;0800 CST。">
-    2022-03-29
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge post-taxonomy">Web 安全</a></span>
-</div>
-<div class="post-summary">
-      <p>同源策略（Same-Origin Policy，SOP）是一种保护 Web 资源的安全机制，它限制了不同源之间的资源访问。需要说明的是，SOP 只作用于应用脚本，这意味着在 HTML 标签中可以引入不同源的图片、CSS 文件或动态加载的脚本文件（见<a href="/posts/web-same-origin-policy/#%e9%aa%8c%e8%af%81-1">验证 1</a>）。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/web-same-origin-policy/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-read-and-write-file/">Python 读写文件
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-28 13:28:47 &#43;0800 CST。">
-    2022-03-28
-  </span><span class="post-reading-time">
-    4 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="badge post-taxonomy">文件操作</a></span>
-</div>
-<div class="post-summary">
-      <p>在开发过程中，开发者常常需要对文件执行读写操作，仅以此文记录读写文件的常规用法。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-read-and-write-file/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-</div><div class="row table-responsive mb-3"></div>
+</div><div class="row table-responsive mb-3">
+    <ul class="pagination pagination-default">
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/2/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul></div>
 </div>
 
 </div><aside class="col-lg-4 sidebar d-flex">
@@ -428,6 +458,12 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/python-chi-square-test/">卡方检验 - 检验特征对是否相关
+</a>
+      </li><li>
+        <a href="/posts/python-palmer-archipelago-penguin-testing/">帕尔默企鹅数据集测试
+</a>
+      </li><li>
         <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
 </a>
       </li><li>
@@ -435,12 +471,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </a>
       </li><li>
         <a href="/posts/protocol-buffer-reduce-data-size/">Protocol Buffer 减少传输数据的大小
-</a>
-      </li><li>
-        <a href="/posts/protocol-buffer-syntax/">Protocol Buffer 语法
-</a>
-      </li><li>
-        <a href="/posts/python-matplotlib-bar-tips/">Matplotlib Bar 图常规编码
 </a>
       </li></ul>
   </div>
@@ -464,10 +494,12 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
         <div class="py-2"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge rounded post-taxonomy" title="数据库">
             数据库</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
             Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
-            Python</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Python</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            数据挖掘</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
             Web</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
-            可视化</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
-            数据挖掘</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge rounded post-taxonomy" title="运维">
+            可视化</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
+            统计学</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
+            机器学习</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge rounded post-taxonomy" title="运维">
             运维</a></div>
       </div>
     </section><section class="tags-taxonomies row card component">
@@ -478,14 +510,19 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
       </div>
       <div class="card-body">
         <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
-            Redis</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
-            protocol buffer</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
+            Redis</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
+            protocol buffer</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
+            Chi-Square</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
             Go 1.18</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
-            k-means</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
-            Matplotlib</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
+            k-means</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
             Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="rpc">
-            rpc</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            rpc</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
+            scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
+            sklearn</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
             Web 安全</a><a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="badge rounded post-taxonomy" title="文件操作">
             文件操作</a></div>
       </div>
@@ -502,7 +539,7 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </div>
 
 </footer>
-<script src="/assets/main/bundle.min.954a425fbcd82d8daa4a6e88fd4f5d12619f640fc7495a4ad66102c277e5139d.js" integrity="sha256-lUpCX7zYLY2qSm6I/U9dEmGfZA/HSVpK1mECwnflE50=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script src="/assets/main/bundle.min.f3cd9bcde4a08cbc0f3f3127f17108eea43431f7c3f9473f4bffac328a91b8d1.js" integrity="sha256-882bzeSgjLwPPzEn8XEI7qQ0MffD&#43;Uc/S/&#43;sMoqRuNE=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

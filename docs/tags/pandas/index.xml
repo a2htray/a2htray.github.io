@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pandas on Mozart&#39;s Sheet</title>
+    <link>/tags/pandas/</link>
+    <description>Recent content in Pandas on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Mon, 11 Apr 2022 18:57:39 +0800</lastBuildDate><atom:link href="/tags/pandas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>卡方检验 - 检验特征对是否相关</title>
+      <link>/posts/python-chi-square-test/</link>
+      <pubDate>Mon, 11 Apr 2022 18:57:39 +0800</pubDate>
+      
+      <guid>/posts/python-chi-square-test/</guid>
+      <description>在本文开头，贴一段百科对卡方检验基本原理的介绍： 卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离</description>
+    </item>
+    
+  </channel>
+</rss>

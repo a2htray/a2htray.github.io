@@ -32,6 +32,57 @@
     <loc>/doc-redis-commands/introduction/</loc>
     <lastmod>2022-03-27T05:56:48+08:00</lastmod>
   </url><url>
+    <loc>/tags/chi-square/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/tags/numpy/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/tags/pandas/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/categories/python/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/tags/scipy/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/posts/python-chi-square-test/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/</loc>
+    <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/tags/matplotlib/</loc>
+    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
+  </url><url>
+    <loc>/tags/sklearn/</loc>
+    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
+    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
+  </url><url>
+    <loc>/posts/python-palmer-archipelago-penguin-testing/</loc>
+    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
+  </url><url>
     <loc>/categories/go/</loc>
     <lastmod>2022-04-10T16:37:30+08:00</lastmod>
   </url><url>
@@ -41,19 +92,7 @@
     <loc>/tags/jsonrpc/</loc>
     <lastmod>2022-04-10T16:37:30+08:00</lastmod>
   </url><url>
-    <loc>/</loc>
-    <lastmod>2022-04-10T16:37:30+08:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2022-04-10T16:37:30+08:00</lastmod>
-  </url><url>
     <loc>/tags/rpc/</loc>
-    <lastmod>2022-04-10T16:37:30+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
-    <lastmod>2022-04-10T16:37:30+08:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
     <lastmod>2022-04-10T16:37:30+08:00</lastmod>
   </url><url>
     <loc>/tags/go-1.18/</loc>
@@ -86,25 +125,13 @@
     <loc>/posts/protocol-buffer-syntax/</loc>
     <lastmod>2022-04-08T16:33:52+08:00</lastmod>
   </url><url>
-    <loc>/tags/matplotlib/</loc>
-    <lastmod>2022-04-05T10:11:12+08:00</lastmod>
-  </url><url>
     <loc>/posts/python-matplotlib-bar-tips/</loc>
-    <lastmod>2022-04-05T10:11:12+08:00</lastmod>
-  </url><url>
-    <loc>/categories/python/</loc>
-    <lastmod>2022-04-05T10:11:12+08:00</lastmod>
-  </url><url>
-    <loc>/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
     <lastmod>2022-04-05T10:11:12+08:00</lastmod>
   </url><url>
     <loc>/tags/k-means/</loc>
     <lastmod>2022-04-02T13:27:02+08:00</lastmod>
   </url><url>
     <loc>/posts/data-analysis-kmeans/</loc>
-    <lastmod>2022-04-02T13:27:02+08:00</lastmod>
-  </url><url>
-    <loc>/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/</loc>
     <lastmod>2022-04-02T13:27:02+08:00</lastmod>
   </url><url>
     <loc>/posts/go-revel-run-require-packages/</loc>

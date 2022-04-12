@@ -8,6 +8,8 @@ categories:
  - Go
 tags:
  - Go 1.18
+images:
+ - "images/golang-1.18-release.png"
 ---
 
 Go 1.18 在 2022 年 3 月 15 日发布，根据团队的[博文](https://go.dev/blog/go1.18)介绍，1.18 版本包含 4 个重要特性：
