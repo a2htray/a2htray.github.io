@@ -247,7 +247,7 @@ print(clf.predict(scaler.transform(test_X)))
 
 1. 将特征  culmen_length_mm、culmen_depth_mm、flipper_length_mm、body_mass_g 作为输入，特征 sex 作为预测值；
 2. 对输入做标准化处理；
-3. 采用 10-Fold 交叉验证，输出准确率为 0.907；
+3. 采用 10-Fold 交叉验证，输出平均准确率为 0.904，标准差为 0.047；
 4. 训练模型；
 5. 预测目标特征；
 

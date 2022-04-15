@@ -6,7 +6,16 @@
     <description>Recent content in 分类 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 11 Apr 2022 18:57:39 +0800</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Apr 2022 11:24:13 +0800</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go</title>
+      <link>/categories/go/</link>
+      <pubDate>Fri, 15 Apr 2022 11:24:13 +0800</pubDate>
+      
+      <guid>/categories/go/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Python</title>
       <link>/categories/python/</link>
@@ -49,15 +58,6 @@
       <pubDate>Mon, 11 Apr 2022 13:28:26 +0800</pubDate>
       
       <guid>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Go</title>
-      <link>/categories/go/</link>
-      <pubDate>Sun, 10 Apr 2022 16:37:30 +0800</pubDate>
-      
-      <guid>/categories/go/</guid>
       <description></description>
     </item>
     
