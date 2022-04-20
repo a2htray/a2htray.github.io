@@ -2,59 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/posts/redis-master-slave-replication-deployment/</loc>
-    <lastmod>2022-03-30T10:28:31+08:00</lastmod>
-  </url><url>
-    <loc>/doc-redis-commands/examples/stack-and-queue/</loc>
-    <lastmod>2022-03-27T06:05:41+08:00</lastmod>
-  </url><url>
     <loc>/doc-redis-commands/cluster-related/</loc>
     <lastmod>2022-04-10T11:34:31+08:00</lastmod>
-  </url><url>
-    <loc>/doc-redis-commands/server-related/</loc>
-    <lastmod>2022-03-30T09:24:49+08:00</lastmod>
   </url><url>
     <loc>/doc-redis-commands/zset-related/</loc>
     <lastmod>2022-03-27T05:45:52+08:00</lastmod>
   </url><url>
-    <loc>/doc-redis-commands/set-related/</loc>
-    <lastmod>2022-03-27T05:41:15+08:00</lastmod>
-  </url><url>
     <loc>/doc-redis-commands/list-related/</loc>
     <lastmod>2022-03-27T05:32:39+08:00</lastmod>
   </url><url>
-    <loc>/doc-redis-commands/string-related/</loc>
-    <lastmod>2022-03-27T04:59:49+08:00</lastmod>
-  </url><url>
     <loc>/doc-redis-commands/key-related/</loc>
-    <lastmod>2022-03-27T04:59:48+08:00</lastmod>
+    <lastmod>2022-03-27T05:57:48+08:00</lastmod>
   </url><url>
     <loc>/doc-redis-commands/introduction/</loc>
     <lastmod>2022-03-27T05:56:48+08:00</lastmod>
   </url><url>
-    <loc>/categories/go/</loc>
-    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
-  </url><url>
     <loc>/</loc>
-    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
+    <lastmod>2022-04-19T19:35:33+08:00</lastmod>
+  </url><url>
+    <loc>/tags/mysql/</loc>
+    <lastmod>2022-04-19T19:35:33+08:00</lastmod>
+  </url><url>
+    <loc>/posts/mysql-writing-procedure/</loc>
+    <lastmod>2022-04-19T19:35:33+08:00</lastmod>
   </url><url>
     <loc>/posts/</loc>
-    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
+    <lastmod>2022-04-19T19:35:33+08:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
+    <lastmod>2022-04-19T19:35:33+08:00</lastmod>
+  </url><url>
+    <loc>/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/</loc>
+    <lastmod>2022-04-19T19:35:33+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2022-04-19T19:35:33+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-19T19:35:33+08:00</lastmod>
+  </url><url>
+    <loc>/posts/interview-csig/</loc>
+    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
+  </url><url>
+    <loc>/categories/go/</loc>
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>
   </url><url>
     <loc>/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/</loc>
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>
   </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
-  </url><url>
-    <loc>/posts/interview-csig/</loc>
-    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
-  </url><url>
     <loc>/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/</loc>
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>
+  </url><url>
+    <loc>/posts/database-performance-tuning/</loc>
+    <lastmod>2022-04-14T19:59:24+08:00</lastmod>
+  </url><url>
+    <loc>/tags/roadmap/</loc>
+    <lastmod>2022-04-14T19:59:24+08:00</lastmod>
+  </url><url>
+    <loc>/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2022-04-14T19:59:24+08:00</lastmod>
   </url><url>
     <loc>/tags/chi-square/</loc>
     <lastmod>2022-04-11T18:57:39+08:00</lastmod>
@@ -122,9 +128,6 @@
     <loc>/series/</loc>
     <lastmod>2022-04-10T11:34:31+08:00</lastmod>
   </url><url>
-    <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-04-10T11:34:31+08:00</lastmod>
-  </url><url>
     <loc>/tags/protocol-buffer/</loc>
     <lastmod>2022-04-09T15:01:17+08:00</lastmod>
   </url><url>
@@ -152,8 +155,14 @@
     <loc>/categories/web/</loc>
     <lastmod>2022-03-31T10:40:58+08:00</lastmod>
   </url><url>
+    <loc>/posts/redis-master-slave-replication-deployment/</loc>
+    <lastmod>2022-03-30T10:28:31+08:00</lastmod>
+  </url><url>
     <loc>/categories/%E8%BF%90%E7%BB%B4/</loc>
     <lastmod>2022-03-30T10:28:31+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/server-related/</loc>
+    <lastmod>2022-03-30T09:24:49+08:00</lastmod>
   </url><url>
     <loc>/tags/web-%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2022-03-29T15:56:02+08:00</lastmod>
@@ -166,6 +175,9 @@
   </url><url>
     <loc>/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</loc>
     <lastmod>2022-03-28T13:28:47+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/examples/stack-and-queue/</loc>
+    <lastmod>2022-03-27T06:05:41+08:00</lastmod>
   </url><url>
     <loc>/doc-redis-commands/examples/</loc>
     <lastmod>2022-03-27T06:05:41+08:00</lastmod>

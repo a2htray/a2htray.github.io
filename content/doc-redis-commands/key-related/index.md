@@ -1,9 +1,8 @@
 ---
 title: "键相关"
-date: 2022-03-27T04:59:48+08:00
+date: 2022-03-27T05:57:48+08:00
 draft: false
 comment: false
-featured: true
 reward: false
 toc: true
 pinned: false
@@ -13,8 +12,10 @@ tags:
   - "Redis"
 series:
   - "Redis 命令手册"
-weight: 20
 type: "docs"
+weight: 99
+images:
+  - images/redis-key.jpeg
 ---
 
 Redis 服务器中与 key 相关的命令。

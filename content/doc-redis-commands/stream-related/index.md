@@ -3,7 +3,6 @@ title: "流相关"
 date: 2022-03-27T05:47:22+08:00
 draft: true
 comment: false
-featured: true
 reward: false
 toc: true
 pinned: false
@@ -13,8 +12,10 @@ tags:
   - "Redis"
 series:
   - "Redis 命令手册"
-weight: 16
 type: "docs"
+weight: 94
+images:
+- images/redis-stream.png
 ---
 
 Redis 服务器中与 stream 相关的命令。

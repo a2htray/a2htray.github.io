@@ -6,29 +6,7 @@
     <description>Recent content on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Fri, 15 Apr 2022 11:24:13 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Redis 主从复制配置过程</title>
-      <link>/posts/redis-master-slave-replication-deployment/</link>
-      <pubDate>Wed, 30 Mar 2022 10:28:31 +0800</pubDate>
-      
-      <guid>/posts/redis-master-slave-replication-deployment/</guid>
-      <description>&lt;p&gt;Redis 主从复制可以实现数据库的读写分离，即主节点负责接收写请求、从节点负责接收读请求，是高性能 Redis 服务的基础。所以配置 Redis 主从复制应当作为开发者的技能之一，后文内容包括：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;单机配置一主二从的主从复制服务&lt;/li&gt;
-&lt;li&gt;服务验证；&lt;/li&gt;
-&lt;/ol&gt;</description>
-    </item>
-    
-    <item>
-      <title>列表模拟栈和队列</title>
-      <link>/doc-redis-commands/examples/stack-and-queue/</link>
-      <pubDate>Sun, 27 Mar 2022 06:05:41 +0800</pubDate>
-      
-      <guid>/doc-redis-commands/examples/stack-and-queue/</guid>
-      <description>&lt;p&gt;栈（Stack）和队列（Queue）是编程中常用的两种数据结构，下面通过 Redis 的列表（List）类型来实现栈和队列。&lt;/p&gt;</description>
-    </item>
-    
+    <lastBuildDate>Tue, 19 Apr 2022 19:35:33 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>集群相关</title>
       <link>/doc-redis-commands/cluster-related/</link>
@@ -36,15 +14,6 @@
       
       <guid>/doc-redis-commands/cluster-related/</guid>
       <description>&lt;p&gt;Redis 服务器中与服务相关的命令，集群的配置过程可参考&lt;a href=&#34;/posts/redis-cluster-deployment/&#34;&gt;《Redis 集群配置过程》&lt;/a&gt;。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>服务相关</title>
-      <link>/doc-redis-commands/server-related/</link>
-      <pubDate>Wed, 30 Mar 2022 09:24:49 +0800</pubDate>
-      
-      <guid>/doc-redis-commands/server-related/</guid>
-      <description>&lt;p&gt;Redis 服务器中与服务相关的命令。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -57,15 +26,6 @@
     </item>
     
     <item>
-      <title>集合相关</title>
-      <link>/doc-redis-commands/set-related/</link>
-      <pubDate>Sun, 27 Mar 2022 05:41:15 +0800</pubDate>
-      
-      <guid>/doc-redis-commands/set-related/</guid>
-      <description>&lt;p&gt;Redis 服务器中与集合相关的命令。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>列表值相关</title>
       <link>/doc-redis-commands/list-related/</link>
       <pubDate>Sun, 27 Mar 2022 05:32:39 +0800</pubDate>
@@ -75,18 +35,9 @@
     </item>
     
     <item>
-      <title>字符串值相关</title>
-      <link>/doc-redis-commands/string-related/</link>
-      <pubDate>Sun, 27 Mar 2022 04:59:49 +0800</pubDate>
-      
-      <guid>/doc-redis-commands/string-related/</guid>
-      <description>&lt;p&gt;Redis 服务器中与字符串值相关的命令。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>键相关</title>
       <link>/doc-redis-commands/key-related/</link>
-      <pubDate>Sun, 27 Mar 2022 04:59:48 +0800</pubDate>
+      <pubDate>Sun, 27 Mar 2022 05:57:48 +0800</pubDate>
       
       <guid>/doc-redis-commands/key-related/</guid>
       <description>&lt;p&gt;Redis 服务器中与 key 相关的命令。&lt;/p&gt;</description>
@@ -98,17 +49,40 @@
       <pubDate>Sun, 27 Mar 2022 05:56:48 +0800</pubDate>
       
       <guid>/doc-redis-commands/introduction/</guid>
-      <description>Redis 是开源的、高性能的数据结构存储系统，在框架设计中常常被当作缓存服务器。不同于传统的关系型数据库（如 MySQL、PostgreSQL），Re</description>
+      <description>&lt;p&gt;Redis 是开源的、高性能的数据结构存储系统，在框架设计中常常被当作缓存服务器。不同于传统的关系型数据库（如 MySQL、PostgreSQL），Redis 将数据以键值对的方式存储于内存并且支持数据持久化。尽管 Redis 采用了单线程模型来处理请求，但其通过 I/O 多路复用技术做到了应用级别的异步，运行的性能也十分良好。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>线上面试 CSIG</title>
+      <title>MySQL 存储过程</title>
+      <link>/posts/mysql-writing-procedure/</link>
+      <pubDate>Tue, 19 Apr 2022 19:35:33 +0800</pubDate>
+      
+      <guid>/posts/mysql-writing-procedure/</guid>
+      <description>&lt;p&gt;存储过程是存储在数据库中并且已经提前编译好的 SQL 语句集合，它是应用中数据操作的部分逻辑实现。MySQL 5 版本引入了这一设计，存储过程包含 3 个部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;名称；&lt;/li&gt;
+&lt;li&gt;参数列表；&lt;/li&gt;
+&lt;li&gt;SQL 语句；&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>CSIG 线上面试</title>
       <link>/posts/interview-csig/</link>
       <pubDate>Fri, 15 Apr 2022 11:24:13 +0800</pubDate>
       
       <guid>/posts/interview-csig/</guid>
       <description>&lt;p&gt;有幸搞了个 CSIG 的线上面试，感觉是“没什么感觉”，一般般吧，没过。&lt;/p&gt;
-&lt;p&gt;前面介绍什么就不说了，我这边没突出什么工作亮点，然后就直接共享桌面写代码了。题目是编程实现一个由字符串数组表示的大数的除以 9 的计算，后面又追问了小数点后值如何保存，所以所幸在线下个人实现也写了写。&lt;/p&gt;</description>
+&lt;p&gt;前面介绍什么就不说了，我这边没突出什么工作亮点，然后就直接共享桌面写代码了。题目是编程实现一个由字符串数组表示的大数的除以 9 的计算，后面又追问了小数点后值如何保存，所以索性在线下实现也写了写。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL 性能调优</title>
+      <link>/posts/database-performance-tuning/</link>
+      <pubDate>Thu, 14 Apr 2022 19:59:24 +0800</pubDate>
+      
+      <guid>/posts/database-performance-tuning/</guid>
+      <description>&lt;p&gt;数据库是应用的数据存储中心，请求增多和数据量增大都会对数据库造成严重的影响，导致数据库服务性能偏低。所以归纳了个别优化点，后续有看到新的内容也会追加。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -199,6 +173,28 @@
     </item>
     
     <item>
+      <title>Redis 主从复制配置过程</title>
+      <link>/posts/redis-master-slave-replication-deployment/</link>
+      <pubDate>Wed, 30 Mar 2022 10:28:31 +0800</pubDate>
+      
+      <guid>/posts/redis-master-slave-replication-deployment/</guid>
+      <description>&lt;p&gt;Redis 主从复制可以实现数据库的读写分离，即主节点负责接收写请求、从节点负责接收读请求，是高性能 Redis 服务的基础。所以配置 Redis 主从复制应当作为开发者的技能之一，后文内容包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;单机配置一主二从的主从复制服务&lt;/li&gt;
+&lt;li&gt;服务验证；&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>服务相关</title>
+      <link>/doc-redis-commands/server-related/</link>
+      <pubDate>Wed, 30 Mar 2022 09:24:49 +0800</pubDate>
+      
+      <guid>/doc-redis-commands/server-related/</guid>
+      <description>&lt;p&gt;Redis 服务器中与服务相关的命令。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>同源策略 Same-Origin Policy</title>
       <link>/posts/web-same-origin-policy/</link>
       <pubDate>Tue, 29 Mar 2022 15:56:02 +0800</pubDate>
@@ -214,6 +210,15 @@
       
       <guid>/posts/python-read-and-write-file/</guid>
       <description>&lt;p&gt;在开发过程中，开发者常常需要对文件执行读写操作，仅以此文记录读写文件的常规用法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>列表模拟栈和队列</title>
+      <link>/doc-redis-commands/examples/stack-and-queue/</link>
+      <pubDate>Sun, 27 Mar 2022 06:05:41 +0800</pubDate>
+      
+      <guid>/doc-redis-commands/examples/stack-and-queue/</guid>
+      <description>&lt;p&gt;栈（Stack）和队列（Queue）是编程中常用的两种数据结构，下面通过 Redis 的列表（List）类型来实现栈和队列。&lt;/p&gt;</description>
     </item>
     
     <item>

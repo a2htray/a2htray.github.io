@@ -3,7 +3,6 @@ title: "Redis 主从复制配置过程"
 date: 2022-03-30T10:28:31+08:00
 draft: false
 comment: false
-featured: true
 reward: false
 toc: true
 pinned: false
@@ -12,7 +11,6 @@ categories:
   - "运维"
 tags:
   - "Redis"
-weight: 1
 ---
 
 Redis 主从复制可以实现数据库的读写分离，即主节点负责接收写请求、从节点负责接收读请求，是高性能 Redis 服务的基础。所以配置 Redis 主从复制应当作为开发者的技能之一，后文内容包括：

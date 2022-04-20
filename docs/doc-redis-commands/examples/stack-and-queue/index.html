@@ -26,7 +26,7 @@
 <meta name="twitter:description" content="栈（Stack）和队列（Queue）是编程中常用的两种数据结构，下面通过 Redis 的列表（List）类型来实现栈和队列。"/>
 <meta name="twitter:site" content="@yourtwitterusername"/>
 <meta property="og:image" content="/false"/>
-  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.4cba4804642c4367bc038524f0dac8b28d92f466414252349b9285f1af94269e.css" integrity="sha256-TLpIBGQsQ2e8A4Uk8NrIso2S9GZBQlI0m5KF8a+UJp4=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.24259f28482843761b0bb15995dd54f27857559e12f78a77b9c08b1991c26223.css" integrity="sha256-JCWfKEgoQ3YbC7FZld1U8nhXVZ4S94p3ucCLGZHCYiM=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
   <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -152,17 +152,7 @@
     <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
   </div>
 </form>
-      <ul class="navbar-nav ms-auto"><li class="nav-item dropdown">
-          <a class="nav-link" id="navbarDropdownDocument" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-fw fa-chevron-circle-down"></i>文档
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownDocument"><li>
-              <a class="dropdown-item"
-                href="/doc-redis-commands/introduction/">
-                Redis 命令手册
-              </a>
-            </li></ul>
-        </li><li class="nav-item">
+      <ul class="navbar-nav ms-auto"><li class="nav-item">
           <a class="nav-link" href="/series/">
             <i class="fas fa-fw fa-columns"></i>专栏
           </a>
@@ -196,17 +186,13 @@
         </li><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/key-related/">键相关</a>
         </li><li class="mb-2" tabindex="-1">
-          <a href="/doc-redis-commands/string-related/">字符串值相关</a>
-        </li><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/list-related/">列表值相关</a>
-        </li><li class="mb-2" tabindex="-1">
-          <a href="/doc-redis-commands/set-related/">集合相关</a>
         </li><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/zset-related/">有序集合相关</a>
         </li><li class="mb-2" tabindex="-1">
-          <a href="/doc-redis-commands/server-related/">服务相关</a>
-        </li><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/cluster-related/">集群相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/server-related/">服务相关</a>
         </li><li class="mb-2" tabindex="-1">
           <div class="catalog-section py-1 d-flex justify-content-between align-items-center px-2 bg-accent text-white">
             <a href="/doc-redis-commands/examples/">示例</a>
@@ -352,10 +338,10 @@
         <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列
 </a>
       </li><li>
-        <a href="/doc-redis-commands/introduction/">介绍
+        <a href="/doc-redis-commands/key-related/">键相关
 </a>
       </li><li>
-        <a href="/doc-redis-commands/zset-related/">有序集合相关
+        <a href="/doc-redis-commands/introduction/">介绍
 </a>
       </li></ul>
   </div>

@@ -8,10 +8,10 @@ tags:
  - PostgreSQL
  - 索引
  - 数据更新
- - Go
  - sqlx
 categories:
- - "数据库"
+ - 数据库
+ - Go
 images:
  - "images/postgresql-index.jpg"
 ---

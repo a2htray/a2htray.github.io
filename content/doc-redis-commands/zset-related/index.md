@@ -3,7 +3,6 @@ title: "有序集合相关"
 date: 2022-03-27T05:45:52+08:00
 draft: false
 comment: false
-featured: true
 reward: false
 toc: true
 pinned: false
@@ -13,8 +12,10 @@ tags:
   - "Redis"
 series:
   - "Redis 命令手册"
-weight: 16
 type: "docs"
+weight: 95
+images:
+- images/redis-zset.png
 ---
 
 Redis 服务器中与有序集合相关的命令。

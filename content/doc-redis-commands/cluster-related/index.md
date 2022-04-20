@@ -3,7 +3,6 @@ title: "集群相关"
 date: 2022-04-10T11:34:31+08:00
 draft: false
 comment: false
-featured: true
 reward: false
 toc: true
 pinned: false
@@ -13,8 +12,10 @@ tags:
   - "Redis"
 series:
   - "Redis 命令手册"
-weight: 15
 type: "docs"
+weight: 93
+images:
+- images/redis-cluster.png
 ---
 
 Redis 服务器中与服务相关的命令，集群的配置过程可参考[《Redis 集群配置过程》](/posts/redis-cluster-deployment/)。

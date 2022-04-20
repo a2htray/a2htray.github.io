@@ -1,9 +1,8 @@
 ---
-title: "字符串值相关"
-date: 2022-03-27T04:59:49+08:00
-draft: false
+title: "字符串相关"
+date: 2022-03-27T05:47:22+08:00
+draft: true
 comment: false
-featured: true
 reward: false
 toc: true
 pinned: false
@@ -13,8 +12,10 @@ tags:
   - "Redis"
 series:
   - "Redis 命令手册"
-weight: 19
 type: "docs"
+weight: 98
+images:
+  - images/redis-medium.png
 ---
 
 Redis 服务器中与字符串值相关的命令。

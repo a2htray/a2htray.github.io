@@ -1,14 +1,14 @@
-[[main]]
-  name = "文档"
-  identifier = "document"
-  weight = -100
-  pre = '<i class="fas fa-fw fa-chevron-circle-down"></i>'
-[[main]]
-  name = "Redis 命令手册"
-  identifier = "redis-command-handbook"
-  parent = "document"
-  url = "/doc-redis-commands/introduction/"
-  weight = 1
+#[[main]]
+#  name = "文档"
+#  identifier = "document"
+#  weight = -100
+#  pre = '<i class="fas fa-fw fa-chevron-circle-down"></i>'
+#[[main]]
+#  name = "Redis 命令手册"
+#  identifier = "redis-command-handbook"
+#  parent = "document"
+#  url = "/doc-redis-commands/introduction/"
+#  weight = 1
 #[[main]]
 #  name = "MySQL 语法"
 #  identifier = "mysql-syntax"

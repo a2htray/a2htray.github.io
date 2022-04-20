@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on Mozart&#39;s Sheet</title>
+    <link>/tags/mysql/</link>
+    <description>Recent content in MySQL on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Tue, 19 Apr 2022 19:35:33 +0800</lastBuildDate><atom:link href="/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL 存储过程</title>
+      <link>/posts/mysql-writing-procedure/</link>
+      <pubDate>Tue, 19 Apr 2022 19:35:33 +0800</pubDate>
+      
+      <guid>/posts/mysql-writing-procedure/</guid>
+      <description>&lt;p&gt;存储过程是存储在数据库中并且已经提前编译好的 SQL 语句集合，它是应用中数据操作的部分逻辑实现。MySQL 5 版本引入了这一设计，存储过程包含 3 个部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;名称；&lt;/li&gt;
+&lt;li&gt;参数列表；&lt;/li&gt;
+&lt;li&gt;SQL 语句；&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL 性能调优</title>
+      <link>/posts/database-performance-tuning/</link>
+      <pubDate>Thu, 14 Apr 2022 19:59:24 +0800</pubDate>
+      
+      <guid>/posts/database-performance-tuning/</guid>
+      <description>&lt;p&gt;数据库是应用的数据存储中心，请求增多和数据量增大都会对数据库造成严重的影响，导致数据库服务性能偏低。所以归纳了个别优化点，后续有看到新的内容也会追加。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

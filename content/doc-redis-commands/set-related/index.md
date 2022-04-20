@@ -1,9 +1,8 @@
 ---
 title: "集合相关"
-date: 2022-03-27T05:41:15+08:00
-draft: false
+date: 2022-03-27T05:47:22+08:00
+draft: true
 comment: false
-featured: true
 reward: false
 toc: true
 pinned: false
@@ -13,8 +12,10 @@ tags:
   - "Redis"
 series:
   - "Redis 命令手册"
-weight: 17
 type: "docs"
+weight: 94
+images:
+  - images/redis-set.png
 ---
 
 Redis 服务器中与集合相关的命令。

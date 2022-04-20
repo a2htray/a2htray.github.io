@@ -3,7 +3,6 @@ title: "列表模拟栈和队列"
 date: 2022-03-27T06:05:41+08:00
 draft: false
 comment: false
-featured: true
 reward: false
 toc: true
 pinned: false
@@ -13,7 +12,6 @@ tags:
   - "Redis"
 series:
   - "Redis 命令手册"
-weight: 1
 type: "docs"
 ---
 
