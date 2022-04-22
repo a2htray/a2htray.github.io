@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 19 Apr 2022 19:35:33 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Apr 2022 13:35:02 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL 设置存储引擎的 3 种方法</title>
+      <link>/posts/mysql-set-storage-engine/</link>
+      <pubDate>Thu, 21 Apr 2022 13:35:02 +0800</pubDate>
+      
+      <guid>/posts/mysql-set-storage-engine/</guid>
+      <description>在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。 选择一个合适的存储引擎至关重要 存储引擎 根据是否支持事务，MyS</description>
+    </item>
+    
     <item>
       <title>MySQL 存储过程</title>
       <link>/posts/mysql-writing-procedure/</link>
