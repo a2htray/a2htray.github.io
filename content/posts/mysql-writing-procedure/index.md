@@ -2,7 +2,6 @@
 title: "MySQL 存储过程"
 date: 2022-04-19T19:35:33+08:00
 draft: false
-comment: false
 reward: false
 tags:
  - MySQL

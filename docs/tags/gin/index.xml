@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gin on Mozart&#39;s Sheet</title>
+    <link>/tags/gin/</link>
+    <description>Recent content in Gin on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Sat, 23 Apr 2022 19:05:01 +0800</lastBuildDate><atom:link href="/tags/gin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis 的 list 和 stream：异步记录请求信息</title>
+      <link>/posts/go-redis-request-log-dumper/</link>
+      <pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate>
+      
+      <guid>/posts/go-redis-request-log-dumper/</guid>
+      <description>在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。</description>
+    </item>
+    
+  </channel>
+</rss>

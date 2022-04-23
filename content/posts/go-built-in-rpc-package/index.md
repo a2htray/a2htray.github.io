@@ -2,7 +2,6 @@
 title: "Go 内置的 RPC 包"
 date: 2022-04-10T16:37:30+08:00
 draft: false
-comment: false
 reward: false
 categories:
  - Go

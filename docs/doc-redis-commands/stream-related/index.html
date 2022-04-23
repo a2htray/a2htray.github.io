@@ -1,0 +1,508 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="teal"
+  >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>流相关 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/images/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="Redis 服务器中与 stream 相关的命令。" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="流相关">
+<meta itemprop="description" content="Redis 服务器中与 stream 相关的命令。"><meta itemprop="datePublished" content="2022-03-27T05:47:22+08:00" />
+<meta itemprop="dateModified" content="2022-03-27T05:47:22+08:00" />
+<meta itemprop="wordCount" content="745"><meta itemprop="image" content="/images/redis-stream.png">
+<meta itemprop="keywords" content="Redis," /><meta property="og:title" content="流相关" />
+<meta property="og:description" content="Redis 服务器中与 stream 相关的命令。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/doc-redis-commands/stream-related/" /><meta property="og:image" content="/images/redis-stream.png" /><meta property="article:section" content="doc-redis-commands" />
+<meta property="article:published_time" content="2022-03-27T05:47:22+08:00" />
+<meta property="article:modified_time" content="2022-03-27T05:47:22+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/images/redis-stream.png"/>
+
+<meta name="twitter:title" content="流相关"/>
+<meta name="twitter:description" content="Redis 服务器中与 stream 相关的命令。"/>
+<meta name="twitter:site" content="@yourtwitterusername"/>
+<link rel="stylesheet" href="/assets/main/bundle.min.d947531a40fb25eeb91f67fc51f881f0d290ad5e1c993667dccb03c2aef28edb.css" integrity="sha256-2UdTGkD7Je65H2f8UfiB8NKQrV4cmTZn3MsDwq7yjts=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="/">Mozart&#39;s Sheet
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=%e6%b5%81%e7%9b%b8%e5%85%b3&url=%2fdoc-redis-commands%2fstream-related%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fdoc-redis-commands%2fstream-related%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">设置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+<div class="setting">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="modeSwitcher">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="蓝色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="蓝灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="绿色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="红色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="蓝绿色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黄色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 复制链接
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item">
+          <a class="nav-link" href="/series/">
+            <i class="fas fa-fw fa-columns"></i>专栏
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>归档
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-fw fa-folder"></i>分类
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="fas fa-fw fa-tags"></i>标签
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content"><button class="catalog-toggle d-lg-none position-fixed top-0 left-0 h-100 p-0" type="button" data-bs-toggle="collapse" data-bs-target=".docs-catalog" aria-expanded="false" aria-controls="collapseCatalog">
+    <i class="catalog-toggle-icon fas fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+</button>
+<aside class="docs-catalog col-lg-2 collapse collapse-horizontal catalog-collapse" tabindex="-1" data-bs-hide="focusout">
+  <div class="container px-0 px-lg-1">
+    <div class="row card component">
+      <div class="card-body">
+        <ul class="list-unstyled mb-2"><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/introduction/">介绍</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/key-related/">键相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/list-related/">列表值相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/zset-related/">有序集合相关</a>
+        </li><li class="mb-2 active text-accent" tabindex="-1">
+          <a href="/doc-redis-commands/stream-related/">流相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/cluster-related/">集群相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/server-related/">服务相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <div class="catalog-section py-1 d-flex justify-content-between align-items-center px-2 bg-background text-on-background">
+            <a href="/doc-redis-commands/examples/">示例</a>
+            <a class="btn-toggle collapsed ms-1" role="button" data-bs-toggle="collapse"
+              data-bs-target="#catalog-8a9a2207fbbe1324820b6a1e32b149de" aria-expanded="false" aria-controls="catalog-8a9a2207fbbe1324820b6a1e32b149de">
+              <i class="btn-toggle-icon fas fa-chevron-circle-down ms-auto" data-fa-transform="rotate-270"></i>
+            </a>
+          </div>
+          <div class="mt-2 border-start collapse" id="catalog-8a9a2207fbbe1324820b6a1e32b149de">
+            <ul class="btn-toggle-nav list-unstyled fw-normal ms-2">
+              <ul class="list-unstyled mb-2"><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列</a>
+        </li></ul>
+            </ul>
+          </div>
+        </li></ul>
+      </div>
+    </div>
+  </div>
+</aside><div class="col-lg-7 ms-auto">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/doc-redis-commands/">Redis 命令手册</a></li><li class="breadcrumb-item active">流相关</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    <a class="action" href="#post-comments" role="button" aria-label="Comments" title="Comments">
+  <i class="fas fa-fw fa-comments"></i>
+</a>
+    <a class="action d-lg-none" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+<div class="card-header ">
+    <h1 class="card-title post-title">流相关
+</h1>
+</div>
+<div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-03-27 05:47:22 &#43;0800 CST。">
+    2022-03-27
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+</div>
+<img class="post-featured-img w-100 mb-3" alt="流相关" src="/images/redis-stream.png" loading="lazy"/><div class="post-content mb-3"><p>Redis 服务器中与 stream 相关的命令。</p>
+<h2 id="xadd向-stream-添加消息">XADD：向 stream 添加消息<a class="anchor ms-1" href="#xadd向-stream-添加消息"><i class="fas fa-link"></i></a></h2>
+<p><code>XADD</code> 可以向 stream 添加消息，返回实体 entry 的 ID。</p>
+<p>格式：<code>XADD key *|ID field value [field value ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; XADD chat:1:messages * msg <span class="s2">&#34;hello world&#34;</span> date <span class="m">2020</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;1648184286632-0&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XADD chat:2:messages <span class="m">1</span> msg <span class="s2">&#34;hello world&#34;</span> date <span class="m">2020</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;1-0&#34;</span>
+</span></span></code></pre></div><h2 id="xrange返回-stream-记录的列表">XRANGE：返回 stream 记录的列表<a class="anchor ms-1" href="#xrange返回-stream-记录的列表"><i class="fas fa-link"></i></a></h2>
+<p><code>XRANGE</code> 用于获取指定 ID 范围内的 entry，其中 <code>-</code> 和 <code>+</code> 为特征 ID，分别表示最小 ID 和最大 ID。</p>
+<p>格式：<code>XRANGE key start stop [COUNT count]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; XADD chat:1:messages * msg <span class="s2">&#34;hello GO&#34;</span> date <span class="m">2021</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;1648184498673-0&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XADD chat:1:messages * msg <span class="s2">&#34;hello TypeScript&#34;</span> date <span class="m">2022</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;1648184539697-0&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XRANGE chat:1:messages - +
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184286632-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello world&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2020&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184498673-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello GO&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2021&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184539697-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello TypeScript&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2022&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XRANGE chat:1:messages 1648184286632-0 1648184286632-1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184286632-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello world&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2020&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XRANGE chat:1:messages 1648184286632-0 1648184498673-1
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184286632-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello world&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2020&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184498673-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello GO&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2021&#34;</span>
+</span></span></code></pre></div><h2 id="xrevrange">XREVRANGE<a class="anchor ms-1" href="#xrevrange"><i class="fas fa-link"></i></a></h2>
+<p><code>XREVRANGE</code> 与 <code>XRANGE</code> 用途相近，但该命令会以倒序的方式返回 entry。</p>
+<p>格式：<code>XREVRANGE key end start [COUNT count]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; XREVRANGE chat:1:messages 1648184498673-1 1648184286632-0
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184498673-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello GO&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2021&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184286632-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello world&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2020&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XREVRANGE chat:1:messages 1648184498673-1 1648184286632-0 COUNT <span class="m">1</span>
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184498673-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello GO&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2021&#34;</span>
+</span></span></code></pre></div><h2 id="xtrim裁剪-stream">XTRIM：裁剪 stream<a class="anchor ms-1" href="#xtrim裁剪-stream"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>XTRIM key MAXLEN|MINID [=|~] threshold [LIMIT count]</code></p>
+<p><code>MAXLEN</code>：用于保留最近的 entry</p>
+<p><code>MINID</code>：用于裁剪低于某一 ID 的 entry</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; XTRIM chat:1:messages MAXLEN <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XRANGE chat:1:messages - +
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184498673-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello GO&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2021&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184539697-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello TypeScript&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2022&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 此时最早加入的 entry 已经被裁剪，stream 中保留两条 entry</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XTRIM chat:1:messages MINID <span class="m">1648184498674</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ID 低于 1648184498674 的 entry 会被删除</span>
+</span></span></code></pre></div><h2 id="xdel删除-stream-中-entry">XDEL：删除 stream 中 entry<a class="anchor ms-1" href="#xdel删除-stream-中-entry"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>XDEL key ID [ID ...]</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; XRANGE chat:1:messages - +
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1648184539697-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;msg&#34;</span>
+</span></span><span class="line"><span class="cl">      2<span class="o">)</span> <span class="s2">&#34;hello TypeScript&#34;</span>
+</span></span><span class="line"><span class="cl">      3<span class="o">)</span> <span class="s2">&#34;date&#34;</span>
+</span></span><span class="line"><span class="cl">      4<span class="o">)</span> <span class="s2">&#34;2022&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XDEL chat:1:messages 1648184539697-0
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span></code></pre></div><h2 id="xlen返回-stream-中-entry-的数目">XLEN：返回 stream 中 entry 的数目<a class="anchor ms-1" href="#xlen返回-stream-中-entry-的数目"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>XLEN key</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; XLEN chat:1:messages
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; DEL chat:1:messages
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span></code></pre></div><h2 id="xread从一个或多个-stream-中读取数据">XREAD：从一个或多个 stream 中读取数据<a class="anchor ms-1" href="#xread从一个或多个-stream-中读取数据"><i class="fas fa-link"></i></a></h2>
+<p>格式：<code>XREAD [COUNT count] [BLOCK milliseconds] STREAMS key [key ...] id [id ...]</code></p>
+<p><a href="https://redis.io/commands/xread/" target="_blank" rel="noopener noreferrer">XREAD</a> 可以以阻塞或非阻塞的方式读取 stream 的数据（指定 BLOCK）。在获取 stream 记录时，需要指定记录的 ID。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; XRANGE api-request-log - +
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1650702336219-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span>  1<span class="o">)</span> <span class="s2">&#34;remote_addr&#34;</span>
+</span></span><span class="line"><span class="cl">       2<span class="o">)</span> <span class="s2">&#34;[::1]:54058&#34;</span>
+</span></span><span class="line"><span class="cl">       3<span class="o">)</span> <span class="s2">&#34;url&#34;</span>
+</span></span><span class="line"><span class="cl">       4<span class="o">)</span> <span class="s2">&#34;/api/users&#34;</span>
+</span></span><span class="line"><span class="cl">       5<span class="o">)</span> <span class="s2">&#34;access_time&#34;</span>
+</span></span><span class="line"><span class="cl">       6<span class="o">)</span> <span class="s2">&#34;1650702336&#34;</span>
+</span></span><span class="line"><span class="cl">       7<span class="o">)</span> <span class="s2">&#34;time_executed&#34;</span>
+</span></span><span class="line"><span class="cl">       8<span class="o">)</span> <span class="s2">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">       9<span class="o">)</span> <span class="s2">&#34;body_bytes_sent&#34;</span>
+</span></span><span class="line"><span class="cl">      10<span class="o">)</span> <span class="s2">&#34;96&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1650702505299-0&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span>  1<span class="o">)</span> <span class="s2">&#34;remote_addr&#34;</span>
+</span></span><span class="line"><span class="cl">       2<span class="o">)</span> <span class="s2">&#34;[::1]:54112&#34;</span>
+</span></span><span class="line"><span class="cl">       3<span class="o">)</span> <span class="s2">&#34;url&#34;</span>
+</span></span><span class="line"><span class="cl">       4<span class="o">)</span> <span class="s2">&#34;/api/users&#34;</span>
+</span></span><span class="line"><span class="cl">       5<span class="o">)</span> <span class="s2">&#34;access_time&#34;</span>
+</span></span><span class="line"><span class="cl">       6<span class="o">)</span> <span class="s2">&#34;1650702505&#34;</span>
+</span></span><span class="line"><span class="cl">       7<span class="o">)</span> <span class="s2">&#34;time_executed&#34;</span>
+</span></span><span class="line"><span class="cl">       8<span class="o">)</span> <span class="s2">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">       9<span class="o">)</span> <span class="s2">&#34;body_bytes_sent&#34;</span>
+</span></span><span class="line"><span class="cl">      10<span class="o">)</span> <span class="s2">&#34;96&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; XREAD COUNT <span class="m">1</span> BLOCK <span class="m">1000</span> STREAMS api-request-log 1650702336219-0
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;api-request-log&#34;</span>
+</span></span><span class="line"><span class="cl">   2<span class="o">)</span> 1<span class="o">)</span> 1<span class="o">)</span> <span class="s2">&#34;1650702505299-0&#34;</span>
+</span></span><span class="line"><span class="cl">         2<span class="o">)</span>  1<span class="o">)</span> <span class="s2">&#34;remote_addr&#34;</span>
+</span></span><span class="line"><span class="cl">             2<span class="o">)</span> <span class="s2">&#34;[::1]:54112&#34;</span>
+</span></span><span class="line"><span class="cl">             3<span class="o">)</span> <span class="s2">&#34;url&#34;</span>
+</span></span><span class="line"><span class="cl">             4<span class="o">)</span> <span class="s2">&#34;/api/users&#34;</span>
+</span></span><span class="line"><span class="cl">             5<span class="o">)</span> <span class="s2">&#34;access_time&#34;</span>
+</span></span><span class="line"><span class="cl">             6<span class="o">)</span> <span class="s2">&#34;1650702505&#34;</span>
+</span></span><span class="line"><span class="cl">             7<span class="o">)</span> <span class="s2">&#34;time_executed&#34;</span>
+</span></span><span class="line"><span class="cl">             8<span class="o">)</span> <span class="s2">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">             9<span class="o">)</span> <span class="s2">&#34;body_bytes_sent&#34;</span>
+</span></span><span class="line"><span class="cl">            10<span class="o">)</span> <span class="s2">&#34;96&#34;</span>
+</span></span></code></pre></div></div></div>
+<div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/doc-redis-commands/zset-related/">有序集合相关
+</a>
+  </div><div class="post-nav post-next">
+    <a href="/doc-redis-commands/cluster-related/">集群相关
+</a>
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
+    </div>
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
+</a>
+
+
+    </div>
+</div><div class="card component row post-comments" id="post-comments">
+  <div class="card-header">
+    <h2 class="card-title">评论</h2>
+  </div>
+  <div class="card-body"><script src="https://utteranc.es/client.js"
+  repo="a2htray/a2htray.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div>
+</div></div>
+</div><aside class="sidebar d-flex docs-sidebar col-lg-3 position-sticky">
+  <div class="container">
+    
+    <div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#xadd向-stream-添加消息">XADD：向 stream 添加消息</a></li>
+    <li><a href="#xrange返回-stream-记录的列表">XRANGE：返回 stream 记录的列表</a></li>
+    <li><a href="#xrevrange">XREVRANGE</a></li>
+    <li><a href="#xtrim裁剪-stream">XTRIM：裁剪 stream</a></li>
+    <li><a href="#xdel删除-stream-中-entry">XDEL：删除 stream 中 entry</a></li>
+    <li><a href="#xlen返回-stream-中-entry-的数目">XLEN：返回 stream 中 entry 的数目</a></li>
+    <li><a href="#xread从一个或多个-stream-中读取数据">XREAD：从一个或多个 stream 中读取数据</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    
+<section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="/doc-redis-commands/cluster-related/">集群相关
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/server-related/">服务相关
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/examples/stack-and-queue/">列表模拟栈和队列
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/key-related/">键相关
+</a>
+      </li><li>
+        <a href="/doc-redis-commands/introduction/">介绍
+</a>
+      </li></ul>
+  </div>
+</section>
+
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><div class="copyright mb-2">
+  Copyright © 2016-2022 a2htray. All Rights Reserved.
+</div>
+<div class="powered-by mb-2">
+  Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
+</div>
+
+</footer>
+<script src="/assets/main/bundle.min.a81822567b124a08cfe9b1fd948e6306717d92a9de14b7eb3cc90a0275f92bd3.js" integrity="sha256-qBgiVnsSSgjP6bH9lI5jBnF9kqneFLfrPMkKAnX5K9M=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('\/service-worker.min.js').then(function(reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  });
+}
+</script><script src="/assets/viewer/bundle.min.3ce688736c8224a9cd6b3104011fc2a816428f07c0fa226359736f33f0c593de.js" integrity="sha256-POaIc2yCJKnNazEEAR/CqBZCjwfA&#43;iJjWXNvM/DFk94=" crossorigin="anonymous" defer></script>
+</body>
+</html>

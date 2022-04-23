@@ -2,7 +2,6 @@
 title: "Redis 的数据持久化"
 date: 2022-03-27T09:17:03+08:00
 draft: true
-comment: false
 reward: false
 toc: true
 pinned: false

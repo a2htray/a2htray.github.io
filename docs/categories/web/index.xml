@@ -6,7 +6,16 @@
     <description>Recent content in Web on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 31 Mar 2022 10:40:58 +0800</lastBuildDate><atom:link href="/categories/web/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Apr 2022 19:05:01 +0800</lastBuildDate><atom:link href="/categories/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis 的 list 和 stream：异步记录请求信息</title>
+      <link>/posts/go-redis-request-log-dumper/</link>
+      <pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate>
+      
+      <guid>/posts/go-redis-request-log-dumper/</guid>
+      <description>在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。</description>
+    </item>
+    
     <item>
       <title>Go 1.16 运行 Revel 项目</title>
       <link>/posts/go-revel-run-require-packages/</link>

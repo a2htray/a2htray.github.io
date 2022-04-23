@@ -27,7 +27,7 @@
 <meta name="twitter:title" content="集群相关"/>
 <meta name="twitter:description" content="Redis 服务器中与服务相关的命令，集群的配置过程可参考《Redis 集群配置过程》。"/>
 <meta name="twitter:site" content="@yourtwitterusername"/>
-<link rel="stylesheet" href="/assets/main/bundle.min.24259f28482843761b0bb15995dd54f27857559e12f78a77b9c08b1991c26223.css" integrity="sha256-JCWfKEgoQ3YbC7FZld1U8nhXVZ4S94p3ucCLGZHCYiM=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+<link rel="stylesheet" href="/assets/main/bundle.min.d947531a40fb25eeb91f67fc51f881f0d290ad5e1c993667dccb03c2aef28edb.css" integrity="sha256-2UdTGkD7Je65H2f8UfiB8NKQrV4cmTZn3MsDwq7yjts=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
   <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -190,6 +190,8 @@
           <a href="/doc-redis-commands/list-related/">列表值相关</a>
         </li><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/zset-related/">有序集合相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/stream-related/">流相关</a>
         </li><li class="mb-2 active text-accent" tabindex="-1">
           <a href="/doc-redis-commands/cluster-related/">集群相关</a>
         </li><li class="mb-2" tabindex="-1">
@@ -234,7 +236,9 @@
     <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
   <i class="fas fa-fw fa-copyright"></i>
 </a>
-    
+    <a class="action" href="#post-comments" role="button" aria-label="Comments" title="Comments">
+  <i class="fas fa-fw fa-comments"></i>
+</a>
     <a class="action d-lg-none" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
   <i class="fas fa-fw fa-list-alt"></i>
 </a>
@@ -291,12 +295,10 @@
 </span></span></code></pre></div><h2 id="cluster-keyslot显示-key-对应的哈希槽">CLUSTER keyslot：显示 key 对应的哈希槽<a class="anchor ms-1" href="#cluster-keyslot显示-key-对应的哈希槽"><i class="fas fa-link"></i></a></h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6380&gt; CLUSTER keyslot user:1:name
 </span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">12440</span>
-</span></span></code></pre></div></div><div class="alert alert-warning" role="alert">
-    如果文章存在错误或存在歧义的地方，烦请<a target="_blank" href="https://github.com/a2htray/a2htray.github.io/issues/new"><strong>批评指正</strong></a>。
-</div></div>
+</span></span></code></pre></div></div></div>
 <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
     <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
-    <a href="/doc-redis-commands/zset-related/">有序集合相关
+    <a href="/doc-redis-commands/stream-related/">流相关
 </a>
   </div></div></div>
 </article><div class="post-copyright mb-3 row card component" id="post-copyright">
@@ -310,6 +312,18 @@
 
 
     </div>
+</div><div class="card component row post-comments" id="post-comments">
+  <div class="card-header">
+    <h2 class="card-title">评论</h2>
+  </div>
+  <div class="card-body"><script src="https://utteranc.es/client.js"
+  repo="a2htray/a2htray.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div>
 </div></div>
 </div><aside class="sidebar d-flex docs-sidebar col-lg-3 position-sticky">
   <div class="container">
@@ -364,7 +378,7 @@
 </div>
 
 </footer>
-<script src="/assets/main/bundle.min.726a2da71b68eac699b8e51bf0e6dd67e48d2efe3e3f04a1a0ead64e582ae90a.js" integrity="sha256-cmotpxto6saZuOUb8ObdZ&#43;SNLv4&#43;PwShoOrWTlgq6Qo=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script src="/assets/main/bundle.min.a81822567b124a08cfe9b1fd948e6306717d92a9de14b7eb3cc90a0275f92bd3.js" integrity="sha256-qBgiVnsSSgjP6bH9lI5jBnF9kqneFLfrPMkKAnX5K9M=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

@@ -2,7 +2,6 @@
 title: "Matplotlib bar 图常规编码"
 date: 2022-04-05T10:11:12+08:00
 draft: false
-comment: false
 reward: false
 categories:
  - Python

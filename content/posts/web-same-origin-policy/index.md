@@ -2,7 +2,6 @@
 title: "同源策略 Same-Origin Policy"
 date: 2022-03-29T15:56:02+08:00
 draft: false
-comment: false
 reward: false
 tags:
  - Web 安全

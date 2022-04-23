@@ -2,7 +2,6 @@
 title: "Redis 主从复制配置过程"
 date: 2022-03-30T10:28:31+08:00
 draft: false
-comment: false
 reward: false
 toc: true
 pinned: false

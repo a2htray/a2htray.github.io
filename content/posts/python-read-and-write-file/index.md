@@ -2,7 +2,6 @@
 title: "Python 读写文件"
 date: 2022-03-28T13:28:47+08:00
 draft: false
-comment: false
 reward: false
 categories:
  - Python

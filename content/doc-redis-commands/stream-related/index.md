@@ -1,8 +1,7 @@
 ---
 title: "流相关"
 date: 2022-03-27T05:47:22+08:00
-draft: true
-comment: false
+draft: false
 reward: false
 toc: true
 pinned: false
@@ -35,7 +34,7 @@ Redis 服务器中与 stream 相关的命令。
 "1-0"
 ```
 
-## XRANGE
+## XRANGE：返回 stream 记录的列表
 
 `XRANGE` 用于获取指定 ID 范围内的 entry，其中 `-` 和 `+` 为特征 ID，分别表示最小 ID 和最大 ID。
 
@@ -160,3 +159,49 @@ Redis 服务器中与 stream 相关的命令。
 127.0.0.1:6379> DEL chat:1:messages
 (integer) 1
 ```
+
+## XREAD：从一个或多个 stream 中读取数据
+
+格式：`XREAD [COUNT count] [BLOCK milliseconds] STREAMS key [key ...] id [id ...]`
+
+[XREAD](https://redis.io/commands/xread/) 可以以阻塞或非阻塞的方式读取 stream 的数据（指定 BLOCK）。在获取 stream 记录时，需要指定记录的 ID。
+
+```bash
+127.0.0.1:6379> XRANGE api-request-log - +
+1) 1) "1650702336219-0"
+   2)  1) "remote_addr"
+       2) "[::1]:54058"
+       3) "url"
+       4) "/api/users"
+       5) "access_time"
+       6) "1650702336"
+       7) "time_executed"
+       8) "0"
+       9) "body_bytes_sent"
+      10) "96"
+2) 1) "1650702505299-0"
+   2)  1) "remote_addr"
+       2) "[::1]:54112"
+       3) "url"
+       4) "/api/users"
+       5) "access_time"
+       6) "1650702505"
+       7) "time_executed"
+       8) "0"
+       9) "body_bytes_sent"
+      10) "96"
+127.0.0.1:6379> XREAD COUNT 1 BLOCK 1000 STREAMS api-request-log 1650702336219-0
+1) 1) "api-request-log"
+   2) 1) 1) "1650702505299-0"
+         2)  1) "remote_addr"
+             2) "[::1]:54112"
+             3) "url"
+             4) "/api/users"
+             5) "access_time"
+             6) "1650702505"
+             7) "time_executed"
+             8) "0"
+             9) "body_bytes_sent"
+            10) "96"
+```
+

@@ -2,7 +2,6 @@
 title: "帕尔默企鹅数据集测试"
 date: 2022-04-11T13:28:26+08:00
 draft: false
-comment: false
 reward: false
 math: true
 categories:

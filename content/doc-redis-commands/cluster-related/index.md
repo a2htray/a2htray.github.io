@@ -2,7 +2,6 @@
 title: "集群相关"
 date: 2022-04-10T11:34:31+08:00
 draft: false
-comment: false
 reward: false
 toc: true
 pinned: false

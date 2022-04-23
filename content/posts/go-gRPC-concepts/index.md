@@ -2,7 +2,6 @@
 title: "gRPC 的基本概述"
 date: 2022-04-08T15:39:54+08:00
 draft: true
-comment: false
 reward: false
 categories:
  - Go

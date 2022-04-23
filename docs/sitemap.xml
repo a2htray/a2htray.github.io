@@ -5,6 +5,9 @@
     <loc>/doc-redis-commands/cluster-related/</loc>
     <lastmod>2022-04-10T11:34:31+08:00</lastmod>
   </url><url>
+    <loc>/doc-redis-commands/stream-related/</loc>
+    <lastmod>2022-03-27T05:47:22+08:00</lastmod>
+  </url><url>
     <loc>/doc-redis-commands/zset-related/</loc>
     <lastmod>2022-03-27T05:45:52+08:00</lastmod>
   </url><url>
@@ -17,8 +20,47 @@
     <loc>/doc-redis-commands/introduction/</loc>
     <lastmod>2022-03-27T05:56:48+08:00</lastmod>
   </url><url>
+    <loc>/tags/gin/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/categories/go/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
     <loc>/</loc>
-    <lastmod>2022-04-21T13:35:02+08:00</lastmod>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/redis/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/posts/go-redis-request-log-dumper/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/categories/web/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
+  </url><url>
+    <loc>/posts/go-set-value-via-reflect-package/</loc>
+    <lastmod>2022-04-21T19:59:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/reflect/</loc>
+    <lastmod>2022-04-21T19:59:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/%E5%8F%8D%E5%B0%84/</loc>
+    <lastmod>2022-04-21T19:59:01+08:00</lastmod>
   </url><url>
     <loc>/tags/mysql/</loc>
     <lastmod>2022-04-21T13:35:02+08:00</lastmod>
@@ -26,19 +68,7 @@
     <loc>/posts/mysql-set-storage-engine/</loc>
     <lastmod>2022-04-21T13:35:02+08:00</lastmod>
   </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2022-04-21T13:35:02+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
-    <lastmod>2022-04-21T13:35:02+08:00</lastmod>
-  </url><url>
     <loc>/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/</loc>
-    <lastmod>2022-04-21T13:35:02+08:00</lastmod>
-  </url><url>
-    <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-04-21T13:35:02+08:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
     <lastmod>2022-04-21T13:35:02+08:00</lastmod>
   </url><url>
     <loc>/posts/mysql-writing-procedure/</loc>
@@ -48,9 +78,6 @@
     <lastmod>2022-04-19T19:35:33+08:00</lastmod>
   </url><url>
     <loc>/posts/interview-csig/</loc>
-    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
-  </url><url>
-    <loc>/categories/go/</loc>
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>
   </url><url>
     <loc>/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/</loc>
@@ -122,9 +149,6 @@
     <loc>/posts/go-1.18-release-features/</loc>
     <lastmod>2022-04-10T12:11:38+08:00</lastmod>
   </url><url>
-    <loc>/tags/redis/</loc>
-    <lastmod>2022-04-10T11:34:31+08:00</lastmod>
-  </url><url>
     <loc>/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/</loc>
     <lastmod>2022-04-10T11:34:31+08:00</lastmod>
   </url><url>
@@ -143,6 +167,12 @@
     <loc>/posts/protocol-buffer-syntax/</loc>
     <lastmod>2022-04-08T16:33:52+08:00</lastmod>
   </url><url>
+    <loc>/posts/redis-cluster-deployment/</loc>
+    <lastmod>2022-04-07T14:07:35+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E8%BF%90%E7%BB%B4/</loc>
+    <lastmod>2022-04-07T14:07:35+08:00</lastmod>
+  </url><url>
     <loc>/posts/python-matplotlib-bar-tips/</loc>
     <lastmod>2022-04-05T10:11:12+08:00</lastmod>
   </url><url>
@@ -158,13 +188,7 @@
     <loc>/tags/revel/</loc>
     <lastmod>2022-03-31T10:40:58+08:00</lastmod>
   </url><url>
-    <loc>/categories/web/</loc>
-    <lastmod>2022-03-31T10:40:58+08:00</lastmod>
-  </url><url>
     <loc>/posts/redis-master-slave-replication-deployment/</loc>
-    <lastmod>2022-03-30T10:28:31+08:00</lastmod>
-  </url><url>
-    <loc>/categories/%E8%BF%90%E7%BB%B4/</loc>
     <lastmod>2022-03-30T10:28:31+08:00</lastmod>
   </url><url>
     <loc>/doc-redis-commands/server-related/</loc>

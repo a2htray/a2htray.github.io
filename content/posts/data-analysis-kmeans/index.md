@@ -3,13 +3,14 @@ title: "k-means 基本原理及其实现"
 date: 2022-04-02T13:27:02+08:00
 draft: false
 math: true
-comment: false
 reward: false
 categories:
  - Python
  - 数据挖掘
 tags:
  - k-means
+images:
+ - images/357_2019_9314_Fig1_HTML.png
 ---
 
 k-means 算法是一种无监督的聚类算法，其优点是逻辑简单、易于实现。

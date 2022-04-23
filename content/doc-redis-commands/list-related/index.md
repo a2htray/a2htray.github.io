@@ -2,7 +2,6 @@
 title: "列表值相关"
 date: 2022-03-27T05:32:39+08:00
 draft: false
-comment: false
 reward: false
 toc: true
 pinned: false

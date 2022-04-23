@@ -41,7 +41,7 @@
 "/>
 <meta name="twitter:site" content="@yourtwitterusername"/>
 <meta property="og:image" content="/false"/>
-  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.24259f28482843761b0bb15995dd54f27857559e12f78a77b9c08b1991c26223.css" integrity="sha256-JCWfKEgoQ3YbC7FZld1U8nhXVZ4S94p3ucCLGZHCYiM=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.d947531a40fb25eeb91f67fc51f881f0d290ad5e1c993667dccb03c2aef28edb.css" integrity="sha256-2UdTGkD7Je65H2f8UfiB8NKQrV4cmTZn3MsDwq7yjts=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
   <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -211,7 +211,9 @@
     <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
   <i class="fas fa-fw fa-copyright"></i>
 </a>
-    
+    <a class="action" href="#post-comments" role="button" aria-label="Comments" title="Comments">
+  <i class="fas fa-fw fa-comments"></i>
+</a>
     <a class="action" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
   <i class="fas fa-fw fa-list-alt"></i>
 </a>
@@ -371,9 +373,7 @@
 <ol>
 <li>Redis 主从复制的配置过程；</li>
 <li>Redis 服务相关配置项说明；</li>
-</ol></div><div class="alert alert-warning" role="alert">
-    如果文章存在错误或存在歧义的地方，烦请<a target="_blank" href="https://github.com/a2htray/a2htray.github.io/issues/new"><strong>批评指正</strong></a>。
-</div></div>
+</ol></div></div>
   <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
     <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
     <a href="/posts/web-same-origin-policy/">同源策略 Same-Origin Policy
@@ -411,7 +411,19 @@
 </span>
         </li></ul>
     </div>
-  </section></div>
+  </section><div class="card component row post-comments" id="post-comments">
+  <div class="card-header">
+    <h2 class="card-title">评论</h2>
+  </div>
+  <div class="card-body"><script src="https://utteranc.es/client.js"
+  repo="a2htray/a2htray.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div>
+</div></div>
 </div><aside class="col-lg-4 sidebar d-flex">
   <div class="container d-flex flex-column">
     
@@ -459,6 +471,12 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go-redis-request-log-dumper/">Redis 的 List 和 Stream：异步记录请求信息
+</a>
+      </li><li>
+        <a href="/posts/go-set-value-via-reflect-package/">Go 的反射包 Reflect
+</a>
+      </li><li>
         <a href="/posts/mysql-set-storage-engine/">MySQL 设置存储引擎的 3 种方法
 </a>
       </li><li>
@@ -466,12 +484,6 @@
 </a>
       </li><li>
         <a href="/posts/interview-csig/">CSIG 线上面试
-</a>
-      </li><li>
-        <a href="/posts/database-performance-tuning/">MySQL 性能调优
-</a>
-      </li><li>
-        <a href="/posts/python-chi-square-test/">卡方检验 - 检验特征对是否相关
 </a>
       </li></ul>
   </div>
@@ -495,13 +507,13 @@
         <div class="py-2"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge rounded post-taxonomy" title="数据库">
             数据库</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
             Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
-            Python</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
-            数据挖掘</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
-            Web</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            Python</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Web</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            数据挖掘</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
             可视化</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
-            统计学</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
-            机器学习</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge rounded post-taxonomy" title="运维">
-            运维</a></div>
+            统计学</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge rounded post-taxonomy" title="运维">
+            运维</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
+            机器学习</a></div>
       </div>
     </section><section class="tags-taxonomies row card component">
       <div class="card-header">
@@ -515,23 +527,27 @@
             MySQL</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
             Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
-            Chi-Square</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
+            Chi-Square</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
+            Gin</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
             Go 1.18</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
             NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
-            Pandas</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
+            Pandas</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
+            reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
             Revel</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
             roadmap</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="rpc">
             rpc</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
             scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
             sklearn</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
-            Web 安全</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
+            Web 安全</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
+            反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
             大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">
             存储引擎</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge rounded post-taxonomy" title="存储过程">
             存储过程</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
             性能优化</a><a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="badge rounded post-taxonomy" title="文件操作">
-            文件操作</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
+            文件操作</a><a href="/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" class="badge rounded post-taxonomy" title="日志管理">
+            日志管理</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
             面试经</a></div>
       </div>
     </section>
@@ -547,7 +563,7 @@
 </div>
 
 </footer>
-<script src="/assets/main/bundle.min.726a2da71b68eac699b8e51bf0e6dd67e48d2efe3e3f04a1a0ead64e582ae90a.js" integrity="sha256-cmotpxto6saZuOUb8ObdZ&#43;SNLv4&#43;PwShoOrWTlgq6Qo=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script src="/assets/main/bundle.min.a81822567b124a08cfe9b1fd948e6306717d92a9de14b7eb3cc90a0275f92bd3.js" integrity="sha256-qBgiVnsSSgjP6bH9lI5jBnF9kqneFLfrPMkKAnX5K9M=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

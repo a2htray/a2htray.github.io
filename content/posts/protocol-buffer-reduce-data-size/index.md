@@ -2,7 +2,6 @@
 title: "Protocol Buffer 减少传输数据的大小"
 date: 2022-04-09T15:01:17+08:00
 draft: false
-comment: false
 reward: false
 categories:
  - Go

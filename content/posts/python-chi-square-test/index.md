@@ -2,7 +2,6 @@
 title: "卡方检验 - 检验特征对是否相关"
 date: 2022-04-11T18:57:39+08:00
 draft: false
-comment: false
 reward: false
 math: true
 categories:

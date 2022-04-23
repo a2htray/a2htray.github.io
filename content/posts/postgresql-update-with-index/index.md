@@ -2,7 +2,6 @@
 title: "通过索引加快数据表更新速度"
 date: 2022-04-14T11:16:11+08:00
 draft: true
-comment: false
 reward: false
 tags:
  - PostgreSQL

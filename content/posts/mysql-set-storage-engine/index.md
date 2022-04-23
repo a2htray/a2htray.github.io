@@ -2,7 +2,6 @@
 title: "MySQL 设置存储引擎的 3 种方法"
 date: 2022-04-21T13:35:02+08:00
 draft: false
-comment: false
 reward: false
 tags:
  - MySQL

@@ -6,7 +6,34 @@
     <description>Recent content in Go on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Fri, 15 Apr 2022 11:24:13 +0800</lastBuildDate><atom:link href="/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Apr 2022 19:05:01 +0800</lastBuildDate><atom:link href="/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis 的 list 和 stream：异步记录请求信息</title>
+      <link>/posts/go-redis-request-log-dumper/</link>
+      <pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate>
+      
+      <guid>/posts/go-redis-request-log-dumper/</guid>
+      <description>在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。</description>
+    </item>
+    
+    <item>
+      <title>Go 的反射包 reflect</title>
+      <link>/posts/go-set-value-via-reflect-package/</link>
+      <pubDate>Thu, 21 Apr 2022 19:59:01 +0800</pubDate>
+      
+      <guid>/posts/go-set-value-via-reflect-package/</guid>
+      <description>&lt;p&gt;首先贴上 Go 开发团队对 reflect 包的描述：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Package reflect implements run-time reflection, allowing a program to manipulate objects with arbitrary types. The typical use is to take a value with static type interface{} and extract its dynamic type information by calling TypeOf, which returns a Type.&lt;/p&gt;
+&lt;p&gt;A call to ValueOf returns a Value representing the run-time data. Zero takes a Type and returns a Value representing a zero value for that type.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;从描述中，我们得到以下几点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;reflect 包实现了运行时的反射机制，允许程序操作任意类型的对象；&lt;/li&gt;
+&lt;li&gt;TypeOf 可以得到一个 interface{} 的具体类型，ValueOf 可以得到一个 interface{} 的具体值；&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
     <item>
       <title>CSIG 线上面试</title>
       <link>/posts/interview-csig/</link>

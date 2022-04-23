@@ -2,7 +2,6 @@
 title: "集合相关"
 date: 2022-03-27T05:47:22+08:00
 draft: true
-comment: false
 reward: false
 toc: true
 pinned: false

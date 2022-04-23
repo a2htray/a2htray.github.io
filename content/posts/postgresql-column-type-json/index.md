@@ -2,7 +2,6 @@
 title: "PostgreSQL JSON 类型字段"
 date: 2022-04-13T10:51:09+08:00
 draft: true
-comment: false
 reward: false
 tags:
  - "PostgreSQL"

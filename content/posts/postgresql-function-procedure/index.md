@@ -2,7 +2,6 @@
 title: "PostgreSQL 函数与存储过程"
 date: 2022-04-13T17:57:25+08:00
 draft: true
-comment: false
 reward: false
 tags:
  - "PostgreSQL"

@@ -2,7 +2,6 @@
 title: "Protocol Buffer 语法"
 date: 2022-04-08T16:33:52+08:00
 draft: false
-comment: false
 reward: false
 categories:
  - Go

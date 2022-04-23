@@ -2,7 +2,6 @@
 title: "Go 1.18 特性 - 泛型"
 date: 2022-04-10T12:11:38+08:00
 draft: false
-comment: false
 reward: false
 categories:
  - Go

@@ -2,7 +2,6 @@
 title: "Go 1.16 运行 Revel 项目"
 date: 2022-03-31T10:40:58+08:00
 draft: false
-comment: false
 reward: false
 categories:
  - Go

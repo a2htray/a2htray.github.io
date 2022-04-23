@@ -3,7 +3,6 @@ title: "MySQL 性能调优"
 date: 2022-04-14T19:59:24+08:00
 draft: false
 reward: false
-comment: false
 categories:
   - 数据库
 tags:

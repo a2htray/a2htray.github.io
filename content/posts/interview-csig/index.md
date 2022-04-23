@@ -2,7 +2,6 @@
 title: "CSIG 线上面试"
 date: 2022-04-15T11:24:13+08:00
 draft: false
-comment: false
 reward: false
 categories:
  - Go

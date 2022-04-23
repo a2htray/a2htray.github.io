@@ -1,0 +1,756 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="teal"
+  >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Go 的反射包 reflect - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/images/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="首先贴上 Go 开发团队对 reflect 包的描述：
+
+Package reflect implements run-time reflection, allowing a program to manipulate objects with arbitrary types. The typical use is to take a value with static type interface{} and extract its dynamic type information by calling TypeOf, which returns a Type.
+A call to ValueOf returns a Value representing the run-time data. Zero takes a Type and returns a Value representing a zero value for that type.
+
+从描述中，我们得到以下几点：
+
+reflect 包实现了运行时的反射机制，允许程序操作任意类型的对象；
+TypeOf 可以得到一个 interface{} 的具体类型，ValueOf 可以得到一个 interface{} 的具体值；
+" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="Go 的反射包 reflect">
+<meta itemprop="description" content="首先贴上 Go 开发团队对 reflect 包的描述：
+
+Package reflect implements run-time reflection, allowing a program to manipulate objects with arbitrary types. The typical use is to take a value with static type interface{} and extract its dynamic type information by calling TypeOf, which returns a Type.
+A call to ValueOf returns a Value representing the run-time data. Zero takes a Type and returns a Value representing a zero value for that type.
+
+从描述中，我们得到以下几点：
+
+reflect 包实现了运行时的反射机制，允许程序操作任意类型的对象；
+TypeOf 可以得到一个 interface{} 的具体类型，ValueOf 可以得到一个 interface{} 的具体值；
+"><meta itemprop="datePublished" content="2022-04-21T19:59:01+08:00" />
+<meta itemprop="dateModified" content="2022-04-21T19:59:01+08:00" />
+<meta itemprop="wordCount" content="1791"><meta itemprop="image" content="/images/golang-reflect.png">
+<meta itemprop="keywords" content="reflect,反射," /><meta property="og:title" content="Go 的反射包 reflect" />
+<meta property="og:description" content="首先贴上 Go 开发团队对 reflect 包的描述：
+
+Package reflect implements run-time reflection, allowing a program to manipulate objects with arbitrary types. The typical use is to take a value with static type interface{} and extract its dynamic type information by calling TypeOf, which returns a Type.
+A call to ValueOf returns a Value representing the run-time data. Zero takes a Type and returns a Value representing a zero value for that type.
+
+从描述中，我们得到以下几点：
+
+reflect 包实现了运行时的反射机制，允许程序操作任意类型的对象；
+TypeOf 可以得到一个 interface{} 的具体类型，ValueOf 可以得到一个 interface{} 的具体值；
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/go-set-value-via-reflect-package/" /><meta property="og:image" content="/images/golang-reflect.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-21T19:59:01+08:00" />
+<meta property="article:modified_time" content="2022-04-21T19:59:01+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/images/golang-reflect.png"/>
+
+<meta name="twitter:title" content="Go 的反射包 reflect"/>
+<meta name="twitter:description" content="首先贴上 Go 开发团队对 reflect 包的描述：
+
+Package reflect implements run-time reflection, allowing a program to manipulate objects with arbitrary types. The typical use is to take a value with static type interface{} and extract its dynamic type information by calling TypeOf, which returns a Type.
+A call to ValueOf returns a Value representing the run-time data. Zero takes a Type and returns a Value representing a zero value for that type.
+
+从描述中，我们得到以下几点：
+
+reflect 包实现了运行时的反射机制，允许程序操作任意类型的对象；
+TypeOf 可以得到一个 interface{} 的具体类型，ValueOf 可以得到一个 interface{} 的具体值；
+"/>
+<meta name="twitter:site" content="@yourtwitterusername"/>
+<link rel="stylesheet" href="/assets/main/bundle.min.d947531a40fb25eeb91f67fc51f881f0d290ad5e1c993667dccb03c2aef28edb.css" integrity="sha256-2UdTGkD7Je65H2f8UfiB8NKQrV4cmTZn3MsDwq7yjts=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="/">Mozart&#39;s Sheet
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=Go%20%e7%9a%84%e5%8f%8d%e5%b0%84%e5%8c%85%20reflect&url=%2fposts%2fgo-set-value-via-reflect-package%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fposts%2fgo-set-value-via-reflect-package%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">设置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+<div class="setting">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="modeSwitcher">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="蓝色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="蓝灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="绿色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="红色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="蓝绿色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黄色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 复制链接
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item">
+          <a class="nav-link" href="/series/">
+            <i class="fas fa-fw fa-columns"></i>专栏
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>归档
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-fw fa-folder"></i>分类
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="fas fa-fw fa-tags"></i>标签
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/posts/">Posts</a></li><li class="breadcrumb-item active">Go 的反射包 Reflect</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    <a class="action" href="#post-comments" role="button" aria-label="Comments" title="Comments">
+  <i class="fas fa-fw fa-comments"></i>
+</a>
+    <a class="action" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+  <div class="card-header ">
+    <h1 class="card-title post-title">Go 的反射包 Reflect
+</h1>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-21 19:59:01 &#43;0800 CST。">
+    2022-04-21
+  </span><span class="post-reading-time">
+    4 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/reflect/" class="badge post-taxonomy">reflect</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge post-taxonomy">反射</a></span>
+</div>
+<img class="post-featured-img w-100 mb-3" alt="Go 的反射包 reflect" src="/images/golang-reflect.png" loading="lazy"/><div class="post-content mb-3"><p>首先贴上 Go 开发团队对 reflect 包的描述：</p>
+<blockquote>
+<p>Package reflect implements run-time reflection, allowing a program to manipulate objects with arbitrary types. The typical use is to take a value with static type interface{} and extract its dynamic type information by calling TypeOf, which returns a Type.</p>
+<p>A call to ValueOf returns a Value representing the run-time data. Zero takes a Type and returns a Value representing a zero value for that type.</p>
+</blockquote>
+<p>从描述中，我们得到以下几点：</p>
+<ol>
+<li>reflect 包实现了运行时的反射机制，允许程序操作任意类型的对象；</li>
+<li>TypeOf 可以得到一个 interface{} 的具体类型，ValueOf 可以得到一个 interface{} 的具体值；</li>
+</ol>
+<h2 id="重要类型">重要类型<a class="anchor ms-1" href="#重要类型"><i class="fas fa-link"></i></a></h2>
+<p>reflect 包中定义了几种重要的、常用的类型，分别为：</p>
+<ol>
+<li>Kind；</li>
+<li>Value；</li>
+<li>SliceHeader；</li>
+<li>StringHeader；</li>
+<li>Method；</li>
+<li>StructField；</li>
+</ol>
+<h3 id="kind">Kind<a class="anchor ms-1" href="#kind"><i class="fas fa-link"></i></a></h3>
+<p>Kind 类型用于修饰类型 <code>Type</code>，用于表示 <code>Type</code> 的种类，底层是用一个<strong>无符号整数</strong>表示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Kind</span> <span class="kt">uint</span><span class="p">;</span>
+</span></span></code></pre></div><p>其中修饰了的基础数据类型包括<code>Bool</code>、<code>Int</code>、<code>Int32</code>、<code>Float32</code>、<code>Float64</code> 等，引用数据类型包括<code>Slice</code>、<code>Map</code>、<code>Chan</code>、<code>Interface</code>、<code>Func</code> 等。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;reflect&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">v1</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">v2</span> <span class="kt">float32</span> <span class="p">=</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">v3</span> <span class="o">:=</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}{}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">v4</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">PrintKind</span><span class="p">(</span><span class="nx">v1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">PrintKind</span><span class="p">(</span><span class="nx">v2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">PrintKind</span><span class="p">(</span><span class="nx">v3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">PrintKind</span><span class="p">(</span><span class="nx">v4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">PrintKind</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">t</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Kind</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;int&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Float32</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;float32&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Struct</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;struct&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Func</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;function&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 其它的情况 ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">int
+</span></span><span class="line"><span class="cl">float32
+</span></span><span class="line"><span class="cl">struct
+</span></span><span class="line"><span class="cl"><span class="k">function</span>
+</span></span></code></pre></div><p>如果只是单纯地打印类型 <code>Type</code> 的种类，直接调用 <code>.String</code> 方法即可。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">PrintKind</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">t</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">int
+</span></span><span class="line"><span class="cl">float32
+</span></span><span class="line"><span class="cl">struct <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">func<span class="o">()</span>
+</span></span></code></pre></div><h3 id="value">Value<a class="anchor ms-1" href="#value"><i class="fas fa-link"></i></a></h3>
+<p>Value 类型表示一个接口具体的值，类型的定义如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Value</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 值的真实类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">typ</span> <span class="o">*</span><span class="nx">rtype</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 指向值的指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">ptr</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 值的元数据信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// flag 可以是多种情况的组合
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">flag</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>在知道值类型的情况下，可以调用相应的函数获取其本身的值，即值的类型是 <code>int</code>，经过 <code>ValueOf</code> 返回 <code>Value</code> 类型的值就可以调用 <code>Int</code> 方法得到其值。但是，如果调用了不符合本身类型的方法会报错，这一类方法的开头都对值的类型做了类型判断。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;reflect&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">v1</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">v1</span><span class="p">).</span><span class="nf">Int</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">v2</span> <span class="kt">float32</span> <span class="p">=</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// fmt.Println(reflect.ValueOf(v2).Int()) 会报错
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">v</span> <span class="nx">Value</span><span class="p">)</span> <span class="nf">Int</span><span class="p">()</span> <span class="kt">int64</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">k</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nf">kind</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">p</span> <span class="o">:=</span> <span class="nx">v</span><span class="p">.</span><span class="nx">ptr</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="nx">k</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">Int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nb">int64</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="kt">int</span><span class="p">)(</span><span class="nx">p</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">Int8</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nb">int64</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="kt">int8</span><span class="p">)(</span><span class="nx">p</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">Int16</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nb">int64</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="kt">int16</span><span class="p">)(</span><span class="nx">p</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">Int32</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nb">int64</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="kt">int32</span><span class="p">)(</span><span class="nx">p</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">Int64</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="kt">int64</span><span class="p">)(</span><span class="nx">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">panic</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ValueError</span><span class="p">{</span><span class="s">&#34;reflect.Value.Int&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">.</span><span class="nf">kind</span><span class="p">()})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">f</span> <span class="nx">flag</span><span class="p">)</span> <span class="nf">mustBe</span><span class="p">(</span><span class="nx">expected</span> <span class="nx">Kind</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// TODO(mvdan): use f.kind() again once mid-stack inlining gets better
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nf">Kind</span><span class="p">(</span><span class="nx">f</span><span class="o">&amp;</span><span class="nx">flagKindMask</span><span class="p">)</span> <span class="o">!=</span> <span class="nx">expected</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ValueError</span><span class="p">{</span><span class="nf">methodName</span><span class="p">(),</span> <span class="nx">f</span><span class="p">.</span><span class="nf">kind</span><span class="p">()})</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="sliceheader">SliceHeader<a class="anchor ms-1" href="#sliceheader"><i class="fas fa-link"></i></a></h3>
+<p>SliceHeader 是 slice 运行时的底层实现，其结构如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">SliceHeader</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 指向底层数据的指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 无符号的整数表示内存中的地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Data</span> <span class="kt">uintptr</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// slice 的长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Len</span>  <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// slice 的容量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Cap</span>  <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// unsafe.Pointer 表示任意类型的指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">dataPointer</span> <span class="o">:=</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sh1</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">SliceHeader</span><span class="p">)(</span><span class="nx">dataPointer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">`SliceHeader {
+</span></span></span><span class="line"><span class="cl"><span class="s">    Data: %d
+</span></span></span><span class="line"><span class="cl"><span class="s">    Len: %d
+</span></span></span><span class="line"><span class="cl"><span class="s">    Cap: %d
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">`</span><span class="p">,</span> <span class="nx">sh1</span><span class="p">.</span><span class="nx">Data</span><span class="p">,</span> <span class="nx">sh1</span><span class="p">.</span><span class="nx">Len</span><span class="p">,</span> <span class="nx">sh1</span><span class="p">.</span><span class="nx">Cap</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">sh1</span><span class="p">.</span><span class="nx">Len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// slice 中各元素的地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">addr</span> <span class="o">:=</span> <span class="nb">uint</span><span class="p">(</span><span class="nx">sh1</span><span class="p">.</span><span class="nx">Data</span><span class="p">)</span> <span class="o">+</span> <span class="nb">uint</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="nb">uint</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// slice 中各元素的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">value</span> <span class="o">:=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="kt">int</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">addr</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%dth element addr: 0x%x, value: %d\n&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">addr</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">SliceHeader <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    Data: <span class="m">824634670792</span>
+</span></span><span class="line"><span class="cl">    Len: <span class="m">5</span>
+</span></span><span class="line"><span class="cl">    Cap: <span class="m">5</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">0th element addr: 0xc0000e7ec8, value: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">1th element addr: 0xc0000e7ed0, value: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">2th element addr: 0xc0000e7ed8, value: <span class="m">3</span>
+</span></span><span class="line"><span class="cl">3th element addr: 0xc0000e7ee0, value: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">4th element addr: 0xc0000e7ee8, value: <span class="m">5</span>
+</span></span></code></pre></div><p>上述代码构造了一个 SliceHeader 类型的变量 <code>sh1</code>，并逐一打印出各元素的地址和值：</p>
+<ol>
+<li><code>&amp;data</code> 得到了 slice 的指针，使用 <code> unsafe.Pointer(&amp;data)</code> 强制转换变成 <code>*ArbitraryType</code>；</li>
+<li>使用 <code>(*reflect.SliceHeader)(dataPointer)</code> 得到了一个指向 SliceHeader 的指针；</li>
+<li><code>fmt.Printf</code> 打印变量中 3 个字段的信息；</li>
+<li>for 循环：先计算每一个元素的地址，再通过地址得到地址上的值，最后打印输出；</li>
+<li>地址和值都需要进行一系列转换；
+<ol>
+<li>如 uintptr 不支持算法运算符，所以通过转换成 uint 类型进行计算；</li>
+<li>值的获取则是先将 uint 转换成 uintptr，再通过 <code>unsafe.Pointer</code> 转换成可表示任意类型的指针，接着转成 <code>*int</code> 类型的指针，最后使用 <code>*</code> 取指针的值；</li>
+</ol>
+</li>
+</ol>
+<h3 id="stringheader">StringHeader<a class="anchor ms-1" href="#stringheader"><i class="fas fa-link"></i></a></h3>
+<p>StringHeader 是 string 运行时的底层实现，其结构如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">StringHeader</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 指向底层数据的指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 无符号的整数表示内存中的地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Data</span> <span class="kt">uintptr</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 字符串的长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Len</span>  <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;22&#34;</span><span class="p">,</span> <span class="s">&#34;333&#34;</span><span class="p">,</span> <span class="s">&#34;4444&#34;</span><span class="p">,</span> <span class="s">&#34;55555&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sh1</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StringHeader</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">data</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;string slice length: %d\n&#34;</span><span class="p">,</span> <span class="nx">sh1</span><span class="p">.</span><span class="nx">Len</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">sh1</span><span class="p">.</span><span class="nx">Len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 计算第 i 个元素的地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">addr</span> <span class="o">:=</span> <span class="nb">uint</span><span class="p">(</span><span class="nx">sh1</span><span class="p">.</span><span class="nx">Data</span><span class="p">)</span> <span class="o">+</span> <span class="nb">uint</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">*</span> <span class="nb">uint</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 转换成任意类型的指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">arbitraryPointer</span> <span class="o">:=</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">addr</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 转换成字符串指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">stringPointer</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="kt">string</span><span class="p">)(</span><span class="nx">arbitraryPointer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">value</span> <span class="o">:=</span> <span class="o">*</span><span class="nx">stringPointer</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%dth value: %s\n&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">string slice length: <span class="m">5</span>
+</span></span><span class="line"><span class="cl">0th value: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">1th value: <span class="m">22</span>
+</span></span><span class="line"><span class="cl">2th value: <span class="m">333</span>
+</span></span><span class="line"><span class="cl">3th value: <span class="m">4444</span>
+</span></span><span class="line"><span class="cl">4th value: <span class="m">55555</span>
+</span></span></code></pre></div><p>StringHeader 的例子与 SliceHeader 类似，区别在于在指针转换时 StringHeader 使用了 <code>*string</code>。</p>
+<h3 id="method">Method<a class="anchor ms-1" href="#method"><i class="fas fa-link"></i></a></h3>
+<p>Method 表示一个方法，可以使用 reflect 包动态的调用方法，传入的参数是一个 <code>reflect.Value</code> 的 slice，其返回值也是使用一个 <code>reflect.Value</code> 的 slice 表示。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">anyFunc</span> <span class="kd">func</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">A</span> <span class="kd">struct</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="nx">A</span><span class="p">)</span> <span class="nf">AnyFunc</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;A&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">oneFunc</span> <span class="nx">anyFunc</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// oneFunc 是一个函数指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;1. pointer %p\n&#34;</span><span class="p">,</span> <span class="nx">oneFunc</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 函数类型的字符串表示
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;2. %s\n&#34;</span><span class="p">,</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">oneFunc</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 函数指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;3. %s\n&#34;</span><span class="p">,</span>  <span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">oneFunc</span><span class="p">)).</span><span class="nf">Kind</span><span class="p">().</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;== call method by reflect package&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">i</span> <span class="o">:=</span> <span class="mi">1000</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// reflect.Value 得到函数值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// .Call 调用函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// []reflect.Value{reflect.ValueOf(i)} 是传入函数的参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">result</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">oneFunc</span><span class="p">).</span><span class="nf">Call</span><span class="p">([]</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Value</span><span class="p">{</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">i</span><span class="p">)})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 类型中的方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">a</span> <span class="o">:=</span> <span class="nx">A</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">method</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">Method</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">`== basic information of A.AnyFunc
+</span></span></span><span class="line"><span class="cl"><span class="s">Type: %s
+</span></span></span><span class="line"><span class="cl"><span class="s">Name: %s
+</span></span></span><span class="line"><span class="cl"><span class="s">PkgPath： %s
+</span></span></span><span class="line"><span class="cl"><span class="s">Index: %d
+</span></span></span><span class="line"><span class="cl"><span class="s">`</span><span class="p">,</span> <span class="nx">method</span><span class="p">.</span><span class="nx">Type</span><span class="p">,</span> <span class="nx">method</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">method</span><span class="p">.</span><span class="nx">PkgPath</span><span class="p">,</span> <span class="nx">method</span><span class="p">.</span><span class="nx">Index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 调用类型中的方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;== call a.AnyFunc&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">Method</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nf">Call</span><span class="p">([]</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Value</span><span class="p">{}))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="structfield">StructField<a class="anchor ms-1" href="#structfield"><i class="fas fa-link"></i></a></h3>
+<p>StructField 表示一个结构的字段，StructField 还会保存字段的 Tag 信息（StructTag）。StructTag 的底层实现是 string：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">StructTag</span> <span class="kt">string</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">A</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">StringField</span> <span class="kt">string</span> <span class="s">`json:&#34;jsonStringField&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">IntField</span>    <span class="kt">int</span>    <span class="s">`json:&#34;jsonIntField&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">a</span> <span class="o">:=</span> <span class="nx">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">StringField</span><span class="p">:</span> <span class="s">&#34;simple string&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">IntField</span><span class="p">:</span>    <span class="mi">100</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;number of struct fields: %d\n&#34;</span><span class="p">,</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">NumField</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;== get struct field value&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">numField</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">NumField</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">numField</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%s: %v\n&#34;</span><span class="p">,</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;== get struct field tag&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">numField</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">tag</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">Tag</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%s&#39;s tag string: `%s`\n&#34;</span><span class="p">,</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">Field</span><span class="p">(</span><span class="nx">i</span><span class="p">).</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">tag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;  json: %v\n&#34;</span><span class="p">,</span> <span class="nx">tag</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;json&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="总结">总结<a class="anchor ms-1" href="#总结"><i class="fas fa-link"></i></a></h2>
+<ol>
+<li>reflect.ValueOf(值) 和 reflect.ValueOf(指针).Elem() 等价；</li>
+<li>unsafe.Pointer 提供了任意类型指针的访问；</li>
+</ol>
+<h2 id="参考">参考<a class="anchor ms-1" href="#参考"><i class="fas fa-link"></i></a></h2>
+<ol>
+<li><a href="https://pkg.go.dev/reflect" target="_blank" rel="noopener noreferrer">Go 标准库 reflect</a></li>
+<li><a href="https://stackoverflow.com/questions/8103617/call-a-struct-and-its-method-by-name-in-go" target="_blank" rel="noopener noreferrer">stackoverflow 动态调用对象的方法</a></li>
+</ol></div></div>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/posts/mysql-set-storage-engine/">MySQL 设置存储引擎的 3 种方法
+</a>
+  </div><div class="post-nav post-next">
+    <a href="/posts/go-redis-request-log-dumper/">Redis 的 List 和 Stream：异步记录请求信息
+</a>
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
+    </div>
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
+</a>
+
+
+    </div>
+</div><section class="related-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">相关文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="/posts/mysql-set-storage-engine/">MySQL 设置存储引擎的 3 种方法
+</a>
+          <span class="float-end post-date">2022-04-21
+</span>
+        </li><li>
+          <a href="/posts/mysql-writing-procedure/">MySQL 存储过程
+</a>
+          <span class="float-end post-date">2022-04-19
+</span>
+        </li><li>
+          <a href="/posts/interview-csig/">CSIG 线上面试
+</a>
+          <span class="float-end post-date">2022-04-15
+</span>
+        </li><li>
+          <a href="/posts/database-performance-tuning/">MySQL 性能调优
+</a>
+          <span class="float-end post-date">2022-04-14
+</span>
+        </li><li>
+          <a href="/posts/python-chi-square-test/">卡方检验 - 检验特征对是否相关
+</a>
+          <span class="float-end post-date">2022-04-11
+</span>
+        </li></ul>
+    </div>
+  </section><div class="card component row post-comments" id="post-comments">
+  <div class="card-header">
+    <h2 class="card-title">评论</h2>
+  </div>
+  <div class="card-body"><script src="https://utteranc.es/client.js"
+  repo="a2htray/a2htray.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div>
+</div></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container d-flex flex-column">
+    
+    <div class="profile profile-compact card row component">
+  <div class="col-lg-5 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="a2htray" src="/images/profile.jpg" loading="lazy" data-viewer-invisible
+   width="460" height="460"
+   />
+</div>
+  <div class="col-lg-7 profile-meta"><div class="profile-name">a2htray</div><div class="profile-bio">Gopher and Student</div><nav class="social-links nav justify-content-center"><a class="nav-link social-link" href="mailto:a2htray@outlook.com" title="Email">
+      <i class="fas fa-fw fa-2x fa-envelope"></i>
+    </a><a class="nav-link social-link" target="_blank" href="https://github.com/a2htray" title="GitHub" rel="noopener noreferrer">
+        <i class="fa-fw fa-2x fab fa-github"></i>
+      </a><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+</div>
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#重要类型">重要类型</a>
+      <ul>
+        <li><a href="#kind">Kind</a></li>
+        <li><a href="#value">Value</a></li>
+        <li><a href="#sliceheader">SliceHeader</a></li>
+        <li><a href="#stringheader">StringHeader</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#structfield">StructField</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+  </div>
+</div><section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="/posts/go-redis-request-log-dumper/">Redis 的 List 和 Stream：异步记录请求信息
+</a>
+      </li><li>
+        <a href="/posts/go-set-value-via-reflect-package/">Go 的反射包 Reflect
+</a>
+      </li><li>
+        <a href="/posts/mysql-set-storage-engine/">MySQL 设置存储引擎的 3 种方法
+</a>
+      </li><li>
+        <a href="/posts/mysql-writing-procedure/">MySQL 存储过程
+</a>
+      </li><li>
+        <a href="/posts/interview-csig/">CSIG 线上面试
+</a>
+      </li></ul>
+  </div>
+</section><section class="series-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/series">专栏</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge rounded post-taxonomy" title="Redis 命令手册">
+            Redis 命令手册</a></div>
+      </div>
+    </section><section class="categories-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/categories">分类</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge rounded post-taxonomy" title="数据库">
+            数据库</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
+            Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
+            Python</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Web</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            数据挖掘</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            可视化</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
+            统计学</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge rounded post-taxonomy" title="运维">
+            运维</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
+            机器学习</a></div>
+      </div>
+    </section><section class="tags-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/tags">标签</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
+            Redis</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
+            MySQL</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
+            protocol buffer</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
+            Chi-Square</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
+            Gin</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
+            Go 1.18</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
+            jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
+            k-means</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
+            reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
+            Revel</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
+            roadmap</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="rpc">
+            rpc</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
+            scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
+            sklearn</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            Web 安全</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
+            反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
+            大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">
+            存储引擎</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge rounded post-taxonomy" title="存储过程">
+            存储过程</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
+            性能优化</a><a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="badge rounded post-taxonomy" title="文件操作">
+            文件操作</a><a href="/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" class="badge rounded post-taxonomy" title="日志管理">
+            日志管理</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
+            面试经</a></div>
+      </div>
+    </section>
+    
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><div class="copyright mb-2">
+  Copyright © 2016-2022 a2htray. All Rights Reserved.
+</div>
+<div class="powered-by mb-2">
+  Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
+</div>
+
+</footer>
+<script src="/assets/main/bundle.min.a81822567b124a08cfe9b1fd948e6306717d92a9de14b7eb3cc90a0275f92bd3.js" integrity="sha256-qBgiVnsSSgjP6bH9lI5jBnF9kqneFLfrPMkKAnX5K9M=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('\/service-worker.min.js').then(function(reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  });
+}
+</script><script src="/assets/viewer/bundle.min.3ce688736c8224a9cd6b3104011fc2a816428f07c0fa226359736f33f0c593de.js" integrity="sha256-POaIc2yCJKnNazEEAR/CqBZCjwfA&#43;iJjWXNvM/DFk94=" crossorigin="anonymous" defer></script>
+</body>
+</html>

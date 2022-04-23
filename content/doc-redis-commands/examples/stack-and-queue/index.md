@@ -2,7 +2,6 @@
 title: "列表模拟栈和队列"
 date: 2022-03-27T06:05:41+08:00
 draft: false
-comment: false
 reward: false
 toc: true
 pinned: false
