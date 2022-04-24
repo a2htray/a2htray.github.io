@@ -20,16 +20,43 @@
     <loc>/doc-redis-commands/introduction/</loc>
     <lastmod>2022-03-27T05:56:48+08:00</lastmod>
   </url><url>
+    <loc>/tags/file/</loc>
+    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
+  </url><url>
+    <loc>/categories/go/</loc>
+    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
+  </url><url>
+    <loc>/tags/stackoverflow/</loc>
+    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
+  </url><url>
+    <loc>/posts/go-file-rename-pit/</loc>
+    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
+  </url><url>
+    <loc>/tags/http/</loc>
+    <lastmod>2022-04-24T10:00:25+08:00</lastmod>
+  </url><url>
+    <loc>/categories/web/</loc>
+    <lastmod>2022-04-24T10:00:25+08:00</lastmod>
+  </url><url>
+    <loc>/posts/go-download-network-file/</loc>
+    <lastmod>2022-04-24T10:00:25+08:00</lastmod>
+  </url><url>
     <loc>/tags/gin/</loc>
     <lastmod>2022-04-23T19:05:01+08:00</lastmod>
   </url><url>
-    <loc>/categories/go/</loc>
-    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
+    <loc>/tags/logging/</loc>
     <lastmod>2022-04-23T19:05:01+08:00</lastmod>
   </url><url>
     <loc>/tags/redis/</loc>
@@ -38,19 +65,7 @@
     <loc>/posts/go-redis-request-log-dumper/</loc>
     <lastmod>2022-04-23T19:05:01+08:00</lastmod>
   </url><url>
-    <loc>/categories/web/</loc>
-    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
-    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
-  </url><url>
     <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
-  </url><url>
-    <loc>/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
     <lastmod>2022-04-23T19:05:01+08:00</lastmod>
   </url><url>
     <loc>/posts/go-set-value-via-reflect-package/</loc>
@@ -203,14 +218,13 @@
     <loc>/posts/python-read-and-write-file/</loc>
     <lastmod>2022-03-28T13:28:47+08:00</lastmod>
   </url><url>
-    <loc>/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2022-03-28T13:28:47+08:00</lastmod>
-  </url><url>
     <loc>/doc-redis-commands/examples/stack-and-queue/</loc>
     <lastmod>2022-03-27T06:05:41+08:00</lastmod>
   </url><url>
     <loc>/doc-redis-commands/examples/</loc>
     <lastmod>2022-03-27T06:05:41+08:00</lastmod>
+  </url><url>
+    <loc>/tags/i/o/</loc>
   </url><url>
     <loc>/offline/</loc>
   </url><url>

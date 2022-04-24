@@ -9,18 +9,30 @@ categories:
  - Web
 tags:
  - Redis
- - 日志管理
+ - logging
  - Gin
 images:
  - images/managing_activity_logs.jpg
 ---
 
-在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。在程序中，可以以同步或异步的方式完成这一需求。同步方式是指请求信息写入日志文件后才返回数据给客户端，异步方式则是在返回数据之前以新线程或进程完成对请求信息的记录。
+在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。在程序中，可以以同步或异步的方式完成这一需求。同步方式是指请求信息写入日志文件后才返回数据给客户端，异步方式则是在返回数据之前以新线程或进程完成对请求信息的记录。开源的日志包有：
 
-在 Go 开发中，一个非常简单的办法就是启用一个 goroutine 用记录请求信息，信息的来源可以是一个 channel，也可以是一个其它的应用，如 Redis。本次实现中，包含两个组件：
+1. [Zap](https://pkg.go.dev/go.uber.org/zap)：出自 Uber 团队，以高性能著称；
+2. [Zerolog](https://github.com/rs/zerolog)：以易用性著称，支持 7 种日志级别；
+3. [Logrus](https://github.com/sirupsen/logrus)：兼容标准日志包格式，也是本人常用的日志包；
+4. [apex/log](https://github.com/apex/log)：受 Logrus 启发，简化操作后的 Logrus；
+5. [ Log15](https://github.com/inconshreveable/log15)：日志可读性强；
 
-1. app 组件：接收客户端请求，以协程的方式将请求信息发送给 Redis 服务器；
-2. micro-dumper：逐一读取 Redis 服务器中的请求信息并将信息记录到日志文件；
+5 个日志包的详细介绍可以看[《5 种结构化 Go 日志包对比分析》](/posts/go-five-structured-logging-package/)这篇文章。
+
+<!--more-->
+
+在 Go 开发中，一个非常简单的办法就是启用一个 goroutine 将请求信息发送到目的地，目的地可以是（1）一个日志文件；（2）一个 channel 或其它的应用（如 Redis）。在第 2 种方法中，还需要另一个拉取日志信息的服务，这类方法的优势是可以提高主体应用的性能，缺点是增加了系统的复杂度。本文的重点落在两个方面，分别为：
+
+1. 解析请求，将信息发送到 Redis 服务器；
+2. 读取 Redis 服务器中的请求信息，持久化到日志文件；
+
+所以在本次实现中，包含两个组件（app 组件和 micro-dumper 组件）分别完成上述两项功能。
 
 ## app
 

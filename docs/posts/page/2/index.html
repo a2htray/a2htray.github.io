@@ -176,6 +176,53 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Go 内置的 RPC 包" src="/images/operating-system-remote-procedure-call-1.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-10 16:37:30 &#43;0800 CST。">
+    2022-04-10
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/rpc/" class="badge post-taxonomy">rpc</a><a href="/tags/jsonrpc/" class="badge post-taxonomy">jsonrpc</a></span>
+</div>
+<div class="post-summary">
+      <p>在网络或 I/O 连接中，可以使用 net/rpc 包实现对一个对象的导出方法的调用，即远程过程调用（Remote Procedure Call，RPC）。通过向 RPC 服务注册一个对象，使其可被远程调用，进而实现一些复杂的业务逻辑。
+项目结构 示例项目的结构如下：
+client - client.go - json_client.go models - greeting.go server - json_server.go - server.go 注册服务 一个可被远程调用的方法须满足以下条件：
+ 方法所属结构是公开的； 方法是分开的； 方法的参数类型是分开的； 方法带两个参数，第 2 个参数为指针； 方法返回值为 error ...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-built-in-rpc-package/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/go-1.18-release-features/">Go 1.18 特性 - 泛型
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Go 1.18 特性 - 泛型" src="/images/golang-1.18-release.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-10 12:11:38 &#43;0800 CST。">
+    2022-04-10
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/go-1.18/" class="badge post-taxonomy">Go 1.18</a></span>
+</div>
+<div class="post-summary">
+      <p>Go 1.18 在 2022 年 3 月 15 日发布，根据团队的<a href="https://go.dev/blog/go1.18" target="_blank" rel="noopener noreferrer">博文</a>介绍，1.18 版本包含 4 个重要特性：</p>
+<ol>
+<li><strong>泛型</strong>；</li>
+<li>fuzzing；</li>
+<li>工作空间；</li>
+<li>20% 的性能提升；</li>
+</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-1.18-release-features/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/protocol-buffer-reduce-data-size/">Protocol Buffer 减少传输数据的大小
 </a>
     </h2>
@@ -330,24 +377,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-read-and-write-file/">Python 读写文件
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-28 13:28:47 &#43;0800 CST。">
-    2022-03-28
-  </span><span class="post-reading-time">
-    4 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="badge post-taxonomy">文件操作</a></span>
-</div>
-<div class="post-summary">
-      <p>在开发过程中，开发者常常需要对文件执行读写操作，仅以此文记录读写文件的常规用法。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-read-and-write-file/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -362,11 +391,14 @@
       <li class="page-item active">
         <a aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
       </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
+      <li class="page-item">
+        <a href="/posts/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
       </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      <li class="page-item">
+        <a href="/posts/page/3/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/3/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul></div>
 </div>
@@ -394,6 +426,12 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go-file-rename-pit/">Windows 下移动文件的坑
+</a>
+      </li><li>
+        <a href="/posts/go-download-network-file/">根据 URL 下载文件
+</a>
+      </li><li>
         <a href="/posts/go-redis-request-log-dumper/">Redis 的 List 和 Stream：异步记录请求信息
 </a>
       </li><li>
@@ -401,12 +439,6 @@
 </a>
       </li><li>
         <a href="/posts/mysql-set-storage-engine/">MySQL 设置存储引擎的 3 种方法
-</a>
-      </li><li>
-        <a href="/posts/mysql-writing-procedure/">MySQL 存储过程
-</a>
-      </li><li>
-        <a href="/posts/interview-csig/">CSIG 线上面试
 </a>
       </li></ul>
   </div>
@@ -447,14 +479,18 @@
       <div class="card-body">
         <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
             Redis</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
-            MySQL</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            MySQL</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
+            file</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
+            I/O</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
             Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
             Chi-Square</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
             Gin</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
-            Go 1.18</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
+            Go 1.18</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
+            HTTP</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
-            k-means</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            k-means</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
+            logging</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
             NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
             Pandas</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
             reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
@@ -462,15 +498,14 @@
             roadmap</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="rpc">
             rpc</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
             scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
-            sklearn</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            sklearn</a><a href="/tags/stackoverflow/" class="badge rounded post-taxonomy" title="stackoverflow">
+            stackoverflow</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
             Web 安全</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
             反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
             大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">
             存储引擎</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge rounded post-taxonomy" title="存储过程">
             存储过程</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
-            性能优化</a><a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="badge rounded post-taxonomy" title="文件操作">
-            文件操作</a><a href="/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" class="badge rounded post-taxonomy" title="日志管理">
-            日志管理</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
+            性能优化</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
             面试经</a></div>
       </div>
     </section>

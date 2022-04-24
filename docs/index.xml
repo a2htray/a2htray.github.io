@@ -6,7 +6,7 @@
     <description>Recent content on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sat, 23 Apr 2022 19:05:01 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Apr 2022 17:16:44 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>集群相关</title>
       <link>/doc-redis-commands/cluster-related/</link>
@@ -62,12 +62,38 @@
     </item>
     
     <item>
+      <title>Windows 下移动文件的坑</title>
+      <link>/posts/go-file-rename-pit/</link>
+      <pubDate>Sun, 24 Apr 2022 17:16:44 +0800</pubDate>
+      
+      <guid>/posts/go-file-rename-pit/</guid>
+      <description>&lt;p&gt;在 Windows 下，Go 的 &lt;code&gt;os&lt;/code&gt; 标准库提供的 &lt;code&gt;Rename&lt;/code&gt; 方法不能跨磁盘移动文件。下面通过问题重现，提供两种解决方案。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>根据 URL 下载文件</title>
+      <link>/posts/go-download-network-file/</link>
+      <pubDate>Sun, 24 Apr 2022 10:00:25 +0800</pubDate>
+      
+      <guid>/posts/go-download-network-file/</guid>
+      <description>&lt;p&gt;从网络上下载文件是开发过程中常用的需求，常规流程是：（1）发送请求；（2）接收响应并读取响应体内容；（3）保存到本地文件。本文包含的两个例子分别来自于&lt;strong&gt;参考 [1]&lt;/strong&gt; 和&lt;strong&gt;参考 [2]&lt;/strong&gt;，在此基础上做了少量的修改。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Redis 的 list 和 stream：异步记录请求信息</title>
       <link>/posts/go-redis-request-log-dumper/</link>
       <pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate>
       
       <guid>/posts/go-redis-request-log-dumper/</guid>
-      <description>在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。</description>
+      <description>&lt;p&gt;在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。在程序中，可以以同步或异步的方式完成这一需求。同步方式是指请求信息写入日志文件后才返回数据给客户端，异步方式则是在返回数据之前以新线程或进程完成对请求信息的记录。开源的日志包有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://pkg.go.dev/go.uber.org/zap&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Zap&lt;/a&gt;：出自 Uber 团队，以高性能著称；&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/rs/zerolog&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Zerolog&lt;/a&gt;：以易用性著称，支持 7 种日志级别；&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/sirupsen/logrus&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Logrus&lt;/a&gt;：兼容标准日志包格式，也是本人常用的日志包；&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/apex/log&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;apex/log&lt;/a&gt;：受 Logrus 启发，简化操作后的 Logrus；&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/inconshreveable/log15&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt; Log15&lt;/a&gt;：日志可读性强；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;5 个日志包的详细介绍可以看&lt;a href=&#34;/posts/go-five-structured-logging-package/&#34;&gt;《5 种结构化 Go 日志包对比分析》&lt;/a&gt;这篇文章。&lt;/p&gt;</description>
     </item>
     
     <item>

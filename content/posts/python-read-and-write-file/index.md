@@ -6,7 +6,7 @@ reward: false
 categories:
  - Python
 tags:
- - 文件操作
+ - file
 ---
 
 在开发过程中，开发者常常需要对文件执行读写操作，仅以此文记录读写文件的常规用法。

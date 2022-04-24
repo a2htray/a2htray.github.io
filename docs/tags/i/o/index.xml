@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>I/O on Mozart&#39;s Sheet</title>
+    <link>/tags/i/o/</link>
+    <description>Recent content in I/O on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright><atom:link href="/tags/i/o/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows 下移动文件的坑</title>
+      <link>/posts/go-file-rename-pit/</link>
+      <pubDate>Sun, 24 Apr 2022 17:16:44 +0800</pubDate>
+      
+      <guid>/posts/go-file-rename-pit/</guid>
+      <description>&lt;p&gt;在 Windows 下，Go 的 &lt;code&gt;os&lt;/code&gt; 标准库提供的 &lt;code&gt;Rename&lt;/code&gt; 方法不能跨磁盘移动文件。下面通过问题重现，提供两种解决方案。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>根据 URL 下载文件</title>
+      <link>/posts/go-download-network-file/</link>
+      <pubDate>Sun, 24 Apr 2022 10:00:25 +0800</pubDate>
+      
+      <guid>/posts/go-download-network-file/</guid>
+      <description>&lt;p&gt;从网络上下载文件是开发过程中常用的需求，常规流程是：（1）发送请求；（2）接收响应并读取响应体内容；（3）保存到本地文件。本文包含的两个例子分别来自于&lt;strong&gt;参考 [1]&lt;/strong&gt; 和&lt;strong&gt;参考 [2]&lt;/strong&gt;，在此基础上做了少量的修改。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

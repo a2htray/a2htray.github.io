@@ -6,7 +6,34 @@
     <description>Recent content in 标签 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sat, 23 Apr 2022 19:05:01 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Apr 2022 17:16:44 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>file</title>
+      <link>/tags/file/</link>
+      <pubDate>Sun, 24 Apr 2022 17:16:44 +0800</pubDate>
+      
+      <guid>/tags/file/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stackoverflow</title>
+      <link>/tags/stackoverflow/</link>
+      <pubDate>Sun, 24 Apr 2022 17:16:44 +0800</pubDate>
+      
+      <guid>/tags/stackoverflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTTP</title>
+      <link>/tags/http/</link>
+      <pubDate>Sun, 24 Apr 2022 10:00:25 +0800</pubDate>
+      
+      <guid>/tags/http/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Gin</title>
       <link>/tags/gin/</link>
@@ -17,20 +44,20 @@
     </item>
     
     <item>
+      <title>logging</title>
+      <link>/tags/logging/</link>
+      <pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate>
+      
+      <guid>/tags/logging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Redis</title>
       <link>/tags/redis/</link>
       <pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate>
       
       <guid>/tags/redis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>日志管理</title>
-      <link>/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/</link>
-      <pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate>
-      
-      <guid>/tags/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/</guid>
       <description></description>
     </item>
     
@@ -233,11 +260,11 @@
     </item>
     
     <item>
-      <title>文件操作</title>
-      <link>/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
-      <pubDate>Mon, 28 Mar 2022 13:28:47 +0800</pubDate>
+      <title>I/O</title>
+      <link>/tags/i/o/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+      <guid>/tags/i/o/</guid>
       <description></description>
     </item>
     
