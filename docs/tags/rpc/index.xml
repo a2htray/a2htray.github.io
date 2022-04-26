@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>rpc on Mozart&#39;s Sheet</title>
+    <title>RPC on Mozart&#39;s Sheet</title>
     <link>/tags/rpc/</link>
-    <description>Recent content in rpc on Mozart&#39;s Sheet</description>
+    <description>Recent content in RPC on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
     <lastBuildDate>Sun, 10 Apr 2022 16:37:30 +0800</lastBuildDate><atom:link href="/tags/rpc/index.xml" rel="self" type="application/rss+xml" />

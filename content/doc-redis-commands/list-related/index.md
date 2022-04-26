@@ -12,7 +12,6 @@ tags:
 series:
   - "Redis 命令手册"
 type: "docs"
-weight: 97
 images:
   - images/redis-list.png
 ---

@@ -6,59 +6,37 @@
     <description>Recent content on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 24 Apr 2022 17:16:44 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Apr 2022 09:24:01 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>集群相关</title>
-      <link>/doc-redis-commands/cluster-related/</link>
-      <pubDate>Sun, 10 Apr 2022 11:34:31 +0800</pubDate>
+      <title>Slice 什么时候报 Out of Range</title>
+      <link>/posts/go-slice-out-of-range/</link>
+      <pubDate>Tue, 26 Apr 2022 09:24:01 +0800</pubDate>
       
-      <guid>/doc-redis-commands/cluster-related/</guid>
-      <description>&lt;p&gt;Redis 服务器中与服务相关的命令，集群的配置过程可参考&lt;a href=&#34;/posts/redis-cluster-deployment/&#34;&gt;《Redis 集群配置过程》&lt;/a&gt;。&lt;/p&gt;</description>
+      <guid>/posts/go-slice-out-of-range/</guid>
+      <description>&lt;p&gt;面试的时候问到了一个关于 go Slice 的问题，即为什么在 &lt;code&gt;a[i:]&lt;/code&gt; 中 &lt;code&gt;i&lt;/code&gt; 的取值可以是 &lt;code&gt;a&lt;/code&gt; 的长度。平时开发中也是这么用的，但也没太深入的了解，所以在这篇文章中对其进行一些探讨。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>流相关</title>
-      <link>/doc-redis-commands/stream-related/</link>
-      <pubDate>Sun, 27 Mar 2022 05:47:22 +0800</pubDate>
+      <title>MySQL 修改列的注释信息</title>
+      <link>/doc-stackoverflow/mysql-modify-table-column-comment/</link>
+      <pubDate>Mon, 25 Apr 2022 14:04:54 +0800</pubDate>
       
-      <guid>/doc-redis-commands/stream-related/</guid>
-      <description>&lt;p&gt;Redis 服务器中与 stream 相关的命令。&lt;/p&gt;</description>
+      <guid>/doc-stackoverflow/mysql-modify-table-column-comment/</guid>
+      <description>小小的修改列的注释信息也能引发一些思考。 正确的修改方式要带上原来列的定义，如： ALTERTABLE`user`CHANGE`id``id`INT(11)COMMENT&amp;#39;id of user&amp;#39;;高票答案的几个回复： Note that altering a comment will cause a full</description>
     </item>
     
     <item>
-      <title>有序集合相关</title>
-      <link>/doc-redis-commands/zset-related/</link>
-      <pubDate>Sun, 27 Mar 2022 05:45:52 +0800</pubDate>
+      <title>go module 使用本地开发的包</title>
+      <link>/doc-stackoverflow/go-use-local-module-in-development/</link>
+      <pubDate>Mon, 25 Apr 2022 11:04:33 +0800</pubDate>
       
-      <guid>/doc-redis-commands/zset-related/</guid>
-      <description>&lt;p&gt;Redis 服务器中与有序集合相关的命令。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>列表值相关</title>
-      <link>/doc-redis-commands/list-related/</link>
-      <pubDate>Sun, 27 Mar 2022 05:32:39 +0800</pubDate>
-      
-      <guid>/doc-redis-commands/list-related/</guid>
-      <description>&lt;p&gt;Redis 服务器中与列表值相关的命令。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>键相关</title>
-      <link>/doc-redis-commands/key-related/</link>
-      <pubDate>Sun, 27 Mar 2022 05:57:48 +0800</pubDate>
-      
-      <guid>/doc-redis-commands/key-related/</guid>
-      <description>&lt;p&gt;Redis 服务器中与 key 相关的命令。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>介绍</title>
-      <link>/doc-redis-commands/introduction/</link>
-      <pubDate>Sun, 27 Mar 2022 05:56:48 +0800</pubDate>
-      
-      <guid>/doc-redis-commands/introduction/</guid>
-      <description>&lt;p&gt;Redis 是开源的、高性能的数据结构存储系统，在框架设计中常常被当作缓存服务器。不同于传统的关系型数据库（如 MySQL、PostgreSQL），Redis 将数据以键值对的方式存储于内存并且支持数据持久化。尽管 Redis 采用了单线程模型来处理请求，但其通过 I/O 多路复用技术做到了应用级别的异步，运行的性能也十分良好。&lt;/p&gt;</description>
+      <guid>/doc-stackoverflow/go-use-local-module-in-development/</guid>
+      <description>&lt;p&gt;在 &lt;code&gt;go.mod&lt;/code&gt; 文件中新增 &lt;code&gt;replace&lt;/code&gt; 信息，内容如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;module github.com/userName/mainModule
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;require &lt;span class=&#34;s2&#34;&gt;&amp;#34;github.com/userName/otherModule&amp;#34;&lt;/span&gt; v0.0.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;replace &lt;span class=&#34;s2&#34;&gt;&amp;#34;github.com/userName/otherModule&amp;#34;&lt;/span&gt; v0.0.0 &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;本地包路径&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -199,6 +177,15 @@
     </item>
     
     <item>
+      <title>集群相关</title>
+      <link>/doc-redis-commands/cluster-related/</link>
+      <pubDate>Sun, 10 Apr 2022 11:34:31 +0800</pubDate>
+      
+      <guid>/doc-redis-commands/cluster-related/</guid>
+      <description>&lt;p&gt;Redis 服务器中与服务相关的命令，集群的配置过程可参考&lt;a href=&#34;/posts/redis-cluster-deployment/&#34;&gt;《Redis 集群配置过程》&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Protocol Buffer 减少传输数据的大小</title>
       <link>/posts/protocol-buffer-reduce-data-size/</link>
       <pubDate>Sat, 09 Apr 2022 15:01:17 +0800</pubDate>
@@ -304,6 +291,51 @@
       
       <guid>/doc-redis-commands/examples/stack-and-queue/</guid>
       <description>&lt;p&gt;栈（Stack）和队列（Queue）是编程中常用的两种数据结构，下面通过 Redis 的列表（List）类型来实现栈和队列。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>键相关</title>
+      <link>/doc-redis-commands/key-related/</link>
+      <pubDate>Sun, 27 Mar 2022 05:57:48 +0800</pubDate>
+      
+      <guid>/doc-redis-commands/key-related/</guid>
+      <description>&lt;p&gt;Redis 服务器中与 key 相关的命令。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>介绍</title>
+      <link>/doc-redis-commands/introduction/</link>
+      <pubDate>Sun, 27 Mar 2022 05:56:48 +0800</pubDate>
+      
+      <guid>/doc-redis-commands/introduction/</guid>
+      <description>&lt;p&gt;Redis 是开源的、高性能的数据结构存储系统，在框架设计中常常被当作缓存服务器。不同于传统的关系型数据库（如 MySQL、PostgreSQL），Redis 将数据以键值对的方式存储于内存并且支持数据持久化。尽管 Redis 采用了单线程模型来处理请求，但其通过 I/O 多路复用技术做到了应用级别的异步，运行的性能也十分良好。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>流相关</title>
+      <link>/doc-redis-commands/stream-related/</link>
+      <pubDate>Sun, 27 Mar 2022 05:47:22 +0800</pubDate>
+      
+      <guid>/doc-redis-commands/stream-related/</guid>
+      <description>&lt;p&gt;Redis 服务器中与 stream 相关的命令。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有序集合相关</title>
+      <link>/doc-redis-commands/zset-related/</link>
+      <pubDate>Sun, 27 Mar 2022 05:45:52 +0800</pubDate>
+      
+      <guid>/doc-redis-commands/zset-related/</guid>
+      <description>&lt;p&gt;Redis 服务器中与有序集合相关的命令。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>列表值相关</title>
+      <link>/doc-redis-commands/list-related/</link>
+      <pubDate>Sun, 27 Mar 2022 05:32:39 +0800</pubDate>
+      
+      <guid>/doc-redis-commands/list-related/</guid>
+      <description>&lt;p&gt;Redis 服务器中与列表值相关的命令。&lt;/p&gt;</description>
     </item>
     
     <item>

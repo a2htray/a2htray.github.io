@@ -8,7 +8,7 @@ categories:
 tags:
  - file
  - I/O
- - stackoverflow
+ - Stackoverflow
 ---
 
 在 Windows 下，Go 的 `os` 标准库提供的 `Rename` 方法不能跨磁盘移动文件。下面通过问题重现，提供两种解决方案。

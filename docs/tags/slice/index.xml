@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>slice on Mozart&#39;s Sheet</title>
+    <link>/tags/slice/</link>
+    <description>Recent content in slice on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Tue, 26 Apr 2022 09:24:01 +0800</lastBuildDate><atom:link href="/tags/slice/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Slice 什么时候报 Out of Range</title>
+      <link>/posts/go-slice-out-of-range/</link>
+      <pubDate>Tue, 26 Apr 2022 09:24:01 +0800</pubDate>
+      
+      <guid>/posts/go-slice-out-of-range/</guid>
+      <description>&lt;p&gt;面试的时候问到了一个关于 go Slice 的问题，即为什么在 &lt;code&gt;a[i:]&lt;/code&gt; 中 &lt;code&gt;i&lt;/code&gt; 的取值可以是 &lt;code&gt;a&lt;/code&gt; 的长度。平时开发中也是这么用的，但也没太深入的了解，所以在这篇文章中对其进行一些探讨。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

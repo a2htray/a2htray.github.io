@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go module on Mozart&#39;s Sheet</title>
+    <link>/tags/go-module/</link>
+    <description>Recent content in go module on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Mon, 25 Apr 2022 11:04:33 +0800</lastBuildDate><atom:link href="/tags/go-module/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go module 使用本地开发的包</title>
+      <link>/doc-stackoverflow/go-use-local-module-in-development/</link>
+      <pubDate>Mon, 25 Apr 2022 11:04:33 +0800</pubDate>
+      
+      <guid>/doc-stackoverflow/go-use-local-module-in-development/</guid>
+      <description>&lt;p&gt;在 &lt;code&gt;go.mod&lt;/code&gt; 文件中新增 &lt;code&gt;replace&lt;/code&gt; 信息，内容如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;module github.com/userName/mainModule
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;require &lt;span class=&#34;s2&#34;&gt;&amp;#34;github.com/userName/otherModule&amp;#34;&lt;/span&gt; v0.0.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;replace &lt;span class=&#34;s2&#34;&gt;&amp;#34;github.com/userName/otherModule&amp;#34;&lt;/span&gt; v0.0.0 &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;本地包路径&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

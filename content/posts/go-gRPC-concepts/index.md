@@ -7,7 +7,7 @@ categories:
  - Go
 tags:
  - gRPC
- - rpc
+ - RPC
  - protocol buffer
 ---
 

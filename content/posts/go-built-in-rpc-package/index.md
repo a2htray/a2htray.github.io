@@ -6,7 +6,7 @@ reward: false
 categories:
  - Go
 tags:
- - rpc
+ - RPC
  - jsonrpc
 images:
  - "images/operating-system-remote-procedure-call-1.png"

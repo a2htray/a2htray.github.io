@@ -82,6 +82,87 @@ func main() {
 // {"level":"info","timestamp":"2021-12-18T18:21:34+01:00","caller":"go-logging/main.go:23","msg":"Hello from zap logger"}
 ```
 
+如果你更关心应用的性能，可以在 `SugaredLogger` 实例上调用 `DeSugar` 方法，这样就可以返回一个标准的、更快的 `Logger`。然而这么做后，你需要指定要打印的具体类型。
+
+```go
+l := sugar.Desugar()
+
+l.Info("Hello from zap logger",
+  zap.String("tag", "hello_zap"),
+  zap.Int("count", 10),
+)
+```
+
+## Zerolog
+
+[Zerolog](https://github.com/rs/zerolog) 是功能完备的、用于记录 JSON 格式日志信息的日志包，设计理念以性能、易用性为主。你可以使用默认的 logger，它的用法相当简便。如果你要使用这个 logger，需要在代码中引入 log 的子包，就像下面这样：
+
+```go
+package main
+
+import (
+    "github.com/rs/zerolog"
+    "github.com/rs/zerolog/log"
+)
+
+func main() {
+    zerolog.SetGlobalLevel(zerolog.InfoLevel)
+
+    log.Error().Msg("Error message")
+    log.Warn().Msg("Warning message")
+    log.Info().Msg("Info message")
+    log.Debug().Msg("Debug message")
+    log.Trace().Msg("Trace message")
+}
+
+// Output:
+// {"level":"error","time":"2021-12-19T17:38:12+01:00","message":"Error message"}
+// {"level":"warn","time":"2021-12-19T17:38:12+01:00","message":"Warning message"}
+// {"level":"info","time":"2021-12-19T17:38:12+01:00","message":"Info message"}
+```
+
+Zerolog 支持 7 种日志级别，从用于追踪的 `trace` 至抛出异常的 `panic`。你可以使用 `SetGlobalLevel()` 方法设置全局 logger 的日志级别。在上述的例子中，日志级别为 `info`，所以只有日志级别大于 `info` 的日志信息才会被写入。
+
+Zerolog 支持上下文日志记录，通过 `zerolog.Event` 类型上的方法，你可以很容易地住日志记录中加入额外的字段。
+
+在一个 logger 上调用任一方法，如 `Error()`，最后以 `Msg()` 或 `Msgf()` 结束，都会创建一个 `zerolog.Event` 实例。在下面的例子中，我们加入了一串上下文：
+
+```go
+log.Info().Str("tag", "a tag").Int("count", 123456).Msg("info message")
+
+// Output:
+// {"level":"info","tag":"a tag","count":123456,"time":"2021-12-20T09:01:33+01:00","message":"info message"}
+```
+
+`Event` 类型上有一个特殊的 `Err()` 方法，可以用来传递 `error` 类型的数据。如果希望修改 `error` 值对应的字段名，可以设置 `zerolog.ErrorFieldName` 的值。
+
+```go
+err := fmt.Errorf("An error occurred")
+
+log.Error().Err(err).Int("count", 123456).Msg("error message")
+
+// Output:
+// {"level":"error","error":"An error occurred","count":123456,"time":"2021-12-20T09:07:08+01:00","message":"error message"}
+```
+
+
+
+## Logrus
+
+
+
+## apex/log
+
+
+
+## log15
+
+
+
+## 性能比较
+
+
+
 
 
 ## 参考

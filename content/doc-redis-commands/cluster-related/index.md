@@ -12,7 +12,6 @@ tags:
 series:
   - "Redis 命令手册"
 type: "docs"
-weight: 93
 images:
 - images/redis-cluster.png
 ---

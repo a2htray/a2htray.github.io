@@ -2,46 +2,61 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/doc-redis-commands/cluster-related/</loc>
-    <lastmod>2022-04-10T11:34:31+08:00</lastmod>
+    <loc>/categories/go/</loc>
+    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
-    <loc>/doc-redis-commands/stream-related/</loc>
-    <lastmod>2022-03-27T05:47:22+08:00</lastmod>
+    <loc>/</loc>
+    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
-    <loc>/doc-redis-commands/zset-related/</loc>
-    <lastmod>2022-03-27T05:45:52+08:00</lastmod>
+    <loc>/posts/</loc>
+    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
-    <loc>/doc-redis-commands/list-related/</loc>
-    <lastmod>2022-03-27T05:32:39+08:00</lastmod>
+    <loc>/tags/slice/</loc>
+    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
-    <loc>/doc-redis-commands/key-related/</loc>
-    <lastmod>2022-03-27T05:57:48+08:00</lastmod>
+    <loc>/posts/go-slice-out-of-range/</loc>
+    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
-    <loc>/doc-redis-commands/introduction/</loc>
-    <lastmod>2022-03-27T05:56:48+08:00</lastmod>
+    <loc>/tags/stackoverflow/</loc>
+    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/</loc>
+    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/mysql/</loc>
+    <lastmod>2022-04-25T14:04:54+08:00</lastmod>
+  </url><url>
+    <loc>/doc-stackoverflow/mysql-modify-table-column-comment/</loc>
+    <lastmod>2022-04-25T14:04:54+08:00</lastmod>
+  </url><url>
+    <loc>/series/stackoverflow-magic/</loc>
+    <lastmod>2022-04-25T14:04:54+08:00</lastmod>
+  </url><url>
+    <loc>/series/</loc>
+    <lastmod>2022-04-25T14:04:54+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2022-04-25T14:04:54+08:00</lastmod>
+  </url><url>
+    <loc>/tags/go-module/</loc>
+    <lastmod>2022-04-25T11:04:33+08:00</lastmod>
+  </url><url>
+    <loc>/doc-stackoverflow/go-use-local-module-in-development/</loc>
+    <lastmod>2022-04-25T11:04:33+08:00</lastmod>
+  </url><url>
+    <loc>/doc-stackoverflow/</loc>
+    <lastmod>2022-04-25T10:57:09+08:00</lastmod>
   </url><url>
     <loc>/tags/file/</loc>
     <lastmod>2022-04-24T17:16:44+08:00</lastmod>
   </url><url>
-    <loc>/categories/go/</loc>
-    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
-  </url><url>
-    <loc>/tags/stackoverflow/</loc>
-    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
-  </url><url>
     <loc>/posts/go-file-rename-pit/</loc>
-    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
-    <lastmod>2022-04-24T17:16:44+08:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
     <lastmod>2022-04-24T17:16:44+08:00</lastmod>
   </url><url>
     <loc>/tags/http/</loc>
@@ -65,9 +80,6 @@
     <loc>/posts/go-redis-request-log-dumper/</loc>
     <lastmod>2022-04-23T19:05:01+08:00</lastmod>
   </url><url>
-    <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
-  </url><url>
     <loc>/posts/go-set-value-via-reflect-package/</loc>
     <lastmod>2022-04-21T19:59:01+08:00</lastmod>
   </url><url>
@@ -76,9 +88,6 @@
   </url><url>
     <loc>/tags/%E5%8F%8D%E5%B0%84/</loc>
     <lastmod>2022-04-21T19:59:01+08:00</lastmod>
-  </url><url>
-    <loc>/tags/mysql/</loc>
-    <lastmod>2022-04-21T13:35:02+08:00</lastmod>
   </url><url>
     <loc>/posts/mysql-set-storage-engine/</loc>
     <lastmod>2022-04-21T13:35:02+08:00</lastmod>
@@ -96,9 +105,6 @@
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>
   </url><url>
     <loc>/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/</loc>
-    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
-  </url><url>
-    <loc>/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/</loc>
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>
   </url><url>
     <loc>/posts/database-performance-tuning/</loc>
@@ -170,7 +176,7 @@
     <loc>/doc-redis-commands/</loc>
     <lastmod>2022-04-10T11:34:31+08:00</lastmod>
   </url><url>
-    <loc>/series/</loc>
+    <loc>/doc-redis-commands/cluster-related/</loc>
     <lastmod>2022-04-10T11:34:31+08:00</lastmod>
   </url><url>
     <loc>/tags/protocol-buffer/</loc>
@@ -223,6 +229,21 @@
   </url><url>
     <loc>/doc-redis-commands/examples/</loc>
     <lastmod>2022-03-27T06:05:41+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/key-related/</loc>
+    <lastmod>2022-03-27T05:57:48+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/introduction/</loc>
+    <lastmod>2022-03-27T05:56:48+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/stream-related/</loc>
+    <lastmod>2022-03-27T05:47:22+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/zset-related/</loc>
+    <lastmod>2022-03-27T05:45:52+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/list-related/</loc>
+    <lastmod>2022-03-27T05:32:39+08:00</lastmod>
   </url><url>
     <loc>/tags/i/o/</loc>
   </url><url>
