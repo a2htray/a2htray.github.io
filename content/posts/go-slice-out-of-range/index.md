@@ -1,5 +1,5 @@
 ---
-title: "Slice 什么时候报 Out of Range"
+title: "Slice 什么时候报 out of range"
 date: 2022-04-26T09:24:01+08:00
 draft: false
 math: true
@@ -12,7 +12,7 @@ tags:
  - 面试经
 ---
 
-面试的时候问到了一个关于 go Slice 的问题，即为什么在 `a[i:]` 中 `i` 的取值可以是 `a` 的长度。平时开发中也是这么用的，但也没太深入的了解，所以在这篇文章中对其进行一些探讨。
+面试的时候问到了一个关于 go Slice 的问题，即为什么在 `a[i:]` 中 `i` 的取值可以是 `a` 的长度。平时开发中也是这么用的，但没太深入的了解，所以在这篇文章中对其进行一些探讨。
 
 <!--more-->
 
@@ -38,31 +38,71 @@ func remove(slice []int, s int) []int {
 
 **a[low:high] 表示式**
 
->  对于数组或字符串，下标的取值范围在 $0 \le low \lt high \le len(a)$，即下标可以取到数组的长度或字符串的长度。对于 slice 来说，下标的取值上限是 slice 的容量，显然 slice 的容量会大于等于其长度。
-
-## 猜想
-
-猜想：`a[len(a):] (len(a) < cap(a))` 是不是读到了 slice 相邻内存上的数据，因为相邻内存上没有数据，所以才会返回 `[]`。所以要先了解下 slice 容量的扩展方式，例子如下：
+>  对于数组或字符串，下标的取值范围在 $0 \le low \le high \le len(a)$，即下标可以取到数组的长度或字符串的长度。对于 slice 来说，下标的取值上限是 slice 的容量，显然 slice 的容量会大于等于其长度。
 
 ```go
 package main
 
 import (
 	"fmt"
-	"reflect"
-	"unsafe"
+)
+
+func main() {
+	ints := make([]int, 0)
+	for i := 0; i < 3; i++ {
+		ints = append(ints, i)
+	}
+
+	fmt.Printf("length: %d, capacity: %d\n", len(ints), cap(ints))
+	fmt.Println(ints[3:4])
+}
+```
+
+```bash
+length: 3, capacity: 4
+[0]
+```
+
+`ints` 的容量为 4，所以 `ints[3:4]` 符合定义。另外，扩容操作只有在使用 `append` 方法后才会执行，正常初始化的 slice 的长度与容量相同，如下：
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	ints := []int{1, 2, 3}
+	fmt.Printf("length: %d, capacity: %d\n", len(ints), cap(ints))
+}
+```
+
+```go
+length: 3, capacity: 3
+```
+
+值得注意的是，如果 `a[low:high]` 中的 `high` 缺省了会默认为 `a` 的长度，则 `a[len(a):]` 会变成 `a[len(a):len(a)]` ，而 `len(a) - len(a) = 0`，所以会取到一个空 `[]` 的 slice。
+
+## 猜想一
+
+猜想：`a[len(a):]` 是不是读到了 slice 相邻内存上的数据，因为相邻内存上没有数据，所以才会返回 `[]`。所以要先了解下 slice 容量的扩展方式，例子如下：
+
+```go
+package main
+
+import (
+	"fmt"
 )
 
 func main() {
 	ints := make([]int, 0)
 	for i := 0; i < 9; i++ {
-		sh := (*reflect.SliceHeader)(unsafe.Pointer(&ints))
+		// sh := (*reflect.SliceHeader)(unsafe.Pointer(&ints))
 		fmt.Printf("before adding a element [%d]\n", i)
-		fmt.Printf("length: %d, capacity: %d\n", sh.Len, sh.Cap)
+		fmt.Printf("length: %d, capacity: %d\n", len(ints), cap(ints))
 
 		ints = append(ints, i)
 		fmt.Printf("after adding a element [%d]\n", i)
-		fmt.Printf("length: %d, capacity: %d\n", sh.Len, sh.Cap)
+		fmt.Printf("length: %d, capacity: %d\n", len(ints), cap(ints))
 		fmt.Println()
 		// slice 容量从 4 开始以 2 的倍数增加
 	}
@@ -138,8 +178,7 @@ import (
 func main() {
 	ints := make([]int, 0)
 	ints = append(ints, 1, 2, 3)
-	// slice 的长度为 3，容量为 4
-	// 因为 slice 的长度是 3，所以取下标 3 的元素会越界
+	// slice 的长度为 3，容量为 3，取下标 3 的元素会越界
 	// fmt.Println("try to get the 4th element", ints[3])
 
 	// 取 slice 从下标 3 之后的元素，返回的是个 []
@@ -176,6 +215,35 @@ the address of ints[2]: 0xc0000be0a0
 2. 多次调用 `ints[3:]` 始终返回相同的结果，且长度和容量均为 0；
 
 显然，`ints[3:]` 并非取到了 `ints` 相邻内存中的值，所以猜想不成立。
+
+## 猜想二
+
+猜想：当 `len(a) < cap(a)` 时，`a[i:j] (i <= j, len(a) < j)` 取到了已分配内存中的零值。
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	ints := make([]int, 0)
+	for i := 0; i < 5; i++ {
+		ints = append(ints, i)
+	}
+
+	fmt.Printf("length: %d, capacity: %d\n", len(ints), cap(ints))
+	fmt.Println(ints[4:8])
+}
+```
+
+ ```bash
+length: 5, capacity: 8
+[4 0 0 0]
+ ```
+
+在上述代码中，`ints` 的长度为 5、容量为 8，`ints[4:8]` 中的下标值 8 符合小于等于容量的规定，语法有效。同时看到输出，也确实取到了已分配（未使用）内存中的值。
 
 ## 参考
 

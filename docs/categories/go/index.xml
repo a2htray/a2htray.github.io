@@ -13,7 +13,7 @@
       <pubDate>Tue, 26 Apr 2022 09:24:01 +0800</pubDate>
       
       <guid>/posts/go-slice-out-of-range/</guid>
-      <description>&lt;p&gt;面试的时候问到了一个关于 go Slice 的问题，即为什么在 &lt;code&gt;a[i:]&lt;/code&gt; 中 &lt;code&gt;i&lt;/code&gt; 的取值可以是 &lt;code&gt;a&lt;/code&gt; 的长度。平时开发中也是这么用的，但也没太深入的了解，所以在这篇文章中对其进行一些探讨。&lt;/p&gt;</description>
+      <description>&lt;p&gt;面试的时候问到了一个关于 go Slice 的问题，即为什么在 &lt;code&gt;a[i:]&lt;/code&gt; 中 &lt;code&gt;i&lt;/code&gt; 的取值可以是 &lt;code&gt;a&lt;/code&gt; 的长度。平时开发中也是这么用的，但没太深入的了解，所以在这篇文章中对其进行一些探讨。&lt;/p&gt;</description>
     </item>
     
     <item>
