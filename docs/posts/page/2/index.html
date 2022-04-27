@@ -176,6 +176,29 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/python-chi-square-test/">卡方检验 - 检验特征对是否相关
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="卡方检验 - 检验特征对是否相关" src="/images/chi-square-test.webp" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-11 18:57:39 &#43;0800 CST。">
+    2022-04-11
+  </span><span class="post-reading-time">
+    3 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge post-taxonomy">数据挖掘</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge post-taxonomy">统计学</a><a href="/tags/chi-square/" class="badge post-taxonomy">Chi-Square</a><a href="/tags/scipy/" class="badge post-taxonomy">scipy</a><a href="/tags/numpy/" class="badge post-taxonomy">NumPy</a><a href="/tags/pandas/" class="badge post-taxonomy">Pandas</a></span>
+</div>
+<div class="post-summary">
+      <p>在本文开头，贴一段百科对卡方检验基本原理的介绍：
+卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，如果卡方值越大，二者偏差程度越大；反之，二者偏差越小；若两个值完全相等时，卡方值就为 0，表明理论值完全符合。
+由此可见，卡方检验刻画的是一种偏离程度。那么在相关性计算中也可以利用卡方检验计算出显著性来判断两个特征是否相关。
+卡方检验 卡方检验的步骤如下：
+ 定义 H0 和 H1 假设； 根据领域知识定义显著性水平 $\alpha$，一般取 0.05，表示有 5% 的容错； 计算卡方值； 计算显著性水平，小于 $\alpha$ 则拒绝 H0 接受 H1；...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-chi-square-test/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/python-palmer-archipelago-penguin-testing/">帕尔默企鹅数据集测试
 </a>
     </h2>
@@ -359,28 +382,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/redis-master-slave-replication-deployment/">Redis 主从复制配置过程
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-30 10:28:31 &#43;0800 CST。">
-    2022-03-30
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge post-taxonomy">运维</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 主从复制可以实现数据库的读写分离，即主节点负责接收写请求、从节点负责接收读请求，是高性能 Redis 服务的基础。所以配置 Redis 主从复制应当作为开发者的技能之一，后文内容包括：</p>
-<ol>
-<li>单机配置一主二从的主从复制服务</li>
-<li>服务验证；</li>
-</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-master-slave-replication-deployment/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -430,6 +431,9 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go-map-detail/">Go Map
+</a>
+      </li><li>
         <a href="/posts/go-slice-out-of-range/">Slice 什么时候报 Out of Range
 </a>
       </li><li>
@@ -440,9 +444,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </a>
       </li><li>
         <a href="/posts/go-redis-request-log-dumper/">Redis 的 List 和 Stream：异步记录请求信息
-</a>
-      </li><li>
-        <a href="/posts/go-set-value-via-reflect-package/">Go 的反射包 Reflect
 </a>
       </li></ul>
   </div>
@@ -498,7 +499,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             HTTP</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
-            logging</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
+            map</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
             NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
             Pandas</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
             reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">

@@ -6,9 +6,18 @@
     <description>Recent content in Posts on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 26 Apr 2022 09:24:01 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Apr 2022 16:02:52 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Slice 什么时候报 Out of Range</title>
+      <title>Go Map</title>
+      <link>/posts/go-map-detail/</link>
+      <pubDate>Wed, 27 Apr 2022 16:02:52 +0800</pubDate>
+      
+      <guid>/posts/go-map-detail/</guid>
+      <description>&lt;p&gt;Go 中 map 是键值对的关联容器（Associative Container），可以存储不同类型的键值对，其中键的类型需要满足可比较（==）特性。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Slice 什么时候报 out of range</title>
       <link>/posts/go-slice-out-of-range/</link>
       <pubDate>Tue, 26 Apr 2022 09:24:01 +0800</pubDate>
       

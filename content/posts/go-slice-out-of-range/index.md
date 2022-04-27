@@ -10,6 +10,8 @@ tags:
  - slice
  - stackoverflow
  - 面试经
+images:
+ - images/go-slice.png
 ---
 
 面试的时候问到了一个关于 go Slice 的问题，即为什么在 `a[i:]` 中 `i` 的取值可以是 `a` 的长度。平时开发中也是这么用的，但没太深入的了解，所以在这篇文章中对其进行一些探讨。

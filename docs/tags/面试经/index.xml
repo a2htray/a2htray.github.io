@@ -8,7 +8,7 @@
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
     <lastBuildDate>Tue, 26 Apr 2022 09:24:01 +0800</lastBuildDate><atom:link href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Slice 什么时候报 Out of Range</title>
+      <title>Slice 什么时候报 out of range</title>
       <link>/posts/go-slice-out-of-range/</link>
       <pubDate>Tue, 26 Apr 2022 09:24:01 +0800</pubDate>
       
