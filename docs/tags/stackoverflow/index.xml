@@ -22,7 +22,7 @@
       <pubDate>Mon, 25 Apr 2022 14:04:54 +0800</pubDate>
       
       <guid>/doc-stackoverflow/mysql-modify-table-column-comment/</guid>
-      <description>小小的修改列的注释信息也能引发一些思考。 正确的修改方式要带上原来列的定义，如： ALTERTABLE`user`CHANGE`id``id`INT(11)COMMENT&amp;#39;id of user&amp;#39;;高票答案的几个回复： Note that altering a comment will cause a full</description>
+      <description>&lt;p&gt;小小的修改列的注释信息也能引发一些思考。&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 27 Apr 2022 16:02:52 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Apr 2022 20:55:01 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IDE 代码显示无引用 no usages found</title>
+      <link>/posts/ide-no-usages-found/</link>
+      <pubDate>Wed, 27 Apr 2022 20:55:01 +0800</pubDate>
+      
+      <guid>/posts/ide-no-usages-found/</guid>
+      <description>&lt;p&gt;IntelliJ IDEA 代码显示灰色，表示无任何引用，实际上是有引用。出现这种问题，非常不易于 DEBUG。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Go Map</title>
       <link>/posts/go-map-detail/</link>
@@ -35,7 +44,7 @@
     </item>
     
     <item>
-      <title>根据 URL 下载文件</title>
+      <title>URL 下载网络文件</title>
       <link>/posts/go-download-network-file/</link>
       <pubDate>Sun, 24 Apr 2022 10:00:25 +0800</pubDate>
       
@@ -84,7 +93,8 @@
       <pubDate>Thu, 21 Apr 2022 13:35:02 +0800</pubDate>
       
       <guid>/posts/mysql-set-storage-engine/</guid>
-      <description>在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。 选择一个合适的存储引擎至关重要 存储引擎 根据是否支持事务，MyS</description>
+      <description>&lt;p&gt;在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。&lt;/p&gt;
+&lt;p&gt;选择一个合适的存储引擎至关重要。&lt;/p&gt;</description>
     </item>
     
     <item>

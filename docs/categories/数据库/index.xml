@@ -13,7 +13,7 @@
       <pubDate>Mon, 25 Apr 2022 14:04:54 +0800</pubDate>
       
       <guid>/doc-stackoverflow/mysql-modify-table-column-comment/</guid>
-      <description>小小的修改列的注释信息也能引发一些思考。 正确的修改方式要带上原来列的定义，如： ALTERTABLE`user`CHANGE`id``id`INT(11)COMMENT&amp;#39;id of user&amp;#39;;高票答案的几个回复： Note that altering a comment will cause a full</description>
+      <description>&lt;p&gt;小小的修改列的注释信息也能引发一些思考。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -39,7 +39,8 @@
       <pubDate>Thu, 21 Apr 2022 13:35:02 +0800</pubDate>
       
       <guid>/posts/mysql-set-storage-engine/</guid>
-      <description>在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。 选择一个合适的存储引擎至关重要 存储引擎 根据是否支持事务，MyS</description>
+      <description>&lt;p&gt;在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。&lt;/p&gt;
+&lt;p&gt;选择一个合适的存储引擎至关重要。&lt;/p&gt;</description>
     </item>
     
     <item>

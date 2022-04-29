@@ -13,7 +13,8 @@
       <pubDate>Thu, 21 Apr 2022 13:35:02 +0800</pubDate>
       
       <guid>/posts/mysql-set-storage-engine/</guid>
-      <description>在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。 选择一个合适的存储引擎至关重要 存储引擎 根据是否支持事务，MyS</description>
+      <description>&lt;p&gt;在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。&lt;/p&gt;
+&lt;p&gt;选择一个合适的存储引擎至关重要。&lt;/p&gt;</description>
     </item>
     
   </channel>

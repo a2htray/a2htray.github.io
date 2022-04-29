@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/posts/ide-no-usages-found/</loc>
+    <lastmod>2022-04-27T20:55:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/jetbrains/</loc>
+    <lastmod>2022-04-27T20:55:01+08:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2022-04-27T20:55:01+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2022-04-27T20:55:01+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2022-04-27T20:55:01+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-27T20:55:01+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2022-04-27T20:55:01+08:00</lastmod>
+  </url><url>
     <loc>/categories/go/</loc>
     <lastmod>2022-04-27T16:02:52+08:00</lastmod>
   </url><url>
@@ -9,18 +30,6 @@
     <lastmod>2022-04-27T16:02:52+08:00</lastmod>
   </url><url>
     <loc>/tags/map/</loc>
-    <lastmod>2022-04-27T16:02:52+08:00</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2022-04-27T16:02:52+08:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2022-04-27T16:02:52+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
-    <lastmod>2022-04-27T16:02:52+08:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
     <lastmod>2022-04-27T16:02:52+08:00</lastmod>
   </url><url>
     <loc>/tags/slice/</loc>
@@ -68,10 +77,10 @@
     <loc>/tags/http/</loc>
     <lastmod>2022-04-24T10:00:25+08:00</lastmod>
   </url><url>
-    <loc>/categories/web/</loc>
+    <loc>/posts/go-download-network-file/</loc>
     <lastmod>2022-04-24T10:00:25+08:00</lastmod>
   </url><url>
-    <loc>/posts/go-download-network-file/</loc>
+    <loc>/categories/web/</loc>
     <lastmod>2022-04-24T10:00:25+08:00</lastmod>
   </url><url>
     <loc>/tags/gin/</loc>

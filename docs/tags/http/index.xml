@@ -8,7 +8,7 @@
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
     <lastBuildDate>Sun, 24 Apr 2022 10:00:25 +0800</lastBuildDate><atom:link href="/tags/http/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>根据 URL 下载文件</title>
+      <title>URL 下载网络文件</title>
       <link>/posts/go-download-network-file/</link>
       <pubDate>Sun, 24 Apr 2022 10:00:25 +0800</pubDate>
       

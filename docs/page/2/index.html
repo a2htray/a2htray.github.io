@@ -172,6 +172,30 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/mysql-writing-procedure/">MySQL 存储过程
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="MySQL 存储过程" src="/images/mysql-procedure.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-19 19:35:33 &#43;0800 CST。">
+    2022-04-19
+  </span><span class="post-reading-time">
+    4 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/tags/mysql/" class="badge post-taxonomy">MySQL</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge post-taxonomy">存储过程</a></span>
+</div>
+<div class="post-summary">
+      <p>存储过程是存储在数据库中并且已经提前编译好的 SQL 语句集合，它是应用中数据操作的部分逻辑实现。MySQL 5 版本引入了这一设计，存储过程包含 3 个部分：</p>
+<ol>
+<li>名称；</li>
+<li>参数列表；</li>
+<li>SQL 语句；</li>
+</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/mysql-writing-procedure/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/interview-csig/">CSIG 线上面试
 </a>
     </h2>
@@ -358,29 +382,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/redis-cluster-deployment/">Redis 集群配置过程
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-07 14:07:35 &#43;0800 CST。">
-    2022-04-07
-  </span><span class="post-reading-time">
-    3 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge post-taxonomy">运维</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 集群是基于“主从复制”特性之上的分布式 Redis 版本，可提供高并发、高性能、高可用的数据库服务。Redis 集群突破了单台服务器的内存局限，集群中的每一个节点都可以存储数据，同时维护着 &ldquo;key-node&rdquo; 的映射表。本文记录了 3 主 3 从的 Redis 集群的配置过程，主要内容包括：</p>
-<ol>
-<li>Redis 集群的配置过程；</li>
-<li>集群相关命令；</li>
-<li>Go 存取集群数据；</li>
-</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-cluster-deployment/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -433,6 +434,9 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/ide-no-usages-found/">IDE 代码显示无引用 No Usages Found
+</a>
+      </li><li>
         <a href="/posts/go-map-detail/">Go Map
 </a>
       </li><li>
@@ -443,9 +447,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </a>
       </li><li>
         <a href="/doc-stackoverflow/go-use-local-module-in-development/">Go Module 使用本地开发的包
-</a>
-      </li><li>
-        <a href="/posts/go-file-rename-pit/">Windows 下移动文件的坑
 </a>
       </li></ul>
   </div>
@@ -476,7 +477,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             可视化</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
             统计学</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge rounded post-taxonomy" title="运维">
             运维</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
-            机器学习</a></div>
+            机器学习</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
+            生产工具</a></div>
       </div>
     </section><section class="tags-taxonomies row card component">
       <div class="card-header">
@@ -498,7 +500,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             Gin</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
             Go 1.18</a><a href="/tags/go-module/" class="badge rounded post-taxonomy" title="go module">
             go module</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
-            HTTP</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
+            HTTP</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
+            JetBrains</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
             logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
