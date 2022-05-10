@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>正则表达式 on Mozart&#39;s Sheet</title>
+    <link>/doc-regular-expressions/</link>
+    <description>Recent content in 正则表达式 on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Fri, 29 Apr 2022 23:45:10 +0800</lastBuildDate><atom:link href="/doc-regular-expressions/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

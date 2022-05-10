@@ -6,7 +6,36 @@
     <description>Recent content in Posts on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 27 Apr 2022 20:55:01 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 May 2022 22:15:52 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>与 image 概念相关的命令</title>
+      <link>/posts/docker-roadmap-image/</link>
+      <pubDate>Tue, 10 May 2022 22:15:52 +0800</pubDate>
+      
+      <guid>/posts/docker-roadmap-image/</guid>
+      <description>&lt;p&gt;Docker 命令快速查询，收集了与 docker image 相关的命令及部分示例。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>channel 的方向</title>
+      <link>/posts/go-channel-direction/</link>
+      <pubDate>Thu, 05 May 2022 17:17:29 +0800</pubDate>
+      
+      <guid>/posts/go-channel-direction/</guid>
+      <description>&lt;p&gt;在回忆管道方向的语法上时不时地会出错，所以搜罗一些资料以加强自身的记忆。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go&amp;MySQL`max_allowed_packet`</title>
+      <link>/posts/go-max-allowed-packet/</link>
+      <pubDate>Sat, 30 Apr 2022 20:25:09 +0800</pubDate>
+      
+      <guid>/posts/go-max-allowed-packet/</guid>
+      <description>&lt;p&gt;当发送给数据库的语句过大时，会报如下错误：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;panic: Error 1105: Parameter of prepared statement which is &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; through mysql_send_long_data&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; is longer than &lt;span class=&#34;s1&#34;&gt;&amp;#39;max_allowed_packet&amp;#39;&lt;/span&gt; bytes
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;从报错中可知，需要修改 &lt;code&gt;max_allowed_packet&lt;/code&gt; 选项的值。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>IDE 代码显示无引用 no usages found</title>
       <link>/posts/ide-no-usages-found/</link>
