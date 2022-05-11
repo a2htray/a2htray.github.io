@@ -172,6 +172,53 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Go 内置的 RPC 包" src="/images/operating-system-remote-procedure-call-1.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-10 16:37:30 &#43;0800 CST。">
+    2022-04-10
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/rpc/" class="badge post-taxonomy">RPC</a><a href="/tags/jsonrpc/" class="badge post-taxonomy">jsonrpc</a></span>
+</div>
+<div class="post-summary">
+      <p>在网络或 I/O 连接中，可以使用 net/rpc 包实现对一个对象的导出方法的调用，即远程过程调用（Remote Procedure Call，RPC）。通过向 RPC 服务注册一个对象，使其可被远程调用，进而实现一些复杂的业务逻辑。
+项目结构 示例项目的结构如下：
+client - client.go - json_client.go models - greeting.go server - json_server.go - server.go 注册服务 一个可被远程调用的方法须满足以下条件：
+ 方法所属结构是公开的； 方法是分开的； 方法的参数类型是分开的； 方法带两个参数，第 2 个参数为指针； 方法返回值为 error ...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-built-in-rpc-package/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/go-1.18-release-features/">Go 1.18 特性 - 泛型
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Go 1.18 特性 - 泛型" src="/images/golang-1.18-release.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-10 12:11:38 &#43;0800 CST。">
+    2022-04-10
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/go-1.18/" class="badge post-taxonomy">Go 1.18</a></span>
+</div>
+<div class="post-summary">
+      <p>Go 1.18 在 2022 年 3 月 15 日发布，根据团队的<a href="https://go.dev/blog/go1.18" target="_blank" rel="noopener noreferrer">博文</a>介绍，1.18 版本包含 4 个重要特性：</p>
+<ol>
+<li><strong>泛型</strong>；</li>
+<li>fuzzing；</li>
+<li>工作空间；</li>
+<li>20% 的性能提升；</li>
+</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-1.18-release-features/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/doc-redis-commands/cluster-related/">集群相关
 </a>
     </h2>
@@ -327,42 +374,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/server-related/">服务相关
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-30 09:24:49 &#43;0800 CST。">
-    2022-03-30
-  </span><span class="post-reading-time">
-    1 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与服务相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/server-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/web-same-origin-policy/">同源策略 Same-Origin Policy
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-29 15:56:02 &#43;0800 CST。">
-    2022-03-29
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge post-taxonomy">Web 安全</a></span>
-</div>
-<div class="post-summary">
-      <p>同源策略（Same-Origin Policy，SOP）是一种保护 Web 资源的安全机制，它限制了不同源之间的资源访问。需要说明的是，SOP 只作用于应用脚本，这意味着在 HTML 标签中可以引入不同源的图片、CSS 文件或动态加载的脚本文件（见<a href="/posts/web-same-origin-policy/#%e9%aa%8c%e8%af%81-1">验证 1</a>）。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/web-same-origin-policy/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -415,6 +426,9 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go-sql-escape/">SQL 转义问题
+</a>
+      </li><li>
         <a href="/posts/docker-roadmap-image/">与 Image 概念相关的命令
 </a>
       </li><li>
@@ -422,6 +436,9 @@
 </a>
       </li><li>
         <a href="/posts/go-max-allowed-packet/">Go&amp;MySQL`max_allowed_packet`
+</a>
+      </li><li>
+        <a href="/doc-regular-expressions/introduction/">介绍
 </a>
       </li><li>
         <a href="/posts/ide-no-usages-found/">IDE 代码显示无引用 No Usages Found
@@ -438,12 +455,6 @@
       </li><li>
         <a href="/doc-stackoverflow/go-use-local-module-in-development/">Go Module 使用本地开发的包
 </a>
-      </li><li>
-        <a href="/posts/go-file-rename-pit/">Windows 下移动文件的坑
-</a>
-      </li><li>
-        <a href="/posts/go-download-network-file/">URL 下载网络文件
-</a>
       </li></ul>
   </div>
 </section><section class="series-taxonomies row card component">
@@ -455,7 +466,8 @@
       <div class="card-body">
         <div class="py-2"><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge rounded post-taxonomy" title="Redis 命令手册">
             Redis 命令手册</a><a href="/series/stackoverflow-magic/" class="badge rounded post-taxonomy" title="Stackoverflow Magic">
-            Stackoverflow Magic</a></div>
+            Stackoverflow Magic</a><a href="/series/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="badge rounded post-taxonomy" title="正则表达式">
+            正则表达式</a></div>
       </div>
     </section><section class="categories-taxonomies row card component">
       <div class="card-header">
@@ -474,7 +486,8 @@
             可视化</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
             生产工具</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
             统计学</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
-            机器学习</a></div>
+            机器学习</a><a href="/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="badge rounded post-taxonomy" title="正则表达式">
+            正则表达式</a></div>
       </div>
     </section><section class="tags-taxonomies row card component">
       <div class="card-header">
@@ -513,7 +526,8 @@
             RPC</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
             scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
             sklearn</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
-            slice</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            slice</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
+            sqlx</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
             Web 安全</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
             反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
             大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">

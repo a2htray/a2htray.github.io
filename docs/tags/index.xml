@@ -6,7 +6,25 @@
     <description>Recent content in 标签 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 10 May 2022 22:15:52 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 May 2022 13:49:39 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL</title>
+      <link>/tags/mysql/</link>
+      <pubDate>Wed, 11 May 2022 13:49:39 +0800</pubDate>
+      
+      <guid>/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqlx</title>
+      <link>/tags/sqlx/</link>
+      <pubDate>Wed, 11 May 2022 13:49:39 +0800</pubDate>
+      
+      <guid>/tags/sqlx/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Docker</title>
       <link>/tags/docker/</link>
@@ -40,15 +58,6 @@
       <pubDate>Thu, 05 May 2022 17:17:29 +0800</pubDate>
       
       <guid>/tags/channel/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MySQL</title>
-      <link>/tags/mysql/</link>
-      <pubDate>Sat, 30 Apr 2022 20:25:09 +0800</pubDate>
-      
-      <guid>/tags/mysql/</guid>
       <description></description>
     </item>
     
