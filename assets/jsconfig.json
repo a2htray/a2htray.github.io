@@ -4,7 +4,7 @@
   "paths": {
    "*": [
     "*",
-    "..\\themes\\hugo-theme-bootstrap\\assets\\*"
+    "../themes/hugo-theme-bootstrap/assets/*"
    ]
   }
  }

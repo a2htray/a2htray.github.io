@@ -11,13 +11,13 @@
     <loc>/tags/mysql/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2022-05-11T13:49:39+08:00</lastmod>
-  </url><url>
     <loc>/posts/go-sql-escape/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
     <loc>/tags/sqlx/</loc>
+    <lastmod>2022-05-11T13:49:39+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
@@ -26,7 +26,7 @@
     <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
-    <loc>/tags/</loc>
+    <loc>/posts/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
     <loc>/tags/docker/</loc>
@@ -38,10 +38,10 @@
     <loc>/tags/roadmap/</loc>
     <lastmod>2022-05-10T22:15:52+08:00</lastmod>
   </url><url>
-    <loc>/posts/docker-roadmap-image/</loc>
+    <loc>/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2022-05-10T22:15:52+08:00</lastmod>
   </url><url>
-    <loc>/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/</loc>
+    <loc>/posts/docker-roadmap-image/</loc>
     <lastmod>2022-05-10T22:15:52+08:00</lastmod>
   </url><url>
     <loc>/categories/%E8%BF%90%E7%BB%B4/</loc>
@@ -56,9 +56,6 @@
     <loc>/posts/go-max-allowed-packet/</loc>
     <lastmod>2022-04-30T20:25:09+08:00</lastmod>
   </url><url>
-    <loc>/series/</loc>
-    <lastmod>2022-04-29T23:45:33+08:00</lastmod>
-  </url><url>
     <loc>/doc-regular-expressions/introduction/</loc>
     <lastmod>2022-04-29T23:45:33+08:00</lastmod>
   </url><url>
@@ -66,6 +63,9 @@
     <lastmod>2022-04-29T23:45:33+08:00</lastmod>
   </url><url>
     <loc>/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
+    <lastmod>2022-04-29T23:45:33+08:00</lastmod>
+  </url><url>
+    <loc>/series/</loc>
     <lastmod>2022-04-29T23:45:33+08:00</lastmod>
   </url><url>
     <loc>/doc-regular-expressions/</loc>
@@ -164,6 +164,9 @@
     <loc>/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/</loc>
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>
   </url><url>
+    <loc>/categories/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
+  </url><url>
     <loc>/posts/database-performance-tuning/</loc>
     <lastmod>2022-04-14T19:59:24+08:00</lastmod>
   </url><url>
@@ -200,13 +203,13 @@
     <loc>/tags/sklearn/</loc>
     <lastmod>2022-04-11T13:28:26+08:00</lastmod>
   </url><url>
+    <loc>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
+  </url><url>
     <loc>/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
     <lastmod>2022-04-11T13:28:26+08:00</lastmod>
   </url><url>
     <loc>/posts/python-palmer-archipelago-penguin-testing/</loc>
-    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
-  </url><url>
-    <loc>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2022-04-11T13:28:26+08:00</lastmod>
   </url><url>
     <loc>/posts/go-built-in-rpc-package/</loc>

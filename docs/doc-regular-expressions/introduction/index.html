@@ -12,7 +12,7 @@
 <meta name="description" content="正则表达式教程 - 介绍。" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="介绍">
 <meta itemprop="description" content="正则表达式教程 - 介绍。"><meta itemprop="datePublished" content="2022-04-29T23:45:33+08:00" />
 <meta itemprop="dateModified" content="2022-04-29T23:45:33+08:00" />
-<meta itemprop="wordCount" content="610">
+<meta itemprop="wordCount" content="1288">
 <meta itemprop="keywords" content="" /><meta property="og:title" content="介绍" />
 <meta property="og:description" content="正则表达式教程 - 介绍。" />
 <meta property="og:type" content="article" />
@@ -24,7 +24,6 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="介绍"/>
 <meta name="twitter:description" content="正则表达式教程 - 介绍。"/>
-<meta name="twitter:site" content="@yourtwitterusername"/>
 <meta property="og:image" content="/false"/>
   <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.167e94c7b316d713be3630685cf55d2d89f5ad9ac6d51a75f3f9df14324de701.css" integrity="sha256-Fn6Ux7MW1xO+NjBoXPVdLYn1rZrG1Rp18/nfFDJN5wE=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
   <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
@@ -226,18 +225,43 @@
   <span class="post-date" title="创建于 2022-04-29 23:45:33 &#43;0800 CST。">
     2022-04-29
   </span><span class="post-reading-time">
-    2 分钟阅读
+    3 分钟阅读
   </span><span class="post-taxonomies"><a href="/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="badge post-taxonomy">正则表达式</a><a href="/series/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="badge post-taxonomy">正则表达式</a></span>
 </div>
 <div class="post-content mb-3"><p>正则表达式教程 - 介绍。</p>
 <h2 id="学习如何使用和充分利用正则表达式">学习如何使用和充分利用正则表达式<a class="anchor ms-1" href="#学习如何使用和充分利用正则表达式"><i class="fas fa-link"></i></a></h2>
 <p>这篇教程会教会你所有关于如何创造高效正则表达式的方法。教程从最基础的概念开始，所以即使你不懂正则表达式也没有关系，你也可能跟上教程的节奏。本教程会讲解正则表达式引擎的工作机制，理解正则表达式引擎有助于对一些疑难杂症的问题快速寻找解决方案。同时，本教程也旨在节约你学习正则表达式的时间，带你更好地入门。</p>
 <h2 id="什么是正则表达式">什么是正则表达式<a class="anchor ms-1" href="#什么是正则表达式"><i class="fas fa-link"></i></a></h2>
-<p>一般来说，正则表达式是指用于描述特写长度文本的<strong>模式字符串</strong>，正则的名字来源于数学方法，但本教程并不会深入数学。正则一般可以缩写为 regex 和 regexp，本教程使用 regex（PS：翻译过程中使用 regex 表示正则）。在书写的过程中，使用 <code>regex</code> 表示一个正则表达式字符串。</p>
-<p>第 1 个示例 <code>regex</code> 是一个完全合法的正则表达式</p>
-<p>This first example is actually a perfectly valid regex. It is the most basic pattern, simply matching the literal text <code>regex</code>. A “match” is the piece of text, or sequence of bytes or characters that pattern was found to correspond to by the regex processing software. Matches are highlighted in blue on this site.</p>
-<p><code>\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b</code> is a more complex pattern. It describes a series of letters, digits, dots, underscores, percentage signs and hyphens, followed by an at sign, followed by another series of letters, digits and hyphens, finally followed by a single dot and two or more letters. In other words: this pattern describes an <a href="https://www.regular-expressions.info/email.html" target="_blank" rel="noopener noreferrer">email address</a>. This also shows the syntax highlighting applied to regular expressions on this site. Word boundaries and quantifiers are blue, character classes are orange, and escaped literals are gray. You’ll see additional colors like green for grouping and purple for meta tokens later in the tutorial.</p>
-<p>With the above regular expression pattern, you can search through a text file to find email addresses, or verify if a given string looks like an email address. This tutorial uses the term “string” to indicate the text that the regular expression is applied to. This website highlights them in <code>green</code>. The term “string” or “character string” is used by programmers to indicate a sequence of characters. In practice, you can use regular expressions with whatever data you can access using the application or programming language you are working with.</p></div></div>
+<p>一般来说，正则表达式是指用于描述某特定长度文本的<strong>模式字符串</strong>，正则的名字来源于数学方法，但本教程并不会深入数学。正则一般可以缩写为 regex 和 regexp，本教程使用 regex（PS：翻译过程中使用 regex 表示正则）。在书写的过程中，使用 <code>regex</code> 表示一个正则表达式字符串。</p>
+<p>第 1 个示例 <code>regex</code> 是一个完全合法的正则表达式，它是一个最简单的正则匹配模式，仅仅可以匹配字符串 <font color="blue">regex</font>。如：</p>
+<p><img class="img-fluid" alt="" src="/doc-regular-expressions/introduction/WX20220511-211632@2x.png" loading="lazy"
+  
+   />
+
+</p>
+<p>术语 <code>匹配项（match）</code>是根据正则表达式从文本中找到的一个文本片段，在本教程中使用<font color="blue">蓝底字</font>表示匹配项。<code>\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b</code> 是一个复杂的正则表达式，它描述了一系列的字母 <code>A-Za-z</code>、数字 <code>0-9</code>、点号 <code>.</code>、下划号 <code>_</code>、百分号 <code>%</code>、加号 <code>+</code> 及减号 <code>-</code> 的文本，然后文本后接一个 <code>@</code> 符号，再接另一系列的字母、数字、点号、减号的文本，最后接至少两个的大写字母。换言之，该模式描述的是一个邮箱。如：</p>
+<p><img class="img-fluid" alt="" src="/doc-regular-expressions/introduction/WX20220511-213043@2x.png" loading="lazy"
+  
+   />
+
+</p>
+<p>正则表达式各部分说明如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="se">\b</span><span class="o">[</span>A-Za-z0-9._%+-<span class="o">]</span>+@<span class="o">[</span>A-Za-z0-9.-<span class="o">]</span>+<span class="se">\.</span><span class="o">[</span>A-Za-z<span class="o">]{</span>2,<span class="o">}</span><span class="se">\b</span>
+</span></span><span class="line"><span class="cl">- <span class="se">\b</span> 边界符
+</span></span><span class="line"><span class="cl">- <span class="o">[</span>A-Za-z0-9._%+-<span class="o">]</span> 、 <span class="o">[</span>A-Za-z0-9.-<span class="o">]</span> 及 <span class="o">[</span>A-Za-z<span class="o">]</span> 为字符
+</span></span><span class="line"><span class="cl">- <span class="se">\.</span> 转义
+</span></span></code></pre></div><p>通过上述的邮箱正则表达式，你可以在一段文本中找到邮箱字符串，或者给定一个字符串并判断其是否为一个邮箱。在本教程中，使用术语<code>字符串</code>表示一串字符。在实际应用中，你可以在程序或编程语言中的任意数据上使用正则表达式。</p>
+<h2 id="不同的正则表达式引擎">不同的正则表达式引擎<a class="anchor ms-1" href="#不同的正则表达式引擎"><i class="fas fa-link"></i></a></h2>
+<p>正则表达式引擎可以是一个可处理正则表达式的程序或软件，引擎可以在给定的文本中通过模式串找到特定的字符串。通常情况下，正则表达式引擎只是一个大型应用的部分功能，并且你也不能直接修改该引擎。当需要正则表达式时，只要确保在合法的数据上使用，你可以随时的使用正则表达式引擎。</p>
+<p>在不同的编程语言或软件中，各正则表达式引擎并不是完全兼容，正则的语法也有各自的特点。本教程会涵盖所有流行的正则表达式的特点，包括 <a href="https://www.regular-expressions.info/perl.html" target="_blank" rel="noopener noreferrer">Perl</a>、<a href="https://www.regular-expressions.info/pcre.html" target="_blank" rel="noopener noreferrer">PCRE</a>、<a href="https://www.regular-expressions.info/php.html" target="_blank" rel="noopener noreferrer">PHP</a>、<a href="https://www.regular-expressions.info/dotnet.html" target="_blank" rel="noopener noreferrer">.NET</a>、 <a href="https://www.regular-expressions.info/java.html" target="_blank" rel="noopener noreferrer">Java</a>、<a href="https://www.regular-expressions.info/javascript.html" target="_blank" rel="noopener noreferrer">JavaScript</a>、<a href="https://www.regular-expressions.info/xregexp.html" target="_blank" rel="noopener noreferrer">XRegExp</a>、<a href="https://www.regular-expressions.info/vbscript.html" target="_blank" rel="noopener noreferrer">VBScript</a>、<a href="https://www.regular-expressions.info/python.html" target="_blank" rel="noopener noreferrer">Python</a>、<a href="https://www.regular-expressions.info/ruby.html" target="_blank" rel="noopener noreferrer">Ruby</a>、<a href="https://www.regular-expressions.info/delphi.html" target="_blank" rel="noopener noreferrer">Delphi</a>、<a href="https://www.regular-expressions.info/rlanguage.html" target="_blank" rel="noopener noreferrer">R</a>、<a href="https://www.regular-expressions.info/tcl.html" target="_blank" rel="noopener noreferrer">Tcl</a>、<a href="https://www.regular-expressions.info/posix.html" target="_blank" rel="noopener noreferrer">POSIX</a> 或 <a href="https://www.regular-expressions.info/tools.html" target="_blank" rel="noopener noreferrer">其它</a>，并介绍各正则引擎的不同之处。当然，如果教程的内容没有涵盖到你使用的语言或应用，也会介绍一些其它的正则库供你使用。</p>
+<h2 id="正则初探">正则初探<a class="anchor ms-1" href="#正则初探"><i class="fas fa-link"></i></a></h2>
+<p>你可以很轻松地在支持正则表达式的文本编辑器使用正则表达式，如 <a href="https://www.regular-expressions.info/editpadpro.html" target="_blank" rel="noopener noreferrer">EditPad Pro</a>。如果你没有这样的编辑器，可以下免费版本的<a href="https://www.editpadpro.com/download.html" target="_blank" rel="noopener noreferrer">免费版本</a>。</p>
+<p><img class="img-fluid" alt="" src="/doc-regular-expressions/introduction/eppeditpadpro.png" loading="lazy"
+  
+   />
+
+</p>
+<p>将本文的内容复制到 EditPad Pro 上，然后选择 Search|Multiline Search Panel in the menu，在编辑器的底部就正则所匹配到的字符串。作为开发者的你，也必须熟悉一门编程语言，你只要使用自己熟悉的语言就可以快速的尝试正则表达式。使用正则表达式可以减少你的开发时间，因为在众多语言中，声明一个正则并利用语言提供的方法，代码量要比自己去解析要来得少很多。</p></div></div>
 <div class="card-footer"></div>
 </article><div class="post-copyright mb-3 row card component" id="post-copyright">
     <div class="card-header">
@@ -275,6 +299,8 @@
   <ul>
     <li><a href="#学习如何使用和充分利用正则表达式">学习如何使用和充分利用正则表达式</a></li>
     <li><a href="#什么是正则表达式">什么是正则表达式</a></li>
+    <li><a href="#不同的正则表达式引擎">不同的正则表达式引擎</a></li>
+    <li><a href="#正则初探">正则初探</a></li>
   </ul>
 </nav>
   </div>
@@ -322,7 +348,10 @@
   </div>
 </aside>
 </div>
-    </main><footer class="footer mt-auto py-3 text-center container"><div class="copyright mb-2">
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav justify-content-center mb-2"><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+<div class="copyright mb-2">
   Copyright © 2016-2022 a2htray. All Rights Reserved.
 </div>
 <div class="powered-by mb-2">
@@ -330,7 +359,7 @@
 </div>
 
 </footer>
-<script src="/assets/main/bundle.min.6fb7f1c30a3ce84ff982e134ff3ef370334adfc44a73436111bbbee6bb315395.js" integrity="sha256-b7fxwwo86E/5guE0/z7zcDNK38RKc0NhEbu&#43;5rsxU5U=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script src="/assets/main/bundle.min.2d4afda4c3db522321386e0a0e4a500c7fbb559e735b4a4a38525eca46103101.js" integrity="sha256-LUr9pMPbUiMhOG4KDkpQDH&#43;7VZ5zW0pKOFJeykYQMQE=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -341,6 +370,6 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-</script><script src="/assets/viewer/bundle.min.3ce688736c8224a9cd6b3104011fc2a816428f07c0fa226359736f33f0c593de.js" integrity="sha256-POaIc2yCJKnNazEEAR/CqBZCjwfA&#43;iJjWXNvM/DFk94=" crossorigin="anonymous" defer></script>
+</script><script src="/assets/viewer/bundle.min.5ad926b46749e67285f66e2fdbc2d7cfb2689e8d9f2fcc2f59c3f51d2a1c4506.js" integrity="sha256-WtkmtGdJ5nKF9m4v28LXz7Jono2fL8wvWcP1HSocRQY=" crossorigin="anonymous" defer></script>
 </body>
 </html>
