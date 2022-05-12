@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>文章 on Mozart&#39;s Sheet</title>
+    <title>Posts on Mozart&#39;s Sheet</title>
     <link>/posts/</link>
-    <description>Recent content in 文章 on Mozart&#39;s Sheet</description>
+    <description>Recent content in Posts on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
     <lastBuildDate>Wed, 11 May 2022 13:49:39 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />

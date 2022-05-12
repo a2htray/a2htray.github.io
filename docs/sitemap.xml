@@ -2,13 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/tags/node.js/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/tags/stackoverflow/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/series/stackoverflow-magic/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/categories/web/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/series/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/doc-stackoverflow/nodejs-fs-copyfile/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
     <loc>/categories/go/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
-    <loc>/</loc>
+    <loc>/tags/mysql/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
-    <loc>/tags/mysql/</loc>
+    <loc>/posts/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
     <loc>/posts/go-sql-escape/</loc>
@@ -17,16 +44,7 @@
     <loc>/tags/sqlx/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2022-05-11T13:49:39+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
-    <lastmod>2022-05-11T13:49:39+08:00</lastmod>
-  </url><url>
     <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-05-11T13:49:39+08:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
     <loc>/tags/docker/</loc>
@@ -38,10 +56,10 @@
     <loc>/tags/roadmap/</loc>
     <lastmod>2022-05-10T22:15:52+08:00</lastmod>
   </url><url>
-    <loc>/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/</loc>
+    <loc>/posts/docker-roadmap-image/</loc>
     <lastmod>2022-05-10T22:15:52+08:00</lastmod>
   </url><url>
-    <loc>/posts/docker-roadmap-image/</loc>
+    <loc>/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2022-05-10T22:15:52+08:00</lastmod>
   </url><url>
     <loc>/categories/%E8%BF%90%E7%BB%B4/</loc>
@@ -65,9 +83,6 @@
     <loc>/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
     <lastmod>2022-04-29T23:45:33+08:00</lastmod>
   </url><url>
-    <loc>/series/</loc>
-    <lastmod>2022-04-29T23:45:33+08:00</lastmod>
-  </url><url>
     <loc>/doc-regular-expressions/</loc>
     <lastmod>2022-04-29T23:45:10+08:00</lastmod>
   </url><url>
@@ -89,16 +104,10 @@
     <loc>/posts/go-slice-out-of-range/</loc>
     <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
-    <loc>/tags/stackoverflow/</loc>
-    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
-  </url><url>
     <loc>/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/</loc>
     <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
     <loc>/doc-stackoverflow/mysql-modify-table-column-comment/</loc>
-    <lastmod>2022-04-25T14:04:54+08:00</lastmod>
-  </url><url>
-    <loc>/series/stackoverflow-magic/</loc>
     <lastmod>2022-04-25T14:04:54+08:00</lastmod>
   </url><url>
     <loc>/tags/go-module/</loc>
@@ -120,9 +129,6 @@
     <lastmod>2022-04-24T10:00:25+08:00</lastmod>
   </url><url>
     <loc>/posts/go-download-network-file/</loc>
-    <lastmod>2022-04-24T10:00:25+08:00</lastmod>
-  </url><url>
-    <loc>/categories/web/</loc>
     <lastmod>2022-04-24T10:00:25+08:00</lastmod>
   </url><url>
     <loc>/tags/gin/</loc>
@@ -203,13 +209,13 @@
     <loc>/tags/sklearn/</loc>
     <lastmod>2022-04-11T13:28:26+08:00</lastmod>
   </url><url>
-    <loc>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
-  </url><url>
     <loc>/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
     <lastmod>2022-04-11T13:28:26+08:00</lastmod>
   </url><url>
     <loc>/posts/python-palmer-archipelago-penguin-testing/</loc>
+    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2022-04-11T13:28:26+08:00</lastmod>
   </url><url>
     <loc>/posts/go-built-in-rpc-package/</loc>

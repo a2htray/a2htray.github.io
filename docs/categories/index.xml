@@ -6,7 +6,16 @@
     <description>Recent content in 分类 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 11 May 2022 13:49:39 +0800</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 May 2022 11:09:53 +0800</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Web</title>
+      <link>/categories/web/</link>
+      <pubDate>Thu, 12 May 2022 11:09:53 +0800</pubDate>
+      
+      <guid>/categories/web/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Go</title>
       <link>/categories/go/</link>
@@ -53,15 +62,6 @@
     </item>
     
     <item>
-      <title>Web</title>
-      <link>/categories/web/</link>
-      <pubDate>Sun, 24 Apr 2022 10:00:25 +0800</pubDate>
-      
-      <guid>/categories/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>算法</title>
       <link>/categories/%E7%AE%97%E6%B3%95/</link>
       <pubDate>Fri, 15 Apr 2022 11:24:13 +0800</pubDate>
@@ -98,20 +98,20 @@
     </item>
     
     <item>
-      <title>机器学习</title>
-      <link>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
-      <pubDate>Mon, 11 Apr 2022 13:28:26 +0800</pubDate>
-      
-      <guid>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>可视化</title>
       <link>/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/</link>
       <pubDate>Mon, 11 Apr 2022 13:28:26 +0800</pubDate>
       
       <guid>/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>机器学习</title>
+      <link>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Mon, 11 Apr 2022 13:28:26 +0800</pubDate>
+      
+      <guid>/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</guid>
       <description></description>
     </item>
     

@@ -1,7 +1,7 @@
 <!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="teal"
   >
   <head>
-	<meta name="generator" content="Hugo 0.98.0" />
+	<meta name="generator" content="Hugo 0.95.0" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mozart&#39;s Sheet 第 2 页</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
@@ -170,6 +170,29 @@
 <main class="container">
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/doc-stackoverflow/go-use-local-module-in-development/">Go Module 使用本地开发的包
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-25 11:04:33 &#43;0800 CST。">
+    2022-04-25
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/series/stackoverflow-magic/" class="badge post-taxonomy">Stackoverflow Magic</a><a href="/tags/stackoverflow/" class="badge post-taxonomy">stackoverflow</a><a href="/tags/go-module/" class="badge post-taxonomy">go module</a></span>
+</div>
+<div class="post-summary">
+      <p>在 <code>go.mod</code> 文件中新增 <code>replace</code> 信息，内容如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">module github.com/userName/mainModule
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">require <span class="s2">&#34;github.com/userName/otherModule&#34;</span> v0.0.0
+</span></span><span class="line"><span class="cl">replace <span class="s2">&#34;github.com/userName/otherModule&#34;</span> v0.0.0 <span class="o">=</span>&gt; <span class="s2">&#34;本地包路径&#34;</span>
+</span></span></code></pre></div><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-stackoverflow/go-use-local-module-in-development/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
       <a href="/posts/go-file-rename-pit/">Windows 下移动文件的坑
 </a>
@@ -365,28 +388,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-palmer-archipelago-penguin-testing/">帕尔默企鹅数据集测试
-</a>
-    </h2>
-  </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="帕尔默企鹅数据集测试" src="/images/Palmer-Archipelago-Antarctica-penguin-data.webp" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-11 13:28:26 &#43;0800 CST。">
-    2022-04-11
-  </span><span class="post-reading-time">
-    5 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge post-taxonomy">可视化</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge post-taxonomy">数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge post-taxonomy">机器学习</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge post-taxonomy">统计学</a><a href="/tags/matplotlib/" class="badge post-taxonomy">Matplotlib</a><a href="/tags/sklearn/" class="badge post-taxonomy">sklearn</a></span>
-</div>
-<div class="post-summary">
-      <p>今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。
-数据集介绍 数据集是在 Kaggle 下载的，包含两个文件：
- penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的数据文件；  本次分析使用的是简化后的数据集 penguins_size.csv。数据集共 344 个样本，特征信息如下表：
-   特征 数据类型 说明     species 离散值 标签信息，值为 Adelie|Chinstrap|Gentoo...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-palmer-archipelago-penguin-testing/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -439,6 +440,9 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/doc-stackoverflow/nodejs-fs-copyfile/">静态资源的管理-文件复制
+</a>
+      </li><li>
         <a href="/posts/go-sql-escape/">SQL 转义问题
 </a>
       </li><li>
@@ -464,9 +468,6 @@
 </a>
       </li><li>
         <a href="/doc-stackoverflow/mysql-modify-table-column-comment/">MySQL 修改列的注释信息
-</a>
-      </li><li>
-        <a href="/doc-stackoverflow/go-use-local-module-in-development/">Go Module 使用本地开发的包
 </a>
       </li></ul>
   </div>
@@ -532,7 +533,8 @@
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
             logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
-            map</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            map</a><a href="/tags/node.js/" class="badge rounded post-taxonomy" title="Node.js">
+            Node.js</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
             NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
             Pandas</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
             reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
@@ -554,10 +556,7 @@
   </div>
 </aside>
 </div>
-    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav justify-content-center mb-2"><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
-    <i class="fas fa-fw fa-2x fa-rss"></i>
-  </a></nav>
-<div class="copyright mb-2">
+    </main><footer class="footer mt-auto py-3 text-center container"><div class="copyright mb-2">
   Copyright © 2016-2022 a2htray. All Rights Reserved.
 </div>
 <div class="powered-by mb-2">
@@ -565,7 +564,7 @@
 </div>
 
 </footer>
-<script src="/assets/main/bundle.min.2d4afda4c3db522321386e0a0e4a500c7fbb559e735b4a4a38525eca46103101.js" integrity="sha256-LUr9pMPbUiMhOG4KDkpQDH&#43;7VZ5zW0pKOFJeykYQMQE=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script src="/assets/main/bundle.min.6fb7f1c30a3ce84ff982e134ff3ef370334adfc44a73436111bbbee6bb315395.js" integrity="sha256-b7fxwwo86E/5guE0/z7zcDNK38RKc0NhEbu&#43;5rsxU5U=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -576,6 +575,6 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-</script><script src="/assets/viewer/bundle.min.5ad926b46749e67285f66e2fdbc2d7cfb2689e8d9f2fcc2f59c3f51d2a1c4506.js" integrity="sha256-WtkmtGdJ5nKF9m4v28LXz7Jono2fL8wvWcP1HSocRQY=" crossorigin="anonymous" defer></script>
+</script><script src="/assets/viewer/bundle.min.3ce688736c8224a9cd6b3104011fc2a816428f07c0fa226359736f33f0c593de.js" integrity="sha256-POaIc2yCJKnNazEEAR/CqBZCjwfA&#43;iJjWXNvM/DFk94=" crossorigin="anonymous" defer></script>
 </body>
 </html>
