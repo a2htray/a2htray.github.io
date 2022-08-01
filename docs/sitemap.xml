@@ -23,6 +23,24 @@
     <loc>/posts/</loc>
     <lastmod>2022-08-01T23:24:15+08:00</lastmod>
   </url><url>
+    <loc>/tags/node.js/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/tags/stackoverflow/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/series/stackoverflow-magic/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/categories/web/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/doc-stackoverflow/nodejs-fs-copyfile/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
+    <loc>/series/</loc>
+    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
+  </url><url>
     <loc>/categories/go/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
@@ -74,9 +92,6 @@
     <loc>/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
     <lastmod>2022-04-29T23:45:33+08:00</lastmod>
   </url><url>
-    <loc>/series/</loc>
-    <lastmod>2022-04-29T23:45:33+08:00</lastmod>
-  </url><url>
     <loc>/doc-regular-expressions/</loc>
     <lastmod>2022-04-29T23:45:10+08:00</lastmod>
   </url><url>
@@ -98,16 +113,10 @@
     <loc>/posts/go-slice-out-of-range/</loc>
     <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
-    <loc>/tags/stackoverflow/</loc>
-    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
-  </url><url>
     <loc>/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/</loc>
     <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
     <loc>/doc-stackoverflow/mysql-modify-table-column-comment/</loc>
-    <lastmod>2022-04-25T14:04:54+08:00</lastmod>
-  </url><url>
-    <loc>/series/stackoverflow-magic/</loc>
     <lastmod>2022-04-25T14:04:54+08:00</lastmod>
   </url><url>
     <loc>/tags/go-module/</loc>
@@ -129,9 +138,6 @@
     <lastmod>2022-04-24T10:00:25+08:00</lastmod>
   </url><url>
     <loc>/posts/go-download-network-file/</loc>
-    <lastmod>2022-04-24T10:00:25+08:00</lastmod>
-  </url><url>
-    <loc>/categories/web/</loc>
     <lastmod>2022-04-24T10:00:25+08:00</lastmod>
   </url><url>
     <loc>/tags/gin/</loc>

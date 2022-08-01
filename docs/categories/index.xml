@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>Web</title>
+      <link>/categories/web/</link>
+      <pubDate>Thu, 12 May 2022 11:09:53 +0800</pubDate>
+      
+      <guid>/categories/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Go</title>
       <link>/categories/go/</link>
       <pubDate>Wed, 11 May 2022 13:49:39 +0800</pubDate>
@@ -58,15 +67,6 @@
       <pubDate>Fri, 29 Apr 2022 23:45:33 +0800</pubDate>
       
       <guid>/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Web</title>
-      <link>/categories/web/</link>
-      <pubDate>Sun, 24 Apr 2022 10:00:25 +0800</pubDate>
-      
-      <guid>/categories/web/</guid>
       <description></description>
     </item>
     

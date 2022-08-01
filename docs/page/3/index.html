@@ -171,6 +171,29 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/python-chi-square-test/">卡方检验 - 检验特征对是否相关
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="卡方检验 - 检验特征对是否相关" src="/images/chi-square-test.webp" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-11 18:57:39 &#43;0800 CST。">
+    2022-04-11
+  </span><span class="post-reading-time">
+    3 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge post-taxonomy">数据挖掘</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge post-taxonomy">统计学</a><a href="/tags/chi-square/" class="badge post-taxonomy">Chi-Square</a><a href="/tags/scipy/" class="badge post-taxonomy">scipy</a><a href="/tags/numpy/" class="badge post-taxonomy">NumPy</a><a href="/tags/pandas/" class="badge post-taxonomy">Pandas</a></span>
+</div>
+<div class="post-summary">
+      <p>在本文开头，贴一段百科对卡方检验基本原理的介绍：
+卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，如果卡方值越大，二者偏差程度越大；反之，二者偏差越小；若两个值完全相等时，卡方值就为 0，表明理论值完全符合。
+由此可见，卡方检验刻画的是一种偏离程度。那么在相关性计算中也可以利用卡方检验计算出显著性来判断两个特征是否相关。
+卡方检验 卡方检验的步骤如下：
+ 定义 H0 和 H1 假设； 根据领域知识定义显著性水平 $\alpha$，一般取 0.05，表示有 5% 的容错； 计算卡方值； 计算显著性水平，小于 $\alpha$ 则拒绝 H0 接受 H1；...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-chi-square-test/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/python-palmer-archipelago-penguin-testing/">帕尔默企鹅数据集测试
 </a>
     </h2>
@@ -355,24 +378,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-revel-run-require-packages/">Go 1.16 运行 Revel 项目
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-31 10:40:58 &#43;0800 CST。">
-    2022-03-31
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/revel/" class="badge post-taxonomy">Revel</a></span>
-</div>
-<div class="post-summary">
-      <p><a href="http://revel.github.io/" target="_blank" rel="noopener noreferrer">Revel</a> 是一个以高效率、高性能著称的 Go Web 框架，提供了路由、参数解析和验证、会话机制、模板机制、缓存和任务管理等诸多常用的 Web 开发功能。同时作为一个全栈的 MVC 框架， Revel 通过模块实现了组件的复用，因此可以大大提高开发者的效率。其高性能则是依托 Go 语言的性能，相信这个不必多说。但相较于其它职责相对单一的 Web 框架（如 Gin、go-restful），Revel 只能说是在保证性能的基础上尽可能地对开发者友好。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-revel-run-require-packages/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -394,10 +399,13 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
         <a href="/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
       </li>
       <li class="page-item">
+        <a href="/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item">
         <a href="/page/4/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/5/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul></div>
 </div>
@@ -428,6 +436,9 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
         <a href="/posts/python-pat-1003/">Python PAT 甲级 1003
 </a>
       </li><li>
+        <a href="/doc-stackoverflow/nodejs-fs-copyfile/">静态资源的管理-文件复制
+</a>
+      </li><li>
         <a href="/posts/go-sql-escape/">SQL 转义问题
 </a>
       </li><li>
@@ -450,9 +461,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </a>
       </li><li>
         <a href="/posts/go-slice-out-of-range/">Slice 什么时候报 Out of Range
-</a>
-      </li><li>
-        <a href="/doc-stackoverflow/mysql-modify-table-column-comment/">MySQL 修改列的注释信息
 </a>
       </li></ul>
   </div>
@@ -518,7 +526,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
             logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
-            map</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            map</a><a href="/tags/node.js/" class="badge rounded post-taxonomy" title="Node.js">
+            Node.js</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
             NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
             Pandas</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
             PAT</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
