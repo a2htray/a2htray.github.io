@@ -6,7 +6,16 @@
     <description>Recent content in Python on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 11 Apr 2022 18:57:39 +0800</lastBuildDate><atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Aug 2022 23:24:15 +0800</lastBuildDate><atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python PAT 甲级 1003</title>
+      <link>/posts/python-pat-1003/</link>
+      <pubDate>Mon, 01 Aug 2022 23:24:15 +0800</pubDate>
+      
+      <guid>/posts/python-pat-1003/</guid>
+      <description>PAT 甲级 1003 。 # -*- coding:utf-8 -*- import sys MAX_INT = sys.maxsize if __name__ == &amp;#39;__main__&amp;#39;: # m 城市个数 # n 路径条数 # start 起始城市下标 # end 结束城市下标 m, n, start, end = map(int, input().strip().split(&amp;#39; &amp;#39;)) # nums_of_teams 各城市救援队的数量 nums_of_teams = list(map(int, input().strip().split(&amp;#39; &amp;#39;)))</description>
+    </item>
+    
     <item>
       <title>卡方检验 - 检验特征对是否相关</title>
       <link>/posts/python-chi-square-test/</link>

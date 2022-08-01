@@ -6,7 +6,16 @@
     <description>Recent content in 标签 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 11 May 2022 13:49:39 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Aug 2022 23:24:15 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PAT</title>
+      <link>/tags/pat/</link>
+      <pubDate>Mon, 01 Aug 2022 23:24:15 +0800</pubDate>
+      
+      <guid>/tags/pat/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>MySQL</title>
       <link>/tags/mysql/</link>

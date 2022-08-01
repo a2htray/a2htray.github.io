@@ -171,6 +171,29 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/doc-stackoverflow/go-use-local-module-in-development/">Go Module 使用本地开发的包
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-25 11:04:33 &#43;0800 CST。">
+    2022-04-25
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/series/stackoverflow-magic/" class="badge post-taxonomy">Stackoverflow Magic</a><a href="/tags/stackoverflow/" class="badge post-taxonomy">stackoverflow</a><a href="/tags/go-module/" class="badge post-taxonomy">go module</a></span>
+</div>
+<div class="post-summary">
+      <p>在 <code>go.mod</code> 文件中新增 <code>replace</code> 信息，内容如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">module github.com/userName/mainModule
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">require <span class="s2">&#34;github.com/userName/otherModule&#34;</span> v0.0.0
+</span></span><span class="line"><span class="cl">replace <span class="s2">&#34;github.com/userName/otherModule&#34;</span> v0.0.0 <span class="o">=</span>&gt; <span class="s2">&#34;本地包路径&#34;</span>
+</span></span></code></pre></div><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-stackoverflow/go-use-local-module-in-development/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/go-file-rename-pit/">Windows 下移动文件的坑
 </a>
     </h2>
@@ -365,28 +388,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-palmer-archipelago-penguin-testing/">帕尔默企鹅数据集测试
-</a>
-    </h2>
-  </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="帕尔默企鹅数据集测试" src="/images/Palmer-Archipelago-Antarctica-penguin-data.webp" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-11 13:28:26 &#43;0800 CST。">
-    2022-04-11
-  </span><span class="post-reading-time">
-    5 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge post-taxonomy">可视化</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge post-taxonomy">数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge post-taxonomy">机器学习</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge post-taxonomy">统计学</a><a href="/tags/matplotlib/" class="badge post-taxonomy">Matplotlib</a><a href="/tags/sklearn/" class="badge post-taxonomy">sklearn</a></span>
-</div>
-<div class="post-summary">
-      <p>今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。
-数据集介绍 数据集是在 Kaggle 下载的，包含两个文件：
- penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的数据文件；  本次分析使用的是简化后的数据集 penguins_size.csv。数据集共 344 个样本，特征信息如下表：
-   特征 数据类型 说明     species 离散值 标签信息，值为 Adelie|Chinstrap|Gentoo...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-palmer-archipelago-penguin-testing/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -439,6 +440,9 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/python-pat-1003/">Python PAT 甲级 1003
+</a>
+      </li><li>
         <a href="/posts/go-sql-escape/">SQL 转义问题
 </a>
       </li><li>
@@ -464,9 +468,6 @@
 </a>
       </li><li>
         <a href="/doc-stackoverflow/mysql-modify-table-column-comment/">MySQL 修改列的注释信息
-</a>
-      </li><li>
-        <a href="/doc-stackoverflow/go-use-local-module-in-development/">Go Module 使用本地开发的包
 </a>
       </li></ul>
   </div>
@@ -534,7 +535,8 @@
             logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
             map</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
             NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
-            Pandas</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
+            Pandas</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
+            PAT</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
             reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
             Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="RPC">
             RPC</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
