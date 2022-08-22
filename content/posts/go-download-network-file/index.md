@@ -15,7 +15,7 @@ tags:
 
 <!--more-->
 
-## 例 1 普通下载 
+## 例 1 普通下载
 
 ```go
 package main

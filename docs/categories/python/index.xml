@@ -6,7 +6,16 @@
     <description>Recent content in Python on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 01 Aug 2022 23:24:15 +0800</lastBuildDate><atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Aug 2022 00:33:33 +0800</lastBuildDate><atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python PAT 甲级 1003</title>
+      <link>/posts/python-pat-1004/</link>
+      <pubDate>Wed, 03 Aug 2022 00:33:33 +0800</pubDate>
+      
+      <guid>/posts/python-pat-1004/</guid>
+      <description>PAT 甲级 1003 。 # -*- coding:utf-8 -*- if __name__ == &amp;#39;__main__&amp;#39;: # n 树中节点个数 # m 非叶子节点个数 n, m = list(map(int, input().strip().split(&amp;#39; &amp;#39;))) # 二维数组 # 元素的下标表示节点的 ID # 第 1 个元素不使用 tree = [[] for _ in range(n+1)] while</description>
+    </item>
+    
     <item>
       <title>Python PAT 甲级 1003</title>
       <link>/posts/python-pat-1003/</link>
