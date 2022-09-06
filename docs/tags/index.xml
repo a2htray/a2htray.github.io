@@ -6,7 +6,25 @@
     <description>Recent content in 标签 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 22 Aug 2022 23:40:01 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Sep 2022 22:22:13 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Django</title>
+      <link>/tags/django/</link>
+      <pubDate>Mon, 05 Sep 2022 22:22:13 +0800</pubDate>
+      
+      <guid>/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>参数验证</title>
+      <link>/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/</link>
+      <pubDate>Mon, 05 Sep 2022 22:22:13 +0800</pubDate>
+      
+      <guid>/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>翻译</title>
       <link>/tags/%E7%BF%BB%E8%AF%91/</link>
