@@ -6,7 +6,16 @@
     <description>Recent content in 翻译 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 22 Aug 2022 23:40:01 +0800</lastBuildDate><atom:link href="/tags/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Sep 2022 23:33:58 +0800</lastBuildDate><atom:link href="/tags/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go Slice 的使用</title>
+      <link>/posts/go-slice-usage/</link>
+      <pubDate>Mon, 19 Sep 2022 23:33:58 +0800</pubDate>
+      
+      <guid>/posts/go-slice-usage/</guid>
+      <description>&lt;p&gt;原文：&lt;a href=&#34;https://yourbasic.org/golang/slices-explained/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Slices/arrays explained: create, index, slice, iterate&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Go 的错误处理</title>
       <link>/posts/go-error-handling/</link>

@@ -3,24 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/categories/go/</loc>
-    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+    <lastmod>2022-09-19T23:33:58+08:00</lastmod>
   </url><url>
-    <loc>/posts/go-slice-basic/</loc>
-    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+    <loc>/posts/go-slice-usage/</loc>
+    <lastmod>2022-09-19T23:33:58+08:00</lastmod>
   </url><url>
     <loc>/</loc>
-    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+    <lastmod>2022-09-19T23:33:58+08:00</lastmod>
   </url><url>
     <loc>/tags/slice/</loc>
-    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+    <lastmod>2022-09-19T23:33:58+08:00</lastmod>
   </url><url>
     <loc>/tags/</loc>
-    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+    <lastmod>2022-09-19T23:33:58+08:00</lastmod>
+  </url><url>
+    <loc>/tags/%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2022-09-19T23:33:58+08:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
-    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+    <lastmod>2022-09-19T23:33:58+08:00</lastmod>
   </url><url>
     <loc>/posts/</loc>
+    <lastmod>2022-09-19T23:33:58+08:00</lastmod>
+  </url><url>
+    <loc>/posts/go-slice-basic/</loc>
     <lastmod>2022-09-19T23:22:21+08:00</lastmod>
   </url><url>
     <loc>/tags/django/</loc>
@@ -36,9 +42,6 @@
     <lastmod>2022-09-05T22:22:13+08:00</lastmod>
   </url><url>
     <loc>/posts/go-error-handling/</loc>
-    <lastmod>2022-08-22T23:40:01+08:00</lastmod>
-  </url><url>
-    <loc>/tags/%E7%BF%BB%E8%AF%91/</loc>
     <lastmod>2022-08-22T23:40:01+08:00</lastmod>
   </url><url>
     <loc>/tags/pat/</loc>
