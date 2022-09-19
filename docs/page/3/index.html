@@ -171,6 +171,25 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/mysql-set-storage-engine/">MySQL 设置存储引擎的 3 种方法
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-21 13:35:02 &#43;0800 CST。">
+    2022-04-21
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/tags/mysql/" class="badge post-taxonomy">MySQL</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge post-taxonomy">存储引擎</a></span>
+</div>
+<div class="post-summary">
+      <p>在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。</p>
+<p>选择一个合适的存储引擎至关重要。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/mysql-set-storage-engine/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/mysql-writing-procedure/">MySQL 存储过程
 </a>
     </h2>
@@ -361,26 +380,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/protocol-buffer-syntax/">Protocol Buffer 语法
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-08 16:33:52 &#43;0800 CST。">
-    2022-04-08
-  </span><span class="post-reading-time">
-    4 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/protocol-buffer/" class="badge post-taxonomy">protocol buffer</a></span>
-</div>
-<div class="post-summary">
-      <p>Protocol Buffer（Protobuf） 是一种高效的数据结构序列化的机制，同时也是一种结构化数据的存储格式。
- 序列化与反序列化
- 序列化：将数据结构或对象转换成二进制串的过程； 反序列化：将序列化后的二进制串转换成数据结构或对象的过程；   语法 /* * 语法 *//* * 指定 Protobuf 解析使用的版本，可以是 proto3 或 proto2 */syntax = &#34;proto3&#34;;/* * message 定义中的每一个字段都有一个唯一标识，该标识用于在二进制格式中识别字段 * 字段的标识一旦使用就不要进行修改 * 当标识为 1 到 15 时，使用一个字节进行编码，字节信息中包含字段的标识以及类型 * 当...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/protocol-buffer-syntax/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -436,6 +435,9 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go-slice-basic/">Go Slice Roadmap
+</a>
+      </li><li>
         <a href="/posts/python-django-parameter-validation-default/">扩展 Django Forms.Field - 支持 Default 属性
 </a>
       </li><li>
@@ -461,9 +463,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </a>
       </li><li>
         <a href="/posts/go-max-allowed-packet/">Go&amp;MySQL`max_allowed_packet`
-</a>
-      </li><li>
-        <a href="/doc-regular-expressions/introduction/">介绍
 </a>
       </li></ul>
   </div>
@@ -516,7 +515,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             Matplotlib</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
             PAT</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
-            roadmap</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
+            roadmap</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
+            slice</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
             面试经</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
             channel</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
             Chi-Square</a><a href="/tags/django/" class="badge rounded post-taxonomy" title="Django">
@@ -539,8 +539,7 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="RPC">
             RPC</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
             scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
-            sklearn</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
-            slice</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
+            sklearn</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
             sqlx</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
             Web 安全</a><a href="/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/" class="badge rounded post-taxonomy" title="参数验证">
             参数验证</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">

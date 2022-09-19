@@ -2,32 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/tags/django/</loc>
-    <lastmod>2022-09-05T22:22:13+08:00</lastmod>
+    <loc>/categories/go/</loc>
+    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+  </url><url>
+    <loc>/posts/go-slice-basic/</loc>
+    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
   </url><url>
     <loc>/</loc>
+    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+  </url><url>
+    <loc>/tags/slice/</loc>
+    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2022-09-19T23:22:21+08:00</lastmod>
+  </url><url>
+    <loc>/tags/django/</loc>
     <lastmod>2022-09-05T22:22:13+08:00</lastmod>
   </url><url>
     <loc>/categories/python/</loc>
     <lastmod>2022-09-05T22:22:13+08:00</lastmod>
   </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2022-09-05T22:22:13+08:00</lastmod>
-  </url><url>
     <loc>/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/</loc>
-    <lastmod>2022-09-05T22:22:13+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
     <lastmod>2022-09-05T22:22:13+08:00</lastmod>
   </url><url>
     <loc>/posts/python-django-parameter-validation-default/</loc>
     <lastmod>2022-09-05T22:22:13+08:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2022-09-05T22:22:13+08:00</lastmod>
-  </url><url>
-    <loc>/categories/go/</loc>
-    <lastmod>2022-08-22T23:40:01+08:00</lastmod>
   </url><url>
     <loc>/posts/go-error-handling/</loc>
     <lastmod>2022-08-22T23:40:01+08:00</lastmod>
@@ -124,9 +130,6 @@
   </url><url>
     <loc>/tags/map/</loc>
     <lastmod>2022-04-27T16:02:52+08:00</lastmod>
-  </url><url>
-    <loc>/tags/slice/</loc>
-    <lastmod>2022-04-26T09:24:01+08:00</lastmod>
   </url><url>
     <loc>/posts/go-slice-out-of-range/</loc>
     <lastmod>2022-04-26T09:24:01+08:00</lastmod>
