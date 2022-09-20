@@ -171,6 +171,24 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-channel-direction/">Channel 的方向
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-05-05 17:17:29 &#43;0800 CST。">
+    2022-05-05
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/channel/" class="badge post-taxonomy">channel</a></span>
+</div>
+<div class="post-summary">
+      <p>在回忆管道方向的语法上时不时地会出错，所以搜罗一些资料以加强自身的记忆。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-channel-direction/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/go-max-allowed-packet/">Go&amp;MySQL`max_allowed_packet`
 </a>
     </h2>
@@ -340,33 +358,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-redis-request-log-dumper/">Redis 的 List 和 Stream：异步记录请求信息
-</a>
-    </h2>
-  </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="Redis 的 list 和 stream：异步记录请求信息" src="/images/managing_activity_logs.jpg" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-23 19:05:01 &#43;0800 CST。">
-    2022-04-23
-  </span><span class="post-reading-time">
-    4 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a><a href="/tags/logging/" class="badge post-taxonomy">logging</a><a href="/tags/gin/" class="badge post-taxonomy">Gin</a></span>
-</div>
-<div class="post-summary">
-      <p>在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。在程序中，可以以同步或异步的方式完成这一需求。同步方式是指请求信息写入日志文件后才返回数据给客户端，异步方式则是在返回数据之前以新线程或进程完成对请求信息的记录。开源的日志包有：</p>
-<ol>
-<li><a href="https://pkg.go.dev/go.uber.org/zap" target="_blank" rel="noopener noreferrer">Zap</a>：出自 Uber 团队，以高性能著称；</li>
-<li><a href="https://github.com/rs/zerolog" target="_blank" rel="noopener noreferrer">Zerolog</a>：以易用性著称，支持 7 种日志级别；</li>
-<li><a href="https://github.com/sirupsen/logrus" target="_blank" rel="noopener noreferrer">Logrus</a>：兼容标准日志包格式，也是本人常用的日志包；</li>
-<li><a href="https://github.com/apex/log" target="_blank" rel="noopener noreferrer">apex/log</a>：受 Logrus 启发，简化操作后的 Logrus；</li>
-<li><a href="https://github.com/inconshreveable/log15" target="_blank" rel="noopener noreferrer"> Log15</a>：日志可读性强；</li>
-</ol>
-<p>5 个日志包的详细介绍可以看<a href="/posts/go-five-structured-logging-package/">《5 种结构化 Go 日志包对比分析》</a>这篇文章。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-redis-request-log-dumper/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -422,6 +413,9 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/python-pandas-write-mumultiple-dataframes-to-worksheets/">Write Mumultiple Dataframes to Worksheets
+</a>
+      </li><li>
         <a href="/posts/go-slice-usage/">Go Slice 的使用
 </a>
       </li><li>
@@ -447,9 +441,6 @@
 </a>
       </li><li>
         <a href="/posts/docker-roadmap-image/">与 Image 概念相关的命令
-</a>
-      </li><li>
-        <a href="/posts/go-channel-direction/">Channel 的方向
 </a>
       </li></ul>
   </div>
@@ -500,7 +491,8 @@
             slice</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
             file</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
             I/O</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
-            Matplotlib</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
+            Matplotlib</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
             PAT</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
             roadmap</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
@@ -521,15 +513,15 @@
             logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
             map</a><a href="/tags/node.js/" class="badge rounded post-taxonomy" title="Node.js">
             Node.js</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
-            NumPy</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
-            Pandas</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
+            NumPy</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
             reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
             Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="RPC">
             RPC</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
             scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
             sklearn</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
             sqlx</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
-            Web 安全</a><a href="/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/" class="badge rounded post-taxonomy" title="参数验证">
+            Web 安全</a><a href="/tags/xls/" class="badge rounded post-taxonomy" title="xls">
+            xls</a><a href="/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/" class="badge rounded post-taxonomy" title="参数验证">
             参数验证</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
             反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
             大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">
