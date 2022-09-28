@@ -13,8 +13,8 @@ keywords = "Mozart's Gun, 个人博客, 技能成长"
 logo = false # Disable Logo
 brand = "Mozart's Sheet"
 
-palette = "teal" # Default palette. Optional. You'll need to clear the browser cache after modifying this.
-# palettes = ["blue", "blue gray", "brown"] # Available palettes. Default to ALL.
+palette = "blue" # Default palette. Optional. You'll need to clear the browser cache after modifying this.
+#palettes = ["blue", "blue gray", "brown"] # Available palettes. Default to ALL.
 # palettes = [] # Disable palette switcher.
 
 # color = "dark" # light, dark or dynamic. Default to dynamic.
