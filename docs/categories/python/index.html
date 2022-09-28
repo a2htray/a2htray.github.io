@@ -269,7 +269,7 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
 卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，如果卡方值越大，二者偏差程度越大；反之，二者偏差越小；若两个值完全相等时，卡方值就为 0，表明理论值完全符合。
 由此可见，卡方检验刻画的是一种偏离程度。那么在相关性计算中也可以利用卡方检验计算出显著性来判断两个特征是否相关。
 卡方检验 卡方检验的步骤如下：
- 定义 H0 和 H1 假设； 根据领域知识定义显著性水平 $\alpha$，一般取 0.05，表示有 5% 的容错； 计算卡方值； 计算显著性水平，小于 $\alpha$ 则拒绝 H0 接受 H1；...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-chi-square-test/">阅读更多</a></div>
+定义 H0 和 H1 假设； 根据领域知识定义显著性水平 $\alpha$，一般取 0.05，表示有 5% 的容错； 计算卡方值； 计算显著性水平，小于 $\alpha$ 则拒绝 H0 接受 H1； 离散型特征对 离...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-chi-square-test/">阅读更多</a></div>
     </div>
   </div>
 </article>
@@ -290,8 +290,8 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
 <div class="post-summary">
       <p>今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。
 数据集介绍 数据集是在 Kaggle 下载的，包含两个文件：
- penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的数据文件；  本次分析使用的是简化后的数据集 penguins_size.csv。数据集共 344 个样本，特征信息如下表：
-   特征 数据类型 说明     species 离散值 标签信息，值为 Adelie|Chinstrap|Gentoo...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-palmer-archipelago-penguin-testing/">阅读更多</a></div>
+penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的数据文件； 本次分析使用的是简化后的数据集 penguins_size.csv。数据集共 344 个样本，特征信息如下表：
+特征 数据类型 说明 species 离散值 标签信息，值为 Adelie|Chinstrap|Gentoo 之一 island 离散值 岛屿，...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-palmer-archipelago-penguin-testing/">阅读更多</a></div>
     </div>
   </div>
 </article>
@@ -376,6 +376,9 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go-hugo-wowchemy-academic-website/">Two Steps to Build a Academic Website With Hugo and Wowchemy
+</a>
+      </li><li>
         <a href="/posts/python-pandas-write-mumultiple-dataframes-to-worksheets/">Write Mumultiple Dataframes to Worksheets
 </a>
       </li><li>
@@ -401,9 +404,6 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
 </a>
       </li><li>
         <a href="/posts/go-sql-escape/">SQL 转义问题
-</a>
-      </li><li>
-        <a href="/posts/docker-roadmap-image/">与 Image 概念相关的命令
 </a>
       </li></ul>
   </div>
@@ -460,7 +460,8 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
             roadmap</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
             翻译</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
-            面试经</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
+            面试经</a><a href="/tags/academic-website/" class="badge rounded post-taxonomy" title="Academic Website">
+            Academic Website</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
             channel</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
             Chi-Square</a><a href="/tags/django/" class="badge rounded post-taxonomy" title="Django">
             Django</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
@@ -469,7 +470,8 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
             Gin</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
             Go 1.18</a><a href="/tags/go-module/" class="badge rounded post-taxonomy" title="go module">
             go module</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
-            HTTP</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
+            HTTP</a><a href="/tags/hugo/" class="badge rounded post-taxonomy" title="Hugo">
+            Hugo</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
             JetBrains</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
@@ -483,7 +485,8 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
             scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
             sklearn</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
             sqlx</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
-            Web 安全</a><a href="/tags/xls/" class="badge rounded post-taxonomy" title="xls">
+            Web 安全</a><a href="/tags/wowchemy/" class="badge rounded post-taxonomy" title="Wowchemy">
+            Wowchemy</a><a href="/tags/xls/" class="badge rounded post-taxonomy" title="xls">
             xls</a><a href="/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/" class="badge rounded post-taxonomy" title="参数验证">
             参数验证</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
             反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
@@ -508,7 +511,7 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
 </div>
 
 </footer>
-<script src="/assets/main/bundle.min.2d4afda4c3db522321386e0a0e4a500c7fbb559e735b4a4a38525eca46103101.js" integrity="sha256-LUr9pMPbUiMhOG4KDkpQDH&#43;7VZ5zW0pKOFJeykYQMQE=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script src="/assets/main/bundle.min.75eb69fcc4a90cc309c38f4f99c78f027563bbfd5371689b997ca88a6408a178.js" integrity="sha256-detp/MSpDMMJw49PmcePAnVju/1TcWibmXyoimQIoXg=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.17849018f3f3b1b6bcb22df1fb426d0b6c496d4434266dd0b28bd13b9d6b63aa.js" integrity="sha256-F4SQGPPzsba8si3x&#43;0JtC2xJbUQ0Jm3QsovRO51rY6o=" crossorigin="anonymous" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

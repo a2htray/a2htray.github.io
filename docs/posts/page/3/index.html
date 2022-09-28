@@ -175,6 +175,30 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/mysql-writing-procedure/">MySQL 存储过程
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="MySQL 存储过程" src="/images/mysql-procedure.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-19 19:35:33 &#43;0800 CST。">
+    2022-04-19
+  </span><span class="post-reading-time">
+    3 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/tags/mysql/" class="badge post-taxonomy">MySQL</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge post-taxonomy">存储过程</a></span>
+</div>
+<div class="post-summary">
+      <p>存储过程是存储在数据库中并且已经提前编译好的 SQL 语句集合，它是应用中数据操作的部分逻辑实现。MySQL 5 版本引入了这一设计，存储过程包含 3 个部分：</p>
+<ol>
+<li>名称；</li>
+<li>参数列表；</li>
+<li>SQL 语句；</li>
+</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/mysql-writing-procedure/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/interview-csig/">CSIG 线上面试
 </a>
     </h2>
@@ -231,7 +255,7 @@
 卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，如果卡方值越大，二者偏差程度越大；反之，二者偏差越小；若两个值完全相等时，卡方值就为 0，表明理论值完全符合。
 由此可见，卡方检验刻画的是一种偏离程度。那么在相关性计算中也可以利用卡方检验计算出显著性来判断两个特征是否相关。
 卡方检验 卡方检验的步骤如下：
- 定义 H0 和 H1 假设； 根据领域知识定义显著性水平 $\alpha$，一般取 0.05，表示有 5% 的容错； 计算卡方值； 计算显著性水平，小于 $\alpha$ 则拒绝 H0 接受 H1；...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-chi-square-test/">阅读更多</a></div>
+定义 H0 和 H1 假设； 根据领域知识定义显著性水平 $\alpha$，一般取 0.05，表示有 5% 的容错； 计算卡方值； 计算显著性水平，小于 $\alpha$ 则拒绝 H0 接受 H1； 离散型特征对 离...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-chi-square-test/">阅读更多</a></div>
     </div>
   </div>
 </article>
@@ -252,8 +276,8 @@
 <div class="post-summary">
       <p>今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。
 数据集介绍 数据集是在 Kaggle 下载的，包含两个文件：
- penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的数据文件；  本次分析使用的是简化后的数据集 penguins_size.csv。数据集共 344 个样本，特征信息如下表：
-   特征 数据类型 说明     species 离散值 标签信息，值为 Adelie|Chinstrap|Gentoo...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-palmer-archipelago-penguin-testing/">阅读更多</a></div>
+penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的数据文件； 本次分析使用的是简化后的数据集 penguins_size.csv。数据集共 344 个样本，特征信息如下表：
+特征 数据类型 说明 species 离散值 标签信息，值为 Adelie|Chinstrap|Gentoo 之一 island 离散值 岛屿，...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-palmer-archipelago-penguin-testing/">阅读更多</a></div>
     </div>
   </div>
 </article>
@@ -272,10 +296,10 @@
   </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/rpc/" class="badge post-taxonomy">RPC</a><a href="/tags/jsonrpc/" class="badge post-taxonomy">jsonrpc</a></span>
 </div>
 <div class="post-summary">
-      <p>在网络或 I/O 连接中，可以使用 net/rpc 包实现对一个对象的导出方法的调用，即远程过程调用（Remote Procedure Call，RPC）。通过向 RPC 服务注册一个对象，使其可被远程调用，进而实现一些复杂的业务逻辑。
+      <p> 在网络或 I/O 连接中，可以使用 net/rpc 包实现对一个对象的导出方法的调用，即远程过程调用（Remote Procedure Call，RPC）。通过向 RPC 服务注册一个对象，使其可被远程调用，进而实现一些复杂的业务逻辑。
 项目结构 示例项目的结构如下：
 client - client.go - json_client.go models - greeting.go server - json_server.go - server.go 注册服务 一个可被远程调用的方法须满足以下条件：
- 方法所属结构是公开的； 方法是分开的； 方法的参数类型是分开的； 方法带两个参数，第 2 个参数为指针； 方法返回值为 error ...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-built-in-rpc-package/">阅读更多</a></div>
+方法所属结构是公开的； 方法是分开的； 方法的参数类型是分开的； 方法带两个参数，第 2 个参数为指针； 方法返回值为 error ...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-built-in-rpc-package/">阅读更多</a></div>
     </div>
   </div>
 </article>
@@ -337,8 +361,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </div>
 <div class="post-summary">
       <p>Protocol Buffer（Protobuf） 是一种高效的数据结构序列化的机制，同时也是一种结构化数据的存储格式。
- 序列化与反序列化
- 序列化：将数据结构或对象转换成二进制串的过程； 反序列化：将序列化后的二进制串转换成数据结构或对象的过程；   语法 /* * 语法 *//* * 指定 Protobuf 解析使用的版本，可以是 proto3 或 proto2 */syntax = &#34;proto3&#34;;/* * message 定义中的每一个字段都有一个唯一标识，该标识用于在二进制格式中识别字段 * 字段的标识一旦使用就不要进行修改 * 当标识为 1 到 15 时，使用一个字节进行编码，字节信息中包含字段的标识以及类型 * 当...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/protocol-buffer-syntax/">阅读更多</a></div>
+序列化与反序列化
+序列化：将数据结构或对象转换成二进制串的过程； 反序列化：将序列化后的二进制串转换成数据结构或对象的过程； 语法 /* * 语法 */ /* * 指定 Protobuf 解析使用的版本，可以是 proto3 或 proto2 */ syntax = &#34;proto3&#34;; /* * message 定义中的每一个字段都有一个唯一标识，该标识用于在二进制格式中识别字段 * 字段的标识一旦使用就不要进行修改 * 当标识为 1 到 15 时，使用一个字节进行编码，字节信息中包含字段的标识以及类型 * 当标...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/protocol-buffer-syntax/">阅读更多</a></div>
     </div>
   </div>
 </article>
@@ -362,24 +386,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 <li>集群相关命令；</li>
 <li>Go 存取集群数据；</li>
 </ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-cluster-deployment/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-matplotlib-bar-tips/">Matplotlib Bar 图常规编码
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-05 10:11:12 &#43;0800 CST。">
-    2022-04-05
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge post-taxonomy">可视化</a><a href="/tags/matplotlib/" class="badge post-taxonomy">Matplotlib</a></span>
-</div>
-<div class="post-summary">
-      <p>每当有快速绘制图表的需求时，第一时间反应到的肯定是 Matplotlib，因为其官方提供了详细的 API 文档及示例。但是每次在编码时，总是时不时地需要查看文档，不利用于可视化快速成型。所以在本文中罗列一些 bar 图的快速实现，方便 Ctrl+C/V。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-matplotlib-bar-tips/">阅读更多</a></div>
     </div>
   </div>
 </article>
@@ -435,6 +441,9 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go-hugo-wowchemy-academic-website/">Two Steps to Build a Academic Website With Hugo and Wowchemy
+</a>
+      </li><li>
         <a href="/posts/python-pandas-write-mumultiple-dataframes-to-worksheets/">Write Mumultiple Dataframes to Worksheets
 </a>
       </li><li>
@@ -460,9 +469,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </a>
       </li><li>
         <a href="/posts/docker-roadmap-image/">与 Image 概念相关的命令
-</a>
-      </li><li>
-        <a href="/posts/go-channel-direction/">Channel 的方向
 </a>
       </li></ul>
   </div>
@@ -519,7 +525,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
             roadmap</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
             翻译</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
-            面试经</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
+            面试经</a><a href="/tags/academic-website/" class="badge rounded post-taxonomy" title="Academic Website">
+            Academic Website</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
             channel</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
             Chi-Square</a><a href="/tags/django/" class="badge rounded post-taxonomy" title="Django">
             Django</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
@@ -528,7 +535,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             Gin</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
             Go 1.18</a><a href="/tags/go-module/" class="badge rounded post-taxonomy" title="go module">
             go module</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
-            HTTP</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
+            HTTP</a><a href="/tags/hugo/" class="badge rounded post-taxonomy" title="Hugo">
+            Hugo</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
             JetBrains</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
@@ -542,7 +550,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
             sklearn</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
             sqlx</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
-            Web 安全</a><a href="/tags/xls/" class="badge rounded post-taxonomy" title="xls">
+            Web 安全</a><a href="/tags/wowchemy/" class="badge rounded post-taxonomy" title="Wowchemy">
+            Wowchemy</a><a href="/tags/xls/" class="badge rounded post-taxonomy" title="xls">
             xls</a><a href="/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/" class="badge rounded post-taxonomy" title="参数验证">
             参数验证</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
             反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
@@ -567,7 +576,7 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </div>
 
 </footer>
-<script src="/assets/main/bundle.min.2d4afda4c3db522321386e0a0e4a500c7fbb559e735b4a4a38525eca46103101.js" integrity="sha256-LUr9pMPbUiMhOG4KDkpQDH&#43;7VZ5zW0pKOFJeykYQMQE=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.33d47ac38f46933e4315bbf80007a5dc90f1b9979787b8effaeeb9720232b630.js" integrity="sha256-M9R6w49Gkz5DFbv4AAel3JDxuZeXh7jv&#43;u65cgIytjA=" crossorigin="anonymous" defer></script>
+<script src="/assets/main/bundle.min.75eb69fcc4a90cc309c38f4f99c78f027563bbfd5371689b997ca88a6408a178.js" integrity="sha256-detp/MSpDMMJw49PmcePAnVju/1TcWibmXyoimQIoXg=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.17849018f3f3b1b6bcb22df1fb426d0b6c496d4434266dd0b28bd13b9d6b63aa.js" integrity="sha256-F4SQGPPzsba8si3x&#43;0JtC2xJbUQ0Jm3QsovRO51rY6o=" crossorigin="anonymous" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
