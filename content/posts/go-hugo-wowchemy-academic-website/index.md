@@ -1,5 +1,5 @@
 ---
-title: "Two Steps to Build a Academic Website with Hugo and Wowchemy"
+title: "Two Steps to Build an Academic Website with Hugo and Wowchemy"
 date: 2022-09-28T23:10:30+08:00
 draft: false
 reward: false
@@ -12,7 +12,7 @@ tags:
  - Wowchemy
 ---
 
-Four days ago, I got a requirement to build a academic website for [yunzila~](https://github.com/jingyunluo). This 
+Four days ago, I got a requirement to build an academic website for [yunzila~](https://github.com/jingyunluo). This 
 reminds me of my previous blog experience. Since my blog is built with Hugo, I started to find an academic theme which is 
 designed for Hugo. Here is a link to [Hugo themes](https://themes.gohugo.io/), and then I find the [Academic](https://themes.gohugo.io/themes/starter-hugo-academic/)
 theme developed by [gcushen](https://github.com/gcushen) which meets my needs.

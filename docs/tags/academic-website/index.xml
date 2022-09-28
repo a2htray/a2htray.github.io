@@ -8,12 +8,12 @@
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
     <lastBuildDate>Wed, 28 Sep 2022 23:10:30 +0800</lastBuildDate><atom:link href="/tags/academic-website/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Two Steps to Build a Academic Website with Hugo and Wowchemy</title>
+      <title>Two Steps to Build an Academic Website with Hugo and Wowchemy</title>
       <link>/posts/go-hugo-wowchemy-academic-website/</link>
       <pubDate>Wed, 28 Sep 2022 23:10:30 +0800</pubDate>
       
       <guid>/posts/go-hugo-wowchemy-academic-website/</guid>
-      <description>&lt;p&gt;Four days ago, I got a requirement to build a academic website for &lt;a href=&#34;https://github.com/jingyunluo&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;yunzila~&lt;/a&gt;. This
+      <description>&lt;p&gt;Four days ago, I got a requirement to build an academic website for &lt;a href=&#34;https://github.com/jingyunluo&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;yunzila~&lt;/a&gt;. This
 reminds me of my previous blog experience. Since my blog is built with Hugo, I started to find an academic theme which is
 designed for Hugo. Here is a link to &lt;a href=&#34;https://themes.gohugo.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Hugo themes&lt;/a&gt;, and then I find the &lt;a href=&#34;https://themes.gohugo.io/themes/starter-hugo-academic/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Academic&lt;/a&gt;
 theme developed by &lt;a href=&#34;https://github.com/gcushen&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;gcushen&lt;/a&gt; which meets my needs.&lt;/p&gt;</description>
