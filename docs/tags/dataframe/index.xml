@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataFrame on Mozart&#39;s Sheet</title>
+    <link>/tags/dataframe/</link>
+    <description>Recent content in DataFrame on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Sat, 15 Oct 2022 19:25:04 +0800</lastBuildDate><atom:link href="/tags/dataframe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>创建 Pandas 的 Series 和 DataFrame </title>
+      <link>/posts/python-pandas-series-dataframe/</link>
+      <pubDate>Sat, 15 Oct 2022 19:25:04 +0800</pubDate>
+      
+      <guid>/posts/python-pandas-series-dataframe/</guid>
+      <description>&lt;p&gt;Series 和 DataFrame 是 Pandas 中两种重要的数据结构，也是我们操作和分析的主要对象。其中 Series 是一种类似于数组、列表或表格中一列的
+一维数据对象，DataFrame 则可以表示表格化的数据对象，可由多个 Series 对象组成。&lt;/p&gt;
+&lt;p&gt;本文主要摘录 Series 和 DataFrame 两种数据结结构的创建方法以及一些注意事项。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

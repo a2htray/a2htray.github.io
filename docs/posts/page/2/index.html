@@ -175,6 +175,48 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-sql-escape/">SQL 转义问题
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="SQL 转义问题" src="/images/word-image-16.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-05-11 13:49:39 &#43;0800 CST。">
+    2022-05-11
+  </span><span class="post-reading-time">
+    3 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/sqlx/" class="badge post-taxonomy">sqlx</a><a href="/tags/mysql/" class="badge post-taxonomy">MySQL</a></span>
+</div>
+<div class="post-summary">
+      <p>SQL 转义问题是指执行的 SQL 语句中包含了某些特定的字符，如单引号 <code>'</code>、反斜杠 <code>\</code> 等，导致 SQL 语句不能正常执行。所以，我们应该在拼接 SQL 语句的过程中对特别的传入参数进行转义。</p>
+<p>环境信息：</p>
+<ol>
+<li>MySQL 8.0.28；</li>
+<li>Go 1.16.9 windows/amd64</li>
+</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-sql-escape/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/docker-roadmap-image/">与 Image 概念相关的命令
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-05-10 22:15:52 &#43;0800 CST。">
+    2022-05-10
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge post-taxonomy">生产工具</a><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge post-taxonomy">运维</a><a href="/tags/roadmap/" class="badge post-taxonomy">roadmap</a><a href="/tags/docker/" class="badge post-taxonomy">Docker</a><a href="/tags/docker-image/" class="badge post-taxonomy">docker image</a></span>
+</div>
+<div class="post-summary">
+      <p>Docker 命令快速查询，收集了与 docker image 相关的命令及部分示例。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/docker-roadmap-image/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/go-channel-direction/">Channel 的方向
 </a>
     </h2>
@@ -330,53 +372,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-set-value-via-reflect-package/">Go 的反射包 Reflect
-</a>
-    </h2>
-  </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="Go 的反射包 reflect" src="/images/golang-reflect.png" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-21 19:59:01 &#43;0800 CST。">
-    2022-04-21
-  </span><span class="post-reading-time">
-    4 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/reflect/" class="badge post-taxonomy">reflect</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge post-taxonomy">反射</a></span>
-</div>
-<div class="post-summary">
-      <p>首先贴上 Go 开发团队对 reflect 包的描述：</p>
-<blockquote>
-<p>Package reflect implements run-time reflection, allowing a program to manipulate objects with arbitrary types. The typical use is to take a value with static type interface{} and extract its dynamic type information by calling TypeOf, which returns a Type.</p>
-<p>A call to ValueOf returns a Value representing the run-time data. Zero takes a Type and returns a Value representing a zero value for that type.</p>
-</blockquote>
-<p>从描述中，我们得到以下几点：</p>
-<ol>
-<li>reflect 包实现了运行时的反射机制，允许程序操作任意类型的对象；</li>
-<li>TypeOf 可以得到一个 interface{} 的具体类型，ValueOf 可以得到一个 interface{} 的具体值；</li>
-</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-set-value-via-reflect-package/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/mysql-set-storage-engine/">MySQL 设置存储引擎的 3 种方法
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-21 13:35:02 &#43;0800 CST。">
-    2022-04-21
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/tags/mysql/" class="badge post-taxonomy">MySQL</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge post-taxonomy">存储引擎</a></span>
-</div>
-<div class="post-summary">
-      <p>在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。</p>
-<p>选择一个合适的存储引擎至关重要。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/mysql-set-storage-engine/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -429,6 +424,12 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/python-pandas-create-dataframe-from-raw-string/">从字符串中创建 DataFrame
+</a>
+      </li><li>
+        <a href="/posts/python-pandas-series-dataframe/">创建 Pandas 的 Series 和 DataFrame 
+</a>
+      </li><li>
         <a href="/posts/go-hugo-wowchemy-academic-website/">Two Steps to Build an Academic Website With Hugo and Wowchemy
 </a>
       </li><li>
@@ -451,12 +452,6 @@
 </a>
       </li><li>
         <a href="/posts/python-pat-1003/">Python PAT 甲级 1003
-</a>
-      </li><li>
-        <a href="/posts/go-sql-escape/">SQL 转义问题
-</a>
-      </li><li>
-        <a href="/posts/docker-roadmap-image/">与 Image 概念相关的命令
 </a>
       </li></ul>
   </div>
@@ -503,12 +498,12 @@
         <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
             Redis</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
             MySQL</a><a href="/tags/stackoverflow/" class="badge rounded post-taxonomy" title="stackoverflow">
-            stackoverflow</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
+            stackoverflow</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
             slice</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
             file</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
             I/O</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
-            Matplotlib</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
-            Pandas</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
+            Matplotlib</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
             PAT</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
             roadmap</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
@@ -516,7 +511,8 @@
             面试经</a><a href="/tags/academic-website/" class="badge rounded post-taxonomy" title="Academic Website">
             Academic Website</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
             channel</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
-            Chi-Square</a><a href="/tags/django/" class="badge rounded post-taxonomy" title="Django">
+            Chi-Square</a><a href="/tags/dataframe/" class="badge rounded post-taxonomy" title="DataFrame">
+            DataFrame</a><a href="/tags/django/" class="badge rounded post-taxonomy" title="Django">
             Django</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
             Docker</a><a href="/tags/docker-image/" class="badge rounded post-taxonomy" title="docker image">
             docker image</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
@@ -535,7 +531,8 @@
             reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
             Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="RPC">
             RPC</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
-            scipy</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
+            scipy</a><a href="/tags/series/" class="badge rounded post-taxonomy" title="Series">
+            Series</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
             sklearn</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
             sqlx</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
             Web 安全</a><a href="/tags/wowchemy/" class="badge rounded post-taxonomy" title="Wowchemy">
