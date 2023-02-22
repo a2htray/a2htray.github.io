@@ -171,6 +171,42 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/linux-jq-command-02/">命令 Jq（二） 特殊字符和构造器
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-02-22 22:40:49 &#43;0800 CST。">
+    2023-02-22
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge post-taxonomy">运维</a><a href="/tags/linux-shell/" class="badge post-taxonomy">Linux Shell</a><a href="/tags/jq/" class="badge post-taxonomy">jq</a></span>
+</div>
+<div class="post-summary">
+      <p>上一篇文章介绍了 jq 中的过滤器，但单独地使用过滤器无法满足复杂的实际需求，所以 jq 中引入了特殊字符（<code>,</code> 和 <code>|</code>）和构造器来实现定制化的输出。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/linux-jq-command-02/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/linux-jq-command-01/">命令 Jq（一）基础过滤器
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-02-22 22:13:29 &#43;0800 CST。">
+    2023-02-22
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E8%BF%90%E7%BB%B4/" class="badge post-taxonomy">运维</a><a href="/tags/linux-shell/" class="badge post-taxonomy">Linux Shell</a><a href="/tags/jq/" class="badge post-taxonomy">jq</a></span>
+</div>
+<div class="post-summary">
+      <p>jq 是 Linux 下处理 JSON 文档字符串的命令行工具，可用于过滤并格式化输出特定的内容。其官网的手册详尽地介绍了 jq 的使用方法，内容相当丰富。本文则注重对过滤器的使用，并通过不同的示例加以说明。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/linux-jq-command-01/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/nginx-load-balance-with-docker/">基于 Docker 的 Nginx 负载均衡配置
 </a>
     </h2>
@@ -324,45 +360,6 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-error-handling/">Go 的错误处理
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-08-22 23:40:01 &#43;0800 CST。">
-    2022-08-22
-  </span><span class="post-reading-time">
-    5 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge post-taxonomy">翻译</a></span>
-</div>
-<div class="post-summary">
-      <p>原文：<a href="https://go.dev/blog/error-handling-and-go" target="_blank" rel="noopener noreferrer">Error handling and Go</a></p>
-<h1 id="介绍">介绍<a class="anchor ms-1" href="#介绍"><i class="fas fa-link"></i></a></h1>
-<p>如果你写过 Go 的代码，就一定遇到过 Go 的内置类型 error。一个 error 类型的值可用于指明程序的某种不正常的状态，比如，当打开文件失败时，os.Open 函数会返回一个非 nil 的 error 值。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-error-handling/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-pat-1004/">Python PAT 甲级 1003
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-08-03 00:33:33 &#43;0800 CST。">
-    2022-08-03
-  </span><span class="post-reading-time">
-    1 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
-</div>
-<div class="post-summary">
-      <p>PAT 甲级 1003 。
-# -*- coding:utf-8 -*- if __name__ == &#39;__main__&#39;: # n 树中节点个数 # m 非叶子节点个数 n, m = list(map(int, input().strip().split(&#39; &#39;))) # 二维数组 # 元素的下标表示节点的 ID # 第 1 个元素不使用 tree = [[] for _ in range(n+1)] while m != 0: tokens = list(map(int, input().split(&#39; &#39;))) _id = tokens[0] children = tokens[2:] tree[_id] =...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-pat-1004/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item disabled">
@@ -418,6 +415,12 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/linux-jq-command-02/">命令 Jq（二） 特殊字符和构造器
+</a>
+      </li><li>
+        <a href="/posts/linux-jq-command-01/">命令 Jq（一）基础过滤器
+</a>
+      </li><li>
         <a href="/posts/nginx-load-balance-with-docker/">基于 Docker 的 Nginx 负载均衡配置
 </a>
       </li><li>
@@ -440,12 +443,6 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
 </a>
       </li><li>
         <a href="/posts/python-django-parameter-validation-default/">扩展 Django Forms.Field - 支持 Default 属性
-</a>
-      </li><li>
-        <a href="/posts/go-error-handling/">Go 的错误处理
-</a>
-      </li><li>
-        <a href="/posts/python-pat-1004/">Python PAT 甲级 1003
 </a>
       </li></ul>
   </div>
@@ -497,7 +494,9 @@ __all__ = ( &#39;Field&#39;, &#39;CharField&#39;, &#39;IntegerField&#39;, &#39;D
             slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
             Docker</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
             file</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
-            I/O</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            I/O</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
+            jq</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
+            Linux Shell</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
             Matplotlib</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
             PAT</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">

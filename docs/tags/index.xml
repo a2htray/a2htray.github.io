@@ -6,7 +6,25 @@
     <description>Recent content in 标签 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 16 Feb 2023 21:22:17 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Feb 2023 22:40:49 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jq</title>
+      <link>/tags/jq/</link>
+      <pubDate>Wed, 22 Feb 2023 22:40:49 +0800</pubDate>
+      
+      <guid>/tags/jq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux Shell</title>
+      <link>/tags/linux-shell/</link>
+      <pubDate>Wed, 22 Feb 2023 22:40:49 +0800</pubDate>
+      
+      <guid>/tags/linux-shell/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Docker</title>
       <link>/tags/docker/</link>

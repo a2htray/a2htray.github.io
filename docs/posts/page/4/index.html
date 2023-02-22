@@ -175,6 +175,53 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-built-in-rpc-package/">Go 内置的 RPC 包
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Go 内置的 RPC 包" src="/images/operating-system-remote-procedure-call-1.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-10 16:37:30 &#43;0800 CST。">
+    2022-04-10
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/rpc/" class="badge post-taxonomy">RPC</a><a href="/tags/jsonrpc/" class="badge post-taxonomy">jsonrpc</a></span>
+</div>
+<div class="post-summary">
+      <p> 在网络或 I/O 连接中，可以使用 net/rpc 包实现对一个对象的导出方法的调用，即远程过程调用（Remote Procedure Call，RPC）。通过向 RPC 服务注册一个对象，使其可被远程调用，进而实现一些复杂的业务逻辑。
+项目结构 示例项目的结构如下：
+client - client.go - json_client.go models - greeting.go server - json_server.go - server.go 注册服务 一个可被远程调用的方法须满足以下条件：
+方法所属结构是公开的； 方法是分开的； 方法的参数类型是分开的； 方法带两个参数，第 2 个参数为指针； 方法返回值为 error ...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-built-in-rpc-package/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/go-1.18-release-features/">Go 1.18 特性 - 泛型
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Go 1.18 特性 - 泛型" src="/images/golang-1.18-release.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-10 12:11:38 &#43;0800 CST。">
+    2022-04-10
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/go-1.18/" class="badge post-taxonomy">Go 1.18</a></span>
+</div>
+<div class="post-summary">
+      <p>Go 1.18 在 2022 年 3 月 15 日发布，根据团队的<a href="https://go.dev/blog/go1.18" target="_blank" rel="noopener noreferrer">博文</a>介绍，1.18 版本包含 4 个重要特性：</p>
+<ol>
+<li><strong>泛型</strong>；</li>
+<li>fuzzing；</li>
+<li>工作空间；</li>
+<li>20% 的性能提升；</li>
+</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-1.18-release-features/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/protocol-buffer-reduce-data-size/">Protocol Buffer 减少传输数据的大小
 </a>
     </h2>
@@ -329,24 +376,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-read-and-write-file/">Python 读写文件
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-28 13:28:47 &#43;0800 CST。">
-    2022-03-28
-  </span><span class="post-reading-time">
-    4 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/tags/file/" class="badge post-taxonomy">file</a></span>
-</div>
-<div class="post-summary">
-      <p>在开发过程中，开发者常常需要对文件执行读写操作，仅以此文记录读写文件的常规用法。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-read-and-write-file/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -367,11 +396,14 @@
       <li class="page-item active">
         <a aria-current="page" aria-label="Page 4" class="page-link" role="button">4</a>
       </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
+      <li class="page-item">
+        <a href="/posts/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
       </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      <li class="page-item">
+        <a href="/posts/page/5/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/posts/page/5/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul></div>
 </div>
@@ -399,6 +431,12 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/linux-jq-command-02/">命令 Jq（二） 特殊字符和构造器
+</a>
+      </li><li>
+        <a href="/posts/linux-jq-command-01/">命令 Jq（一）基础过滤器
+</a>
+      </li><li>
         <a href="/posts/nginx-load-balance-with-docker/">基于 Docker 的 Nginx 负载均衡配置
 </a>
       </li><li>
@@ -421,12 +459,6 @@
 </a>
       </li><li>
         <a href="/posts/python-django-parameter-validation-default/">扩展 Django Forms.Field - 支持 Default 属性
-</a>
-      </li><li>
-        <a href="/posts/go-error-handling/">Go 的错误处理
-</a>
-      </li><li>
-        <a href="/posts/python-pat-1004/">Python PAT 甲级 1003
 </a>
       </li></ul>
   </div>
@@ -478,7 +510,9 @@
             slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
             Docker</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
             file</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
-            I/O</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            I/O</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
+            jq</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
+            Linux Shell</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
             Matplotlib</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
             PAT</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">

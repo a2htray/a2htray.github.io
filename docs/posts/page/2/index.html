@@ -175,6 +175,45 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-error-handling/">Go 的错误处理
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-08-22 23:40:01 &#43;0800 CST。">
+    2022-08-22
+  </span><span class="post-reading-time">
+    5 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge post-taxonomy">翻译</a></span>
+</div>
+<div class="post-summary">
+      <p>原文：<a href="https://go.dev/blog/error-handling-and-go" target="_blank" rel="noopener noreferrer">Error handling and Go</a></p>
+<h1 id="介绍">介绍<a class="anchor ms-1" href="#介绍"><i class="fas fa-link"></i></a></h1>
+<p>如果你写过 Go 的代码，就一定遇到过 Go 的内置类型 error。一个 error 类型的值可用于指明程序的某种不正常的状态，比如，当打开文件失败时，os.Open 函数会返回一个非 nil 的 error 值。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-error-handling/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/python-pat-1004/">Python PAT 甲级 1003
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-08-03 00:33:33 &#43;0800 CST。">
+    2022-08-03
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
+</div>
+<div class="post-summary">
+      <p>PAT 甲级 1003 。
+# -*- coding:utf-8 -*- if __name__ == &#39;__main__&#39;: # n 树中节点个数 # m 非叶子节点个数 n, m = list(map(int, input().strip().split(&#39; &#39;))) # 二维数组 # 元素的下标表示节点的 ID # 第 1 个元素不使用 tree = [[] for _ in range(n+1)] while m != 0: tokens = list(map(int, input().split(&#39; &#39;))) _id = tokens[0] children = tokens[2:] tree[_id] =...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-pat-1004/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/python-pat-1003/">Python PAT 甲级 1003
 </a>
     </h2>
@@ -328,42 +367,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-file-rename-pit/">Windows 下移动文件的坑
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-24 17:16:44 &#43;0800 CST。">
-    2022-04-24
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/file/" class="badge post-taxonomy">file</a><a href="/tags/i/o/" class="badge post-taxonomy">I/O</a><a href="/tags/stackoverflow/" class="badge post-taxonomy">stackoverflow</a></span>
-</div>
-<div class="post-summary">
-      <p>在 Windows 下，Go 的 <code>os</code> 标准库提供的 <code>Rename</code> 方法不能跨磁盘移动文件。下面通过问题重现，提供两种解决方案。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-file-rename-pit/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-download-network-file/">URL 下载网络文件
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-24 10:00:25 &#43;0800 CST。">
-    2022-04-24
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/http/" class="badge post-taxonomy">HTTP</a><a href="/tags/i/o/" class="badge post-taxonomy">I/O</a></span>
-</div>
-<div class="post-summary">
-      <p>从网络上下载文件是开发过程中常用的需求，常规流程是：（1）发送请求；（2）接收响应并读取响应体内容；（3）保存到本地文件。本文包含的两个例子分别来自于<strong>参考 [1]</strong> 和<strong>参考 [2]</strong>，在此基础上做了少量的修改。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-download-network-file/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -385,10 +388,13 @@
         <a href="/posts/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
       </li>
       <li class="page-item">
+        <a href="/posts/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item">
         <a href="/posts/page/3/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/posts/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/posts/page/5/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul></div>
 </div>
@@ -416,6 +422,12 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/linux-jq-command-02/">命令 Jq（二） 特殊字符和构造器
+</a>
+      </li><li>
+        <a href="/posts/linux-jq-command-01/">命令 Jq（一）基础过滤器
+</a>
+      </li><li>
         <a href="/posts/nginx-load-balance-with-docker/">基于 Docker 的 Nginx 负载均衡配置
 </a>
       </li><li>
@@ -438,12 +450,6 @@
 </a>
       </li><li>
         <a href="/posts/python-django-parameter-validation-default/">扩展 Django Forms.Field - 支持 Default 属性
-</a>
-      </li><li>
-        <a href="/posts/go-error-handling/">Go 的错误处理
-</a>
-      </li><li>
-        <a href="/posts/python-pat-1004/">Python PAT 甲级 1003
 </a>
       </li></ul>
   </div>
@@ -495,7 +501,9 @@
             slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
             Docker</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
             file</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
-            I/O</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            I/O</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
+            jq</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
+            Linux Shell</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
             Matplotlib</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
             PAT</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
