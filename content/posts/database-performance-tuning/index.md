@@ -4,7 +4,7 @@ date: 2022-04-14T19:59:24+08:00
 draft: false
 reward: false
 categories:
-  - 数据库
+  - Database
 tags:
   - MySQL
   - 性能优化

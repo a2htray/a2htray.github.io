@@ -6,7 +6,7 @@ reward: false
 toc: true
 pinned: false
 categories:
-  - "数据库"
+  - Database
 tags:
   - "Redis"
 series:
@@ -231,28 +231,6 @@ OK
 127.0.0.1:6379> BRPOP mock:list 2`
 (nil)
 (2.05s)
-```
-
-## RPUSHX：向已存在的列表右端添加元素
-
-`RPUSHX` 用于将一个或多个元素添加到已存在列表，若列表不存在，则操作无效。
-
-格式：`RPUSHX key element [element ...]`
-
-```bash
-127.0.0.1:6379> LRANGE colors 0 -1
-1) "red"
-2) "blue"
-3) "yellow"
-127.0.0.1:6379> RPUSHX colors green
-(integer) 4
-127.0.0.1:6379> LRANGE colors 0 -1
-1) "red"
-2) "blue"
-3) "yellow"
-4) "green"
-127.0.0.1:6379> RPUSHX not:exists:colors green
-(integer) 0
 ```
 
 ## BRPOPLPUSH：操作两个列表，对元素进行弹出再推入

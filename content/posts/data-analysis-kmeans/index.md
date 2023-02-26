@@ -6,7 +6,7 @@ math: true
 reward: false
 categories:
  - Python
- - 数据挖掘
+ - Data Mining
 tags:
  - k-means
 images:

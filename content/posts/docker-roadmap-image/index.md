@@ -8,8 +8,7 @@ tags:
  - Docker
  - docker image
 categories:
- - 生产工具
- - 运维
+ - O&M
 ---
 
 Docker 命令快速查询，收集了与 docker image 相关的命令及部分示例。

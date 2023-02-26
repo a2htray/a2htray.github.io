@@ -6,9 +6,9 @@ reward: false
 toc: true
 pinned: false
 categories:
-  - "数据库"
+  - Database
 tags:
-  - "Redis"
+  - Redis
 series:
   - "Redis 命令手册"
 type: "docs"

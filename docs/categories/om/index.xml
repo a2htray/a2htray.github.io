@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>O&amp;M on Mozart&#39;s Sheet</title>
+    <link>/categories/om/</link>
+    <description>Recent content in O&amp;M on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Wed, 22 Feb 2023 22:40:49 +0800</lastBuildDate><atom:link href="/categories/om/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>命令 jq（二） 特殊字符和构造器</title>
+      <link>/posts/linux-jq-command-02/</link>
+      <pubDate>Wed, 22 Feb 2023 22:40:49 +0800</pubDate>
+      
+      <guid>/posts/linux-jq-command-02/</guid>
+      <description>&lt;p&gt;上一篇文章介绍了 jq 中的过滤器，但单独地使用过滤器无法满足复杂的实际需求，所以 jq 中引入了特殊字符（&lt;code&gt;,&lt;/code&gt; 和 &lt;code&gt;|&lt;/code&gt;）和构造器来实现定制化的输出。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>命令 jq（一）基础过滤器</title>
+      <link>/posts/linux-jq-command-01/</link>
+      <pubDate>Wed, 22 Feb 2023 22:13:29 +0800</pubDate>
+      
+      <guid>/posts/linux-jq-command-01/</guid>
+      <description>&lt;p&gt;jq 是 Linux 下处理 JSON 文档字符串的命令行工具，可用于过滤并格式化输出特定的内容。其官网的手册详尽地介绍了 jq 的使用方法，内容相当丰富。本文则注重对过滤器的使用，并通过不同的示例加以说明。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于 Docker 的 Nginx 负载均衡配置</title>
+      <link>/posts/nginx-load-balance-with-docker/</link>
+      <pubDate>Thu, 16 Feb 2023 21:22:17 +0800</pubDate>
+      
+      <guid>/posts/nginx-load-balance-with-docker/</guid>
+      <description>本文主要介绍如何基于 Docker 生成容器化应用以及配置 Nginx 来实现 Web 服务的负载均衡，包含以下内容： Go 简易 Web 程序（hello world） 通过 Dockerfile 生成镜像 Nginx 配置</description>
+    </item>
+    
+    <item>
+      <title>与 image 概念相关的命令</title>
+      <link>/posts/docker-roadmap-image/</link>
+      <pubDate>Tue, 10 May 2022 22:15:52 +0800</pubDate>
+      
+      <guid>/posts/docker-roadmap-image/</guid>
+      <description>&lt;p&gt;Docker 命令快速查询，收集了与 docker image 相关的命令及部分示例。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Redis 集群配置过程</title>
+      <link>/posts/redis-cluster-deployment/</link>
+      <pubDate>Thu, 07 Apr 2022 14:07:35 +0800</pubDate>
+      
+      <guid>/posts/redis-cluster-deployment/</guid>
+      <description>&lt;p&gt;Redis 集群是基于“主从复制”特性之上的分布式 Redis 版本，可提供高并发、高性能、高可用的数据库服务。Redis 集群突破了单台服务器的内存局限，集群中的每一个节点都可以存储数据，同时维护着 &amp;ldquo;key-node&amp;rdquo; 的映射表。本文记录了 3 主 3 从的 Redis 集群的配置过程，主要内容包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Redis 集群的配置过程；&lt;/li&gt;
+&lt;li&gt;集群相关命令；&lt;/li&gt;
+&lt;li&gt;Go 存取集群数据；&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>Redis 主从复制配置过程</title>
+      <link>/posts/redis-master-slave-replication-deployment/</link>
+      <pubDate>Wed, 30 Mar 2022 10:28:31 +0800</pubDate>
+      
+      <guid>/posts/redis-master-slave-replication-deployment/</guid>
+      <description>&lt;p&gt;Redis 主从复制可以实现数据库的读写分离，即主节点负责接收写请求、从节点负责接收读请求，是高性能 Redis 服务的基础。所以配置 Redis 主从复制应当作为开发者的技能之一，后文内容包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;单机配置一主二从的主从复制服务&lt;/li&gt;
+&lt;li&gt;服务验证；&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,8 +6,8 @@ reward: false
 toc: true
 pinned: false
 categories:
-  - "数据库"
-  - "运维"
+  - Database
+  - O&M
 tags:
   - "Redis"
 ---

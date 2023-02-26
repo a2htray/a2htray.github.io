@@ -5,7 +5,7 @@ draft: false
 reward: false
 categories:
  - Go
- - 算法
+ - Algo
 tags:
  - 面试经
  - 大数除法

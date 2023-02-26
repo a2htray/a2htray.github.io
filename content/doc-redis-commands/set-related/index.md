@@ -1,12 +1,12 @@
 ---
 title: "集合相关"
 date: 2022-03-27T05:47:22+08:00
-draft: true
+draft: false
 reward: false
 toc: true
 pinned: false
 categories:
-  - "数据库"
+  - Database
 tags:
   - "Redis"
 series:

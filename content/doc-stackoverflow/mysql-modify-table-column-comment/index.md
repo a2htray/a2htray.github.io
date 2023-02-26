@@ -8,7 +8,7 @@ series:
   - "Stackoverflow Magic"
 type: "docs"
 categories:
- - 数据库
+ - Database
 tags:
  - stackoverflow
  - MySQL

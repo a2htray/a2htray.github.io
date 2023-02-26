@@ -11,7 +11,7 @@ tags:
 categories:
  - Go
  - Web
- - 运维
+ - O&M
 ---
 
 本文主要介绍如何基于 Docker 生成容器化应用以及配置 Nginx 来实现 Web 服务的负载均衡，包含以下内容：

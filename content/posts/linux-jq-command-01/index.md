@@ -4,7 +4,7 @@ date: 2023-02-22T22:13:29+08:00
 draft: false
 reward: false
 categories:
- - 运维
+ - O&M
 tags:
  - Linux Shell
  - jq

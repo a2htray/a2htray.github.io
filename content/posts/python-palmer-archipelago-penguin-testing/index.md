@@ -7,7 +7,7 @@ math: true
 categories:
  - Python
  - 可视化
- - 数据挖掘
+ - Data Mining
  - 机器学习
  - 统计学 
 tags:
@@ -30,15 +30,15 @@ images:
 
 本次分析使用的是简化后的数据集 `penguins_size.csv`。数据集共 344 个样本，特征信息如下表：
 
-| 特征              | 数据类型 | 说明                                          |
-| ----------------- | -------- | --------------------------------------------- |
-| species           | 离散值   | 标签信息，值为 Adelie\|Chinstrap\|Gentoo 之一 |
-| island            | 离散值   | 岛屿，值为 Torgersen\|Biscoe\|Dream 之一      |
-| culmen_length_mm  | 连续值   | 喙的长度（mm）                                |
-| culmen_depth_mm   | 连续值   | 喙的高度（mm）                                |
-| flipper_length_mm | 连续值   | 脚蹼长度（mm）                                |
-| body_mass_g       | 连续值   | 体重（克）                                    |
-| sex               | 离散值   | 性别，值为 MALE\| FEMALE 之一                 |
+| 特征                | 数据类型 | 说明                                   |
+| ----------------- | ---- | ------------------------------------ |
+| species           | 离散值  | 标签信息，值为 Adelie\|Chinstrap\|Gentoo 之一 |
+| island            | 离散值  | 岛屿，值为 Torgersen\|Biscoe\|Dream 之一    |
+| culmen_length_mm  | 连续值  | 喙的长度（mm）                             |
+| culmen_depth_mm   | 连续值  | 喙的高度（mm）                             |
+| flipper_length_mm | 连续值  | 脚蹼长度（mm）                             |
+| body_mass_g       | 连续值  | 体重（克）                                |
+| sex               | 离散值  | 性别，值为 MALE\| FEMALE 之一               |
 
 > 数据集包含缺失数据，用 NA 表示特征值缺失，其中第 337 样本的 sex 特征值为“.”，在此也认为是缺失值。
 
@@ -252,17 +252,17 @@ print(clf.predict(scaler.transform(test_X)))
 
 预测结果如下表：
 
-| 编号 | sex 预测值 |
-| ---- | ---------- |
-| 8    | MALE       |
-| 9    | MALE       |
-| 10   | MALE       |
-| 11   | MALE       |
-| 47   | MALE       |
-| 246  | MALE       |
-| 286  | MALE       |
-| 324  | MALE       |
-| 336  | MALE       |
+| 编号   | sex 预测值 |
+| ---- | ------- |
+| 8    | MALE    |
+| 9    | MALE    |
+| 10   | MALE    |
+| 11   | MALE    |
+| 47   | MALE    |
+| 246  | MALE    |
+| 286  | MALE    |
+| 324  | MALE    |
+| 336  | MALE    |
 
 从预测结果来看，怎么都是 MALE，本能地选择不相信模型结果 -|_|-。
 

@@ -5,7 +5,7 @@ draft: false
 reward: false
 categories:
  - Go
- - 数据库
+ - Database
  - Web
 tags:
  - Redis

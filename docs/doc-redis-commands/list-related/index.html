@@ -12,7 +12,7 @@
 <meta name="description" content="Redis 服务器中与列表值相关的命令。" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="列表值相关">
 <meta itemprop="description" content="Redis 服务器中与列表值相关的命令。"><meta itemprop="datePublished" content="2022-03-27T05:32:39+08:00" />
 <meta itemprop="dateModified" content="2022-03-27T05:32:39+08:00" />
-<meta itemprop="wordCount" content="1222"><meta itemprop="image" content="/images/redis-list.png">
+<meta itemprop="wordCount" content="1120"><meta itemprop="image" content="/images/redis-list.png">
 <meta itemprop="keywords" content="Redis," /><meta property="og:title" content="列表值相关" />
 <meta property="og:description" content="Redis 服务器中与列表值相关的命令。" />
 <meta property="og:type" content="article" />
@@ -184,6 +184,10 @@
         <ul class="list-unstyled mb-2"><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/server-related/">服务相关</a>
         </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/hash-related/">哈希表相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/set-related/">集合相关</a>
+        </li><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/cluster-related/">集群相关</a>
         </li><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/key-related/">键相关</a>
@@ -210,6 +214,8 @@
           </div>
         </li><li class="mb-2" tabindex="-1">
           <a href="/doc-redis-commands/zset-related/">有序集合相关</a>
+        </li><li class="mb-2" tabindex="-1">
+          <a href="/doc-redis-commands/string-related/">字符串相关</a>
         </li></ul>
       </div>
     </div>
@@ -254,7 +260,7 @@
     2022-03-27
   </span><span class="post-reading-time">
     3 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="badge post-taxonomy">数据库</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
 </div>
 <img class="post-featured-img w-100 mb-3" alt="列表值相关" src="/images/redis-list.png" loading="lazy"/><div class="post-content mb-3"><p>Redis 服务器中与列表值相关的命令。</p>
 <h2 id="lpush向列表左端添加元素">LPUSH：向列表左端添加元素<a class="anchor ms-1" href="#lpush向列表左端添加元素"><i class="fas fa-link"></i></a></h2>
@@ -376,22 +382,6 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; BRPOP mock:list 2<span class="sb">`</span>
 </span></span><span class="line"><span class="cl"><span class="o">(</span>nil<span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">(</span>2.05s<span class="o">)</span>
-</span></span></code></pre></div><h2 id="rpushx向已存在的列表右端添加元素">RPUSHX：向已存在的列表右端添加元素<a class="anchor ms-1" href="#rpushx向已存在的列表右端添加元素"><i class="fas fa-link"></i></a></h2>
-<p><code>RPUSHX</code> 用于将一个或多个元素添加到已存在列表，若列表不存在，则操作无效。</p>
-<p>格式：<code>RPUSHX key element [element ...]</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE colors <span class="m">0</span> -1
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;red&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;blue&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;yellow&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; RPUSHX colors green
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; LRANGE colors <span class="m">0</span> -1
-</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;red&#34;</span>
-</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;blue&#34;</span>
-</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;yellow&#34;</span>
-</span></span><span class="line"><span class="cl">4<span class="o">)</span> <span class="s2">&#34;green&#34;</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; RPUSHX not:exists:colors green
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">0</span>
 </span></span></code></pre></div><h2 id="brpoplpush操作两个列表对元素进行弹出再推入">BRPOPLPUSH：操作两个列表，对元素进行弹出再推入<a class="anchor ms-1" href="#brpoplpush操作两个列表对元素进行弹出再推入"><i class="fas fa-link"></i></a></h2>
 <p><code>BRPOPLPUSH</code> 与 <code>RPOPLPUSH</code> 类似，但如果列表中没有元素会阻塞直到等待超时或有元素弹出，超时时间的单位为秒。</p>
 <p>格式：<code>BRPOPLPUSH source destination timeout</code></p>
@@ -460,7 +450,6 @@
     <li><a href="#rpoplpush操作两个列表对元素进行弹出再推入">RPOPLPUSH：操作两个列表，对元素进行弹出再推入</a></li>
     <li><a href="#blpop阻塞式从列表左端弹出元素">BLPOP：阻塞式从列表左端弹出元素</a></li>
     <li><a href="#brpop阻塞式从列表右端弹出元素">BRPOP：阻塞式从列表右端弹出元素</a></li>
-    <li><a href="#rpushx向已存在的列表右端添加元素">RPUSHX：向已存在的列表右端添加元素</a></li>
     <li><a href="#brpoplpush操作两个列表对元素进行弹出再推入">BRPOPLPUSH：操作两个列表，对元素进行弹出再推入</a></li>
   </ul>
 </nav>
@@ -473,6 +462,9 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/doc-redis-commands/hash-related/">哈希表相关
+</a>
+      </li><li>
         <a href="/doc-stackoverflow/nodejs-fs-copyfile/">静态资源的管理-文件复制
 </a>
       </li><li>
@@ -498,9 +490,6 @@
 </a>
       </li><li>
         <a href="/doc-redis-commands/introduction/">介绍
-</a>
-      </li><li>
-        <a href="/doc-redis-commands/stream-related/">流相关
 </a>
       </li></ul>
   </div>

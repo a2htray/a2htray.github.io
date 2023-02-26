@@ -2,28 +2,61 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/categories/database/</loc>
+    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+  </url><url>
+    <loc>/tags/redis/</loc>
+    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+  </url><url>
+    <loc>/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/</loc>
+    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/</loc>
+    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/hash-related/</loc>
+    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+  </url><url>
+    <loc>/series/</loc>
+    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+  </url><url>
+    <loc>/categories/python/</loc>
+    <lastmod>2023-02-26T20:10:40+08:00</lastmod>
+  </url><url>
+    <loc>/posts/redis-python-zset/</loc>
+    <lastmod>2023-02-26T20:10:40+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2023-02-26T20:10:40+08:00</lastmod>
+  </url><url>
+    <loc>/posts/redis-python-set/</loc>
+    <lastmod>2023-02-26T16:59:30+08:00</lastmod>
+  </url><url>
+    <loc>/posts/redis-python-string/</loc>
+    <lastmod>2023-02-26T14:47:07+08:00</lastmod>
+  </url><url>
+    <loc>/posts/redis-python-list/</loc>
+    <lastmod>2023-02-25T21:58:12+08:00</lastmod>
+  </url><url>
     <loc>/tags/jq/</loc>
     <lastmod>2023-02-22T22:40:49+08:00</lastmod>
   </url><url>
     <loc>/tags/linux-shell/</loc>
     <lastmod>2023-02-22T22:40:49+08:00</lastmod>
   </url><url>
-    <loc>/</loc>
-    <lastmod>2023-02-22T22:40:49+08:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2023-02-22T22:40:49+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
+    <loc>/categories/om/</loc>
     <lastmod>2023-02-22T22:40:49+08:00</lastmod>
   </url><url>
     <loc>/posts/linux-jq-command-02/</loc>
-    <lastmod>2023-02-22T22:40:49+08:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2023-02-22T22:40:49+08:00</lastmod>
-  </url><url>
-    <loc>/categories/%E8%BF%90%E7%BB%B4/</loc>
     <lastmod>2023-02-22T22:40:49+08:00</lastmod>
   </url><url>
     <loc>/posts/linux-jq-command-01/</loc>
@@ -51,9 +84,6 @@
     <lastmod>2023-02-16T21:22:17+08:00</lastmod>
   </url><url>
     <loc>/tags/pandas/</loc>
-    <lastmod>2022-11-17T22:24:05+08:00</lastmod>
-  </url><url>
-    <loc>/categories/python/</loc>
     <lastmod>2022-11-17T22:24:05+08:00</lastmod>
   </url><url>
     <loc>/posts/python-pandas-create-dataframe-from-raw-string/</loc>
@@ -131,9 +161,6 @@
     <loc>/doc-stackoverflow/nodejs-fs-copyfile/</loc>
     <lastmod>2022-05-12T11:09:53+08:00</lastmod>
   </url><url>
-    <loc>/series/</loc>
-    <lastmod>2022-05-12T11:09:53+08:00</lastmod>
-  </url><url>
     <loc>/tags/mysql/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
@@ -143,16 +170,10 @@
     <loc>/tags/sqlx/</loc>
     <lastmod>2022-05-11T13:49:39+08:00</lastmod>
   </url><url>
-    <loc>/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-05-11T13:49:39+08:00</lastmod>
-  </url><url>
     <loc>/tags/docker-image/</loc>
     <lastmod>2022-05-10T22:15:52+08:00</lastmod>
   </url><url>
     <loc>/tags/roadmap/</loc>
-    <lastmod>2022-05-10T22:15:52+08:00</lastmod>
-  </url><url>
-    <loc>/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2022-05-10T22:15:52+08:00</lastmod>
   </url><url>
     <loc>/posts/docker-roadmap-image/</loc>
@@ -183,6 +204,9 @@
     <lastmod>2022-04-27T20:55:01+08:00</lastmod>
   </url><url>
     <loc>/tags/jetbrains/</loc>
+    <lastmod>2022-04-27T20:55:01+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2022-04-27T20:55:01+08:00</lastmod>
   </url><url>
     <loc>/posts/go-map-detail/</loc>
@@ -227,9 +251,6 @@
     <loc>/tags/logging/</loc>
     <lastmod>2022-04-23T19:05:01+08:00</lastmod>
   </url><url>
-    <loc>/tags/redis/</loc>
-    <lastmod>2022-04-23T19:05:01+08:00</lastmod>
-  </url><url>
     <loc>/posts/go-redis-request-log-dumper/</loc>
     <lastmod>2022-04-23T19:05:01+08:00</lastmod>
   </url><url>
@@ -254,13 +275,13 @@
     <loc>/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/</loc>
     <lastmod>2022-04-19T19:35:33+08:00</lastmod>
   </url><url>
+    <loc>/categories/algo/</loc>
+    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
+  </url><url>
     <loc>/posts/interview-csig/</loc>
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>
   </url><url>
     <loc>/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/</loc>
-    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
-  </url><url>
-    <loc>/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>
   </url><url>
     <loc>/posts/database-performance-tuning/</loc>
@@ -286,6 +307,9 @@
   </url><url>
     <loc>/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/</loc>
     <lastmod>2022-04-11T18:57:39+08:00</lastmod>
+  </url><url>
+    <loc>/categories/data-mining/</loc>
+    <lastmod>2022-04-11T13:28:26+08:00</lastmod>
   </url><url>
     <loc>/tags/matplotlib/</loc>
     <lastmod>2022-04-11T13:28:26+08:00</lastmod>
@@ -316,12 +340,6 @@
   </url><url>
     <loc>/posts/go-1.18-release-features/</loc>
     <lastmod>2022-04-10T12:11:38+08:00</lastmod>
-  </url><url>
-    <loc>/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/</loc>
-    <lastmod>2022-04-10T11:34:31+08:00</lastmod>
-  </url><url>
-    <loc>/doc-redis-commands/</loc>
-    <lastmod>2022-04-10T11:34:31+08:00</lastmod>
   </url><url>
     <loc>/doc-redis-commands/cluster-related/</loc>
     <lastmod>2022-04-10T11:34:31+08:00</lastmod>
@@ -380,7 +398,13 @@
     <loc>/doc-redis-commands/introduction/</loc>
     <lastmod>2022-03-27T05:56:48+08:00</lastmod>
   </url><url>
+    <loc>/doc-redis-commands/set-related/</loc>
+    <lastmod>2022-03-27T05:47:22+08:00</lastmod>
+  </url><url>
     <loc>/doc-redis-commands/stream-related/</loc>
+    <lastmod>2022-03-27T05:47:22+08:00</lastmod>
+  </url><url>
+    <loc>/doc-redis-commands/string-related/</loc>
     <lastmod>2022-03-27T05:47:22+08:00</lastmod>
   </url><url>
     <loc>/doc-redis-commands/zset-related/</loc>

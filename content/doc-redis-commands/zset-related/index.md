@@ -6,7 +6,7 @@ reward: false
 toc: true
 pinned: false
 categories:
-  - "数据库"
+  - Database
 tags:
   - "Redis"
 series:

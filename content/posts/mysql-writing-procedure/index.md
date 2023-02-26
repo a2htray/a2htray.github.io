@@ -7,7 +7,7 @@ tags:
  - MySQL
  - 存储过程
 categories:
- - "数据库"
+ - Database
 images:
  - images/mysql-procedure.png
 ---

@@ -4,7 +4,7 @@ date: 2022-04-30T20:25:09+08:00
 draft: false
 reward: false
 categories:
- - 数据库
+ - Database
  - Go
 tags:
  - MySQL

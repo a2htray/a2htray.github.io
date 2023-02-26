@@ -1,0 +1,592 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="blue"
+  >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Redis with Python（三） 集合操作及运算 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/images/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="set 数据类型对应元素不重复的数据结构，在 Redis 中，set 数据类型是无序的，与之相对的有序集合 zset。本文内容分两部分：
+
+集合操作
+集合运算
+" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="Redis with Python（三） 集合操作及运算">
+<meta itemprop="description" content="set 数据类型对应元素不重复的数据结构，在 Redis 中，set 数据类型是无序的，与之相对的有序集合 zset。本文内容分两部分：
+
+集合操作
+集合运算
+"><meta itemprop="datePublished" content="2023-02-26T16:59:30+08:00" />
+<meta itemprop="dateModified" content="2023-02-26T16:59:30+08:00" />
+<meta itemprop="wordCount" content="775">
+<meta itemprop="keywords" content="Redis," /><meta property="og:title" content="Redis with Python（三） 集合操作及运算" />
+<meta property="og:description" content="set 数据类型对应元素不重复的数据结构，在 Redis 中，set 数据类型是无序的，与之相对的有序集合 zset。本文内容分两部分：
+
+集合操作
+集合运算
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/redis-python-set/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-26T16:59:30+08:00" />
+<meta property="article:modified_time" content="2023-02-26T16:59:30+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis with Python（三） 集合操作及运算"/>
+<meta name="twitter:description" content="set 数据类型对应元素不重复的数据结构，在 Redis 中，set 数据类型是无序的，与之相对的有序集合 zset。本文内容分两部分：
+
+集合操作
+集合运算
+"/>
+<meta property="og:image" content="/false"/>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.167e94c7b316d713be3630685cf55d2d89f5ad9ac6d51a75f3f9df14324de701.css" integrity="sha256-Fn6Ux7MW1xO+NjBoXPVdLYn1rZrG1Rp18/nfFDJN5wE=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="/">Mozart&#39;s Sheet
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=Redis%20with%20Python%ef%bc%88%e4%b8%89%ef%bc%89%20%e9%9b%86%e5%90%88%e6%93%8d%e4%bd%9c%e5%8f%8a%e8%bf%90%e7%ae%97&url=%2fposts%2fredis-python-set%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fposts%2fredis-python-set%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">设置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+<div class="setting">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="modeSwitcher">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="蓝色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="蓝灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="绿色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="红色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="蓝绿色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黄色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 复制链接
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item">
+          <a class="nav-link" href="/series/">
+            <i class="fas fa-fw fa-columns"></i>专栏
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>归档
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-fw fa-folder"></i>分类
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="fas fa-fw fa-tags"></i>标签
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/posts/">文章</a></li><li class="breadcrumb-item active">Redis With Python（三） 集合操作及运算</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    <a class="action" href="#post-comments" role="button" aria-label="Comments" title="Comments">
+  <i class="fas fa-fw fa-comments"></i>
+</a>
+    <a class="action" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+  <div class="card-header ">
+    <h1 class="card-title post-title">Redis With Python（三） 集合操作及运算
+</h1>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-02-26 16:59:30 &#43;0800 CST。">
+    2023-02-26
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+</div>
+<div class="post-content mb-3"><p>set 数据类型对应元素不重复的数据结构，在 Redis 中，set 数据类型是无序的，与之相对的有序集合 zset。本文内容分两部分：</p>
+<ul>
+<li>集合操作</li>
+<li>集合运算</li>
+</ul>
+<h2 id="集合操作">集合操作<a class="anchor ms-1" href="#集合操作"><i class="fas fa-link"></i></a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">redis</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">redis_config</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;redis-testing&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">6379</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;db&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rs</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">(</span><span class="o">**</span><span class="n">redis_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># SADD 向集合中添加元素</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 返回添加成功元素的个数</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sadd</span><span class="p">(</span><span class="s1">&#39;numbers&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># 5</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 由于 4, 5 已存在于 numbers 集合，所以只需要添加 6, 7, 8，返回成功添加的个数 3</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sadd</span><span class="p">(</span><span class="s1">&#39;numbers&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  <span class="c1"># 3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SREM</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 删除集合中的元素，返回成功删除的元素个数</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">srem</span><span class="p">(</span><span class="s1">&#39;numbers&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>  <span class="c1"># 3</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">srem</span><span class="p">(</span><span class="s1">&#39;numbers&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>  <span class="c1"># 1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SMEMBERS</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 获取集合中的所有元素，返回类型对应 Python 中的 set 类型</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sadd</span><span class="p">(</span><span class="s1">&#39;alphabet&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]))</span>  <span class="c1"># 3</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">smembers</span><span class="p">(</span><span class="s1">&#39;alphabet&#39;</span><span class="p">))</span>  <span class="c1"># {b&#39;b&#39;, b&#39;a&#39;, b&#39;c&#39;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SCARD</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 取集合中元素的个数</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">scard</span><span class="p">(</span><span class="s1">&#39;alphabet&#39;</span><span class="p">))</span>  <span class="c1"># 3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SRANDMEMBER</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 随机取集合中指定个数的元素</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 随机输出，结果不保证一致</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">srandmember</span><span class="p">(</span><span class="s1">&#39;alphabet&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># [b&#39;b&#39;]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 指定个数大于集合元素个数时，返回全部元素</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">srandmember</span><span class="p">(</span><span class="s1">&#39;alphabet&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>  <span class="c1"># [b&#39;c&#39;, b&#39;a&#39;, b&#39;b&#39;]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SPOP</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 从集合中弹出指定个数的元素</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">spop</span><span class="p">(</span><span class="s1">&#39;alphabet&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># [b&#39;b&#39;, b&#39;c&#39;]</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">smembers</span><span class="p">(</span><span class="s1">&#39;alphabet&#39;</span><span class="p">))</span>  <span class="c1"># {b&#39;a&#39;}</span>
+</span></span></code></pre></div><p>代码在：<a href="https://github.com/a2htray/code-notebook/blob/main/Redis/app/set_basic.py" target="_blank" rel="noopener noreferrer">https://github.com/a2htray/code-notebook/blob/main/Redis/app/set_basic.py</a>。</p>
+<h2 id="集合运算">集合运算<a class="anchor ms-1" href="#集合运算"><i class="fas fa-link"></i></a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">redis</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">redis_config</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;redis-testing&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">6379</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;db&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rs</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">(</span><span class="o">**</span><span class="n">redis_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rs</span><span class="o">.</span><span class="n">sadd</span><span class="p">(</span><span class="s1">&#39;projectA&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39;A001&#39;</span><span class="p">,</span> <span class="s1">&#39;A002&#39;</span><span class="p">,</span> <span class="s1">&#39;A003&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rs</span><span class="o">.</span><span class="n">sadd</span><span class="p">(</span><span class="s1">&#39;projectAB&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39;A001&#39;</span><span class="p">,</span> <span class="s1">&#39;A002&#39;</span><span class="p">,</span> <span class="s1">&#39;A003&#39;</span><span class="p">,</span> <span class="s1">&#39;B001&#39;</span><span class="p">,</span> <span class="s1">&#39;B002&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SDIFF</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 取集合的差集</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 若参数为 S1, S2, S3, ...，则返回结果为 S1 - S2 - S3 - ...</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sdiff</span><span class="p">(</span><span class="s1">&#39;projectA&#39;</span><span class="p">,</span> <span class="s1">&#39;projectAB&#39;</span><span class="p">))</span>  <span class="c1"># set()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sdiff</span><span class="p">(</span><span class="s1">&#39;projectAB&#39;</span><span class="p">,</span> <span class="s1">&#39;projectA&#39;</span><span class="p">))</span>  <span class="c1"># {b&#39;B001&#39;, b&#39;B002&#39;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SINTER</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 取集合的交集</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sinter</span><span class="p">(</span><span class="s1">&#39;projectA&#39;</span><span class="p">,</span> <span class="s1">&#39;projectAB&#39;</span><span class="p">))</span>  <span class="c1"># {b&#39;A001&#39;, b&#39;A003&#39;, b&#39;A002&#39;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SUNION</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 取集合的并集</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rs</span><span class="o">.</span><span class="n">sadd</span><span class="p">(</span><span class="s1">&#39;projectB&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39;B001&#39;</span><span class="p">,</span> <span class="s1">&#39;B002&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sunion</span><span class="p">(</span><span class="s1">&#39;projectA&#39;</span><span class="p">,</span> <span class="s1">&#39;projectB&#39;</span><span class="p">))</span>  <span class="c1"># {b&#39;A002&#39;, b&#39;A001&#39;, b&#39;B001&#39;, b&#39;A003&#39;, b&#39;B002&#39;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SDIFFSTORE</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 计算集合的差集并将结果保存至另一键的集合中</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 返回差集中元素的个数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rs</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;projectB&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sdiffstore</span><span class="p">(</span><span class="s1">&#39;projectB&#39;</span><span class="p">,</span> <span class="s1">&#39;projectAB&#39;</span><span class="p">,</span> <span class="s1">&#39;projectA&#39;</span><span class="p">))</span>  <span class="c1"># 2</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">smembers</span><span class="p">(</span><span class="s1">&#39;projectB&#39;</span><span class="p">))</span>  <span class="c1"># {b&#39;B001&#39;, b&#39;B002&#39;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SINTERSTORE</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 计算集合的交集并将结果保存至另一键的集合中</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 返回交集中元素的个数</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sinterstore</span><span class="p">(</span><span class="s1">&#39;newProjectB&#39;</span><span class="p">,</span> <span class="s1">&#39;projectAB&#39;</span><span class="p">,</span> <span class="s1">&#39;projectB&#39;</span><span class="p">))</span>  <span class="c1"># 2</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">smembers</span><span class="p">(</span><span class="s1">&#39;newProjectB&#39;</span><span class="p">))</span>  <span class="c1"># {b&#39;B001&#39;, b&#39;B002&#39;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># SUNIONSTORE</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 计算集合的并集并将结果保存至另一键的集合中</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 返回并集中元素的个数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rs</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;projectAB&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">sunionstore</span><span class="p">(</span><span class="s1">&#39;projectAB&#39;</span><span class="p">,</span> <span class="s1">&#39;projectA&#39;</span><span class="p">,</span> <span class="s1">&#39;projectB&#39;</span><span class="p">))</span>  <span class="c1"># 5</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">smembers</span><span class="p">(</span><span class="s1">&#39;projectAB&#39;</span><span class="p">))</span>  <span class="c1"># {b&#39;A002&#39;, b&#39;A001&#39;, b&#39;B001&#39;, b&#39;A003&#39;, b&#39;B002&#39;}</span>
+</span></span></code></pre></div><p>代码在：<a href="https://github.com/a2htray/code-notebook/blob/main/Redis/app/set_ops.py" target="_blank" rel="noopener noreferrer">https://github.com/a2htray/code-notebook/blob/main/Redis/app/set_ops.py</a>。</p>
+<h2 id="小结">小结<a class="anchor ms-1" href="#小结"><i class="fas fa-link"></i></a></h2>
+<p>Redis 中的 set 数据类型保存的是无序的元素集合，Python 调用方式与 Redis 指令高度一致。</p></div></div>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/posts/redis-python-string/">Redis With Python（二） 字符串操作
+</a>
+  </div><div class="post-nav post-next">
+    <a href="/posts/redis-python-zset/">Redis With Python（四） 有序集合操作
+</a>
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
+    </div>
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
+</a>
+
+
+    </div>
+</div><section class="related-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">相关文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="/posts/redis-python-string/">Redis With Python（二） 字符串操作
+</a>
+          <span class="float-end post-date">2023-02-26
+</span>
+        </li><li>
+          <a href="/posts/redis-python-list/">Redis With Python（一） 列表操作
+</a>
+          <span class="float-end post-date">2023-02-25
+</span>
+        </li><li>
+          <a href="/posts/go-redis-request-log-dumper/">Redis 的 List 和 Stream：异步记录请求信息
+</a>
+          <span class="float-end post-date">2022-04-23
+</span>
+        </li><li>
+          <a href="/posts/redis-cluster-deployment/">Redis 集群配置过程
+</a>
+          <span class="float-end post-date">2022-04-07
+</span>
+        </li><li>
+          <a href="/posts/redis-master-slave-replication-deployment/">Redis 主从复制配置过程
+</a>
+          <span class="float-end post-date">2022-03-30
+</span>
+        </li></ul>
+    </div>
+  </section><div class="card component row post-comments" id="post-comments">
+  <div class="card-header">
+    <h2 class="card-title">评论</h2>
+  </div>
+  <div class="card-body"><script src="https://utteranc.es/client.js"
+  repo="a2htray/a2htray.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div>
+</div></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container d-flex flex-column">
+    
+    <div class="profile profile-compact card row component">
+  <div class="col-lg-5 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="a2htray" src="/images/profile.jpg" loading="lazy" data-viewer-invisible
+   width="460" height="460"
+   />
+</div>
+  <div class="col-lg-7 profile-meta"><div class="profile-name">a2htray</div><div class="profile-bio">Gopher and Student</div><nav class="social-links nav justify-content-center"><a class="nav-link social-link" href="mailto:a2htray@outlook.com" title="Email">
+      <i class="fas fa-fw fa-2x fa-envelope"></i>
+    </a><a class="nav-link social-link" target="_blank" href="https://github.com/a2htray" title="GitHub" rel="noopener noreferrer">
+        <i class="fa-fw fa-2x fab fa-github"></i>
+      </a><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+</div>
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#集合操作">集合操作</a></li>
+    <li><a href="#集合运算">集合运算</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav>
+  </div>
+</div><section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="/posts/redis-python-zset/">Redis With Python（四） 有序集合操作
+</a>
+      </li><li>
+        <a href="/posts/redis-python-set/">Redis With Python（三） 集合操作及运算
+</a>
+      </li><li>
+        <a href="/posts/redis-python-string/">Redis With Python（二） 字符串操作
+</a>
+      </li><li>
+        <a href="/posts/redis-python-list/">Redis With Python（一） 列表操作
+</a>
+      </li><li>
+        <a href="/posts/linux-jq-command-02/">命令 Jq（二） 特殊字符和构造器
+</a>
+      </li><li>
+        <a href="/posts/linux-jq-command-01/">命令 Jq（一）基础过滤器
+</a>
+      </li><li>
+        <a href="/posts/nginx-load-balance-with-docker/">基于 Docker 的 Nginx 负载均衡配置
+</a>
+      </li><li>
+        <a href="/posts/python-pandas-create-dataframe-from-raw-string/">从字符串中创建 DataFrame
+</a>
+      </li><li>
+        <a href="/posts/python-pandas-series-dataframe/">创建 Pandas 的 Series 和 DataFrame 
+</a>
+      </li><li>
+        <a href="/posts/go-hugo-wowchemy-academic-website/">Two Steps to Build an Academic Website With Hugo and Wowchemy
+</a>
+      </li></ul>
+  </div>
+</section><section class="series-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/series">专栏</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge rounded post-taxonomy" title="Redis 命令手册">
+            Redis 命令手册</a><a href="/series/stackoverflow-magic/" class="badge rounded post-taxonomy" title="Stackoverflow Magic">
+            Stackoverflow Magic</a><a href="/series/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="badge rounded post-taxonomy" title="正则表达式">
+            正则表达式</a></div>
+      </div>
+    </section><section class="categories-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/categories">分类</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/categories/database/" class="badge rounded post-taxonomy" title="Database">
+            Database</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
+            Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
+            Python</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Web</a><a href="/categories/om/" class="badge rounded post-taxonomy" title="O&amp;M">
+            O&amp;M</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
+            Data Mining</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            可视化</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
+            统计学</a><a href="/categories/algo/" class="badge rounded post-taxonomy" title="Algo">
+            Algo</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
+            机器学习</a><a href="/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="badge rounded post-taxonomy" title="正则表达式">
+            正则表达式</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
+            生产工具</a></div>
+      </div>
+    </section><section class="tags-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/tags">标签</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
+            Redis</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
+            MySQL</a><a href="/tags/stackoverflow/" class="badge rounded post-taxonomy" title="stackoverflow">
+            stackoverflow</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
+            slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
+            Docker</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
+            file</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
+            I/O</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
+            jq</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
+            Linux Shell</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            Matplotlib</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
+            PAT</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
+            protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
+            roadmap</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
+            翻译</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
+            面试经</a><a href="/tags/academic-website/" class="badge rounded post-taxonomy" title="Academic Website">
+            Academic Website</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
+            channel</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
+            Chi-Square</a><a href="/tags/dataframe/" class="badge rounded post-taxonomy" title="DataFrame">
+            DataFrame</a><a href="/tags/django/" class="badge rounded post-taxonomy" title="Django">
+            Django</a><a href="/tags/docker-compose/" class="badge rounded post-taxonomy" title="Docker Compose">
+            Docker Compose</a><a href="/tags/docker-image/" class="badge rounded post-taxonomy" title="docker image">
+            docker image</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
+            Gin</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
+            Go 1.18</a><a href="/tags/go-module/" class="badge rounded post-taxonomy" title="go module">
+            go module</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
+            HTTP</a><a href="/tags/hugo/" class="badge rounded post-taxonomy" title="Hugo">
+            Hugo</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
+            JetBrains</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
+            jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
+            k-means</a><a href="/tags/load-balance/" class="badge rounded post-taxonomy" title="Load Balance">
+            Load Balance</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
+            logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
+            map</a><a href="/tags/nginx/" class="badge rounded post-taxonomy" title="Nginx">
+            Nginx</a><a href="/tags/node.js/" class="badge rounded post-taxonomy" title="Node.js">
+            Node.js</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            NumPy</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
+            reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
+            Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="RPC">
+            RPC</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
+            scipy</a><a href="/tags/series/" class="badge rounded post-taxonomy" title="Series">
+            Series</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
+            sklearn</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
+            sqlx</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            Web 安全</a><a href="/tags/wowchemy/" class="badge rounded post-taxonomy" title="Wowchemy">
+            Wowchemy</a><a href="/tags/xls/" class="badge rounded post-taxonomy" title="xls">
+            xls</a><a href="/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/" class="badge rounded post-taxonomy" title="参数验证">
+            参数验证</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
+            反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
+            大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">
+            存储引擎</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge rounded post-taxonomy" title="存储过程">
+            存储过程</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
+            性能优化</a></div>
+      </div>
+    </section>
+    
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav justify-content-center mb-2"><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+<div class="copyright mb-2">
+  Copyright © 2016-2023 a2htray. All Rights Reserved.
+</div>
+<div class="powered-by mb-2">
+  Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
+</div>
+
+</footer>
+<script src="/assets/main/bundle.min.c3c91cbec33e895992a8d138fe7d2987f27869667dfccfa37fe07757e9270a9c.js" integrity="sha256-w8kcvsM&#43;iVmSqNE4/n0ph/J4aWZ9/M&#43;jf&#43;B3V&#43;knCpw=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.17849018f3f3b1b6bcb22df1fb426d0b6c496d4434266dd0b28bd13b9d6b63aa.js" integrity="sha256-F4SQGPPzsba8si3x&#43;0JtC2xJbUQ0Jm3QsovRO51rY6o=" crossorigin="anonymous" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('\/service-worker.min.js').then(function(reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  });
+}
+</script><script src="/assets/viewer/bundle.min.5ad926b46749e67285f66e2fdbc2d7cfb2689e8d9f2fcc2f59c3f51d2a1c4506.js" integrity="sha256-WtkmtGdJ5nKF9m4v28LXz7Jono2fL8wvWcP1HSocRQY=" crossorigin="anonymous" defer></script>
+</body>
+</html>

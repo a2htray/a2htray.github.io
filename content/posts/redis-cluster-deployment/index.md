@@ -6,10 +6,10 @@ reward: false
 toc: true
 pinned: false
 categories:
-  - "数据库"
-  - "运维"
+  - Database
+  - O&M
 tags:
-  - "Redis"
+  - Redis
 ---
 
 Redis 集群是基于“主从复制”特性之上的分布式 Redis 版本，可提供高并发、高性能、高可用的数据库服务。Redis 集群突破了单台服务器的内存局限，集群中的每一个节点都可以存储数据，同时维护着 "key-node" 的映射表。本文记录了 3 主 3 从的 Redis 集群的配置过程，主要内容包括：
