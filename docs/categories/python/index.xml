@@ -6,22 +6,42 @@
     <description>Recent content in Python on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 26 Feb 2023 20:10:40 +0800</lastBuildDate><atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Feb 2023 22:46:29 +0800</lastBuildDate><atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis with Python（五） 哈希表操作</title>
+      <link>/posts/redis-python/redis-python-hash/</link>
+      <pubDate>Mon, 27 Feb 2023 22:46:29 +0800</pubDate>
+      
+      <guid>/posts/redis-python/redis-python-hash/</guid>
+      <description>&lt;p&gt;哈希表（hash）是 Redis 中重要的数据结构，本文通过示例演示如何使用 Python 完成对哈希表的操作，各方法调用分别对应着 Redis 的一个指令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HSET&lt;/li&gt;
+&lt;li&gt;HGET&lt;/li&gt;
+&lt;li&gt;HINCRBY&lt;/li&gt;
+&lt;li&gt;HINCRBYFLOAT&lt;/li&gt;
+&lt;li&gt;HSTRLEN&lt;/li&gt;
+&lt;li&gt;HVALS&lt;/li&gt;
+&lt;li&gt;HMSET&lt;/li&gt;
+&lt;li&gt;HMGET&lt;/li&gt;
+&lt;li&gt;HSETNX&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
     <item>
       <title>Redis with Python（四） 有序集合操作</title>
-      <link>/posts/redis-python-zset/</link>
+      <link>/posts/redis-python/redis-python-zset/</link>
       <pubDate>Sun, 26 Feb 2023 20:10:40 +0800</pubDate>
       
-      <guid>/posts/redis-python-zset/</guid>
+      <guid>/posts/redis-python/redis-python-zset/</guid>
       <description>&lt;p&gt;zset 有序集合是 set 的补充，zset 中的元素都带有一个用于排序的分数，以下通过代码示例进行说明。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Redis with Python（三） 集合操作及运算</title>
-      <link>/posts/redis-python-set/</link>
+      <link>/posts/redis-python/redis-python-set/</link>
       <pubDate>Sun, 26 Feb 2023 16:59:30 +0800</pubDate>
       
-      <guid>/posts/redis-python-set/</guid>
+      <guid>/posts/redis-python/redis-python-set/</guid>
       <description>&lt;p&gt;set 数据类型对应元素不重复的数据结构，在 Redis 中，set 数据类型是无序的，与之相对的有序集合 zset。本文内容分两部分：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;集合操作&lt;/li&gt;
@@ -31,10 +51,10 @@
     
     <item>
       <title>Redis with Python（二） 字符串操作</title>
-      <link>/posts/redis-python-string/</link>
+      <link>/posts/redis-python/redis-python-string/</link>
       <pubDate>Sun, 26 Feb 2023 14:47:07 +0800</pubDate>
       
-      <guid>/posts/redis-python-string/</guid>
+      <guid>/posts/redis-python/redis-python-string/</guid>
       <description>&lt;p&gt;string 是 Redis 中最基础的数据类型，由于它是二进制安全的，所以可以存储图片的二进制信息。本文通过 3 个部分介绍在 Python 下如何操作 Redis 的 string 数据类型：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;常规字符串操作&lt;/li&gt;
@@ -45,10 +65,10 @@
     
     <item>
       <title>Redis with Python（一） 列表操作</title>
-      <link>/posts/redis-python-list/</link>
+      <link>/posts/redis-python/redis-python-list/</link>
       <pubDate>Sat, 25 Feb 2023 21:58:12 +0800</pubDate>
       
-      <guid>/posts/redis-python-list/</guid>
+      <guid>/posts/redis-python/redis-python-list/</guid>
       <description>&lt;p&gt;list 是 Redis 中操作比较频繁的数据结构，本文将结合 Python 对其进行相关操作并按“是否发生阻塞”分成两个部分：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;非阻塞指令&lt;/li&gt;

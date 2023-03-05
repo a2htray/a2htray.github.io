@@ -2,25 +2,61 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/categories/database/</loc>
-    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+    <loc>/categories/algo/</loc>
+    <lastmod>2023-03-05T23:28:59+08:00</lastmod>
   </url><url>
     <loc>/</loc>
-    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+    <lastmod>2023-03-05T23:28:59+08:00</lastmod>
+  </url><url>
+    <loc>/tags/pat/</loc>
+    <lastmod>2023-03-05T23:28:59+08:00</lastmod>
+  </url><url>
+    <loc>/tags/pat-basic-level/</loc>
+    <lastmod>2023-03-05T23:28:59+08:00</lastmod>
+  </url><url>
+    <loc>/posts/pat-basic-level/1017/</loc>
+    <lastmod>2023-03-05T23:28:59+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2023-03-05T23:28:59+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2023-03-05T23:28:59+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2023-03-05T23:28:59+08:00</lastmod>
+  </url><url>
+    <loc>/posts/pat-basic-level/1016/</loc>
+    <lastmod>2023-03-05T23:28:55+08:00</lastmod>
+  </url><url>
+    <loc>/posts/pat-basic-level/1015/</loc>
+    <lastmod>2023-03-05T23:28:52+08:00</lastmod>
+  </url><url>
+    <loc>/posts/pat-basic-level/1014/</loc>
+    <lastmod>2023-03-05T23:28:48+08:00</lastmod>
+  </url><url>
+    <loc>/posts/pat-basic-level/1002/</loc>
+    <lastmod>2023-02-28T20:52:15+08:00</lastmod>
+  </url><url>
+    <loc>/posts/pat-basic-level/1001/</loc>
+    <lastmod>2023-02-28T20:34:14+08:00</lastmod>
+  </url><url>
+    <loc>/categories/database/</loc>
+    <lastmod>2023-02-27T22:46:29+08:00</lastmod>
+  </url><url>
+    <loc>/categories/python/</loc>
+    <lastmod>2023-02-27T22:46:29+08:00</lastmod>
   </url><url>
     <loc>/tags/redis/</loc>
-    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
+    <lastmod>2023-02-27T22:46:29+08:00</lastmod>
+  </url><url>
+    <loc>/posts/redis-python/redis-python-hash/</loc>
+    <lastmod>2023-02-27T22:46:29+08:00</lastmod>
   </url><url>
     <loc>/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/</loc>
     <lastmod>2023-02-26T20:19:59+08:00</lastmod>
   </url><url>
     <loc>/doc-redis-commands/</loc>
-    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2023-02-26T20:19:59+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
     <lastmod>2023-02-26T20:19:59+08:00</lastmod>
   </url><url>
     <loc>/doc-redis-commands/hash-related/</loc>
@@ -29,22 +65,16 @@
     <loc>/series/</loc>
     <lastmod>2023-02-26T20:19:59+08:00</lastmod>
   </url><url>
-    <loc>/categories/python/</loc>
+    <loc>/posts/redis-python/redis-python-zset/</loc>
     <lastmod>2023-02-26T20:10:40+08:00</lastmod>
   </url><url>
-    <loc>/posts/redis-python-zset/</loc>
-    <lastmod>2023-02-26T20:10:40+08:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2023-02-26T20:10:40+08:00</lastmod>
-  </url><url>
-    <loc>/posts/redis-python-set/</loc>
+    <loc>/posts/redis-python/redis-python-set/</loc>
     <lastmod>2023-02-26T16:59:30+08:00</lastmod>
   </url><url>
-    <loc>/posts/redis-python-string/</loc>
+    <loc>/posts/redis-python/redis-python-string/</loc>
     <lastmod>2023-02-26T14:47:07+08:00</lastmod>
   </url><url>
-    <loc>/posts/redis-python-list/</loc>
+    <loc>/posts/redis-python/redis-python-list/</loc>
     <lastmod>2023-02-25T21:58:12+08:00</lastmod>
   </url><url>
     <loc>/tags/jq/</loc>
@@ -139,9 +169,6 @@
   </url><url>
     <loc>/posts/go-error-handling/</loc>
     <lastmod>2022-08-22T23:40:01+08:00</lastmod>
-  </url><url>
-    <loc>/tags/pat/</loc>
-    <lastmod>2022-08-03T00:33:33+08:00</lastmod>
   </url><url>
     <loc>/posts/python-pat-1004/</loc>
     <lastmod>2022-08-03T00:33:33+08:00</lastmod>
@@ -274,9 +301,6 @@
   </url><url>
     <loc>/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/</loc>
     <lastmod>2022-04-19T19:35:33+08:00</lastmod>
-  </url><url>
-    <loc>/categories/algo/</loc>
-    <lastmod>2022-04-15T11:24:13+08:00</lastmod>
   </url><url>
     <loc>/posts/interview-csig/</loc>
     <lastmod>2022-04-15T11:24:13+08:00</lastmod>

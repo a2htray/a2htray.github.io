@@ -20,8 +20,7 @@ Series 和 DataFrame 是 Pandas 中两种重要的数据结构，也是我们操
 
 ## Series 的创建
 
-Pandas 提供 Series 来表示一系列的元素，与常规一维数组只能以整数作为索引不同，Series 的索引值可以是任务值，其索引值与值的映射结构类似于 Python 中
-的字典。
+Pandas 提供 Series 来表示一系列的元素，与常规一维数组只能以整数作为索引不同，Series 的索引类型可以是任一类型，其索引值与值的映射结构类似于 Python 中的字典。
 
 ### Series 的构造函数
 
@@ -47,8 +46,7 @@ names = ['Jimmy', 'Andy', 'Tony', 'John']
 names_series = pd.Series(names)
 ```
 
-`pd.Series` 的第 1 个参数名为 `data`，即上述调用过程等价于 `names_series = pd.Series(data=names)`。因为列表中没有相应的值可以作为
-Series 的 index 值，所以 Pandas 会以 0 起始为每 1 个元素进行索引。如果指定了 index 参数值，可以修改 Series 中的索引值。
+`pd.Series` 的第 1 个参数名为 `data`，即上述调用过程等价于 `names_series = pd.Series(data=names)`。因为列表中没有相应的值可以作为 Series 的 index 值，所以 Pandas 会以 0 起始为每 1 个元素进行索引。如果指定了 index 参数值，可以修改 Series 中的索引值。
 
 ```python
 names_series = pd.Series(names, index=['ST0001', 'ST0002', 'ST0003', 'ST0004'])
@@ -67,8 +65,7 @@ sales = {
 sales_series = pd.Series(sales)
 ```
 
-Python 中的字典是 key-value 结构，所以字典值作为 `data` 参数值时，其 key 值会作为 Series 的 index 值。此时可以通过 `sales['January']` 访问
-到 `1000` 元素。
+Python 中的字典是 key-value 结构，所以字典值作为 `data` 参数值时，其 key 值会作为 Series 的 index 值。此时可以通过 `sales['January']` 访问到 `1000` 元素。
 
 ### 从 np.ndarray 中创建 Series
 

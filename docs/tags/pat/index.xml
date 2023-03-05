@@ -6,7 +6,61 @@
     <description>Recent content in PAT on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 03 Aug 2022 00:33:33 +0800</lastBuildDate><atom:link href="/tags/pat/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Mar 2023 23:28:59 +0800</lastBuildDate><atom:link href="/tags/pat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PAT 乙级 1017</title>
+      <link>/posts/pat-basic-level/1017/</link>
+      <pubDate>Sun, 05 Mar 2023 23:28:59 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1017/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/5 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1017 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: a, b = map(int, input().split(&amp;#39; &amp;#39;)) print(a // b, a % b)</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1016</title>
+      <link>/posts/pat-basic-level/1016/</link>
+      <pubDate>Sun, 05 Mar 2023 23:28:55 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1016/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/5 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1016 &amp;#34;&amp;#34;&amp;#34; def count(string, char): c = 0 for v in string: if v == char: c += 1 return c def pad(char, num): if num == 0: return &amp;#39;0&amp;#39; ret = &amp;#39;&amp;#39; while num != 0: ret += char num -= 1 return ret if __name__ == &amp;#39;__main__&amp;#39;: strings</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1015</title>
+      <link>/posts/pat-basic-level/1015/</link>
+      <pubDate>Sun, 05 Mar 2023 23:28:52 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1015/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/4 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1015 &amp;#34;&amp;#34;&amp;#34; from functools import cmp_to_key def sort_students(student1, student2): total1 = sum(student1[1:]) total2 = sum(student2[1:]) if total1 != total2: return -1 if total1 &amp;gt; total2 else 1 elif student1[1] != student2[1]: return -1 if student1[1] &amp;gt; student2[1] else 1 else: return -1 if int(student1[0]) &amp;gt; int(student2[1]) else 1 if __name__</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1014</title>
+      <link>/posts/pat-basic-level/1014/</link>
+      <pubDate>Sun, 05 Mar 2023 23:28:48 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1014/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/4 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1014 &amp;#34;&amp;#34;&amp;#34; week_dict = { &amp;#39;A&amp;#39;: &amp;#39;MON&amp;#39;, &amp;#39;B&amp;#39;: &amp;#39;TUE&amp;#39;, &amp;#39;C&amp;#39;: &amp;#39;WED&amp;#39;, &amp;#39;D&amp;#39;: &amp;#39;THU&amp;#39;, &amp;#39;E&amp;#39;: &amp;#39;FRI&amp;#39;, &amp;#39;F&amp;#39;: &amp;#39;SAT&amp;#39;, &amp;#39;G&amp;#39;: &amp;#39;SUN&amp;#39;, } hour_dict = { &amp;#39;0&amp;#39;: &amp;#39;00&amp;#39;, &amp;#39;1&amp;#39;: &amp;#39;01&amp;#39;, &amp;#39;2&amp;#39;: &amp;#39;02&amp;#39;, &amp;#39;3&amp;#39;: &amp;#39;03&amp;#39;, &amp;#39;4&amp;#39;: &amp;#39;04&amp;#39;, &amp;#39;5&amp;#39;: &amp;#39;05&amp;#39;, &amp;#39;6&amp;#39;: &amp;#39;06&amp;#39;, &amp;#39;7&amp;#39;: &amp;#39;07&amp;#39;, &amp;#39;8&amp;#39;: &amp;#39;08&amp;#39;, &amp;#39;9&amp;#39;: &amp;#39;09&amp;#39;, &amp;#39;A&amp;#39;: &amp;#39;10&amp;#39;, &amp;#39;B&amp;#39;: &amp;#39;11&amp;#39;, &amp;#39;C&amp;#39;: &amp;#39;12&amp;#39;, &amp;#39;D&amp;#39;:</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1002</title>
+      <link>/posts/pat-basic-level/1002/</link>
+      <pubDate>Tue, 28 Feb 2023 20:52:15 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1002/</guid>
+      <description>代码 # basic_1002.py chinese_pinyins = [ &amp;#39;ling&amp;#39;, &amp;#39;yi&amp;#39;, &amp;#39;er&amp;#39;, &amp;#39;san&amp;#39;, &amp;#39;si&amp;#39;, &amp;#39;wu&amp;#39;, &amp;#39;liu&amp;#39;, &amp;#39;qi&amp;#39;, &amp;#39;ba&amp;#39;, &amp;#39;jiu&amp;#39;, ] if __name__ == &amp;#39;__main__&amp;#39;: num_chars = input() total = 0 for num_char in num_chars: total += int(num_char) output = [] for num_char in str(total): output.append(chinese_pinyins[int(num_char)]) print(&amp;#39; &amp;#39;.join(output)) 运行 input: 1928374 output: san si</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1001</title>
+      <link>/posts/pat-basic-level/1001/</link>
+      <pubDate>Tue, 28 Feb 2023 20:34:14 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1001/</guid>
+      <description>代码 # basic_1001.py if __name__ == &amp;#39;__main__&amp;#39;: n = int(input()) step = 0 while n != 1: if n % 2 == 0: n = n // 2 else: n = (3 * n + 1) // 2 step += 1 print(step) 运行 input: 100 output: 18</description>
+    </item>
+    
     <item>
       <title>Python PAT 甲级 1003</title>
       <link>/posts/python-pat-1004/</link>

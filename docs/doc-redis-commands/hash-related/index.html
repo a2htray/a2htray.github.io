@@ -12,7 +12,7 @@
 <meta name="description" content="Redis 服务器中与哈希表相关的命令。" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="哈希表相关">
 <meta itemprop="description" content="Redis 服务器中与哈希表相关的命令。"><meta itemprop="datePublished" content="2023-02-26T20:19:59+08:00" />
 <meta itemprop="dateModified" content="2023-02-26T20:19:59+08:00" />
-<meta itemprop="wordCount" content="1192">
+<meta itemprop="wordCount" content="978">
 <meta itemprop="keywords" content="Redis," /><meta property="og:title" content="哈希表相关" />
 <meta property="og:description" content="Redis 服务器中与哈希表相关的命令。" />
 <meta property="og:type" content="article" />
@@ -258,7 +258,7 @@
   <span class="post-date" title="创建于 2023-02-26 20:19:59 &#43;0800 CST。">
     2023-02-26
   </span><span class="post-reading-time">
-    3 分钟阅读
+    2 分钟阅读
   </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
 </div>
 <div class="post-content mb-3"><p>Redis 服务器中与哈希表相关的命令。</p>
@@ -330,22 +330,6 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; HGETALL person
 </span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
 </span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;a2htray&#34;</span>
-</span></span></code></pre></div><h2 id="hincrby对哈希表中某个字段的值设置自增">HINCRBY：对哈希表中某个字段的值设置自增<a class="anchor ms-1" href="#hincrby对哈希表中某个字段的值设置自增"><i class="fas fa-link"></i></a></h2>
-<p>如果哈希表中某个字段的值可以被 Redis 解析成整数，则可以使用 <code>HINCRBY</code> 对其进行自增并返回更新后的值。</p>
-<p>格式：<code>HINCRBY key field increment</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; HSET term numOfPerson <span class="m">10</span> avgAge <span class="m">28</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; HINCRBY term numOfPerson <span class="m">1</span>
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">11</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; HGET term numOfPerson
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;11&#34;</span>
-</span></span></code></pre></div><h2 id="hincrebyfloat对哈希表中某个字段的值设置浮点数的自增">HINCREBYFLOAT：对哈希表中某个字段的值设置浮点数的自增<a class="anchor ms-1" href="#hincrebyfloat对哈希表中某个字段的值设置浮点数的自增"><i class="fas fa-link"></i></a></h2>
-<p>如果哈希表中某个字段的值可以被 Redis 解析成浮点数，则可以使用 <code>HINCRBYFLOAT</code> 对其进行浮点数的自增并返回更新后的值。</p>
-<p>格式：<code>HINCRBYFLOAT key field increment</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">127.0.0.1:6379&gt; HSET person weight 66.5 height 178.5
-</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; HINCRBYFLOAT person weight 1.56
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;68.06&#34;</span>
 </span></span></code></pre></div><h2 id="hlen取哈希表中字段的个数">HLEN：取哈希表中字段的个数<a class="anchor ms-1" href="#hlen取哈希表中字段的个数"><i class="fas fa-link"></i></a></h2>
 <p><code>HLEN</code> 可用于获取哈希表中字段的个数。</p>
 <p>格式：<code>HLEN key</code></p>
@@ -429,8 +413,6 @@
     <li><a href="#hkeys列出哈希表中的字段列表">HKEYS：列出哈希表中的字段列表</a></li>
     <li><a href="#hexists判断哈希表中是否存在某个字段">HEXISTS：判断哈希表中是否存在某个字段</a></li>
     <li><a href="#hgetall获取哈希表中所有的字段和值">HGETALL：获取哈希表中所有的字段和值</a></li>
-    <li><a href="#hincrby对哈希表中某个字段的值设置自增">HINCRBY：对哈希表中某个字段的值设置自增</a></li>
-    <li><a href="#hincrebyfloat对哈希表中某个字段的值设置浮点数的自增">HINCREBYFLOAT：对哈希表中某个字段的值设置浮点数的自增</a></li>
     <li><a href="#hlen取哈希表中字段的个数">HLEN：取哈希表中字段的个数</a></li>
     <li><a href="#hvals取哈希表中所有值">HVALS：取哈希表中所有值</a></li>
     <li><a href="#hmset同时设置哈希表中的多个字段和值">HMSET：同时设置哈希表中的多个字段和值</a></li>

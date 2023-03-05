@@ -175,7 +175,144 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
-      <a href="/posts/redis-python-zset/">Redis With Python（四） 有序集合操作
+      <a href="/posts/pat-basic-level/1017/">PAT 乙级 1017
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-03-05 23:28:59 &#43;0800 CST。">
+    2023-03-05
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/algo/" class="badge post-taxonomy">Algo</a><a href="/tags/pat-basic-level/" class="badge post-taxonomy">PAT Basic Level</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
+</div>
+<div class="post-summary">
+      <p> 代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/5 &#34;&#34;&#34; PAT 乙级 1017 &#34;&#34;&#34; if __name__ == &#39;__main__&#39;: a, b = map(int, input().split(&#39; &#39;)) print(a // b, a % b) </p>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/pat-basic-level/1016/">PAT 乙级 1016
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-03-05 23:28:55 &#43;0800 CST。">
+    2023-03-05
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/algo/" class="badge post-taxonomy">Algo</a><a href="/tags/pat-basic-level/" class="badge post-taxonomy">PAT Basic Level</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
+</div>
+<div class="post-summary">
+      <p> 代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/5 &#34;&#34;&#34; PAT 乙级 1016 &#34;&#34;&#34; def count(string, char): c = 0 for v in string: if v == char: c += 1 return c def pad(char, num): if num == 0: return &#39;0&#39; ret = &#39;&#39; while num != 0: ret += char num -= 1 return ret if __name__ == &#39;__main__&#39;:...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/pat-basic-level/1016/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/pat-basic-level/1015/">PAT 乙级 1015
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-03-05 23:28:52 &#43;0800 CST。">
+    2023-03-05
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/algo/" class="badge post-taxonomy">Algo</a><a href="/tags/pat-basic-level/" class="badge post-taxonomy">PAT Basic Level</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
+</div>
+<div class="post-summary">
+      <p> 代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/4 &#34;&#34;&#34; PAT 乙级 1015 &#34;&#34;&#34; from functools import cmp_to_key def sort_students(student1, student2): total1 = sum(student1[1:]) total2 = sum(student2[1:]) if total1 != total2: return -1 if total1 &gt; total2 else 1 elif student1[1] !=...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/pat-basic-level/1015/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/pat-basic-level/1014/">PAT 乙级 1014
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-03-05 23:28:48 &#43;0800 CST。">
+    2023-03-05
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/algo/" class="badge post-taxonomy">Algo</a><a href="/tags/pat-basic-level/" class="badge post-taxonomy">PAT Basic Level</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
+</div>
+<div class="post-summary">
+      <p> 代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/4 &#34;&#34;&#34; PAT 乙级 1014 &#34;&#34;&#34; week_dict = { &#39;A&#39;: &#39;MON&#39;, &#39;B&#39;: &#39;TUE&#39;, &#39;C&#39;: &#39;WED&#39;, &#39;D&#39;: &#39;THU&#39;, &#39;E&#39;: &#39;FRI&#39;, &#39;F&#39;: &#39;SAT&#39;, &#39;G&#39;: &#39;SUN&#39;, } hour_dict = { &#39;0&#39;: &#39;00&#39;, &#39;1&#39;: &#39;01&#39;, &#39;2&#39;: &#39;02&#39;, &#39;3&#39;: &#39;03&#39;, &#39;4&#39;: &#39;04&#39;, &#39;5&#39;: &#39;05&#39;, &#39;6&#39;: &#39;06&#39;, &#39;7&#39;: &#39;07&#39;, &#39;8&#39;:...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/pat-basic-level/1014/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/pat-basic-level/1002/">PAT 乙级 1002
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-02-28 20:52:15 &#43;0800 CST。">
+    2023-02-28
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/algo/" class="badge post-taxonomy">Algo</a><a href="/tags/pat-basic-level/" class="badge post-taxonomy">PAT Basic Level</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
+</div>
+<div class="post-summary">
+      <p> 代码 # basic_1002.py chinese_pinyins = [ &#39;ling&#39;, &#39;yi&#39;, &#39;er&#39;, &#39;san&#39;, &#39;si&#39;, &#39;wu&#39;, &#39;liu&#39;, &#39;qi&#39;, &#39;ba&#39;, &#39;jiu&#39;, ] if __name__ == &#39;__main__&#39;: num_chars = input() total = 0 for num_char in num_chars: total += int(num_char) output = [] for num_char in str(total): output.append(chinese_pinyins[int(num_char)]) print(&#39;...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/pat-basic-level/1002/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/pat-basic-level/1001/">PAT 乙级 1001
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-02-28 20:34:14 &#43;0800 CST。">
+    2023-02-28
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/algo/" class="badge post-taxonomy">Algo</a><a href="/tags/pat-basic-level/" class="badge post-taxonomy">PAT Basic Level</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
+</div>
+<div class="post-summary">
+      <p> 代码 # basic_1001.py if __name__ == &#39;__main__&#39;: n = int(input()) step = 0 while n != 1: if n % 2 == 0: n = n // 2 else: n = (3 * n + 1) // 2 step += 1 print(step) 运行 input: 100 output: 18 </p>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/redis-python/redis-python-hash/">Redis With Python（五） 哈希表操作
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-02-27 22:46:29 &#43;0800 CST。">
+    2023-02-27
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+</div>
+<div class="post-summary">
+      <p>哈希表（hash）是 Redis 中重要的数据结构，本文通过示例演示如何使用 Python 完成对哈希表的操作，各方法调用分别对应着 Redis 的一个指令：</p>
+<ul>
+<li>HSET</li>
+<li>HGET</li>
+<li>HINCRBY</li>
+<li>HINCRBYFLOAT</li>
+<li>HSTRLEN</li>
+<li>HVALS</li>
+<li>HMSET</li>
+<li>HMGET</li>
+<li>HSETNX</li>
+</ul><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-python/redis-python-hash/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/redis-python/redis-python-zset/">Redis With Python（四） 有序集合操作
 </a>
     </h2>
   </div>
@@ -187,13 +324,13 @@
   </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
 </div>
 <div class="post-summary">
-      <p>zset 有序集合是 set 的补充，zset 中的元素都带有一个用于排序的分数，以下通过代码示例进行说明。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-python-zset/">阅读更多</a></div>
+      <p>zset 有序集合是 set 的补充，zset 中的元素都带有一个用于排序的分数，以下通过代码示例进行说明。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-python/redis-python-zset/">阅读更多</a></div>
     </div>
   </div>
 </article>
 <article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
-      <a href="/posts/redis-python-set/">Redis With Python（三） 集合操作及运算
+      <a href="/posts/redis-python/redis-python-set/">Redis With Python（三） 集合操作及运算
 </a>
     </h2>
   </div>
@@ -209,13 +346,13 @@
 <ul>
 <li>集合操作</li>
 <li>集合运算</li>
-</ul><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-python-set/">阅读更多</a></div>
+</ul><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-python/redis-python-set/">阅读更多</a></div>
     </div>
   </div>
 </article>
 <article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
-      <a href="/posts/redis-python-string/">Redis With Python（二） 字符串操作
+      <a href="/posts/redis-python/redis-python-string/">Redis With Python（二） 字符串操作
 </a>
     </h2>
   </div>
@@ -232,145 +369,7 @@
 <li>常规字符串操作</li>
 <li>位运算操作</li>
 <li>数值操作</li>
-</ul><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-python-string/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/redis-python-list/">Redis With Python（一） 列表操作
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2023-02-25 21:58:12 &#43;0800 CST。">
-    2023-02-25
-  </span><span class="post-reading-time">
-    3 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>list 是 Redis 中操作比较频繁的数据结构，本文将结合 Python 对其进行相关操作并按“是否发生阻塞”分成两个部分：</p>
-<ul>
-<li>非阻塞指令</li>
-<li>阻塞指令</li>
-</ul><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-python-list/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/linux-jq-command-02/">命令 Jq（二） 特殊字符和构造器
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2023-02-22 22:40:49 &#43;0800 CST。">
-    2023-02-22
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/om/" class="badge post-taxonomy">O&amp;M</a><a href="/tags/linux-shell/" class="badge post-taxonomy">Linux Shell</a><a href="/tags/jq/" class="badge post-taxonomy">jq</a></span>
-</div>
-<div class="post-summary">
-      <p>上一篇文章介绍了 jq 中的过滤器，但单独地使用过滤器无法满足复杂的实际需求，所以 jq 中引入了特殊字符（<code>,</code> 和 <code>|</code>）和构造器来实现定制化的输出。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/linux-jq-command-02/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/linux-jq-command-01/">命令 Jq（一）基础过滤器
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2023-02-22 22:13:29 &#43;0800 CST。">
-    2023-02-22
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/om/" class="badge post-taxonomy">O&amp;M</a><a href="/tags/linux-shell/" class="badge post-taxonomy">Linux Shell</a><a href="/tags/jq/" class="badge post-taxonomy">jq</a></span>
-</div>
-<div class="post-summary">
-      <p>jq 是 Linux 下处理 JSON 文档字符串的命令行工具，可用于过滤并格式化输出特定的内容。其官网的手册详尽地介绍了 jq 的使用方法，内容相当丰富。本文则注重对过滤器的使用，并通过不同的示例加以说明。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/linux-jq-command-01/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/nginx-load-balance-with-docker/">基于 Docker 的 Nginx 负载均衡配置
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2023-02-16 21:22:17 &#43;0800 CST。">
-    2023-02-16
-  </span><span class="post-reading-time">
-    3 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/categories/om/" class="badge post-taxonomy">O&amp;M</a><a href="/tags/nginx/" class="badge post-taxonomy">Nginx</a><a href="/tags/docker/" class="badge post-taxonomy">Docker</a><a href="/tags/docker-compose/" class="badge post-taxonomy">Docker Compose</a><a href="/tags/load-balance/" class="badge post-taxonomy">Load Balance</a></span>
-</div>
-<div class="post-summary">
-      <p>本文主要介绍如何基于 Docker 生成容器化应用以及配置 Nginx 来实现 Web 服务的负载均衡，包含以下内容：
-Go 简易 Web 程序（hello world） 通过 Dockerfile 生成镜像 Nginx 配置 Docker Compose 多容器启动 Go Web 程序 本次配置使用 Go Web 程序作为后端服务，其作用是接收请求并返回“hello-world”，代码如下：
-// main.go package main import ( &#34;log&#34; &#34;net/http&#34; &#34;os&#34; ) func main() { logFile, err := os.OpenFile(&#34;/var/log/app.log&#34;,...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/nginx-load-balance-with-docker/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-pandas-create-dataframe-from-raw-string/">从字符串中创建 DataFrame
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-11-17 22:24:05 &#43;0800 CST。">
-    2022-11-17
-  </span><span class="post-reading-time">
-    1 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/tags/pandas/" class="badge post-taxonomy">Pandas</a></span>
-</div>
-<div class="post-summary">
-      <p>一般情况下，你们会通过文件（CSV、Excel等） 或 Python 的内置结构（字典）来创建 DataFrame 对象。但有时，数据是字符串的形式，如何将其转换成
-DataFrame 对象？</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-pandas-create-dataframe-from-raw-string/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-pandas-series-dataframe/">创建 Pandas 的 Series 和 DataFrame 
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-10-15 19:25:04 &#43;0800 CST。">
-    2022-10-15
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/tags/pandas/" class="badge post-taxonomy">Pandas</a><a href="/tags/series/" class="badge post-taxonomy">Series</a><a href="/tags/dataframe/" class="badge post-taxonomy">DataFrame</a></span>
-</div>
-<div class="post-summary">
-      <p>Series 和 DataFrame 是 Pandas 中两种重要的数据结构，也是我们操作和分析的主要对象。其中 Series 是一种类似于数组、列表或表格中一列的
-一维数据对象，DataFrame 则可以表示表格化的数据对象，可由多个 Series 对象组成。</p>
-<p>本文主要摘录 Series 和 DataFrame 两种数据结结构的创建方法以及一些注意事项。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-pandas-series-dataframe/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-hugo-wowchemy-academic-website/">Two Steps to Build an Academic Website With Hugo and Wowchemy
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-09-28 23:10:30 &#43;0800 CST。">
-    2022-09-28
-  </span><span class="post-reading-time">
-    3 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/academic-website/" class="badge post-taxonomy">Academic Website</a><a href="/tags/hugo/" class="badge post-taxonomy">Hugo</a><a href="/tags/wowchemy/" class="badge post-taxonomy">Wowchemy</a></span>
-</div>
-<div class="post-summary">
-      <p>Four days ago, I got a requirement to build an academic website for <a href="https://github.com/jingyunluo" target="_blank" rel="noopener noreferrer">yunzila~</a>. This
-reminds me of my previous blog experience. Since my blog is built with Hugo, I started to find an academic theme which is
-designed for Hugo. Here is a link to <a href="https://themes.gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo themes</a>, and then I find the <a href="https://themes.gohugo.io/themes/starter-hugo-academic/" target="_blank" rel="noopener noreferrer">Academic</a>
-theme developed by <a href="https://github.com/gcushen" target="_blank" rel="noopener noreferrer">gcushen</a> which meets my needs.</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-hugo-wowchemy-academic-website/">阅读更多</a></div>
+</ul><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-python/redis-python-string/">阅读更多</a></div>
     </div>
   </div>
 </article>
@@ -401,7 +400,7 @@ theme developed by <a href="https://github.com/gcushen" target="_blank" rel="noo
         <a href="/posts/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/posts/page/5/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/posts/page/6/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul></div>
 </div>
@@ -429,34 +428,34 @@ theme developed by <a href="https://github.com/gcushen" target="_blank" rel="noo
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
-        <a href="/posts/redis-python-zset/">Redis With Python（四） 有序集合操作
+        <a href="/posts/pat-basic-level/1017/">PAT 乙级 1017
 </a>
       </li><li>
-        <a href="/posts/redis-python-set/">Redis With Python（三） 集合操作及运算
+        <a href="/posts/pat-basic-level/1016/">PAT 乙级 1016
 </a>
       </li><li>
-        <a href="/posts/redis-python-string/">Redis With Python（二） 字符串操作
+        <a href="/posts/pat-basic-level/1015/">PAT 乙级 1015
 </a>
       </li><li>
-        <a href="/posts/redis-python-list/">Redis With Python（一） 列表操作
+        <a href="/posts/pat-basic-level/1014/">PAT 乙级 1014
 </a>
       </li><li>
-        <a href="/posts/linux-jq-command-02/">命令 Jq（二） 特殊字符和构造器
+        <a href="/posts/pat-basic-level/1002/">PAT 乙级 1002
 </a>
       </li><li>
-        <a href="/posts/linux-jq-command-01/">命令 Jq（一）基础过滤器
+        <a href="/posts/pat-basic-level/1001/">PAT 乙级 1001
 </a>
       </li><li>
-        <a href="/posts/nginx-load-balance-with-docker/">基于 Docker 的 Nginx 负载均衡配置
+        <a href="/posts/redis-python/redis-python-hash/">Redis With Python（五） 哈希表操作
 </a>
       </li><li>
-        <a href="/posts/python-pandas-create-dataframe-from-raw-string/">从字符串中创建 DataFrame
+        <a href="/posts/redis-python/redis-python-zset/">Redis With Python（四） 有序集合操作
 </a>
       </li><li>
-        <a href="/posts/python-pandas-series-dataframe/">创建 Pandas 的 Series 和 DataFrame 
+        <a href="/posts/redis-python/redis-python-set/">Redis With Python（三） 集合操作及运算
 </a>
       </li><li>
-        <a href="/posts/go-hugo-wowchemy-academic-website/">Two Steps to Build an Academic Website With Hugo and Wowchemy
+        <a href="/posts/redis-python/redis-python-string/">Redis With Python（二） 字符串操作
 </a>
       </li></ul>
   </div>
@@ -482,13 +481,13 @@ theme developed by <a href="https://github.com/gcushen" target="_blank" rel="noo
         <div class="py-2"><a href="/categories/database/" class="badge rounded post-taxonomy" title="Database">
             Database</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
             Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
-            Python</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Python</a><a href="/categories/algo/" class="badge rounded post-taxonomy" title="Algo">
+            Algo</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
             Web</a><a href="/categories/om/" class="badge rounded post-taxonomy" title="O&amp;M">
             O&amp;M</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
             Data Mining</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
             可视化</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
-            统计学</a><a href="/categories/algo/" class="badge rounded post-taxonomy" title="Algo">
-            Algo</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            统计学</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
             数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
             机器学习</a><a href="/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="badge rounded post-taxonomy" title="正则表达式">
             正则表达式</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
@@ -502,8 +501,10 @@ theme developed by <a href="https://github.com/gcushen" target="_blank" rel="noo
       </div>
       <div class="card-body">
         <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
-            Redis</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
-            MySQL</a><a href="/tags/stackoverflow/" class="badge rounded post-taxonomy" title="stackoverflow">
+            Redis</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
+            PAT</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
+            MySQL</a><a href="/tags/pat-basic-level/" class="badge rounded post-taxonomy" title="PAT Basic Level">
+            PAT Basic Level</a><a href="/tags/stackoverflow/" class="badge rounded post-taxonomy" title="stackoverflow">
             stackoverflow</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
             Pandas</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
             slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
@@ -512,8 +513,7 @@ theme developed by <a href="https://github.com/gcushen" target="_blank" rel="noo
             I/O</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
             jq</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
             Linux Shell</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
-            Matplotlib</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
-            PAT</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
+            Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
             roadmap</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
             翻译</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">

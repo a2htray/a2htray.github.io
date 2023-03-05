@@ -140,34 +140,6 @@ Redis 服务器中与哈希表相关的命令。
 2) "a2htray"
 ```
 
-## HINCRBY：对哈希表中某个字段的值设置自增
-
-如果哈希表中某个字段的值可以被 Redis 解析成整数，则可以使用 `HINCRBY` 对其进行自增并返回更新后的值。
-
-格式：`HINCRBY key field increment`
-
-```bash
-127.0.0.1:6379> HSET term numOfPerson 10 avgAge 28
-(integer) 2
-127.0.0.1:6379> HINCRBY term numOfPerson 1
-(integer) 11
-127.0.0.1:6379> HGET term numOfPerson
-"11"
-```
-
-## HINCREBYFLOAT：对哈希表中某个字段的值设置浮点数的自增
-
-如果哈希表中某个字段的值可以被 Redis 解析成浮点数，则可以使用 `HINCRBYFLOAT` 对其进行浮点数的自增并返回更新后的值。
-
-格式：`HINCRBYFLOAT key field increment`
-
-```bash
-127.0.0.1:6379> HSET person weight 66.5 height 178.5
-(integer) 2
-127.0.0.1:6379> HINCRBYFLOAT person weight 1.56
-"68.06"
-```
-
 ## HLEN：取哈希表中字段的个数
 
 `HLEN` 可用于获取哈希表中字段的个数。
