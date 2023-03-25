@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="Mozart&#39;s Sheet"/>
 <meta name="twitter:description" content="一个快速、响应式和功能丰富的 Hugo 博客主题"/>
 <meta property="og:image" content="/false"/>
-  <meta name="twitter:image" content="/false"/><link rel="alternate" type="application/rss+xml" href="/index.xml" title="Mozart's Sheet" /><link rel="stylesheet" href="/assets/main/bundle.min.167e94c7b316d713be3630685cf55d2d89f5ad9ac6d51a75f3f9df14324de701.css" integrity="sha256-Fn6Ux7MW1xO+NjBoXPVdLYn1rZrG1Rp18/nfFDJN5wE=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <meta name="twitter:image" content="/false"/><link rel="alternate" type="application/rss+xml" href="/index.xml" title="Mozart's Sheet" /><link rel="stylesheet" href="/assets/main/bundle.min.d947531a40fb25eeb91f67fc51f881f0d290ad5e1c993667dccb03c2aef28edb.css" integrity="sha256-2UdTGkD7Je65H2f8UfiB8NKQrV4cmTZn3MsDwq7yjts=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
   <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -171,134 +171,205 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/key-related/">键相关
+      <a href="/posts/go-channel-direction/">channel 的方向
 </a>
     </h2>
   </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="键相关" src="/images/redis-key.jpeg" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:57:48 &#43;0800 CST。">
-    2022-03-27
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-05-05 17:17:29 &#43;0800 CST。">
+    2022-05-05
   </span><span class="post-reading-time">
-    3 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/channel/" class="badge post-taxonomy">channel</a></span>
 </div>
 <div class="post-summary">
-      <p>Redis 服务器中与 key 相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/key-related/">阅读更多</a></div>
+      <p>在回忆管道方向的语法上时不时地会出错，所以搜罗一些资料以加强自身的记忆。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-channel-direction/">阅读更多</a></div>
     </div>
   </div>
 </article>
 <article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/introduction/">介绍
+      <a href="/posts/go-max-allowed-packet/">Go&amp;MySQL`max_allowed_packet`
 </a>
     </h2>
   </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="介绍" src="/images/redis.png" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:56:48 &#43;0800 CST。">
-    2022-03-27
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-30 20:25:09 &#43;0800 CST。">
+    2022-04-30
   </span><span class="post-reading-time">
     1 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/mysql/" class="badge post-taxonomy">MySQL</a></span>
 </div>
 <div class="post-summary">
-      <p>Redis 是开源的、高性能的数据结构存储系统，在框架设计中常常被当作缓存服务器。不同于传统的关系型数据库（如 MySQL、PostgreSQL），Redis 将数据以键值对的方式存储于内存并且支持数据持久化。尽管 Redis 采用了单线程模型来处理请求，但其通过 I/O 多路复用技术做到了应用级别的异步，运行的性能也十分良好。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/introduction/">阅读更多</a></div>
+      <p>当发送给数据库的语句过大时，会报如下错误：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">panic: Error 1105: Parameter of prepared statement which is <span class="nb">set</span> through mysql_send_long_data<span class="o">()</span> is longer than <span class="s1">&#39;max_allowed_packet&#39;</span> bytes
+</span></span></code></pre></div><p>从报错中可知，需要修改 <code>max_allowed_packet</code> 选项的值。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-max-allowed-packet/">阅读更多</a></div>
     </div>
   </div>
 </article>
 <article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/set-related/">集合相关
+      <a href="/posts/ide-no-usages-found/">IDE 代码显示无引用 no usages found
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-27 20:55:01 &#43;0800 CST。">
+    2022-04-27
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge post-taxonomy">生产工具</a><a href="/tags/jetbrains/" class="badge post-taxonomy">JetBrains</a></span>
+</div>
+<div class="post-summary">
+      <p>IntelliJ IDEA 代码显示灰色，表示无任何引用，实际上是有引用。出现这种问题，非常不易于 DEBUG。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/ide-no-usages-found/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/go-map-detail/">Go Map
 </a>
     </h2>
   </div>
   <div class="card-body">
-  <img class="img-fluid" alt="集合相关" src="/images/redis-set.png" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:47:22 &#43;0800 CST。">
-    2022-03-27
+  <img class="img-fluid" alt="Go Map" src="/images/go-map.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-27 16:02:52 &#43;0800 CST。">
+    2022-04-27
   </span><span class="post-reading-time">
     2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/map/" class="badge post-taxonomy">map</a></span>
 </div>
 <div class="post-summary">
-      <p>Redis 服务器中与集合相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/set-related/">阅读更多</a></div>
+      <p>Go 中 map 是键值对的关联容器（Associative Container），可以存储不同类型的键值对，其中键的类型需要满足可比较（==）特性。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-map-detail/">阅读更多</a></div>
     </div>
   </div>
 </article>
 <article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/stream-related/">流相关
+      <a href="/posts/go-slice-out-of-range/">Slice 什么时候报 out of range
 </a>
     </h2>
   </div>
   <div class="card-body">
-  <img class="img-fluid" alt="流相关" src="/images/redis-stream.png" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:47:22 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与 stream 相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/stream-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/string-related/">字符串相关
-</a>
-    </h2>
-  </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="字符串相关" src="/images/redis-medium.png" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:47:22 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    4 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与字符串值相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/string-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/zset-related/">有序集合相关
-</a>
-    </h2>
-  </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="有序集合相关" src="/images/redis-zset.png" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:45:52 &#43;0800 CST。">
-    2022-03-27
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
-</div>
-<div class="post-summary">
-      <p>Redis 服务器中与有序集合相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/zset-related/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/doc-redis-commands/list-related/">列表值相关
-</a>
-    </h2>
-  </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="列表值相关" src="/images/redis-list.png" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-03-27 05:32:39 &#43;0800 CST。">
-    2022-03-27
+  <img class="img-fluid" alt="Slice 什么时候报 out of range" src="/images/go-slice.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-26 09:24:01 &#43;0800 CST。">
+    2022-04-26
   </span><span class="post-reading-time">
     3 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge post-taxonomy">Redis 命令手册</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/slice/" class="badge post-taxonomy">slice</a><a href="/tags/stackoverflow/" class="badge post-taxonomy">Stackoverflow</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge post-taxonomy">面试经</a></span>
 </div>
 <div class="post-summary">
-      <p>Redis 服务器中与列表值相关的命令。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/doc-redis-commands/list-related/">阅读更多</a></div>
+      <p>面试的时候问到了一个关于 go Slice 的问题，即为什么在 <code>a[i:]</code> 中 <code>i</code> 的取值可以是 <code>a</code> 的长度。平时开发中也是这么用的，但没太深入的了解，所以在这篇文章中对其进行一些探讨。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-slice-out-of-range/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/go-file-rename-pit/">Windows 下移动文件的坑
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-24 17:16:44 &#43;0800 CST。">
+    2022-04-24
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/file/" class="badge post-taxonomy">file</a><a href="/tags/i/o/" class="badge post-taxonomy">I/O</a><a href="/tags/stackoverflow/" class="badge post-taxonomy">Stackoverflow</a></span>
+</div>
+<div class="post-summary">
+      <p>在 Windows 下，Go 的 <code>os</code> 标准库提供的 <code>Rename</code> 方法不能跨磁盘移动文件。下面通过问题重现，提供两种解决方案。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-file-rename-pit/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/go-download-network-file/">URL 下载网络文件
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-24 10:00:25 &#43;0800 CST。">
+    2022-04-24
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/http/" class="badge post-taxonomy">HTTP</a><a href="/tags/i/o/" class="badge post-taxonomy">I/O</a></span>
+</div>
+<div class="post-summary">
+      <p>从网络上下载文件是开发过程中常用的需求，常规流程是：（1）发送请求；（2）接收响应并读取响应体内容；（3）保存到本地文件。本文包含的两个例子分别来自于<strong>参考 [1]</strong> 和<strong>参考 [2]</strong>，在此基础上做了少量的修改。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-download-network-file/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/go-redis-request-log-dumper/">Redis 的 list 和 stream：异步记录请求信息
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Redis 的 list 和 stream：异步记录请求信息" src="/images/managing_activity_logs.jpg" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-23 19:05:01 &#43;0800 CST。">
+    2022-04-23
+  </span><span class="post-reading-time">
+    4 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a><a href="/tags/logging/" class="badge post-taxonomy">logging</a><a href="/tags/gin/" class="badge post-taxonomy">Gin</a></span>
+</div>
+<div class="post-summary">
+      <p>在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。在程序中，可以以同步或异步的方式完成这一需求。同步方式是指请求信息写入日志文件后才返回数据给客户端，异步方式则是在返回数据之前以新线程或进程完成对请求信息的记录。开源的日志包有：</p>
+<ol>
+<li><a href="https://pkg.go.dev/go.uber.org/zap" target="_blank" rel="noopener noreferrer">Zap</a>：出自 Uber 团队，以高性能著称；</li>
+<li><a href="https://github.com/rs/zerolog" target="_blank" rel="noopener noreferrer">Zerolog</a>：以易用性著称，支持 7 种日志级别；</li>
+<li><a href="https://github.com/sirupsen/logrus" target="_blank" rel="noopener noreferrer">Logrus</a>：兼容标准日志包格式，也是本人常用的日志包；</li>
+<li><a href="https://github.com/apex/log" target="_blank" rel="noopener noreferrer">apex/log</a>：受 Logrus 启发，简化操作后的 Logrus；</li>
+<li><a href="https://github.com/inconshreveable/log15" target="_blank" rel="noopener noreferrer"> Log15</a>：日志可读性强；</li>
+</ol>
+<p>5 个日志包的详细介绍可以看<a href="/posts/go-five-structured-logging-package/">《5 种结构化 Go 日志包对比分析》</a>这篇文章。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-redis-request-log-dumper/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/go-set-value-via-reflect-package/">Go 的反射包 reflect
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Go 的反射包 reflect" src="/images/golang-reflect.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-21 19:59:01 &#43;0800 CST。">
+    2022-04-21
+  </span><span class="post-reading-time">
+    4 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/reflect/" class="badge post-taxonomy">reflect</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge post-taxonomy">反射</a></span>
+</div>
+<div class="post-summary">
+      <p>首先贴上 Go 开发团队对 reflect 包的描述：</p>
+<blockquote>
+<p>Package reflect implements run-time reflection, allowing a program to manipulate objects with arbitrary types. The typical use is to take a value with static type interface{} and extract its dynamic type information by calling TypeOf, which returns a Type.</p>
+<p>A call to ValueOf returns a Value representing the run-time data. Zero takes a Type and returns a Value representing a zero value for that type.</p>
+</blockquote>
+<p>从描述中，我们得到以下几点：</p>
+<ol>
+<li>reflect 包实现了运行时的反射机制，允许程序操作任意类型的对象；</li>
+<li>TypeOf 可以得到一个 interface{} 的具体类型，ValueOf 可以得到一个 interface{} 的具体值；</li>
+</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-set-value-via-reflect-package/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/mysql-set-storage-engine/">MySQL 设置存储引擎的 3 种方法
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-21 13:35:02 &#43;0800 CST。">
+    2022-04-21
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/tags/mysql/" class="badge post-taxonomy">MySQL</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge post-taxonomy">存储引擎</a></span>
+</div>
+<div class="post-summary">
+      <p>在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。</p>
+<p>选择一个合适的存储引擎至关重要。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/mysql-set-storage-engine/">阅读更多</a></div>
     </div>
   </div>
 </article>
@@ -311,12 +382,6 @@
         <a href="/page/6/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
-      </li>
-      <li class="page-item">
-        <a href="/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
-      </li>
-      <li class="page-item">
         <a href="/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
       </li>
       <li class="page-item">
@@ -325,11 +390,17 @@
       <li class="page-item active">
         <a aria-current="page" aria-label="Page 7" class="page-link" role="button">7</a>
       </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
+      <li class="page-item">
+        <a href="/page/8/" aria-label="Page 8" class="page-link" role="button">8</a>
       </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      <li class="page-item">
+        <a href="/page/9/" aria-label="Page 9" class="page-link" role="button">9</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/8/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/page/10/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul></div>
 </div>
@@ -357,34 +428,34 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
-        <a href="/posts/pat-basic-level/1017/">PAT 乙级 1017
+        <a href="/posts/linux-commands/history/">Linux history 命令
 </a>
       </li><li>
-        <a href="/posts/pat-basic-level/1016/">PAT 乙级 1016
+        <a href="/posts/linux-shell/file-test-operators/">Linux Shell：文件测试比较操作符
 </a>
       </li><li>
-        <a href="/posts/pat-basic-level/1015/">PAT 乙级 1015
+        <a href="/posts/pat-basic-level/1044/">PAT 乙级 1044
 </a>
       </li><li>
-        <a href="/posts/pat-basic-level/1014/">PAT 乙级 1014
+        <a href="/posts/pat-basic-level/1043/">PAT 乙级 1043
 </a>
       </li><li>
-        <a href="/posts/pat-basic-level/1002/">PAT 乙级 1002
+        <a href="/posts/pat-basic-level/1042/">PAT 乙级 1042
 </a>
       </li><li>
-        <a href="/posts/pat-basic-level/1001/">PAT 乙级 1001
+        <a href="/posts/pat-basic-level/1041/">PAT 乙级 1041
 </a>
       </li><li>
-        <a href="/posts/redis-python/redis-python-hash/">Redis With Python（五） 哈希表操作
+        <a href="/posts/pat-basic-level/1040/">PAT 乙级 1040
 </a>
       </li><li>
-        <a href="/doc-redis-commands/hash-related/">哈希表相关
+        <a href="/posts/pat-basic-level/1039/">PAT 乙级 1039
 </a>
       </li><li>
-        <a href="/posts/redis-python/redis-python-zset/">Redis With Python（四） 有序集合操作
+        <a href="/posts/git/someone-could-be-eavesdropping-on-you-right-now/">Someone could be eavesdropping on you right now (man-in-the-middle attack)!
 </a>
       </li><li>
-        <a href="/posts/redis-python/redis-python-set/">Redis With Python（三） 集合操作及运算
+        <a href="/posts/pat-basic-level/1038/">PAT 乙级 1038
 </a>
       </li></ul>
   </div>
@@ -396,9 +467,7 @@
       </div>
       <div class="card-body">
         <div class="py-2"><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge rounded post-taxonomy" title="Redis 命令手册">
-            Redis 命令手册</a><a href="/series/stackoverflow-magic/" class="badge rounded post-taxonomy" title="Stackoverflow Magic">
-            Stackoverflow Magic</a><a href="/series/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="badge rounded post-taxonomy" title="正则表达式">
-            正则表达式</a></div>
+            Redis 命令手册</a></div>
       </div>
     </section><section class="categories-taxonomies row card component">
       <div class="card-header">
@@ -407,20 +476,20 @@
         </h2>
       </div>
       <div class="card-body">
-        <div class="py-2"><a href="/categories/database/" class="badge rounded post-taxonomy" title="Database">
+        <div class="py-2"><a href="/categories/algo/" class="badge rounded post-taxonomy" title="Algo">
+            Algo</a><a href="/categories/database/" class="badge rounded post-taxonomy" title="Database">
             Database</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
             Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
-            Python</a><a href="/categories/algo/" class="badge rounded post-taxonomy" title="Algo">
-            Algo</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
-            Web</a><a href="/categories/om/" class="badge rounded post-taxonomy" title="O&amp;M">
-            O&amp;M</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
-            Data Mining</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
-            可视化</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
+            Python</a><a href="/categories/om/" class="badge rounded post-taxonomy" title="O&amp;M">
+            O&amp;M</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Web</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
+            Data Mining</a><a href="/categories/unix/linux/" class="badge rounded post-taxonomy" title="Unix/Linux">
+            Unix/Linux</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            可视化</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
+            生产工具</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
             统计学</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
             数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
-            机器学习</a><a href="/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="badge rounded post-taxonomy" title="正则表达式">
-            正则表达式</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
-            生产工具</a></div>
+            机器学习</a></div>
       </div>
     </section><section class="tags-taxonomies row card component">
       <div class="card-header">
@@ -429,34 +498,39 @@
         </h2>
       </div>
       <div class="card-body">
-        <div class="py-2"><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
-            Redis</a><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
-            PAT</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
-            MySQL</a><a href="/tags/pat-basic-level/" class="badge rounded post-taxonomy" title="PAT Basic Level">
-            PAT Basic Level</a><a href="/tags/stackoverflow/" class="badge rounded post-taxonomy" title="stackoverflow">
-            stackoverflow</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+        <div class="py-2"><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
+            PAT</a><a href="/tags/pat-basic-level/" class="badge rounded post-taxonomy" title="PAT Basic Level">
+            PAT Basic Level</a><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
+            Redis</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
+            Linux Shell</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
+            MySQL</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
             Pandas</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
-            slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
+            slice</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
+            翻译</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
             Docker</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
-            file</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
-            I/O</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
-            jq</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
-            Linux Shell</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            file</a><a href="/tags/go-flags/" class="badge rounded post-taxonomy" title="go flags">
+            go flags</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
+            I/O</a><a href="/tags/jobs/" class="badge rounded post-taxonomy" title="jobs">
+            jobs</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
+            jq</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
             Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
             protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
-            roadmap</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
-            翻译</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
+            roadmap</a><a href="/tags/stackoverflow/" class="badge rounded post-taxonomy" title="Stackoverflow">
+            Stackoverflow</a><a href="/tags/test-operators/" class="badge rounded post-taxonomy" title="Test Operators">
+            Test Operators</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
             面试经</a><a href="/tags/academic-website/" class="badge rounded post-taxonomy" title="Academic Website">
-            Academic Website</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
+            Academic Website</a><a href="/tags/bg/" class="badge rounded post-taxonomy" title="bg">
+            bg</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
             channel</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
             Chi-Square</a><a href="/tags/dataframe/" class="badge rounded post-taxonomy" title="DataFrame">
             DataFrame</a><a href="/tags/django/" class="badge rounded post-taxonomy" title="Django">
             Django</a><a href="/tags/docker-compose/" class="badge rounded post-taxonomy" title="Docker Compose">
             Docker Compose</a><a href="/tags/docker-image/" class="badge rounded post-taxonomy" title="docker image">
-            docker image</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
-            Gin</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
-            Go 1.18</a><a href="/tags/go-module/" class="badge rounded post-taxonomy" title="go module">
-            go module</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
+            docker image</a><a href="/tags/fg/" class="badge rounded post-taxonomy" title="fg">
+            fg</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
+            Gin</a><a href="/tags/git/" class="badge rounded post-taxonomy" title="Git">
+            Git</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
+            Go 1.18</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
             HTTP</a><a href="/tags/hugo/" class="badge rounded post-taxonomy" title="Hugo">
             Hugo</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
             JetBrains</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
@@ -465,8 +539,7 @@
             Load Balance</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
             logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
             map</a><a href="/tags/nginx/" class="badge rounded post-taxonomy" title="Nginx">
-            Nginx</a><a href="/tags/node.js/" class="badge rounded post-taxonomy" title="Node.js">
-            Node.js</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            Nginx</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
             NumPy</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
             reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
             Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="RPC">
@@ -501,7 +574,7 @@
 </div>
 
 </footer>
-<script src="/assets/main/bundle.min.c3c91cbec33e895992a8d138fe7d2987f27869667dfccfa37fe07757e9270a9c.js" integrity="sha256-w8kcvsM&#43;iVmSqNE4/n0ph/J4aWZ9/M&#43;jf&#43;B3V&#43;knCpw=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.17849018f3f3b1b6bcb22df1fb426d0b6c496d4434266dd0b28bd13b9d6b63aa.js" integrity="sha256-F4SQGPPzsba8si3x&#43;0JtC2xJbUQ0Jm3QsovRO51rY6o=" crossorigin="anonymous" defer></script>
+<script src="/assets/main/bundle.min.620d3d34ad2e850a36ccbe101d50d3aa453007b92daff3739f9f571a2732deeb.js" integrity="sha256-Yg09NK0uhQo2zL4QHVDTqkUwB7ktr/Nzn59XGicy3us=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.17849018f3f3b1b6bcb22df1fb426d0b6c496d4434266dd0b28bd13b9d6b63aa.js" integrity="sha256-F4SQGPPzsba8si3x&#43;0JtC2xJbUQ0Jm3QsovRO51rY6o=" crossorigin="anonymous" defer></script>
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

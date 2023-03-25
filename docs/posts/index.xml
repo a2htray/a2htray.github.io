@@ -6,7 +6,336 @@
     <description>Recent content in 文章 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 05 Mar 2023 23:28:59 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Mar 2023 20:26:08 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux history 命令</title>
+      <link>/posts/linux-commands/history/</link>
+      <pubDate>Sat, 25 Mar 2023 20:26:08 +0800</pubDate>
+      
+      <guid>/posts/linux-commands/history/</guid>
+      <description>&lt;p&gt;&lt;code&gt;history&lt;/code&gt; 命令可用于浏览历史执行过的命令，该命令在 Bourne Shell 中不可用，但 Bash 和 Korn 则支持该特性。在 Bash 和 Korn 中，每一次命令的执行都被视为一次事件，并且配有相应的事件号（Event Number）。在需要的情况下，可以通过事件号将执行过的命令再次执行。&lt;/p&gt;
+&lt;p&gt;不带选项的 &lt;code&gt;history&lt;/code&gt; 会在终端输出所有执行过的历史命令。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux Shell：文件测试比较操作符</title>
+      <link>/posts/linux-shell/file-test-operators/</link>
+      <pubDate>Sat, 25 Mar 2023 20:13:25 +0800</pubDate>
+      
+      <guid>/posts/linux-shell/file-test-operators/</guid>
+      <description>&lt;p&gt;在 Shell 中，我们经常需要与文件打交道，所以了解文件测试操作符十分有必要。本文罗列了文件测试操作符并逐一给出示例，其中测试表达式的形式以 &lt;code&gt;[[]]&lt;/code&gt; 给出。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1044</title>
+      <link>/posts/pat-basic-level/1044/</link>
+      <pubDate>Sat, 25 Mar 2023 18:46:30 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1044/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/25 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1044 &amp;#34;&amp;#34;&amp;#34; mars_digits = [ &amp;#39;tret&amp;#39;, &amp;#39;jan&amp;#39;, &amp;#39;feb&amp;#39;, &amp;#39;mar&amp;#39;, &amp;#39;apr&amp;#39;, &amp;#39;may&amp;#39;, &amp;#39;jun&amp;#39;, &amp;#39;jly&amp;#39;, &amp;#39;aug&amp;#39;, &amp;#39;sep&amp;#39;, &amp;#39;oct&amp;#39;, &amp;#39;nov&amp;#39;, &amp;#39;dec&amp;#39;, ] mars_carries = [ &amp;#39;tam&amp;#39;, &amp;#39;hel&amp;#39;, &amp;#39;maa&amp;#39;, &amp;#39;huh&amp;#39;, &amp;#39;tou&amp;#39;, &amp;#39;kes&amp;#39;, &amp;#39;hei&amp;#39;, &amp;#39;elo&amp;#39;, &amp;#39;syy&amp;#39;, &amp;#39;lok&amp;#39;, &amp;#39;mer&amp;#39;, &amp;#39;jou&amp;#39;, ] def is_earth(s: str): return s.isdigit() def is_mars(s: str): return not is_earth(s) def to_earth(s: str): tokens</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1043</title>
+      <link>/posts/pat-basic-level/1043/</link>
+      <pubDate>Sat, 25 Mar 2023 15:50:40 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1043/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/25 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1043 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: line = input() nums = [0] * 6 chars = [&amp;#39;P&amp;#39;, &amp;#39;A&amp;#39;, &amp;#39;T&amp;#39;, &amp;#39;e&amp;#39;, &amp;#39;s&amp;#39;, &amp;#39;t&amp;#39;] for c in line: if c == &amp;#39;P&amp;#39;: nums[0] += 1 if c == &amp;#39;A&amp;#39;: nums[1] += 1 if c == &amp;#39;T&amp;#39;: nums[2] += 1 if c ==</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1042</title>
+      <link>/posts/pat-basic-level/1042/</link>
+      <pubDate>Sat, 25 Mar 2023 15:30:03 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1042/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/25 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1042 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: line = input() stat = [0] * 26 for c in line: if ord(&amp;#39;a&amp;#39;) &amp;lt;= ord(c) &amp;lt;= ord(&amp;#39;z&amp;#39;): stat[ord(c) - ord(&amp;#39;a&amp;#39;)] += 1 if ord(&amp;#39;A&amp;#39;) &amp;lt;= ord(c) &amp;lt;= ord(&amp;#39;Z&amp;#39;): stat[ord(c) - ord(&amp;#39;A&amp;#39;)] += 1 max_num = max(stat) print(chr(ord(&amp;#39;a&amp;#39;) + stat.index(max_num)), max_num)</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1041</title>
+      <link>/posts/pat-basic-level/1041/</link>
+      <pubDate>Sat, 25 Mar 2023 15:07:42 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1041/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/25 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1041 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: n = int(input()) student_dict = {} for _ in range(n): tokens = input().split(&amp;#39; &amp;#39;) student_dict[tokens[1]] = [tokens[0], tokens[2]] _ = input() nums = input().split(&amp;#39; &amp;#39;) for num in nums: print(&amp;#39; &amp;#39;.join(student_dict[num]))</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1040</title>
+      <link>/posts/pat-basic-level/1040/</link>
+      <pubDate>Sat, 25 Mar 2023 14:56:07 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1040/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/25 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1039 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: line = input() num_t = 0 num_at = 0 num_pat = 0 for i in range(len(line) - 1, -1, -1): if line[i] == &amp;#39;T&amp;#39;: num_t += 1 if num_t != 0 and line[i] == &amp;#39;A&amp;#39;: num_at += num_t if num_at != 0 and line[i]</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1039</title>
+      <link>/posts/pat-basic-level/1039/</link>
+      <pubDate>Sat, 25 Mar 2023 14:27:25 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1039/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/25 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1039 &amp;#34;&amp;#34;&amp;#34; def color_stat(s): stat = {} for c in s: if c not in stat: stat[c] = 0 stat[c] = stat[c] + 1 return stat if __name__ == &amp;#39;__main__&amp;#39;: line1 = input() line2 = input() stat1 = color_stat(line1) stat2 = color_stat(line2) absent = 0 for color, num in stat2.items():</description>
+    </item>
+    
+    <item>
+      <title>Someone could be eavesdropping on you right now (man-in-the-middle attack)!</title>
+      <link>/posts/git/someone-could-be-eavesdropping-on-you-right-now/</link>
+      <pubDate>Sat, 25 Mar 2023 14:07:10 +0800</pubDate>
+      
+      <guid>/posts/git/someone-could-be-eavesdropping-on-you-right-now/</guid>
+      <description>&lt;p&gt;今天在 &lt;code&gt;git pull&lt;/code&gt; 时报了如下的错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Someone could be eavesdropping on you right now &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;man-in-the-middle attack&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;It is also possible that a host key has just been changed.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The fingerprint &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the RSA key sent by the remote host is
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SHA256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Please contact your system administrator.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Add correct host key in /Users/a2htray/.ssh/known_hosts to get rid of this message.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Offending RSA key in /Users/a2htray/.ssh/known_hosts:2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host key &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; github.com has changed and you have requested strict checking.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host key verification failed.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;fatal: Could not &lt;span class=&#34;nb&#34;&gt;read&lt;/span&gt; from remote repository.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Please make sure you have the correct access rights
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;and the repository exists.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;导致无法拉取远程仓库的代码。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1038</title>
+      <link>/posts/pat-basic-level/1038/</link>
+      <pubDate>Thu, 23 Mar 2023 23:52:27 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1038/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/13 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1038 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: n = int(input()) scores = {} for score in input().split(&amp;#39; &amp;#39;): if score not in scores: scores[score] = 0 scores[score] += 1 counts = [] for score in input().split(&amp;#39; &amp;#39;)[1:]: if score in scores: counts.append(scores[score]) else: counts.append(&amp;#39;0&amp;#39;) print(&amp;#39; &amp;#39;.join(map(str, counts)))</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1037</title>
+      <link>/posts/pat-basic-level/1037/</link>
+      <pubDate>Thu, 23 Mar 2023 23:52:23 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1037/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/13 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1037 &amp;#34;&amp;#34;&amp;#34; def get_gsk(s): return list(map(int, s.split(&amp;#39;.&amp;#39;))) if __name__ == &amp;#39;__main__&amp;#39;: gsk1, gsk2 = map(get_gsk, input().split(&amp;#39; &amp;#39;)) price1 = gsk1[0] * 17 * 29 + gsk1[1] * 29 + gsk1[2] price2 = gsk2[0] * 17 * 29 + gsk2[1] * 29 + gsk2[2] if price2 &amp;gt;= price1: flag = &amp;#39;&amp;#39;</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1036</title>
+      <link>/posts/pat-basic-level/1036/</link>
+      <pubDate>Thu, 23 Mar 2023 23:52:18 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1036/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/13 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1036 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: tokens = input().split(&amp;#39; &amp;#39;) n = int(tokens[0]) c = tokens[1] row_num = str(1.0 * n / 2) if &amp;#39;.&amp;#39; in row_num: num, fraction = row_num.split(&amp;#39;.&amp;#39;) if 5 &amp;lt;= int(fraction[0]) &amp;lt;= 9: num = int(num) + 1 else: num = int(num) else: num = int(row_num)</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1033</title>
+      <link>/posts/pat-basic-level/1033/</link>
+      <pubDate>Thu, 23 Mar 2023 23:49:46 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1033/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/13 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1033 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: bad_keys = input() shift_bad = &amp;#39;+&amp;#39; in bad_keys for v in input(): if v in bad_keys or v.upper() in bad_keys: continue if shift_bad and ord(&amp;#39;A&amp;#39;) &amp;lt;= ord(v) &amp;lt;= ord(&amp;#39;Z&amp;#39;): continue print(v, end=&amp;#39;&amp;#39;)</description>
+    </item>
+    
+    <item>
+      <title>Bash：单括号与双括号的区别</title>
+      <link>/posts/linux-shell/single-and-double-brackets/</link>
+      <pubDate>Thu, 23 Mar 2023 22:47:16 +0800</pubDate>
+      
+      <guid>/posts/linux-shell/single-and-double-brackets/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.baeldung.com/linux/bash-single-vs-double-brackets&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;原文：Differences Between Single and Double Brackets in Bash&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;概述&#34;&gt;概述&lt;a class=&#34;anchor ms-1&#34; href=&#34;#概述&#34;&gt;&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;当我们在 Bash 中做变量比较时，通常可以交换地使用单括号 &lt;code&gt;[]&lt;/code&gt; 和双括号 &lt;code&gt;[[]]&lt;/code&gt;。比如，我们可以使用表达式 &lt;code&gt;[ 3 -eq 3 ]&lt;/code&gt; 或 &lt;code&gt;[[ 3 -eq 3 ]]&lt;/code&gt; 来比较 &lt;code&gt;3&lt;/code&gt; 是否等于 &lt;code&gt;3&lt;/code&gt;。两个表达式都会执行成功，那两者的区别是什么呢？&lt;/p&gt;
+&lt;p&gt;在本文中，我们会讨论单括号和双括号之间的一些区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1031</title>
+      <link>/posts/pat-basic-level/1031/</link>
+      <pubDate>Sun, 12 Mar 2023 23:10:04 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1031/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/12 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1031 &amp;#34;&amp;#34;&amp;#34; weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2] m = [&amp;#39;1&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;X&amp;#39;, &amp;#39;9&amp;#39;, &amp;#39;8&amp;#39;, &amp;#39;7&amp;#39;, &amp;#39;6&amp;#39;, &amp;#39;5&amp;#39;, &amp;#39;4&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;2&amp;#39;] def weight_sum(digits): total = 0 for i, digit in enumerate(digits): total += digit * weights[i] return</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1029</title>
+      <link>/posts/pat-basic-level/1029/</link>
+      <pubDate>Sun, 12 Mar 2023 23:05:13 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1029/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/12 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1029 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: statement1 = input() statement2 = input() got_dict = {} statement1 = statement1.upper() statement2 = statement2.upper() for c in statement1: if c not in got_dict: if c not in statement2: got_dict[c] = True print(c, end=&amp;#39;&amp;#39;)</description>
+    </item>
+    
+    <item>
+      <title>Linux jobs 命令</title>
+      <link>/posts/linux-commands/jobs/</link>
+      <pubDate>Sun, 12 Mar 2023 21:38:18 +0800</pubDate>
+      
+      <guid>/posts/linux-commands/jobs/</guid>
+      <description>&lt;p&gt;jobs 命令主要用于显示系统中的任务列表及运行状态。在 Linux 中，每一个 job 都有一个唯一 ID，系统管理员通过任务 ID 对任务进行管理，可使其在前后或后台运行。通常任务和进程是等价的，只在于说侧重不同。即任务之于用户，相应地，进程之于系统。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1026</title>
+      <link>/posts/pat-basic-level/1026/</link>
+      <pubDate>Thu, 09 Mar 2023 23:50:37 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1026/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/9 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1026 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: start_clock, end_clock = map(int, input().split(&amp;#39; &amp;#39;)) duration = 1.0 * (end_clock - start_clock) / 100 h = int(duration // 3600) m = int(duration % 3600 // 60) s = str(duration % 3600 % 60) tokens = s.split(&amp;#39;.&amp;#39;) add = 1 if int(tokens[1][0]) &amp;gt;= 5</description>
+    </item>
+    
+    <item>
+      <title>Go flag 自定义选项类型</title>
+      <link>/posts/go-packages/flag-user-defined-flag-type/</link>
+      <pubDate>Thu, 09 Mar 2023 20:38:36 +0800</pubDate>
+      
+      <guid>/posts/go-packages/flag-user-defined-flag-type/</guid>
+      <description>&lt;p&gt;&lt;code&gt;flag&lt;/code&gt; 包定义了一系列函数，可用于定义命令行参数，支持的参数类型如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;string：flag.StringVar 函数&lt;/li&gt;
+&lt;li&gt;bool：flag.BoolVar 函数&lt;/li&gt;
+&lt;li&gt;time.Duration: flag.DurationVar 函数&lt;/li&gt;
+&lt;li&gt;int: flag.IntVar 函数&lt;/li&gt;
+&lt;li&gt;uint: flag.UintVar 函数&lt;/li&gt;
+&lt;li&gt;float64: flag.Float64Var 函数&lt;/li&gt;
+&lt;li&gt;int64: flag.Int64Var 函数&lt;/li&gt;
+&lt;li&gt;uint64: flag.Uint64Var 函数&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go flag 支持选项简写</title>
+      <link>/posts/go-packages/flag-shorthand/</link>
+      <pubDate>Thu, 09 Mar 2023 20:17:17 +0800</pubDate>
+      
+      <guid>/posts/go-packages/flag-shorthand/</guid>
+      <description>&lt;p&gt;在命令行工具的开发过程中，我们常常需要设置一个同时支持短名称和长名称的选项，如 &lt;code&gt;-d&lt;/code&gt; 等价于 &lt;code&gt;--debug&lt;/code&gt;、&lt;code&gt;-p&lt;/code&gt; 等价于 &lt;code&gt;--password&lt;/code&gt;。在使用 Go flag 包的情况下，该需求的实现相当简单，只需要定义两个不同的 flag 指向同一个变量即可。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1024</title>
+      <link>/posts/pat-basic-level/1024/</link>
+      <pubDate>Wed, 08 Mar 2023 22:51:25 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1024/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/8 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1024 &amp;#34;&amp;#34;&amp;#34; from typing import List class SciNumber: def __init__(self, s: str): self.sign = &amp;#39;-&amp;#39; if s[0] == &amp;#39;-&amp;#39; else &amp;#39;&amp;#39; nums, exp = s[1:].split(&amp;#39;E&amp;#39;) self.nums = [v for v in nums] self.left_move = exp[0] == &amp;#39;-&amp;#39; self.exp = int(exp[1:]) # print(self.sign, self.nums, self.left_move, self.exp) def to_number(self) -&amp;gt; List[str]: if</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1023</title>
+      <link>/posts/pat-basic-level/1023/</link>
+      <pubDate>Wed, 08 Mar 2023 21:43:35 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1023/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/8 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1023 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: digits = [] for i, digit in enumerate(map(int, input().split(&amp;#39; &amp;#39;))): digits += [i] * digit digits.sort() if digits[0] != 0: print(&amp;#39;&amp;#39;.join(map(str, digits))) exit(0) for i, v in enumerate(digits): if v != 0: digits[0], digits[i] = digits[i], digits[0] break print(&amp;#39;&amp;#39;.join(map(str, digits)))</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1021</title>
+      <link>/posts/pat-basic-level/1021/</link>
+      <pubDate>Wed, 08 Mar 2023 21:08:17 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1021/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/7 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1021 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: counts = [0] * 10 for s in input(): counts[int(s)] += 1 for i, count in enumerate(counts): if count != 0: print(&amp;#39;%d:%d&amp;#39; % (i, count))</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1020</title>
+      <link>/posts/pat-basic-level/1020/</link>
+      <pubDate>Wed, 08 Mar 2023 21:08:14 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1020/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/6 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1020 &amp;#34;&amp;#34;&amp;#34; from functools import cmp_to_key class MoonCake: def __init__(self, num, total_price): self.num = num self.total_price = total_price self.unit_price = 1.0 * self.total_price / self.num def cmp(mooncake1, mooncake2): return -1 if mooncake1.unit_price &amp;gt; mooncake2.unit_price else 1 if __name__ == &amp;#39;__main__&amp;#39;: n_class, max_requirement = map(int, input().split(&amp;#39; &amp;#39;)) mooncakes = [] for</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1019</title>
+      <link>/posts/pat-basic-level/1019/</link>
+      <pubDate>Wed, 08 Mar 2023 21:08:10 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1019/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/6 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1019 &amp;#34;&amp;#34;&amp;#34; def get_sorted_nums(num_str): dn = 4 - len(num_str) for _ in range(dn): num_str = &amp;#39;0&amp;#39; + num_str nums = list(map(int, num_str)) nums.sort() return 1 * nums[0] + 10 * nums[1] + 100 * nums[2] + 1000 * nums[3], \ 1 * nums[3] + 10 * nums[2] + 100 *</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1018</title>
+      <link>/posts/pat-basic-level/1018/</link>
+      <pubDate>Wed, 08 Mar 2023 21:08:06 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1018/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/6 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1018 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: n = int(input()) first = [0, 0, 0] second = [0, 0, 0] first_win = 0 second_win = 0 alphabet = [&amp;#39;B&amp;#39;, &amp;#39;C&amp;#39;, &amp;#39;J&amp;#39;] for _ in range(n): p1, p2 = input().split() if p1 == &amp;#39;C&amp;#39; and p2 == &amp;#39;J&amp;#39;: first[1] += 1 first_win</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1022</title>
+      <link>/posts/pat-basic-level/1022/</link>
+      <pubDate>Wed, 08 Mar 2023 21:02:22 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1022/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/8 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1022 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: num1, num2, base = map(int, input().split(&amp;#39; &amp;#39;)) total = num1 + num2 if total == 0: print(0) exit(0) res = [] while total &amp;gt;= 1: res = [total % base] + res total = total // base if res[0] == 0: res = res[1:]</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1013</title>
+      <link>/posts/pat-basic-level/1013/</link>
+      <pubDate>Wed, 08 Mar 2023 20:47:11 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1013/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/3 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1013 &amp;#34;&amp;#34;&amp;#34; import math def is_prime(num): for i in range(2, int(math.sqrt(num)) + 1): if num % i == 0: return False return True if __name__ == &amp;#39;__main__&amp;#39;: nums_str = input().split(&amp;#39; &amp;#39;) m, n = int(nums_str[0]), int(nums_str[1]) prime_nums = [0] * n i = 0 num = 2 while i !=</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1009</title>
+      <link>/posts/pat-basic-level/1009/</link>
+      <pubDate>Wed, 08 Mar 2023 20:46:58 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1009/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/3 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1009 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: statement = input().split(&amp;#39; &amp;#39;) statement.reverse() print(&amp;#39; &amp;#39;.join(statement))</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1007</title>
+      <link>/posts/pat-basic-level/1007/</link>
+      <pubDate>Wed, 08 Mar 2023 20:46:54 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1007/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/3 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1007 &amp;#34;&amp;#34;&amp;#34; import math def is_prime(n): prime = True for i in range(3, int(math.sqrt(n)) + 1): if n % i == 0: prime = False break return prime if __name__ == &amp;#39;__main__&amp;#39;: nums = [n for n in range(3, int(input()) + 1)] nums = [n for n in nums if</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1006</title>
+      <link>/posts/pat-basic-level/1006/</link>
+      <pubDate>Wed, 08 Mar 2023 20:46:43 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1006/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/3 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1006 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: chars = [*input()] chars.reverse() tail = [] for i in range(1, int(chars[0]) + 1): tail.append(str(i)) bs_list = [[], []] for i, char in enumerate(chars[1:]): if i == 0: bs_list[0] = [&amp;#39;S&amp;#39;] * int(char) else: bs_list[1] = [&amp;#39;B&amp;#39;] * int(char) print(&amp;#39;&amp;#39;.join(bs_list[1] + bs_list[0] + tail))</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1005</title>
+      <link>/posts/pat-basic-level/1005/</link>
+      <pubDate>Wed, 08 Mar 2023 20:46:39 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1005/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/2 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1005 &amp;#34;&amp;#34;&amp;#34; def compute_sequence(num): sequence = [] while num != 1: if num % 2 == 0: num = num // 2 else: num = (num * 3 + 1) // 2 sequence.append(num) return sequence if __name__ == &amp;#39;__main__&amp;#39;: sequences = [] n = int(input()) nums = [int(num) for num</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1004</title>
+      <link>/posts/pat-basic-level/1004/</link>
+      <pubDate>Wed, 08 Mar 2023 20:45:38 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1004/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/1 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1004 &amp;#34;&amp;#34;&amp;#34; def get_score(student): return student[2] if __name__ == &amp;#39;__main__&amp;#39;: n = int(input()) students = [] while n != 0: tokens = input().split(&amp;#39; &amp;#39;) students.append((tokens[0], tokens[1], int(tokens[2]))) n -= 1 students.sort(key=get_score) print(students[len(students) - 1][0], students[len(students) - 1][1]) print(students[0][0], students[0][1])</description>
+    </item>
+    
     <item>
       <title>PAT 乙级 1017</title>
       <link>/posts/pat-basic-level/1017/</link>

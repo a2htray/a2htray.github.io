@@ -6,7 +6,34 @@
     <description>Recent content in 生产工具 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 27 Apr 2022 20:55:01 +0800</lastBuildDate><atom:link href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Mar 2023 14:07:10 +0800</lastBuildDate><atom:link href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Someone could be eavesdropping on you right now (man-in-the-middle attack)!</title>
+      <link>/posts/git/someone-could-be-eavesdropping-on-you-right-now/</link>
+      <pubDate>Sat, 25 Mar 2023 14:07:10 +0800</pubDate>
+      
+      <guid>/posts/git/someone-could-be-eavesdropping-on-you-right-now/</guid>
+      <description>&lt;p&gt;今天在 &lt;code&gt;git pull&lt;/code&gt; 时报了如下的错：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Someone could be eavesdropping on you right now &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;man-in-the-middle attack&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;It is also possible that a host key has just been changed.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The fingerprint &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the RSA key sent by the remote host is
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SHA256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Please contact your system administrator.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Add correct host key in /Users/a2htray/.ssh/known_hosts to get rid of this message.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Offending RSA key in /Users/a2htray/.ssh/known_hosts:2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host key &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; github.com has changed and you have requested strict checking.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host key verification failed.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;fatal: Could not &lt;span class=&#34;nb&#34;&gt;read&lt;/span&gt; from remote repository.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Please make sure you have the correct access rights
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;and the repository exists.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;导致无法拉取远程仓库的代码。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>IDE 代码显示无引用 no usages found</title>
       <link>/posts/ide-no-usages-found/</link>

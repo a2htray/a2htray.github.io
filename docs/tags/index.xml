@@ -6,11 +6,38 @@
     <description>Recent content in 标签 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 05 Mar 2023 23:28:59 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Mar 2023 20:26:08 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jobs</title>
+      <link>/tags/jobs/</link>
+      <pubDate>Sat, 25 Mar 2023 20:26:08 +0800</pubDate>
+      
+      <guid>/tags/jobs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux Shell</title>
+      <link>/tags/linux-shell/</link>
+      <pubDate>Sat, 25 Mar 2023 20:26:08 +0800</pubDate>
+      
+      <guid>/tags/linux-shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Test Operators</title>
+      <link>/tags/test-operators/</link>
+      <pubDate>Sat, 25 Mar 2023 20:13:25 +0800</pubDate>
+      
+      <guid>/tags/test-operators/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>PAT</title>
       <link>/tags/pat/</link>
-      <pubDate>Sun, 05 Mar 2023 23:28:59 +0800</pubDate>
+      <pubDate>Sat, 25 Mar 2023 18:46:30 +0800</pubDate>
       
       <guid>/tags/pat/</guid>
       <description></description>
@@ -19,9 +46,54 @@
     <item>
       <title>PAT Basic Level</title>
       <link>/tags/pat-basic-level/</link>
-      <pubDate>Sun, 05 Mar 2023 23:28:59 +0800</pubDate>
+      <pubDate>Sat, 25 Mar 2023 18:46:30 +0800</pubDate>
       
       <guid>/tags/pat-basic-level/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>/tags/git/</link>
+      <pubDate>Sat, 25 Mar 2023 14:07:10 +0800</pubDate>
+      
+      <guid>/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>翻译</title>
+      <link>/tags/%E7%BF%BB%E8%AF%91/</link>
+      <pubDate>Thu, 23 Mar 2023 22:47:16 +0800</pubDate>
+      
+      <guid>/tags/%E7%BF%BB%E8%AF%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bg</title>
+      <link>/tags/bg/</link>
+      <pubDate>Sun, 12 Mar 2023 21:38:18 +0800</pubDate>
+      
+      <guid>/tags/bg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fg</title>
+      <link>/tags/fg/</link>
+      <pubDate>Sun, 12 Mar 2023 21:38:18 +0800</pubDate>
+      
+      <guid>/tags/fg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go flags</title>
+      <link>/tags/go-flags/</link>
+      <pubDate>Thu, 09 Mar 2023 20:38:36 +0800</pubDate>
+      
+      <guid>/tags/go-flags/</guid>
       <description></description>
     </item>
     
@@ -40,15 +112,6 @@
       <pubDate>Wed, 22 Feb 2023 22:40:49 +0800</pubDate>
       
       <guid>/tags/jq/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux Shell</title>
-      <link>/tags/linux-shell/</link>
-      <pubDate>Wed, 22 Feb 2023 22:40:49 +0800</pubDate>
-      
-      <guid>/tags/linux-shell/</guid>
       <description></description>
     </item>
     
@@ -161,15 +224,6 @@
     </item>
     
     <item>
-      <title>翻译</title>
-      <link>/tags/%E7%BF%BB%E8%AF%91/</link>
-      <pubDate>Mon, 19 Sep 2022 23:33:58 +0800</pubDate>
-      
-      <guid>/tags/%E7%BF%BB%E8%AF%91/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Django</title>
       <link>/tags/django/</link>
       <pubDate>Mon, 05 Sep 2022 22:22:13 +0800</pubDate>
@@ -184,24 +238,6 @@
       <pubDate>Mon, 05 Sep 2022 22:22:13 +0800</pubDate>
       
       <guid>/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Node.js</title>
-      <link>/tags/node.js/</link>
-      <pubDate>Thu, 12 May 2022 11:09:53 +0800</pubDate>
-      
-      <guid>/tags/node.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>stackoverflow</title>
-      <link>/tags/stackoverflow/</link>
-      <pubDate>Thu, 12 May 2022 11:09:53 +0800</pubDate>
-      
-      <guid>/tags/stackoverflow/</guid>
       <description></description>
     </item>
     
@@ -269,20 +305,20 @@
     </item>
     
     <item>
+      <title>Stackoverflow</title>
+      <link>/tags/stackoverflow/</link>
+      <pubDate>Tue, 26 Apr 2022 09:24:01 +0800</pubDate>
+      
+      <guid>/tags/stackoverflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>面试经</title>
       <link>/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/</link>
       <pubDate>Tue, 26 Apr 2022 09:24:01 +0800</pubDate>
       
       <guid>/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go module</title>
-      <link>/tags/go-module/</link>
-      <pubDate>Mon, 25 Apr 2022 11:04:33 +0800</pubDate>
-      
-      <guid>/tags/go-module/</guid>
       <description></description>
     </item>
     

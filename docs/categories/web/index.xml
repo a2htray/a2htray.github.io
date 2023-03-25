@@ -29,15 +29,6 @@ theme developed by &lt;a href=&#34;https://github.com/gcushen&#34; target=&#34;_
     </item>
     
     <item>
-      <title>静态资源的管理-文件复制</title>
-      <link>/doc-stackoverflow/nodejs-fs-copyfile/</link>
-      <pubDate>Thu, 12 May 2022 11:09:53 +0800</pubDate>
-      
-      <guid>/doc-stackoverflow/nodejs-fs-copyfile/</guid>
-      <description>&lt;p&gt;这是一个简单的 Node.js 的 API 的使用示例：如何基于 Node.js 的完成文件的复制。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>URL 下载网络文件</title>
       <link>/posts/go-download-network-file/</link>
       <pubDate>Sun, 24 Apr 2022 10:00:25 +0800</pubDate>
