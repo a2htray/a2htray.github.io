@@ -19,7 +19,7 @@
 <meta name="twitter:title" content="文章"/>
 <meta name="twitter:description" content="一个快速、响应式和功能丰富的 Hugo 博客主题"/>
 <meta property="og:image" content="/false"/>
-  <meta name="twitter:image" content="/false"/><link rel="alternate" type="application/rss+xml" href="/posts/index.xml" title="Mozart's Sheet" /><link rel="stylesheet" href="/assets/main/bundle.min.d947531a40fb25eeb91f67fc51f881f0d290ad5e1c993667dccb03c2aef28edb.css" integrity="sha256-2UdTGkD7Je65H2f8UfiB8NKQrV4cmTZn3MsDwq7yjts=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <meta name="twitter:image" content="/false"/><link rel="alternate" type="application/rss+xml" href="/posts/index.xml" title="Mozart's Sheet" /><link rel="stylesheet" href="/assets/main/bundle.min.1957acd0b66b72de75da4f137b9a5aa7a8f37b8d038c1ded1947162bceacc353.css" integrity="sha256-GVes0LZrct512k8Te5pap6jze40DjB3tGUcWK86sw1M=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
   <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -175,6 +175,67 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/protocol-buffer-syntax/">Protocol Buffer 语法
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-08 16:33:52 &#43;0800 CST。">
+    2022-04-08
+  </span><span class="post-reading-time">
+    4 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/protocol-buffer/" class="badge post-taxonomy">protocol buffer</a></span>
+</div>
+<div class="post-summary">
+      <p>Protocol Buffer（Protobuf） 是一种高效的数据结构序列化的机制，同时也是一种结构化数据的存储格式。
+序列化与反序列化
+序列化：将数据结构或对象转换成二进制串的过程； 反序列化：将序列化后的二进制串转换成数据结构或对象的过程； 语法 /* * 语法 */ /* * 指定 Protobuf 解析使用的版本，可以是 proto3 或 proto2 */ syntax = &#34;proto3&#34;; /* * message 定义中的每一个字段都有一个唯一标识，该标识用于在二进制格式中识别字段 * 字段的标识一旦使用就不要进行修改 * 当标识为 1 到 15 时，使用一个字节进行编码，字节信息中包含字段的标识以及类型 * 当标...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/protocol-buffer-syntax/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/redis-cluster-deployment/">Redis 集群配置过程
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-07 14:07:35 &#43;0800 CST。">
+    2022-04-07
+  </span><span class="post-reading-time">
+    3 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/categories/om/" class="badge post-taxonomy">O&amp;M</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a></span>
+</div>
+<div class="post-summary">
+      <p>Redis 集群是基于“主从复制”特性之上的分布式 Redis 版本，可提供高并发、高性能、高可用的数据库服务。Redis 集群突破了单台服务器的内存局限，集群中的每一个节点都可以存储数据，同时维护着 &ldquo;key-node&rdquo; 的映射表。本文记录了 3 主 3 从的 Redis 集群的配置过程，主要内容包括：</p>
+<ol>
+<li>Redis 集群的配置过程；</li>
+<li>集群相关命令；</li>
+<li>Go 存取集群数据；</li>
+</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/redis-cluster-deployment/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/python-matplotlib-bar-tips/">Matplotlib bar 图常规编码
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-05 10:11:12 &#43;0800 CST。">
+    2022-04-05
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge post-taxonomy">可视化</a><a href="/tags/matplotlib/" class="badge post-taxonomy">Matplotlib</a></span>
+</div>
+<div class="post-summary">
+      <p>每当有快速绘制图表的需求时，第一时间反应到的肯定是 Matplotlib，因为其官方提供了详细的 API 文档及示例。但是每次在编码时，总是时不时地需要查看文档，不利用于可视化快速成型。所以在本文中罗列一些 bar 图的快速实现，方便 Ctrl+C/V。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-matplotlib-bar-tips/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/data-analysis-kmeans/">k-means 基本原理及其实现
 </a>
     </h2>
@@ -323,6 +384,15 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/diagrams/flowchart/">flowchart.js 学习
+</a>
+      </li><li>
+        <a href="/posts/sorts/r_merge-sort/">递归版本的归并排序 Go &amp; Python 实现
+</a>
+      </li><li>
+        <a href="/posts/pat-basic-level/1046/">PAT 乙级 1046
+</a>
+      </li><li>
         <a href="/posts/linux-commands/history/">Linux history 命令
 </a>
       </li><li>
@@ -342,15 +412,6 @@
 </a>
       </li><li>
         <a href="/posts/pat-basic-level/1040/">PAT 乙级 1040
-</a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1039/">PAT 乙级 1039
-</a>
-      </li><li>
-        <a href="/posts/git/someone-could-be-eavesdropping-on-you-right-now/">Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-</a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1038/">PAT 乙级 1038
 </a>
       </li></ul>
   </div>
@@ -377,11 +438,11 @@
             Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
             Python</a><a href="/categories/om/" class="badge rounded post-taxonomy" title="O&amp;M">
             O&amp;M</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
-            Web</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
-            Data Mining</a><a href="/categories/unix/linux/" class="badge rounded post-taxonomy" title="Unix/Linux">
-            Unix/Linux</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            Web</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
             可视化</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
-            生产工具</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
+            生产工具</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
+            Data Mining</a><a href="/categories/unix/linux/" class="badge rounded post-taxonomy" title="Unix/Linux">
+            Unix/Linux</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
             统计学</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
             数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
             机器学习</a></div>
@@ -422,7 +483,8 @@
             Django</a><a href="/tags/docker-compose/" class="badge rounded post-taxonomy" title="Docker Compose">
             Docker Compose</a><a href="/tags/docker-image/" class="badge rounded post-taxonomy" title="docker image">
             docker image</a><a href="/tags/fg/" class="badge rounded post-taxonomy" title="fg">
-            fg</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
+            fg</a><a href="/tags/flowchart.js/" class="badge rounded post-taxonomy" title="flowchart.js">
+            flowchart.js</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
             Gin</a><a href="/tags/git/" class="badge rounded post-taxonomy" title="Git">
             Git</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
             Go 1.18</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
@@ -450,8 +512,13 @@
             反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
             大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">
             存储引擎</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge rounded post-taxonomy" title="存储过程">
-            存储过程</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
-            性能优化</a></div>
+            存储过程</a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="badge rounded post-taxonomy" title="学习笔记">
+            学习笔记</a><a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="badge rounded post-taxonomy" title="归并排序">
+            归并排序</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
+            性能优化</a><a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="badge rounded post-taxonomy" title="排序算法">
+            排序算法</a><a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="badge rounded post-taxonomy" title="流程图">
+            流程图</a><a href="/tags/%E9%80%92%E5%BD%92/" class="badge rounded post-taxonomy" title="递归">
+            递归</a></div>
       </div>
     </section>
     

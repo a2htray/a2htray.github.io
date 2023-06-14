@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>归并排序 on Mozart&#39;s Sheet</title>
+    <link>/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</link>
+    <description>Recent content in 归并排序 on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Sun, 23 Apr 2023 23:38:47 +0800</lastBuildDate><atom:link href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>递归版本的归并排序 Go &amp; Python 实现</title>
+      <link>/posts/sorts/r_merge-sort/</link>
+      <pubDate>Sun, 23 Apr 2023 23:38:47 +0800</pubDate>
+      
+      <guid>/posts/sorts/r_merge-sort/</guid>
+      <description>&lt;p&gt;递归版本的归并排序。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

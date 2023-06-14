@@ -6,7 +6,34 @@
     <description>Recent content in 文章 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sat, 25 Mar 2023 20:26:08 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Jun 2023 22:37:29 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>flowchart.js 学习</title>
+      <link>/posts/diagrams/flowchart/</link>
+      <pubDate>Tue, 13 Jun 2023 22:37:29 +0800</pubDate>
+      
+      <guid>/posts/diagrams/flowchart/</guid>
+      <description>流程图是一种可用于表示工作流操作、算法步骤和程序控制等的图形化展示，常常被运用于软件开发过程中，也是开发者之间交流的一种媒介。流程图的使用场</description>
+    </item>
+    
+    <item>
+      <title>递归版本的归并排序 Go &amp; Python 实现</title>
+      <link>/posts/sorts/r_merge-sort/</link>
+      <pubDate>Sun, 23 Apr 2023 23:38:47 +0800</pubDate>
+      
+      <guid>/posts/sorts/r_merge-sort/</guid>
+      <description>&lt;p&gt;递归版本的归并排序。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PAT 乙级 1046</title>
+      <link>/posts/pat-basic-level/1046/</link>
+      <pubDate>Sun, 26 Mar 2023 11:32:42 +0800</pubDate>
+      
+      <guid>/posts/pat-basic-level/1046/</guid>
+      <description>代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/26 &amp;#34;&amp;#34;&amp;#34; PAT 乙级 1046 &amp;#34;&amp;#34;&amp;#34; if __name__ == &amp;#39;__main__&amp;#39;: n = int(input()) a = 0 b = 0 for i in range(n): tokens = list(map(int, input().split(&amp;#39; &amp;#39;))) if tokens[1] == tokens[3]: continue total = tokens[0] + tokens[2] if tokens[1] == total: b += 1 continue if tokens[3] == total: a += 1 continue</description>
+    </item>
+    
     <item>
       <title>Linux history 命令</title>
       <link>/posts/linux-commands/history/</link>

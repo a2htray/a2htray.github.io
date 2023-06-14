@@ -47,12 +47,24 @@ $ history 5
 $ history -c
 ```
 
+### -w
+
+将历史执行命令记录写入到 `.bash_history` 文件。
+
+```bash
+$ history -w
+```
+
+
+
 ## 环境变量
 
 与 `history` 相关的环境变量包括：
 
 * `HISTSIZE`：历史执行命令列表的数量
 * `HISTFILESIZE`：保存到 `.bash_history` 的历史执行命令数
+* `HISTTIMEFORMAT`：显示命令时的时间格式字符串
+* `HISTCONTROL`：记录控制变量
 
 ```bash
 $ echo $HISTSIZE
@@ -119,7 +131,37 @@ expr 1 + 2
 3
 ```
 
+**运行一条命令，但不对其进行记录**
 
+```bash
+$ echo "hello world"; history -d $(history 1)
+```
+
+**在命令前输出执行的时间**
+
+```bash
+$ HISTTIMEFORMAT="%c "
+$ history 1
+537  Sat Mar 25 22:12:14 2023 history 1
+```
+
+**对于重复连续执行的命令只记录一次**
+
+```bash
+$ HISTCONTROL="ignoredups"
+$ pwd
+/Users/a2htray/workspace/a2htray.github.io
+$ pwd
+/Users/a2htray/workspace/a2htray.github.io
+$ pwd
+/Users/a2htray/workspace/a2htray.github.io
+$ history 5
+  537  Sat Mar 25 22:12:14 2023 history 1
+  538  Sat Mar 25 22:14:16 2023 echo $HISTCONTROL
+  539  Sat Mar 25 22:16:42 2023 HISTCONTROL="ignoredups"
+  540  Sat Mar 25 22:16:49 2023 pwd
+  541  Sat Mar 25 22:16:54 2023 history 5
+```
 
 
 
@@ -127,3 +169,5 @@ expr 1 + 2
 
 1. [history command in Linux with Examples](https://www.geeksforgeeks.org/history-command-in-linux-with-examples/)
 2. [How to Use the Linux history Command](https://phoenixnap.com/kb/linux-history-command)
+3. [Bash History Command Examples In Linux](https://www.rootusers.com/17-bash-history-command-examples-in-linux/)
+

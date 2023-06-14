@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>学习笔记 on Mozart&#39;s Sheet</title>
+    <link>/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+    <description>Recent content in 学习笔记 on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
+    <lastBuildDate>Tue, 13 Jun 2023 22:37:29 +0800</lastBuildDate><atom:link href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>flowchart.js 学习</title>
+      <link>/posts/diagrams/flowchart/</link>
+      <pubDate>Tue, 13 Jun 2023 22:37:29 +0800</pubDate>
+      
+      <guid>/posts/diagrams/flowchart/</guid>
+      <description>流程图是一种可用于表示工作流操作、算法步骤和程序控制等的图形化展示，常常被运用于软件开发过程中，也是开发者之间交流的一种媒介。流程图的使用场</description>
+    </item>
+    
+  </channel>
+</rss>

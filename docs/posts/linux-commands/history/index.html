@@ -14,7 +14,7 @@
 <meta itemprop="description" content="history 命令可用于浏览历史执行过的命令，该命令在 Bourne Shell 中不可用，但 Bash 和 Korn 则支持该特性。在 Bash 和 Korn 中，每一次命令的执行都被视为一次事件，并且配有相应的事件号（Event Number）。在需要的情况下，可以通过事件号将执行过的命令再次执行。
 不带选项的 history 会在终端输出所有执行过的历史命令。"><meta itemprop="datePublished" content="2023-03-25T20:26:08+08:00" />
 <meta itemprop="dateModified" content="2023-03-25T20:26:08+08:00" />
-<meta itemprop="wordCount" content="456">
+<meta itemprop="wordCount" content="644">
 <meta itemprop="keywords" content="Linux Shell,jobs," /><meta property="og:title" content="Linux history 命令" />
 <meta property="og:description" content="history 命令可用于浏览历史执行过的命令，该命令在 Bourne Shell 中不可用，但 Bash 和 Korn 则支持该特性。在 Bash 和 Korn 中，每一次命令的执行都被视为一次事件，并且配有相应的事件号（Event Number）。在需要的情况下，可以通过事件号将执行过的命令再次执行。
 不带选项的 history 会在终端输出所有执行过的历史命令。" />
@@ -28,7 +28,7 @@
 <meta name="twitter:description" content="history 命令可用于浏览历史执行过的命令，该命令在 Bourne Shell 中不可用，但 Bash 和 Korn 则支持该特性。在 Bash 和 Korn 中，每一次命令的执行都被视为一次事件，并且配有相应的事件号（Event Number）。在需要的情况下，可以通过事件号将执行过的命令再次执行。
 不带选项的 history 会在终端输出所有执行过的历史命令。"/>
 <meta property="og:image" content="/false"/>
-  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.d947531a40fb25eeb91f67fc51f881f0d290ad5e1c993667dccb03c2aef28edb.css" integrity="sha256-2UdTGkD7Je65H2f8UfiB8NKQrV4cmTZn3MsDwq7yjts=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.1957acd0b66b72de75da4f137b9a5aa7a8f37b8d038c1ded1947162bceacc353.css" integrity="sha256-GVes0LZrct512k8Te5pap6jze40DjB3tGUcWK86sw1M=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
   <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -216,7 +216,7 @@
   <span class="post-date" title="创建于 2023-03-25 20:26:08 &#43;0800 CST。">
     2023-03-25
   </span><span class="post-reading-time">
-    1 分钟阅读
+    2 分钟阅读
   </span><span class="post-taxonomies"><a href="/categories/om/" class="badge post-taxonomy">O&amp;M</a><a href="/categories/unix/linux/" class="badge post-taxonomy">Unix/Linux</a><a href="/tags/linux-shell/" class="badge post-taxonomy">Linux Shell</a><a href="/tags/jobs/" class="badge post-taxonomy">jobs</a></span>
 </div>
 <div class="post-content mb-3"><p><code>history</code> 命令可用于浏览历史执行过的命令，该命令在 Bourne Shell 中不可用，但 Bash 和 Korn 则支持该特性。在 Bash 和 Korn 中，每一次命令的执行都被视为一次事件，并且配有相应的事件号（Event Number）。在需要的情况下，可以通过事件号将执行过的命令再次执行。</p>
@@ -240,11 +240,16 @@
 </span></span></code></pre></div><h3 id="-c">-c<a class="anchor ms-1" href="#-c"><i class="fas fa-link"></i></a></h3>
 <p>移除所有历史命令。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">history</span> -c
+</span></span></code></pre></div><h3 id="-w">-w<a class="anchor ms-1" href="#-w"><i class="fas fa-link"></i></a></h3>
+<p>将历史执行命令记录写入到 <code>.bash_history</code> 文件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">history</span> -w
 </span></span></code></pre></div><h2 id="环境变量">环境变量<a class="anchor ms-1" href="#环境变量"><i class="fas fa-link"></i></a></h2>
 <p>与 <code>history</code> 相关的环境变量包括：</p>
 <ul>
 <li><code>HISTSIZE</code>：历史执行命令列表的数量</li>
 <li><code>HISTFILESIZE</code>：保存到 <code>.bash_history</code> 的历史执行命令数</li>
+<li><code>HISTTIMEFORMAT</code>：显示命令时的时间格式字符串</li>
+<li><code>HISTCONTROL</code>：记录控制变量</li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="nv">$HISTSIZE</span>
 </span></span><span class="line"><span class="cl"><span class="m">500</span>
@@ -283,15 +288,40 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ !exp
 </span></span><span class="line"><span class="cl">expr <span class="m">1</span> + <span class="m">2</span>
 </span></span><span class="line"><span class="cl"><span class="m">3</span>
+</span></span></code></pre></div><p><strong>运行一条命令，但不对其进行记录</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s2">&#34;hello world&#34;</span><span class="p">;</span> <span class="nb">history</span> -d <span class="k">$(</span><span class="nb">history</span> 1<span class="k">)</span>
+</span></span></code></pre></div><p><strong>在命令前输出执行的时间</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nv">HISTTIMEFORMAT</span><span class="o">=</span><span class="s2">&#34;%c &#34;</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">history</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="m">537</span>  Sat Mar <span class="m">25</span> 22:12:14 <span class="m">2023</span> <span class="nb">history</span> <span class="m">1</span>
+</span></span></code></pre></div><p><strong>对于重复连续执行的命令只记录一次</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nv">HISTCONTROL</span><span class="o">=</span><span class="s2">&#34;ignoredups&#34;</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">/Users/a2htray/workspace/a2htray.github.io
+</span></span><span class="line"><span class="cl">$ <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">/Users/a2htray/workspace/a2htray.github.io
+</span></span><span class="line"><span class="cl">$ <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">/Users/a2htray/workspace/a2htray.github.io
+</span></span><span class="line"><span class="cl">$ <span class="nb">history</span> <span class="m">5</span>
+</span></span><span class="line"><span class="cl">  <span class="m">537</span>  Sat Mar <span class="m">25</span> 22:12:14 <span class="m">2023</span> <span class="nb">history</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  <span class="m">538</span>  Sat Mar <span class="m">25</span> 22:14:16 <span class="m">2023</span> <span class="nb">echo</span> <span class="nv">$HISTCONTROL</span>
+</span></span><span class="line"><span class="cl">  <span class="m">539</span>  Sat Mar <span class="m">25</span> 22:16:42 <span class="m">2023</span> <span class="nv">HISTCONTROL</span><span class="o">=</span><span class="s2">&#34;ignoredups&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="m">540</span>  Sat Mar <span class="m">25</span> 22:16:49 <span class="m">2023</span> <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">  <span class="m">541</span>  Sat Mar <span class="m">25</span> 22:16:54 <span class="m">2023</span> <span class="nb">history</span> <span class="m">5</span>
 </span></span></code></pre></div><h2 id="参考">参考<a class="anchor ms-1" href="#参考"><i class="fas fa-link"></i></a></h2>
 <ol>
 <li><a href="https://www.geeksforgeeks.org/history-command-in-linux-with-examples/" target="_blank" rel="noopener noreferrer">history command in Linux with Examples</a></li>
 <li><a href="https://phoenixnap.com/kb/linux-history-command" target="_blank" rel="noopener noreferrer">How to Use the Linux history Command</a></li>
+<li><a href="https://www.rootusers.com/17-bash-history-command-examples-in-linux/" target="_blank" rel="noopener noreferrer">Bash History Command Examples In Linux</a></li>
 </ol></div></div>
   <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
     <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
     <a href="/posts/linux-shell/file-test-operators/">Linux Shell：文件测试比较操作符
 </a>
+  </div><div class="post-nav post-next">
+    <a href="/posts/pat-basic-level/1046/">PAT 乙级 1046
+</a>
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-270"></i>
   </div></div></div>
 </article><div class="post-copyright mb-3 row card component" id="post-copyright">
     <div class="card-header">
@@ -377,6 +407,7 @@
       <ul>
         <li><a href="#-d">-d</a></li>
         <li><a href="#-c">-c</a></li>
+        <li><a href="#-w">-w</a></li>
       </ul>
     </li>
     <li><a href="#环境变量">环境变量</a></li>
@@ -391,6 +422,15 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/diagrams/flowchart/">flowchart.js 学习
+</a>
+      </li><li>
+        <a href="/posts/sorts/r_merge-sort/">递归版本的归并排序 Go &amp; Python 实现
+</a>
+      </li><li>
+        <a href="/posts/pat-basic-level/1046/">PAT 乙级 1046
+</a>
+      </li><li>
         <a href="/posts/linux-commands/history/">Linux history 命令
 </a>
       </li><li>
@@ -410,15 +450,6 @@
 </a>
       </li><li>
         <a href="/posts/pat-basic-level/1040/">PAT 乙级 1040
-</a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1039/">PAT 乙级 1039
-</a>
-      </li><li>
-        <a href="/posts/git/someone-could-be-eavesdropping-on-you-right-now/">Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-</a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1038/">PAT 乙级 1038
 </a>
       </li></ul>
   </div>
@@ -445,11 +476,11 @@
             Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
             Python</a><a href="/categories/om/" class="badge rounded post-taxonomy" title="O&amp;M">
             O&amp;M</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
-            Web</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
-            Data Mining</a><a href="/categories/unix/linux/" class="badge rounded post-taxonomy" title="Unix/Linux">
-            Unix/Linux</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            Web</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
             可视化</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
-            生产工具</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
+            生产工具</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
+            Data Mining</a><a href="/categories/unix/linux/" class="badge rounded post-taxonomy" title="Unix/Linux">
+            Unix/Linux</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
             统计学</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
             数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
             机器学习</a></div>
@@ -490,7 +521,8 @@
             Django</a><a href="/tags/docker-compose/" class="badge rounded post-taxonomy" title="Docker Compose">
             Docker Compose</a><a href="/tags/docker-image/" class="badge rounded post-taxonomy" title="docker image">
             docker image</a><a href="/tags/fg/" class="badge rounded post-taxonomy" title="fg">
-            fg</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
+            fg</a><a href="/tags/flowchart.js/" class="badge rounded post-taxonomy" title="flowchart.js">
+            flowchart.js</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
             Gin</a><a href="/tags/git/" class="badge rounded post-taxonomy" title="Git">
             Git</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
             Go 1.18</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
@@ -518,8 +550,13 @@
             反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
             大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">
             存储引擎</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge rounded post-taxonomy" title="存储过程">
-            存储过程</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
-            性能优化</a></div>
+            存储过程</a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="badge rounded post-taxonomy" title="学习笔记">
+            学习笔记</a><a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="badge rounded post-taxonomy" title="归并排序">
+            归并排序</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
+            性能优化</a><a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="badge rounded post-taxonomy" title="排序算法">
+            排序算法</a><a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="badge rounded post-taxonomy" title="流程图">
+            流程图</a><a href="/tags/%E9%80%92%E5%BD%92/" class="badge rounded post-taxonomy" title="递归">
+            递归</a></div>
       </div>
     </section>
     
