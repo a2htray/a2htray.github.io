@@ -6,7 +6,25 @@
     <description>Recent content in 标签 on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 13 Jun 2023 22:37:29 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Sep 2023 16:51:25 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go 1.21</title>
+      <link>/tags/go-1.21/</link>
+      <pubDate>Sun, 03 Sep 2023 16:51:25 +0800</pubDate>
+      
+      <guid>/tags/go-1.21/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>翻译</title>
+      <link>/tags/%E7%BF%BB%E8%AF%91/</link>
+      <pubDate>Sun, 03 Sep 2023 16:51:25 +0800</pubDate>
+      
+      <guid>/tags/%E7%BF%BB%E8%AF%91/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>flowchart.js</title>
       <link>/tags/flowchart.js/</link>
@@ -112,15 +130,6 @@
       <pubDate>Sat, 25 Mar 2023 14:07:10 +0800</pubDate>
       
       <guid>/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>翻译</title>
-      <link>/tags/%E7%BF%BB%E8%AF%91/</link>
-      <pubDate>Thu, 23 Mar 2023 22:47:16 +0800</pubDate>
-      
-      <guid>/tags/%E7%BF%BB%E8%AF%91/</guid>
       <description></description>
     </item>
     
@@ -580,6 +589,15 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/tags/i/o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>log/slog</title>
+      <link>/tags/log/slog/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/log/slog/</guid>
       <description></description>
     </item>
     

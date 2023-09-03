@@ -1,0 +1,1126 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="blue"
+  >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Go slog 标准包功能详细指南 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/images/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。
+原文地址：https://betterstack.com/community/guides/logging/logging-in-go/" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="Go slog 标准包功能详细指南">
+<meta itemprop="description" content="在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。
+原文地址：https://betterstack.com/community/guides/logging/logging-in-go/"><meta itemprop="datePublished" content="2023-09-03T16:51:25+08:00" />
+<meta itemprop="dateModified" content="2023-09-03T16:51:25+08:00" />
+<meta itemprop="wordCount" content="5593">
+<meta itemprop="keywords" content="Go 1.21,log/slog,翻译," /><meta property="og:title" content="Go slog 标准包功能详细指南" />
+<meta property="og:description" content="在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。
+原文地址：https://betterstack.com/community/guides/logging/logging-in-go/" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/go/go-slog-package-translate/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-03T16:51:25+08:00" />
+<meta property="article:modified_time" content="2023-09-03T16:51:25+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go slog 标准包功能详细指南"/>
+<meta name="twitter:description" content="在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。
+原文地址：https://betterstack.com/community/guides/logging/logging-in-go/"/>
+<meta property="og:image" content="/false"/>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.1957acd0b66b72de75da4f137b9a5aa7a8f37b8d038c1ded1947162bceacc353.css" integrity="sha256-GVes0LZrct512k8Te5pap6jze40DjB3tGUcWK86sw1M=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="/">Mozart&#39;s Sheet
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=Go%20slog%20%e6%a0%87%e5%87%86%e5%8c%85%e5%8a%9f%e8%83%bd%e8%af%a6%e7%bb%86%e6%8c%87%e5%8d%97&url=%2fposts%2fgo%2fgo-slog-package-translate%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fposts%2fgo%2fgo-slog-package-translate%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">设置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+<div class="setting">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="modeSwitcher">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="蓝色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="蓝灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="绿色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="红色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="蓝绿色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黄色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 复制链接
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item">
+          <a class="nav-link" href="/series/">
+            <i class="fas fa-fw fa-columns"></i>专栏
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>归档
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-fw fa-folder"></i>分类
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="fas fa-fw fa-tags"></i>标签
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/posts/">文章</a></li><li class="breadcrumb-item active">Go slog 标准包功能详细指南</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    <a class="action" href="#post-comments" role="button" aria-label="Comments" title="Comments">
+  <i class="fas fa-fw fa-comments"></i>
+</a>
+    <a class="action" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+  <div class="card-header ">
+    <h1 class="card-title post-title">Go slog 标准包功能详细指南
+</h1>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2023-09-03 16:51:25 &#43;0800 CST。">
+    2023-09-03
+  </span><span class="post-reading-time">
+    12 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/go-1.21/" class="badge post-taxonomy">Go 1.21</a><a href="/tags/log/slog/" class="badge post-taxonomy">log/slog</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge post-taxonomy">翻译</a></span>
+</div>
+<div class="post-content mb-3"><p>在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。</p>
+<p>原文地址：<a href="https://betterstack.com/community/guides/logging/logging-in-go/" target="_blank" rel="noopener noreferrer">https://betterstack.com/community/guides/logging/logging-in-go/</a></p>
+<p><strong>正文开始</strong></p>
+<p>结构化日志记录是指以明确定义的格式（通常为 JSON）来产生日志记录，为程序日志提供了一定程度的可组织性和一致性，使其更易于处理。此类日志记录由 key/value 对组成，key/value 对通常包含所记录日志的相关上下文信息，例如日志记录的严重性、时间戳、源代码位置、相关标识或任何其它相关元信息。</p>
+<p>Go 1.21 引入的 log/slog 标准包旨在提供高性能的结构化、日志级别记录的功能，本文将会聚焦于 log/slog 标准包，深入研究 Go 语言中的结构化日志记录。</p>
+<p>在开始之前，我们会先验证下已有 log 包并指出它的局限，然后再详细介绍新的 log/slog 包中的所有重要内容。</p>
+<h2 id="log-标准包">log 标准包<a class="anchor ms-1" href="#log-标准包"><i class="fas fa-link"></i></a></h2>
+<p>在讨论结构化日志包前，我们先验证下 log 标准包，该包提供以一种简单的方式将日志消息输出到终端、文件或者任意只要实现 io.Writer 接口的类型。下面是 Go 中最基本输出日志消息的方式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello from Go application!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2023/03/08 11:43:09 Hello from Go application!
+</span></span></code></pre></div><p>终端输出中包含了日志消息以及消息产生的时间戳。Println() 方法是预先配置的全局 Logger 可用方法的其中一个，它将消息输出到标准错误。全局 Logger 可用的方法如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Print</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Fatalln</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Panic</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Panicf</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Panicln</span><span class="p">()</span>
+</span></span></code></pre></div><p>Fatal 族和 Panic 族方法的不同之处在于：前者会在日志记录之后调用 os.Exit(1) 而后者则会调用 panic()。</p>
+<p>通过 log.Default() 方法获得默认 Logger 之后，你可以对 Logger 进行定制化。下面的示例中，将默认 Logger 输出从标准错误配置成标准输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">defaultLogger</span> <span class="o">:=</span> <span class="nx">log</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">defaultLogger</span><span class="p">.</span><span class="nf">SetOutput</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello from Go application!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>当然，你也可以通过 log.New() 方法构建完全定制化的 Logger，log.New() 的函数声明如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">New</span><span class="p">(</span><span class="nx">out</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span> <span class="nx">prefix</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">flag</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">Logger</span>
+</span></span></code></pre></div><p>第 1 个参数表示日志消息的目的地，只要该参数的类型实现了 io.Writer 接口即可。第 2 个参数和第 3 个参数分别为日志消息的前缀字符串和添加到日志消息中的常量集合（控制日志内容）。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">log</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">log</span><span class="p">.</span><span class="nx">LstdFlags</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello from Go application!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上述示例中的 logger 的输出配置成了标准输出，并且不对日志消息添加前缀，因此它的输出与之前一样：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="mi">2023</span><span class="o">/</span><span class="mo">03</span><span class="o">/</span><span class="mi">08</span> <span class="mi">11</span><span class="p">:</span><span class="mi">44</span><span class="p">:</span><span class="mi">17</span> <span class="nx">Hello</span> <span class="nx">from</span> <span class="nx">Go</span> <span class="nx">application</span><span class="p">!</span>
+</span></span></code></pre></div><p>现在，我们对 Logger 进行定制，为每一条日志记录添加程序名、文件名和日志行信息。同时，我们还为时间戳添加了微秒信息以及将本地时间替换成 UTC 时间：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">logger</span> <span class="o">:=</span> <span class="nx">log</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;MyApplication: &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">log</span><span class="p">.</span><span class="nx">Ldate</span><span class="p">|</span><span class="nx">log</span><span class="p">.</span><span class="nx">Ltime</span><span class="p">|</span><span class="nx">log</span><span class="p">.</span><span class="nx">Lmicroseconds</span><span class="p">|</span><span class="nx">log</span><span class="p">.</span><span class="nx">LUTC</span><span class="p">|</span><span class="nx">log</span><span class="p">.</span><span class="nx">Lshortfile</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>定制化后的 Logger 输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">MyApplication: 2023/03/08 10:47:12.348478 main.go:14: Hello from Go application!
+</span></span></code></pre></div><p>定制后 Logger 输出的日志包含了&quot;MyApplication: &ldquo;前缀、微秒、文件名和日志行信息，这些信息可以帮助我们更快地定位到具体的源代码。</p>
+<h2 id="log-标准包的局限">log 标准包的局限<a class="anchor ms-1" href="#log-标准包的局限"><i class="fas fa-link"></i></a></h2>
+<p>尽管 log 标准包提供了一种方便的方式来初始化日志记录，但由于一些局限，log 标准包并不适合用于生产环境。log 标准包的局限如下：</p>
+<ol>
+<li>缺少日志级别：日志级别是大多数日志包的主要功能之一，但 log 标准包缺少了这一功能。由于所有日志记录都一视同仁，所以无法基于重要程度或严重程度对这些日志记录进行过滤和区分。</li>
+<li>不支持结构化日志：log 标准包的输出是纯文本信息，不支持结构化（如 JSON）的方式记录日志记录。在监控、报警、诊断等各类分析中，结构化日志可以更好通过程序自动进行逐条解析和分析。</li>
+<li>不涉及上下文：log 标准包不支持上下文日志记录，导致无法自动记录日志相关的上下文信息（如请求 ID、用户 ID 或其它值）。</li>
+<li>不支持日志采样：对于高通量的程序来说，日志采样可以有效地减少日志所占的磁盘空间。第三方日志包通常会提供这一功能，但在 log 标准包中没有这一功能。</li>
+<li>有限的配置选项：log 标准包仅仅支持有限的配置选项，例如设置日志的输出，日志前缀。高级的日志包通常可以提供更多的可选配置，例如日志格式、上下文数据、异步日志、错误处理等。</li>
+</ol>
+<p>鉴于上述的局限，新引入的 log/slog 标准包正好弥补了这一空白。简单地说，log/slog 标准包旨在为 Go 语言提供结构化日志的能力，以及创建通用日志接口来集成其它日志包。</p>
+<h2 id="结构化日志包-logslog">结构化日志包 log/slog<a class="anchor ms-1" href="#结构化日志包-logslog"><i class="fas fa-link"></i></a></h2>
+<p>log/slog 标准包起源于 Github 上的一次讨论（<a href="https://github.com/golang/go/discussions/54763" target="_blank" rel="noopener noreferrer">https://github.com/golang/go/discussions/54763</a>），并由此产了关于新日志包的提议。log/slog 标准包一经确立，就在 Go 1.21 版本中发布了。</p>
+<p>我们会从 log/slog 标准包的设计和架构来对其进行讨论。该包包含 3 个我们需要熟悉的主要类型：</p>
+<ul>
+<li>Logger：log/slog 标准包的前端类型，该类型提供了如Info() 和 Error()等用于记录日志的方法。</li>
+<li>Record：由 Logger 产生的独立的日志记录对象。</li>
+<li>Handler：log/slog 标准包的后端类型，一旦实现了这一接口，就确定了日志记录的格式及目的地。log/slog 标准包提供了两种默认的 Handler 实现：TextHandler 和 JSONHandler。</li>
+</ul>
+<p>接下来的章节中，我们会通过相应的示例来详细介绍、验证上述 3 个类型。</p>
+<h3 id="开始">开始<a class="anchor ms-1" href="#开始"><i class="fas fa-link"></i></a></h3>
+<p>和绝大多数日志框架一样，log/slog 标准包会用最顶层的函数来暴露一个默认的 Logger。默认 Logger 的日志级别为 INFO，并且会以纯文本的方式将日志输出到标准输出。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;log/slog&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;Debug message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Info message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;Warning message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;Error message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">2023/03/15 12:55:56 INFO Info message
+</span></span><span class="line"><span class="cl">2023/03/15 12:55:56 WARN Warning message
+</span></span><span class="line"><span class="cl">2023/03/15 12:55:56 ERROR Error message
+</span></span></code></pre></div><p>你还可以使用 slog.New() 方法来创建自定义的 Logger 实例。slog.New() 方法接受一个非 nil 的 Handler 接口，该接口确定了日志的格式以及写入位置。下面是一个使用 JSONHandler 类型并且将日志输出到标准输出的示例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;Debug message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Info message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;Warning message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;Error message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-03-15T12:59:22.227408691+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;INFO&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Info message&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-03-15T12:59:22.227468972+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;WARN&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Warning message&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-03-15T12:59:22.227472149+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;ERROR&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Error message&#34;</span><span class="o">}</span>
+</span></span></code></pre></div><p>需要注意的是，默认的自定义 Logger 的日志级别也是 INFO，这样会抑制 DEBUG 级别日志的输出。如果你使用的是 TextHandler 类型，其输出的日志格式遵循 logfmt 标准（<a href="https://brandur.org/logfmt" target="_blank" rel="noopener noreferrer">https://brandur.org/logfmt</a>）。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">slog</span><span class="p">.</span><span class="nf">NewTextHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">time</span><span class="p">=</span><span class="mi">2023</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">15</span><span class="nx">T13</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mf">11.333</span><span class="o">+</span><span class="mo">01</span><span class="p">:</span><span class="mo">00</span> <span class="nx">level</span><span class="p">=</span><span class="nx">INFO</span> <span class="nx">msg</span><span class="p">=</span><span class="s">&#34;Info message&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">time</span><span class="p">=</span><span class="mi">2023</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">15</span><span class="nx">T13</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mf">11.333</span><span class="o">+</span><span class="mo">01</span><span class="p">:</span><span class="mo">00</span> <span class="nx">level</span><span class="p">=</span><span class="nx">WARN</span> <span class="nx">msg</span><span class="p">=</span><span class="s">&#34;Warning message&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">time</span><span class="p">=</span><span class="mi">2023</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">15</span><span class="nx">T13</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mf">11.333</span><span class="o">+</span><span class="mo">01</span><span class="p">:</span><span class="mo">00</span> <span class="nx">level</span><span class="p">=</span><span class="nx">ERROR</span> <span class="nx">msg</span><span class="p">=</span><span class="s">&#34;Error message&#34;</span>
+</span></span></code></pre></div><h2 id="定制化默认-logger">定制化默认 Logger<a class="anchor ms-1" href="#定制化默认-logger"><i class="fas fa-link"></i></a></h2>
+<p>如果要配置默认的 Logger，最直接的方式就是调用 slog.SetDefault() 方法，该方法可以将默认 Logger 替换成自定义的 Logger。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">SetDefault</span><span class="p">(</span><span class="nx">logger</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Info message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2023-03-15T13:07:39.105777557+01:00&#34;</span><span class="p">,</span><span class="nt">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;INFO&#34;</span><span class="p">,</span><span class="nt">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;Info message&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><p>正如上述示例所现，你应该注意到在调用顶层日志 slog.Info() 方法后，Logger 的输出格式为 JSON。同样的，我们注意到 SetDefault() 也修改了 log 标准包使用的默认 log.Logger。这一改变使得使用 log.Printf() 的应用程序也能够用类似的方法来实现结构化日志功能。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">SetDefault</span><span class="p">(</span><span class="nx">logger</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello from old logger&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2023-03-16T15:20:33.783681176+01:00&#34;</span><span class="p">,</span><span class="nt">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;INFO&#34;</span><span class="p">,</span><span class="nt">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;Hello from old logger&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><p>当你需要使用 API 用到的 Logger 时，slog.NewLogLogger() 方法也可以将一个 slog.Logger 转换成 log.Logger。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">handler</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">NewLogLogger</span><span class="p">(</span><span class="nx">handler</span><span class="p">,</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelError</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">server</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Server</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ErrorLog</span><span class="p">:</span> <span class="nx">logger</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="上下文日志记录">上下文日志记录<a class="anchor ms-1" href="#上下文日志记录"><i class="fas fa-link"></i></a></h2>
+<p>相较于传统的以纯文本形式记录日志，结构化日志有着更明显的优势，即允许以 key/value 对的形式在日志中表示任一属性。这些属性可以表示日志事件的上下文信息，而这些信息对于一些诸如故障检查、实时指标、审计之类的任务非常有用。下面是一个示例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;incoming request&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;method&#34;</span><span class="p">,</span> <span class="s">&#34;GET&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;time_taken_ms&#34;</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;path&#34;</span><span class="p">,</span> <span class="s">&#34;/hello/world?q=search&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;status&#34;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;user_agent&#34;</span><span class="p">,</span> <span class="s">&#34;Googlebot/2.1 (+http://www.google.com/bot.html)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2023-02-24T11:52:49.554074496+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;INFO&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;incoming request&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;method&#34;</span><span class="p">:</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time_taken_ms&#34;</span><span class="p">:</span><span class="mi">158</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;path&#34;</span><span class="p">:</span><span class="s2">&#34;/hello/world?q=search&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;status&#34;</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;user_agent&#34;</span><span class="p">:</span><span class="s2">&#34;Googlebot/2.1 (+http://www.google.com/bot.html)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>所有级别的方法，如 Info()、Debug() 等，都接受一个日志消息作为其第一个参数，接着后面是不限数量的松散类型的 key/value 对。API 类似于 Zap 日志包的 SugaredLogger API，是以额外的内存分配为代价优先考虑了 API 的简洁性。然而，如果你不注意，这也会导致一些奇怪的问题，最明显的就是 key 和 value 数量对不上就会产生有问题的输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;incoming request&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;method&#34;</span><span class="p">,</span> <span class="s">&#34;GET&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;time_taken_ms&#34;</span><span class="p">,</span> <span class="c1">// 缺少了相应的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span></code></pre></div><p>因为作为 key 的 time_taken_ms 缺失了相应的值，它会被认为一个 key 为 !BADKEY 的值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="s2">&#34;2023-03-15T13:15:29.956566795+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;level&#34;</span><span class="p">:</span> <span class="s2">&#34;INFO&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;incoming request&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;method&#34;</span><span class="p">:</span> <span class="s2">&#34;GET&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;!BADKEY&#34;</span><span class="p">:</span> <span class="s2">&#34;time_taken_ms&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>因为参数数量对不上导致错误的日志产生，这一问题可能只有到你用到日志信息时才会察觉。虽然该提议建议使用 vet 工具来检查缺失的 key/value 对问题，但在代码审查时也需要额外小心，我们要确保 key/value 对是匹配且类型正确的。</p>
+<p>如果希望防止 key/value 对不匹配问题的发生，可以使用强类型的属性，如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;incoming request&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;method&#34;</span><span class="p">,</span> <span class="s">&#34;GET&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;time_taken_ms&#34;</span><span class="p">,</span> <span class="mi">158</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;path&#34;</span><span class="p">,</span> <span class="s">&#34;/hello/world?q=search&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;status&#34;</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;user_agent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Googlebot/2.1 (+http://www.google.com/bot.html)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>尽管这是一种更好的上下文日志记录的方法，但它也并不是万无一失的。因为在实际场景中，无法确保你不会混合使用强类型和松散类型的组合，如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;incoming request&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;method&#34;</span><span class="p">,</span> <span class="s">&#34;GET&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;time_taken_ms&#34;</span><span class="p">,</span> <span class="mi">158</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;path&#34;</span><span class="p">,</span> <span class="s">&#34;/hello/world?q=search&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;status&#34;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;user_agent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Googlebot/2.1 (+http://www.google.com/bot.html)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>为了确保记录上下文日志记录的类型安全，你必须使用下面的 logAttrs() 方法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nf">LogAttrs</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelInfo</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;incoming request&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;method&#34;</span><span class="p">,</span> <span class="s">&#34;GET&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;time_taken_ms&#34;</span><span class="p">,</span> <span class="mi">158</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;path&#34;</span><span class="p">,</span> <span class="s">&#34;/hello/world?q=search&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;status&#34;</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;user_agent&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Googlebot/2.1 (+http://www.google.com/bot.html)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>该方法只接受 slog.Attr 类型的自定义属性，所以可以保证 key/value 对不匹配问题不会发生。这个 API 相对比较复杂些，因为你总是需要为日志传入上下文和日志级别。</p>
+<h3 id="上下文属性分组">上下文属性分组<a class="anchor ms-1" href="#上下文属性分组"><i class="fas fa-link"></i></a></h3>
+<p>log/slog 标准包还提供对属性分组的功能，分组后的日志展示则是根据使用不同的 Handler 而不同。比如在 JSONHandler 中，组的形式是一个单独的 JSON 对象：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nf">LogAttrs</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelInfo</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;image uploaded&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">,</span> <span class="mi">23123</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;properties&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;width&#34;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;height&#34;</span><span class="p">,</span> <span class="mi">3000</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;format&#34;</span><span class="p">,</span> <span class="s">&#34;jpeg&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2023-02-24T12:03:12.175582603+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;INFO&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;image uploaded&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;id&#34;</span><span class="p">:</span><span class="mi">23123</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;properties&#34;</span><span class="p">:{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;width&#34;</span><span class="p">:</span><span class="mi">4000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;height&#34;</span><span class="p">:</span><span class="mi">3000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;format&#34;</span><span class="p">:</span><span class="s2">&#34;jpeg&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>当使用 TextHandler 时，分组名则为每个字段的前缀，如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">time</span><span class="o">=</span>2023-02-24T12:06:20.249+01:00 <span class="nv">level</span><span class="o">=</span>INFO <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;image uploaded&#34;</span> <span class="nv">id</span><span class="o">=</span><span class="m">23123</span> properties.width<span class="o">=</span><span class="m">4000</span> properties.height<span class="o">=</span><span class="m">3000</span> properties.format<span class="o">=</span>jpeg
+</span></span></code></pre></div><h2 id="创建和使用子-logger">创建和使用子 Logger<a class="anchor ms-1" href="#创建和使用子-logger"><i class="fas fa-link"></i></a></h2>
+<p>在特定的程序作用域下，所有日志记录中包含相同的属性有助于减少代码量，而不需要重复使用记录语句。这就是子 Logger 的用武之处，因为子 Logger 是继承于父 Logger 且包含额外上下文字段的 Logger。</p>
+<p>在 log/slog 标准包中，使用 Logger.With() 方法创建子 Logger，该方法接受一系列强类型和松散类型的 key/value 对，并且返回包含特定属性的 Logger。在一个给定的程序作用域下，使用子 Logger 有助于在所有日志记录中包含相同的属性，这样就不用在每个日志记录点重复显示输出。这就是子 Logger 的作用，它会继承父 Logger 且带有额外的属性。试想下下方面的代码，每一个日志记录中需要包含程序的进程 ID 和 Go 版本号，并且将它们保存在 program_info 字段。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">handler</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">buildInfo</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">debug</span><span class="p">.</span><span class="nf">ReadBuildInfo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">child</span> <span class="o">:=</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">With</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">slog</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;program_info&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;pid&#34;</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getpid</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;go_version&#34;</span><span class="p">,</span> <span class="nx">buildInfo</span><span class="p">.</span><span class="nx">GoVersion</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>在子 Logger 的配置处，所有子 Logger 的日志记录都会带有 program_info 字段。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">child</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;image upload successful&#34;</span><span class="p">,</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;image_id&#34;</span><span class="p">,</span> <span class="s">&#34;39ud88&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">child</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;storage is 90% full&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;available_space&#34;</span><span class="p">,</span> <span class="s">&#34;900.1 mb&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="s2">&#34;2023-02-26T19:26:46.046793623+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;level&#34;</span><span class="p">:</span> <span class="s2">&#34;INFO&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;image upload successful&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;program_info&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;pid&#34;</span><span class="p">:</span> <span class="mi">229108</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;go_version&#34;</span><span class="p">:</span> <span class="s2">&#34;go1.20&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;image_id&#34;</span><span class="p">:</span> <span class="s2">&#34;39ud88&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="s2">&#34;2023-02-26T19:26:46.046847902+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;level&#34;</span><span class="p">:</span> <span class="s2">&#34;WARN&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;storage is 90% full&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;program_info&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;pid&#34;</span><span class="p">:</span> <span class="mi">229108</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;go_version&#34;</span><span class="p">:</span> <span class="s2">&#34;go1.20&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;available_space&#34;</span><span class="p">:</span> <span class="s2">&#34;900.1 MB&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>你也可以使用 WithGroup() 方法来创建一个带有初始组（Group）的子 Logger，这样所有记录属性都会被添加到这个组中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">handler</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">buildInfo</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">debug</span><span class="p">.</span><span class="nf">ReadBuildInfo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">handler</span><span class="p">).</span><span class="nf">WithGroup</span><span class="p">(</span><span class="s">&#34;program_info&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">child</span> <span class="o">:=</span> <span class="nx">logger</span><span class="p">.</span><span class="nf">With</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;pid&#34;</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getpid</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;go_version&#34;</span><span class="p">,</span> <span class="nx">buildInfo</span><span class="p">.</span><span class="nx">GoVersion</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">child</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;image upload successful&#34;</span><span class="p">,</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;image_id&#34;</span><span class="p">,</span> <span class="s">&#34;39ud88&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nx">child</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;storage is 90% full&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;available_space&#34;</span><span class="p">,</span> <span class="s">&#34;900.1 MB&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="s2">&#34;2023-05-24T19:00:18.384085509+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;level&#34;</span><span class="p">:</span> <span class="s2">&#34;INFO&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;image upload successful&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;program_info&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;pid&#34;</span><span class="p">:</span> <span class="mi">1971993</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;go_version&#34;</span><span class="p">:</span> <span class="s2">&#34;go1.20.2&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;image_id&#34;</span><span class="p">:</span> <span class="s2">&#34;39ud88&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="s2">&#34;2023-05-24T19:00:18.384136084+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;level&#34;</span><span class="p">:</span> <span class="s2">&#34;WARN&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;storage is 90% full&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;program_info&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;pid&#34;</span><span class="p">:</span> <span class="mi">1971993</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;go_version&#34;</span><span class="p">:</span> <span class="s2">&#34;go1.20.2&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;available_space&#34;</span><span class="p">:</span> <span class="s2">&#34;900.1 mb&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="自定义日志级别">自定义日志级别<a class="anchor ms-1" href="#自定义日志级别"><i class="fas fa-link"></i></a></h2>
+<p>log/slog 标准包提供 4 种默认日志级别，分别为 DEBUG(-4)、INFO(0)、WARN(4) 和 ERROR(8)。各数值的区间是为了更好的配置自定义的日志级别以实现更优的日志设计。例如，你可以创建一个在 INFO 和 WARN 之间的自定义日志级别 NOTICE，其值可以是 1、2 或 3。</p>
+<p>你可能已经注意到，所有的 Logger 默认的日志级别为 INFO，这也导致了数值低于 INFO 的日志级别（如 DEBUG）的记录不会被输出。你可以通过 HandlerOptions 自定义日志级别：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Level</span><span class="p">:</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelDebug</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">handler</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;Debug message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Info message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;Warning message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;Error message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-05-24T19:03:10.70311982+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;DEBUG&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Debug message&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-05-24T19:03:10.703187713+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;INFO&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Info message&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-05-24T19:03:10.703190419+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;WARN&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Warning message&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-05-24T19:03:10.703192892+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;ERROR&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Error message&#34;</span><span class="o">}</span>
+</span></span></code></pre></div><p>上述方式创建了一个日志级别为 DEBUG 的 Logger，如果你希望创建一个支持动态日志级别的 Logger，可以使用如下方式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">logLevel</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">slog</span><span class="p">.</span><span class="nx">LevelVar</span><span class="p">{}</span> <span class="c1">// INFO
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">opts</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Level</span><span class="p">:</span> <span class="nx">logLevel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// you can change the level anytime like this
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">logLevel</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">slog</span><span class="p">.</span><span class="nx">LevelDebug</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="创建自定义日志级别">创建自定义日志级别<a class="anchor ms-1" href="#创建自定义日志级别"><i class="fas fa-link"></i></a></h3>
+<p>如何你不想使用 log/slog 标准包提供的默认日志级别，你可以构建一个实现 Leveler 接口的结构：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Leveler</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Level</span><span class="p">()</span> <span class="nx">Level</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>还有一种简便的方式，就是使用已经实现了 Leveler 接口的 slog.Level 结构，如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">LevelTrace</span>  <span class="p">=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">Level</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">LevelNotice</span> <span class="p">=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">Level</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">LevelFatal</span>  <span class="p">=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">Level</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>一旦你定义了上面的日志级别，你就可以像下面的方式使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">opts</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Level</span><span class="p">:</span> <span class="nx">LevelTrace</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="nx">opts</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">ctx</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">LevelTrace</span><span class="p">,</span> <span class="s">&#34;Trace message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">LevelNotice</span><span class="p">,</span> <span class="s">&#34;Notice message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">LevelFatal</span><span class="p">,</span> <span class="s">&#34;Fatal level&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-02-24T09:26:41.666493901+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;DEBUG-4&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Trace level&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-02-24T09:26:41.66659754+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;INFO+2&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Notice level&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-02-24T09:26:41.666602404+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;ERROR+4&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Fatal level&#34;</span><span class="o">}</span>
+</span></span></code></pre></div><p>上面代码是如何创建自定义日志级别的方法，但这可能并不是你想要的，所以你应该通过 HandlerOptions 结构的方式定制化你的日志级别：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">LevelNames</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="nx">slog</span><span class="p">.</span><span class="nx">Leveler</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">LevelTrace</span><span class="p">:</span>      <span class="s">&#34;TRACE&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">LevelNotice</span><span class="p">:</span>     <span class="s">&#34;NOTICE&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">LevelFatal</span><span class="p">:</span>      <span class="s">&#34;FATAL&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Level</span><span class="p">:</span> <span class="nx">LevelTrace</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ReplaceAttr</span><span class="p">:</span> <span class="kd">func</span><span class="p">(</span><span class="nx">groups</span> <span class="p">[]</span><span class="kt">string</span><span class="p">,</span> <span class="nx">a</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Attr</span><span class="p">)</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Attr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Key</span> <span class="o">==</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelKey</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">level</span> <span class="o">:=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Value</span><span class="p">.</span><span class="nf">Any</span><span class="p">().(</span><span class="nx">slog</span><span class="p">.</span><span class="nx">Level</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">levelLabel</span><span class="p">,</span> <span class="nx">exists</span> <span class="o">:=</span> <span class="nx">LevelNames</span><span class="p">[</span><span class="nx">level</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">!</span><span class="nx">exists</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">levelLabel</span> <span class="p">=</span> <span class="nx">level</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="nx">a</span><span class="p">.</span><span class="nx">Value</span> <span class="p">=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">StringValue</span><span class="p">(</span><span class="nx">levelLabel</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">a</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-02-24T09:27:51.747625912+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;TRACE&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Trace level&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-02-24T09:27:51.747732118+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;NOTICE&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Notice level&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-02-24T09:27:51.747737319+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;FATAL&#34;</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Fatal level&#34;</span><span class="o">}</span>
+</span></span></code></pre></div><p>ReplaceAttr() 方法可用于定制化日志记录中 key/value 对的输出展示，它可以实现根据一个特定的 key并转换其 value 的输出结果。在上述的示例中，我们使用 map 结构保存了各自日志级别的字符串表示：TRACE、NOTICE 和 FATAL。</p>
+<h2 id="自定义-handler">自定义 Handler<a class="anchor ms-1" href="#自定义-handler"><i class="fas fa-link"></i></a></h2>
+<p>在上述众多使用 TextHandler 和 JSONHandler 的示例中，你已经学会了如何调整最小日志级别和如何个性日志记录的属性。如果需要的话，还有一种定制化的方式，就是通过 HandlerOptions 来在日志记录中记录日志源代码信息：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">opts</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">AddSource</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Level</span><span class="p">:</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelDebug</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-05-24T19:39:27.005871442+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;DEBUG&#34;</span>,<span class="s2">&#34;source&#34;</span>:<span class="o">{</span><span class="s2">&#34;function&#34;</span>:<span class="s2">&#34;main.main&#34;</span>,<span class="s2">&#34;file&#34;</span>:<span class="s2">&#34;/home/ayo/dev/demo/slog/main.go&#34;</span>,<span class="s2">&#34;line&#34;</span>:30<span class="o">}</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Debug message&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-05-24T19:39:27.005940778+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;INFO&#34;</span>,<span class="s2">&#34;source&#34;</span>:<span class="o">{</span><span class="s2">&#34;function&#34;</span>:<span class="s2">&#34;main.main&#34;</span>,<span class="s2">&#34;file&#34;</span>:<span class="s2">&#34;/home/ayo/dev/demo/slog/main.go&#34;</span>,<span class="s2">&#34;line&#34;</span>:31<span class="o">}</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Info message&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-05-24T19:39:27.00594459+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;WARN&#34;</span>,<span class="s2">&#34;source&#34;</span>:<span class="o">{</span><span class="s2">&#34;function&#34;</span>:<span class="s2">&#34;main.main&#34;</span>,<span class="s2">&#34;file&#34;</span>:<span class="s2">&#34;/home/ayo/dev/demo/slog/main.go&#34;</span>,<span class="s2">&#34;line&#34;</span>:32<span class="o">}</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Warning message&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;time&#34;</span>:<span class="s2">&#34;2023-05-24T19:39:27.005947669+01:00&#34;</span>,<span class="s2">&#34;level&#34;</span>:<span class="s2">&#34;ERROR&#34;</span>,<span class="s2">&#34;source&#34;</span>:<span class="o">{</span><span class="s2">&#34;function&#34;</span>:<span class="s2">&#34;main.main&#34;</span>,<span class="s2">&#34;file&#34;</span>:<span class="s2">&#34;/home/ayo/dev/demo/slog/main.go&#34;</span>,<span class="s2">&#34;line&#34;</span>:33<span class="o">}</span>,<span class="s2">&#34;msg&#34;</span>:<span class="s2">&#34;Error message&#34;</span><span class="o">}</span>
+</span></span></code></pre></div><p>根据程序运行环境切换相应的 Handler 也非常方便。例如，你可能希望在开发环境中使用 TextHandler，但在生产环境使用 JSONHandler，这个需求你可以通过环境变量来实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">appEnv</span> <span class="p">=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;APP_ENV&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Level</span><span class="p">:</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelDebug</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">handler</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Handler</span> <span class="p">=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">NewTextHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">appEnv</span> <span class="o">==</span> <span class="s">&#34;production&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">handler</span> <span class="p">=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Info message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go run main.go
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">time</span><span class="o">=</span>2023-02-24T10:36:39.697+01:00 <span class="nv">level</span><span class="o">=</span>INFO <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;Info message&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">APP_ENV</span><span class="o">=</span>production go run main.go
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2023-02-24T10:35:16.964821548+01:00&#34;</span><span class="p">,</span><span class="nt">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;INFO&#34;</span><span class="p">,</span><span class="nt">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;Info message&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><h3 id="创建自定义-handler">创建自定义 Handler<a class="anchor ms-1" href="#创建自定义-handler"><i class="fas fa-link"></i></a></h3>
+<p>因为 Handler 是一个接口，所以你同样可以创建自定义的 Handler 来格式化日志记录，或者修改日志记录的目的地，其声明如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Handler</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Enabled</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">Level</span><span class="p">)</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Handle</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">r</span> <span class="nx">Record</span><span class="p">)</span> <span class="kt">error</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">WithAttrs</span><span class="p">(</span><span class="nx">attrs</span> <span class="p">[]</span><span class="nx">Attr</span><span class="p">)</span> <span class="nx">Handler</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">WithGroup</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">Handler</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>下面的示例中，使用了 log、json 和 color 包来实现对日志记录的着色操作：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// NOTE: 仅做示例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;encoding/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;io&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;log/slog&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/fatih/color&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PrettyHandlerOptions</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">SlogOpts</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PrettyHandler</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nx">Handler</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">l</span> <span class="o">*</span><span class="nx">log</span><span class="p">.</span><span class="nx">Logger</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">h</span> <span class="o">*</span><span class="nx">PrettyHandler</span><span class="p">)</span> <span class="nf">Handle</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">r</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Record</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">level</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Level</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Level</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelDebug</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">level</span> <span class="p">=</span> <span class="nx">color</span><span class="p">.</span><span class="nf">MagentaString</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelInfo</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">level</span> <span class="p">=</span> <span class="nx">color</span><span class="p">.</span><span class="nf">BlueString</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelWarn</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">level</span> <span class="p">=</span> <span class="nx">color</span><span class="p">.</span><span class="nf">YellowString</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">level</span> <span class="p">=</span> <span class="nx">color</span><span class="p">.</span><span class="nf">RedString</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">fields</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{},</span> <span class="nx">r</span><span class="p">.</span><span class="nf">NumAttrs</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">r</span><span class="p">.</span><span class="nf">Attrs</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Attr</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fields</span><span class="p">[</span><span class="nx">a</span><span class="p">.</span><span class="nx">Key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Value</span><span class="p">.</span><span class="nf">Any</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">b</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">MarshalIndent</span><span class="p">(</span><span class="nx">fields</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;  &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">timeStr</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Time</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span><span class="s">&#34;[15:05:05.000]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">msg</span> <span class="o">:=</span> <span class="nx">color</span><span class="p">.</span><span class="nf">CyanString</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="p">.</span><span class="nx">l</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">timeStr</span><span class="p">,</span> <span class="nx">level</span><span class="p">,</span> <span class="nx">msg</span><span class="p">,</span> <span class="nx">color</span><span class="p">.</span><span class="nf">WhiteString</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">b</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewPrettyHandler</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">out</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span> <span class="nx">PrettyHandlerOptions</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">*</span><span class="nx">PrettyHandler</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">h</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">PrettyHandler</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Handler</span><span class="p">:</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">out</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">opts</span><span class="p">.</span><span class="nx">SlogOpts</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">l</span><span class="p">:</span>       <span class="nx">log</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">out</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">h</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>你可以像下方的方式使用 PrettyHandler：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span> <span class="o">:=</span> <span class="nx">PrettyHandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">SlogOpts</span><span class="p">:</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Level</span><span class="p">:</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelDebug</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">handler</span> <span class="o">:=</span> <span class="nf">NewPrettyHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;executing database query&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;query&#34;</span><span class="p">,</span> <span class="s">&#34;SELECT * FROM users&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;image upload successful&#34;</span><span class="p">,</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;image_id&#34;</span><span class="p">,</span> <span class="s">&#34;39ud88&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;storage is 90% full&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;available_space&#34;</span><span class="p">,</span> <span class="s">&#34;900.1 MB&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;An error occurred while processing the request&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;url&#34;</span><span class="p">,</span> <span class="s">&#34;https://example.com&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>执行程序之后，你可以看到着色后的输出：</p>
+<p><img class="img-fluid" alt="" src="/posts/go/go-slog-package-translate/1.png" loading="lazy"
+  
+   />
+
+</p>
+<h2 id="通过-logvaluer-隐藏敏感字段">通过 LogValuer 隐藏敏感字段<a class="anchor ms-1" href="#通过-logvaluer-隐藏敏感字段"><i class="fas fa-link"></i></a></h2>
+<p>LogValuer 接口允许你定义一个自定义类型如何被记录，其声明如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">LogValuer</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">LogValue</span><span class="p">()</span> <span class="nx">Value</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>最简单的用法是实现一个可以隐藏敏感字段的 LogValuer，在没有实现 LoggerValuer 的情况下，User 类型会将所有可导出的字段进行输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// User does not implement `LogValuer` here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ID</span>        <span class="kt">string</span> <span class="s">`json:&#34;id&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">FirstName</span> <span class="kt">string</span> <span class="s">`json:&#34;first_name&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">LastName</span>  <span class="kt">string</span> <span class="s">`json:&#34;last_name&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Email</span>     <span class="kt">string</span> <span class="s">`json:&#34;email&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Password</span>  <span class="kt">string</span> <span class="s">`json:&#34;password&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">handler</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">u</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ID</span><span class="p">:</span>        <span class="s">&#34;user-12234&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">FirstName</span><span class="p">:</span> <span class="s">&#34;Jan&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">LastName</span><span class="p">:</span>  <span class="s">&#34;Doe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Email</span><span class="p">:</span>     <span class="s">&#34;jan@example.com&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Password</span><span class="p">:</span>  <span class="s">&#34;pass-12334&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;info&#34;</span><span class="p">,</span> <span class="s">&#34;user&#34;</span><span class="p">,</span> <span class="nx">u</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;time&#34;</span><span class="p">:</span> <span class="s">&#34;2023-02-26T22:11:30.080656774+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;level&#34;</span><span class="p">:</span> <span class="s">&#34;INFO&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;msg&#34;</span><span class="p">:</span> <span class="s">&#34;info&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;user&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;id&#34;</span><span class="p">:</span> <span class="s">&#34;user-12234&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;first_name&#34;</span><span class="p">:</span> <span class="s">&#34;Jan&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;last_name&#34;</span><span class="p">:</span> <span class="s">&#34;Doe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;email&#34;</span><span class="p">:</span> <span class="s">&#34;jan@example.com&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;password&#34;</span><span class="p">:</span> <span class="s">&#34;pass-12334&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>在没有实现 LoggerValuer 之前，整个 User 的信息都会被输出。这是一个比较严重的问题，因为某些类型中可能包含一些敏感的字段（如邮箱和密码），这类信息不需要出现在日志中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// implement the `LogValuer` interface
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="nf">LogValue</span><span class="p">()</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Value</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">StringValue</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">ID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>实现 LogValue 方法后，你的输出发生了改变：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="s2">&#34;2023-02-26T22:43:28.184363059+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;level&#34;</span><span class="p">:</span> <span class="s2">&#34;INFO&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;info&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;user&#34;</span><span class="p">:</span> <span class="s2">&#34;user-12234&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>同样的，你也可以对属性进行分组输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">u</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="nf">LogValue</span><span class="p">()</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Value</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">GroupValue</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">,</span> <span class="nx">u</span><span class="p">.</span><span class="nx">ID</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">slog</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">,</span> <span class="nx">u</span><span class="p">.</span><span class="nx">FirstName</span><span class="o">+</span><span class="s">&#34; &#34;</span><span class="o">+</span><span class="nx">u</span><span class="p">.</span><span class="nx">LastName</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="s2">&#34;2023-03-15T14:44:24.223381036+01:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;level&#34;</span><span class="p">:</span> <span class="s2">&#34;INFO&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;info&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;user&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;user-12234&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Jan Doe&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="最后的想法">最后的想法<a class="anchor ms-1" href="#最后的想法"><i class="fas fa-link"></i></a></h2>
+<p>我们希望这篇文章可以帮助你更好地理解 Go 中新的结构化日志包并将其使用在你的项目之中，如果你希望了解更多与之相关的内容，我建议你去翻阅<a href="https://go.googlesource.com/proposal/&#43;/master/design/56345-structured-logging.md" target="_blank" rel="noopener noreferrer">提议</a>和<a href="https://pkg.go.dev/log/slog" target="_blank" rel="noopener noreferrer">包文档</a>。</p>
+<p>感谢您的阅读并开始快乐的日志之旅吧！</p></div></div>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/posts/python/how-to-copy-a-file-with-python/">如何使用 Python 复制文件
+</a>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
+    </div>
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
+</a>
+
+
+    </div>
+</div><section class="related-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">相关文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="/posts/python/how-to-copy-a-file-with-python/">如何使用 Python 复制文件
+</a>
+          <span class="float-end post-date">2023-06-15
+</span>
+        </li><li>
+          <a href="/posts/linux-shell/single-and-double-brackets/">Bash：单括号与双括号的区别
+</a>
+          <span class="float-end post-date">2023-03-23
+</span>
+        </li><li>
+          <a href="/posts/go-slice-usage/">Go Slice 的使用
+</a>
+          <span class="float-end post-date">2022-09-19
+</span>
+        </li><li>
+          <a href="/posts/go-error-handling/">Go 的错误处理
+</a>
+          <span class="float-end post-date">2022-08-22
+</span>
+        </li><li>
+          <a href="/posts/diagrams/flowchart/">flowchart.js 学习
+</a>
+          <span class="float-end post-date">2023-06-13
+</span>
+        </li></ul>
+    </div>
+  </section><div class="card component row post-comments" id="post-comments">
+  <div class="card-header">
+    <h2 class="card-title">评论</h2>
+  </div>
+  <div class="card-body"><script src="https://utteranc.es/client.js"
+  repo="a2htray/a2htray.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div>
+</div></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container d-flex flex-column">
+    
+    <div class="profile profile-compact card row component">
+  <div class="col-lg-5 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="a2htray" src="/images/profile.jpg" loading="lazy" data-viewer-invisible
+   width="460" height="460"
+   />
+</div>
+  <div class="col-lg-7 profile-meta"><div class="profile-name">a2htray</div><div class="profile-bio">Gopher and Student</div><nav class="social-links nav justify-content-center"><a class="nav-link social-link" href="mailto:a2htray@outlook.com" title="Email">
+      <i class="fas fa-fw fa-2x fa-envelope"></i>
+    </a><a class="nav-link social-link" target="_blank" href="https://github.com/a2htray" title="GitHub" rel="noopener noreferrer">
+        <i class="fa-fw fa-2x fab fa-github"></i>
+      </a><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+</div>
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#log-标准包">log 标准包</a></li>
+    <li><a href="#log-标准包的局限">log 标准包的局限</a></li>
+    <li><a href="#结构化日志包-logslog">结构化日志包 log/slog</a>
+      <ul>
+        <li><a href="#开始">开始</a></li>
+      </ul>
+    </li>
+    <li><a href="#定制化默认-logger">定制化默认 Logger</a></li>
+    <li><a href="#上下文日志记录">上下文日志记录</a>
+      <ul>
+        <li><a href="#上下文属性分组">上下文属性分组</a></li>
+      </ul>
+    </li>
+    <li><a href="#创建和使用子-logger">创建和使用子 Logger</a></li>
+    <li><a href="#自定义日志级别">自定义日志级别</a>
+      <ul>
+        <li><a href="#创建自定义日志级别">创建自定义日志级别</a></li>
+      </ul>
+    </li>
+    <li><a href="#自定义-handler">自定义 Handler</a>
+      <ul>
+        <li><a href="#创建自定义-handler">创建自定义 Handler</a></li>
+      </ul>
+    </li>
+    <li><a href="#通过-logvaluer-隐藏敏感字段">通过 LogValuer 隐藏敏感字段</a></li>
+    <li><a href="#最后的想法">最后的想法</a></li>
+  </ul>
+</nav>
+  </div>
+</div><section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="/posts/go/go-slog-package-translate/">Go slog 标准包功能详细指南
+</a>
+      </li><li>
+        <a href="/posts/python/how-to-copy-a-file-with-python/">如何使用 Python 复制文件
+</a>
+      </li><li>
+        <a href="/posts/diagrams/flowchart/">flowchart.js 学习
+</a>
+      </li><li>
+        <a href="/posts/sorts/r_merge-sort/">递归版本的归并排序 Go &amp; Python 实现
+</a>
+      </li><li>
+        <a href="/posts/pat-basic-level/1046/">PAT 乙级 1046
+</a>
+      </li><li>
+        <a href="/posts/linux-commands/history/">Linux history 命令
+</a>
+      </li><li>
+        <a href="/posts/linux-shell/file-test-operators/">Linux Shell：文件测试比较操作符
+</a>
+      </li><li>
+        <a href="/posts/pat-basic-level/1044/">PAT 乙级 1044
+</a>
+      </li><li>
+        <a href="/posts/pat-basic-level/1043/">PAT 乙级 1043
+</a>
+      </li><li>
+        <a href="/posts/pat-basic-level/1042/">PAT 乙级 1042
+</a>
+      </li></ul>
+  </div>
+</section><section class="series-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/series">专栏</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge rounded post-taxonomy" title="Redis 命令手册">
+            Redis 命令手册</a></div>
+      </div>
+    </section><section class="categories-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/categories">分类</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/categories/algo/" class="badge rounded post-taxonomy" title="Algo">
+            Algo</a><a href="/categories/database/" class="badge rounded post-taxonomy" title="Database">
+            Database</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
+            Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
+            Python</a><a href="/categories/om/" class="badge rounded post-taxonomy" title="O&amp;M">
+            O&amp;M</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Web</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            可视化</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
+            生产工具</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
+            Data Mining</a><a href="/categories/unix/linux/" class="badge rounded post-taxonomy" title="Unix/Linux">
+            Unix/Linux</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
+            统计学</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
+            机器学习</a><a href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="badge rounded post-taxonomy" title="程序设计">
+            程序设计</a></div>
+      </div>
+    </section><section class="tags-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/tags">标签</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
+            PAT</a><a href="/tags/pat-basic-level/" class="badge rounded post-taxonomy" title="PAT Basic Level">
+            PAT Basic Level</a><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
+            Redis</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
+            Linux Shell</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
+            MySQL</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
+            翻译</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
+            I/O</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
+            slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
+            Docker</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
+            file</a><a href="/tags/go-flags/" class="badge rounded post-taxonomy" title="go flags">
+            go flags</a><a href="/tags/jobs/" class="badge rounded post-taxonomy" title="jobs">
+            jobs</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
+            jq</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
+            protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
+            roadmap</a><a href="/tags/stackoverflow/" class="badge rounded post-taxonomy" title="Stackoverflow">
+            Stackoverflow</a><a href="/tags/test-operators/" class="badge rounded post-taxonomy" title="Test Operators">
+            Test Operators</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
+            面试经</a><a href="/tags/academic-website/" class="badge rounded post-taxonomy" title="Academic Website">
+            Academic Website</a><a href="/tags/bg/" class="badge rounded post-taxonomy" title="bg">
+            bg</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
+            channel</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
+            Chi-Square</a><a href="/tags/dataframe/" class="badge rounded post-taxonomy" title="DataFrame">
+            DataFrame</a><a href="/tags/django/" class="badge rounded post-taxonomy" title="Django">
+            Django</a><a href="/tags/docker-compose/" class="badge rounded post-taxonomy" title="Docker Compose">
+            Docker Compose</a><a href="/tags/docker-image/" class="badge rounded post-taxonomy" title="docker image">
+            docker image</a><a href="/tags/fg/" class="badge rounded post-taxonomy" title="fg">
+            fg</a><a href="/tags/flowchart.js/" class="badge rounded post-taxonomy" title="flowchart.js">
+            flowchart.js</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
+            Gin</a><a href="/tags/git/" class="badge rounded post-taxonomy" title="Git">
+            Git</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
+            Go 1.18</a><a href="/tags/go-1.21/" class="badge rounded post-taxonomy" title="Go 1.21">
+            Go 1.21</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
+            HTTP</a><a href="/tags/hugo/" class="badge rounded post-taxonomy" title="Hugo">
+            Hugo</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
+            JetBrains</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
+            jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
+            k-means</a><a href="/tags/load-balance/" class="badge rounded post-taxonomy" title="Load Balance">
+            Load Balance</a><a href="/tags/log/slog/" class="badge rounded post-taxonomy" title="log/slog">
+            log/slog</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
+            logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
+            map</a><a href="/tags/nginx/" class="badge rounded post-taxonomy" title="Nginx">
+            Nginx</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            NumPy</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
+            reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
+            Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="RPC">
+            RPC</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
+            scipy</a><a href="/tags/series/" class="badge rounded post-taxonomy" title="Series">
+            Series</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
+            sklearn</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
+            sqlx</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            Web 安全</a><a href="/tags/wowchemy/" class="badge rounded post-taxonomy" title="Wowchemy">
+            Wowchemy</a><a href="/tags/xls/" class="badge rounded post-taxonomy" title="xls">
+            xls</a><a href="/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/" class="badge rounded post-taxonomy" title="参数验证">
+            参数验证</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
+            反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
+            大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">
+            存储引擎</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge rounded post-taxonomy" title="存储过程">
+            存储过程</a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="badge rounded post-taxonomy" title="学习笔记">
+            学习笔记</a><a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="badge rounded post-taxonomy" title="归并排序">
+            归并排序</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
+            性能优化</a><a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="badge rounded post-taxonomy" title="排序算法">
+            排序算法</a><a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="badge rounded post-taxonomy" title="流程图">
+            流程图</a><a href="/tags/%E9%80%92%E5%BD%92/" class="badge rounded post-taxonomy" title="递归">
+            递归</a></div>
+      </div>
+    </section>
+    
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav justify-content-center mb-2"><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+<div class="copyright mb-2">
+  Copyright © 2016-2023 a2htray. All Rights Reserved.
+</div>
+<div class="powered-by mb-2">
+  Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
+</div>
+
+</footer>
+<script src="/assets/main/bundle.min.620d3d34ad2e850a36ccbe101d50d3aa453007b92daff3739f9f571a2732deeb.js" integrity="sha256-Yg09NK0uhQo2zL4QHVDTqkUwB7ktr/Nzn59XGicy3us=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.17849018f3f3b1b6bcb22df1fb426d0b6c496d4434266dd0b28bd13b9d6b63aa.js" integrity="sha256-F4SQGPPzsba8si3x&#43;0JtC2xJbUQ0Jm3QsovRO51rY6o=" crossorigin="anonymous" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('\/service-worker.min.js').then(function(reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  });
+}
+</script><script src="/assets/viewer/bundle.min.5ad926b46749e67285f66e2fdbc2d7cfb2689e8d9f2fcc2f59c3f51d2a1c4506.js" integrity="sha256-WtkmtGdJ5nKF9m4v28LXz7Jono2fL8wvWcP1HSocRQY=" crossorigin="anonymous" defer></script>
+</body>
+</html>

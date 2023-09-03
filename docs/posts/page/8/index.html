@@ -175,6 +175,51 @@
   </div>
 </nav><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-download-network-file/">URL 下载网络文件
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-24 10:00:25 &#43;0800 CST。">
+    2022-04-24
+  </span><span class="post-reading-time">
+    2 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/http/" class="badge post-taxonomy">HTTP</a><a href="/tags/i/o/" class="badge post-taxonomy">I/O</a></span>
+</div>
+<div class="post-summary">
+      <p>从网络上下载文件是开发过程中常用的需求，常规流程是：（1）发送请求；（2）接收响应并读取响应体内容；（3）保存到本地文件。本文包含的两个例子分别来自于<strong>参考 [1]</strong> 和<strong>参考 [2]</strong>，在此基础上做了少量的修改。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-download-network-file/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/go-redis-request-log-dumper/">Redis 的 list 和 stream：异步记录请求信息
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Redis 的 list 和 stream：异步记录请求信息" src="/images/managing_activity_logs.jpg" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-23 19:05:01 &#43;0800 CST。">
+    2022-04-23
+  </span><span class="post-reading-time">
+    4 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/database/" class="badge post-taxonomy">Database</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/redis/" class="badge post-taxonomy">Redis</a><a href="/tags/logging/" class="badge post-taxonomy">logging</a><a href="/tags/gin/" class="badge post-taxonomy">Gin</a></span>
+</div>
+<div class="post-summary">
+      <p>在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。在程序中，可以以同步或异步的方式完成这一需求。同步方式是指请求信息写入日志文件后才返回数据给客户端，异步方式则是在返回数据之前以新线程或进程完成对请求信息的记录。开源的日志包有：</p>
+<ol>
+<li><a href="https://pkg.go.dev/go.uber.org/zap" target="_blank" rel="noopener noreferrer">Zap</a>：出自 Uber 团队，以高性能著称；</li>
+<li><a href="https://github.com/rs/zerolog" target="_blank" rel="noopener noreferrer">Zerolog</a>：以易用性著称，支持 7 种日志级别；</li>
+<li><a href="https://github.com/sirupsen/logrus" target="_blank" rel="noopener noreferrer">Logrus</a>：兼容标准日志包格式，也是本人常用的日志包；</li>
+<li><a href="https://github.com/apex/log" target="_blank" rel="noopener noreferrer">apex/log</a>：受 Logrus 启发，简化操作后的 Logrus；</li>
+<li><a href="https://github.com/inconshreveable/log15" target="_blank" rel="noopener noreferrer"> Log15</a>：日志可读性强；</li>
+</ol>
+<p>5 个日志包的详细介绍可以看<a href="/posts/go-five-structured-logging-package/">《5 种结构化 Go 日志包对比分析》</a>这篇文章。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-redis-request-log-dumper/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/go-set-value-via-reflect-package/">Go 的反射包 reflect
 </a>
     </h2>
@@ -350,49 +395,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-1.18-release-features/">Go 1.18 特性 - 泛型
-</a>
-    </h2>
-  </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="Go 1.18 特性 - 泛型" src="/images/golang-1.18-release.png" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-10 12:11:38 &#43;0800 CST。">
-    2022-04-10
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/go-1.18/" class="badge post-taxonomy">Go 1.18</a></span>
-</div>
-<div class="post-summary">
-      <p>Go 1.18 在 2022 年 3 月 15 日发布，根据团队的<a href="https://go.dev/blog/go1.18" target="_blank" rel="noopener noreferrer">博文</a>介绍，1.18 版本包含 4 个重要特性：</p>
-<ol>
-<li><strong>泛型</strong>；</li>
-<li>fuzzing；</li>
-<li>工作空间；</li>
-<li>20% 的性能提升；</li>
-</ol><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-1.18-release-features/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/protocol-buffer-reduce-data-size/">Protocol Buffer 减少传输数据的大小
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-09 15:01:17 &#43;0800 CST。">
-    2022-04-09
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/protocol-buffer/" class="badge post-taxonomy">protocol buffer</a></span>
-</div>
-<div class="post-summary">
-      <p>Protocol Buffer 的介绍与语法已在文章<a href="/posts/protocol-buffer-syntax/">《Protocol Buffer 语法》</a>给出，本文则演示了 Protocol Buffer 如何减少了传输数据的大小。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/protocol-buffer-reduce-data-size/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -448,6 +450,12 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go/go-slog-package-translate/">Go slog 标准包功能详细指南
+</a>
+      </li><li>
+        <a href="/posts/python/how-to-copy-a-file-with-python/">如何使用 Python 复制文件
+</a>
+      </li><li>
         <a href="/posts/diagrams/flowchart/">flowchart.js 学习
 </a>
       </li><li>
@@ -470,12 +478,6 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
 </a>
       </li><li>
         <a href="/posts/pat-basic-level/1042/">PAT 乙级 1042
-</a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1041/">PAT 乙级 1041
-</a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1040/">PAT 乙级 1040
 </a>
       </li></ul>
   </div>
@@ -509,7 +511,8 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             Unix/Linux</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
             统计学</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
             数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
-            机器学习</a></div>
+            机器学习</a><a href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="badge rounded post-taxonomy" title="程序设计">
+            程序设计</a></div>
       </div>
     </section><section class="tags-taxonomies row card component">
       <div class="card-header">
@@ -523,14 +526,14 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             PAT Basic Level</a><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
             Redis</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
             Linux Shell</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
-            MySQL</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
-            Pandas</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
-            slice</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
-            翻译</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
+            MySQL</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
+            翻译</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
+            I/O</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
+            slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
             Docker</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
             file</a><a href="/tags/go-flags/" class="badge rounded post-taxonomy" title="go flags">
-            go flags</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
-            I/O</a><a href="/tags/jobs/" class="badge rounded post-taxonomy" title="jobs">
+            go flags</a><a href="/tags/jobs/" class="badge rounded post-taxonomy" title="jobs">
             jobs</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
             jq</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
             Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
@@ -551,13 +554,15 @@ client - client.go - json_client.go models - greeting.go server - json_server.go
             flowchart.js</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
             Gin</a><a href="/tags/git/" class="badge rounded post-taxonomy" title="Git">
             Git</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
-            Go 1.18</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
+            Go 1.18</a><a href="/tags/go-1.21/" class="badge rounded post-taxonomy" title="Go 1.21">
+            Go 1.21</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
             HTTP</a><a href="/tags/hugo/" class="badge rounded post-taxonomy" title="Hugo">
             Hugo</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
             JetBrains</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/load-balance/" class="badge rounded post-taxonomy" title="Load Balance">
-            Load Balance</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
+            Load Balance</a><a href="/tags/log/slog/" class="badge rounded post-taxonomy" title="log/slog">
+            log/slog</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
             logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
             map</a><a href="/tags/nginx/" class="badge rounded post-taxonomy" title="Nginx">
             Nginx</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">

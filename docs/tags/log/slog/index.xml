@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>log/slog on Mozart&#39;s Sheet</title>
+    <link>/tags/log/slog/</link>
+    <description>Recent content in log/slog on Mozart&#39;s Sheet</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright><atom:link href="/tags/log/slog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go slog 标准包功能详细指南</title>
+      <link>/posts/go/go-slog-package-translate/</link>
+      <pubDate>Sun, 03 Sep 2023 16:51:25 +0800</pubDate>
+      
+      <guid>/posts/go/go-slog-package-translate/</guid>
+      <description>&lt;p&gt;在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。&lt;/p&gt;
+&lt;p&gt;原文地址：&lt;a href=&#34;https://betterstack.com/community/guides/logging/logging-in-go/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://betterstack.com/community/guides/logging/logging-in-go/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

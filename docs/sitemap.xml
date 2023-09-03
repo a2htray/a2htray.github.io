@@ -2,19 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/categories/go/</loc>
+    <lastmod>2023-09-03T16:51:25+08:00</lastmod>
+  </url><url>
+    <loc>/tags/go-1.21/</loc>
+    <lastmod>2023-09-03T16:51:25+08:00</lastmod>
+  </url><url>
+    <loc>/posts/go/go-slog-package-translate/</loc>
+    <lastmod>2023-09-03T16:51:25+08:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2023-09-03T16:51:25+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2023-09-03T16:51:25+08:00</lastmod>
+  </url><url>
+    <loc>/tags/%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2023-09-03T16:51:25+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2023-09-03T16:51:25+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2023-09-03T16:51:25+08:00</lastmod>
+  </url><url>
+    <loc>/categories/python/</loc>
+    <lastmod>2023-06-15T20:44:17+08:00</lastmod>
+  </url><url>
+    <loc>/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2023-06-15T20:44:17+08:00</lastmod>
+  </url><url>
+    <loc>/posts/python/how-to-copy-a-file-with-python/</loc>
+    <lastmod>2023-06-15T20:44:17+08:00</lastmod>
+  </url><url>
     <loc>/tags/flowchart.js/</loc>
     <lastmod>2023-06-13T22:37:29+08:00</lastmod>
   </url><url>
     <loc>/posts/diagrams/flowchart/</loc>
-    <lastmod>2023-06-13T22:37:29+08:00</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2023-06-13T22:37:29+08:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2023-06-13T22:37:29+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
     <lastmod>2023-06-13T22:37:29+08:00</lastmod>
   </url><url>
     <loc>/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
@@ -26,19 +50,10 @@
     <loc>/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2023-06-13T22:37:29+08:00</lastmod>
   </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2023-06-13T22:37:29+08:00</lastmod>
-  </url><url>
     <loc>/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-06-13T22:37:29+08:00</lastmod>
   </url><url>
     <loc>/categories/algo/</loc>
-    <lastmod>2023-04-23T23:38:47+08:00</lastmod>
-  </url><url>
-    <loc>/categories/go/</loc>
-    <lastmod>2023-04-23T23:38:47+08:00</lastmod>
-  </url><url>
-    <loc>/categories/python/</loc>
     <lastmod>2023-04-23T23:38:47+08:00</lastmod>
   </url><url>
     <loc>/tags/%E9%80%92%E5%BD%92/</loc>
@@ -117,9 +132,6 @@
     <lastmod>2023-03-23T23:49:46+08:00</lastmod>
   </url><url>
     <loc>/posts/linux-shell/single-and-double-brackets/</loc>
-    <lastmod>2023-03-23T22:47:16+08:00</lastmod>
-  </url><url>
-    <loc>/tags/%E7%BF%BB%E8%AF%91/</loc>
     <lastmod>2023-03-23T22:47:16+08:00</lastmod>
   </url><url>
     <loc>/posts/pat-basic-level/1031/</loc>
@@ -549,6 +561,8 @@
     <lastmod>2022-03-27T05:32:39+08:00</lastmod>
   </url><url>
     <loc>/tags/i/o/</loc>
+  </url><url>
+    <loc>/tags/log/slog/</loc>
   </url><url>
     <loc>/offline/</loc>
   </url><url>

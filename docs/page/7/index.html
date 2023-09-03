@@ -171,6 +171,45 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-error-handling/">Go 的错误处理
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-08-22 23:40:01 &#43;0800 CST。">
+    2022-08-22
+  </span><span class="post-reading-time">
+    5 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge post-taxonomy">翻译</a></span>
+</div>
+<div class="post-summary">
+      <p>原文：<a href="https://go.dev/blog/error-handling-and-go" target="_blank" rel="noopener noreferrer">Error handling and Go</a></p>
+<h1 id="介绍">介绍<a class="anchor ms-1" href="#介绍"><i class="fas fa-link"></i></a></h1>
+<p>如果你写过 Go 的代码，就一定遇到过 Go 的内置类型 error。一个 error 类型的值可用于指明程序的某种不正常的状态，比如，当打开文件失败时，os.Open 函数会返回一个非 nil 的 error 值。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-error-handling/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
+      <a href="/posts/python-pat-1004/">Python PAT 甲级 1003
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2022-08-03 00:33:33 &#43;0800 CST。">
+    2022-08-03
+  </span><span class="post-reading-time">
+    1 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
+</div>
+<div class="post-summary">
+      <p>PAT 甲级 1003 。
+# -*- coding:utf-8 -*- if __name__ == &#39;__main__&#39;: # n 树中节点个数 # m 非叶子节点个数 n, m = list(map(int, input().strip().split(&#39; &#39;))) # 二维数组 # 元素的下标表示节点的 ID # 第 1 个元素不使用 tree = [[] for _ in range(n+1)] while m != 0: tokens = list(map(int, input().split(&#39; &#39;))) _id = tokens[0] children = tokens[2:] tree[_id] =...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-pat-1004/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/python-pat-1003/">Python PAT 甲级 1003
 </a>
     </h2>
@@ -324,42 +363,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-file-rename-pit/">Windows 下移动文件的坑
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-24 17:16:44 &#43;0800 CST。">
-    2022-04-24
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/file/" class="badge post-taxonomy">file</a><a href="/tags/i/o/" class="badge post-taxonomy">I/O</a><a href="/tags/stackoverflow/" class="badge post-taxonomy">Stackoverflow</a></span>
-</div>
-<div class="post-summary">
-      <p>在 Windows 下，Go 的 <code>os</code> 标准库提供的 <code>Rename</code> 方法不能跨磁盘移动文件。下面通过问题重现，提供两种解决方案。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-file-rename-pit/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/go-download-network-file/">URL 下载网络文件
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-24 10:00:25 &#43;0800 CST。">
-    2022-04-24
-  </span><span class="post-reading-time">
-    2 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/categories/web/" class="badge post-taxonomy">Web</a><a href="/tags/http/" class="badge post-taxonomy">HTTP</a><a href="/tags/i/o/" class="badge post-taxonomy">I/O</a></span>
-</div>
-<div class="post-summary">
-      <p>从网络上下载文件是开发过程中常用的需求，常规流程是：（1）发送请求；（2）接收响应并读取响应体内容；（3）保存到本地文件。本文包含的两个例子分别来自于<strong>参考 [1]</strong> 和<strong>参考 [2]</strong>，在此基础上做了少量的修改。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-download-network-file/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -387,7 +390,7 @@
         <a href="/page/8/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/page/10/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/11/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul></div>
 </div>
@@ -415,6 +418,12 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go/go-slog-package-translate/">Go slog 标准包功能详细指南
+</a>
+      </li><li>
+        <a href="/posts/python/how-to-copy-a-file-with-python/">如何使用 Python 复制文件
+</a>
+      </li><li>
         <a href="/posts/diagrams/flowchart/">flowchart.js 学习
 </a>
       </li><li>
@@ -437,12 +446,6 @@
 </a>
       </li><li>
         <a href="/posts/pat-basic-level/1042/">PAT 乙级 1042
-</a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1041/">PAT 乙级 1041
-</a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1040/">PAT 乙级 1040
 </a>
       </li></ul>
   </div>
@@ -476,7 +479,8 @@
             Unix/Linux</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
             统计学</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
             数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
-            机器学习</a></div>
+            机器学习</a><a href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="badge rounded post-taxonomy" title="程序设计">
+            程序设计</a></div>
       </div>
     </section><section class="tags-taxonomies row card component">
       <div class="card-header">
@@ -490,14 +494,14 @@
             PAT Basic Level</a><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
             Redis</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
             Linux Shell</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
-            MySQL</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
-            Pandas</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
-            slice</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
-            翻译</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
+            MySQL</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
+            翻译</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
+            I/O</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
+            slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
             Docker</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
             file</a><a href="/tags/go-flags/" class="badge rounded post-taxonomy" title="go flags">
-            go flags</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
-            I/O</a><a href="/tags/jobs/" class="badge rounded post-taxonomy" title="jobs">
+            go flags</a><a href="/tags/jobs/" class="badge rounded post-taxonomy" title="jobs">
             jobs</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
             jq</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
             Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
@@ -518,13 +522,15 @@
             flowchart.js</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
             Gin</a><a href="/tags/git/" class="badge rounded post-taxonomy" title="Git">
             Git</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
-            Go 1.18</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
+            Go 1.18</a><a href="/tags/go-1.21/" class="badge rounded post-taxonomy" title="Go 1.21">
+            Go 1.21</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
             HTTP</a><a href="/tags/hugo/" class="badge rounded post-taxonomy" title="Hugo">
             Hugo</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
             JetBrains</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
             jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
             k-means</a><a href="/tags/load-balance/" class="badge rounded post-taxonomy" title="Load Balance">
-            Load Balance</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
+            Load Balance</a><a href="/tags/log/slog/" class="badge rounded post-taxonomy" title="log/slog">
+            log/slog</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
             logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
             map</a><a href="/tags/nginx/" class="badge rounded post-taxonomy" title="Nginx">
             Nginx</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
