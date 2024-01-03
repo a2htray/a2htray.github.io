@@ -6,7 +6,16 @@
     <description>Recent content on Mozart&#39;s Sheet</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2016-{year} a2htray. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 03 Sep 2023 16:51:25 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Jan 2024 22:38:25 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何高效地使用 useRef、useMemo 和 useCallback</title>
+      <link>/posts/react/react-hooks-useref-usememo-usecallback/</link>
+      <pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate>
+      
+      <guid>/posts/react/react-hooks-useref-usememo-usecallback/</guid>
+      <description>这是一篇关于 React Hooks 的技术文章翻译，原文地址： https://dev.to/michael_osas/understanding-react-h</description>
+    </item>
+    
     <item>
       <title>Go slog 标准包功能详细指南</title>
       <link>/posts/go/go-slog-package-translate/</link>

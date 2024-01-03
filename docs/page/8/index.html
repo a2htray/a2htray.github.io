@@ -171,6 +171,25 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go-slice-out-of-range/">Slice 什么时候报 out of range
+</a>
+    </h2>
+  </div>
+  <div class="card-body">
+  <img class="img-fluid" alt="Slice 什么时候报 out of range" src="/images/go-slice.png" loading="lazy"/><div class="post-meta">
+  <span class="post-date" title="创建于 2022-04-26 09:24:01 &#43;0800 CST。">
+    2022-04-26
+  </span><span class="post-reading-time">
+    3 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/slice/" class="badge post-taxonomy">slice</a><a href="/tags/stackoverflow/" class="badge post-taxonomy">Stackoverflow</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge post-taxonomy">面试经</a></span>
+</div>
+<div class="post-summary">
+      <p>面试的时候问到了一个关于 go Slice 的问题，即为什么在 <code>a[i:]</code> 中 <code>i</code> 的取值可以是 <code>a</code> 的长度。平时开发中也是这么用的，但没太深入的了解，所以在这篇文章中对其进行一些探讨。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go-slice-out-of-range/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/go-file-rename-pit/">Windows 下移动文件的坑
 </a>
     </h2>
@@ -365,28 +384,6 @@
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/python-palmer-archipelago-penguin-testing/">帕尔默企鹅数据集测试
-</a>
-    </h2>
-  </div>
-  <div class="card-body">
-  <img class="img-fluid" alt="帕尔默企鹅数据集测试" src="/images/Palmer-Archipelago-Antarctica-penguin-data.webp" loading="lazy"/><div class="post-meta">
-  <span class="post-date" title="创建于 2022-04-11 13:28:26 &#43;0800 CST。">
-    2022-04-11
-  </span><span class="post-reading-time">
-    5 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/python/" class="badge post-taxonomy">Python</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge post-taxonomy">可视化</a><a href="/categories/data-mining/" class="badge post-taxonomy">Data Mining</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge post-taxonomy">机器学习</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge post-taxonomy">统计学</a><a href="/tags/matplotlib/" class="badge post-taxonomy">Matplotlib</a><a href="/tags/sklearn/" class="badge post-taxonomy">sklearn</a></span>
-</div>
-<div class="post-summary">
-      <p>今天导师在群里分享了一个链接 23 个优秀的机器学习训练公共数据集，看了一下，决定对帕尔默企鹅数据集（Palmer Archipelago (Antarctica) penguin data）做一些分析。
-数据集介绍 数据集是在 Kaggle 下载的，包含两个文件：
-penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的数据文件； 本次分析使用的是简化后的数据集 penguins_size.csv。数据集共 344 个样本，特征信息如下表：
-特征 数据类型 说明 species 离散值 标签信息，值为 Adelie|Chinstrap|Gentoo 之一 island 离散值 岛屿，...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/python-palmer-archipelago-penguin-testing/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -442,6 +439,9 @@ penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/react/react-hooks-useref-usememo-usecallback/">如何高效地使用 useRef、useMemo 和 useCallback
+</a>
+      </li><li>
         <a href="/posts/go/go-slog-package-translate/">Go slog 标准包功能详细指南
 </a>
       </li><li>
@@ -467,9 +467,6 @@ penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的
 </a>
       </li><li>
         <a href="/posts/pat-basic-level/1043/">PAT 乙级 1043
-</a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1042/">PAT 乙级 1042
 </a>
       </li></ul>
   </div>
@@ -501,7 +498,8 @@ penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的
             生产工具</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
             Data Mining</a><a href="/categories/unix/linux/" class="badge rounded post-taxonomy" title="Unix/Linux">
             Unix/Linux</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
-            统计学</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            统计学</a><a href="/categories/react/" class="badge rounded post-taxonomy" title="React">
+            React</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
             数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
             机器学习</a><a href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="badge rounded post-taxonomy" title="程序设计">
             程序设计</a></div>
@@ -517,9 +515,9 @@ penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的
             PAT</a><a href="/tags/pat-basic-level/" class="badge rounded post-taxonomy" title="PAT Basic Level">
             PAT Basic Level</a><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
             Redis</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
-            Linux Shell</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
-            MySQL</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
-            翻译</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Linux Shell</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
+            翻译</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
+            MySQL</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
             Pandas</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
             I/O</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
             slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
@@ -558,14 +556,16 @@ penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的
             logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
             map</a><a href="/tags/nginx/" class="badge rounded post-taxonomy" title="Nginx">
             Nginx</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
-            NumPy</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
+            NumPy</a><a href="/tags/react-hooks/" class="badge rounded post-taxonomy" title="React Hooks">
+            React Hooks</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
             reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
             Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="RPC">
             RPC</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
             scipy</a><a href="/tags/series/" class="badge rounded post-taxonomy" title="Series">
             Series</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
             sklearn</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
-            sqlx</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            sqlx</a><a href="/tags/typescript/" class="badge rounded post-taxonomy" title="TypeScript">
+            TypeScript</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
             Web 安全</a><a href="/tags/wowchemy/" class="badge rounded post-taxonomy" title="Wowchemy">
             Wowchemy</a><a href="/tags/xls/" class="badge rounded post-taxonomy" title="xls">
             xls</a><a href="/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/" class="badge rounded post-taxonomy" title="参数验证">
@@ -590,7 +590,7 @@ penguins_lter.csv：原始数据文件； penguins_size.csv：特征约简后的
     <i class="fas fa-fw fa-2x fa-rss"></i>
   </a></nav>
 <div class="copyright mb-2">
-  Copyright © 2016-2023 a2htray. All Rights Reserved.
+  Copyright © 2016-2024 a2htray. All Rights Reserved.
 </div>
 <div class="powered-by mb-2">
   Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
