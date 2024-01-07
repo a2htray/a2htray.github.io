@@ -171,6 +171,26 @@
       <div class="row content">
 <div class="col-lg-8"><div class="container"><div class="posts mb-4"><article class="row card post component"><div class="card-header">
     <h2 class="card-title post-title">
+      <a href="/posts/go/deconstructing-type-in-go-with-a-example/">Go 泛型函数 - 解构类型参数
+</a>
+    </h2>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2024-01-07 14:41:11 &#43;0800 CST。">
+    2024-01-07
+  </span><span class="post-reading-time">
+    6 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD/" class="badge post-taxonomy">类型推断</a><a href="/tags/%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0/" class="badge post-taxonomy">泛型函数</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge post-taxonomy">翻译</a></span>
+</div>
+<div class="post-summary">
+      <p>原文地址：<a href="https://go.dev/blog/deconstructing-type-parameters" target="_blank" rel="noopener noreferrer">https://go.dev/blog/deconstructing-type-parameters</a></p>
+<p><strong>译者评论</strong></p>
+<p>本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用<font color="#0d6efd" style="font-weight: bold;">类型推断</font>完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 <font color="#0d6efd" style="font-weight: bold;">~ 符号</font>，即用于指定类型的底层类型。</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/go/deconstructing-type-in-go-with-a-example/">阅读更多</a></div>
+    </div>
+  </div>
+</article>
+<article class="row card post component"><div class="card-header">
+    <h2 class="card-title post-title">
       <a href="/posts/react/react-hooks-useref-usememo-usecallback/">如何高效地使用 useRef、useMemo 和 useCallback
 </a>
     </h2>
@@ -341,24 +361,6 @@ flowchart.js 简介 flowchart.js 是一种可以运行在终端和浏览器的�
     </div>
   </div>
 </article>
-<article class="row card post component"><div class="card-header">
-    <h2 class="card-title post-title">
-      <a href="/posts/pat-basic-level/1043/">PAT 乙级 1043
-</a>
-    </h2>
-  </div>
-  <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="创建于 2023-03-25 15:50:40 &#43;0800 CST。">
-    2023-03-25
-  </span><span class="post-reading-time">
-    1 分钟阅读
-  </span><span class="post-taxonomies"><a href="/categories/algo/" class="badge post-taxonomy">Algo</a><a href="/tags/pat-basic-level/" class="badge post-taxonomy">PAT Basic Level</a><a href="/tags/pat/" class="badge post-taxonomy">PAT</a></span>
-</div>
-<div class="post-summary">
-      <p> 代码 #!/usr/bin/env python # -*- coding: utf-8 -*- # author: a2htray # create date: 2023/3/25 &#34;&#34;&#34; PAT 乙级 1043 &#34;&#34;&#34; if __name__ == &#39;__main__&#39;: line = input() nums = [0] * 6 chars = [&#39;P&#39;, &#39;A&#39;, &#39;T&#39;, &#39;e&#39;, &#39;s&#39;, &#39;t&#39;] for c in line: if c == &#39;P&#39;: nums[0] += 1 if c == &#39;A&#39;: nums[1] += 1 if c == &#39;T&#39;: nums[2] += 1 if c == &#39;e&#39;:...</p><div><a class="btn btn-sm btn-primary btn-read-more" href="/posts/pat-basic-level/1043/">阅读更多</a></div>
-    </div>
-  </div>
-</article>
 </div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item disabled">
@@ -414,6 +416,9 @@ flowchart.js 简介 flowchart.js 是一种可以运行在终端和浏览器的�
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="/posts/go/deconstructing-type-in-go-with-a-example/">Go 泛型函数 - 解构类型参数
+</a>
+      </li><li>
         <a href="/posts/react/react-hooks-useref-usememo-usecallback/">如何高效地使用 useRef、useMemo 和 useCallback
 </a>
       </li><li>
@@ -440,9 +445,6 @@ flowchart.js 简介 flowchart.js 是一种可以运行在终端和浏览器的�
       </li><li>
         <a href="/posts/pat-basic-level/1044/">PAT 乙级 1044
 </a>
-      </li><li>
-        <a href="/posts/pat-basic-level/1043/">PAT 乙级 1043
-</a>
       </li></ul>
   </div>
 </section><section class="series-taxonomies row card component">
@@ -463,9 +465,9 @@ flowchart.js 简介 flowchart.js 是一种可以运行在终端和浏览器的�
       </div>
       <div class="card-body">
         <div class="py-2"><a href="/categories/algo/" class="badge rounded post-taxonomy" title="Algo">
-            Algo</a><a href="/categories/database/" class="badge rounded post-taxonomy" title="Database">
-            Database</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
-            Go</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
+            Algo</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
+            Go</a><a href="/categories/database/" class="badge rounded post-taxonomy" title="Database">
+            Database</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
             Python</a><a href="/categories/om/" class="badge rounded post-taxonomy" title="O&amp;M">
             O&amp;M</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
             Web</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
@@ -489,9 +491,9 @@ flowchart.js 简介 flowchart.js 是一种可以运行在终端和浏览器的�
         <div class="py-2"><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
             PAT</a><a href="/tags/pat-basic-level/" class="badge rounded post-taxonomy" title="PAT Basic Level">
             PAT Basic Level</a><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
-            Redis</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
-            Linux Shell</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
-            翻译</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
+            Redis</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
+            翻译</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
+            Linux Shell</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
             MySQL</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
             Pandas</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
             I/O</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
@@ -552,8 +554,10 @@ flowchart.js 简介 flowchart.js 是一种可以运行在终端和浏览器的�
             学习笔记</a><a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="badge rounded post-taxonomy" title="归并排序">
             归并排序</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
             性能优化</a><a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="badge rounded post-taxonomy" title="排序算法">
-            排序算法</a><a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="badge rounded post-taxonomy" title="流程图">
-            流程图</a><a href="/tags/%E9%80%92%E5%BD%92/" class="badge rounded post-taxonomy" title="递归">
+            排序算法</a><a href="/tags/%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0/" class="badge rounded post-taxonomy" title="泛型函数">
+            泛型函数</a><a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="badge rounded post-taxonomy" title="流程图">
+            流程图</a><a href="/tags/%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD/" class="badge rounded post-taxonomy" title="类型推断">
+            类型推断</a><a href="/tags/%E9%80%92%E5%BD%92/" class="badge rounded post-taxonomy" title="递归">
             递归</a></div>
       </div>
     </section>

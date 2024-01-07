@@ -1,0 +1,582 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-cn" data-palette="blue"
+  >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Go 泛型函数 - 解构类型参数 - Mozart&#39;s Sheet</title><link rel="apple-touch-icon" href="/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/images/icons/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="原文地址：https://go.dev/blog/deconstructing-type-parameters
+译者评论
+本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用类型推断完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 ~ 符号，即用于指定类型的底层类型。" /><meta name="robots" content="index, follow" /><meta itemprop="name" content="Go 泛型函数 - 解构类型参数">
+<meta itemprop="description" content="原文地址：https://go.dev/blog/deconstructing-type-parameters
+译者评论
+本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用类型推断完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 ~ 符号，即用于指定类型的底层类型。"><meta itemprop="datePublished" content="2024-01-07T14:41:11+08:00" />
+<meta itemprop="dateModified" content="2024-01-07T14:41:11+08:00" />
+<meta itemprop="wordCount" content="2570">
+<meta itemprop="keywords" content="类型推断,泛型函数,翻译," /><meta property="og:title" content="Go 泛型函数 - 解构类型参数" />
+<meta property="og:description" content="原文地址：https://go.dev/blog/deconstructing-type-parameters
+译者评论
+本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用类型推断完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 ~ 符号，即用于指定类型的底层类型。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/go/deconstructing-type-in-go-with-a-example/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-07T14:41:11+08:00" />
+<meta property="article:modified_time" content="2024-01-07T14:41:11+08:00" /><meta property="og:site_name" content="Mozart&#39;s Sheet" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go 泛型函数 - 解构类型参数"/>
+<meta name="twitter:description" content="原文地址：https://go.dev/blog/deconstructing-type-parameters
+译者评论
+本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用类型推断完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 ~ 符号，即用于指定类型的底层类型。"/>
+<meta property="og:image" content="/false"/>
+  <meta name="twitter:image" content="/false"/><link rel="stylesheet" href="/assets/main/bundle.min.1957acd0b66b72de75da4f137b9a5aa7a8f37b8d038c1ded1947162bceacc353.css" integrity="sha256-GVes0LZrct512k8Te5pap6jze40DjB3tGUcWK86sw1M=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/viewer/bundle.min.f05183267bb952fbc8c63a7178364de2951614ab71d544ec1068ad36c7447ccc.css" integrity="sha256-8FGDJnu5UvvIxjpxeDZN4pUWFKtx1UTsEGitNsdEfMw=" crossorigin="anonymous"></head>
+  <body><script>const items=["mode","palette"];items.forEach(function(e){const t=localStorage.getItem("hbs-"+e);t&&document.body.parentElement.setAttribute("data-"+e,t)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="/">Mozart&#39;s Sheet
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=Go%20%e6%b3%9b%e5%9e%8b%e5%87%bd%e6%95%b0%20-%20%e8%a7%a3%e6%9e%84%e7%b1%bb%e5%9e%8b%e5%8f%82%e6%95%b0&url=%2fposts%2fgo%2fdeconstructing-type-in-go-with-a-example%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=%2fposts%2fgo%2fdeconstructing-type-in-go-with-a-example%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">设置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+<div class="setting">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-adjust"></i> 模式</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="modeSwitcher">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字体大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="蓝色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="蓝灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="绿色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="红色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="蓝绿色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黄色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 复制链接
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item">
+          <a class="nav-link" href="/series/">
+            <i class="fas fa-fw fa-columns"></i>专栏
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>归档
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="fas fa-fw fa-folder"></i>分类
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="fas fa-fw fa-tags"></i>标签
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="/">主页</a></li><li class="breadcrumb-item"><a href="/posts/">文章</a></li><li class="breadcrumb-item active">Go 泛型函数 - 解构类型参数</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    <a class="action" href="#post-copyright" role="button" aria-label="Copyright" title="Copyright">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    <a class="action" href="#post-comments" role="button" aria-label="Comments" title="Comments">
+  <i class="fas fa-fw fa-comments"></i>
+</a>
+    <a class="action" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+  <div class="card-header ">
+    <h1 class="card-title post-title">Go 泛型函数 - 解构类型参数
+</h1>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="创建于 2024-01-07 14:41:11 &#43;0800 CST。">
+    2024-01-07
+  </span><span class="post-reading-time">
+    6 分钟阅读
+  </span><span class="post-taxonomies"><a href="/categories/go/" class="badge post-taxonomy">Go</a><a href="/tags/%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD/" class="badge post-taxonomy">类型推断</a><a href="/tags/%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0/" class="badge post-taxonomy">泛型函数</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge post-taxonomy">翻译</a></span>
+</div>
+<div class="post-content mb-3"><p>原文地址：<a href="https://go.dev/blog/deconstructing-type-parameters" target="_blank" rel="noopener noreferrer">https://go.dev/blog/deconstructing-type-parameters</a></p>
+<p><strong>译者评论</strong></p>
+<p>本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用<font color="#0d6efd" style="font-weight: bold;">类型推断</font>完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 <font color="#0d6efd" style="font-weight: bold;">~ 符号</font>，即用于指定类型的底层类型。</p>
+<h2 id="slices-包函数签名">slices 包函数签名<a class="anchor ms-1" href="#slices-包函数签名"><i class="fas fa-link"></i></a></h2>
+<p>slices.Clone 函数非常简单，该函数可以克隆任意类型元素的 slice，函数签名如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">Clone</span><span class="p">[</span><span class="nx">S</span> <span class="err">~</span><span class="p">[]</span><span class="nx">E</span><span class="p">,</span> <span class="nx">E</span> <span class="nx">any</span><span class="p">](</span><span class="nx">s</span> <span class="nx">S</span><span class="p">)</span> <span class="nx">S</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">append</span><span class="p">(</span><span class="nx">s</span><span class="p">[:</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">],</span> <span class="nx">s</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>slices.Clone 函数可以正常运行，因为<font color="#0d6efd" style="font-weight: bold;">向一个空容量的 slice 添加元素会在底层分配一个新的数组</font>。我们看到，函数体内容要比函数签要短，为什么会这样？在这篇文章中，我们会解释如此设计函数签名的原因。</p>
+<h2 id="简单-clone-实现">简单 Clone 实现<a class="anchor ms-1" href="#简单-clone-实现"><i class="fas fa-link"></i></a></h2>
+<p>首先，我们在 slices 包之外写一个简单的泛型 Clone1 函数。我们希望函数接收一个任意元素类型的 slice，并返回一个 slice。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">Clone1</span><span class="p">[</span><span class="nx">E</span> <span class="nx">any</span><span class="p">](</span><span class="nx">s</span> <span class="p">[]</span><span class="nx">E</span><span class="p">)</span> <span class="p">[]</span><span class="nx">E</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// body omitted
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>Clone1 泛型函数只有一个类型参数 E，且函数参数是一个类型为 E 的 slice s，并返回一个相同类型的 slice。对于了解 Go 泛型的开发者来说，函数签名直接了当，很好理解。</p>
+<p>然而，这里隐含着一个问题。尽管 slice 命名类型在 Go 中不常见，但开发者偶尔也会使用到。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// MySlice 是一个包含特殊方法的 string slice
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">MySlice</span> <span class="p">[]</span><span class="kt">string</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// String 返回 slice 拼接的结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="nx">MySlice</span><span class="p">)</span> <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="s">&#34;+&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>现在我们想要实现一个 MySlice 拷贝再打印出里面的内容，只不过其中字符串是经过排序的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">PrintSorted</span><span class="p">(</span><span class="nx">ms</span> <span class="nx">MySlice</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">c</span> <span class="o">:=</span> <span class="nf">Clone1</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slices</span><span class="p">.</span><span class="nf">Sort</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="c1">// FAILS TO COMPILE
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>但不幸的是，上述代码不能正常工作，编译器会报一个 error：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">c.String undefined <span class="o">(</span><span class="nb">type</span> <span class="o">[]</span>string has no field or method String<span class="o">)</span>
+</span></span></code></pre></div><p>如果用传参类型代替类型参数的类型，手动实例化 Clone1 函数（如 InstantiatedClone1），就会看到这个问题。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">InstantiatedClone1</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span> <span class="p">[]</span><span class="kt">string</span>
+</span></span></code></pre></div><p>Go 的赋值规则允许我们为类型为 []string 的参数传入一个类型为 MySlice 的值，<font color="#0d6efd" style="font-weight: bold;">但是 Clone1 函数返回值的类型为 []string，并不是 MySlice</font>。由于 []string 类型没有 String 方法，所以编译器报了这个错。</p>
+<h2 id="更灵活的-clone">更灵活的 Clone<a class="anchor ms-1" href="#更灵活的-clone"><i class="fas fa-link"></i></a></h2>
+<p>为了解决这个问题，我们不得不再写一个 Clone2 函数，该函数返回值的类型与其参数类型一致。如果这么做了，然后向 Clone2 函数传入类型为 MySlice 的值，函数也会返回一个类型为 MySlice 的结果。</p>
+<p>新函数签名就应该像下面一样。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">Clone2</span><span class="p">[</span><span class="nx">S</span> <span class="err">?</span><span class="p">](</span><span class="nx">s</span> <span class="nx">S</span><span class="p">)</span> <span class="nx">S</span> <span class="c1">// INVALID
+</span></span></span></code></pre></div><p>Clone2 函数返回值的类型与其参数类型一致。</p>
+<p>这里我们将约束定义为 ?，但这只是一个占位符。在 Clone1 函数中，我们使用了一个 any 类型参数，但在 Clone2 函数中，并不适合用 any 类型参数，因为我们需要一个 slice 类型。</p>
+<p>因为我们知道需要一个 slice，S 的约束就必须是一个 slice。我们先不管 slice 的元素类型，先姑且像 Clone1 函数中一样，声明一个类型参数 E。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">Clone3</span><span class="p">[</span><span class="nx">S</span> <span class="p">[]</span><span class="nx">E</span><span class="p">](</span><span class="nx">s</span> <span class="nx">S</span><span class="p">)</span> <span class="nx">S</span> <span class="c1">// INVALID
+</span></span></span></code></pre></div><p>上面的代码依然是无效的，因为我们并没有定义类型参数 E。类型参数 E 可以是任意类型，这也就意味着 E 可以是其本身，因为可以是任意类型，所以 E 的约束应该 any。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">Clone4</span><span class="p">[</span><span class="nx">S</span> <span class="p">[]</span><span class="nx">E</span><span class="p">,</span> <span class="nx">E</span> <span class="nx">any</span><span class="p">](</span><span class="nx">s</span> <span class="nx">S</span><span class="p">)</span> <span class="nx">S</span>
+</span></span></code></pre></div><p>我们已经慢慢接近正确答案了，至少现在是可以编译通过的。如果我们按上述函数声明运行，依然会报一个 error。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">MySlice</span> <span class="nx">does</span> <span class="nx">not</span> <span class="nx">satisfy</span> <span class="p">[]</span><span class="kt">string</span> <span class="p">(</span><span class="nx">possibly</span> <span class="nx">missing</span> <span class="err">~</span> <span class="k">for</span> <span class="p">[]</span><span class="kt">string</span> <span class="nx">in</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span>
+</span></span></code></pre></div><p>编译器告诉我们，我们不能用 MySlice 作为 S 的类型参数，因为 MySlice 并不满足约束 []E。<font color="#0d6efd" style="font-weight: bold;">这是因为 []E 只允许 slice 字面量，不支持 MySlice</font>。</p>
+<h2 id="底层类型约束">底层类型约束<a class="anchor ms-1" href="#底层类型约束"><i class="fas fa-link"></i></a></h2>
+<p>因为上面的错误提示，我们应该加上 ~。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">Clone5</span><span class="p">[</span><span class="nx">S</span> <span class="err">~</span><span class="p">[]</span><span class="nx">E</span><span class="p">,</span> <span class="nx">E</span> <span class="nx">any</span><span class="p">](</span><span class="nx">s</span> <span class="nx">S</span><span class="p">)</span> <span class="nx">S</span>
+</span></span></code></pre></div><p>再次声明，约束 [S []E, E any] 表示<font color="#0d6efd" style="font-weight: bold;">类型参数 S 可以是一个 slice 类型，但不能是一个 slice 的命名类型</font>。将其改成 [S ~[]E, E any]，<font color="#0d6efd" style="font-weight: bold;">则表示 S 可以是任意底层类型是 slice 的任意类型</font>。</p>
+<p>因为 MySlice 的底层类型是一个 string slice，所以我们可以向 Clone5 函数传递类型为 MySlice 的参数。最终，Clone5 函数的签名已经和 slices.Clone 函数的签名一样了。</p>
+<p>在继续之前，我们讨论下为什么 Go 语法需要 ~。就好像我们只需要总是允许传递 MySlice 类型就好了，为什么不使用其默认类型。或者，我们只需要实现精确匹配就好，即用 []E 只匹配 slice 类型字面量。</p>
+<p>为解释这个原因，我们首先<font color="#0d6efd" style="font-weight: bold;">观察到使用 [T ~MySlice] 没有多大意义，因为 MySlice 并不是其它类型的底层类型</font>。比如，我们定义一个类型 MySlice2 MySlice</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">MySlice2</span> <span class="nx">MySlice</span>
+</span></span></code></pre></div><p>但 MySlice2 的底层类型依然是 []string。所以 [T ~MySlice] 的作用与 [T MySlice] 一样，仅仅只约束到了 MySlice 类型的传参。为了消除困惑，所以编译器禁用了这一类使用，不然会报以下的错误</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">invalid use of ~ <span class="o">(</span>underlying <span class="nb">type</span> of MySlice is <span class="o">[]</span>string<span class="o">)</span>
+</span></span></code></pre></div><p>如果 Go 语法中不使用 ~，那么 <font color="#0d6efd" style="font-weight: bold;">[S []E] 将会精确匹配到任意以 []E 作为底层类型的类型，这样我们就不得不定义 [S MySlice] 作为约束</font>。</p>
+<p>Go 语法禁止 [S MySlice]，或者说 [S MySlice] 只能匹配到 MySlice，但是对语言预定义的类型会造成困惑。作为预定义类型的 int，其底层类型依然是 int。我们希望 Go 语言能够能开发者提供精确匹配和定义约束底层类型为 int 的方式，如在程序中使用 [T ~int]。如果我们不使用 ~，<font color="#0d6efd" style="font-weight: bold;">[T int] 不能很好表明要使用底层类型为 int 语义。如果这么做了，那么 [T MySlice] 和 [T int] 的约束行为就会有歧义</font>。</p>
+<p>我们可能会认为 [S MySlice] 匹配任意底层类型为 MySlice 的底层类型的类型，但这样会很困惑。</p>
+<p>所以我们觉得使用 ~ 表明其底层类型会更好一些。</p>
+<h2 id="类型推断">类型推断<a class="anchor ms-1" href="#类型推断"><i class="fas fa-link"></i></a></h2>
+<p>我们已经解释了为什么 slices.Clone 的签名，现在再看看如果在实际中使用 slice.Clone。slices.Clone 的签名如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">Clone</span><span class="p">[</span><span class="nx">S</span> <span class="err">~</span><span class="p">[]</span><span class="nx">E</span><span class="p">,</span> <span class="nx">E</span> <span class="nx">any</span><span class="p">](</span><span class="nx">s</span> <span class="nx">S</span><span class="p">)</span> <span class="nx">S</span>
+</span></span></code></pre></div><p>在调用 slices.Clone 时，需要将一个 slice 传递给参数 s。在类型推断时，<font color="#0d6efd" style="font-weight: bold;">编译器在 slice 传递给 Clone 之前就会推断出类型参数 S 的实际参数类型</font>。类型推断足够强大，即可以确定类型参数 E 是传递给 S 中的元素类型。</p>
+<p>所以我们可以像下面这么写：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">c</span> <span class="o">:=</span> <span class="nf">Clone</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span>
+</span></span></code></pre></div><p>而不需要像下面这么写：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">c</span> <span class="o">:=</span> <span class="nx">Clone</span><span class="p">[</span><span class="nx">MySlice</span><span class="p">,</span> <span class="kt">string</span><span class="p">](</span><span class="nx">ms</span><span class="p">)</span>
+</span></span></code></pre></div><p>如果我们要引用 Clone，而不是直接调用，因为编译器没有任何信息作为推断，所以我们需要指定 S 的类型参数。幸运的是在这个示例中，类型抢断可以从 S 的参数中推断出 E 的类型参数，所以我们不需要依次指定类型参数。</p>
+<p>这就是为什么我们可以像下面这么写：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">myClone</span> <span class="o">:=</span> <span class="nx">Clone</span><span class="p">[</span><span class="nx">MySlice</span><span class="p">]</span>
+</span></span></code></pre></div><p>而不需要像下面这么写：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">myClone</span> <span class="o">:=</span> <span class="nx">Clone</span><span class="p">[</span><span class="nx">MySlice</span><span class="p">,</span> <span class="kt">string</span><span class="p">]</span>
+</span></span></code></pre></div><h2 id="解构类型参数">解构类型参数<a class="anchor ms-1" href="#解构类型参数"><i class="fas fa-link"></i></a></h2>
+<p>我们使用到的技术，即定义一个使用类型参数 E 的类型参数 S，是<font color="#0d6efd" style="font-weight: bold;">一种在泛型函数签名中解构类型的方式</font>。通过解构类型，我们可以命名、约束类型的各个方面。</p>
+<p>比如，maps.Clone 的签名如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">Clone</span><span class="p">[</span><span class="nx">M</span> <span class="err">~</span><span class="kd">map</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span><span class="nx">V</span><span class="p">,</span> <span class="nx">K</span> <span class="nx">comparable</span><span class="p">,</span> <span class="nx">V</span> <span class="nx">any</span><span class="p">](</span><span class="nx">m</span> <span class="nx">M</span><span class="p">)</span> <span class="nx">M</span>
+</span></span></code></pre></div><p>和 slices.Clone 一样，我们使用了类型参数 M 来约束参数 m，然后定义类型参数 K 和 V 用于解构类型。</p>
+<p>在 maps.Clone 中，我们约束 K 必须是可比较型的，这与 map 的 key 的约束一致。也正因为这一特性，我们可以在开发过程中实现对复合类型的解构。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">WithStrings</span><span class="p">[</span><span class="nx">S</span> <span class="err">~</span><span class="p">[]</span><span class="nx">E</span><span class="p">,</span> <span class="nx">E</span> <span class="kd">interface</span> <span class="p">{</span> <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span> <span class="p">}](</span><span class="nx">s</span> <span class="nx">S</span><span class="p">)</span> <span class="p">(</span><span class="nx">S</span><span class="p">,</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span>
+</span></span></code></pre></div><p>上述示例中，我们要求 WithStrings 的参数类型必须是一个元素类型为带 String 方法的 slice。</p>
+<p>因此，我们可以 Go 语言中在复合类型中使用类型推断来推断出其实际类型。</p></div></div>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down" data-fa-transform="rotate-90"></i>
+    <a href="/posts/react/react-hooks-useref-usememo-usecallback/">如何高效地使用 useRef、useMemo 和 useCallback
+</a>
+  </div></div></div>
+</article><div class="post-copyright mb-3 row card component" id="post-copyright">
+    <div class="card-header">
+        <h2 class="card-title">版权</h2>
+    </div>
+    <div class="card-body"><a class="d-flex align-items-center flex-column" target="_blank" rel="license noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">
+  <span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+  CC BY-NC-ND 4.0 
+</a>
+
+
+    </div>
+</div><section class="related-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">相关文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="/posts/react/react-hooks-useref-usememo-usecallback/">如何高效地使用 useRef、useMemo 和 useCallback
+</a>
+          <span class="float-end post-date">2024-01-03
+</span>
+        </li><li>
+          <a href="/posts/go/go-slog-package-translate/">Go slog 标准包功能详细指南
+</a>
+          <span class="float-end post-date">2023-09-03
+</span>
+        </li><li>
+          <a href="/posts/python/how-to-copy-a-file-with-python/">如何使用 Python 复制文件
+</a>
+          <span class="float-end post-date">2023-06-15
+</span>
+        </li><li>
+          <a href="/posts/linux-shell/single-and-double-brackets/">Bash：单括号与双括号的区别
+</a>
+          <span class="float-end post-date">2023-03-23
+</span>
+        </li><li>
+          <a href="/posts/go-slice-usage/">Go Slice 的使用
+</a>
+          <span class="float-end post-date">2022-09-19
+</span>
+        </li></ul>
+    </div>
+  </section><div class="card component row post-comments" id="post-comments">
+  <div class="card-header">
+    <h2 class="card-title">评论</h2>
+  </div>
+  <div class="card-body"><script src="https://utteranc.es/client.js"
+  repo="a2htray/a2htray.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div>
+</div></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container d-flex flex-column">
+    
+    <div class="profile profile-compact card row component">
+  <div class="col-lg-5 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="a2htray" src="/images/profile.jpg" loading="lazy" data-viewer-invisible
+   width="460" height="460"
+   />
+</div>
+  <div class="col-lg-7 profile-meta"><div class="profile-name">a2htray</div><div class="profile-bio">Gopher and Student</div><nav class="social-links nav justify-content-center"><a class="nav-link social-link" href="mailto:a2htray@outlook.com" title="Email">
+      <i class="fas fa-fw fa-2x fa-envelope"></i>
+    </a><a class="nav-link social-link" target="_blank" href="https://github.com/a2htray" title="GitHub" rel="noopener noreferrer">
+        <i class="fa-fw fa-2x fab fa-github"></i>
+      </a><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+</div>
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目录</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#slices-包函数签名">slices 包函数签名</a></li>
+    <li><a href="#简单-clone-实现">简单 Clone 实现</a></li>
+    <li><a href="#更灵活的-clone">更灵活的 Clone</a></li>
+    <li><a href="#底层类型约束">底层类型约束</a></li>
+    <li><a href="#类型推断">类型推断</a></li>
+    <li><a href="#解构类型参数">解构类型参数</a></li>
+  </ul>
+</nav>
+  </div>
+</div><section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="/posts/go/deconstructing-type-in-go-with-a-example/">Go 泛型函数 - 解构类型参数
+</a>
+      </li><li>
+        <a href="/posts/react/react-hooks-useref-usememo-usecallback/">如何高效地使用 useRef、useMemo 和 useCallback
+</a>
+      </li><li>
+        <a href="/posts/go/go-slog-package-translate/">Go slog 标准包功能详细指南
+</a>
+      </li><li>
+        <a href="/posts/python/how-to-copy-a-file-with-python/">如何使用 Python 复制文件
+</a>
+      </li><li>
+        <a href="/posts/diagrams/flowchart/">flowchart.js 学习
+</a>
+      </li><li>
+        <a href="/posts/sorts/r_merge-sort/">递归版本的归并排序 Go &amp; Python 实现
+</a>
+      </li><li>
+        <a href="/posts/pat-basic-level/1046/">PAT 乙级 1046
+</a>
+      </li><li>
+        <a href="/posts/linux-commands/history/">Linux history 命令
+</a>
+      </li><li>
+        <a href="/posts/linux-shell/file-test-operators/">Linux Shell：文件测试比较操作符
+</a>
+      </li><li>
+        <a href="/posts/pat-basic-level/1044/">PAT 乙级 1044
+</a>
+      </li></ul>
+  </div>
+</section><section class="series-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/series">专栏</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/series/redis-%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" class="badge rounded post-taxonomy" title="Redis 命令手册">
+            Redis 命令手册</a></div>
+      </div>
+    </section><section class="categories-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/categories">分类</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/categories/algo/" class="badge rounded post-taxonomy" title="Algo">
+            Algo</a><a href="/categories/go/" class="badge rounded post-taxonomy" title="Go">
+            Go</a><a href="/categories/database/" class="badge rounded post-taxonomy" title="Database">
+            Database</a><a href="/categories/python/" class="badge rounded post-taxonomy" title="Python">
+            Python</a><a href="/categories/om/" class="badge rounded post-taxonomy" title="O&amp;M">
+            O&amp;M</a><a href="/categories/web/" class="badge rounded post-taxonomy" title="Web">
+            Web</a><a href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/" class="badge rounded post-taxonomy" title="可视化">
+            可视化</a><a href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%85%B7/" class="badge rounded post-taxonomy" title="生产工具">
+            生产工具</a><a href="/categories/data-mining/" class="badge rounded post-taxonomy" title="Data Mining">
+            Data Mining</a><a href="/categories/unix/linux/" class="badge rounded post-taxonomy" title="Unix/Linux">
+            Unix/Linux</a><a href="/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="badge rounded post-taxonomy" title="统计学">
+            统计学</a><a href="/categories/react/" class="badge rounded post-taxonomy" title="React">
+            React</a><a href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="badge rounded post-taxonomy" title="数据挖掘">
+            数据挖掘</a><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="badge rounded post-taxonomy" title="机器学习">
+            机器学习</a><a href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="badge rounded post-taxonomy" title="程序设计">
+            程序设计</a></div>
+      </div>
+    </section><section class="tags-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="/tags">标签</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="/tags/pat/" class="badge rounded post-taxonomy" title="PAT">
+            PAT</a><a href="/tags/pat-basic-level/" class="badge rounded post-taxonomy" title="PAT Basic Level">
+            PAT Basic Level</a><a href="/tags/redis/" class="badge rounded post-taxonomy" title="Redis">
+            Redis</a><a href="/tags/%E7%BF%BB%E8%AF%91/" class="badge rounded post-taxonomy" title="翻译">
+            翻译</a><a href="/tags/linux-shell/" class="badge rounded post-taxonomy" title="Linux Shell">
+            Linux Shell</a><a href="/tags/mysql/" class="badge rounded post-taxonomy" title="MySQL">
+            MySQL</a><a href="/tags/pandas/" class="badge rounded post-taxonomy" title="Pandas">
+            Pandas</a><a href="/tags/i/o/" class="badge rounded post-taxonomy" title="I/O">
+            I/O</a><a href="/tags/slice/" class="badge rounded post-taxonomy" title="slice">
+            slice</a><a href="/tags/docker/" class="badge rounded post-taxonomy" title="Docker">
+            Docker</a><a href="/tags/file/" class="badge rounded post-taxonomy" title="file">
+            file</a><a href="/tags/go-flags/" class="badge rounded post-taxonomy" title="go flags">
+            go flags</a><a href="/tags/jobs/" class="badge rounded post-taxonomy" title="jobs">
+            jobs</a><a href="/tags/jq/" class="badge rounded post-taxonomy" title="jq">
+            jq</a><a href="/tags/matplotlib/" class="badge rounded post-taxonomy" title="Matplotlib">
+            Matplotlib</a><a href="/tags/protocol-buffer/" class="badge rounded post-taxonomy" title="protocol buffer">
+            protocol buffer</a><a href="/tags/roadmap/" class="badge rounded post-taxonomy" title="roadmap">
+            roadmap</a><a href="/tags/stackoverflow/" class="badge rounded post-taxonomy" title="Stackoverflow">
+            Stackoverflow</a><a href="/tags/test-operators/" class="badge rounded post-taxonomy" title="Test Operators">
+            Test Operators</a><a href="/tags/%E9%9D%A2%E8%AF%95%E7%BB%8F/" class="badge rounded post-taxonomy" title="面试经">
+            面试经</a><a href="/tags/academic-website/" class="badge rounded post-taxonomy" title="Academic Website">
+            Academic Website</a><a href="/tags/bg/" class="badge rounded post-taxonomy" title="bg">
+            bg</a><a href="/tags/channel/" class="badge rounded post-taxonomy" title="channel">
+            channel</a><a href="/tags/chi-square/" class="badge rounded post-taxonomy" title="Chi-Square">
+            Chi-Square</a><a href="/tags/dataframe/" class="badge rounded post-taxonomy" title="DataFrame">
+            DataFrame</a><a href="/tags/django/" class="badge rounded post-taxonomy" title="Django">
+            Django</a><a href="/tags/docker-compose/" class="badge rounded post-taxonomy" title="Docker Compose">
+            Docker Compose</a><a href="/tags/docker-image/" class="badge rounded post-taxonomy" title="docker image">
+            docker image</a><a href="/tags/fg/" class="badge rounded post-taxonomy" title="fg">
+            fg</a><a href="/tags/flowchart.js/" class="badge rounded post-taxonomy" title="flowchart.js">
+            flowchart.js</a><a href="/tags/gin/" class="badge rounded post-taxonomy" title="Gin">
+            Gin</a><a href="/tags/git/" class="badge rounded post-taxonomy" title="Git">
+            Git</a><a href="/tags/go-1.18/" class="badge rounded post-taxonomy" title="Go 1.18">
+            Go 1.18</a><a href="/tags/go-1.21/" class="badge rounded post-taxonomy" title="Go 1.21">
+            Go 1.21</a><a href="/tags/http/" class="badge rounded post-taxonomy" title="HTTP">
+            HTTP</a><a href="/tags/hugo/" class="badge rounded post-taxonomy" title="Hugo">
+            Hugo</a><a href="/tags/jetbrains/" class="badge rounded post-taxonomy" title="JetBrains">
+            JetBrains</a><a href="/tags/jsonrpc/" class="badge rounded post-taxonomy" title="jsonrpc">
+            jsonrpc</a><a href="/tags/k-means/" class="badge rounded post-taxonomy" title="k-means">
+            k-means</a><a href="/tags/load-balance/" class="badge rounded post-taxonomy" title="Load Balance">
+            Load Balance</a><a href="/tags/log/slog/" class="badge rounded post-taxonomy" title="log/slog">
+            log/slog</a><a href="/tags/logging/" class="badge rounded post-taxonomy" title="logging">
+            logging</a><a href="/tags/map/" class="badge rounded post-taxonomy" title="map">
+            map</a><a href="/tags/nginx/" class="badge rounded post-taxonomy" title="Nginx">
+            Nginx</a><a href="/tags/numpy/" class="badge rounded post-taxonomy" title="NumPy">
+            NumPy</a><a href="/tags/react-hooks/" class="badge rounded post-taxonomy" title="React Hooks">
+            React Hooks</a><a href="/tags/reflect/" class="badge rounded post-taxonomy" title="reflect">
+            reflect</a><a href="/tags/revel/" class="badge rounded post-taxonomy" title="Revel">
+            Revel</a><a href="/tags/rpc/" class="badge rounded post-taxonomy" title="RPC">
+            RPC</a><a href="/tags/scipy/" class="badge rounded post-taxonomy" title="scipy">
+            scipy</a><a href="/tags/series/" class="badge rounded post-taxonomy" title="Series">
+            Series</a><a href="/tags/sklearn/" class="badge rounded post-taxonomy" title="sklearn">
+            sklearn</a><a href="/tags/sqlx/" class="badge rounded post-taxonomy" title="sqlx">
+            sqlx</a><a href="/tags/typescript/" class="badge rounded post-taxonomy" title="TypeScript">
+            TypeScript</a><a href="/tags/web-%E5%AE%89%E5%85%A8/" class="badge rounded post-taxonomy" title="Web 安全">
+            Web 安全</a><a href="/tags/wowchemy/" class="badge rounded post-taxonomy" title="Wowchemy">
+            Wowchemy</a><a href="/tags/xls/" class="badge rounded post-taxonomy" title="xls">
+            xls</a><a href="/tags/%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81/" class="badge rounded post-taxonomy" title="参数验证">
+            参数验证</a><a href="/tags/%E5%8F%8D%E5%B0%84/" class="badge rounded post-taxonomy" title="反射">
+            反射</a><a href="/tags/%E5%A4%A7%E6%95%B0%E9%99%A4%E6%B3%95/" class="badge rounded post-taxonomy" title="大数除法">
+            大数除法</a><a href="/tags/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" class="badge rounded post-taxonomy" title="存储引擎">
+            存储引擎</a><a href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="badge rounded post-taxonomy" title="存储过程">
+            存储过程</a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="badge rounded post-taxonomy" title="学习笔记">
+            学习笔记</a><a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="badge rounded post-taxonomy" title="归并排序">
+            归并排序</a><a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="badge rounded post-taxonomy" title="性能优化">
+            性能优化</a><a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="badge rounded post-taxonomy" title="排序算法">
+            排序算法</a><a href="/tags/%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0/" class="badge rounded post-taxonomy" title="泛型函数">
+            泛型函数</a><a href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" class="badge rounded post-taxonomy" title="流程图">
+            流程图</a><a href="/tags/%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD/" class="badge rounded post-taxonomy" title="类型推断">
+            类型推断</a><a href="/tags/%E9%80%92%E5%BD%92/" class="badge rounded post-taxonomy" title="递归">
+            递归</a></div>
+      </div>
+    </section>
+    
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav justify-content-center mb-2"><a class="nav-link social-link" target="_blank" href="/index.xml" title="RSS" rel="noopener noreferrer">
+    <i class="fas fa-fw fa-2x fa-rss"></i>
+  </a></nav>
+<div class="copyright mb-2">
+  Copyright © 2016-2024 a2htray. All Rights Reserved.
+</div>
+<div class="powered-by mb-2">
+  Powered by <a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a> and the <a href="https://github.com/razonyang/hugo-theme-bootstrap" target="_blank" rel="noopener noreferrer">Bootstrap</a> theme.
+</div>
+
+</footer>
+<script src="/assets/main/bundle.min.620d3d34ad2e850a36ccbe101d50d3aa453007b92daff3739f9f571a2732deeb.js" integrity="sha256-Yg09NK0uhQo2zL4QHVDTqkUwB7ktr/Nzn59XGicy3us=" crossorigin="anonymous" defer></script><script src="/assets/icons/bundle.min.17849018f3f3b1b6bcb22df1fb426d0b6c496d4434266dd0b28bd13b9d6b63aa.js" integrity="sha256-F4SQGPPzsba8si3x&#43;0JtC2xJbUQ0Jm3QsovRO51rY6o=" crossorigin="anonymous" defer></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('\/service-worker.min.js').then(function(reg) {
+      console.log('Successfully registered service worker', reg);
+    }).catch(function(err) {
+      console.warn('Error whilst registering service worker', err);
+    });
+  });
+}
+</script><script src="/assets/viewer/bundle.min.5ad926b46749e67285f66e2fdbc2d7cfb2689e8d9f2fcc2f59c3f51d2a1c4506.js" integrity="sha256-WtkmtGdJ5nKF9m4v28LXz7Jono2fL8wvWcP1HSocRQY=" crossorigin="anonymous" defer></script>
+</body>
+</html>
