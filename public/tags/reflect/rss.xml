@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reflect on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/reflect/</link><description>Recent content in Reflect on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 21 Apr 2022 19:59:01 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/reflect/rss.xml" rel="self" type="application/rss+xml"/><item><title>Go 的反射包 reflect</title><link>https://a2htray.github.io/post/old/go-set-value-via-reflect-package/</link><pubDate>Thu, 21 Apr 2022 19:59:01 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-set-value-via-reflect-package/</guid><description>&lt;p&gt;首先贴上 Go 开发团队对 reflect 包的描述：&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Package reflect implements run-time reflection, allowing a program to manipulate objects with arbitrary types. The typical use is to take a value with static type interface{} and extract its dynamic type information by calling TypeOf, which returns a Type.&lt;/p&gt;
+&lt;p&gt;A call to ValueOf returns a Value representing the run-time data. Zero takes a Type and returns a Value representing a zero value for that type.&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;从描述中，我们得到以下几点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;reflect 包实现了运行时的反射机制，允许程序操作任意类型的对象；&lt;/li&gt;
+&lt;li&gt;TypeOf 可以得到一个 interface{} 的具体类型，ValueOf 可以得到一个 interface{} 的具体值；&lt;/li&gt;
+&lt;/ol&gt;</description></item></channel></rss>

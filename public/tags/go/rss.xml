@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/go/</link><description>Recent content in Go on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 23 Apr 2023 23:38:47 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/go/rss.xml" rel="self" type="application/rss+xml"/><item><title>递归版本的归并排序 Go &amp; Python 实现</title><link>https://a2htray.github.io/post/old/sorts/r_merge-sort/</link><pubDate>Sun, 23 Apr 2023 23:38:47 +0800</pubDate><guid>https://a2htray.github.io/post/old/sorts/r_merge-sort/</guid><description>&lt;p&gt;递归版本的归并排序。&lt;/p&gt;</description></item><item><title>Go flag 自定义选项类型</title><link>https://a2htray.github.io/post/old/go-packages/flag-user-defined-flag-type/</link><pubDate>Thu, 09 Mar 2023 20:38:36 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-packages/flag-user-defined-flag-type/</guid><description>&lt;p&gt;&lt;code&gt;flag&lt;/code&gt; 包定义了一系列函数，可用于定义命令行参数，支持的参数类型如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;string：flag.StringVar 函数&lt;/li&gt;
+&lt;li&gt;bool：flag.BoolVar 函数&lt;/li&gt;
+&lt;li&gt;time.Duration: flag.DurationVar 函数&lt;/li&gt;
+&lt;li&gt;int: flag.IntVar 函数&lt;/li&gt;
+&lt;li&gt;uint: flag.UintVar 函数&lt;/li&gt;
+&lt;li&gt;float64: flag.Float64Var 函数&lt;/li&gt;
+&lt;li&gt;int64: flag.Int64Var 函数&lt;/li&gt;
+&lt;li&gt;uint64: flag.Uint64Var 函数&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Go flag 支持选项简写</title><link>https://a2htray.github.io/post/old/go-packages/flag-shorthand/</link><pubDate>Thu, 09 Mar 2023 20:17:17 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-packages/flag-shorthand/</guid><description>&lt;p&gt;在命令行工具的开发过程中，我们常常需要设置一个同时支持短名称和长名称的选项，如 &lt;code&gt;-d&lt;/code&gt; 等价于 &lt;code&gt;--debug&lt;/code&gt;、&lt;code&gt;-p&lt;/code&gt; 等价于 &lt;code&gt;--password&lt;/code&gt;。在使用 Go flag 包的情况下，该需求的实现相当简单，只需要定义两个不同的 flag 指向同一个变量即可。&lt;/p&gt;</description></item><item><title>Go&amp;MySQL`max_allowed_packet`</title><link>https://a2htray.github.io/post/old/go-max-allowed-packet/</link><pubDate>Sat, 30 Apr 2022 20:25:09 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-max-allowed-packet/</guid><description>&lt;p&gt;当发送给数据库的语句过大时，会报如下错误：&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;panic: Error 1105: Parameter of prepared statement which is &lt;span class="nb"&gt;set&lt;/span&gt; through mysql_send_long_data&lt;span class="o"&gt;()&lt;/span&gt; is longer than &lt;span class="s1"&gt;&amp;#39;max_allowed_packet&amp;#39;&lt;/span&gt; bytes&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;从报错中可知，需要修改 &lt;code&gt;max_allowed_packet&lt;/code&gt; 选项的值。&lt;/p&gt;</description></item><item><title>Redis 的 list 和 stream：异步记录请求信息</title><link>https://a2htray.github.io/post/old/go-redis-request-log-dumper/</link><pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-redis-request-log-dumper/</guid><description>&lt;p&gt;在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。在程序中，可以以同步或异步的方式完成这一需求。同步方式是指请求信息写入日志文件后才返回数据给客户端，异步方式则是在返回数据之前以新线程或进程完成对请求信息的记录。开源的日志包有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href="https://pkg.go.dev/go.uber.org/zap" title="Zap" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Zap
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：出自 Uber 团队，以高性能著称；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/rs/zerolog" title="Zerolog" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Zerolog
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：以易用性著称，支持 7 种日志级别；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/sirupsen/logrus" title="Logrus" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Logrus
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：兼容标准日志包格式，也是本人常用的日志包；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/apex/log" title="apex/log" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ apex/log
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：受 Logrus 启发，简化操作后的 Logrus；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/inconshreveable/log15" title=" Log15" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Log15
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：日志可读性强；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;5 个日志包的详细介绍可以看
+&lt;a href="https://a2htray.github.io/posts/go-five-structured-logging-package/" title="《5 种结构化 Go 日志包对比分析》" &gt;
+ 《5 种结构化 Go 日志包对比分析》
+ 
+&lt;/a&gt;这篇文章。&lt;/p&gt;</description></item><item><title>Protocol Buffer 减少传输数据的大小</title><link>https://a2htray.github.io/post/old/protocol-buffer-reduce-data-size/</link><pubDate>Sat, 09 Apr 2022 15:01:17 +0800</pubDate><guid>https://a2htray.github.io/post/old/protocol-buffer-reduce-data-size/</guid><description>&lt;p&gt;Protocol Buffer 的介绍与语法已在文章
+&lt;a href="https://a2htray.github.io/posts/protocol-buffer-syntax/" title="《Protocol Buffer 语法》" &gt;
+ 《Protocol Buffer 语法》
+ 
+&lt;/a&gt;给出，本文则演示了 Protocol Buffer 如何减少了传输数据的大小。&lt;/p&gt;</description></item><item><title>Protocol Buffer 语法</title><link>https://a2htray.github.io/post/old/protocol-buffer-syntax/</link><pubDate>Fri, 08 Apr 2022 16:33:52 +0800</pubDate><guid>https://a2htray.github.io/post/old/protocol-buffer-syntax/</guid><description>&lt;p&gt;Protocol Buffer（Protobuf） 是一种高效的数据结构序列化的机制，同时也是一种结构化数据的存储格式。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;序列化与反序列化&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;序列化：将数据结构或对象转换成二进制串的过程；&lt;/li&gt;
+&lt;li&gt;反序列化：将序列化后的二进制串转换成数据结构或对象的过程；&lt;/li&gt;
+&lt;/ul&gt;
+
+ &lt;/blockquote&gt;
+&lt;!-- more --&gt;
+&lt;h2 id="语法"&gt;语法
+&lt;a class="header-anchor" href="#%e8%af%ad%e6%b3%95"&gt;&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt; 1&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-2"&gt;&lt;a class="lnlinks" href="#hl-0-2"&gt; 2&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-3"&gt;&lt;a class="lnlinks" href="#hl-0-3"&gt; 3&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-4"&gt;&lt;a class="lnlinks" href="#hl-0-4"&gt; 4&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-5"&gt;&lt;a class="lnlinks" href="#hl-0-5"&gt; 5&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-6"&gt;&lt;a class="lnlinks" href="#hl-0-6"&gt; 6&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-7"&gt;&lt;a class="lnlinks" href="#hl-0-7"&gt; 7&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-8"&gt;&lt;a class="lnlinks" href="#hl-0-8"&gt; 8&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-9"&gt;&lt;a class="lnlinks" href="#hl-0-9"&gt; 9&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-10"&gt;&lt;a class="lnlinks" href="#hl-0-10"&gt; 10&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-11"&gt;&lt;a class="lnlinks" href="#hl-0-11"&gt; 11&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-12"&gt;&lt;a class="lnlinks" href="#hl-0-12"&gt; 12&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-13"&gt;&lt;a class="lnlinks" href="#hl-0-13"&gt; 13&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-14"&gt;&lt;a class="lnlinks" href="#hl-0-14"&gt; 14&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-15"&gt;&lt;a class="lnlinks" href="#hl-0-15"&gt; 15&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-16"&gt;&lt;a class="lnlinks" href="#hl-0-16"&gt; 16&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-17"&gt;&lt;a class="lnlinks" href="#hl-0-17"&gt; 17&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-18"&gt;&lt;a class="lnlinks" href="#hl-0-18"&gt; 18&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-19"&gt;&lt;a class="lnlinks" href="#hl-0-19"&gt; 19&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-20"&gt;&lt;a class="lnlinks" href="#hl-0-20"&gt; 20&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-21"&gt;&lt;a class="lnlinks" href="#hl-0-21"&gt; 21&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-22"&gt;&lt;a class="lnlinks" href="#hl-0-22"&gt; 22&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-23"&gt;&lt;a class="lnlinks" href="#hl-0-23"&gt; 23&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-24"&gt;&lt;a class="lnlinks" href="#hl-0-24"&gt; 24&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-25"&gt;&lt;a class="lnlinks" href="#hl-0-25"&gt; 25&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-26"&gt;&lt;a class="lnlinks" href="#hl-0-26"&gt; 26&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-27"&gt;&lt;a class="lnlinks" href="#hl-0-27"&gt; 27&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-28"&gt;&lt;a class="lnlinks" href="#hl-0-28"&gt; 28&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-29"&gt;&lt;a class="lnlinks" href="#hl-0-29"&gt; 29&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-30"&gt;&lt;a class="lnlinks" href="#hl-0-30"&gt; 30&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-31"&gt;&lt;a class="lnlinks" href="#hl-0-31"&gt; 31&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-32"&gt;&lt;a class="lnlinks" href="#hl-0-32"&gt; 32&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-33"&gt;&lt;a class="lnlinks" href="#hl-0-33"&gt; 33&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-34"&gt;&lt;a class="lnlinks" href="#hl-0-34"&gt; 34&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-35"&gt;&lt;a class="lnlinks" href="#hl-0-35"&gt; 35&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-36"&gt;&lt;a class="lnlinks" href="#hl-0-36"&gt; 36&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-37"&gt;&lt;a class="lnlinks" href="#hl-0-37"&gt; 37&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-38"&gt;&lt;a class="lnlinks" href="#hl-0-38"&gt; 38&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-39"&gt;&lt;a class="lnlinks" href="#hl-0-39"&gt; 39&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-40"&gt;&lt;a class="lnlinks" href="#hl-0-40"&gt; 40&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-41"&gt;&lt;a class="lnlinks" href="#hl-0-41"&gt; 41&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-42"&gt;&lt;a class="lnlinks" href="#hl-0-42"&gt; 42&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-43"&gt;&lt;a class="lnlinks" href="#hl-0-43"&gt; 43&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-44"&gt;&lt;a class="lnlinks" href="#hl-0-44"&gt; 44&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-45"&gt;&lt;a class="lnlinks" href="#hl-0-45"&gt; 45&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-46"&gt;&lt;a class="lnlinks" href="#hl-0-46"&gt; 46&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-47"&gt;&lt;a class="lnlinks" href="#hl-0-47"&gt; 47&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-48"&gt;&lt;a class="lnlinks" href="#hl-0-48"&gt; 48&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-49"&gt;&lt;a class="lnlinks" href="#hl-0-49"&gt; 49&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-50"&gt;&lt;a class="lnlinks" href="#hl-0-50"&gt; 50&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-51"&gt;&lt;a class="lnlinks" href="#hl-0-51"&gt; 51&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-52"&gt;&lt;a class="lnlinks" href="#hl-0-52"&gt; 52&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-53"&gt;&lt;a class="lnlinks" href="#hl-0-53"&gt; 53&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-54"&gt;&lt;a class="lnlinks" href="#hl-0-54"&gt; 54&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-55"&gt;&lt;a class="lnlinks" href="#hl-0-55"&gt; 55&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-56"&gt;&lt;a class="lnlinks" href="#hl-0-56"&gt; 56&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-57"&gt;&lt;a class="lnlinks" href="#hl-0-57"&gt; 57&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-58"&gt;&lt;a class="lnlinks" href="#hl-0-58"&gt; 58&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-59"&gt;&lt;a class="lnlinks" href="#hl-0-59"&gt; 59&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-60"&gt;&lt;a class="lnlinks" href="#hl-0-60"&gt; 60&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-61"&gt;&lt;a class="lnlinks" href="#hl-0-61"&gt; 61&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-62"&gt;&lt;a class="lnlinks" href="#hl-0-62"&gt; 62&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-63"&gt;&lt;a class="lnlinks" href="#hl-0-63"&gt; 63&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-64"&gt;&lt;a class="lnlinks" href="#hl-0-64"&gt; 64&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-65"&gt;&lt;a class="lnlinks" href="#hl-0-65"&gt; 65&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-66"&gt;&lt;a class="lnlinks" href="#hl-0-66"&gt; 66&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-67"&gt;&lt;a class="lnlinks" href="#hl-0-67"&gt; 67&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-68"&gt;&lt;a class="lnlinks" href="#hl-0-68"&gt; 68&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-69"&gt;&lt;a class="lnlinks" href="#hl-0-69"&gt; 69&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-70"&gt;&lt;a class="lnlinks" href="#hl-0-70"&gt; 70&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-71"&gt;&lt;a class="lnlinks" href="#hl-0-71"&gt; 71&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-72"&gt;&lt;a class="lnlinks" href="#hl-0-72"&gt; 72&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-73"&gt;&lt;a class="lnlinks" href="#hl-0-73"&gt; 73&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-74"&gt;&lt;a class="lnlinks" href="#hl-0-74"&gt; 74&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-75"&gt;&lt;a class="lnlinks" href="#hl-0-75"&gt; 75&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-76"&gt;&lt;a class="lnlinks" href="#hl-0-76"&gt; 76&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-77"&gt;&lt;a class="lnlinks" href="#hl-0-77"&gt; 77&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-78"&gt;&lt;a class="lnlinks" href="#hl-0-78"&gt; 78&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-79"&gt;&lt;a class="lnlinks" href="#hl-0-79"&gt; 79&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-80"&gt;&lt;a class="lnlinks" href="#hl-0-80"&gt; 80&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-81"&gt;&lt;a class="lnlinks" href="#hl-0-81"&gt; 81&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-82"&gt;&lt;a class="lnlinks" href="#hl-0-82"&gt; 82&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-83"&gt;&lt;a class="lnlinks" href="#hl-0-83"&gt; 83&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-84"&gt;&lt;a class="lnlinks" href="#hl-0-84"&gt; 84&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-85"&gt;&lt;a class="lnlinks" href="#hl-0-85"&gt; 85&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-86"&gt;&lt;a class="lnlinks" href="#hl-0-86"&gt; 86&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-87"&gt;&lt;a class="lnlinks" href="#hl-0-87"&gt; 87&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-88"&gt;&lt;a class="lnlinks" href="#hl-0-88"&gt; 88&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-89"&gt;&lt;a class="lnlinks" href="#hl-0-89"&gt; 89&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-90"&gt;&lt;a class="lnlinks" href="#hl-0-90"&gt; 90&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-91"&gt;&lt;a class="lnlinks" href="#hl-0-91"&gt; 91&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-92"&gt;&lt;a class="lnlinks" href="#hl-0-92"&gt; 92&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-93"&gt;&lt;a class="lnlinks" href="#hl-0-93"&gt; 93&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-94"&gt;&lt;a class="lnlinks" href="#hl-0-94"&gt; 94&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-95"&gt;&lt;a class="lnlinks" href="#hl-0-95"&gt; 95&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-96"&gt;&lt;a class="lnlinks" href="#hl-0-96"&gt; 96&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-97"&gt;&lt;a class="lnlinks" href="#hl-0-97"&gt; 97&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-98"&gt;&lt;a class="lnlinks" href="#hl-0-98"&gt; 98&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-99"&gt;&lt;a class="lnlinks" href="#hl-0-99"&gt; 99&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-100"&gt;&lt;a class="lnlinks" href="#hl-0-100"&gt;100&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-101"&gt;&lt;a class="lnlinks" href="#hl-0-101"&gt;101&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-102"&gt;&lt;a class="lnlinks" href="#hl-0-102"&gt;102&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-103"&gt;&lt;a class="lnlinks" href="#hl-0-103"&gt;103&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-104"&gt;&lt;a class="lnlinks" href="#hl-0-104"&gt;104&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-105"&gt;&lt;a class="lnlinks" href="#hl-0-105"&gt;105&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-106"&gt;&lt;a class="lnlinks" href="#hl-0-106"&gt;106&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-107"&gt;&lt;a class="lnlinks" href="#hl-0-107"&gt;107&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-108"&gt;&lt;a class="lnlinks" href="#hl-0-108"&gt;108&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-109"&gt;&lt;a class="lnlinks" href="#hl-0-109"&gt;109&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-110"&gt;&lt;a class="lnlinks" href="#hl-0-110"&gt;110&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-111"&gt;&lt;a class="lnlinks" href="#hl-0-111"&gt;111&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-112"&gt;&lt;a class="lnlinks" href="#hl-0-112"&gt;112&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-113"&gt;&lt;a class="lnlinks" href="#hl-0-113"&gt;113&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-114"&gt;&lt;a class="lnlinks" href="#hl-0-114"&gt;114&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-115"&gt;&lt;a class="lnlinks" href="#hl-0-115"&gt;115&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-116"&gt;&lt;a class="lnlinks" href="#hl-0-116"&gt;116&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-117"&gt;&lt;a class="lnlinks" href="#hl-0-117"&gt;117&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-118"&gt;&lt;a class="lnlinks" href="#hl-0-118"&gt;118&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-119"&gt;&lt;a class="lnlinks" href="#hl-0-119"&gt;119&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-120"&gt;&lt;a class="lnlinks" href="#hl-0-120"&gt;120&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-121"&gt;&lt;a class="lnlinks" href="#hl-0-121"&gt;121&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-122"&gt;&lt;a class="lnlinks" href="#hl-0-122"&gt;122&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-123"&gt;&lt;a class="lnlinks" href="#hl-0-123"&gt;123&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-124"&gt;&lt;a class="lnlinks" href="#hl-0-124"&gt;124&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-125"&gt;&lt;a class="lnlinks" href="#hl-0-125"&gt;125&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-126"&gt;&lt;a class="lnlinks" href="#hl-0-126"&gt;126&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-127"&gt;&lt;a class="lnlinks" href="#hl-0-127"&gt;127&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-128"&gt;&lt;a class="lnlinks" href="#hl-0-128"&gt;128&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-129"&gt;&lt;a class="lnlinks" href="#hl-0-129"&gt;129&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-130"&gt;&lt;a class="lnlinks" href="#hl-0-130"&gt;130&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-131"&gt;&lt;a class="lnlinks" href="#hl-0-131"&gt;131&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-132"&gt;&lt;a class="lnlinks" href="#hl-0-132"&gt;132&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-133"&gt;&lt;a class="lnlinks" href="#hl-0-133"&gt;133&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-134"&gt;&lt;a class="lnlinks" href="#hl-0-134"&gt;134&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-135"&gt;&lt;a class="lnlinks" href="#hl-0-135"&gt;135&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-136"&gt;&lt;a class="lnlinks" href="#hl-0-136"&gt;136&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-137"&gt;&lt;a class="lnlinks" href="#hl-0-137"&gt;137&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-138"&gt;&lt;a class="lnlinks" href="#hl-0-138"&gt;138&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-139"&gt;&lt;a class="lnlinks" href="#hl-0-139"&gt;139&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-140"&gt;&lt;a class="lnlinks" href="#hl-0-140"&gt;140&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-141"&gt;&lt;a class="lnlinks" href="#hl-0-141"&gt;141&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-142"&gt;&lt;a class="lnlinks" href="#hl-0-142"&gt;142&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-143"&gt;&lt;a class="lnlinks" href="#hl-0-143"&gt;143&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-144"&gt;&lt;a class="lnlinks" href="#hl-0-144"&gt;144&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-145"&gt;&lt;a class="lnlinks" href="#hl-0-145"&gt;145&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-146"&gt;&lt;a class="lnlinks" href="#hl-0-146"&gt;146&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-147"&gt;&lt;a class="lnlinks" href="#hl-0-147"&gt;147&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-148"&gt;&lt;a class="lnlinks" href="#hl-0-148"&gt;148&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-149"&gt;&lt;a class="lnlinks" href="#hl-0-149"&gt;149&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-150"&gt;&lt;a class="lnlinks" href="#hl-0-150"&gt;150&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-151"&gt;&lt;a class="lnlinks" href="#hl-0-151"&gt;151&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-152"&gt;&lt;a class="lnlinks" href="#hl-0-152"&gt;152&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-153"&gt;&lt;a class="lnlinks" href="#hl-0-153"&gt;153&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-154"&gt;&lt;a class="lnlinks" href="#hl-0-154"&gt;154&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-155"&gt;&lt;a class="lnlinks" href="#hl-0-155"&gt;155&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-156"&gt;&lt;a class="lnlinks" href="#hl-0-156"&gt;156&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-157"&gt;&lt;a class="lnlinks" href="#hl-0-157"&gt;157&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-158"&gt;&lt;a class="lnlinks" href="#hl-0-158"&gt;158&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-159"&gt;&lt;a class="lnlinks" href="#hl-0-159"&gt;159&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-160"&gt;&lt;a class="lnlinks" href="#hl-0-160"&gt;160&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-161"&gt;&lt;a class="lnlinks" href="#hl-0-161"&gt;161&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-162"&gt;&lt;a class="lnlinks" href="#hl-0-162"&gt;162&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-163"&gt;&lt;a class="lnlinks" href="#hl-0-163"&gt;163&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-164"&gt;&lt;a class="lnlinks" href="#hl-0-164"&gt;164&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-165"&gt;&lt;a class="lnlinks" href="#hl-0-165"&gt;165&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-166"&gt;&lt;a class="lnlinks" href="#hl-0-166"&gt;166&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-167"&gt;&lt;a class="lnlinks" href="#hl-0-167"&gt;167&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-168"&gt;&lt;a class="lnlinks" href="#hl-0-168"&gt;168&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-169"&gt;&lt;a class="lnlinks" href="#hl-0-169"&gt;169&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-170"&gt;&lt;a class="lnlinks" href="#hl-0-170"&gt;170&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-171"&gt;&lt;a class="lnlinks" href="#hl-0-171"&gt;171&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-172"&gt;&lt;a class="lnlinks" href="#hl-0-172"&gt;172&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-173"&gt;&lt;a class="lnlinks" href="#hl-0-173"&gt;173&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-174"&gt;&lt;a class="lnlinks" href="#hl-0-174"&gt;174&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-175"&gt;&lt;a class="lnlinks" href="#hl-0-175"&gt;175&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-176"&gt;&lt;a class="lnlinks" href="#hl-0-176"&gt;176&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-177"&gt;&lt;a class="lnlinks" href="#hl-0-177"&gt;177&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-178"&gt;&lt;a class="lnlinks" href="#hl-0-178"&gt;178&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-179"&gt;&lt;a class="lnlinks" href="#hl-0-179"&gt;179&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-180"&gt;&lt;a class="lnlinks" href="#hl-0-180"&gt;180&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-181"&gt;&lt;a class="lnlinks" href="#hl-0-181"&gt;181&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-182"&gt;&lt;a class="lnlinks" href="#hl-0-182"&gt;182&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-183"&gt;&lt;a class="lnlinks" href="#hl-0-183"&gt;183&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-184"&gt;&lt;a class="lnlinks" href="#hl-0-184"&gt;184&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-185"&gt;&lt;a class="lnlinks" href="#hl-0-185"&gt;185&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-186"&gt;&lt;a class="lnlinks" href="#hl-0-186"&gt;186&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-187"&gt;&lt;a class="lnlinks" href="#hl-0-187"&gt;187&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-protobuf" data-lang="protobuf"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 语法
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 指定 Protobuf 解析使用的版本，可以是 proto3 或 proto2
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="n"&gt;syntax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;proto3&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* message 定义中的每一个字段都有一个唯一标识，该标识用于在二进制格式中识别字段
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 字段的标识一旦使用就不要进行修改
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 当标识为 1 到 15 时，使用一个字节进行编码，字节信息中包含字段的标识以及类型
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 当标识为 16 到 2047 时，使用两个字节进行编码
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* Field numbers in the range 16 through 2047 take two bytes. So you should reserve the numbers 1 through 15 for very frequently occurring message elements.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 在编码的过程中，标识使用应当留有余地，便于将来扩展
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 标识最小的值是 1，最大的值为 2^29-1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 不能使用的标识为 19000 到 19999
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 不能再使用已经被 reserved 的标识
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;定义 message 的语法：
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; message ${MessageName} {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; ${Scalar Value Type} ${FieldName1} = ${Tag Number1};
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; .
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; .
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; .
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; ${Scalar Value Type} ${FieldNameN} = ${Tag NumberN};
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;MessageTypes&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * 标量值类型
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; */&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;stringType&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 字符串可以是 UTF-8 编码，也可以是一个 7 比特的 ASCII 字符，默认为“”
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="c1"&gt;// 数值类型，默认为 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="kt"&gt;int32&lt;/span&gt; &lt;span class="n"&gt;int32Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 使用变量长度进行编码，如果是负数，请使用 sint32
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="kt"&gt;int64&lt;/span&gt; &lt;span class="n"&gt;int64Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 使用变量长度进行编码，如果是负数，请使用 sint64
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="kt"&gt;uint32&lt;/span&gt; &lt;span class="n"&gt;uInt32Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 使用变量长度进行编码
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="kt"&gt;uint64&lt;/span&gt; &lt;span class="n"&gt;uInt64Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 使用变量长度进行编码
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="kt"&gt;sint32&lt;/span&gt; &lt;span class="n"&gt;sInt32Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 使用变量长度进行编码，处理负数更高效
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="kt"&gt;sint64&lt;/span&gt; &lt;span class="n"&gt;sInt64Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 使用变量长度进行编码，处理负数更高效
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;fixed32&lt;/span&gt; &lt;span class="n"&gt;fixed32Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 变量总是占 4 个字节，当值大于 2^28 时，比使用 uint32 更有效率
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="kt"&gt;fixed64&lt;/span&gt; &lt;span class="n"&gt;fixed64Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 变量总是占 8 个字节，当值大于 2^56 时，比使用 uint64 更有效率
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;sfixed32&lt;/span&gt; &lt;span class="n"&gt;sfixed32Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 变量总是占 4 个字节
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="kt"&gt;sfixed64&lt;/span&gt; &lt;span class="n"&gt;sfixed64Type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 变量总是占 8 个字节
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;boolType&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 布尔类型，默认为 false
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;bytesType&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 可包含任意长度的字节数组，默认为长度为 0 的字节数组
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;doubleType&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;floatType&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kd"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;Week&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;UNDEFINED&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 第 1 个值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="n"&gt;SUNDAY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;MONDAY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;TUESDAY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;WEDNESDAY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;THURSDAY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;FRIDAY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;SATURDAY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;Week&lt;/span&gt; &lt;span class="n"&gt;wkDayType&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * 定义标量值类型的集合
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * Syntax: repeated ${ScalarType} ${name} = TagValue
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; */&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="k"&gt;repeated&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;listOfString&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// List[String]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 在其它 message 中使用已定义的 message
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;Person&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;fname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;sname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;City&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;Person&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 嵌套的 message 定义
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;NestedMessages&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;FirstLevelNestedMessage&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;firstString&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;SecondLevelNestedMessage&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;secondString&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;FirstLevelNestedMessage&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;FirstLevelNestedMessage.SecondLevelNestedMessage&lt;/span&gt; &lt;span class="n"&gt;msg2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* .proto 文件的引入
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="c1"&gt;// one.proto
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// message One {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// string oneMsg = 1;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="c1"&gt;// two.proto
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// import &amp;#34;myproject/one.proto&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// message Two {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// string twoMsg = 2;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 高级知识点
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* message 发生改变时，永远不要修改或使用已经删除字段的标识
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 使用 reserved 保留已删除的标识或字段名
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;ReservedMessage&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;reserved&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 这里的标识不可再使用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="n"&gt;reserved&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;firstMsg&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;secondMsg&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;thirdMsg&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 这里的字段名不可再使用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 引用其它文件中定义的 message
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;google/protobuf/any.proto&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;AnySampleMessage&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="k"&gt;repeated&lt;/span&gt; &lt;span class="n"&gt;google.protobuf.Any.details&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* OneOf
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 相同于 union，只能是其中一个
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 使用 oneof 的 message 不能被 repeated
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;OneOfMessage&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="k"&gt;oneof&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;fname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;sname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* Maps
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* map 字段不能被 repeated
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;MessageWithMaps&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;mapOfMessages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* Packages
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 声明一个包名，防止同名的 message
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 语法:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; package ${packageName};
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; 访问方式
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; ${packageName}.${messageName} = ${tagNumber};
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;* 在 RPC 系统中使用，其中可以定义方法
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt;*/&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;SearchRequest&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;queryString&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;message&lt;/span&gt; &lt;span class="nc"&gt;SearchResponse&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="n"&gt;queryResponse&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="kd"&gt;service&lt;/span&gt; &lt;span class="n"&gt;SearchService&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt; &lt;span class="k"&gt;rpc&lt;/span&gt; &lt;span class="n"&gt;Search&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SearchRequest&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;returns&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SearchResponse&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id="数据类型"&gt;数据类型
+&lt;a class="header-anchor" href="#%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b"&gt;&lt;/a&gt;
+&lt;/h3&gt;&lt;p&gt;Protobuf 内置的数据类型以及在 Go 中对应的数据类型：&lt;/p&gt;</description></item></channel></rss>

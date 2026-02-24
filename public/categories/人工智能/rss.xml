@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>人工智能 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link><description>Recent content in 人工智能 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 13 Feb 2026 09:30:18 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/rss.xml" rel="self" type="application/rss+xml"/><item><title>构建 MCP 服务端</title><link>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</link><pubDate>Fri, 13 Feb 2026 09:30:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</guid><description>&lt;ul&gt;
+&lt;li&gt;学习来源：
+&lt;a href="https://modelcontextprotocol.io/docs/develop/build-server" title="https://modelcontextprotocol.io/docs/develop/build-server" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://modelcontextprotocol.io/docs/develop/build-server
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;目标：构建一个“天气查询”的 MCP Server&lt;/li&gt;
+&lt;li&gt;编程语言：Python&lt;/li&gt;
+&lt;li&gt;天气接口文档：
+&lt;a href="https://uapis.cn/docs/api-reference/get-misc-weather" title="https://uapis.cn/docs/api-reference/get-misc-weather" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://uapis.cn/docs/api-reference/get-misc-weather
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="前提条件"&gt;前提条件
+&lt;a class="header-anchor" href="#%e5%89%8d%e6%8f%90%e6%9d%a1%e4%bb%b6"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Python 的开发环境&lt;/li&gt;
+&lt;li&gt;MCP 主机（我使用的是 Cherry Studio）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="注意事项"&gt;注意事项
+&lt;a class="header-anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;根据实现的 MCP Server 的类型不同，做日志功能时需要注意：&lt;/p&gt;</description></item><item><title>MCP：服务器和客户端</title><link>https://a2htray.github.io/post/learn-mcp/server-and-client/</link><pubDate>Thu, 05 Feb 2026 16:06:49 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/server-and-client/</guid><description>&lt;p&gt;本文继续做官方文档的学习和摘录，在服务器和客户端这一块，理解有效，有些翻译甚至有些勉强。&lt;/p&gt;
+&lt;p&gt;学习来源：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href="https://modelcontextprotocol.io/docs/learn/server-concepts" title="https://modelcontextprotocol.io/docs/learn/server-concepts" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://modelcontextprotocol.io/docs/learn/server-concepts
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://modelcontextprotocol.io/docs/learn/client-concepts" title="https://modelcontextprotocol.io/docs/learn/client-concepts" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://modelcontextprotocol.io/docs/learn/client-concepts
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="服务端"&gt;服务端
+&lt;a class="header-anchor" href="#%e6%9c%8d%e5%8a%a1%e7%ab%af"&gt;&lt;/a&gt;
+&lt;/h2&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;MCP servers are programs that expose specific capabilities to AI applications through standardized protocol interfaces.&lt;/p&gt;</description></item><item><title>MCP：基础概念</title><link>https://a2htray.github.io/post/learn-mcp/basic-mcp/</link><pubDate>Thu, 29 Jan 2026 15:01:42 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/basic-mcp/</guid><description>&lt;p&gt;做项目要用到 MCP，所以对官方的文档进行学习及摘录，不然做出的东西一知半解，不深入。&lt;/p&gt;
+&lt;p&gt;学习来源：
+&lt;a href="https://modelcontextprotocol.io" title="https://modelcontextprotocol.io" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://modelcontextprotocol.io
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="什么是-mcp"&gt;什么是 MCP
+&lt;a class="header-anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af-mcp"&gt;&lt;/a&gt;
+&lt;/h2&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems.&lt;/p&gt;</description></item><item><title>自然语言处理介绍</title><link>https://a2htray.github.io/post/natural-language-processing-fundamentals/chapter-01-introduction-to-natural-language-processing/</link><pubDate>Thu, 15 Jan 2026 15:01:00 +0800</pubDate><guid>https://a2htray.github.io/post/natural-language-processing-fundamentals/chapter-01-introduction-to-natural-language-processing/</guid><description>&lt;p&gt;目标：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;能够介绍“什么是 NLP”&lt;/li&gt;
+&lt;li&gt;学习 NLP 的历史&lt;/li&gt;
+&lt;li&gt;NLP 与文本分析的区别&lt;/li&gt;
+&lt;li&gt;实现特定处理工作&lt;/li&gt;
+&lt;li&gt;NLP 工程的不同阶段&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="nlp"&gt;NLP
+&lt;a class="header-anchor" href="#nlp"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;自然语言处理（NLP）是一个与多个学科交叉的领域，它脱胎于人工智能、语言学、形式语言及编译器等学科。&lt;/p&gt;</description></item></channel></rss>

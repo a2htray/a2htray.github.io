@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>翻译 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E7%BF%BB%E8%AF%91/</link><description>Recent content in 翻译 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 07 Jan 2024 14:41:11 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E7%BF%BB%E8%AF%91/rss.xml" rel="self" type="application/rss+xml"/><item><title>Go 泛型函数 - 解构类型参数</title><link>https://a2htray.github.io/post/old/go/deconstructing-type-in-go-with-a-example/</link><pubDate>Sun, 07 Jan 2024 14:41:11 +0800</pubDate><guid>https://a2htray.github.io/post/old/go/deconstructing-type-in-go-with-a-example/</guid><description>&lt;p&gt;原文地址：
+&lt;a href="https://go.dev/blog/deconstructing-type-parameters" title="https://go.dev/blog/deconstructing-type-parameters" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://go.dev/blog/deconstructing-type-parameters
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;译者评论&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用&lt;font color="#0d6efd" style="font-weight: bold;"&gt;类型推断&lt;/font&gt;完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 &lt;font color="#0d6efd" style="font-weight: bold;"&gt;~ 符号&lt;/font&gt;，即用于指定类型的底层类型。&lt;/p&gt;</description></item><item><title>如何高效地使用 useRef、useMemo 和 useCallback</title><link>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</link><pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</guid><description>&lt;p&gt;这是一篇关于 React Hooks 的技术文章翻译，原文地址：
+
+&lt;a href="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" title="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;，翻译不当之处请指正。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;译者评价&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;文章主要介绍了 useRef、useMemo 和 useCallback 3 个 React Hook，读者可以通过此文了解 3 种 Hook 的使用方式、场景，但文章也存在一些缺点：&lt;/p&gt;</description></item><item><title>Go slog 标准包功能详细指南</title><link>https://a2htray.github.io/post/old/go/go-slog-package-translate/</link><pubDate>Sun, 03 Sep 2023 16:51:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/go/go-slog-package-translate/</guid><description>&lt;p&gt;在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。&lt;/p&gt;
+&lt;p&gt;原文地址：
+&lt;a href="https://betterstack.com/community/guides/logging/logging-in-go/" title="https://betterstack.com/community/guides/logging/logging-in-go/" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://betterstack.com/community/guides/logging/logging-in-go/
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;</description></item><item><title>如何使用 Python 复制文件</title><link>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</link><pubDate>Thu, 15 Jun 2023 20:44:17 +0800</pubDate><guid>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</guid><description>&lt;p&gt;
+&lt;a href="https://builtin.com/data-science/copy-a-file-with-python" title="原文 How to Copy a File With Python" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 原文 How to Copy a File With Python
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Python 的 shutil 模块提供了 4 种复制文件的方法，根据你的实际情况选择合适的方法。或许，本文的内容可能帮助到你。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;  在每天的软件开发过程中，通过程序复制文件是一项平常的工作任务。我们将学习 Python &lt;code&gt;shutil&lt;/code&gt; 模块提供的 4 种方法来完成文件复制，包括：&lt;/p&gt;</description></item><item><title>Bash：单括号与双括号的区别</title><link>https://a2htray.github.io/post/old/linux-shell/single-and-double-brackets/</link><pubDate>Thu, 23 Mar 2023 22:47:16 +0800</pubDate><guid>https://a2htray.github.io/post/old/linux-shell/single-and-double-brackets/</guid><description>&lt;p&gt;
+&lt;a href="https://www.baeldung.com/linux/bash-single-vs-double-brackets" title="原文：Differences Between Single and Double Brackets in Bash" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 原文：Differences Between Single and Double Brackets in Bash
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="概述"&gt;概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;当我们在 Bash 中做变量比较时，通常可以交换地使用单括号 &lt;code&gt;[]&lt;/code&gt; 和双括号 &lt;code&gt;[[]]&lt;/code&gt;。比如，我们可以使用表达式 &lt;code&gt;[ 3 -eq 3 ]&lt;/code&gt; 或 &lt;code&gt;[[ 3 -eq 3 ]]&lt;/code&gt; 来比较 &lt;code&gt;3&lt;/code&gt; 是否等于 &lt;code&gt;3&lt;/code&gt;。两个表达式都会执行成功，那两者的区别是什么呢？&lt;/p&gt;
+&lt;p&gt;在本文中，我们会讨论单括号和双括号之间的一些区别。&lt;/p&gt;</description></item><item><title>Go Slice 的使用</title><link>https://a2htray.github.io/post/old/go-slice-usage/</link><pubDate>Mon, 19 Sep 2022 23:33:58 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-slice-usage/</guid><description>&lt;p&gt;原文：
+&lt;a href="https://yourbasic.org/golang/slices-explained/" title="Slices/arrays explained: create, index, slice, iterate" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Slices/arrays explained: create, index, slice, iterate
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Go 的错误处理</title><link>https://a2htray.github.io/post/old/go-error-handling/</link><pubDate>Mon, 22 Aug 2022 23:40:01 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-error-handling/</guid><description>&lt;p&gt;原文：
+&lt;a href="https://go.dev/blog/error-handling-and-go" title="Error handling and Go" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Error handling and Go
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="介绍"&gt;介绍
+&lt;a class="header-anchor" href="#%e4%bb%8b%e7%bb%8d"&gt;&lt;/a&gt;
+&lt;/h1&gt;&lt;p&gt;如果你写过 Go 的代码，就一定遇到过 Go 的内置类型 error。一个 error 类型的值可用于指明程序的某种不正常的状态，比如，当打开文件失败时，os.Open 函数会返回一个非 nil 的 error 值。&lt;/p&gt;</description></item></channel></rss>

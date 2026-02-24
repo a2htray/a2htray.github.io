@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JSON 类型 on 快乐冲浪与生活</title><link>http://localhost:1313/tags/json-%E7%B1%BB%E5%9E%8B/</link><description>Recent content in JSON 类型 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 13 Apr 2022 10:51:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/json-%E7%B1%BB%E5%9E%8B/rss.xml" rel="self" type="application/rss+xml"/><item><title>PostgreSQL JSON 类型字段</title><link>http://localhost:1313/post/old/postgresql-column-type-json/</link><pubDate>Wed, 13 Apr 2022 10:51:09 +0800</pubDate><guid>http://localhost:1313/post/old/postgresql-column-type-json/</guid><description>&lt;p&gt;JSON 类型是 PostgreSQL 9.2 加的数据类型，&lt;/p&gt;
+&lt;p&gt;环境：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PostgreSQL&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;version&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-1-1"&gt;&lt;a class="lnlinks" href="#hl-1-1"&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;PostgreSQL 9.5.24, compiled by Visual C++ build 1800, 64-bit&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id="jsonb-类型"&gt;JSONB 类型
+&lt;a class="header-anchor" href="#jsonb-%e7%b1%bb%e5%9e%8b"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;PostgreSQL 9.4 支持存储 JSON 的二进制格式（Binary JSON，JSONB）&lt;/p&gt;
+&lt;h3 id="索引"&gt;索引
+&lt;a class="header-anchor" href="#%e7%b4%a2%e5%bc%95"&gt;&lt;/a&gt;
+&lt;/h3&gt;&lt;p&gt;PostgreSQL 支持对 JSONB 类型字段创建索引，可以加速数据的查询，通过下方示例加以说明。&lt;/p&gt;</description></item></channel></rss>

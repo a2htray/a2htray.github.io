@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sqlx on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/sqlx/</link><description>Recent content in Sqlx on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 11 May 2022 13:49:39 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/sqlx/rss.xml" rel="self" type="application/rss+xml"/><item><title>SQL 转义问题</title><link>https://a2htray.github.io/post/old/go-sql-escape/</link><pubDate>Wed, 11 May 2022 13:49:39 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-sql-escape/</guid><description>&lt;p&gt;SQL 转义问题是指执行的 SQL 语句中包含了某些特定的字符，如单引号 &lt;code&gt;'&lt;/code&gt;、反斜杠 &lt;code&gt;\&lt;/code&gt; 等，导致 SQL 语句不能正常执行。所以，我们应该在拼接 SQL 语句的过程中对特别的传入参数进行转义。&lt;/p&gt;
+&lt;p&gt;环境信息：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;MySQL 8.0.28；&lt;/li&gt;
+&lt;li&gt;Go 1.16.9 windows/amd64&lt;/li&gt;
+&lt;/ol&gt;</description></item></channel></rss>

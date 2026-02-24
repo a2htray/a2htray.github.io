@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>技术笔记 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/</link><description>Recent content in 技术笔记 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 15 Jan 2026 15:01:00 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/rss.xml" rel="self" type="application/rss+xml"/><item><title>自然语言处理介绍</title><link>https://a2htray.github.io/post/natural-language-processing-fundamentals/chapter-01-introduction-to-natural-language-processing/</link><pubDate>Thu, 15 Jan 2026 15:01:00 +0800</pubDate><guid>https://a2htray.github.io/post/natural-language-processing-fundamentals/chapter-01-introduction-to-natural-language-processing/</guid><description>&lt;p&gt;目标：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;能够介绍“什么是 NLP”&lt;/li&gt;
+&lt;li&gt;学习 NLP 的历史&lt;/li&gt;
+&lt;li&gt;NLP 与文本分析的区别&lt;/li&gt;
+&lt;li&gt;实现特定处理工作&lt;/li&gt;
+&lt;li&gt;NLP 工程的不同阶段&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="nlp"&gt;NLP
+&lt;a class="header-anchor" href="#nlp"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;自然语言处理（NLP）是一个与多个学科交叉的领域，它脱胎于人工智能、语言学、形式语言及编译器等学科。&lt;/p&gt;</description></item></channel></rss>

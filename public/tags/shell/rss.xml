@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Shell on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/shell/</link><description>Recent content in Shell on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 10 Dec 2025 09:19:39 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/shell/rss.xml" rel="self" type="application/rss+xml"/><item><title>详解：如何将一个大的结构化（CSV）数据导入到 MySQL</title><link>https://a2htray.github.io/post/how-to-load-big-csv-file-into-mysql/</link><pubDate>Wed, 10 Dec 2025 09:19:39 +0800</pubDate><guid>https://a2htray.github.io/post/how-to-load-big-csv-file-into-mysql/</guid><description>&lt;h2 id="实际需求"&gt;实际需求
+&lt;a class="header-anchor" href="#%e5%ae%9e%e9%99%85%e9%9c%80%e6%b1%82"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;昨天领了一个任务，把一个大文件数据导入到 MySQL，文件以 CSV 格式给出，内容是收集的 600 多万条的文献信息。&lt;/p&gt;
+&lt;p&gt;接到时，我觉得很简单，实现思路是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;（前置）部署一个 MySQL 的服务&lt;/li&gt;
+&lt;li&gt;根据 CSV 的表头信息，创建一个表&lt;/li&gt;
+&lt;li&gt;将大文件拆成多个小文件，小文件包含表头信息&lt;/li&gt;
+&lt;li&gt;遍历所有小文件，应用 &lt;code&gt;LOAD DATA INFILE&lt;/code&gt; 语句进行导入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为了让整个过程更好追踪，还加入&lt;code&gt;小文件导入日志&lt;/code&gt;和&lt;code&gt;汇总主日志&lt;/code&gt;的功能。因为是一个即时的任务，并不需要考虑太多后期的扩展，所以采用 &lt;code&gt;Shell&lt;/code&gt; 脚本
+的方式实现。&lt;/p&gt;</description></item></channel></rss>

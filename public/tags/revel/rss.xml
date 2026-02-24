@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Revel on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/revel/</link><description>Recent content in Revel on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 31 Mar 2022 10:40:58 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/revel/rss.xml" rel="self" type="application/rss+xml"/><item><title>Go 1.16 运行 Revel 项目</title><link>https://a2htray.github.io/post/old/go-revel-run-require-packages/</link><pubDate>Thu, 31 Mar 2022 10:40:58 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-revel-run-require-packages/</guid><description>&lt;p&gt;
+&lt;a href="http://revel.github.io/" title="Revel" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Revel
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt; 是一个以高效率、高性能著称的 Go Web 框架，提供了路由、参数解析和验证、会话机制、模板机制、缓存和任务管理等诸多常用的 Web 开发功能。同时作为一个全栈的 MVC 框架， Revel 通过模块实现了组件的复用，因此可以大大提高开发者的效率。其高性能则是依托 Go 语言的性能，相信这个不必多说。但相较于其它职责相对单一的 Web 框架（如 Gin、go-restful），Revel 只能说是在保证性能的基础上尽可能地对开发者友好。&lt;/p&gt;</description></item></channel></rss>

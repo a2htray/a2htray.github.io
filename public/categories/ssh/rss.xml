@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SSH on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/ssh/</link><description>Recent content in SSH on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Dec 2025 15:06:39 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/ssh/rss.xml" rel="self" type="application/rss+xml"/><item><title>3 种使用密钥文件连接 SSH 服务的场景</title><link>https://a2htray.github.io/post/three-ways-to-connect-ssh-server-with-the-key-file/</link><pubDate>Thu, 11 Dec 2025 15:06:39 +0800</pubDate><guid>https://a2htray.github.io/post/three-ways-to-connect-ssh-server-with-the-key-file/</guid><description>&lt;p&gt;SSH 服务除了可以通过用户名和密码登录之外，还可以使用密钥文件进行登录。&lt;/p&gt;
+&lt;p&gt;本文列举 3 种我使用密钥文件的场景。假设我的密钥的放在：&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./.ssh/xxx.pem&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id="终端命令-ssh"&gt;终端命令 ssh
+&lt;a class="header-anchor" href="#%e7%bb%88%e7%ab%af%e5%91%bd%e4%bb%a4-ssh"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;在终端的场景下，直接使用 &lt;code&gt;-i&lt;/code&gt; 参数，指定密钥文件即可。&lt;/p&gt;</description></item></channel></rss>

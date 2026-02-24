@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Test Operators on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/test-operators/</link><description>Recent content in Test Operators on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sat, 25 Mar 2023 20:13:25 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/test-operators/rss.xml" rel="self" type="application/rss+xml"/><item><title>Linux Shell：文件测试比较操作符</title><link>https://a2htray.github.io/post/old/linux-shell/file-test-operators/</link><pubDate>Sat, 25 Mar 2023 20:13:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/linux-shell/file-test-operators/</guid><description>&lt;p&gt;在 Shell 中，我们经常需要与文件打交道，所以了解文件测试操作符十分有必要。本文罗列了文件测试操作符并逐一给出示例，其中测试表达式的形式以 &lt;code&gt;[[]]&lt;/code&gt; 给出。&lt;/p&gt;</description></item><item><title>Bash：单括号与双括号的区别</title><link>https://a2htray.github.io/post/old/linux-shell/single-and-double-brackets/</link><pubDate>Thu, 23 Mar 2023 22:47:16 +0800</pubDate><guid>https://a2htray.github.io/post/old/linux-shell/single-and-double-brackets/</guid><description>&lt;p&gt;
+&lt;a href="https://www.baeldung.com/linux/bash-single-vs-double-brackets" title="原文：Differences Between Single and Double Brackets in Bash" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 原文：Differences Between Single and Double Brackets in Bash
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="概述"&gt;概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;当我们在 Bash 中做变量比较时，通常可以交换地使用单括号 &lt;code&gt;[]&lt;/code&gt; 和双括号 &lt;code&gt;[[]]&lt;/code&gt;。比如，我们可以使用表达式 &lt;code&gt;[ 3 -eq 3 ]&lt;/code&gt; 或 &lt;code&gt;[[ 3 -eq 3 ]]&lt;/code&gt; 来比较 &lt;code&gt;3&lt;/code&gt; 是否等于 &lt;code&gt;3&lt;/code&gt;。两个表达式都会执行成功，那两者的区别是什么呢？&lt;/p&gt;
+&lt;p&gt;在本文中，我们会讨论单括号和双括号之间的一些区别。&lt;/p&gt;</description></item></channel></rss>

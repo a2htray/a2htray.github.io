@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React Hooks on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/react-hooks/</link><description>Recent content in React Hooks on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 03 Jan 2024 22:38:25 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/react-hooks/rss.xml" rel="self" type="application/rss+xml"/><item><title>如何高效地使用 useRef、useMemo 和 useCallback</title><link>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</link><pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</guid><description>&lt;p&gt;这是一篇关于 React Hooks 的技术文章翻译，原文地址：
+
+&lt;a href="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" title="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;，翻译不当之处请指正。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;译者评价&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;文章主要介绍了 useRef、useMemo 和 useCallback 3 个 React Hook，读者可以通过此文了解 3 种 Hook 的使用方式、场景，但文章也存在一些缺点：&lt;/p&gt;</description></item></channel></rss>

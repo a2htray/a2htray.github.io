@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Logging on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/logging/</link><description>Recent content in Logging on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sat, 23 Apr 2022 19:05:01 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/logging/rss.xml" rel="self" type="application/rss+xml"/><item><title>Redis 的 list 和 stream：异步记录请求信息</title><link>https://a2htray.github.io/post/old/go-redis-request-log-dumper/</link><pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-redis-request-log-dumper/</guid><description>&lt;p&gt;在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。在程序中，可以以同步或异步的方式完成这一需求。同步方式是指请求信息写入日志文件后才返回数据给客户端，异步方式则是在返回数据之前以新线程或进程完成对请求信息的记录。开源的日志包有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href="https://pkg.go.dev/go.uber.org/zap" title="Zap" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Zap
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：出自 Uber 团队，以高性能著称；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/rs/zerolog" title="Zerolog" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Zerolog
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：以易用性著称，支持 7 种日志级别；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/sirupsen/logrus" title="Logrus" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Logrus
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：兼容标准日志包格式，也是本人常用的日志包；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/apex/log" title="apex/log" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ apex/log
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：受 Logrus 启发，简化操作后的 Logrus；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/inconshreveable/log15" title=" Log15" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Log15
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：日志可读性强；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;5 个日志包的详细介绍可以看
+&lt;a href="https://a2htray.github.io/posts/go-five-structured-logging-package/" title="《5 种结构化 Go 日志包对比分析》" &gt;
+ 《5 种结构化 Go 日志包对比分析》
+ 
+&lt;/a&gt;这篇文章。&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>持续更新 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</link><description>Recent content in 持续更新 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 17 Dec 2025 14:40:10 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/rss.xml" rel="self" type="application/rss+xml"/><item><title>MySQL 联合索引（持续更新）</title><link>https://a2htray.github.io/post/mysql-composite-indexes-continuously-updated/</link><pubDate>Wed, 17 Dec 2025 14:40:10 +0800</pubDate><guid>https://a2htray.github.io/post/mysql-composite-indexes-continuously-updated/</guid><description>&lt;h2 id="timeline"&gt;Timeline
+&lt;a class="header-anchor" href="#timeline"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%862025-12-17" title="2025-12-17 新增联合索引基础知识" &gt;
+ 2025-12-17 新增联合索引基础知识
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="基础知识2025-12-17"&gt;基础知识（2025-12-17）
+&lt;a class="header-anchor" href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%862025-12-17"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;联合索引，又叫多列索引，是一种可以&lt;strong&gt;包含多个列&lt;/strong&gt;的索引技术，使用得当，可以提升过滤和排序执行效率。&lt;/p&gt;</description></item></channel></rss>

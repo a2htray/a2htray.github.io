@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dockerfile on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/dockerfile/</link><description>Recent content in Dockerfile on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 16 Dec 2025 13:55:38 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/dockerfile/rss.xml" rel="self" type="application/rss+xml"/><item><title>在 Python 镜像的基础上换 apt 源（阿里云）</title><link>https://a2htray.github.io/post/change-apt-source-in-dockerfile-with-python-image/</link><pubDate>Tue, 16 Dec 2025 13:55:38 +0800</pubDate><guid>https://a2htray.github.io/post/change-apt-source-in-dockerfile-with-python-image/</guid><description>&lt;p&gt;介绍如何在 Dockerfile 中对基础镜像进行换源，加快软件的安装。&lt;/p&gt;
+&lt;h2 id="python-的基础系统"&gt;Python 的基础系统
+&lt;a class="header-anchor" href="#python-%e7%9a%84%e5%9f%ba%e7%a1%80%e7%b3%bb%e7%bb%9f"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;官方 Python 的基础系统分成两类：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Debian：标准标签，如 3.12、3.12-slim&lt;/li&gt;
+&lt;li&gt;Alpine Linux：Alpine 标签，如 3.12-alpine&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;本文方法适用于第 1 类。&lt;/p&gt;</description></item></channel></rss>

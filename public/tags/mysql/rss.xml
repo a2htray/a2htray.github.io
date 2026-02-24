@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MySQL on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/mysql/</link><description>Recent content in MySQL on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 17 Dec 2025 14:40:10 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/mysql/rss.xml" rel="self" type="application/rss+xml"/><item><title>MySQL 联合索引（持续更新）</title><link>https://a2htray.github.io/post/mysql-composite-indexes-continuously-updated/</link><pubDate>Wed, 17 Dec 2025 14:40:10 +0800</pubDate><guid>https://a2htray.github.io/post/mysql-composite-indexes-continuously-updated/</guid><description>&lt;h2 id="timeline"&gt;Timeline
+&lt;a class="header-anchor" href="#timeline"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%862025-12-17" title="2025-12-17 新增联合索引基础知识" &gt;
+ 2025-12-17 新增联合索引基础知识
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="基础知识2025-12-17"&gt;基础知识（2025-12-17）
+&lt;a class="header-anchor" href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%862025-12-17"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;联合索引，又叫多列索引，是一种可以&lt;strong&gt;包含多个列&lt;/strong&gt;的索引技术，使用得当，可以提升过滤和排序执行效率。&lt;/p&gt;</description></item><item><title>SQL 转义问题</title><link>https://a2htray.github.io/post/old/go-sql-escape/</link><pubDate>Wed, 11 May 2022 13:49:39 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-sql-escape/</guid><description>&lt;p&gt;SQL 转义问题是指执行的 SQL 语句中包含了某些特定的字符，如单引号 &lt;code&gt;'&lt;/code&gt;、反斜杠 &lt;code&gt;\&lt;/code&gt; 等，导致 SQL 语句不能正常执行。所以，我们应该在拼接 SQL 语句的过程中对特别的传入参数进行转义。&lt;/p&gt;
+&lt;p&gt;环境信息：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;MySQL 8.0.28；&lt;/li&gt;
+&lt;li&gt;Go 1.16.9 windows/amd64&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Go&amp;MySQL`max_allowed_packet`</title><link>https://a2htray.github.io/post/old/go-max-allowed-packet/</link><pubDate>Sat, 30 Apr 2022 20:25:09 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-max-allowed-packet/</guid><description>&lt;p&gt;当发送给数据库的语句过大时，会报如下错误：&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;panic: Error 1105: Parameter of prepared statement which is &lt;span class="nb"&gt;set&lt;/span&gt; through mysql_send_long_data&lt;span class="o"&gt;()&lt;/span&gt; is longer than &lt;span class="s1"&gt;&amp;#39;max_allowed_packet&amp;#39;&lt;/span&gt; bytes&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;从报错中可知，需要修改 &lt;code&gt;max_allowed_packet&lt;/code&gt; 选项的值。&lt;/p&gt;</description></item><item><title>MySQL 修改列的注释信息</title><link>https://a2htray.github.io/post/doc-stackoverflow/mysql-modify-table-column-comment/</link><pubDate>Mon, 25 Apr 2022 14:04:54 +0800</pubDate><guid>https://a2htray.github.io/post/doc-stackoverflow/mysql-modify-table-column-comment/</guid><description>&lt;p&gt;小小的修改列的注释信息也能引发一些思考。&lt;/p&gt;</description></item><item><title>MySQL 设置存储引擎的 3 种方法</title><link>https://a2htray.github.io/post/old/mysql-set-storage-engine/</link><pubDate>Thu, 21 Apr 2022 13:35:02 +0800</pubDate><guid>https://a2htray.github.io/post/old/mysql-set-storage-engine/</guid><description>&lt;p&gt;在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。&lt;/p&gt;
+&lt;p&gt;选择一个合适的存储引擎至关重要。&lt;/p&gt;</description></item><item><title>MySQL 存储过程</title><link>https://a2htray.github.io/post/old/mysql-writing-procedure/</link><pubDate>Tue, 19 Apr 2022 19:35:33 +0800</pubDate><guid>https://a2htray.github.io/post/old/mysql-writing-procedure/</guid><description>&lt;p&gt;存储过程是存储在数据库中并且已经提前编译好的 SQL 语句集合，它是应用中数据操作的部分逻辑实现。MySQL 5 版本引入了这一设计，存储过程包含 3 个部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;名称；&lt;/li&gt;
+&lt;li&gt;参数列表；&lt;/li&gt;
+&lt;li&gt;SQL 语句；&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>MySQL 性能调优</title><link>https://a2htray.github.io/post/old/database-performance-tuning/</link><pubDate>Thu, 14 Apr 2022 19:59:24 +0800</pubDate><guid>https://a2htray.github.io/post/old/database-performance-tuning/</guid><description>&lt;p&gt;数据库是应用的数据存储中心，请求增多和数据量增大都会对数据库造成严重的影响，导致数据库服务性能偏低。所以归纳了个别优化点，后续有看到新的内容也会追加。&lt;/p&gt;</description></item></channel></rss>

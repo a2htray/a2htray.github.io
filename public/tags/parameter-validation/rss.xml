@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Parameter Validation on 快乐冲浪与生活</title><link>http://localhost:1313/tags/parameter-validation/</link><description>Recent content in Parameter Validation on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 11 May 2022 11:11:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/parameter-validation/rss.xml" rel="self" type="application/rss+xml"/><item><title>API 参数验证 - foo</title><link>http://localhost:1313/post/old/go-validate-api/</link><pubDate>Wed, 11 May 2022 11:11:30 +0800</pubDate><guid>http://localhost:1313/post/old/go-validate-api/</guid><description>&lt;p&gt;一个 API 请求代表了一次用户的操作，当请求到达服务器后台程序时，程序应对请求的各项参数进行验证。各项参数包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;查询参数（Query Parameter，QP）；&lt;/li&gt;
+&lt;li&gt;路径参数（Path Parameter，PP）；&lt;/li&gt;
+&lt;li&gt;cookie 参数（Cookie Parameter，CP）；&lt;/li&gt;
+&lt;li&gt;HTTP 请求头（HTTP Request Header，HRH）；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;参数验证的好处在于：&lt;/p&gt;</description></item></channel></rss>

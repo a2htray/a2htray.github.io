@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Redis on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/redis/</link><description>Recent content in Redis on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 26 Feb 2023 20:19:59 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/redis/rss.xml" rel="self" type="application/rss+xml"/><item><title>哈希表相关</title><link>https://a2htray.github.io/post/doc-redis-commands/hash-related/</link><pubDate>Sun, 26 Feb 2023 20:19:59 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/hash-related/</guid><description>&lt;p&gt;Redis 服务器中与哈希表相关的命令。&lt;/p&gt;</description></item><item><title>Redis 的 list 和 stream：异步记录请求信息</title><link>https://a2htray.github.io/post/old/go-redis-request-log-dumper/</link><pubDate>Sat, 23 Apr 2022 19:05:01 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-redis-request-log-dumper/</guid><description>&lt;p&gt;在 Web 开发中，常常需要对请求信息进行记录，形成日志以便于后期评估应用的性能。请求信息通常包含客户端地址、请求的 URL、请求时间及请求执行时间。在程序中，可以以同步或异步的方式完成这一需求。同步方式是指请求信息写入日志文件后才返回数据给客户端，异步方式则是在返回数据之前以新线程或进程完成对请求信息的记录。开源的日志包有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href="https://pkg.go.dev/go.uber.org/zap" title="Zap" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Zap
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：出自 Uber 团队，以高性能著称；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/rs/zerolog" title="Zerolog" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Zerolog
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：以易用性著称，支持 7 种日志级别；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/sirupsen/logrus" title="Logrus" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Logrus
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：兼容标准日志包格式，也是本人常用的日志包；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/apex/log" title="apex/log" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ apex/log
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：受 Logrus 启发，简化操作后的 Logrus；&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://github.com/inconshreveable/log15" title=" Log15" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Log15
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;：日志可读性强；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;5 个日志包的详细介绍可以看
+&lt;a href="https://a2htray.github.io/posts/go-five-structured-logging-package/" title="《5 种结构化 Go 日志包对比分析》" &gt;
+ 《5 种结构化 Go 日志包对比分析》
+ 
+&lt;/a&gt;这篇文章。&lt;/p&gt;</description></item><item><title>集群相关</title><link>https://a2htray.github.io/post/doc-redis-commands/cluster-related/</link><pubDate>Sun, 10 Apr 2022 11:34:31 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/cluster-related/</guid><description>&lt;p&gt;Redis 服务器中与服务相关的命令，集群的配置过程可参考
+&lt;a href="https://a2htray.github.io/posts/redis-cluster-deployment/" title="《Redis 集群配置过程》" &gt;
+ 《Redis 集群配置过程》
+ 
+&lt;/a&gt;。&lt;/p&gt;</description></item><item><title>Redis 集群配置过程</title><link>https://a2htray.github.io/post/old/redis-cluster-deployment/</link><pubDate>Thu, 07 Apr 2022 14:07:35 +0800</pubDate><guid>https://a2htray.github.io/post/old/redis-cluster-deployment/</guid><description>&lt;p&gt;Redis 集群是基于“主从复制”特性之上的分布式 Redis 版本，可提供高并发、高性能、高可用的数据库服务。Redis 集群突破了单台服务器的内存局限，集群中的每一个节点都可以存储数据，同时维护着 &amp;ldquo;key-node&amp;rdquo; 的映射表。本文记录了 3 主 3 从的 Redis 集群的配置过程，主要内容包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Redis 集群的配置过程；&lt;/li&gt;
+&lt;li&gt;集群相关命令；&lt;/li&gt;
+&lt;li&gt;Go 存取集群数据；&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Redis 主从复制配置过程</title><link>https://a2htray.github.io/post/old/redis-master-slave-replication-deployment/</link><pubDate>Wed, 30 Mar 2022 10:28:31 +0800</pubDate><guid>https://a2htray.github.io/post/old/redis-master-slave-replication-deployment/</guid><description>&lt;p&gt;Redis 主从复制可以实现数据库的读写分离，即主节点负责接收写请求、从节点负责接收读请求，是高性能 Redis 服务的基础。所以配置 Redis 主从复制应当作为开发者的技能之一，后文内容包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;单机配置一主二从的主从复制服务&lt;/li&gt;
+&lt;li&gt;服务验证；&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>服务相关</title><link>https://a2htray.github.io/post/doc-redis-commands/server-related/</link><pubDate>Wed, 30 Mar 2022 09:24:49 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/server-related/</guid><description>&lt;p&gt;Redis 服务器中与服务相关的命令。&lt;/p&gt;</description></item><item><title>键相关</title><link>https://a2htray.github.io/post/doc-redis-commands/key-related/</link><pubDate>Sun, 27 Mar 2022 05:57:48 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/key-related/</guid><description>&lt;p&gt;Redis 服务器中与 key 相关的命令。&lt;/p&gt;</description></item><item><title>介绍</title><link>https://a2htray.github.io/post/doc-redis-commands/introduction/</link><pubDate>Sun, 27 Mar 2022 05:56:48 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/introduction/</guid><description>&lt;p&gt;Redis 是开源的、高性能的数据结构存储系统，在框架设计中常常被当作缓存服务器。不同于传统的关系型数据库（如 MySQL、PostgreSQL），Redis 将数据以键值对的方式存储于内存并且支持数据持久化。尽管 Redis 采用了单线程模型来处理请求，但其通过 I/O 多路复用技术做到了应用级别的异步，运行的性能也十分良好。&lt;/p&gt;</description></item><item><title>集合相关</title><link>https://a2htray.github.io/post/doc-redis-commands/set-related/</link><pubDate>Sun, 27 Mar 2022 05:47:22 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/set-related/</guid><description>&lt;p&gt;Redis 服务器中与集合相关的命令。&lt;/p&gt;</description></item><item><title>流相关</title><link>https://a2htray.github.io/post/doc-redis-commands/stream-related/</link><pubDate>Sun, 27 Mar 2022 05:47:22 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/stream-related/</guid><description>&lt;p&gt;Redis 服务器中与 stream 相关的命令。&lt;/p&gt;</description></item><item><title>字符串相关</title><link>https://a2htray.github.io/post/doc-redis-commands/string-related/</link><pubDate>Sun, 27 Mar 2022 05:47:22 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/string-related/</guid><description>&lt;p&gt;Redis 服务器中与字符串值相关的命令。&lt;/p&gt;</description></item><item><title>有序集合相关</title><link>https://a2htray.github.io/post/doc-redis-commands/zset-related/</link><pubDate>Sun, 27 Mar 2022 05:45:52 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/zset-related/</guid><description>&lt;p&gt;Redis 服务器中与有序集合相关的命令。&lt;/p&gt;</description></item><item><title>列表值相关</title><link>https://a2htray.github.io/post/doc-redis-commands/list-related/</link><pubDate>Sun, 27 Mar 2022 05:32:39 +0800</pubDate><guid>https://a2htray.github.io/post/doc-redis-commands/list-related/</guid><description>&lt;p&gt;Redis 服务器中与列表值相关的命令。&lt;/p&gt;</description></item></channel></rss>

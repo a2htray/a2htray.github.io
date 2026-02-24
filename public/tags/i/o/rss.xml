@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>I/O on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/i/o/</link><description>Recent content in I/O on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 15 Jun 2023 20:44:17 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/i/o/rss.xml" rel="self" type="application/rss+xml"/><item><title>如何使用 Python 复制文件</title><link>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</link><pubDate>Thu, 15 Jun 2023 20:44:17 +0800</pubDate><guid>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</guid><description>&lt;p&gt;
+&lt;a href="https://builtin.com/data-science/copy-a-file-with-python" title="原文 How to Copy a File With Python" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 原文 How to Copy a File With Python
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Python 的 shutil 模块提供了 4 种复制文件的方法，根据你的实际情况选择合适的方法。或许，本文的内容可能帮助到你。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;  在每天的软件开发过程中，通过程序复制文件是一项平常的工作任务。我们将学习 Python &lt;code&gt;shutil&lt;/code&gt; 模块提供的 4 种方法来完成文件复制，包括：&lt;/p&gt;</description></item><item><title>Windows 下移动文件的坑</title><link>https://a2htray.github.io/post/old/go-file-rename-pit/</link><pubDate>Sun, 24 Apr 2022 17:16:44 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-file-rename-pit/</guid><description>&lt;p&gt;在 Windows 下，Go 的 &lt;code&gt;os&lt;/code&gt; 标准库提供的 &lt;code&gt;Rename&lt;/code&gt; 方法不能跨磁盘移动文件。下面通过问题重现，提供两种解决方案。&lt;/p&gt;</description></item><item><title>URL 下载网络文件</title><link>https://a2htray.github.io/post/old/go-download-network-file/</link><pubDate>Sun, 24 Apr 2022 10:00:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-download-network-file/</guid><description>&lt;p&gt;从网络上下载文件是开发过程中常用的需求，常规流程是：（1）发送请求；（2）接收响应并读取响应体内容；（3）保存到本地文件。本文包含的两个例子分别来自于&lt;strong&gt;参考 [1]&lt;/strong&gt; 和&lt;strong&gt;参考 [2]&lt;/strong&gt;，在此基础上做了少量的修改。&lt;/p&gt;</description></item></channel></rss>

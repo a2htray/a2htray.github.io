@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Web 安全 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/web-%E5%AE%89%E5%85%A8/</link><description>Recent content in Web 安全 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 29 Mar 2022 15:56:02 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/web-%E5%AE%89%E5%85%A8/rss.xml" rel="self" type="application/rss+xml"/><item><title>同源策略 Same-Origin Policy</title><link>https://a2htray.github.io/post/old/web-same-origin-policy/</link><pubDate>Tue, 29 Mar 2022 15:56:02 +0800</pubDate><guid>https://a2htray.github.io/post/old/web-same-origin-policy/</guid><description>&lt;p&gt;同源策略（Same-Origin Policy，SOP）是一种保护 Web 资源的安全机制，它限制了不同源之间的资源访问。需要说明的是，SOP 只作用于应用脚本，这意味着在 HTML 标签中可以引入不同源的图片、CSS 文件或动态加载的脚本文件（见
+&lt;a href="#%e9%aa%8c%e8%af%81-1" title="验证 1" &gt;
+ 验证 1
+ 
+&lt;/a&gt;）。&lt;/p&gt;</description></item></channel></rss>

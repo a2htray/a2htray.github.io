@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MySQL on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/mysql/</link><description>Recent content in MySQL on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 17 Dec 2025 14:40:10 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/mysql/rss.xml" rel="self" type="application/rss+xml"/><item><title>MySQL 联合索引（持续更新）</title><link>https://a2htray.github.io/post/mysql-composite-indexes-continuously-updated/</link><pubDate>Wed, 17 Dec 2025 14:40:10 +0800</pubDate><guid>https://a2htray.github.io/post/mysql-composite-indexes-continuously-updated/</guid><description>&lt;h2 id="timeline"&gt;Timeline
+&lt;a class="header-anchor" href="#timeline"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%862025-12-17" title="2025-12-17 新增联合索引基础知识" &gt;
+ 2025-12-17 新增联合索引基础知识
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="基础知识2025-12-17"&gt;基础知识（2025-12-17）
+&lt;a class="header-anchor" href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%862025-12-17"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;联合索引，又叫多列索引，是一种可以&lt;strong&gt;包含多个列&lt;/strong&gt;的索引技术，使用得当，可以提升过滤和排序执行效率。&lt;/p&gt;</description></item><item><title>详解：如何将一个大的结构化（CSV）数据导入到 MySQL</title><link>https://a2htray.github.io/post/how-to-load-big-csv-file-into-mysql/</link><pubDate>Wed, 10 Dec 2025 09:19:39 +0800</pubDate><guid>https://a2htray.github.io/post/how-to-load-big-csv-file-into-mysql/</guid><description>&lt;h2 id="实际需求"&gt;实际需求
+&lt;a class="header-anchor" href="#%e5%ae%9e%e9%99%85%e9%9c%80%e6%b1%82"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;昨天领了一个任务，把一个大文件数据导入到 MySQL，文件以 CSV 格式给出，内容是收集的 600 多万条的文献信息。&lt;/p&gt;
+&lt;p&gt;接到时，我觉得很简单，实现思路是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;（前置）部署一个 MySQL 的服务&lt;/li&gt;
+&lt;li&gt;根据 CSV 的表头信息，创建一个表&lt;/li&gt;
+&lt;li&gt;将大文件拆成多个小文件，小文件包含表头信息&lt;/li&gt;
+&lt;li&gt;遍历所有小文件，应用 &lt;code&gt;LOAD DATA INFILE&lt;/code&gt; 语句进行导入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为了让整个过程更好追踪，还加入&lt;code&gt;小文件导入日志&lt;/code&gt;和&lt;code&gt;汇总主日志&lt;/code&gt;的功能。因为是一个即时的任务，并不需要考虑太多后期的扩展，所以采用 &lt;code&gt;Shell&lt;/code&gt; 脚本
+的方式实现。&lt;/p&gt;</description></item><item><title>MySQL 修改列的注释信息</title><link>https://a2htray.github.io/post/doc-stackoverflow/mysql-modify-table-column-comment/</link><pubDate>Mon, 25 Apr 2022 14:04:54 +0800</pubDate><guid>https://a2htray.github.io/post/doc-stackoverflow/mysql-modify-table-column-comment/</guid><description>&lt;p&gt;小小的修改列的注释信息也能引发一些思考。&lt;/p&gt;</description></item><item><title>MySQL 设置存储引擎的 3 种方法</title><link>https://a2htray.github.io/post/old/mysql-set-storage-engine/</link><pubDate>Thu, 21 Apr 2022 13:35:02 +0800</pubDate><guid>https://a2htray.github.io/post/old/mysql-set-storage-engine/</guid><description>&lt;p&gt;在 MySQL 5.5 之前，默认存储引擎为 MyISAM，之后版本的默认存储引擎为 InnoDB。&lt;/p&gt;
+&lt;p&gt;选择一个合适的存储引擎至关重要。&lt;/p&gt;</description></item><item><title>MySQL 存储过程</title><link>https://a2htray.github.io/post/old/mysql-writing-procedure/</link><pubDate>Tue, 19 Apr 2022 19:35:33 +0800</pubDate><guid>https://a2htray.github.io/post/old/mysql-writing-procedure/</guid><description>&lt;p&gt;存储过程是存储在数据库中并且已经提前编译好的 SQL 语句集合，它是应用中数据操作的部分逻辑实现。MySQL 5 版本引入了这一设计，存储过程包含 3 个部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;名称；&lt;/li&gt;
+&lt;li&gt;参数列表；&lt;/li&gt;
+&lt;li&gt;SQL 语句；&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>MySQL 性能调优</title><link>https://a2htray.github.io/post/old/database-performance-tuning/</link><pubDate>Thu, 14 Apr 2022 19:59:24 +0800</pubDate><guid>https://a2htray.github.io/post/old/database-performance-tuning/</guid><description>&lt;p&gt;数据库是应用的数据存储中心，请求增多和数据量增大都会对数据库造成严重的影响，导致数据库服务性能偏低。所以归纳了个别优化点，后续有看到新的内容也会追加。&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>前端技术 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/</link><description>Recent content in 前端技术 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 03 Jan 2024 22:38:25 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/rss.xml" rel="self" type="application/rss+xml"/><item><title>如何高效地使用 useRef、useMemo 和 useCallback</title><link>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</link><pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</guid><description>&lt;p&gt;这是一篇关于 React Hooks 的技术文章翻译，原文地址：
+
+&lt;a href="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" title="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;，翻译不当之处请指正。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;译者评价&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;文章主要介绍了 useRef、useMemo 和 useCallback 3 个 React Hook，读者可以通过此文了解 3 种 Hook 的使用方式、场景，但文章也存在一些缺点：&lt;/p&gt;</description></item><item><title>同源策略 Same-Origin Policy</title><link>https://a2htray.github.io/post/old/web-same-origin-policy/</link><pubDate>Tue, 29 Mar 2022 15:56:02 +0800</pubDate><guid>https://a2htray.github.io/post/old/web-same-origin-policy/</guid><description>&lt;p&gt;同源策略（Same-Origin Policy，SOP）是一种保护 Web 资源的安全机制，它限制了不同源之间的资源访问。需要说明的是，SOP 只作用于应用脚本，这意味着在 HTML 标签中可以引入不同源的图片、CSS 文件或动态加载的脚本文件（见
+&lt;a href="#%e9%aa%8c%e8%af%81-1" title="验证 1" &gt;
+ 验证 1
+ 
+&lt;/a&gt;）。&lt;/p&gt;</description></item></channel></rss>

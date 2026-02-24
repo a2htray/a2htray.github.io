@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>泛型函数 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0/</link><description>Recent content in 泛型函数 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 07 Jan 2024 14:41:11 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0/rss.xml" rel="self" type="application/rss+xml"/><item><title>Go 泛型函数 - 解构类型参数</title><link>https://a2htray.github.io/post/old/go/deconstructing-type-in-go-with-a-example/</link><pubDate>Sun, 07 Jan 2024 14:41:11 +0800</pubDate><guid>https://a2htray.github.io/post/old/go/deconstructing-type-in-go-with-a-example/</guid><description>&lt;p&gt;原文地址：
+&lt;a href="https://go.dev/blog/deconstructing-type-parameters" title="https://go.dev/blog/deconstructing-type-parameters" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://go.dev/blog/deconstructing-type-parameters
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;译者评论&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用&lt;font color="#0d6efd" style="font-weight: bold;"&gt;类型推断&lt;/font&gt;完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 &lt;font color="#0d6efd" style="font-weight: bold;"&gt;~ 符号&lt;/font&gt;，即用于指定类型的底层类型。&lt;/p&gt;</description></item></channel></rss>

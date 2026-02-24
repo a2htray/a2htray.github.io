@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/hugo/</link><description>Recent content in Hugo on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 28 Sep 2022 23:10:30 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/hugo/rss.xml" rel="self" type="application/rss+xml"/><item><title>Two Steps to Build an Academic Website with Hugo and Wowchemy</title><link>https://a2htray.github.io/post/old/go-hugo-wowchemy-academic-website/</link><pubDate>Wed, 28 Sep 2022 23:10:30 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-hugo-wowchemy-academic-website/</guid><description>&lt;p&gt;Four days ago, I got a requirement to build an academic website for 
+&lt;a href="https://github.com/jingyunluo" title="yunzila~" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ yunzila~
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;. This
+reminds me of my previous blog experience. Since my blog is built with Hugo, I started to find an academic theme which is
+designed for Hugo. Here is a link to 
+&lt;a href="https://themes.gohugo.io/" title="Hugo themes" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Hugo themes
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;, and then I find the 
+&lt;a href="https://themes.gohugo.io/themes/starter-hugo-academic/" title="Academic" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ Academic
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;
+theme developed by 
+&lt;a href="https://github.com/gcushen" title="gcushen" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ gcushen
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt; which meets my needs.&lt;/p&gt;</description></item></channel></rss>

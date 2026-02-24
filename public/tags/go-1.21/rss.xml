@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go 1.21 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/go-1.21/</link><description>Recent content in Go 1.21 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 03 Sep 2023 16:51:25 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/go-1.21/rss.xml" rel="self" type="application/rss+xml"/><item><title>Go slog 标准包功能详细指南</title><link>https://a2htray.github.io/post/old/go/go-slog-package-translate/</link><pubDate>Sun, 03 Sep 2023 16:51:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/go/go-slog-package-translate/</guid><description>&lt;p&gt;在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。&lt;/p&gt;
+&lt;p&gt;原文地址：
+&lt;a href="https://betterstack.com/community/guides/logging/logging-in-go/" title="https://betterstack.com/community/guides/logging/logging-in-go/" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://betterstack.com/community/guides/logging/logging-in-go/
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

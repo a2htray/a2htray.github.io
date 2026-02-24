@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Httpx on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/httpx/</link><description>Recent content in Httpx on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 13 Feb 2026 09:30:18 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/httpx/rss.xml" rel="self" type="application/rss+xml"/><item><title>构建 MCP 服务端</title><link>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</link><pubDate>Fri, 13 Feb 2026 09:30:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</guid><description>&lt;ul&gt;
+&lt;li&gt;学习来源：
+&lt;a href="https://modelcontextprotocol.io/docs/develop/build-server" title="https://modelcontextprotocol.io/docs/develop/build-server" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://modelcontextprotocol.io/docs/develop/build-server
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;目标：构建一个“天气查询”的 MCP Server&lt;/li&gt;
+&lt;li&gt;编程语言：Python&lt;/li&gt;
+&lt;li&gt;天气接口文档：
+&lt;a href="https://uapis.cn/docs/api-reference/get-misc-weather" title="https://uapis.cn/docs/api-reference/get-misc-weather" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://uapis.cn/docs/api-reference/get-misc-weather
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="前提条件"&gt;前提条件
+&lt;a class="header-anchor" href="#%e5%89%8d%e6%8f%90%e6%9d%a1%e4%bb%b6"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Python 的开发环境&lt;/li&gt;
+&lt;li&gt;MCP 主机（我使用的是 Cherry Studio）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="注意事项"&gt;注意事项
+&lt;a class="header-anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;根据实现的 MCP Server 的类型不同，做日志功能时需要注意：&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Protocol Buffer on 快乐冲浪与生活</title><link>http://localhost:1313/tags/protocol-buffer/</link><description>Recent content in Protocol Buffer on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 08 Apr 2022 15:39:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/protocol-buffer/rss.xml" rel="self" type="application/rss+xml"/><item><title>gRPC 的基本概述</title><link>http://localhost:1313/post/old/go-grpc-concepts/</link><pubDate>Fri, 08 Apr 2022 15:39:54 +0800</pubDate><guid>http://localhost:1313/post/old/go-grpc-concepts/</guid><description>&lt;p&gt;
+&lt;a href="https://grpc.io/" title="gRPC" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ gRPC
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt; 是开源的高性能的远程过程调用（Remote Procedure Call，RPC）框架，其特点包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务定义简单易用；&lt;/li&gt;
+&lt;li&gt;启动快，高性能；&lt;/li&gt;
+&lt;li&gt;双向的数据流传输；&lt;/li&gt;
+&lt;li&gt;插件支持；&lt;/li&gt;
+&lt;li&gt;跨平台；&lt;/li&gt;
+&lt;li&gt;跨语言，支持众多主流编程语言，包括 C#、C++、Dart、Go 等；&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

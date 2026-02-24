@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/python/</link><description>Recent content in Python on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 15 Jun 2023 20:44:17 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/python/rss.xml" rel="self" type="application/rss+xml"/><item><title>如何使用 Python 复制文件</title><link>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</link><pubDate>Thu, 15 Jun 2023 20:44:17 +0800</pubDate><guid>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</guid><description>&lt;p&gt;
+&lt;a href="https://builtin.com/data-science/copy-a-file-with-python" title="原文 How to Copy a File With Python" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 原文 How to Copy a File With Python
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Python 的 shutil 模块提供了 4 种复制文件的方法，根据你的实际情况选择合适的方法。或许，本文的内容可能帮助到你。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;  在每天的软件开发过程中，通过程序复制文件是一项平常的工作任务。我们将学习 Python &lt;code&gt;shutil&lt;/code&gt; 模块提供的 4 种方法来完成文件复制，包括：&lt;/p&gt;</description></item><item><title>Redis with Python（五） 哈希表操作</title><link>https://a2htray.github.io/post/old/redis-python/redis-python-hash/</link><pubDate>Mon, 27 Feb 2023 22:46:29 +0800</pubDate><guid>https://a2htray.github.io/post/old/redis-python/redis-python-hash/</guid><description>&lt;p&gt;哈希表（hash）是 Redis 中重要的数据结构，本文通过示例演示如何使用 Python 完成对哈希表的操作，各方法调用分别对应着 Redis 的一个指令：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HSET&lt;/li&gt;
+&lt;li&gt;HGET&lt;/li&gt;
+&lt;li&gt;HINCRBY&lt;/li&gt;
+&lt;li&gt;HINCRBYFLOAT&lt;/li&gt;
+&lt;li&gt;HSTRLEN&lt;/li&gt;
+&lt;li&gt;HVALS&lt;/li&gt;
+&lt;li&gt;HMSET&lt;/li&gt;
+&lt;li&gt;HMGET&lt;/li&gt;
+&lt;li&gt;HSETNX&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Redis with Python（四） 有序集合操作</title><link>https://a2htray.github.io/post/old/redis-python/redis-python-zset/</link><pubDate>Sun, 26 Feb 2023 20:10:40 +0800</pubDate><guid>https://a2htray.github.io/post/old/redis-python/redis-python-zset/</guid><description>&lt;p&gt;zset 有序集合是 set 的补充，zset 中的元素都带有一个用于排序的分数，以下通过代码示例进行说明。&lt;/p&gt;</description></item><item><title>Redis with Python（三） 集合操作及运算</title><link>https://a2htray.github.io/post/old/redis-python/redis-python-set/</link><pubDate>Sun, 26 Feb 2023 16:59:30 +0800</pubDate><guid>https://a2htray.github.io/post/old/redis-python/redis-python-set/</guid><description>&lt;p&gt;set 数据类型对应元素不重复的数据结构，在 Redis 中，set 数据类型是无序的，与之相对的有序集合 zset。本文内容分两部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;集合操作&lt;/li&gt;
+&lt;li&gt;集合运算&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Redis with Python（二） 字符串操作</title><link>https://a2htray.github.io/post/old/redis-python/redis-python-string/</link><pubDate>Sun, 26 Feb 2023 14:47:07 +0800</pubDate><guid>https://a2htray.github.io/post/old/redis-python/redis-python-string/</guid><description>&lt;p&gt;string 是 Redis 中最基础的数据类型，由于它是二进制安全的，所以可以存储图片的二进制信息。本文通过 3 个部分介绍在 Python 下如何操作 Redis 的 string 数据类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常规字符串操作&lt;/li&gt;
+&lt;li&gt;位运算操作&lt;/li&gt;
+&lt;li&gt;数值操作&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Redis with Python（一） 列表操作</title><link>https://a2htray.github.io/post/old/redis-python/redis-python-list/</link><pubDate>Sat, 25 Feb 2023 21:58:12 +0800</pubDate><guid>https://a2htray.github.io/post/old/redis-python/redis-python-list/</guid><description>&lt;p&gt;list 是 Redis 中操作比较频繁的数据结构，本文将结合 Python 对其进行相关操作并按“是否发生阻塞”分成两个部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;非阻塞指令&lt;/li&gt;
+&lt;li&gt;阻塞指令&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>从字符串中创建 DataFrame</title><link>https://a2htray.github.io/post/old/python-pandas-create-dataframe-from-raw-string/</link><pubDate>Thu, 17 Nov 2022 22:24:05 +0800</pubDate><guid>https://a2htray.github.io/post/old/python-pandas-create-dataframe-from-raw-string/</guid><description>&lt;p&gt;一般情况下，你们会通过文件（CSV、Excel等） 或 Python 的内置结构（字典）来创建 DataFrame 对象。但有时，数据是字符串的形式，如何将其转换成
+DataFrame 对象？&lt;/p&gt;</description></item><item><title>创建 Pandas 的 Series 和 DataFrame</title><link>https://a2htray.github.io/post/old/python-pandas-series-dataframe/</link><pubDate>Sat, 15 Oct 2022 19:25:04 +0800</pubDate><guid>https://a2htray.github.io/post/old/python-pandas-series-dataframe/</guid><description>&lt;p&gt;Series 和 DataFrame 是 Pandas 中两种重要的数据结构，也是我们操作和分析的主要对象。其中 Series 是一种类似于数组、列表或表格中一列的
+一维数据对象，DataFrame 则可以表示表格化的数据对象，可由多个 Series 对象组成。&lt;/p&gt;
+&lt;p&gt;本文主要摘录 Series 和 DataFrame 两种数据结结构的创建方法以及一些注意事项。&lt;/p&gt;</description></item><item><title>Write Mumultiple Dataframes to Worksheets</title><link>https://a2htray.github.io/post/old/python-pandas-write-mumultiple-dataframes-to-worksheets/</link><pubDate>Wed, 21 Sep 2022 00:01:28 +0800</pubDate><guid>https://a2htray.github.io/post/old/python-pandas-write-mumultiple-dataframes-to-worksheets/</guid><description>&lt;p&gt;In normal work, I usually use &lt;code&gt;Pandas&lt;/code&gt; as my excel read/write utility.&lt;/p&gt;
+&lt;p&gt;Here is an example for how to write multiple dataframes to worksheets. We need to use &lt;code&gt;pd.ExcelWriter&lt;/code&gt; method.&lt;/p&gt;</description></item><item><title>扩展 Django forms.Field - 支持 default 属性</title><link>https://a2htray.github.io/post/old/python-django-parameter-validation-default/</link><pubDate>Mon, 05 Sep 2022 22:22:13 +0800</pubDate><guid>https://a2htray.github.io/post/old/python-django-parameter-validation-default/</guid><description>&lt;p&gt;&lt;code&gt;django.forms&lt;/code&gt; 包提供了 HTML 表单验证的功能，在没有使用 DRF 的情况下，无法合理地处理 API 传参的验证，其中传参验证中就缺少了参数默认值的设置。&lt;/p&gt;
+&lt;h2 id="层次结构"&gt;层次结构
+&lt;a class="header-anchor" href="#%e5%b1%82%e6%ac%a1%e7%bb%93%e6%9e%84"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;django.forms&lt;/code&gt; 包提供的 &lt;code&gt;Field&lt;/code&gt; 类如下：&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt; 1&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-2"&gt;&lt;a class="lnlinks" href="#hl-0-2"&gt; 2&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-3"&gt;&lt;a class="lnlinks" href="#hl-0-3"&gt; 3&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-4"&gt;&lt;a class="lnlinks" href="#hl-0-4"&gt; 4&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-5"&gt;&lt;a class="lnlinks" href="#hl-0-5"&gt; 5&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-6"&gt;&lt;a class="lnlinks" href="#hl-0-6"&gt; 6&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-7"&gt;&lt;a class="lnlinks" href="#hl-0-7"&gt; 7&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-8"&gt;&lt;a class="lnlinks" href="#hl-0-8"&gt; 8&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-9"&gt;&lt;a class="lnlinks" href="#hl-0-9"&gt; 9&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-10"&gt;&lt;a class="lnlinks" href="#hl-0-10"&gt;10&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;__all__&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;Field&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;CharField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;IntegerField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;DateField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;TimeField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;DateTimeField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;DurationField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;RegexField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;EmailField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FileField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ImageField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;URLField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;BooleanField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;NullBooleanField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ChoiceField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MultipleChoiceField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;ComboField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;MultiValueField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FloatField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;DecimalField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;SplitDateTimeField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;GenericIPAddressField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FilePathField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;JSONField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SlugField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;TypedChoiceField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;TypedMultipleChoiceField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s1"&gt;&amp;#39;UUIDField&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;继承关系如下图：&lt;/p&gt;</description></item><item><title>Matplotlib bar 图常规编码</title><link>https://a2htray.github.io/post/old/python-matplotlib-bar-tips/</link><pubDate>Tue, 05 Apr 2022 10:11:12 +0800</pubDate><guid>https://a2htray.github.io/post/old/python-matplotlib-bar-tips/</guid><description>&lt;p&gt;每当有快速绘制图表的需求时，第一时间反应到的肯定是 Matplotlib，因为其官方提供了详细的 API 文档及示例。但是每次在编码时，总是时不时地需要查看文档，不利用于可视化快速成型。所以在本文中罗列一些 bar 图的快速实现，方便 Ctrl+C/V。&lt;/p&gt;</description></item><item><title>Python 读写文件</title><link>https://a2htray.github.io/post/old/python-read-and-write-file/</link><pubDate>Mon, 28 Mar 2022 13:28:47 +0800</pubDate><guid>https://a2htray.github.io/post/old/python-read-and-write-file/</guid><description>&lt;p&gt;在开发过程中，开发者常常需要对文件执行读写操作，仅以此文记录读写文件的常规用法。&lt;/p&gt;</description></item></channel></rss>
