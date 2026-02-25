@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>前端技术 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/</link><description>Recent content in 前端技术 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 03 Jan 2024 22:38:25 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/rss.xml" rel="self" type="application/rss+xml"/><item><title>如何高效地使用 useRef、useMemo 和 useCallback</title><link>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</link><pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</guid><description>&lt;p&gt;这是一篇关于 React Hooks 的技术文章翻译，原文地址：
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>前端技术 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/</link><description>Recent content in 前端技术 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 24 Feb 2026 23:23:06 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/rss.xml" rel="self" type="application/rss+xml"/><item><title>Zod 的学习与使用：Zod 基础知识（一）</title><link>https://a2htray.github.io/post/learn-zod/00_zod_triple/</link><pubDate>Tue, 24 Feb 2026 23:23:06 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/00_zod_triple/</guid><description>&lt;ul&gt;
+&lt;li&gt;学习资料：
+&lt;a href="https://zod.dev/" title="https://zod.dev/" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://zod.dev/
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;辅助：豆包&lt;/li&gt;
+&lt;li&gt;Zod 版本：4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;学习一个新的技术、框架或包，首先要解决的是事物的三个问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;是什么&lt;/li&gt;
+&lt;li&gt;做什么&lt;/li&gt;
+&lt;li&gt;有什么&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文就是围绕 Zod 回答上面的三个问题，并在后续的文章中介绍“怎么用”。&lt;/p&gt;</description></item><item><title>如何高效地使用 useRef、useMemo 和 useCallback</title><link>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</link><pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</guid><description>&lt;p&gt;这是一篇关于 React Hooks 的技术文章翻译，原文地址：
 
 &lt;a href="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" title="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh

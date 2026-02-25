@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Feb 2026 22:53:42 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>过年期间，除了吃喝、玩乐、锻炼，还要把 IT 技术再抓一抓。</title><link>https://a2htray.github.io/post/not-only-segment/2026-02-15/</link><pubDate>Sun, 15 Feb 2026 22:53:42 +0800</pubDate><guid>https://a2htray.github.io/post/not-only-segment/2026-02-15/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/not-only-segment/2026-02-15.png" alt="" /&gt;&lt;/p&gt;</description></item><item><title>构建 MCP 服务端</title><link>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</link><pubDate>Fri, 13 Feb 2026 09:30:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</guid><description>&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 24 Feb 2026 23:23:06 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>Zod 的学习与使用：Zod 基础知识（一）</title><link>https://a2htray.github.io/post/learn-zod/00_zod_triple/</link><pubDate>Tue, 24 Feb 2026 23:23:06 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/00_zod_triple/</guid><description>&lt;ul&gt;
+&lt;li&gt;学习资料：
+&lt;a href="https://zod.dev/" title="https://zod.dev/" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://zod.dev/
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;辅助：豆包&lt;/li&gt;
+&lt;li&gt;Zod 版本：4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;学习一个新的技术、框架或包，首先要解决的是事物的三个问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;是什么&lt;/li&gt;
+&lt;li&gt;做什么&lt;/li&gt;
+&lt;li&gt;有什么&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文就是围绕 Zod 回答上面的三个问题，并在后续的文章中介绍“怎么用”。&lt;/p&gt;</description></item><item><title>过年期间，除了吃喝、玩乐、锻炼，还要把 IT 技术再抓一抓。</title><link>https://a2htray.github.io/post/not-only-segment/2026-02-15/</link><pubDate>Sun, 15 Feb 2026 22:53:42 +0800</pubDate><guid>https://a2htray.github.io/post/not-only-segment/2026-02-15/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/not-only-segment/2026-02-15.png" alt="" /&gt;&lt;/p&gt;</description></item><item><title>构建 MCP 服务端</title><link>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</link><pubDate>Fri, 13 Feb 2026 09:30:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</guid><description>&lt;ul&gt;
 &lt;li&gt;学习来源：
 &lt;a href="https://modelcontextprotocol.io/docs/develop/build-server" title="https://modelcontextprotocol.io/docs/develop/build-server" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://modelcontextprotocol.io/docs/develop/build-server

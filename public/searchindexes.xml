@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>过年期间，除了吃喝、玩乐、锻炼，还要把 IT 技术再抓一抓。</title><url>/post/not-only-segment/2026-02-15/</url><categories><category>句否</category></categories><tags><tag>一句话</tag><tag>一张图</tag></tags><content type="html">  
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Zod 的学习与使用：Zod 基础知识（一）</title><url>/post/learn-zod/00_zod_triple/</url><categories><category>前端技术</category><category>Zod</category></categories><tags><tag>Zod</tag><tag>TypeScript</tag></tags><content type="html"><![CDATA[   学习资料： https://zod.dev/ 辅助：豆包 Zod 版本：4 学习一个新的技术、框架或包，首先要解决的是事物的三个问题：
+是什么 做什么 有什么 本文就是围绕 Zod 回答上面的三个问题，并在后续的文章中介绍“怎么用”。
+是什么 TypeScript-first schema validation with static type inference.
+一言以蔽之，Zod 是具有静态类型推导能力，以 TypeScript 优先的模式校验包。
+Zod 的出现，解决了“TS 类型编译后消息、无法校验运行时数据”的问题，由此可见，Zod 是将类型安全（模式校验）从编译时延伸到运行时的工具。
+编译时的类型安全由 TS 提供，如果使用的 JS，由 Zod 进行提供，这也就是上面“静态类型推导能力”的展现。而运行时的模式校验，则完全由 Zod 提供。
+做什么 模式校验，即是对数据结构的校验，针对这一点，Zod 提供以下的能力：
+校验数据类型与值规则 基础类型校验 复合类型校验 格式校验与逻辑判断 自动联动 TypeScript 类型：使用 z.infer 自定义校验规则 容错式校验与错误处理：parse -&amp;gt; 严格模式，safeParse -&amp;gt; 容错模式 数据转换：检验的同时可对数据进行转换 上述能力可适用于以下场景：
+前端表单校验 API 数据校验 配置文件校验 跨端/跨服务数据校验 数据库操作校验 总的来说，Zod 能做的事可归纳于 3 点：
+校验：校验任意来源数据的类型、格式、值规则，覆盖基础类型到复杂结构 联动：自动推导 TypeScript 类型，实现 “一份定义，同时满足编译时类型检查和运行时数据校验” 适配：支持自定义规则、容错处理、数据转换，能无缝适配前端表单、API 校验、配置校验等各类实战场景 有什么 Zod 的目的是验证数据结构，那么 Zod 就必然包含数据类型定义，有：
+基础数据类型（Primitive Type） 胁迫数据类型（Coercion Type） 胁迫，代表一定的强制，即值会做一次强制转换。
+基础数据类型包括：
+1 2 3 4 5 6 7 8 9 10 import * as z from &amp;#34;zod&amp;#34; z.string() z.number() z.bigint() z.boolean() …  ]]></content></entry><entry><title>过年期间，除了吃喝、玩乐、锻炼，还要把 IT 技术再抓一抓。</title><url>/post/not-only-segment/2026-02-15/</url><categories><category>句否</category></categories><tags><tag>一句话</tag><tag>一张图</tag></tags><content type="html">  
   </content></entry><entry><title>构建 MCP 服务端</title><url>/post/learn-mcp/build-mcp-server/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>摘录</tag><tag>Python</tag><tag>httpx</tag></tags><content type="html"><![CDATA[   学习来源： https://modelcontextprotocol.io/docs/develop/build-server 目标：构建一个“天气查询”的 MCP Server 编程语言：Python 天气接口文档： https://uapis.cn/docs/api-reference/get-misc-weather 前提条件 Python 的开发环境 MCP 主机（我使用的是 Cherry Studio） 注意事项 根据实现的 MCP Server 的类型不同，做日志功能时需要注意：
 对于 stdio 类型：不要把日志打印到标准输出，如 在 Python 中不要使用 print()，但可以将输出定向到 sys.stderr 在 JavaScript 中不要使用 console.log() 在 Go 中不要使用 fmt.Println() 类似在其它语言中，向标准输出写入的语法或方法 对于 HTTP-based 类型：标准输出作为日志记录是没有问题 IMPORTANT！！！：Use a logging library that writes to stderr or files.
 设置开发环境 我使用 conda 作为虚拟环境工具，并且使用 uv 作为包管理工具。
