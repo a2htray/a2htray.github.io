@@ -1,4 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 快乐冲浪与生活</title><link>https://a2htray.github.io/post/</link><description>Recent content in Posts on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 24 Feb 2026 23:23:06 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>Zod 的学习与使用：Zod 基础知识（一）</title><link>https://a2htray.github.io/post/learn-zod/00_zod_triple/</link><pubDate>Tue, 24 Feb 2026 23:23:06 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/00_zod_triple/</guid><description>&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 快乐冲浪与生活</title><link>https://a2htray.github.io/post/</link><description>Recent content in Posts on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 26 Feb 2026 17:02:42 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>Zod 的学习与使用：Record 数据结构（三）</title><link>https://a2htray.github.io/post/learn-zod/02_record_schema/</link><pubDate>Thu, 26 Feb 2026 17:02:42 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/02_record_schema/</guid><description>&lt;ul&gt;
+&lt;li&gt;学习资料：
+&lt;a href="https://zod.dev/api" title="https://zod.dev/api" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://zod.dev/api
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;辅助：豆包&lt;/li&gt;
+&lt;li&gt;Zod 版本：4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Zod 中定义的 Record 对应着 TS 中的 Record，用于构建键值对。&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-2"&gt;&lt;a class="lnlinks" href="#hl-0-2"&gt;2&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-3"&gt;&lt;a class="lnlinks" href="#hl-0-3"&gt;3&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-4"&gt;&lt;a class="lnlinks" href="#hl-0-4"&gt;4&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-5"&gt;&lt;a class="lnlinks" href="#hl-0-5"&gt;5&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-6"&gt;&lt;a class="lnlinks" href="#hl-0-6"&gt;6&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-7"&gt;&lt;a class="lnlinks" href="#hl-0-7"&gt;7&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-8"&gt;&lt;a class="lnlinks" href="#hl-0-8"&gt;8&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="kr"&gt;as&lt;/span&gt; &lt;span class="nx"&gt;z&lt;/span&gt; &lt;span class="kr"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zod&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;StudentSchema&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;record&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="nx"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;Student&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;z&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;infer&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;typeof&lt;/span&gt; &lt;span class="na"&gt;StudentSchema&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 等价于
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;type&lt;/span&gt; &lt;span class="nx"&gt;Student&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Record&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;string&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id="json-和对象"&gt;JSON 和对象
+&lt;a class="header-anchor" href="#json-%e5%92%8c%e5%af%b9%e8%b1%a1"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;TS 中 Record 与 JSON 和对象相似，对应的概念如下：&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：定义模式（二）</title><link>https://a2htray.github.io/post/learn-zod/01_define_schema/</link><pubDate>Wed, 25 Feb 2026 15:09:54 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/01_define_schema/</guid><description>&lt;ul&gt;
+&lt;li&gt;学习资料：
+&lt;a href="https://zod.dev/api" title="https://zod.dev/api" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://zod.dev/api
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;辅助：豆包&lt;/li&gt;
+&lt;li&gt;Zod 版本：4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;模式，也就是数据结构，使用 Zod 时，我们要先定义模式，即定义数据结构的规则，然后调用 &lt;code&gt;.parse&lt;/code&gt; 或 &lt;code&gt;safeParse&lt;/code&gt; 进行校验。&lt;/p&gt;
+&lt;h2 id="开发环境的搭建"&gt;开发环境的搭建
+&lt;a class="header-anchor" href="#%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e7%9a%84%e6%90%ad%e5%bb%ba"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;本节要搭建一个能运行 Zod 库的 TypeScript 开发环境，步骤如下：&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：Zod 基础知识（一）</title><link>https://a2htray.github.io/post/learn-zod/00_zod_triple/</link><pubDate>Tue, 24 Feb 2026 23:23:06 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/00_zod_triple/</guid><description>&lt;ul&gt;
 &lt;li&gt;学习资料：
 &lt;a href="https://zod.dev/" title="https://zod.dev/" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://zod.dev/
