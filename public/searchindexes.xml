@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Zod 的学习与使用：Record 数据结构（三）</title><url>/post/learn-zod/02_record_schema/</url><categories><category>前端技术</category><category>Zod</category></categories><tags><tag>Zod</tag><tag>TypeScript</tag></tags><content type="html"><![CDATA[   学习资料： https://zod.dev/api 辅助：豆包 Zod 版本：4 Zod 中定义的 Record 对应着 TS 中的 Record，用于构建键值对。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>下午做了力量训练，又做了 10km 跑步/爬坡，自己做点吃的，打个卡。</title><url>/post/not-only-segment/2026-03-01/</url><categories><category>句否</category></categories><tags><tag>一句话</tag><tag>一张图</tag></tags><content type="html">  
+  </content></entry><entry><title>MQTT：基础知识（一）</title><url>/post/learn-mqtt/00_mqtt_basic/</url><categories><category>后端技术</category><category>MQTT</category></categories><tags><tag>MQTT</tag></tags><content type="html"><![CDATA[  MQTT 是什么 MQTT（Message Queuing Telemetry Transport，消息队列遥测传输）是一种轻量级、基于发布 / 订阅（Pub/Sub）模式的应用层网络协议，专为低带宽、高延迟、不稳定的网络环境（如物联网、嵌入式设备）设计。
+MQTT 的特点，如下：
+轻量：协议头最小仅 2 字节，客户端代码体积小 低功耗：采用长连接 + 心跳机制，减少频繁建立连接的资源消耗 可靠：支持消息质量等级（QoS），保证不同场景下的消息传输可靠性 灵活：支持一对多、多对多通信 凡是&amp;quot;设备多、带宽小、网络不稳定、低功耗、实时上报/下发、一对多通信&amp;ldquo;的地方，几乎都可以用到 MQTT。
+对比 RabbitMQ 对比 MQTT 和 RabbitMQ 的核心差异，可以从设计定位、核心特性、适用场景三个维度进行说明。
+设计定位
+MQTT 是轻量级物联网通信协议，专为海量轻量级设备设计，核心是设备端和云端双向通信的实时消息传输。RabbitMQ 是通用型消息中间件，基于 AMQP 协议，专为服务器和应用层的高可靠、复杂消息路由设计，核心是系统间的业务消息解耦。
+MQTT：设备端与云端双向通信的实时传输 RabbitMQ：系统间的业务解耦 核心特性
+特性 MQTT RabbitMQ 通信模式 单一：只有发布/订阅一种核心模式 丰富：除了发布/订阅，还支持点对点（P2P）、请求-响应、延迟队列等 连接能力 海量轻型：单台服务器可支撑 100 万 + 设备长连接，每个连接仅占用几 KB 内存 少量重型：单台服务器支撑万级～十万级连接（服务器端应用），每个连接占用内存 MB 级 可靠性 基础：通过 QoS 0/1/2 保证消息传输可靠性，仅覆盖 “消息是否送达” 的基础需求 极致：提供消息持久化、生产者确认、消费者确认、死信队列、事务等全套可靠性机制 适用场景
+不同的特性适用不同的场景，MQTT 适用于涉及硬件设备、低功耗/低带宽、数据上报/指令下发、无需复杂消息路由的应用场景，而 RabbitMQ 适用于纯服务器/应用层通信、复杂消息分发规则、可靠性要求高的应用场景。
+结合 LLM MQTT 是 LLM 与物理世界连接的桥梁，沟通过流程如下：
+flowchart LR id1([设备数据]) --&gt; id2(MQTT) --&gt; id3([LLM 理解意图 …  ]]></content></entry><entry><title>Zod 的学习与使用：Record 数据结构（三）</title><url>/post/learn-zod/02_record_schema/</url><categories><category>前端技术</category><category>Zod</category></categories><tags><tag>Zod</tag><tag>TypeScript</tag></tags><content type="html"><![CDATA[   学习资料： https://zod.dev/api 辅助：豆包 Zod 版本：4 Zod 中定义的 Record 对应着 TS 中的 Record，用于构建键值对。
 1 2 3 4 5 6 7 8 import * as z from &#39;zod&#39; const StudentSchema = z.record(z.string(), z.string()) type Student = z.infer&lt;typeof StudentSchema&gt; // 等价于 type Student = Record&lt;string, string&gt; JSON 和对象 TS 中 Record 与 JSON 和对象相似，对应的概念如下：
 Record：编译时的类型约束（类型工具），是对 “键值对对象” 的类型描述 JSON：文本格式（字符串），是数据传输 / 存储的 “序列化标准” 对象：运行时的数据结构（实体），是编程语言层面的 “键值对集合” Record 和对象的键名规则支持字符串 / 数字 / 布尔 / Symbol，但都会转换成字符串，而 JSON 的键名规则，仅支持双引号包裹的字符串。
 而 Zod 的 Record 是 TS Record 的运行时校验实现。
