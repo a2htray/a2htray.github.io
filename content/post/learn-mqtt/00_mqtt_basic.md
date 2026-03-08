@@ -60,3 +60,8 @@ MQTT 在 LLM 体系中的作用：
 3. （<span style="font-weight: bold; background-color: yellow;">依赖</span>）适配 LLM + 物联网的弱网、低功耗场景：边缘端设备性能受限、弱网络条件
 
 MQTT 主要用来让 LLM 跟现实世界打通。设备通过 MQTT 把状态、语音、传感器数据传给 LLM，LLM 理解意图后，再通过 MQTT 下发控制指令到设备。它轻量、稳定、适合弱网和海量设备，是 LLM 实现感知和控制物理世界的关键通信协议。
+
+## 资源
+
+* [MQTT 协议快速入门 2025：基础知识和实用教程](https://www.emqx.com/zh/blog/the-easiest-guide-to-getting-started-with-mqtt)
+* 

@@ -1,4 +1,61 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2026 23:43:21 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>下午做了力量训练，又做了 10km 跑步/爬坡，自己做点吃的，打个卡。</title><link>https://a2htray.github.io/post/not-only-segment/2026-03-01/</link><pubDate>Sun, 01 Mar 2026 23:43:21 +0800</pubDate><guid>https://a2htray.github.io/post/not-only-segment/2026-03-01/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/not-only-segment/2026-03-01_234849_473.png" alt="" /&gt;&lt;/p&gt;</description></item><item><title>MQTT：基础知识（一）</title><link>https://a2htray.github.io/post/learn-mqtt/00_mqtt_basic/</link><pubDate>Thu, 26 Feb 2026 23:36:01 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/00_mqtt_basic/</guid><description>&lt;h2 id="mqtt-是什么"&gt;MQTT 是什么
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Mar 2026 18:41:08 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>MySQL OR 查询优化为 UNION/UNION AL 验证</title><link>https://a2htray.github.io/post/learn-db/01_or_operation_testing/</link><pubDate>Sun, 08 Mar 2026 18:41:08 +0800</pubDate><guid>https://a2htray.github.io/post/learn-db/01_or_operation_testing/</guid><description>&lt;p&gt;验证目标：在特定场景下（OR 连接不同字段的条件），将 OR 查询拆分为 UNION ALL 能显著提升查询效率。&lt;/p&gt;
+&lt;h2 id="通过-docker-运行-mysql-服务"&gt;通过 Docker 运行 MySQL 服务
+&lt;a class="header-anchor" href="#%e9%80%9a%e8%bf%87-docker-%e8%bf%90%e8%a1%8c-mysql-%e6%9c%8d%e5%8a%a1"&gt;&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt; 1&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-2"&gt;&lt;a class="lnlinks" href="#hl-0-2"&gt; 2&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-3"&gt;&lt;a class="lnlinks" href="#hl-0-3"&gt; 3&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-4"&gt;&lt;a class="lnlinks" href="#hl-0-4"&gt; 4&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-5"&gt;&lt;a class="lnlinks" href="#hl-0-5"&gt; 5&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-6"&gt;&lt;a class="lnlinks" href="#hl-0-6"&gt; 6&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-7"&gt;&lt;a class="lnlinks" href="#hl-0-7"&gt; 7&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-8"&gt;&lt;a class="lnlinks" href="#hl-0-8"&gt; 8&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-9"&gt;&lt;a class="lnlinks" href="#hl-0-9"&gt; 9&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-10"&gt;&lt;a class="lnlinks" href="#hl-0-10"&gt;10&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ docker pull mysql:8.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ docker run -d &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt; --name mysql-or-testing &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt; -p 3306:3306 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt; -e &lt;span class="nv"&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;123456&lt;/span&gt; &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt; -e &lt;span class="nv"&gt;MYSQL_CHARACTER_SET_SERVER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;utf8mb4 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt; -e &lt;span class="nv"&gt;MYSQL_COLLATION_SERVER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;utf8mb4_unicode_ci &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt; -v mysql_data:/var/lib/mysql &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt; --restart&lt;span class="o"&gt;=&lt;/span&gt;always &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="se"&gt;&lt;/span&gt; mysql:8.0&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;查看服务运行状态：&lt;/p&gt;</description></item><item><title>MySQL 查询优化技巧</title><link>https://a2htray.github.io/post/learn-db/00_mysql_query_optimizing/</link><pubDate>Fri, 06 Mar 2026 09:18:58 +0800</pubDate><guid>https://a2htray.github.io/post/learn-db/00_mysql_query_optimizing/</guid><description>&lt;p&gt;基础查询、关联查询、排序与分组、特殊场景、索引设计&lt;/p&gt;
+&lt;h2 id="基础查询优化"&gt;基础查询优化
+&lt;a class="header-anchor" href="#%e5%9f%ba%e7%a1%80%e6%9f%a5%e8%af%a2%e4%bc%98%e5%8c%96"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;🎯 目标：规避全表扫描、减少网络 / 内存开销，让查询更轻量化&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;font color="blue"&gt;只查所需字段，拒绝 SELECT *&lt;/font&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;❌ SELECT * FROM users;&lt;/p&gt;
+&lt;p&gt;✅ SELECT id, name, phone FROM users;&lt;/p&gt;</description></item><item><title>MQTT：Mosquitto 开源客户端 terdia/mqttui（三）</title><link>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</link><pubDate>Wed, 04 Mar 2026 17:15:48 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</guid><description>&lt;p&gt;项目地址：
+&lt;a href="https://github.com/terdia/mqttui" title="https://github.com/terdia/mqttui" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://github.com/terdia/mqttui
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;terdia/mqttui&lt;/code&gt; 是基于 Flask 的一款开源 Web 应用，用于实时可视化展示 MQTT（消息队列遥测传输）的消息流。它支持用户通过简洁直观的 Web 界面监控 MQTT 主题、发布消息，并查看消息统计信息。&lt;/p&gt;</description></item><item><title>JavaScript 中的 async/await</title><link>https://a2htray.github.io/post/fontend/javascript-es7-async-await/</link><pubDate>Wed, 04 Mar 2026 10:29:27 +0800</pubDate><guid>https://a2htray.github.io/post/fontend/javascript-es7-async-await/</guid><description>&lt;p&gt;&lt;code&gt;async/await&lt;/code&gt; 是基于 Promise、以同步方式编写异步代码的语法糖。&lt;/p&gt;
+&lt;p&gt;简单来说：&lt;/p&gt;
+&lt;p&gt;async 放置在函数定义前，函数总是返回一个 Promise，返回值会自动包裹在已解析的 Promise 中。&lt;/p&gt;</description></item><item><title>MQTT：Docker 安装 MQTT 服务 Mosquitto（二）</title><link>https://a2htray.github.io/post/learn-mqtt/01_docker_install_mqtt_mosquitto/</link><pubDate>Tue, 03 Mar 2026 11:05:44 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/01_docker_install_mqtt_mosquitto/</guid><description>&lt;p&gt;Mosquitto 是 MQTT 的开源实现之一，GitHub 地址 
+&lt;a href="https://github.com/eclipse-mosquitto/mosquitto" title="https://github.com/eclipse-mosquitto/mosquitto" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://github.com/eclipse-mosquitto/mosquitto
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;，介绍信息如下：&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Mosquitto is an open source implementation of a server for version 5.0, 3.1.1, and 3.1 of the MQTT protocol. It also includes a C and C++ client library, the mosquitto_pub mosquitto_rr, and mosquitto_sub utilities for publishing and subscribing, and the mosquitto_ctrl, mosquitto_signal, and mosquitto_passwd applications for helping administer the broker.&lt;/p&gt;</description></item><item><title>下午做了力量训练，又做了 10km 跑步/爬坡，自己做点吃的，打个卡。</title><link>https://a2htray.github.io/post/not-only-segment/2026-03-01/</link><pubDate>Sun, 01 Mar 2026 23:43:21 +0800</pubDate><guid>https://a2htray.github.io/post/not-only-segment/2026-03-01/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/not-only-segment/2026-03-01_234849_473.png" alt="" /&gt;&lt;/p&gt;</description></item><item><title>MQTT：基础知识（一）</title><link>https://a2htray.github.io/post/learn-mqtt/00_mqtt_basic/</link><pubDate>Thu, 26 Feb 2026 23:36:01 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/00_mqtt_basic/</guid><description>&lt;h2 id="mqtt-是什么"&gt;MQTT 是什么
 &lt;a class="header-anchor" href="#mqtt-%e6%98%af%e4%bb%80%e4%b9%88"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;MQTT（Message Queuing Telemetry Transport，消息队列遥测传输）是一种&lt;strong&gt;轻量级&lt;/strong&gt;、&lt;strong&gt;基于发布 / 订阅（Pub/Sub）模式&lt;/strong&gt;的应用层网络协议，&lt;span style="font-weight: bold; background-color: yellow;"&gt;专为低带宽、高延迟、不稳定的网络环境（如物联网、嵌入式设备）设计&lt;/span&gt;。&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：Record 数据结构（三）</title><link>https://a2htray.github.io/post/learn-zod/02_record_schema/</link><pubDate>Thu, 26 Feb 2026 17:02:42 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/02_record_schema/</guid><description>&lt;ul&gt;
 &lt;li&gt;学习资料：

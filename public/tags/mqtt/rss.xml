@@ -1,3 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MQTT on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/mqtt/</link><description>Recent content in MQTT on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 26 Feb 2026 23:36:01 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/mqtt/rss.xml" rel="self" type="application/rss+xml"/><item><title>MQTT：基础知识（一）</title><link>https://a2htray.github.io/post/learn-mqtt/00_mqtt_basic/</link><pubDate>Thu, 26 Feb 2026 23:36:01 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/00_mqtt_basic/</guid><description>&lt;h2 id="mqtt-是什么"&gt;MQTT 是什么
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MQTT on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/mqtt/</link><description>Recent content in MQTT on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 04 Mar 2026 17:15:48 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/mqtt/rss.xml" rel="self" type="application/rss+xml"/><item><title>MQTT：Mosquitto 开源客户端 terdia/mqttui（三）</title><link>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</link><pubDate>Wed, 04 Mar 2026 17:15:48 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</guid><description>&lt;p&gt;项目地址：
+&lt;a href="https://github.com/terdia/mqttui" title="https://github.com/terdia/mqttui" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://github.com/terdia/mqttui
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;terdia/mqttui&lt;/code&gt; 是基于 Flask 的一款开源 Web 应用，用于实时可视化展示 MQTT（消息队列遥测传输）的消息流。它支持用户通过简洁直观的 Web 界面监控 MQTT 主题、发布消息，并查看消息统计信息。&lt;/p&gt;</description></item><item><title>MQTT：Docker 安装 MQTT 服务 Mosquitto（二）</title><link>https://a2htray.github.io/post/learn-mqtt/01_docker_install_mqtt_mosquitto/</link><pubDate>Tue, 03 Mar 2026 11:05:44 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/01_docker_install_mqtt_mosquitto/</guid><description>&lt;p&gt;Mosquitto 是 MQTT 的开源实现之一，GitHub 地址 
+&lt;a href="https://github.com/eclipse-mosquitto/mosquitto" title="https://github.com/eclipse-mosquitto/mosquitto" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://github.com/eclipse-mosquitto/mosquitto
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;，介绍信息如下：&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Mosquitto is an open source implementation of a server for version 5.0, 3.1.1, and 3.1 of the MQTT protocol. It also includes a C and C++ client library, the mosquitto_pub mosquitto_rr, and mosquitto_sub utilities for publishing and subscribing, and the mosquitto_ctrl, mosquitto_signal, and mosquitto_passwd applications for helping administer the broker.&lt;/p&gt;</description></item><item><title>MQTT：基础知识（一）</title><link>https://a2htray.github.io/post/learn-mqtt/00_mqtt_basic/</link><pubDate>Thu, 26 Feb 2026 23:36:01 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/00_mqtt_basic/</guid><description>&lt;h2 id="mqtt-是什么"&gt;MQTT 是什么
 &lt;a class="header-anchor" href="#mqtt-%e6%98%af%e4%bb%80%e4%b9%88"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;MQTT（Message Queuing Telemetry Transport，消息队列遥测传输）是一种&lt;strong&gt;轻量级&lt;/strong&gt;、&lt;strong&gt;基于发布 / 订阅（Pub/Sub）模式&lt;/strong&gt;的应用层网络协议，&lt;span style="font-weight: bold; background-color: yellow;"&gt;专为低带宽、高延迟、不稳定的网络环境（如物联网、嵌入式设备）设计&lt;/span&gt;。&lt;/p&gt;</description></item></channel></rss>

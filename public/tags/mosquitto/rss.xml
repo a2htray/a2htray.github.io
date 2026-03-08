@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mosquitto on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/mosquitto/</link><description>Recent content in Mosquitto on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 04 Mar 2026 17:15:48 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/mosquitto/rss.xml" rel="self" type="application/rss+xml"/><item><title>MQTT：Mosquitto 开源客户端 terdia/mqttui（三）</title><link>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</link><pubDate>Wed, 04 Mar 2026 17:15:48 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</guid><description>&lt;p&gt;项目地址：
+&lt;a href="https://github.com/terdia/mqttui" title="https://github.com/terdia/mqttui" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://github.com/terdia/mqttui
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;terdia/mqttui&lt;/code&gt; 是基于 Flask 的一款开源 Web 应用，用于实时可视化展示 MQTT（消息队列遥测传输）的消息流。它支持用户通过简洁直观的 Web 界面监控 MQTT 主题、发布消息，并查看消息统计信息。&lt;/p&gt;</description></item></channel></rss>

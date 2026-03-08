@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>下午做了力量训练，又做了 10km 跑步/爬坡，自己做点吃的，打个卡。</title><url>/post/not-only-segment/2026-03-01/</url><categories><category>句否</category></categories><tags><tag>一句话</tag><tag>一张图</tag></tags><content type="html">  
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>MySQL OR 查询优化为 UNION/UNION AL 验证</title><url>/post/learn-db/01_or_operation_testing/</url><categories><category>后端技术</category><category>MySQL</category></categories><tags><tag>MySQL</tag><tag>查询优化</tag><tag>OR 查询</tag><tag>UNION 操作</tag></tags><content type="html"><![CDATA[  验证目标：在特定场景下（OR 连接不同字段的条件），将 OR 查询拆分为 UNION ALL 能显著提升查询效率。
+通过 Docker 运行 MySQL 服务 1 2 3 4 5 6 7 8 9 10 $ docker pull mysql:8.0 $ docker run -d \ --name mysql-or-testing \ -p 3306:3306 \ -e MYSQL_ROOT_PASSWORD=123456 \ -e MYSQL_CHARACTER_SET_SERVER=utf8mb4 \ -e MYSQL_COLLATION_SERVER=utf8mb4_unicode_ci \ -v mysql_data:/var/lib/mysql \ --restart=always \ mysql:8.0 查看服务运行状态：
+1 2 3 $ docker ps -a CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES 3ec8934547ce mysql:8.0 &#34;docker-entrypoint.s…&#34; 7 seconds ago Up 7 seconds 0.0.0.0:3306-&gt;3306/tcp, 33060/tcp mysql-or-testing 创建测试表，插入大量数据 进入容器内的 MySQL 终端：
+1 2 $ docker exec -it mysql-or-testing /bin/bash bash-5.1# mysql -uroot -p123456 创建测试数据库
+1 2 CREATE DATABASE IF NOT EXISTS test_optimize; USE test_optimize; 创建用户行为表，模拟真实业务数据：
+1 2 3 4 5 6 CREATE TABLE user_behavior ( id BIGINT PRIMARY KEY AUTO_INCREMENT, user_id BIGINT NOT NULL, order_id BIGINT NOT NULL, create_time DATETIME NOT NULL ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4; 创建一个插入测试数据的存储过程：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 DELIMITER // CREATE PROCEDURE insert_test_data() BEGIN DECLARE i INT DEFAULT 1; WHILE i &lt;= 1000 DO INSERT INTO user_behavior (user_id, order_id, create_time) SELECT FLOOR(RAND() * 1000000), FLOOR(RAND() * 10000000), DATE_ADD(&#39;2026-01-01&#39;, INTERVAL FLOOR(RAND() * 365) DAY) FROM information_schema.tables LIMIT 1000; SET i = i + 1; END WHILE; END // DELIMITER ; 调用 insert_test_data 存储过程，并查看插入的记录数
+1 2 3 4 5 6 -- 多次调用，使其记录数尽可能多 CALL insert_test_data(); CALL insert_test_data(); CALL insert_test_data(); SELECT COUNT(*) FROM user_behavior; 共插入 990000 条记录。给 user_behavior 表的 user_id 和 order_id 创建索引：
+1 2 CREATE INDEX idx_user_id ON user_behavior(user_id); CREATE INDEX idx_order_id ON user_behavior(order_id); 验证 逻辑：查询 user_id = 929195 或 order_id = 9804737 的记录。
+1 2 3 4 5 6 7 8 9 10 11 12 -- 1. 开启执行时间显示 SET profiling = 1; -- 2. 执行OR查询 SELECT * FROM user_behavior WHERE user_id = 929195 OR order_id = 9804737; -- 3. 查看执行计划 EXPLAIN SELECT * FROM user_behavior WHERE user_id = 929195 OR order_id = 9804737\G; -- 4. 查看查询耗时 SHOW PROFILES; 执行计划的输出：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 *************************** 1. row *************************** id: 1 select_type: SIMPLE table: user_behavior partitions: NULL type: index_merge possible_keys: idx_user_id,idx_order_id key: idx_user_id,idx_order_id key_len: 8,8 ref: NULL rows: 4 filtered: 100.00 Extra: Using union(idx_user_id,idx_order_id); Using where 1 row in set, 1 warning (0.00 sec) 类型为索引合并（index_merge）。
+执行时间为：0.00763325。
+将查询语句调整为 UNION 方式：
+1 2 3 4 5 6 7 8 9 10 11 12 13 -- 1. 执行UNION ALL查询 SELECT * FROM user_behavior WHERE user_id = 929195 UNION ALL SELECT * FROM user_behavior WHERE order_id = 9804737; -- 2. 查看执行计划 EXPLAIN SELECT * FROM user_behavior WHERE user_id = 929195 UNION ALL SELECT * FROM user_behavior WHERE order_id = 9804737\G; -- 3. 查看查询耗时（对比OR版本） SHOW PROFILES; 执行计划的输出：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 *************************** 1. row *************************** id: 1 select_type: PRIMARY table: user_behavior partitions: NULL type: ref possible_keys: idx_user_id key: idx_user_id key_len: 8 ref: const rows: 2 filtered: 100.00 Extra: NULL *************************** 2. row *************************** id: 2 select_type: UNION table: user_behavior partitions: NULL type: ref possible_keys: idx_order_id key: idx_order_id key_len: 8 ref: const rows: 2 filtered: 100.00 Extra: NULL 2 rows in set, 1 warning (0.00 sec) 执行计划显示有两个查询，类型是非唯一索引。
+执行时间为：0.00937475s。
+总结 UNION/UNION ALL 操作反而略慢于 OR 查询。
+在 MySQL 8 及两个过滤字段都有索引的情况下，使用 UNION/UNION ALL 操作并不会明显提升查询速度。原因在于：
+MySQL 5.6 以前无法利用多个索引字段，而之后有“索引合并 index_merge” 优化器识别到 OR 条件可以拆分为两个独立索引的查询，自动应用了“索引合并 index_merge”   ]]></content></entry><entry><title>MySQL 查询优化技巧</title><url>/post/learn-db/00_mysql_query_optimizing/</url><categories><category>后端技术</category><category>MySQL</category></categories><tags><tag>MySQL</tag><tag>查询优化</tag></tags><content type="html"><![CDATA[  基础查询、关联查询、排序与分组、特殊场景、索引设计
+基础查询优化 🎯 目标：规避全表扫描、减少网络 / 内存开销，让查询更轻量化
+只查所需字段，拒绝 SELECT * ❌ SELECT * FROM users;
+✅ SELECT id, name, phone FROM users;
+禁止在索引列做运算 / 函数操作 ❌ WHERE YEAR(create_time) = 2026;
+✅ WHERE create_time &amp;gt;= &amp;lsquo;2026-01-01&amp;rsquo; AND create_time &amp;lt; &amp;lsquo;2027-01-01&amp;rsquo;;
+优化 LIKE 查询，避免前缀模糊 ❌ WHERE name LIKE &amp;lsquo;%张%&amp;rsquo;;
+✅ WHERE name LIKE &amp;lsquo;张%&amp;rsquo;;
+优化 OR 查询，拆分为 UNION/UNION ALL ❌ SELECT * FROM users WHERE name = &amp;lsquo;张三&amp;rsquo; OR age = 25;
+✅ SELECT * FROM users WHERE name = &amp;lsquo;张三&amp;rsquo; UNION ALL SELECT * FROM users WHERE age = 25;
+已验证，在 MySQL 5.5 及以前版本中，该优化点有效，见 MySQL OR 查询优化为 UNION/UNION AL 验证 。
+优化 IN 查询，控制列表值数量 ❌ IN 后跟 2000 个值
+✅ 将 2000 个值拆分为 2 个 IN 查询，各含 1000 个值，或用 JOIN 替代
+LIMIT 必搭配 ORDER BY，避免结果无序 ❌ SELECT * FROM table LIMIT 10;
+✅ SELECT * FROM table ORDER BY id LIMIT 10;
+关联查询优化 🎯 目标：减少嵌套循环次数、利用索引、避免临时表，提升多表关联效率
+小表驱动大表，降低循环次数 A 表 1000 条记录，B 表 100000 条记录
+❌ B JOIN A
+✅ A JOIN B
+JOIN 连接字段必须建立索引 SELECT o.* FROM users u JOIN orders o ON u.id = …  ]]></content></entry><entry><title>MQTT：Mosquitto 开源客户端 terdia/mqttui（三）</title><url>/post/learn-mqtt/02_mosquitto_clients/</url><categories><category>后端技术</category><category>MQTT</category></categories><tags><tag>MQTT</tag><tag>Docker</tag><tag>mosquitto</tag><tag>mqttui</tag></tags><content type="html"><![CDATA[  项目地址： https://github.com/terdia/mqttui terdia/mqttui 是基于 Flask 的一款开源 Web 应用，用于实时可视化展示 MQTT（消息队列遥测传输）的消息流。它支持用户通过简洁直观的 Web 界面监控 MQTT 主题、发布消息，并查看消息统计信息。
+提供 Docker 部署化方式。
+使用 docker-compose 的方式部署，docker-compose.yml 内容如下：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 services: mosquitto: image: eclipse-mosquitto:2 container_name: mosquitto ports: - 1883:1883 - 9001:9001 volumes: - ./.mosquitto/data:/mosquitto/data - ./.mosquitto/log:/mosquitto/log - ./.mosquitto/config:/mosquitto/config mqtt_web: image: terdia07/mqttui:v1.3.2 container_name: mqtt_web ports: - 5000:5000 environment: - MQTT_BROKER=mosquitto - MQTT_PORT=1883 depends_on: - mosquitto 镜像 terdia07/mqttui:v1.3.2 支持的 环境变量 ，有：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 - DEBUG=False - HOST=0.0.0.0 - PORT=5000 - MQTT_BROKER=mosquitto - MQTT_PORT=1883 - MQTT_USERNAME= - MQTT_PASSWORD= - MQTT_KEEPALIVE=60 - MQTT_VERSION=3.1.1 - SECRET_KEY=your-secret-key - LOG_LEVEL=INFO - MQTT_TOPICS=# - DB_ENABLED=True - DB_PATH=/app/data/mqtt_messages.db - DB_MAX_MESSAGES=10000 - DB_CLEANUP_DAYS=30 1 docker-compose -f docker-compose.yml up -d 1 docker-compose -f docker-compose.yml ps -a 1 2 3 NAME IMAGE COMMAND SERVICE CREATED STATUS PORTS mosquitto eclipse-mosquitto:2 &#34;/docker-entrypoint.…&#34; mosquitto 27 minutes ago Up 27 minutes 0.0.0.0:1883-&gt;1883/tcp, 0.0.0.0:9001-&gt;9001/tcp mqtt_web terdia07/mqttui:v1.3.2 &#34;/entrypoint.sh&#34; mqtt_web 27 minutes ago Up 27 minutes 0.0.0.0:5000-&gt;5000/tcp 访问 http://localhost:5000/ ，如下图：
+评价 在界面上操作了一下，一般般，不是很推荐，原因如下：
+只有一个页面，没有其它复杂功能操作 Message flow 的可视化，没什么用 有 BUG，如超出视角的内容无法滚动   ]]></content></entry><entry><title>JavaScript 中的 async/await</title><url>/post/fontend/javascript-es7-async-await/</url><categories><category>前端技术</category><category>JavaScript</category></categories><tags><tag>JavaScript</tag><tag>async/await</tag></tags><content type="html">  async/await 是基于 Promise、以同步方式编写异步代码的语法糖。
+简单来说：
+async 放置在函数定义前，函数总是返回一个 Promise，返回值会自动包裹在已解析的 Promise 中。
+await 让 JavaScript 等待 Promise 处理完成并返回结果。
+async 函数 async 关键字用于声明异步函数。
+异步函数声明会创建一个 AsyncFunction 对象。每次调用异步函数时，它都会返回一个新的 Promise —— 该 Promise 会在异步函数返回值时兑现（resolve），或在异步函数内部抛出未捕获异常时拒绝（reject）。
+异步函数可包含零个或多个 await 表达式。await 表达式会暂停函数执行，直至其等待的 Promise 兑现（fulfilled）或拒绝（rejected），从而让返回 Promise 的函数表现得如同同步函数一般。该 Promise 的兑现值会被视作 await 表达式的返回值。使用 async 和 await 能够在异步代码中使用常规的 try/catch 代码块（捕获异常）。
+await 语法 使用格式：
+1 await expression 参数：
+expression：Promise 对旬，或 thenable 对象，或其它须等待的值 返回值：
+Promise 或 thenable 对象的兑现值，若该表达式并非 thenable 类型，则为表达式自身的值。
+记住 3 点 async 函数总是返回一个 Promise await 只能在 async 函数中使用 await 等待一个 Promise 完成 使用 async/await 的好处 提高代码的可读性 易于调试、编写测试用例 便于错误处理 减少内嵌 资源 面试官：说说async/await？我差点翻车！原来还可以这么用 JavaScript.info Async/await When to Use Async/Await vs Promises in JavaScript MDN async MDN await   </content></entry><entry><title>MQTT：Docker 安装 MQTT 服务 Mosquitto（二）</title><url>/post/learn-mqtt/01_docker_install_mqtt_mosquitto/</url><categories><category>后端技术</category><category>MQTT</category></categories><tags><tag>MQTT</tag><tag>Docker</tag></tags><content type="html">  Mosquitto 是 MQTT 的开源实现之一，GitHub 地址 https://github.com/eclipse-mosquitto/mosquitto ，介绍信息如下：
+Mosquitto is an open source implementation of a server for version 5.0, 3.1.1, and 3.1 of the MQTT protocol. It also includes a C and C++ client library, the mosquitto_pub mosquitto_rr, and mosquitto_sub utilities for publishing and subscribing, and the mosquitto_ctrl, mosquitto_signal, and mosquitto_passwd applications for helping administer the broker.
+实现了 MQTT 的 5.0、3.1.1 和 3.1 版本 提供 C 和 C++ 的客户端调用库 mosquitto_pub、mosquitto_rr 用于订阅与发布 mosquitto_ctrl、mosquitto_signal、mosquitto_passwd 用于服务器管理 其它方式的安装见其官网文档 https://mosquitto.org/download/ 。
+快速使用 使用默认的配置运行 mosquitto：
+1 2 3 4 5 docker run -d \ --name mosquitto \ -p 1883:1883 \ -p 9001:9001 \ eclipse-mosquitto:2 端口 1883 处理标准 MQTT 连接 端口 9001 是 WebSocket 端口 在默认情况下，mosquitto 不接受外部 IP 的连接请求，所以需要对其进行配置。
+数据挂载与配置 创建 3 个目录，分别用于存储数据（data）、日志（log）和配置（config）。
+1 mkdir -p .mosquitto/{data,log,config} 在 .mosquitto/config 目录下创建 mosquitto.conf 文件，内容如下：
+1 2 3 4 5 6 …  </content></entry><entry><title>下午做了力量训练，又做了 10km 跑步/爬坡，自己做点吃的，打个卡。</title><url>/post/not-only-segment/2026-03-01/</url><categories><category>句否</category></categories><tags><tag>一句话</tag><tag>一张图</tag></tags><content type="html">  
   </content></entry><entry><title>MQTT：基础知识（一）</title><url>/post/learn-mqtt/00_mqtt_basic/</url><categories><category>后端技术</category><category>MQTT</category></categories><tags><tag>MQTT</tag></tags><content type="html"><![CDATA[  MQTT 是什么 MQTT（Message Queuing Telemetry Transport，消息队列遥测传输）是一种轻量级、基于发布 / 订阅（Pub/Sub）模式的应用层网络协议，专为低带宽、高延迟、不稳定的网络环境（如物联网、嵌入式设备）设计。
 MQTT 的特点，如下：
 轻量：协议头最小仅 2 字节，客户端代码体积小 低功耗：采用长连接 + 心跳机制，减少频繁建立连接的资源消耗 可靠：支持消息质量等级（QoS），保证不同场景下的消息传输可靠性 灵活：支持一对多、多对多通信 凡是&amp;quot;设备多、带宽小、网络不稳定、低功耗、实时上报/下发、一对多通信&amp;ldquo;的地方，几乎都可以用到 MQTT。

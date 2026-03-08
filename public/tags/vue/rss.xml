@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vue on 快乐冲浪与生活</title><link>http://localhost:1313/tags/vue/</link><description>Recent content in Vue on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Mar 2026 20:23:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/vue/rss.xml" rel="self" type="application/rss+xml"/><item><title>5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图</title><link>http://localhost:1313/post/learn-nuxt/00_5days_learn_nuxt/</link><pubDate>Sun, 08 Mar 2026 20:23:44 +0800</pubDate><guid>http://localhost:1313/post/learn-nuxt/00_5days_learn_nuxt/</guid><description>&lt;p&gt;5 天学习 Nuxt.js，主要以官方文档为主，对于不明白的地方则问下豆包，加深理解。&lt;/p&gt;
+&lt;p&gt;资源：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href="https://nuxt.com/docs/4.x/getting-started/introduction" title="官方 - 介绍" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 官方 - 介绍
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://nuxt.com/docs/4.x/getting-started/installation" title="官方 - 安装" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 官方 - 安装
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://nuxt.com/docs/4.x/getting-started/configuration" title="官方 - 配置" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 官方 - 配置
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://nuxt.com/docs/4.x/getting-started/views" title="官方 - 视图" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 官方 - 视图
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="介绍"&gt;介绍
+&lt;a class="header-anchor" href="#%e4%bb%8b%e7%bb%8d"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;Nu&lt;/p&gt;</description></item></channel></rss>
