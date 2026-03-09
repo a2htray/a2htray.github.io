@@ -1,4 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>前端技术 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/</link><description>Recent content in 前端技术 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 04 Mar 2026 10:29:27 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/rss.xml" rel="self" type="application/rss+xml"/><item><title>JavaScript 中的 async/await</title><link>https://a2htray.github.io/post/fontend/javascript-es7-async-await/</link><pubDate>Wed, 04 Mar 2026 10:29:27 +0800</pubDate><guid>https://a2htray.github.io/post/fontend/javascript-es7-async-await/</guid><description>&lt;p&gt;&lt;code&gt;async/await&lt;/code&gt; 是基于 Promise、以同步方式编写异步代码的语法糖。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>前端技术 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/</link><description>Recent content in 前端技术 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Mar 2026 20:23:44 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/rss.xml" rel="self" type="application/rss+xml"/><item><title>5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图</title><link>https://a2htray.github.io/post/learn-nuxt/00_5days_learn_nuxt/</link><pubDate>Sun, 08 Mar 2026 20:23:44 +0800</pubDate><guid>https://a2htray.github.io/post/learn-nuxt/00_5days_learn_nuxt/</guid><description>&lt;p&gt;5 天学习 Nuxt.js，主要以官方文档为主，对于不明白的地方则问下豆包，加深理解。&lt;/p&gt;
+&lt;p&gt;资源：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href="https://nuxt.com/docs/4.x/getting-started/introduction" title="官方 - 介绍" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 官方 - 介绍
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://nuxt.com/docs/4.x/getting-started/installation" title="官方 - 安装" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 官方 - 安装
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://nuxt.com/docs/4.x/getting-started/configuration" title="官方 - 配置" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 官方 - 配置
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://nuxt.com/docs/4.x/getting-started/views" title="官方 - 视图" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ 官方 - 视图
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="介绍"&gt;介绍
+&lt;a class="header-anchor" href="#%e4%bb%8b%e7%bb%8d"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;em&gt;Nuxt is a free and open-source framework with an intuitive and extendable way to create type-safe, performant and
+production-grade full-stack web applications and websites with Vue.js.&lt;/em&gt;&lt;/p&gt;</description></item><item><title>JavaScript 中的 async/await</title><link>https://a2htray.github.io/post/fontend/javascript-es7-async-await/</link><pubDate>Wed, 04 Mar 2026 10:29:27 +0800</pubDate><guid>https://a2htray.github.io/post/fontend/javascript-es7-async-await/</guid><description>&lt;p&gt;&lt;code&gt;async/await&lt;/code&gt; 是基于 Promise、以同步方式编写异步代码的语法糖。&lt;/p&gt;
 &lt;p&gt;简单来说：&lt;/p&gt;
 &lt;p&gt;async 放置在函数定义前，函数总是返回一个 Promise，返回值会自动包裹在已解析的 Promise 中。&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：Record 数据结构（三）</title><link>https://a2htray.github.io/post/learn-zod/02_record_schema/</link><pubDate>Thu, 26 Feb 2026 17:02:42 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/02_record_schema/</guid><description>&lt;ul&gt;
 &lt;li&gt;学习资料：

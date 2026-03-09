@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-CN data-theme=light><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.152.2"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon-32x32.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple-touch-icon.png><meta itemprop=name content="5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图"><meta itemprop=description content="记录我的生活、工作与成长。"><meta name=description content="记录我的生活、工作与成长。"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="http://localhost:1313/imgs/my_avatar.jpg"><meta itemprop=keywords content="Nuxt.js,Vue"><meta property="og:type" content="article"><meta property="og:title" content="5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图"><meta property="og:description" content="记录我的生活、工作与成长。"><meta property="og:image" content="/imgs/my_avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="http://localhost:1313/post/learn-nuxt/00_5days_learn_nuxt/"><meta property="og:site_name" content="快乐冲浪与生活"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="a2htray"><meta property="article:published_time" content="2026-03-08 20:23:44 +0800 CST"><meta property="article:modified_time" content="2026-03-08 20:23:44 +0800 CST"><link type=text/css rel=stylesheet href=http://localhost:1313/js/3rd/font-awesome/6.7.2/css/all.min.css><link type=text/css rel=stylesheet href=http://localhost:1313/js/3rd/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=http://localhost:1313/js/3rd/viewerjs/1.11.6/viewer.min.css><link rel=stylesheet href="/css/main.css?=1772974817"><style type=text/css>.post-footer hr:after{content:"~ 我可是有底线的哟 ~"}.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><link rel=stylesheet type=text/css href="/css/custom_style.css?=1772974817"><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return 0[0];const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),0[0]):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图 - 快乐冲浪与生活</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<!doctype html><html lang=zh-CN data-theme=light><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.152.2"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon-32x32.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple-touch-icon.png><meta itemprop=name content="5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图"><meta itemprop=description content="记录我的生活、工作与成长。"><meta name=description content="记录我的生活、工作与成长。"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://a2htray.github.io/imgs/my_avatar.jpg"><meta itemprop=keywords content="Nuxt.js,Vue"><meta property="og:type" content="article"><meta property="og:title" content="5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图"><meta property="og:description" content="记录我的生活、工作与成长。"><meta property="og:image" content="/imgs/my_avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://a2htray.github.io/post/learn-nuxt/00_5days_learn_nuxt/"><meta property="og:site_name" content="快乐冲浪与生活"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="a2htray"><meta property="article:published_time" content="2026-03-08 20:23:44 +0800 CST"><meta property="article:modified_time" content="2026-03-08 20:23:44 +0800 CST"><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/font-awesome/6.7.2/css/all.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.css><link rel=stylesheet href="/css/main.min.css?=1773022286"><style type=text/css>.post-footer hr:after{content:"~ 我可是有底线的哟 ~"}.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><link rel=stylesheet type=text/css href="/css/custom_style.css?=1773022286"><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return 0[0];const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),0[0]):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图 - 快乐冲浪与生活</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
 <span class=toggle-line></span>
 <span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>快乐冲浪与生活</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>多体验、多体会、多体悟</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-tags"><a href=/tags/ class=hvr-icon-pulse rel=section><i class="fa fa-tag hvr-icon"></i>标签</a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
 <span class=toggle-line></span>
@@ -7,7 +7,7 @@
 <span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>112</span>
 <span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/a2htray title="Github → https://github.com/a2htray" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
 Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
-<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/hugo-next rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentColor" class="octo-body"/></svg></a><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=http://localhost:1313/post/learn-nuxt/00_5days_learn_nuxt/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/my_avatar.jpg"><meta itemprop=name content="a2htray"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="a2htray"><meta itemprop=description content="记录我的生活、工作与成长。"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图"><meta itemprop=description content="5 天学习 Nuxt.js，主要以官方文档为主，对于不明白的地方则问下豆包，加深理解。
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/hugo-next rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentColor" class="octo-body"/></svg></a><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://a2htray.github.io/post/learn-nuxt/00_5days_learn_nuxt/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/my_avatar.jpg"><meta itemprop=name content="a2htray"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="a2htray"><meta itemprop=description content="记录我的生活、工作与成长。"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图"><meta itemprop=description content="5 天学习 Nuxt.js，主要以官方文档为主，对于不明白的地方则问下豆包，加深理解。
 资源：
 
 
@@ -50,10 +50,10 @@ production-grade full-stack web applications and websites with Vue.js."></span><
 </span><span class=post-meta-item-text title=分类于>分类于：
 </span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/nuxt.js/ itemprop=url rel=index><span itemprop=name>前端技术/Nuxt.js</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="fas fa-solid fa-file-word"></i>
 </span><span class=post-meta-item-text>字数：</span>
-<span>676</span>
+<span>2484</span>
 </span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="fas fa-solid fa-clock"></i>
 </span><span class=post-meta-item-text>阅读：&ap;</span>
-<span>2分钟</span>
+<span>5分钟</span>
 </span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="fas fa-solid fa-eye"></i>
 </span><span class=post-meta-item-text>浏览：
 </span><span id=busuanzi_value_page_pv data-path=/post/learn-nuxt/00_5days_learn_nuxt/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><p>5 天学习 Nuxt.js，主要以官方文档为主，对于不明白的地方则问下豆包，加深理解。</p><p>资源：</p><ol><li><a href=https://nuxt.com/docs/4.x/getting-started/introduction title="官方 - 介绍" rel="noopener external nofollow noreferrer" target=_blank class=exturl>官方 - 介绍
@@ -110,22 +110,287 @@ production-grade full-stack web applications and websites with Vue.js.</em></p><
 </span></span><span class=line><span class=cl>  <span class=p>},</span>
 </span></span><span class=line><span class=cl><span class=p>})</span></span></span></code></pre></td></tr></table></div></div><p>在构建应用时，使用 &ndash;envName 选项指定环境，如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a class=lnlinks href=#hl-4-1>1</a>
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ nuxt build --envName staging</span></span></code></pre></td></tr></table></div></div><h3 id=环境变量>环境变量
-<a class=header-anchor href=#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f></a></h3><h3 id=应用配置>应用配置
-<a class=header-anchor href=#%e5%ba%94%e7%94%a8%e9%85%8d%e7%bd%ae></a></h3><h3 id=runtimeconfig-vs-appconfig>runtimeConfig vs. app.config
-<a class=header-anchor href=#runtimeconfig-vs-appconfig></a></h3><h2 id=视图>视图
+<a class=header-anchor href=#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f></a></h3><p>字段 runtimeConfig 定义了应用程序可访问的值（类似于环境变量），默认情况下，这些值在服务端侧可读，而字段 runtimeConfig.public 和
+runtimeConfig.app 定义的值则也可以在客户端侧。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a class=lnlinks href=#hl-5-1> 1</a>
+</span><span class=lnt id=hl-5-2><a class=lnlinks href=#hl-5-2> 2</a>
+</span><span class=lnt id=hl-5-3><a class=lnlinks href=#hl-5-3> 3</a>
+</span><span class=lnt id=hl-5-4><a class=lnlinks href=#hl-5-4> 4</a>
+</span><span class=lnt id=hl-5-5><a class=lnlinks href=#hl-5-5> 5</a>
+</span><span class=lnt id=hl-5-6><a class=lnlinks href=#hl-5-6> 6</a>
+</span><span class=lnt id=hl-5-7><a class=lnlinks href=#hl-5-7> 7</a>
+</span><span class=lnt id=hl-5-8><a class=lnlinks href=#hl-5-8> 8</a>
+</span><span class=lnt id=hl-5-9><a class=lnlinks href=#hl-5-9> 9</a>
+</span><span class=lnt id=hl-5-10><a class=lnlinks href=#hl-5-10>10</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=nx>defineNuxtConfig</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>runtimeConfig</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 只能在服务端侧访问
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>apiSecret</span><span class=o>:</span> <span class=s1>&#39;123&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 客户端测同样可以访问
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kr>public</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>apiBase</span><span class=o>:</span> <span class=s1>&#39;/api&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>})</span></span></span></code></pre></td></tr></table></div></div><blockquote><p>Composable 组合式函数：抽离出来的、可复用的逻辑函数。</p></blockquote><p>这些变量会通过 <code>useRuntimeConfig()</code> 组合式函数暴露给应用的其他部分使用。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a class=lnlinks href=#hl-6-1>1</a>
+</span><span class=lnt id=hl-6-2><a class=lnlinks href=#hl-6-2>2</a>
+</span><span class=lnt id=hl-6-3><a class=lnlinks href=#hl-6-3>3</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>setup</span> <span class=na>lang</span><span class=o>=</span><span class=s>&#34;ts&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>runtimeConfig</span> <span class=o>=</span> <span class=nx>useRuntimeConfig</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><h3 id=应用配置>应用配置
+<a class=header-anchor href=#%e5%ba%94%e7%94%a8%e9%85%8d%e7%bd%ae></a></h3><p>app.config.ts 文件位于源码目录（默认是 app/ 目录），用于暴露构建阶段即可确定的公共变量。与 runtimeConfig 配置项不同，这些变量无法通过环境变量覆盖。</p><p>这些变量会通过 <code>useAppConfig()</code> 组合式函数暴露给应用的其他部分使用。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-7-1><a class=lnlinks href=#hl-7-1>1</a>
+</span><span class=lnt id=hl-7-2><a class=lnlinks href=#hl-7-2>2</a>
+</span><span class=lnt id=hl-7-3><a class=lnlinks href=#hl-7-3>3</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span> <span class=na>setup</span> <span class=na>lang</span><span class=o>=</span><span class=s>&#34;ts&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>appConfig</span> <span class=o>=</span> <span class=nx>useAppConfig</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><h3 id=runtimeconfig-vs-appconfig>runtimeConfig vs. app.config
+<a class=header-anchor href=#runtimeconfig-vs-appconfig></a></h3><p>runtimeConfig 是运行时生效的配置（可通过环境变量动态修改，支持私有 / 公有），app.config 是<strong>构建时固化的配置</strong>（打包后无法修改，仅存公有信息）。</p><p>关键差异：</p><ul><li>生效时机：<ul><li>runtimeConfig：配置在应用运行阶段生效，即使项目打包部署后，你依然可以通过修改环境变量（比如 .env 文件、服务器环境变量）来更新配置，无需重新打包。</li><li>app.config：配置在项目构建（build）阶段就被编译进代码里，打包完成后就 “固定死了”，想要修改必须重新打包部署。</li></ul></li><li>数据安全性<ul><li>runtimeConfig：支持私有（private） 和公有（public） 配置：<ul><li>私有配置（如 API 密钥、数据库密码）：仅在服务端可用，不会暴露到客户端代码中。</li><li>公有配置（如公开的 API 基础地址）：可通过 useRuntimeConfig().public 暴露到客户端。</li></ul></li><li>app.config：所有配置都是公开的，会被编译到客户端代码中（能在浏览器 DevTools 里看到），绝对不能放敏感信息（比如密钥、token）。</li></ul></li><li>适用场景<ul><li>runtimeConfig：存放需要动态调整、包含敏感信息的配置，比如：<ul><li>私有：API 密钥、数据库连接字符串、第三方服务的 secret；</li><li>公有：可动态修改的 API 基础地址、环境标识（dev/prod）。</li></ul></li><li>app.config：存放固定不变、非敏感的项目配置，比如：<ul><li>网站标题、logo 地址、主题色；</li><li>静态的功能开关（如是否显示某个模块）、语言列表；</li><li>项目版本号、作者信息。</li></ul></li></ul></li><li>访问方式<ul><li>runtimeConfig：必须通过 <code>useRuntimeConfig()</code> 组合式函数访问，且服务端 / 客户端访问规则不同</li><li>app.config：通过 <code>useAppConfig()</code> 组合式函数访问，服务端 / 客户端均可访问全部内容</li></ul></li></ul><h2 id=视图>视图
 <a class=header-anchor href=#%e8%a7%86%e5%9b%be></a></h2><h3 id=组件>组件
-<a class=header-anchor href=#%e7%bb%84%e4%bb%b6></a></h3><h3 id=页面>页面
-<a class=header-anchor href=#%e9%a1%b5%e9%9d%a2></a></h3><h3 id=布局>布局
-<a class=header-anchor href=#%e5%b8%83%e5%b1%80></a></h3><h2 id=总结>总结
-<a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2></div><footer class=post-footer><div class=post-tags><a href=/tags/nuxt.js/>Nuxt.js
+<a class=header-anchor href=#%e7%bb%84%e4%bb%b6></a></h3><p>在 Nuxt 中，在 <code>app/components/</code> 目录下创建这些组件，它们会自动在整个应用中可用，<strong>无需手动显式导入</strong>。</p><p>在 <code>app/components</code> 目录下创建文件 <code>Topbar.vue</code>，代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-8-1><a class=lnlinks href=#hl-8-1> 1</a>
+</span><span class=lnt id=hl-8-2><a class=lnlinks href=#hl-8-2> 2</a>
+</span><span class=lnt id=hl-8-3><a class=lnlinks href=#hl-8-3> 3</a>
+</span><span class=lnt id=hl-8-4><a class=lnlinks href=#hl-8-4> 4</a>
+</span><span class=lnt id=hl-8-5><a class=lnlinks href=#hl-8-5> 5</a>
+</span><span class=lnt id=hl-8-6><a class=lnlinks href=#hl-8-6> 6</a>
+</span><span class=lnt id=hl-8-7><a class=lnlinks href=#hl-8-7> 7</a>
+</span><span class=lnt id=hl-8-8><a class=lnlinks href=#hl-8-8> 8</a>
+</span><span class=lnt id=hl-8-9><a class=lnlinks href=#hl-8-9> 9</a>
+</span><span class=lnt id=hl-8-10><a class=lnlinks href=#hl-8-10>10</a>
+</span><span class=lnt id=hl-8-11><a class=lnlinks href=#hl-8-11>11</a>
+</span><span class=lnt id=hl-8-12><a class=lnlinks href=#hl-8-12>12</a>
+</span><span class=lnt id=hl-8-13><a class=lnlinks href=#hl-8-13>13</a>
+</span><span class=lnt id=hl-8-14><a class=lnlinks href=#hl-8-14>14</a>
+</span><span class=lnt id=hl-8-15><a class=lnlinks href=#hl-8-15>15</a>
+</span><span class=lnt id=hl-8-16><a class=lnlinks href=#hl-8-16>16</a>
+</span><span class=lnt id=hl-8-17><a class=lnlinks href=#hl-8-17>17</a>
+</span><span class=lnt id=hl-8-18><a class=lnlinks href=#hl-8-18>18</a>
+</span><span class=lnt id=hl-8-19><a class=lnlinks href=#hl-8-19>19</a>
+</span><span class=lnt id=hl-8-20><a class=lnlinks href=#hl-8-20>20</a>
+</span><span class=lnt id=hl-8-21><a class=lnlinks href=#hl-8-21>21</a>
+</span><span class=lnt id=hl-8-22><a class=lnlinks href=#hl-8-22>22</a>
+</span><span class=lnt id=hl-8-23><a class=lnlinks href=#hl-8-23>23</a>
+</span><span class=lnt id=hl-8-24><a class=lnlinks href=#hl-8-24>24</a>
+</span><span class=lnt id=hl-8-25><a class=lnlinks href=#hl-8-25>25</a>
+</span><span class=lnt id=hl-8-26><a class=lnlinks href=#hl-8-26>26</a>
+</span><span class=lnt id=hl-8-27><a class=lnlinks href=#hl-8-27>27</a>
+</span><span class=lnt id=hl-8-28><a class=lnlinks href=#hl-8-28>28</a>
+</span><span class=lnt id=hl-8-29><a class=lnlinks href=#hl-8-29>29</a>
+</span><span class=lnt id=hl-8-30><a class=lnlinks href=#hl-8-30>30</a>
+</span><span class=lnt id=hl-8-31><a class=lnlinks href=#hl-8-31>31</a>
+</span><span class=lnt id=hl-8-32><a class=lnlinks href=#hl-8-32>32</a>
+</span><span class=lnt id=hl-8-33><a class=lnlinks href=#hl-8-33>33</a>
+</span><span class=lnt id=hl-8-34><a class=lnlinks href=#hl-8-34>34</a>
+</span><span class=lnt id=hl-8-35><a class=lnlinks href=#hl-8-35>35</a>
+</span><span class=lnt id=hl-8-36><a class=lnlinks href=#hl-8-36>36</a>
+</span><span class=lnt id=hl-8-37><a class=lnlinks href=#hl-8-37>37</a>
+</span><span class=lnt id=hl-8-38><a class=lnlinks href=#hl-8-38>38</a>
+</span><span class=lnt id=hl-8-39><a class=lnlinks href=#hl-8-39>39</a>
+</span><span class=lnt id=hl-8-40><a class=lnlinks href=#hl-8-40>40</a>
+</span><span class=lnt id=hl-8-41><a class=lnlinks href=#hl-8-41>41</a>
+</span><span class=lnt id=hl-8-42><a class=lnlinks href=#hl-8-42>42</a>
+</span><span class=lnt id=hl-8-43><a class=lnlinks href=#hl-8-43>43</a>
+</span><span class=lnt id=hl-8-44><a class=lnlinks href=#hl-8-44>44</a>
+</span><span class=lnt id=hl-8-45><a class=lnlinks href=#hl-8-45>45</a>
+</span><span class=lnt id=hl-8-46><a class=lnlinks href=#hl-8-46>46</a>
+</span><span class=lnt id=hl-8-47><a class=lnlinks href=#hl-8-47>47</a>
+</span><span class=lnt id=hl-8-48><a class=lnlinks href=#hl-8-48>48</a>
+</span><span class=lnt id=hl-8-49><a class=lnlinks href=#hl-8-49>49</a>
+</span><span class=lnt id=hl-8-50><a class=lnlinks href=#hl-8-50>50</a>
+</span><span class=lnt id=hl-8-51><a class=lnlinks href=#hl-8-51>51</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;topbar&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;logo&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>router-link</span> <span class=na>to</span><span class=o>=</span><span class=s>&#34;/&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;&lt;</span><span class=nt>slot</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;logo&#34;</span> <span class=p>/&gt;&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>router-link</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;nav-links&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>router-link</span> <span class=na>to</span><span class=o>=</span><span class=s>&#34;/tasks&#34;</span><span class=p>&gt;</span><span class=nx>任务列表</span><span class=p>&lt;/</span><span class=nt>router-link</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>router-link</span> <span class=na>to</span><span class=o>=</span><span class=s>&#34;/settings&#34;</span><span class=p>&gt;</span><span class=nx>系统配置</span><span class=p>&lt;/</span><span class=nt>router-link</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span> <span class=na>scoped</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>topbar</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>display</span><span class=o>:</span> <span class=nx>flex</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>justify</span><span class=o>-</span><span class=nx>content</span><span class=o>:</span> <span class=nx>space</span><span class=o>-</span><span class=nx>between</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>align</span><span class=o>-</span><span class=nx>items</span><span class=o>:</span> <span class=nx>center</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>padding</span><span class=o>:</span> <span class=mi>1</span><span class=nx>rem</span> <span class=mi>2</span><span class=nx>rem</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>background</span><span class=o>-</span><span class=nx>color</span><span class=o>:</span> <span class=err>#</span><span class=nx>f8f9fa</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>border</span><span class=o>-</span><span class=nx>bottom</span><span class=o>:</span> <span class=mi>1</span><span class=nx>px</span> <span class=nx>solid</span> <span class=err>#</span><span class=nx>e9ecef</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>logo</span> <span class=nx>h1</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>margin</span><span class=o>:</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>font</span><span class=o>-</span><span class=nx>size</span><span class=o>:</span> <span class=mf>1.5</span><span class=nx>rem</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>font</span><span class=o>-</span><span class=nx>weight</span><span class=o>:</span> <span class=nx>bold</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>logo</span> <span class=nx>a</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>text</span><span class=o>-</span><span class=nx>decoration</span><span class=o>:</span> <span class=nx>none</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>color</span><span class=o>:</span> <span class=err>#</span><span class=mi>333</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>nav</span><span class=o>-</span><span class=nx>links</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>display</span><span class=o>:</span> <span class=nx>flex</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>gap</span><span class=o>:</span> <span class=mi>2</span><span class=nx>rem</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>nav</span><span class=o>-</span><span class=nx>links</span> <span class=nx>a</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>text</span><span class=o>-</span><span class=nx>decoration</span><span class=o>:</span> <span class=nx>none</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>color</span><span class=o>:</span> <span class=err>#</span><span class=mi>333</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>font</span><span class=o>-</span><span class=nx>weight</span><span class=o>:</span> <span class=mi>500</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>transition</span><span class=o>:</span> <span class=nx>color</span> <span class=mf>0.3</span><span class=nx>s</span> <span class=nx>ease</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nx>nav</span><span class=o>-</span><span class=nx>links</span> <span class=nx>a</span><span class=o>:</span><span class=nx>hover</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>color</span><span class=o>:</span> <span class=err>#</span><span class=mi>007</span><span class=nx>bff</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><p>在 <code>app/app.vue</code> 使用 <code>Topbar</code> 组件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-9-1><a class=lnlinks href=#hl-9-1> 1</a>
+</span><span class=lnt id=hl-9-2><a class=lnlinks href=#hl-9-2> 2</a>
+</span><span class=lnt id=hl-9-3><a class=lnlinks href=#hl-9-3> 3</a>
+</span><span class=lnt id=hl-9-4><a class=lnlinks href=#hl-9-4> 4</a>
+</span><span class=lnt id=hl-9-5><a class=lnlinks href=#hl-9-5> 5</a>
+</span><span class=lnt id=hl-9-6><a class=lnlinks href=#hl-9-6> 6</a>
+</span><span class=lnt id=hl-9-7><a class=lnlinks href=#hl-9-7> 7</a>
+</span><span class=lnt id=hl-9-8><a class=lnlinks href=#hl-9-8> 8</a>
+</span><span class=lnt id=hl-9-9><a class=lnlinks href=#hl-9-9> 9</a>
+</span><span class=lnt id=hl-9-10><a class=lnlinks href=#hl-9-10>10</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>template</span> <span class=err>#</span><span class=na>logo</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nx>LLM</span> <span class=nx>Agent</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Index</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><h3 id=页面>页面
+<a class=header-anchor href=#%e9%a1%b5%e9%9d%a2></a></h3><p>多个页面跳转，采用 <code>app/pages/index.vue</code>：</p><ol><li>删除 <code>app/page.vue</code> 文件</li><li>创建 <code>app/pages/index.vue</code> 文件</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-10-1><a class=lnlinks href=#hl-10-1>1</a>
+</span><span class=lnt id=hl-10-2><a class=lnlinks href=#hl-10-2>2</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ rm app/page.vue
+</span></span><span class=line><span class=cl>$ rm app/pages/index.vue</span></span></code></pre></td></tr></table></div></div><p><strong>index.vue</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-11-1><a class=lnlinks href=#hl-11-1> 1</a>
+</span><span class=lnt id=hl-11-2><a class=lnlinks href=#hl-11-2> 2</a>
+</span><span class=lnt id=hl-11-3><a class=lnlinks href=#hl-11-3> 3</a>
+</span><span class=lnt id=hl-11-4><a class=lnlinks href=#hl-11-4> 4</a>
+</span><span class=lnt id=hl-11-5><a class=lnlinks href=#hl-11-5> 5</a>
+</span><span class=lnt id=hl-11-6><a class=lnlinks href=#hl-11-6> 6</a>
+</span><span class=lnt id=hl-11-7><a class=lnlinks href=#hl-11-7> 7</a>
+</span><span class=lnt id=hl-11-8><a class=lnlinks href=#hl-11-8> 8</a>
+</span><span class=lnt id=hl-11-9><a class=lnlinks href=#hl-11-9> 9</a>
+</span><span class=lnt id=hl-11-10><a class=lnlinks href=#hl-11-10>10</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>template</span> <span class=err>#</span><span class=na>logo</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nx>LLM</span> <span class=nx>Agent</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Index</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><p>在 <code>app/pages</code> 目录下创建页面，如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-12-1><a class=lnlinks href=#hl-12-1>1</a>
+</span><span class=lnt id=hl-12-2><a class=lnlinks href=#hl-12-2>2</a>
+</span><span class=lnt id=hl-12-3><a class=lnlinks href=#hl-12-3>3</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ mkdir app/pages
+</span></span><span class=line><span class=cl>$ touch app/pages/tasks.vue
+</span></span><span class=line><span class=cl>$ touch app/pages/settings.vue</span></span></code></pre></td></tr></table></div></div><p><strong>tasks.vue</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-13-1><a class=lnlinks href=#hl-13-1> 1</a>
+</span><span class=lnt id=hl-13-2><a class=lnlinks href=#hl-13-2> 2</a>
+</span><span class=lnt id=hl-13-3><a class=lnlinks href=#hl-13-3> 3</a>
+</span><span class=lnt id=hl-13-4><a class=lnlinks href=#hl-13-4> 4</a>
+</span><span class=lnt id=hl-13-5><a class=lnlinks href=#hl-13-5> 5</a>
+</span><span class=lnt id=hl-13-6><a class=lnlinks href=#hl-13-6> 6</a>
+</span><span class=lnt id=hl-13-7><a class=lnlinks href=#hl-13-7> 7</a>
+</span><span class=lnt id=hl-13-8><a class=lnlinks href=#hl-13-8> 8</a>
+</span><span class=lnt id=hl-13-9><a class=lnlinks href=#hl-13-9> 9</a>
+</span><span class=lnt id=hl-13-10><a class=lnlinks href=#hl-13-10>10</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>template</span> <span class=err>#</span><span class=na>logo</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nx>LLM</span> <span class=nx>Agent</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Tasks</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><p><strong>settings.vue</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-14-1><a class=lnlinks href=#hl-14-1> 1</a>
+</span><span class=lnt id=hl-14-2><a class=lnlinks href=#hl-14-2> 2</a>
+</span><span class=lnt id=hl-14-3><a class=lnlinks href=#hl-14-3> 3</a>
+</span><span class=lnt id=hl-14-4><a class=lnlinks href=#hl-14-4> 4</a>
+</span><span class=lnt id=hl-14-5><a class=lnlinks href=#hl-14-5> 5</a>
+</span><span class=lnt id=hl-14-6><a class=lnlinks href=#hl-14-6> 6</a>
+</span><span class=lnt id=hl-14-7><a class=lnlinks href=#hl-14-7> 7</a>
+</span><span class=lnt id=hl-14-8><a class=lnlinks href=#hl-14-8> 8</a>
+</span><span class=lnt id=hl-14-9><a class=lnlinks href=#hl-14-9> 9</a>
+</span><span class=lnt id=hl-14-10><a class=lnlinks href=#hl-14-10>10</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>template</span> <span class=err>#</span><span class=na>logo</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nx>LLM</span> <span class=nx>Agent</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Settings</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><p>浏览器效果</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-nuxt/1773021309698.gif alt></p><h3 id=布局>布局
+<a class=header-anchor href=#%e5%b8%83%e5%b1%80></a></h3><p>布局是使用 <code>&lt;slot /></code> 插槽组件来展示页面内容的 Vue 文件。<code>app/layouts/default.vue</code> 文件会被默认使用，自定义布局可通过
+<strong>页面元数据</strong>进行配置。</p><p>创建 layout 文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-15-1><a class=lnlinks href=#hl-15-1>1</a>
+</span><span class=lnt id=hl-15-2><a class=lnlinks href=#hl-15-2>2</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ mkdir app/layouts
+</span></span><span class=line><span class=cl>$ touch app/layouts/default.vue</span></span></code></pre></td></tr></table></div></div><p><strong>layouts/default.vue</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-16-1><a class=lnlinks href=#hl-16-1> 1</a>
+</span><span class=lnt id=hl-16-2><a class=lnlinks href=#hl-16-2> 2</a>
+</span><span class=lnt id=hl-16-3><a class=lnlinks href=#hl-16-3> 3</a>
+</span><span class=lnt id=hl-16-4><a class=lnlinks href=#hl-16-4> 4</a>
+</span><span class=lnt id=hl-16-5><a class=lnlinks href=#hl-16-5> 5</a>
+</span><span class=lnt id=hl-16-6><a class=lnlinks href=#hl-16-6> 6</a>
+</span><span class=lnt id=hl-16-7><a class=lnlinks href=#hl-16-7> 7</a>
+</span><span class=lnt id=hl-16-8><a class=lnlinks href=#hl-16-8> 8</a>
+</span><span class=lnt id=hl-16-9><a class=lnlinks href=#hl-16-9> 9</a>
+</span><span class=lnt id=hl-16-10><a class=lnlinks href=#hl-16-10>10</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>template</span> <span class=err>#</span><span class=na>logo</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=nx>LLM</span> <span class=nx>Agent</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>Topbar</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>slot</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><p>调整 <code>index.vue</code> 、<code>tasks.vue</code> 、<code>settings.vue</code>：</p><p><strong>index.vue</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-17-1><a class=lnlinks href=#hl-17-1>1</a>
+</span><span class=lnt id=hl-17-2><a class=lnlinks href=#hl-17-2>2</a>
+</span><span class=lnt id=hl-17-3><a class=lnlinks href=#hl-17-3>3</a>
+</span><span class=lnt id=hl-17-4><a class=lnlinks href=#hl-17-4>4</a>
+</span><span class=lnt id=hl-17-5><a class=lnlinks href=#hl-17-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Index</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><p><strong>tasks.vue</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-18-1><a class=lnlinks href=#hl-18-1>1</a>
+</span><span class=lnt id=hl-18-2><a class=lnlinks href=#hl-18-2>2</a>
+</span><span class=lnt id=hl-18-3><a class=lnlinks href=#hl-18-3>3</a>
+</span><span class=lnt id=hl-18-4><a class=lnlinks href=#hl-18-4>4</a>
+</span><span class=lnt id=hl-18-5><a class=lnlinks href=#hl-18-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Tasks</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><p><strong>settings.vue</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-19-1><a class=lnlinks href=#hl-19-1>1</a>
+</span><span class=lnt id=hl-19-2><a class=lnlinks href=#hl-19-2>2</a>
+</span><span class=lnt id=hl-19-3><a class=lnlinks href=#hl-19-3>3</a>
+</span><span class=lnt id=hl-19-4><a class=lnlinks href=#hl-19-4>4</a>
+</span><span class=lnt id=hl-19-5><a class=lnlinks href=#hl-19-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Settings</span>
+</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span></span></span></code></pre></td></tr></table></div></div><p>浏览器效果不变。</p><h2 id=总结>总结
+<a class=header-anchor href=#%e6%80%bb%e7%bb%93></a></h2><p>了解了 Nuxt 的特点和 SSR 的优势，同时掌握了 Nuxt 项目的搭建过程。</p><p>学习了环境变量（<code>nuxt.config.ts</code>）、应用配置（<code>app.config.ts</code>）的定义、使用，以及它们的区别，如：</p><ol><li>定义的位置不同</li><li>是否可以被覆盖</li><li>使用场景</li><li>数据安全性</li><li>生效时机</li></ol><p>在编码实践中，遵循 Nuxt 约定的规范，如：</p><ol><li>组件放置在目录 <code>/app/components</code>，组件无须显示导入</li><li>页面放置在目录 <code>/app/pages</code></li><li>布局放置在目录 <code>/app/layouts</code>，默认使用 <code>/app/layouts/default.vue</code>，也可通过在页面中设置元数据修改引用布局</li></ol></div><footer class=post-footer><div class=post-tags><a href=/tags/nuxt.js/>Nuxt.js
 </a><a href=/tags/vue/>Vue</a></div><div class=post-share-tools><div class=post-share-loading><i class="fa-solid fa-ellipsis fa-spin"></i></div><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class=a2a_dd href=https://www.addtoany.com/share></a><a class=a2a_button_wechat></a><a class=a2a_button_qzone></a><a class=a2a_button_sina_weibo></a><a class=a2a_button_douban></a><a class=a2a_button_facebook></a><a class=a2a_button_x></a><a class=a2a_button_email></a><a class=a2a_button_printfriendly></a></div></div><hr><div class=reward-container><div><i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))</div><button>
 赞赏</button><div class=post-reward><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_zhifubao.png alt="a2htray - 支付宝">
 <span>支付宝</span></div><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_wechat.png alt="a2htray - 微信">
 <span>微信</span></div></div></div><div class=post-copyright><img src=/imgs/cc/cc.svg class=cc-icon width=75 height=75 align=right alt=共享知识 title=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
 5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图</li><li class=post-copyright-author><strong>本文作者： </strong>a2htray</li><li class=post-copyright-link><strong>本文链接：</strong>
-<a id=post-cr-link href=http://localhost:1313/post/learn-nuxt/00_5days_learn_nuxt/ title="5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图">http://localhost:1313/post/learn-nuxt/00_5days_learn_nuxt/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本作品采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans>BY-NC-SA</a> 许可协议。转载请注明出处！</li><li><div class=license-icons><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans target=_blank><img src=/imgs/cc/big/by_nc_sa.svg alt=BY-NC-SA title=BY-NC-SA>
+<a id=post-cr-link href=https://a2htray.github.io/post/learn-nuxt/00_5days_learn_nuxt/ title="5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图">https://a2htray.github.io/post/learn-nuxt/00_5days_learn_nuxt/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本作品采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans>BY-NC-SA</a> 许可协议。转载请注明出处！</li><li><div class=license-icons><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans target=_blank><img src=/imgs/cc/big/by_nc_sa.svg alt=BY-NC-SA title=BY-NC-SA>
 </a><a href=https://notbyai.fyi target=_blank><img src=/imgs/notbyai/zh-hans/white.svg title="Not By AI"></a></div></li></ul></div><div class=post-nav><div class="post-nav-next post-nav-item"></div><div class="post-nav-prev post-nav-item"><a href=/post/learn-db/01_or_operation_testing/ rel=prev title="MySQL OR 查询优化为 UNION/UNION AL 验证">MySQL OR 查询优化为 UNION/UNION AL 验证
 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
 <span itemprop=copyrightYear>2025 - 2026
 </span><span class=with-love><i class="fa fa-heart"></i>
-</span><span class=author itemprop=copyrightHolder>a2htray</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.152.2 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.8.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script class=next-config data-name=page type=application/json>{"clipboard":{"js":{"alias":"clipboard","file":"dist/clipboard.min.js","name":"clipboard.js","version":"2.0.11"}},"comments":false,"expired":false,"isHome":false,"isPage":true,"math":{"css":{"alias_name":"KaTeX","file":"dist/katex.min.css","name":"katex","version":"0.16.15"},"js":[{"alias_name":"KaTeX","file":"dist/katex.min.js","name":"katex","version":"0.16.15"},{"alias":"katex","alias_name":"KaTeX","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.15"}],"render":"katex"},"path":"00_5days_learn_nuxt","permalink":"http://localhost:1313/post/learn-nuxt/00_5days_learn_nuxt/","title":"5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图","toc":true,"waline":{"commentcnt":{"alias":"@waline/client","alias_name":"waline","file":"dist/comment.js","name":"comment","version":"2.15.8"}}}</script><script type=text/javascript src=http://localhost:1313/js/3rd/animejs/3.2.2/anime.min.js crossorigin=anonymous defer></script><script type=text/javascript src=http://localhost:1313/js/3rd/viewerjs/1.11.6/viewer.min.js crossorigin=anonymous defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":false,"hostname":"http://localhost:1313/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"isMultiLang":false,"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"slideInRight","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","share":{"addtoany":{"js":"https://static.addtoany.com/menu/page.js","locale":"zh-CN","num":8},"enable":true},"sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"local","router":{"name":"local","type":"modern","url":"http://localhost:1313/js/3rd"}},"version":"4.8.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"@waline/client","file":"dist/waline.css","name":"waline","version":"2.15.8"},"js":{"alias":"@waline/client","file":"dist/waline.js","name":"waline","version":"2.15.8"}}}</script><script type=text/javascript src="/js/main.js?=1772974817" defer></script><script type=text/javascript src="/js/clipboard.js?=1772974817" defer></script><script type=text/javascript src="/js/math.js?=1772974817" defer></script></body></html>
+</span><span class=author itemprop=copyrightHolder>a2htray</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.152.2 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.8.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script class=next-config data-name=page type=application/json>{"clipboard":{"js":{"alias":"clipboard","file":"dist/clipboard.min.js","name":"clipboard.js","version":"2.0.11"}},"comments":false,"expired":false,"isHome":false,"isPage":true,"math":{"css":{"alias_name":"KaTeX","file":"dist/katex.min.css","name":"katex","version":"0.16.15"},"js":[{"alias_name":"KaTeX","file":"dist/katex.min.js","name":"katex","version":"0.16.15"},{"alias":"katex","alias_name":"KaTeX","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.15"}],"render":"katex"},"path":"00_5days_learn_nuxt","permalink":"https://a2htray.github.io/post/learn-nuxt/00_5days_learn_nuxt/","title":"5 天学习 Nuxt.js（Day 1）：介绍、安装、配置、视图","toc":true,"waline":{"commentcnt":{"alias":"@waline/client","alias_name":"waline","file":"dist/comment.js","name":"comment","version":"2.15.8"}}}</script><script type=text/javascript src=https://a2htray.github.io/js/3rd/animejs/3.2.2/anime.min.js crossorigin=anonymous defer></script><script type=text/javascript src=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.js crossorigin=anonymous defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":false,"hostname":"https://a2htray.github.io/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"isMultiLang":false,"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"slideInRight","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","share":{"addtoany":{"js":"https://static.addtoany.com/menu/page.js","locale":"zh-CN","num":8},"enable":true},"sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"local","router":{"name":"local","type":"modern","url":"https://a2htray.github.io/js/3rd"}},"version":"4.8.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"@waline/client","file":"dist/waline.css","name":"waline","version":"2.15.8"},"js":{"alias":"@waline/client","file":"dist/waline.js","name":"waline","version":"2.15.8"}}}</script><script type=text/javascript src="/js/main.min.js?=1773022286" defer></script><script type=text/javascript src="/js/clipboard.min.js?=1773022286" defer></script><script type=text/javascript src="/js/math.min.js?=1773022286" defer></script></body></html>
