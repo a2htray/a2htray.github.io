@@ -40,3 +40,5 @@ export const responseCookie = {
 
 1. 服务端的工具方法放置至 `/server/utils` 目录
 2. api 代码中无须显示引入，直接使用 `responseCookie.get`
+3. 响应的 cookie 在响应头中的 set-cookie 键的值
+4. set-cookie 值以分号分隔，采用 key=value 的形式表示
