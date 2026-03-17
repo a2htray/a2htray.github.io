@@ -1,8 +1,9 @@
 +++
 date = '2026-03-13T10:34:30+08:00'
+draft = false
 title = '前端组件封装原则'
 categories = ['前端技术', '最佳实践']
-tags = ['', '摘录']
+tags = ['Vue', '摘录', '组件封装']
 toc = true
 +++
 
