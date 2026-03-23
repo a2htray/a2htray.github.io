@@ -1,5 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TypeScript on 快乐冲浪与生活</title><link>http://localhost:1313/tags/typescript/</link><description>Recent content in TypeScript on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 09 Mar 2026 17:27:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/typescript/rss.xml" rel="self" type="application/rss+xml"/><item><title>工具方法：获取响应的 cookie</title><link>http://localhost:1313/post/learn-nuxt/01_get_response_cookie_util/</link><pubDate>Mon, 09 Mar 2026 17:27:25 +0800</pubDate><guid>http://localhost:1313/post/learn-nuxt/01_get_response_cookie_util/</guid><description>&lt;p&gt;起因：应用在服务端要请求第三方的接口，获取数据的同时，还保存响应头中的 Cookie 信息。&lt;/p&gt;
-&lt;p&gt;本来是想命名为 &lt;code&gt;getCookie&lt;/code&gt;，但该方法名与 Nuxt 内置的一个方法重名，两种方式可以解决：&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：Record 数据结构（三）</title><link>http://localhost:1313/post/learn-zod/02_record_schema/</link><pubDate>Thu, 26 Feb 2026 17:02:42 +0800</pubDate><guid>http://localhost:1313/post/learn-zod/02_record_schema/</guid><description>&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TypeScript on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/typescript/</link><description>Recent content in TypeScript on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 17 Mar 2026 21:12:33 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/typescript/rss.xml" rel="self" type="application/rss+xml"/><item><title>Flowise：本地部署、系统架构、技术实现和应用构建</title><link>https://a2htray.github.io/post/learn-ai/00_deploy_flowise_in_developer_mode/</link><pubDate>Tue, 17 Mar 2026 21:12:33 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/00_deploy_flowise_in_developer_mode/</guid><description>&lt;p&gt;Flowise 是开源的生成式人工智能开发平台，可用于构建&lt;strong&gt;智能体&lt;/strong&gt;和&lt;strong&gt;大语言模型工作流&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;Flowise 提供以下 6 个完整的解决方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可视化的构建过程&lt;/li&gt;
+&lt;li&gt;追踪和分析功能&lt;/li&gt;
+&lt;li&gt;应用评价体系&lt;/li&gt;
+&lt;li&gt;人为干预、修正&lt;/li&gt;
+&lt;li&gt;对外 API、命令行工具、SDK&lt;/li&gt;
+&lt;li&gt;团队和工作空间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="本地部署"&gt;本地部署
+&lt;a class="header-anchor" href="#%e6%9c%ac%e5%9c%b0%e9%83%a8%e7%bd%b2"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;环境说明：&lt;/p&gt;</description></item><item><title>工具方法：获取响应的 cookie</title><link>https://a2htray.github.io/post/learn-nuxt/01_get_response_cookie_util/</link><pubDate>Mon, 09 Mar 2026 17:27:25 +0800</pubDate><guid>https://a2htray.github.io/post/learn-nuxt/01_get_response_cookie_util/</guid><description>&lt;p&gt;起因：应用在服务端要请求第三方的接口，获取数据的同时，还保存响应头中的 Cookie 信息。&lt;/p&gt;
+&lt;p&gt;本来是想命名为 &lt;code&gt;getCookie&lt;/code&gt;，但该方法名与 Nuxt 内置的一个方法重名，两种方式可以解决：&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：Record 数据结构（三）</title><link>https://a2htray.github.io/post/learn-zod/02_record_schema/</link><pubDate>Thu, 26 Feb 2026 17:02:42 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/02_record_schema/</guid><description>&lt;ul&gt;
 &lt;li&gt;学习资料：
 &lt;a href="https://zod.dev/api" title="https://zod.dev/api" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://zod.dev/api
@@ -37,7 +49,7 @@
 
 &lt;h2 id="json-和对象"&gt;JSON 和对象
 &lt;a class="header-anchor" href="#json-%e5%92%8c%e5%af%b9%e8%b1%a1"&gt;&lt;/a&gt;
-&lt;/h2&gt;&lt;p&gt;TS 中 Record 与 JSON 和对象相似，对应的概念如下：&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：定义模式（二）</title><link>http://localhost:1313/post/learn-zod/01_define_schema/</link><pubDate>Wed, 25 Feb 2026 15:09:54 +0800</pubDate><guid>http://localhost:1313/post/learn-zod/01_define_schema/</guid><description>&lt;ul&gt;
+&lt;/h2&gt;&lt;p&gt;TS 中 Record 与 JSON 和对象相似，对应的概念如下：&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：定义模式（二）</title><link>https://a2htray.github.io/post/learn-zod/01_define_schema/</link><pubDate>Wed, 25 Feb 2026 15:09:54 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/01_define_schema/</guid><description>&lt;ul&gt;
 &lt;li&gt;学习资料：
 &lt;a href="https://zod.dev/api" title="https://zod.dev/api" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://zod.dev/api
@@ -51,7 +63,7 @@
 &lt;p&gt;模式，也就是数据结构，使用 Zod 时，我们要先定义模式，即定义数据结构的规则，然后调用 &lt;code&gt;.parse&lt;/code&gt; 或 &lt;code&gt;safeParse&lt;/code&gt; 进行校验。&lt;/p&gt;
 &lt;h2 id="开发环境的搭建"&gt;开发环境的搭建
 &lt;a class="header-anchor" href="#%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e7%9a%84%e6%90%ad%e5%bb%ba"&gt;&lt;/a&gt;
-&lt;/h2&gt;&lt;p&gt;本节要搭建一个能运行 Zod 库的 TypeScript 开发环境，步骤如下：&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：Zod 基础知识（一）</title><link>http://localhost:1313/post/learn-zod/00_zod_triple/</link><pubDate>Tue, 24 Feb 2026 23:23:06 +0800</pubDate><guid>http://localhost:1313/post/learn-zod/00_zod_triple/</guid><description>&lt;ul&gt;
+&lt;/h2&gt;&lt;p&gt;本节要搭建一个能运行 Zod 库的 TypeScript 开发环境，步骤如下：&lt;/p&gt;</description></item><item><title>Zod 的学习与使用：Zod 基础知识（一）</title><link>https://a2htray.github.io/post/learn-zod/00_zod_triple/</link><pubDate>Tue, 24 Feb 2026 23:23:06 +0800</pubDate><guid>https://a2htray.github.io/post/learn-zod/00_zod_triple/</guid><description>&lt;ul&gt;
 &lt;li&gt;学习资料：
 &lt;a href="https://zod.dev/" title="https://zod.dev/" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://zod.dev/
@@ -68,7 +80,7 @@
 &lt;li&gt;做什么&lt;/li&gt;
 &lt;li&gt;有什么&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;本文就是围绕 Zod 回答上面的三个问题，并在后续的文章中介绍“怎么用”。&lt;/p&gt;</description></item><item><title>如何高效地使用 useRef、useMemo 和 useCallback</title><link>http://localhost:1313/post/old/react/react-hooks-useref-usememo-usecallback/</link><pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate><guid>http://localhost:1313/post/old/react/react-hooks-useref-usememo-usecallback/</guid><description>&lt;p&gt;这是一篇关于 React Hooks 的技术文章翻译，原文地址：
+&lt;p&gt;本文就是围绕 Zod 回答上面的三个问题，并在后续的文章中介绍“怎么用”。&lt;/p&gt;</description></item><item><title>如何高效地使用 useRef、useMemo 和 useCallback</title><link>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</link><pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</guid><description>&lt;p&gt;这是一篇关于 React Hooks 的技术文章翻译，原文地址：
 
 &lt;a href="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" title="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh

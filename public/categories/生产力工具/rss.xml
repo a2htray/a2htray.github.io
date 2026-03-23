@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>生产力工具 on 快乐冲浪与生活</title><link>http://localhost:1313/categories/%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7/</link><description>Recent content in 生产力工具 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 31 Dec 2025 15:07:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7/rss.xml" rel="self" type="application/rss+xml"/><item><title>Git Commit 修改作者信息</title><link>http://localhost:1313/post/git-commit-reset-author/</link><pubDate>Wed, 31 Dec 2025 15:07:14 +0800</pubDate><guid>http://localhost:1313/post/git-commit-reset-author/</guid><description>&lt;h2 id="起因"&gt;起因
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>生产力工具 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7/</link><description>Recent content in 生产力工具 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 31 Dec 2025 15:07:14 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E7%94%9F%E4%BA%A7%E5%8A%9B%E5%B7%A5%E5%85%B7/rss.xml" rel="self" type="application/rss+xml"/><item><title>Git Commit 修改作者信息</title><link>https://a2htray.github.io/post/git-commit-reset-author/</link><pubDate>Wed, 31 Dec 2025 15:07:14 +0800</pubDate><guid>https://a2htray.github.io/post/git-commit-reset-author/</guid><description>&lt;h2 id="起因"&gt;起因
 &lt;a class="header-anchor" href="#%e8%b5%b7%e5%9b%a0"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;现在公司上班，用的是我个人电脑，所以 git 信息是我个人的。&lt;/p&gt;
 &lt;p&gt;新建项目，推送分支持时，导致线上仓库的 commit 的作者信息是我个人的。&lt;/p&gt;
-&lt;p&gt;原因就是，项目级别的作者信息 &lt;code&gt;user.name&lt;/code&gt; 和 &lt;code&gt;user.email&lt;/code&gt; 没设置，git 自动使用了全局的作者信息。&lt;/p&gt;</description></item><item><title>3 种使用密钥文件连接 SSH 服务的场景</title><link>http://localhost:1313/post/three-ways-to-connect-ssh-server-with-the-key-file/</link><pubDate>Thu, 11 Dec 2025 15:06:39 +0800</pubDate><guid>http://localhost:1313/post/three-ways-to-connect-ssh-server-with-the-key-file/</guid><description>&lt;p&gt;SSH 服务除了可以通过用户名和密码登录之外，还可以使用密钥文件进行登录。&lt;/p&gt;
+&lt;p&gt;原因就是，项目级别的作者信息 &lt;code&gt;user.name&lt;/code&gt; 和 &lt;code&gt;user.email&lt;/code&gt; 没设置，git 自动使用了全局的作者信息。&lt;/p&gt;</description></item><item><title>3 种使用密钥文件连接 SSH 服务的场景</title><link>https://a2htray.github.io/post/three-ways-to-connect-ssh-server-with-the-key-file/</link><pubDate>Thu, 11 Dec 2025 15:06:39 +0800</pubDate><guid>https://a2htray.github.io/post/three-ways-to-connect-ssh-server-with-the-key-file/</guid><description>&lt;p&gt;SSH 服务除了可以通过用户名和密码登录之外，还可以使用密钥文件进行登录。&lt;/p&gt;
 &lt;p&gt;本文列举 3 种我使用密钥文件的场景。假设我的密钥的放在：&lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -16,7 +16,7 @@
 
 &lt;h2 id="终端命令-ssh"&gt;终端命令 ssh
 &lt;a class="header-anchor" href="#%e7%bb%88%e7%ab%af%e5%91%bd%e4%bb%a4-ssh"&gt;&lt;/a&gt;
-&lt;/h2&gt;&lt;p&gt;在终端的场景下，直接使用 &lt;code&gt;-i&lt;/code&gt; 参数，指定密钥文件即可。&lt;/p&gt;</description></item><item><title>Someone could be eavesdropping on you right now (man-in-the-middle attack)!</title><link>http://localhost:1313/post/old/git/someone-could-be-eavesdropping-on-you-right-now/</link><pubDate>Sat, 25 Mar 2023 14:07:10 +0800</pubDate><guid>http://localhost:1313/post/old/git/someone-could-be-eavesdropping-on-you-right-now/</guid><description>&lt;p&gt;今天在 &lt;code&gt;git pull&lt;/code&gt; 时报了如下的错：&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;在终端的场景下，直接使用 &lt;code&gt;-i&lt;/code&gt; 参数，指定密钥文件即可。&lt;/p&gt;</description></item><item><title>Someone could be eavesdropping on you right now (man-in-the-middle attack)!</title><link>https://a2htray.github.io/post/old/git/someone-could-be-eavesdropping-on-you-right-now/</link><pubDate>Sat, 25 Mar 2023 14:07:10 +0800</pubDate><guid>https://a2htray.github.io/post/old/git/someone-could-be-eavesdropping-on-you-right-now/</guid><description>&lt;p&gt;今天在 &lt;code&gt;git pull&lt;/code&gt; 时报了如下的错：&lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -59,7 +59,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;p&gt;导致无法拉取远程仓库的代码。&lt;/p&gt;</description></item><item><title>Two Steps to Build an Academic Website with Hugo and Wowchemy</title><link>http://localhost:1313/post/old/go-hugo-wowchemy-academic-website/</link><pubDate>Wed, 28 Sep 2022 23:10:30 +0800</pubDate><guid>http://localhost:1313/post/old/go-hugo-wowchemy-academic-website/</guid><description>&lt;p&gt;Four days ago, I got a requirement to build an academic website for 
+&lt;p&gt;导致无法拉取远程仓库的代码。&lt;/p&gt;</description></item><item><title>Two Steps to Build an Academic Website with Hugo and Wowchemy</title><link>https://a2htray.github.io/post/old/go-hugo-wowchemy-academic-website/</link><pubDate>Wed, 28 Sep 2022 23:10:30 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-hugo-wowchemy-academic-website/</guid><description>&lt;p&gt;Four days ago, I got a requirement to build an academic website for 
 &lt;a href="https://github.com/jingyunluo" title="yunzila~" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  yunzila~
  
@@ -86,4 +86,4 @@ theme developed by
  
  &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
  
-&lt;/a&gt; which meets my needs.&lt;/p&gt;</description></item><item><title>IDE 代码显示无引用 no usages found</title><link>http://localhost:1313/post/old/ide-no-usages-found/</link><pubDate>Wed, 27 Apr 2022 20:55:01 +0800</pubDate><guid>http://localhost:1313/post/old/ide-no-usages-found/</guid><description>&lt;p&gt;IntelliJ IDEA 代码显示灰色，表示无任何引用，实际上是有引用。出现这种问题，非常不易于 DEBUG。&lt;/p&gt;</description></item></channel></rss>
+&lt;/a&gt; which meets my needs.&lt;/p&gt;</description></item><item><title>IDE 代码显示无引用 no usages found</title><link>https://a2htray.github.io/post/old/ide-no-usages-found/</link><pubDate>Wed, 27 Apr 2022 20:55:01 +0800</pubDate><guid>https://a2htray.github.io/post/old/ide-no-usages-found/</guid><description>&lt;p&gt;IntelliJ IDEA 代码显示灰色，表示无任何引用，实际上是有引用。出现这种问题，非常不易于 DEBUG。&lt;/p&gt;</description></item></channel></rss>

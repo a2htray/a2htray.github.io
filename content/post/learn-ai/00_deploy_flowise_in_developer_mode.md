@@ -1,6 +1,6 @@
 +++
 date = '2026-03-17T21:12:33+08:00'
-draft = true
+draft = false
 title = 'Flowise：本地部署、系统架构、技术实现和应用构建'
 categories = ['人工智能', '应用平台']
 tags = ['Flowise', '大模型应用开发平台', 'TypeScript']
@@ -88,9 +88,62 @@ $ pnpm dev
 
 ## 应用构建
 
-### AI Agent
+Flowise 支持构建两种智能体，分别是 Chatflow 和 Agentflow，两者的区别在于：
 
-### LLM 工作流
+| /    | Chatflow       | Agentflow                 |
+|------|----------------|---------------------------|
+| 定位   | 单智能体，对话优先的工作流  | 多智能体协作，复杂工作流              |
+| 本质   | 一个 LLM 走完整个工作流 | 多个具有独立 LLM/提示词/工具/记忆 的智能体 |
+| 适用场景 | 聊天机器人，RAG 问答   | 多任务自动化，多角色协同，长时状态工作流      |
+
+
+### Chatflow
+
+Flowise 本地化部署已经完成，试着搭建一个 Chatflow，示例相对简单，使用到了 3 个节点：
+
+* Chat Models 下的 ChatOllama 节点
+* Prompts 下的 Chat Prompt Template 节点
+* Chains 下的 LLM Chain 节点
+
+连接方式如下：
+
+![](/imgs/learn-ai/deploy_flowise_03.png)
+
+> Ollama 的本地部署可以参看的我 [Ollama：部署与使用](/post/learn-ai/01_deploy_ollama_on_local/) 一文。
+
+进行简单的问答，体验效果不是很好，主要是回复得非常慢，可能是本地版本或 Ollama 的问题，但起码有一次完整的问答过程，如下图：
+
+![](/imgs/learn-ai/deploy_flowise_04.png)
+
+#### 接口实现
+
+问答时，请求的接口是 `/api/v1/internal-prediction`，路由文件和控制器文件分别是：
+
+* 路由文件：packages/server/src/routes/internal-predictions/index.ts
+
+```typescript
+router.post(['/', '/:id'], internalPredictionsController.createInternalPrediction)
+```
+
+* 控制器文件：packages/server/src/controllers/internal-predictions/index.ts
+
+查看请求传参：
+
+```json
+{"question":"你好","chatId":"7360cfc0-6f7f-4faa-9562-6bec84db74c2","streaming":true}
+```
+
+服务器端最终调用的是 `createAndStreamInternalPrediction` 函数，产生流式的响应。
+
+代码逻辑如下：
+
+* 获取 App 实例的 sseStreamer 属性，SSEStreamer 用于管理 SSE 的连接信息、发送流式消息等功能
+* 调用 sseStreamer.addClient 方法建立 chatId 和 response 的对应关系
+* 设置 response 流式响应头
+* 调用 utilBuildChatflow 函数，主要的逻辑在这一块
+* 最终，解除 chatId 和 response 的关系，并消除相关信息
+
+### Agentflow
 
 ## 遇到问题
 
@@ -127,3 +180,4 @@ CMake suite maintained and supported by Kitware (kitware.com/cmake).
 ## 资源
 
 * [官方文档 - Introduction](https://docs.flowiseai.com/)
+* [精讲 AI 教程: 免费使用 Flowise 搭建 LLM 工作流应用](https://zhuanlan.zhihu.com/p/688195105)

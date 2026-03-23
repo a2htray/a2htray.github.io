@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>人工智能 on 快乐冲浪与生活</title><link>http://localhost:1313/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link><description>Recent content in 人工智能 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 18 Mar 2026 13:41:40 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/rss.xml" rel="self" type="application/rss+xml"/><item><title>Ollama：部署与使用</title><link>http://localhost:1313/post/learn-ai/01_deploy_ollama_on_local/</link><pubDate>Wed, 18 Mar 2026 13:41:40 +0800</pubDate><guid>http://localhost:1313/post/learn-ai/01_deploy_ollama_on_local/</guid><description>&lt;p&gt;Ollama 是大模型的运行平台，本文主要介绍 Ollama 的安装与使用。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>人工智能 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link><description>Recent content in 人工智能 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 18 Mar 2026 13:41:40 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/rss.xml" rel="self" type="application/rss+xml"/><item><title>Ollama：部署与使用</title><link>https://a2htray.github.io/post/learn-ai/01_deploy_ollama_on_local/</link><pubDate>Wed, 18 Mar 2026 13:41:40 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/01_deploy_ollama_on_local/</guid><description>&lt;p&gt;Ollama 是大模型的运行平台，本文主要介绍 Ollama 的安装与使用。&lt;/p&gt;
 &lt;h2 id="安装"&gt;安装
 &lt;a class="header-anchor" href="#%e5%ae%89%e8%a3%85"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;听说 Ollama 类似于 Docker 一样，出了 Desktop 版本，所以这次我选择下载 &lt;code&gt;.dmg&lt;/code&gt; 文件方式安装。&lt;/p&gt;
@@ -8,7 +8,19 @@
  
  &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
  
-&lt;/a&gt;&lt;/p&gt;</description></item><item><title>构建 MCP 服务端</title><link>http://localhost:1313/post/learn-mcp/build-mcp-server/</link><pubDate>Fri, 13 Feb 2026 09:30:18 +0800</pubDate><guid>http://localhost:1313/post/learn-mcp/build-mcp-server/</guid><description>&lt;ul&gt;
+&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Flowise：本地部署、系统架构、技术实现和应用构建</title><link>https://a2htray.github.io/post/learn-ai/00_deploy_flowise_in_developer_mode/</link><pubDate>Tue, 17 Mar 2026 21:12:33 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/00_deploy_flowise_in_developer_mode/</guid><description>&lt;p&gt;Flowise 是开源的生成式人工智能开发平台，可用于构建&lt;strong&gt;智能体&lt;/strong&gt;和&lt;strong&gt;大语言模型工作流&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;Flowise 提供以下 6 个完整的解决方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可视化的构建过程&lt;/li&gt;
+&lt;li&gt;追踪和分析功能&lt;/li&gt;
+&lt;li&gt;应用评价体系&lt;/li&gt;
+&lt;li&gt;人为干预、修正&lt;/li&gt;
+&lt;li&gt;对外 API、命令行工具、SDK&lt;/li&gt;
+&lt;li&gt;团队和工作空间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="本地部署"&gt;本地部署
+&lt;a class="header-anchor" href="#%e6%9c%ac%e5%9c%b0%e9%83%a8%e7%bd%b2"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;环境说明：&lt;/p&gt;</description></item><item><title>构建 MCP 服务端</title><link>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</link><pubDate>Fri, 13 Feb 2026 09:30:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</guid><description>&lt;ul&gt;
 &lt;li&gt;学习来源：
 &lt;a href="https://modelcontextprotocol.io/docs/develop/build-server" title="https://modelcontextprotocol.io/docs/develop/build-server" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://modelcontextprotocol.io/docs/develop/build-server
@@ -34,7 +46,7 @@
 &lt;/ul&gt;
 &lt;h2 id="注意事项"&gt;注意事项
 &lt;a class="header-anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9"&gt;&lt;/a&gt;
-&lt;/h2&gt;&lt;p&gt;根据实现的 MCP Server 的类型不同，做日志功能时需要注意：&lt;/p&gt;</description></item><item><title>MCP：服务器和客户端</title><link>http://localhost:1313/post/learn-mcp/server-and-client/</link><pubDate>Thu, 05 Feb 2026 16:06:49 +0800</pubDate><guid>http://localhost:1313/post/learn-mcp/server-and-client/</guid><description>&lt;p&gt;本文继续做官方文档的学习和摘录，在服务器和客户端这一块，理解有效，有些翻译甚至有些勉强。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;根据实现的 MCP Server 的类型不同，做日志功能时需要注意：&lt;/p&gt;</description></item><item><title>MCP：服务器和客户端</title><link>https://a2htray.github.io/post/learn-mcp/server-and-client/</link><pubDate>Thu, 05 Feb 2026 16:06:49 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/server-and-client/</guid><description>&lt;p&gt;本文继续做官方文档的学习和摘录，在服务器和客户端这一块，理解有效，有些翻译甚至有些勉强。&lt;/p&gt;
 &lt;p&gt;学习来源：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -56,7 +68,7 @@
 &lt;a class="header-anchor" href="#%e6%9c%8d%e5%8a%a1%e7%ab%af"&gt;&lt;/a&gt;
 &lt;/h2&gt;
  &lt;blockquote&gt;
- &lt;p&gt;MCP servers are programs that expose specific capabilities to AI applications through standardized protocol interfaces.&lt;/p&gt;</description></item><item><title>MCP：基础概念</title><link>http://localhost:1313/post/learn-mcp/basic-mcp/</link><pubDate>Thu, 29 Jan 2026 15:01:42 +0800</pubDate><guid>http://localhost:1313/post/learn-mcp/basic-mcp/</guid><description>&lt;p&gt;做项目要用到 MCP，所以对官方的文档进行学习及摘录，不然做出的东西一知半解，不深入。&lt;/p&gt;
+ &lt;p&gt;MCP servers are programs that expose specific capabilities to AI applications through standardized protocol interfaces.&lt;/p&gt;</description></item><item><title>MCP：基础概念</title><link>https://a2htray.github.io/post/learn-mcp/basic-mcp/</link><pubDate>Thu, 29 Jan 2026 15:01:42 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/basic-mcp/</guid><description>&lt;p&gt;做项目要用到 MCP，所以对官方的文档进行学习及摘录，不然做出的东西一知半解，不深入。&lt;/p&gt;
 &lt;p&gt;学习来源：
 &lt;a href="https://modelcontextprotocol.io" title="https://modelcontextprotocol.io" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://modelcontextprotocol.io
@@ -68,7 +80,7 @@
 &lt;a class="header-anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af-mcp"&gt;&lt;/a&gt;
 &lt;/h2&gt;
  &lt;blockquote&gt;
- &lt;p&gt;MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems.&lt;/p&gt;</description></item><item><title>自然语言处理介绍</title><link>http://localhost:1313/post/natural-language-processing-fundamentals/chapter-01-introduction-to-natural-language-processing/</link><pubDate>Thu, 15 Jan 2026 15:01:00 +0800</pubDate><guid>http://localhost:1313/post/natural-language-processing-fundamentals/chapter-01-introduction-to-natural-language-processing/</guid><description>&lt;p&gt;目标：&lt;/p&gt;
+ &lt;p&gt;MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems.&lt;/p&gt;</description></item><item><title>自然语言处理介绍</title><link>https://a2htray.github.io/post/natural-language-processing-fundamentals/chapter-01-introduction-to-natural-language-processing/</link><pubDate>Thu, 15 Jan 2026 15:01:00 +0800</pubDate><guid>https://a2htray.github.io/post/natural-language-processing-fundamentals/chapter-01-introduction-to-natural-language-processing/</guid><description>&lt;p&gt;目标：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;能够介绍“什么是 NLP”&lt;/li&gt;
 &lt;li&gt;学习 NLP 的历史&lt;/li&gt;
