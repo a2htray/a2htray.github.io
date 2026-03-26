@@ -1,4 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>爬虫 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E7%88%AC%E8%99%AB/</link><description>Recent content in 爬虫 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 23 Mar 2026 10:28:24 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E7%88%AC%E8%99%AB/rss.xml" rel="self" type="application/rss+xml"/><item><title>5 天学习 Playwright（Day2）：API 测试、API 模拟、认证、下载</title><link>https://a2htray.github.io/post/learn-playwright/01_5days_concepts_of_playwright/</link><pubDate>Mon, 23 Mar 2026 10:28:24 +0800</pubDate><guid>https://a2htray.github.io/post/learn-playwright/01_5days_concepts_of_playwright/</guid><description>&lt;p&gt;今天是学习 Playwright 的第 2 天，文章的主要内容来自于官方的文档：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>爬虫 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E7%88%AC%E8%99%AB/</link><description>Recent content in 爬虫 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 26 Mar 2026 12:12:18 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E7%88%AC%E8%99%AB/rss.xml" rel="self" type="application/rss+xml"/><item><title>5 天学习 Playwright（Day4）：文献信息爬取</title><link>https://a2htray.github.io/post/learn-playwright/03_5days_pubmed/</link><pubDate>Thu, 26 Mar 2026 12:12:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-playwright/03_5days_pubmed/</guid><description>&lt;p&gt;看了那么多天的 Playwright，准备做一个&lt;strong&gt;文献信息爬取&lt;/strong&gt;，设定的需求如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;爬取 PubMed 上，查询词为 maize（玉米）的 100 篇文献&lt;/li&gt;
+&lt;li&gt;要求&lt;strong&gt;近 5 年内&lt;/strong&gt;、&lt;strong&gt;摘要可访问&lt;/strong&gt;的文献&lt;/li&gt;
+&lt;li&gt;单篇文献应该具有以下字段：
+&lt;ul&gt;
+&lt;li&gt;title（标题）&lt;/li&gt;
+&lt;li&gt;authors（作者），以英文逗号和空格间隔&lt;/li&gt;
+&lt;li&gt;journal（期刊）&lt;/li&gt;
+&lt;li&gt;first affiliation（第一单位）&lt;/li&gt;
+&lt;li&gt;abstract（摘要）&lt;/li&gt;
+&lt;li&gt;pmid（PubMed 文献编号）&lt;/li&gt;
+&lt;li&gt;doi（文献数字对象标识）&lt;/li&gt;
+&lt;li&gt;publish date（发表日期）&lt;/li&gt;
+&lt;li&gt;pubmed_url（详情地址）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;按 publish date 降序排列&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="思路"&gt;思路
+&lt;a class="header-anchor" href="#%e6%80%9d%e8%b7%af"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;打开列表页，每页 10 个文献，爬取文献的标题和详情页地址（10 次）&lt;/li&gt;
+&lt;li&gt;遍历获得的 100 个文献及详情页地址&lt;/li&gt;
+&lt;li&gt;从详情页获取其它信息&lt;/li&gt;
+&lt;li&gt;全部信息获取完毕后，保存至 CSV 文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="编码"&gt;编码
+&lt;a class="header-anchor" href="#%e7%bc%96%e7%a0%81"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;编写用于存储数据的模型和将模式数据写入 CSV 的方法：&lt;/p&gt;</description></item><item><title>5 天学习 Playwright（Day3）：视频教程学习</title><link>https://a2htray.github.io/post/learn-playwright/02_5days_video_learn/</link><pubDate>Wed, 25 Mar 2026 10:54:47 +0800</pubDate><guid>https://a2htray.github.io/post/learn-playwright/02_5days_video_learn/</guid><description>&lt;p&gt;文档看得差不多，在 B 站上找了个机构的培训视频，播放量挺多，有 4.4w，作为总结。&lt;/p&gt;
+&lt;p&gt;视频讲的内容相较于文档，内空是少了很多，但也补充了一些和 Selenium 的差异及其它。&lt;/p&gt;</description></item><item><title>5 天学习 Playwright（Day2）：API 测试、API 模拟、认证、下载</title><link>https://a2htray.github.io/post/learn-playwright/01_5days_concepts_of_playwright/</link><pubDate>Mon, 23 Mar 2026 10:28:24 +0800</pubDate><guid>https://a2htray.github.io/post/learn-playwright/01_5days_concepts_of_playwright/</guid><description>&lt;p&gt;今天是学习 Playwright 的第 2 天，文章的主要内容来自于官方的文档：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;学习官方的表述、加深自己的理解&lt;/li&gt;
 &lt;li&gt;试着写一些自己的示例，更贴近实际&lt;/li&gt;
