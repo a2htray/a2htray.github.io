@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>5 天学习 Playwright（Day5）：改进文献信息爬取</title><url>/post/learn-playwright/04_5days_pubmed_improved/</url><categories><category>后端技术</category><category>Playwright</category></categories><tags><tag>爬虫</tag><tag>Playwright</tag><tag>文献爬取</tag></tags><content type="html"><![CDATA[  第 4 天的实践中，留了不少的问题，还有很多提升的空间，如：
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>JSON Web Token - 介绍</title><url>/post/learn-jwt/00_jwt_introduction/</url><categories><category>后端技术</category><category>JWT</category></categories><tags><tag>JWT</tag><tag>JSON Web Token</tag><tag>The JWT Handbook</tag></tags><content type="html">  最近在写一个产品，在认证鉴权模块用到了 JWT，为探究其本质，所以打算花一些时间学习一下，并记录成文。
+首先，回答两个问答：
+什么是 JWT？ JWT 解决了什么样的问题？ 什么是 JWT？
+JWT，全称 JSON Web Token，是一个在空间受限环境下传递鉴权声明的标准，目前已广泛地应用于大部分主流 Web 框架中。
+JWT 提供了多种不同类型的签名与加密方式，其中签名为了验证数据是否被篡改，而加密则是为了保持数据内容。
+JWTs, by virtue of JWS and JWE, can provide various types of signatures and encryption. Signatures are useful to validate the data against tampering. Encryption is useful to protect the data from being read by third parties.
+JWT 解决了什么样的问题？
+JWT 统一标准化解决了多方安全可信传递用户身份 / 权限声明的通用难题，替代杂乱私有方案，适配无状态、跨域、分布式场景。
+------------------便于阅读，我是分割线---------------------
+然后，看一个已签名的的 JWT：
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+由 3 部分组成，分别是头部（Header）、载荷（Payload）和签名（Signature），各自的作用如下：
+头部：描述令牌的类型、签名算法 载荷：存储用户数据 签名：防篡改 3 部分以 “.” 分隔。
+------------------便于阅读，我是分割线---------------------
+最后，了解一下 JWT 的使用场景：
+客户端无状态会话：客户端存储部分用户信息 联合身份系统：允许用户使用一种身份验证访问不同的系统   </content></entry><entry><title>5 天学习 Playwright（Day5）：改进文献信息爬取</title><url>/post/learn-playwright/04_5days_pubmed_improved/</url><categories><category>后端技术</category><category>Playwright</category></categories><tags><tag>爬虫</tag><tag>Playwright</tag><tag>文献爬取</tag></tags><content type="html"><![CDATA[  第 4 天的实践中，留了不少的问题，还有很多提升的空间，如：
 启用无头模式，避免开关浏览器的开销 启动用多线程获取文献详情 启用无头模式，避免开关浏览器的开销 针对这一改进，可通过以下设置完成：
 禁止无头模式检测 显示设置视品大小 设置 user-agent，避免被识别为爬虫 代码如下：
 1 2 3 4 5 6 7 8 9 10 11 12 13 async with async_playwright() as p: browser: Browser = await p.chromium.launch( headless=True, # 1. 禁用无头模式检测 args=[&amp;#39;--disable-blink-features=AutomationControlled&amp;#39;], ) context: BrowserContext = await browser.new_context( # 2. 显示设置视口大小 viewport={&amp;#39;width&amp;#39;: 1920, &amp;#39;height&amp;#39;: 1080}, # 3. 伪造 user-agent，避免被检测到是爬虫 user_agent=&amp;#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&amp;#39;, ) # 其它 启动用多线程获取文献详情 多线程的改进主要体现在获取文献详情上，当然也可以多线程获取文献列表，待读者自行实现。

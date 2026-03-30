@@ -1,4 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 快乐冲浪与生活</title><link>https://a2htray.github.io/post/</link><description>Recent content in Posts on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 27 Mar 2026 14:17:22 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>5 天学习 Playwright（Day5）：改进文献信息爬取</title><link>https://a2htray.github.io/post/learn-playwright/04_5days_pubmed_improved/</link><pubDate>Fri, 27 Mar 2026 14:17:22 +0800</pubDate><guid>https://a2htray.github.io/post/learn-playwright/04_5days_pubmed_improved/</guid><description>&lt;p&gt;第 4 天的实践中，留了不少的问题，还有很多提升的空间，如：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 快乐冲浪与生活</title><link>https://a2htray.github.io/post/</link><description>Recent content in Posts on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 30 Mar 2026 06:56:40 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>JSON Web Token - 介绍</title><link>https://a2htray.github.io/post/learn-jwt/00_jwt_introduction/</link><pubDate>Mon, 30 Mar 2026 06:56:40 +0800</pubDate><guid>https://a2htray.github.io/post/learn-jwt/00_jwt_introduction/</guid><description>&lt;p&gt;最近在写一个产品，在认证鉴权模块用到了 JWT，为探究其本质，所以打算花一些时间学习一下，并记录成文。&lt;/p&gt;
+&lt;p&gt;首先，回答两个问答：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;什么是 JWT？&lt;/li&gt;
+&lt;li&gt;JWT 解决了什么样的问题？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;什么是 JWT？&lt;/em&gt;&lt;/p&gt;</description></item><item><title>5 天学习 Playwright（Day5）：改进文献信息爬取</title><link>https://a2htray.github.io/post/learn-playwright/04_5days_pubmed_improved/</link><pubDate>Fri, 27 Mar 2026 14:17:22 +0800</pubDate><guid>https://a2htray.github.io/post/learn-playwright/04_5days_pubmed_improved/</guid><description>&lt;p&gt;第 4 天的实践中，留了不少的问题，还有很多提升的空间，如：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;启用无头模式，避免开关浏览器的开销&lt;/li&gt;
 &lt;li&gt;启动用多线程获取文献详情&lt;/li&gt;
