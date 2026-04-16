@@ -1,4 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/python/</link><description>Recent content in Python on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 15 Jun 2023 20:44:17 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/python/rss.xml" rel="self" type="application/rss+xml"/><item><title>如何使用 Python 复制文件</title><link>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</link><pubDate>Thu, 15 Jun 2023 20:44:17 +0800</pubDate><guid>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</guid><description>&lt;p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/python/</link><description>Recent content in Python on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 16 Apr 2026 11:17:52 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/python/rss.xml" rel="self" type="application/rss+xml"/><item><title>局部变量优化</title><link>https://a2htray.github.io/post/learn-python/local-variable-optimization/</link><pubDate>Thu, 16 Apr 2026 11:17:52 +0800</pubDate><guid>https://a2htray.github.io/post/learn-python/local-variable-optimization/</guid><description>&lt;p&gt;局部变量优化，是指将全局变量 / 函数的地址赋值给局部变量，从而减少内存寻址的开销。&lt;/p&gt;
+&lt;p&gt;我自己的一个观点，大多数应用的瓶颈在于数据库、磁盘 I/O，所以一般不会用这一优化技术。但我今天在项目代码中看到类似的代码，
+又问了豆包，豆包说有场景有必要，所以写一个测试验证一下。&lt;/p&gt;</description></item><item><title>Python 中的类装饰器</title><link>https://a2htray.github.io/post/learn-python/python-class-decorators/</link><pubDate>Mon, 13 Apr 2026 14:47:38 +0800</pubDate><guid>https://a2htray.github.io/post/learn-python/python-class-decorators/</guid><description>&lt;p&gt;本文用于记录在使用 Python 过程中不知道的类装饰器的用法与功能。&lt;/p&gt;
+&lt;h2 id="dataclass"&gt;@dataclass
+&lt;a class="header-anchor" href="#dataclass"&gt;&lt;/a&gt;
+&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt; 1&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-2"&gt;&lt;a class="lnlinks" href="#hl-0-2"&gt; 2&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-3"&gt;&lt;a class="lnlinks" href="#hl-0-3"&gt; 3&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-4"&gt;&lt;a class="lnlinks" href="#hl-0-4"&gt; 4&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-5"&gt;&lt;a class="lnlinks" href="#hl-0-5"&gt; 5&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-6"&gt;&lt;a class="lnlinks" href="#hl-0-6"&gt; 6&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-7"&gt;&lt;a class="lnlinks" href="#hl-0-7"&gt; 7&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-8"&gt;&lt;a class="lnlinks" href="#hl-0-8"&gt; 8&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-9"&gt;&lt;a class="lnlinks" href="#hl-0-9"&gt; 9&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-10"&gt;&lt;a class="lnlinks" href="#hl-0-10"&gt;10&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-11"&gt;&lt;a class="lnlinks" href="#hl-0-11"&gt;11&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-12"&gt;&lt;a class="lnlinks" href="#hl-0-12"&gt;12&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-13"&gt;&lt;a class="lnlinks" href="#hl-0-13"&gt;13&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&amp;#34;&amp;#34;Add dunder methods based on the fields defined in the class.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;Examines PEP 526 __annotations__ to determine fields.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;If init is true, an __init__() method is added to the class. If repr
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;is true, a __repr__() method is added. If order is true, rich
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;comparison dunder methods are added. If unsafe_hash is true, a
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;__hash__() method is added. If frozen is true, fields may not be
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;assigned to after instance creation. If match_args is true, the
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;__match_args__ tuple is added. If kw_only is true, then by default
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;all fields are keyword-only. If slots is true, a new class with a
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;__slots__ attribute is returned.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;根据类中字段的定义，给类添加魔法方法：&lt;/p&gt;</description></item><item><title>如何使用 Python 复制文件</title><link>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</link><pubDate>Thu, 15 Jun 2023 20:44:17 +0800</pubDate><guid>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</guid><description>&lt;p&gt;
 &lt;a href="https://builtin.com/data-science/copy-a-file-with-python" title="原文 How to Copy a File With Python" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  原文 How to Copy a File With Python
  
