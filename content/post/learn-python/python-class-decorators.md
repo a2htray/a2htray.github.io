@@ -65,3 +65,110 @@ student2 = Student(name="Joe", age=28)
 print("equal:", student == student2) # equal: True
 ```
 
+## @property
+
+@property 把类的方法当作属性调用，可以实现**只读**、**属性校验**、**动态计算属性**。
+
+```python
+class User:
+    def __init__(self, age: int):
+        self._age = age
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value: int):
+        if value < 0:
+            raise ValueError("年龄不能小于0")
+        if value > 120:
+            raise ValueError("年龄不能大于120")
+        self._age = value
+
+
+user = User(18)
+print(user.age)
+user.age = 120
+print(user.age)
+```
+
+## @staticmethod
+
+@staticmethod 声明方法为静态方法，无需实例即可调用。
+
+```python
+class Math:
+    """数学工具类"""
+    @staticmethod
+    def add(a: int, b: int) -> int:
+        return a + b
+
+print(Math.add(1, 2))
+```
+
+## @classmethod
+
+@classmethod 把方法变成类方法，常用于工厂方法和多构造函数。
+
+* 第一个参数为类本身，cls
+* 直接`类名.方法名()` 调用
+
+```python
+class Product:
+    """产品类"""
+
+    def __init__(self, name: str, price: float):
+        self.name = name
+        self.price = price
+
+    @classmethod
+    def default(cls) -> "Product":
+        return cls("default", 0.0)
+
+    @classmethod
+    def create(cls, name: str, price: float) -> "Product":
+        return cls(name, price)
+
+
+default_product = Product.default()
+print(default_product.name)
+print(default_product.price)
+
+product = Product.create("test", 100.0)
+print(product.name)
+print(product.price)
+```
+
+## @abstractmethod
+
+`多态设计`
+
+@abstractmethod 用于定义抽象方法，必须配合抽象基类 ABC 使用，作用如下：
+
+1. 子类必须实现父类定义的抽象方法
+2. 定义接口约束
+
+```python
+from abc import ABC, abstractmethod
+
+
+class Animal(ABC):
+    """动物类"""
+    @abstractmethod
+    def sound(self) -> str:
+        """动物的叫声"""
+        pass
+
+
+class Dog(Animal):
+    """狗类"""
+    def sound(self) -> str:
+        return "汪汪汪"
+
+
+dog = Dog()
+print(dog.sound())
+```
+
+
