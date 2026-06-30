@@ -3,7 +3,7 @@ date = '2026-04-13T14:47:38+08:00'
 draft = false
 title = 'Python 中的类装饰器'
 categories = ['后端技术', 'Python']
-tags = ['Python', '类装饰器', '@dataclass']
+tags = ['Python', '类装饰器', '@dataclass', '@property', '@staticmethod', '@classmethod', '@abstractmethod']
 toc = true
 +++
 

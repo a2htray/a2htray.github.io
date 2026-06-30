@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 28 Apr 2026 10:12:59 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>FAIR 原则</title><link>https://a2htray.github.io/post/concepts/fair/</link><pubDate>Tue, 28 Apr 2026 10:12:59 +0800</pubDate><guid>https://a2htray.github.io/post/concepts/fair/</guid><description>&lt;p&gt;FAIR 是一套科研数据与资源可发现、可访问、可互操作、可复用的国际通用准则。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 30 Jun 2026 16:02:18 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>LOF - Local Outlier Factor 局部异常因子算法</title><link>https://a2htray.github.io/post/learn-algo/lof/</link><pubDate>Tue, 30 Jun 2026 16:02:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-algo/lof/</guid><description>&lt;p&gt;LOF 是&lt;strong&gt;无监督&lt;/strong&gt;、&lt;strong&gt;基于密度&lt;/strong&gt;的异常检测算法，核心思想：异常点的局部密度显著低于周边邻居，通过量化「局部密度差异」给出每个样本的异常分数。&lt;/p&gt;
+&lt;p&gt;LOF 的适用场景：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据集存在多个疏密不同的聚类&lt;/li&gt;
+&lt;li&gt;不需要异常标签，纯无监督筛查离群点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="核心公式"&gt;核心公式
+&lt;a class="header-anchor" href="#%e6%a0%b8%e5%bf%83%e5%85%ac%e5%bc%8f"&gt;&lt;/a&gt;
+&lt;/h2&gt;
+ &lt;blockquote&gt;
+ &lt;p&gt;当前距离公式采用欧式距离。&lt;/p&gt;</description></item><item><title>forwardRef - 转发 Ref 和 useImperativeHandle - 自定义 Ref</title><link>https://a2htray.github.io/post/learn-frontend/react-forwardref-useimperativehandle/</link><pubDate>Tue, 26 May 2026 14:22:47 +0800</pubDate><guid>https://a2htray.github.io/post/learn-frontend/react-forwardref-useimperativehandle/</guid><description>&lt;p&gt;forwardRef 和 useImperativeHandle 是 React 提供的两个 Hook，分别用于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;forwardRef 是 React 提供的一个 Hook，解决父子组件传递 Ref 的问题；&lt;/li&gt;
+&lt;li&gt;useImperativeHandle 是 React 提供的一个 Hook，用于自定义 Ref，将子组件的方法暴露给父组件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="forwardref"&gt;forwardRef
+&lt;a class="header-anchor" href="#forwardref"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;举个例子：&lt;/p&gt;</description></item><item><title>ref、reactive 响应式 API</title><link>https://a2htray.github.io/post/learn-vue/ref-reactive/</link><pubDate>Wed, 13 May 2026 14:32:50 +0800</pubDate><guid>https://a2htray.github.io/post/learn-vue/ref-reactive/</guid><description>&lt;p&gt;&lt;code&gt;本文在 LLM 对话中学习、总结、记录&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="响应式-api"&gt;响应式 API
+&lt;a class="header-anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f-api"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;响应式 API 是 Vue 官方提供的一组函数，专门用来把&lt;strong&gt;普通变量 / 对象变成自动监听变化、自动更新视图&lt;/strong&gt;的接口。Vue3 响应式 API共分成 4 类：&lt;/p&gt;</description></item><item><title>FAIR 原则</title><link>https://a2htray.github.io/post/concepts/fair/</link><pubDate>Tue, 28 Apr 2026 10:12:59 +0800</pubDate><guid>https://a2htray.github.io/post/concepts/fair/</guid><description>&lt;p&gt;FAIR 是一套科研数据与资源可发现、可访问、可互操作、可复用的国际通用准则。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;F = Findable&lt;/code&gt;、&lt;code&gt;A = Accessible&lt;/code&gt;、&lt;code&gt;I = Interoperable &lt;/code&gt;、&lt;code&gt;R = Reusable&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id="f"&gt;F
 &lt;a class="header-anchor" href="#f"&gt;&lt;/a&gt;

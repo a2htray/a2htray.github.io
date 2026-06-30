@@ -1,4 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>FAIR 原则</title><url>/post/concepts/fair/</url><categories><category>其它</category><category>原则</category></categories><tags><tag>FAIR</tag></tags><content type="html">  FAIR 是一套科研数据与资源可发现、可访问、可互操作、可复用的国际通用准则。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>LOF - Local Outlier Factor 局部异常因子算法</title><url>/post/learn-algo/lof/</url><categories><category>算法</category><category>异常检测</category></categories><tags><tag>Flowise</tag><tag>大模型应用开发平台</tag><tag>TypeScript</tag></tags><content type="html">  LOF 是无监督、基于密度的异常检测算法，核心思想：异常点的局部密度显著低于周边邻居，通过量化「局部密度差异」给出每个样本的异常分数。
+LOF 的适用场景：
+数据集存在多个疏密不同的聚类 不需要异常标签，纯无监督筛查离群点 核心公式 当前距离公式采用欧式距离。
+1. $k\text{-distance}(p)$ 第 $k$ 邻近距离
+$$k\text{-distance}(p) = d(p,o_k)$$
+其中，$o_k$ 是距离样本 $p$ 第 $k$ 近的样本。邻域 $N_k(p)$ 是所有距离样本 $p$ 小于等于 $k\text{-distance}(p)$ 的样本的集合，如下图：
+当 $k$ 为 5 时，记 $N_5(S001)$，邻域样本个数为 5 当 $k$ 为 8 时，记 $N_8(S001)$，邻域样本个数为 8 邻域样本个数可以大于 $k$，即可能存在多个距离等于 $k\text{-distance}(p)$ 的样本。
+2. $\operatorname{reach-disk}_k(p,o)$ 可达距离
+可达距离公式如下：
+$$ \operatorname{reach-disk}_k(p,o) = \max\big(k\text{-distance}(o),\ d(p,o)\big) $$
+对于样本 $p$ 到样本 $o$ 的可达距离表示：
+当样本 $p$ 在邻域 $N_k(o)$ 内时，可达距离为 $k\text{-distance}(o)$ 当样本 $p$ 在邻域 $N_k(o)$ 外时，可达距离为 $d(p,o)$ 如下图：
+样本 S012 在样本 S001 的邻域 $N_{10}(S001)$ 内 样本 S042 不在样本 S001 的邻域 $N_{10}(S001)$ 内 样本 S012 到样本 S001 的可达距离为 $k\text{-distance}(S001)$ 样本 S042 到样本 S001 的可达距离为 $d(S042,S001)$ 可达距离的作用：同一簇内距离很近的样本统一用邻居的 k-distance 抹平，避免微小距离波动干扰密度计算。
+3. $\operatorname{LRD}_k(p)$ 局部可达密度
+$\operatorname{LRD}_k(p)$ 局部可达密度用于衡量样本 $p$ 所在局部区域的样本密集程度 …  </content></entry><entry><title>forwardRef - 转发 Ref 和 useImperativeHandle - 自定义 Ref</title><url>/post/learn-frontend/react-forwardref-useimperativehandle/</url><categories><category>前端技术</category><category>React</category></categories><tags><tag>React</tag><tag>React Hooks</tag><tag>forwardRef</tag><tag>useImperativeHandle</tag></tags><content type="html"><![CDATA[  forwardRef 和 useImperativeHandle 是 React 提供的两个 Hook，分别用于：
+forwardRef 是 React 提供的一个 Hook，解决父子组件传递 Ref 的问题； useImperativeHandle 是 React 提供的一个 Hook，用于自定义 Ref，将子组件的方法暴露给父组件。 forwardRef 举个例子：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 import React, { useRef, forwardRef } from &#39;react&#39;; const ChildInput = forwardRef((props, ref) =&gt; { return &lt;input ref={ref} placeholder=&#34;子组件输入框&#34; /&gt;; }); const Parent = () =&gt; { const inputRef = useRef(null); const focusInput = () =&gt; { inputRef.current.focus(); }; return ( &lt;div&gt; &lt;ChildInput ref={inputRef} /&gt; &lt;button onClick={focusInput}&gt;聚焦子组件输入框&lt;/button&gt; &lt;/div&gt; ); }; export default Parent; 在父组件（Parent）中定义了 inputRef 的引用，并且子组件（ChildInput）使用 forwardRef 包裹，接收了 ref 参数，注意参数声明，如下：
+1 2 3 const ChildInput = forwardRef((props, ref) =&gt; { // ... }); 第 2 个参数是 ref 参数，用于接收父组件传递来的 Ref。
+在子组件中，内部使用 ref 参数绑定到 input DOM 上，但“聚集”是在父组件中通过 inputRef.current.focus() 来实现的。
+所以，forwardRef 的适用场景：
+子组件需要在父组件操作 DOM 或其他元素； 子组件需要在父组件中调用方法； useImperativeHandle 必须搭配 forwardRef 使用。
+举个例子：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 import React, { useRef, forwardRef, useImperativeHandle } from &#39;react&#39;; const Child = forwardRef((props, ref) =&gt; { const hello = () =&gt; { alert(&#39;我是子组件的方法：你好！&#39;); }; useImperativeHandle(ref, () =&gt; ({ hello, })); return &lt;div&gt;我是子组件&lt;/div&gt;; }); export default function Parent() { const childRef = useRef(null); return ( &lt;div style={{ padding: 20 }}&gt; &lt;Child ref={childRef} /&gt; &lt;button onClick={() =&gt; childRef.current.hello()}&gt; 调用子组件方法 &lt;/button&gt; &lt;/div&gt; ); } 子组件的方法 hello 被暴露给父组件，父组件可以通过 childRef.current.hello() 来调用。
+总结 又学了两个 React Hooks，分别是 forwardRef 和 useImperativeHandle。
+  ]]></content></entry><entry><title>ref、reactive 响应式 API</title><url>/post/learn-vue/ref-reactive/</url><categories><category>前端技术</category><category>Vue</category></categories><tags><tag>Vue</tag><tag>响应式 API</tag><tag>ref</tag><tag>reactive</tag></tags><content type="html">  本文在 LLM 对话中学习、总结、记录
+响应式 API 响应式 API 是 Vue 官方提供的一组函数，专门用来把普通变量 / 对象变成自动监听变化、自动更新视图的接口。Vue3 响应式 API共分成 4 类：
+创建响应式：ref、reactive 转换 / 解构响应式：toRef、toRefs 只读响应式：readonly、shallowReadonly 浅层响应式：shallowRef、shallowReactive 本文主要介绍创建响应式 API - ref、reactive。
+ref 和 reactive ref，全称 reference，能为任意类型创建响应式变量，它的原理是：把普通值包一层对象，内部有 value 属性，实现响应式。
+ref 用于基本数据类型。
+reactive，属于代理式响应式，只能代理对象 / 数组（引用类型），它的原理是：给原始对象创建 Proxy 代理。
+reactive 用于对象 / 数组等引用类型。
+差异 ref 和 reactive 的差异如下表：
+特性 ref reactive 支持的数据类型 所有类型（基本类型 + 引用类型） 仅引用类型（对象、数组、Map、Set 等） 访问 / 修改方式 JS 中必须用 .value 直接访问，无需 .value 响应式丢失 不会丢失 解构 / 展开会丢失响应式 模板中使用 自动解包，不用写 .value 直接使用 重新赋值 可以直接重新赋值 不建议直接重新赋值（会破坏响应式） 开发实践 优先用 ref：通用、安全、不会踩坑，能处理所有数据 reactive：只适合完整对象 / 表单数据这种整体结构 基本类型（数字、字符串、布尔）：只能用 ref   </content></entry><entry><title>FAIR 原则</title><url>/post/concepts/fair/</url><categories><category>其它</category><category>原则</category></categories><tags><tag>FAIR</tag></tags><content type="html">  FAIR 是一套科研数据与资源可发现、可访问、可互操作、可复用的国际通用准则。
 F = Findable、A = Accessible、I = Interoperable 、R = Reusable
 F 数据、流程、工具、样本资源容易被检索、定位
 全局唯一、持久化标识（DOI、PID、BioSample ID） 丰富、标准化元数据（样本信息、实验条件、测序平台、版本） 可被搜索引擎、数据库、平台索引 示例：组学数据入库 ENA/GSA，带项目编号 + 样本描述 A 资源合法、可获取，有明确访问规则
@@ -16,7 +48,7 @@ F 数据、流程、工具、样本资源容易被检索、定位
 附录 豆包说，当使用 PyPy 而不是 CPython 时，可以完全不用考虑局部变量优化，PyPy 的 JIT 会自动做此类优化。
 如果查看解释器实现：
 1 2 3 4 import sys print(sys.executable) # 解释器路径 print(sys.version) # 版本信息 print(sys.implementation) # 核心判断   ]]></content></entry><entry><title>现在用于代码生成的模型实在是太强了，写出来的代码起码比我自己写的超过两个层次。</title><url>/post/not-only-segment/2026-04-15/</url><categories><category>句否</category></categories><tags><tag>一句话</tag><tag>一张图</tag></tags><content type="html">  
-  </content></entry><entry><title>Python 中的类装饰器</title><url>/post/learn-python/python-class-decorators/</url><categories><category>后端技术</category><category>Python</category></categories><tags><tag>Python</tag><tag>类装饰器</tag><tag>@dataclass</tag></tags><content type="html"><![CDATA[  本文用于记录在使用 Python 过程中不知道的类装饰器的用法与功能。
+  </content></entry><entry><title>Python 中的类装饰器</title><url>/post/learn-python/python-class-decorators/</url><categories><category>后端技术</category><category>Python</category></categories><tags><tag>Python</tag><tag>类装饰器</tag><tag>@dataclass</tag><tag>@property</tag><tag>@staticmethod</tag><tag>@classmethod</tag><tag>@abstractmethod</tag></tags><content type="html"><![CDATA[  本文用于记录在使用 Python 过程中不知道的类装饰器的用法与功能。
 @dataclass 1 2 3 4 5 6 7 8 9 10 11 12 13 &amp;#34;&amp;#34;&amp;#34;Add dunder methods based on the fields defined in the class. Examines PEP 526 __annotations__ to determine fields. If init is true, an __init__() method is added to the class. If repr is true, a __repr__() method is added. If order is true, rich comparison dunder methods are added. If unsafe_hash is true, a __hash__() method is added. If frozen is true, fields may not be assigned to after instance creation. If match_args is true, the __match_args__ tuple is added. If kw_only is true, then by default all fields are keyword-only. If slots is true, a new class with a __slots__ attribute is returned. &amp;#34;&amp;#34;&amp;#34; 根据类中字段的定义，给类添加魔法方法：
 如果 init 为 True，则会为类添加一个 __init__() 方法 如果 repr 为 True，则会添加一个 __repr__() 方法 如果 order 为 True，则会添加用于大小比较的魔法方法 如果 unsafe_hash 为 True，则会添加一个 __hash__() 方法 如果 frozen 为 True，则在实例创建后，不允许修改字段的值 如果 match_args 为 True，则会添加 __match_args__ 元组 如果 kw_only 为 True，则默认所有字段都是仅限关键字参数 如果 …  ]]></content></entry><entry><title>SQLAlchemy 查询按字段降序或升序</title><url>/post/learn-backend/python-sqlalchemy-sort-by-desc-asc/</url><categories><category>后端技术</category><category>SQLAlchemy</category></categories><tags><tag>Python</tag><tag>ORM</tag><tag>SQLAlchemy</tag><tag>PostgreSQL</tag></tags><content type="html">  在数据库中，查询按某一字段降序和升序的关键字，分别是 DESC 和 ASC，不指定则默认按升序，也就是 ASC，如下面三个查询：
 不指定
