@@ -35,9 +35,7 @@ $$k\text{-distance}(p) = d(p,o_k)$$
 
 可达距离公式如下：
 
-$$
-\operatorname{reach-disk}_k(p,o) = \max\big(k\text{-distance}(o),\ d(p,o)\big)
-$$
+$$\operatorname{reach-disk}_k(p,o) = \max\big(k\text{-distance}(o),\ d(p,o)\big)$$
 
 对于样本 $p$ 到样本 $o$ 的可达距离表示：
 
@@ -59,9 +57,7 @@ $$
 
 $\operatorname{LRD}_k(p)$ 局部可达密度用于衡量样本 $p$ 所在局部区域的样本密集程度，其公式如下：
 
-$$
-\operatorname{LRD}_k(p) = \frac{1}{\displaystyle \frac{1}{\left|N_k(p)\right|}\sum_{o\in N_k(p)} \operatorname{reach-disk}_k(p,o)} = \frac{\left|N_k(p)\right|}{\sum_{o\in N_k(p)} \operatorname{reach-disk}_k(p,o)}
-$$
+$$\operatorname{LRD}_k(p) = \frac{1}{\displaystyle \frac{1}{\left|N_k(p)\right|}\sum_{o\in N_k(p)} \operatorname{reach-disk}_k(p,o)} = \frac{\left|N_k(p)\right|}{\sum_{o\in N_k(p)} \operatorname{reach-disk}_k(p,o)}$$
 
 表示样本 $p$ 邻域平均可达距离的倒数，$\operatorname{LRD}_k(p)$ 越大，则 样本 $p$ 周围的样本越密集，反之则越稀疏。
 
@@ -75,9 +71,7 @@ $LRD_{5}(S001)$ 为 2.0590，而 $LRD_{5}(S050)$ 为 0.0537，显然样本 S050 
 
 $\operatorname{LOF}_k(p)$ 局部异常因子公式如下：
 
-$$
-\operatorname{LOF}_k(p) = \frac{\displaystyle \frac{1}{\left|N_k(p)\right|}\sum_{o\in N_k(p)} \operatorname{LRD}_k(o)}{\operatorname{LRD}_k(p)}
-$$
+$$\operatorname{LOF}_k(p) = \frac{\displaystyle \frac{1}{\left|N_k(p)\right|}\sum_{o\in N_k(p)} \operatorname{LRD}_k(o)}{\operatorname{LRD}_k(p)}$$
 
 其表示样本 $p$ 的邻居平均局部可达密度除以当前样本的局部可达密度：
 
