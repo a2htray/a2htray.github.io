@@ -24,7 +24,7 @@ $$k\text{-distance}(p) = d(p,o_k)$$
 
 其中，$o_k$ 是距离样本 $p$ 第 $k$ 近的样本。邻域 $N_k(p)$ 是所有距离样本 $p$ 小于等于 $k\text{-distance}(p)$ 的样本的集合，如下图：
 
-![](results/01_k-distance.png)
+![](/imgs/learn-algo/01_k-distance.png)
 
 * 当 $k$ 为 5 时，记 $N_5(S001)$，邻域样本个数为 5
 * 当 $k$ 为 8 时，记 $N_8(S001)$，邻域样本个数为 8
