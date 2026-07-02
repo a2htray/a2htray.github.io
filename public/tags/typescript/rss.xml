@@ -1,14 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TypeScript on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/typescript/</link><description>Recent content in TypeScript on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 30 Jun 2026 16:02:18 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/typescript/rss.xml" rel="self" type="application/rss+xml"/><item><title>LOF - Local Outlier Factor 局部异常因子算法</title><link>https://a2htray.github.io/post/learn-algo/lof/</link><pubDate>Tue, 30 Jun 2026 16:02:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-algo/lof/</guid><description>&lt;p&gt;LOF 是&lt;strong&gt;无监督&lt;/strong&gt;、&lt;strong&gt;基于密度&lt;/strong&gt;的异常检测算法，核心思想：异常点的局部密度显著低于周边邻居，通过量化「局部密度差异」给出每个样本的异常分数。&lt;/p&gt;
-&lt;p&gt;LOF 的适用场景：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;数据集存在多个疏密不同的聚类&lt;/li&gt;
-&lt;li&gt;不需要异常标签，纯无监督筛查离群点&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="核心公式"&gt;核心公式
-&lt;a class="header-anchor" href="#%e6%a0%b8%e5%bf%83%e5%85%ac%e5%bc%8f"&gt;&lt;/a&gt;
-&lt;/h2&gt;
- &lt;blockquote&gt;
- &lt;p&gt;当前距离公式采用欧式距离。&lt;/p&gt;</description></item><item><title>Flowise：本地部署、系统架构、技术实现和应用构建</title><link>https://a2htray.github.io/post/learn-ai/00_deploy_flowise_in_developer_mode/</link><pubDate>Tue, 17 Mar 2026 21:12:33 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/00_deploy_flowise_in_developer_mode/</guid><description>&lt;p&gt;Flowise 是开源的生成式人工智能开发平台，可用于构建&lt;strong&gt;智能体&lt;/strong&gt;和&lt;strong&gt;大语言模型工作流&lt;/strong&gt;。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TypeScript on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/typescript/</link><description>Recent content in TypeScript on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 17 Mar 2026 21:12:33 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/typescript/rss.xml" rel="self" type="application/rss+xml"/><item><title>Flowise：本地部署、系统架构、技术实现和应用构建</title><link>https://a2htray.github.io/post/learn-ai/00_deploy_flowise_in_developer_mode/</link><pubDate>Tue, 17 Mar 2026 21:12:33 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/00_deploy_flowise_in_developer_mode/</guid><description>&lt;p&gt;Flowise 是开源的生成式人工智能开发平台，可用于构建&lt;strong&gt;智能体&lt;/strong&gt;和&lt;strong&gt;大语言模型工作流&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;Flowise 提供以下 6 个完整的解决方案：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;可视化的构建过程&lt;/li&gt;

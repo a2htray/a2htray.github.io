@@ -3,7 +3,7 @@ date = '2026-06-30T16:02:18+08:00'
 draft = false
 title = 'LOF - Local Outlier Factor 局部异常因子算法'
 categories = ['算法', '异常检测']
-tags = ['Flowise', '大模型应用开发平台', 'TypeScript']
+tags = ['异常检测', 'Local Outlier Factor', '算法', 'LOF']
 toc = true
 +++
 
