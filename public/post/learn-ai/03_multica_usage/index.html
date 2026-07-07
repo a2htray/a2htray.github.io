@@ -1,0 +1,330 @@
+<!doctype html><html lang=zh-CN data-theme=light><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.152.2"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon-32x32.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple-touch-icon.png><meta itemprop=name content="Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型"><meta itemprop=description content="记录我的生活、工作与成长。"><meta name=description content="记录我的生活、工作与成长。"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://a2htray.github.io/imgs/my_avatar.jpg"><meta itemprop=keywords content="Multica,Agent 协作平台,Multica Usage"><meta property="og:type" content="article"><meta property="og:title" content="Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型"><meta property="og:description" content="记录我的生活、工作与成长。"><meta property="og:image" content="/imgs/my_avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://a2htray.github.io/post/learn-ai/03_multica_usage/"><meta property="og:site_name" content="快乐冲浪与生活"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="a2htray"><meta property="article:published_time" content="2026-07-07 10:28:42 +0800 CST"><meta property="article:modified_time" content="2026-07-07 10:28:42 +0800 CST"><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/font-awesome/6.7.2/css/all.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.css><link rel=stylesheet href="/css/main.min.css?=1783410830"><style type=text/css>.post-footer hr:after{content:"~ 我可是有底线的哟 ~"}.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><link rel=stylesheet type=text/css href="/css/custom_style.css?=1783410830"><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return 0[0];const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),0[0]):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型 - 快乐冲浪与生活</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>快乐冲浪与生活</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>多体验、多体会、多体悟</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-tags"><a href=/tags/ class=hvr-icon-pulse rel=section><i class="fa fa-tag hvr-icon"></i>标签</a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#目标>目标</a></li><li><a href=#创建项目>创建项目</a></li><li><a href=#创建智能体>创建智能体</a></li><li><a href=#创建-squad>创建 Squad</a></li><li><a href=#创建-issue>创建 issue</a></li><li><a href=#成果展示>成果展示</a></li><li><a href=#小结>小结</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=a2htray src=/imgs/img-lazy-loading.gif data-src=/imgs/my_avatar.jpg><p class=site-author-name itemprop=name>a2htray</p><div class=site-description itemprop=description>记录我的生活、工作与成长。</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/post/><span class=site-state-item-count>169</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>43</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>154</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/a2htray title="Github → https://github.com/a2htray" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/a2htray/a2htray.github.io rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentColor" class="octo-body"/></svg></a><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://a2htray.github.io/post/learn-ai/03_multica_usage/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/my_avatar.jpg"><meta itemprop=name content="a2htray"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="a2htray"><meta itemprop=description content="记录我的生活、工作与成长。"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型"><meta itemprop=description content="昨天在本地搭建了 Agent 协作平台 Multica，并且我目前也在开发一款生信可视化桌面应用 BioScope，正好可以试试 Multica，看看实际效果。"></span><header class=post-header><h1 class=post-title itemprop="name headline">Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型
+<a href=https://github.com/a2htray/a2htray.github.io/tree/main/content/post/learn-ai/03_multica_usage.md rel="noopener external nofollow noreferrer" target=_blank class="exturl post-edit-link" title=编辑><i class="fa fa-pen-nib"></i></a></h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2026-07-07 10:28:42 +08:00" itemprop="dateCreated datePublished" datetime="2026-07-07 10:28:42 +0800 CST">2026-07-07
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E5%BA%94%E7%94%A8%E5%B9%B3%E5%8F%B0/ itemprop=url rel=index><span itemprop=name>人工智能/应用平台</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="fas fa-solid fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>4312</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="fas fa-solid fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>9分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="fas fa-solid fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/post/learn-ai/03_multica_usage/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><p>昨天在本地搭建了 Agent 协作平台 Multica，并且我目前也在开发一款生信可视化桌面应用 BioScope，正好可以试试 Multica，看看实际效果。</p><a id=more></a><blockquote><p>生信可视化桌面应用 BioScope，我目前已经开发的差不多了，完成了 65.6% 的图表（40/61），可以看下部分截图。</p></blockquote><p>&mdash;&mdash;&mdash; 预览效果 start &mdash;&mdash;&mdash;</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/bioscope-01.png alt></p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/bioscope-02.png alt></p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/bioscope-03.png alt></p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/bioscope-04.png alt></p><p>&mdash;&mdash;&mdash; 预览效果 end &mdash;&mdash;&mdash;</p><h2 id=目标>目标
+<a class=header-anchor href=#%e7%9b%ae%e6%a0%87></a></h2><p>不同于个人开发，本次演示的目标是：基于 Multica 平台实现生信可视化桌面应用的原型，至少要实现以下功能：</p><ol><li>Electron 桌面应用的项目搭建</li><li>实现可交互的热力图</li><li>安装包、文档的交付</li></ol><h2 id=创建项目>创建项目
+<a class=header-anchor href=#%e5%88%9b%e5%bb%ba%e9%a1%b9%e7%9b%ae></a></h2><p>点击工作区左侧边栏的“项目”，新建项目：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-01.png alt></p><h2 id=创建智能体>创建智能体
+<a class=header-anchor href=#%e5%88%9b%e5%bb%ba%e6%99%ba%e8%83%bd%e4%bd%93></a></h2><p>在这个项目中，我的规划是创建以下 5 个 Agent：</p><ol><li>Product Manager Agent - 产品经理<ul><li>描述：分析生信可视化场景的用户需求，规划图表功能路线图，定义优先级与验收标准。</li></ul></li><li>Fullstack Engineer Agent - 全栈开发工程师<ul><li>描述：负责桌面端主进程、预加载与前端渲染的完整实现，交付图表、数据交互与原生能力。</li></ul></li><li>QA Engineer Agent - 测试工程师<ul><li>描述：通过静态检查与端到端验证保障图表渲染、数据导入导出与跨平台运行的质量。</li></ul></li><li>Tech Lead Agent - 技术负责人<ul><li>描述：把控整体架构与工程规范，评审技术方案与实现，裁决跨角色的技术冲突。</li></ul></li><li>Tech Writer Agent - 技术文档工程师<ul><li>描述：面向用户和贡献者维护产品说明、开发指南与变更日志，保持文档与产品实际状态一致。</li></ul></li></ol><p>给到各个 Agent 的指令如下：</p><p><strong>Product Manager Agent - 产品经理</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a class=lnlinks href=#hl-0-1> 1</a>
+</span><span class=lnt id=hl-0-2><a class=lnlinks href=#hl-0-2> 2</a>
+</span><span class=lnt id=hl-0-3><a class=lnlinks href=#hl-0-3> 3</a>
+</span><span class=lnt id=hl-0-4><a class=lnlinks href=#hl-0-4> 4</a>
+</span><span class=lnt id=hl-0-5><a class=lnlinks href=#hl-0-5> 5</a>
+</span><span class=lnt id=hl-0-6><a class=lnlinks href=#hl-0-6> 6</a>
+</span><span class=lnt id=hl-0-7><a class=lnlinks href=#hl-0-7> 7</a>
+</span><span class=lnt id=hl-0-8><a class=lnlinks href=#hl-0-8> 8</a>
+</span><span class=lnt id=hl-0-9><a class=lnlinks href=#hl-0-9> 9</a>
+</span><span class=lnt id=hl-0-10><a class=lnlinks href=#hl-0-10>10</a>
+</span><span class=lnt id=hl-0-11><a class=lnlinks href=#hl-0-11>11</a>
+</span><span class=lnt id=hl-0-12><a class=lnlinks href=#hl-0-12>12</a>
+</span><span class=lnt id=hl-0-13><a class=lnlinks href=#hl-0-13>13</a>
+</span><span class=lnt id=hl-0-14><a class=lnlinks href=#hl-0-14>14</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>你是 BioScope 项目的产品经理。BioScope 是一款面向生物信息学场景的桌面数据可视化应用，
+</span></span><span class=line><span class=cl>用户主要是科研人员和数据分析师，核心价值是&#34;让画图变得简单&#34;。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 你的职责
+</span></span><span class=line><span class=cl>- 分析用户在生信可视化（差异表达、富集分析、PCA、变异位点等）场景下的真实需求
+</span></span><span class=line><span class=cl>- 将需求拆解为可交付的功能点，产出用户故事和验收标准
+</span></span><span class=line><span class=cl>- 定义每个图表模板的分类、名称、描述、筛选标签等元数据
+</span></span><span class=line><span class=cl>- 权衡功能范围：不做过度设计，不添加当前用户用不到的能力
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 工作准则
+</span></span><span class=line><span class=cl>- 需求描述使用中文，与现有 UI 文案风格一致
+</span></span><span class=line><span class=cl>- 每个需求必须回答：目标用户是谁、要解决什么问题、如何验收
+</span></span><span class=line><span class=cl>- 需要技术方案评估时，交由 Tech Lead Agent；不直接指导代码实现
+</span></span><span class=line><span class=cl>- 不主动扩展项目范围到非生信可视化领域</span></span></code></pre></td></tr></table></div></div><p><strong>Fullstack Engineer Agent - 全栈开发工程师</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a class=lnlinks href=#hl-1-1> 1</a>
+</span><span class=lnt id=hl-1-2><a class=lnlinks href=#hl-1-2> 2</a>
+</span><span class=lnt id=hl-1-3><a class=lnlinks href=#hl-1-3> 3</a>
+</span><span class=lnt id=hl-1-4><a class=lnlinks href=#hl-1-4> 4</a>
+</span><span class=lnt id=hl-1-5><a class=lnlinks href=#hl-1-5> 5</a>
+</span><span class=lnt id=hl-1-6><a class=lnlinks href=#hl-1-6> 6</a>
+</span><span class=lnt id=hl-1-7><a class=lnlinks href=#hl-1-7> 7</a>
+</span><span class=lnt id=hl-1-8><a class=lnlinks href=#hl-1-8> 8</a>
+</span><span class=lnt id=hl-1-9><a class=lnlinks href=#hl-1-9> 9</a>
+</span><span class=lnt id=hl-1-10><a class=lnlinks href=#hl-1-10>10</a>
+</span><span class=lnt id=hl-1-11><a class=lnlinks href=#hl-1-11>11</a>
+</span><span class=lnt id=hl-1-12><a class=lnlinks href=#hl-1-12>12</a>
+</span><span class=lnt id=hl-1-13><a class=lnlinks href=#hl-1-13>13</a>
+</span><span class=lnt id=hl-1-14><a class=lnlinks href=#hl-1-14>14</a>
+</span><span class=lnt id=hl-1-15><a class=lnlinks href=#hl-1-15>15</a>
+</span><span class=lnt id=hl-1-16><a class=lnlinks href=#hl-1-16>16</a>
+</span><span class=lnt id=hl-1-17><a class=lnlinks href=#hl-1-17>17</a>
+</span><span class=lnt id=hl-1-18><a class=lnlinks href=#hl-1-18>18</a>
+</span><span class=lnt id=hl-1-19><a class=lnlinks href=#hl-1-19>19</a>
+</span><span class=lnt id=hl-1-20><a class=lnlinks href=#hl-1-20>20</a>
+</span><span class=lnt id=hl-1-21><a class=lnlinks href=#hl-1-21>21</a>
+</span><span class=lnt id=hl-1-22><a class=lnlinks href=#hl-1-22>22</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>你是 BioScope 项目的全栈开发工程师，负责 Electron 主进程、预加载脚本、React 渲染进程
+</span></span><span class=line><span class=cl>以及 shared 层的完整实现。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 技术栈
+</span></span><span class=line><span class=cl>Electron 39 + electron-vite 5 + Vite 7 + TypeScript 5.9 + React 19 + Ant Design 6 +
+</span></span><span class=line><span class=cl>react-router-dom 7 + ECharts 6 + D3 7 + xlsx + @dnd-kit + 包管理器 npm
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 你的职责
+</span></span><span class=line><span class=cl>- 渲染端：实现图表页面、图表组件、配置面板、数据表格交互
+</span></span><span class=line><span class=cl>- 主进程：维护窗口、IPC 处理、外链拦截等
+</span></span><span class=line><span class=cl>- 预加载：通过 window.api 安全暴露原生能力
+</span></span><span class=line><span class=cl>- 共享层：维护类型、示例数据、IO 工具、IPC 通道常量
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 编码约定（严格遵守）
+</span></span><span class=line><span class=cl>- React 函数组件 + TypeScript，单引号，不使用分号
+</span></span><span class=line><span class=cl>- UI 文案使用中文，风格与现有页面一致
+</span></span><span class=line><span class=cl>- 涉及本地文件系统等原生能力必须走 IPC，不在 renderer 直接调用 Node API
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 提交前自检
+</span></span><span class=line><span class=cl>- 运行 npm run typecheck 通过
+</span></span><span class=line><span class=cl>- 运行 npm run lint 通过
+</span></span><span class=line><span class=cl>- 手工确认图表在示例数据下能正确渲染，工具栏 SVG/PNG/JPG 导出正常</span></span></code></pre></td></tr></table></div></div><p><strong>QA Engineer Agent - 测试工程师</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a class=lnlinks href=#hl-2-1> 1</a>
+</span><span class=lnt id=hl-2-2><a class=lnlinks href=#hl-2-2> 2</a>
+</span><span class=lnt id=hl-2-3><a class=lnlinks href=#hl-2-3> 3</a>
+</span><span class=lnt id=hl-2-4><a class=lnlinks href=#hl-2-4> 4</a>
+</span><span class=lnt id=hl-2-5><a class=lnlinks href=#hl-2-5> 5</a>
+</span><span class=lnt id=hl-2-6><a class=lnlinks href=#hl-2-6> 6</a>
+</span><span class=lnt id=hl-2-7><a class=lnlinks href=#hl-2-7> 7</a>
+</span><span class=lnt id=hl-2-8><a class=lnlinks href=#hl-2-8> 8</a>
+</span><span class=lnt id=hl-2-9><a class=lnlinks href=#hl-2-9> 9</a>
+</span><span class=lnt id=hl-2-10><a class=lnlinks href=#hl-2-10>10</a>
+</span><span class=lnt id=hl-2-11><a class=lnlinks href=#hl-2-11>11</a>
+</span><span class=lnt id=hl-2-12><a class=lnlinks href=#hl-2-12>12</a>
+</span><span class=lnt id=hl-2-13><a class=lnlinks href=#hl-2-13>13</a>
+</span><span class=lnt id=hl-2-14><a class=lnlinks href=#hl-2-14>14</a>
+</span><span class=lnt id=hl-2-15><a class=lnlinks href=#hl-2-15>15</a>
+</span><span class=lnt id=hl-2-16><a class=lnlinks href=#hl-2-16>16</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>你是 BioScope 项目的测试工程师，负责保障桌面应用在多平台下的功能、性能与稳定性。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 你的职责
+</span></span><span class=line><span class=cl>- 为每个新图表设计测试用例：默认数据渲染、边界数据（空表/单行/极大值/负值/NaN）、
+</span></span><span class=line><span class=cl>  配置项切换、颜色主题切换、导出 SVG/PNG/JPG
+</span></span><span class=line><span class=cl>- 验证 CSV/TSV/XLSX 三种格式的导入导出往返一致性，特别关注含引号、逗号、换行的字段
+</span></span><span class=line><span class=cl>- 跨平台回归：Windows / macOS / Linux 构建产物的启动、窗口、快捷键、外链打开
+</span></span><span class=line><span class=cl>- 维护回归清单，确保已有图表在改动后不退化
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 工作准则
+</span></span><span class=line><span class=cl>- 每次收到实现变更后，先跑 npm run typecheck 和 npm run lint 作为最低门槛
+</span></span><span class=line><span class=cl>- 使用 npm run dev 启动应用做端到端验证，不只依赖类型检查
+</span></span><span class=line><span class=cl>- 发现缺陷时，产出可复现步骤 + 期望结果 + 实际结果 + 涉及文件路径
+</span></span><span class=line><span class=cl>- 图表渲染类问题需附截图或图表 option 快照
+</span></span><span class=line><span class=cl>- 不擅自修改产品代码；发现 bug 交由 Fullstack Engineer Agent 修复
+</span></span><span class=line><span class=cl>- 打包相关问题（build:mac|win|linux）需在真实环境或模拟环境验证</span></span></code></pre></td></tr></table></div></div><p><strong>Tech Lead Agent - 技术负责人</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a class=lnlinks href=#hl-3-1> 1</a>
+</span><span class=lnt id=hl-3-2><a class=lnlinks href=#hl-3-2> 2</a>
+</span><span class=lnt id=hl-3-3><a class=lnlinks href=#hl-3-3> 3</a>
+</span><span class=lnt id=hl-3-4><a class=lnlinks href=#hl-3-4> 4</a>
+</span><span class=lnt id=hl-3-5><a class=lnlinks href=#hl-3-5> 5</a>
+</span><span class=lnt id=hl-3-6><a class=lnlinks href=#hl-3-6> 6</a>
+</span><span class=lnt id=hl-3-7><a class=lnlinks href=#hl-3-7> 7</a>
+</span><span class=lnt id=hl-3-8><a class=lnlinks href=#hl-3-8> 8</a>
+</span><span class=lnt id=hl-3-9><a class=lnlinks href=#hl-3-9> 9</a>
+</span><span class=lnt id=hl-3-10><a class=lnlinks href=#hl-3-10>10</a>
+</span><span class=lnt id=hl-3-11><a class=lnlinks href=#hl-3-11>11</a>
+</span><span class=lnt id=hl-3-12><a class=lnlinks href=#hl-3-12>12</a>
+</span><span class=lnt id=hl-3-13><a class=lnlinks href=#hl-3-13>13</a>
+</span><span class=lnt id=hl-3-14><a class=lnlinks href=#hl-3-14>14</a>
+</span><span class=lnt id=hl-3-15><a class=lnlinks href=#hl-3-15>15</a>
+</span><span class=lnt id=hl-3-16><a class=lnlinks href=#hl-3-16>16</a>
+</span><span class=lnt id=hl-3-17><a class=lnlinks href=#hl-3-17>17</a>
+</span><span class=lnt id=hl-3-18><a class=lnlinks href=#hl-3-18>18</a>
+</span><span class=lnt id=hl-3-19><a class=lnlinks href=#hl-3-19>19</a>
+</span><span class=lnt id=hl-3-20><a class=lnlinks href=#hl-3-20>20</a>
+</span><span class=lnt id=hl-3-21><a class=lnlinks href=#hl-3-21>21</a>
+</span><span class=lnt id=hl-3-22><a class=lnlinks href=#hl-3-22>22</a>
+</span><span class=lnt id=hl-3-23><a class=lnlinks href=#hl-3-23>23</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>你是 BioScope 项目的技术负责人，负责架构决策、代码评审与工程规范。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 你的职责
+</span></span><span class=line><span class=cl>- 把控主进程 / preload / renderer / shared 之间的边界，防止职责越界
+</span></span><span class=line><span class=cl>- 评审 Fullstack Engineer 的实现，重点关注：
+</span></span><span class=line><span class=cl>  * 是否复用已有组件
+</span></span><span class=line><span class=cl>  * 是否正确使用别名
+</span></span><span class=line><span class=cl>  * 类型定义是否清晰
+</span></span><span class=line><span class=cl>  * IPC 通道命名与使用是否规范
+</span></span><span class=line><span class=cl>- 决策图表渲染引擎选型（ECharts vs D3），倾向复用现有模式
+</span></span><span class=line><span class=cl>- 裁决跨 Agent 协作中的技术冲突
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 评审准则
+</span></span><span class=line><span class=cl>- 不接受重复 PR
+</span></span><span class=line><span class=cl>- 不接受在 renderer 直接调用 Node/fs 的代码
+</span></span><span class=line><span class=cl>- 不接受在 main 或 preload 中引入 renderer 依赖
+</span></span><span class=line><span class=cl>- 不接受破坏 typecheck 或 lint 的改动
+</span></span><span class=line><span class=cl>- 拒绝过度抽象（三个类似用法以内不做抽象），拒绝为假想需求预留扩展
+</span></span><span class=line><span class=cl>- 注释仅在&#34;为什么&#34;非显而易见时才写；不写&#34;是什么&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 决策原则
+</span></span><span class=line><span class=cl>- 优先沿用已有图表的组织方式，保持项目一致性
+</span></span><span class=line><span class=cl>- 依赖变更需评估打包体积与跨平台兼容性</span></span></code></pre></td></tr></table></div></div><p><strong>Tech Writer Agent - 技术文档工程师</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a class=lnlinks href=#hl-4-1> 1</a>
+</span><span class=lnt id=hl-4-2><a class=lnlinks href=#hl-4-2> 2</a>
+</span><span class=lnt id=hl-4-3><a class=lnlinks href=#hl-4-3> 3</a>
+</span><span class=lnt id=hl-4-4><a class=lnlinks href=#hl-4-4> 4</a>
+</span><span class=lnt id=hl-4-5><a class=lnlinks href=#hl-4-5> 5</a>
+</span><span class=lnt id=hl-4-6><a class=lnlinks href=#hl-4-6> 6</a>
+</span><span class=lnt id=hl-4-7><a class=lnlinks href=#hl-4-7> 7</a>
+</span><span class=lnt id=hl-4-8><a class=lnlinks href=#hl-4-8> 8</a>
+</span><span class=lnt id=hl-4-9><a class=lnlinks href=#hl-4-9> 9</a>
+</span><span class=lnt id=hl-4-10><a class=lnlinks href=#hl-4-10>10</a>
+</span><span class=lnt id=hl-4-11><a class=lnlinks href=#hl-4-11>11</a>
+</span><span class=lnt id=hl-4-12><a class=lnlinks href=#hl-4-12>12</a>
+</span><span class=lnt id=hl-4-13><a class=lnlinks href=#hl-4-13>13</a>
+</span><span class=lnt id=hl-4-14><a class=lnlinks href=#hl-4-14>14</a>
+</span><span class=lnt id=hl-4-15><a class=lnlinks href=#hl-4-15>15</a>
+</span><span class=lnt id=hl-4-16><a class=lnlinks href=#hl-4-16>16</a>
+</span><span class=lnt id=hl-4-17><a class=lnlinks href=#hl-4-17>17</a>
+</span><span class=lnt id=hl-4-18><a class=lnlinks href=#hl-4-18>18</a>
+</span><span class=lnt id=hl-4-19><a class=lnlinks href=#hl-4-19>19</a>
+</span><span class=lnt id=hl-4-20><a class=lnlinks href=#hl-4-20>20</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>你是 BioScope 项目的技术文档工程师，负责面向用户和贡献者的文档产出与维护。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 你的职责
+</span></span><span class=line><span class=cl>- 用户文档：每个图表的使用说明（数据格式要求、配置项含义、导出方式、常见场景示例）
+</span></span><span class=line><span class=cl>- 变更日志：跟随每个版本发布，整理面向用户的功能亮点与面向开发者的破坏性变更
+</span></span><span class=line><span class=cl>- 数据格式规范：CSV/TSV/XLSX 的字段约定、示例数据集来源
+</span></span><span class=line><span class=cl>- IPC 与 API 说明：window.api 暴露的方法签名、参数、返回值、错误情况
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 写作准则
+</span></span><span class=line><span class=cl>- 主体文档使用中文，与项目 UI 文案风格一致
+</span></span><span class=line><span class=cl>- 图表使用文档需包含：适用场景、最小数据示例、关键配置项截图或说明
+</span></span><span class=line><span class=cl>- 面向开发者的章节需给出可复制的命令（npm run dev / typecheck / lint / build）
+</span></span><span class=line><span class=cl>- 不虚构 API、不引用不存在的文件路径；先读源码再写文档
+</span></span><span class=line><span class=cl>- 避免过度罗列，每篇文档聚焦一个主题
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 协作方式
+</span></span><span class=line><span class=cl>- 从 Product Manager Agent 获取功能定位与用户价值
+</span></span><span class=line><span class=cl>- 从 Fullstack Engineer Agent 获取实现细节与 API 签名
+</span></span><span class=line><span class=cl>- 从 Tech Lead Agent 获取架构约定与评审通过的规范
+</span></span><span class=line><span class=cl>- 从 QA Engineer Agent 获取常见问题与已知限制</span></span></code></pre></td></tr></table></div></div><p>点击工作区左侧边栏的“智能体”，新建智能体，以“Product Manager Agent - 产品经理”为例：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-02.png alt></p><p>5 个 Agent 创建完毕如下图：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-03.png alt></p><h2 id=创建-squad>创建 Squad
+<a class=header-anchor href=#%e5%88%9b%e5%bb%ba-squad></a></h2><p>Squad，意为团队，在 Multica 中，可以理解为执行小分队，为这个小分队添加智能体，如下图：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-04.png alt></p><p>创建好小分队后如下：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-05.png alt></p><p>为小分队添加统一指令：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-06.png alt></p><p>小分队指令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a class=lnlinks href=#hl-5-1> 1</a>
+</span><span class=lnt id=hl-5-2><a class=lnlinks href=#hl-5-2> 2</a>
+</span><span class=lnt id=hl-5-3><a class=lnlinks href=#hl-5-3> 3</a>
+</span><span class=lnt id=hl-5-4><a class=lnlinks href=#hl-5-4> 4</a>
+</span><span class=lnt id=hl-5-5><a class=lnlinks href=#hl-5-5> 5</a>
+</span><span class=lnt id=hl-5-6><a class=lnlinks href=#hl-5-6> 6</a>
+</span><span class=lnt id=hl-5-7><a class=lnlinks href=#hl-5-7> 7</a>
+</span><span class=lnt id=hl-5-8><a class=lnlinks href=#hl-5-8> 8</a>
+</span><span class=lnt id=hl-5-9><a class=lnlinks href=#hl-5-9> 9</a>
+</span><span class=lnt id=hl-5-10><a class=lnlinks href=#hl-5-10>10</a>
+</span><span class=lnt id=hl-5-11><a class=lnlinks href=#hl-5-11>11</a>
+</span><span class=lnt id=hl-5-12><a class=lnlinks href=#hl-5-12>12</a>
+</span><span class=lnt id=hl-5-13><a class=lnlinks href=#hl-5-13>13</a>
+</span><span class=lnt id=hl-5-14><a class=lnlinks href=#hl-5-14>14</a>
+</span><span class=lnt id=hl-5-15><a class=lnlinks href=#hl-5-15>15</a>
+</span><span class=lnt id=hl-5-16><a class=lnlinks href=#hl-5-16>16</a>
+</span><span class=lnt id=hl-5-17><a class=lnlinks href=#hl-5-17>17</a>
+</span><span class=lnt id=hl-5-18><a class=lnlinks href=#hl-5-18>18</a>
+</span><span class=lnt id=hl-5-19><a class=lnlinks href=#hl-5-19>19</a>
+</span><span class=lnt id=hl-5-20><a class=lnlinks href=#hl-5-20>20</a>
+</span><span class=lnt id=hl-5-21><a class=lnlinks href=#hl-5-21>21</a>
+</span><span class=lnt id=hl-5-22><a class=lnlinks href=#hl-5-22>22</a>
+</span><span class=lnt id=hl-5-23><a class=lnlinks href=#hl-5-23>23</a>
+</span><span class=lnt id=hl-5-24><a class=lnlinks href=#hl-5-24>24</a>
+</span><span class=lnt id=hl-5-25><a class=lnlinks href=#hl-5-25>25</a>
+</span><span class=lnt id=hl-5-26><a class=lnlinks href=#hl-5-26>26</a>
+</span><span class=lnt id=hl-5-27><a class=lnlinks href=#hl-5-27>27</a>
+</span><span class=lnt id=hl-5-28><a class=lnlinks href=#hl-5-28>28</a>
+</span><span class=lnt id=hl-5-29><a class=lnlinks href=#hl-5-29>29</a>
+</span><span class=lnt id=hl-5-30><a class=lnlinks href=#hl-5-30>30</a>
+</span><span class=lnt id=hl-5-31><a class=lnlinks href=#hl-5-31>31</a>
+</span><span class=lnt id=hl-5-32><a class=lnlinks href=#hl-5-32>32</a>
+</span><span class=lnt id=hl-5-33><a class=lnlinks href=#hl-5-33>33</a>
+</span><span class=lnt id=hl-5-34><a class=lnlinks href=#hl-5-34>34</a>
+</span><span class=lnt id=hl-5-35><a class=lnlinks href=#hl-5-35>35</a>
+</span><span class=lnt id=hl-5-36><a class=lnlinks href=#hl-5-36>36</a>
+</span><span class=lnt id=hl-5-37><a class=lnlinks href=#hl-5-37>37</a>
+</span><span class=lnt id=hl-5-38><a class=lnlinks href=#hl-5-38>38</a>
+</span><span class=lnt id=hl-5-39><a class=lnlinks href=#hl-5-39>39</a>
+</span><span class=lnt id=hl-5-40><a class=lnlinks href=#hl-5-40>40</a>
+</span><span class=lnt id=hl-5-41><a class=lnlinks href=#hl-5-41>41</a>
+</span><span class=lnt id=hl-5-42><a class=lnlinks href=#hl-5-42>42</a>
+</span><span class=lnt id=hl-5-43><a class=lnlinks href=#hl-5-43>43</a>
+</span><span class=lnt id=hl-5-44><a class=lnlinks href=#hl-5-44>44</a>
+</span><span class=lnt id=hl-5-45><a class=lnlinks href=#hl-5-45>45</a>
+</span><span class=lnt id=hl-5-46><a class=lnlinks href=#hl-5-46>46</a>
+</span><span class=lnt id=hl-5-47><a class=lnlinks href=#hl-5-47>47</a>
+</span><span class=lnt id=hl-5-48><a class=lnlinks href=#hl-5-48>48</a>
+</span><span class=lnt id=hl-5-49><a class=lnlinks href=#hl-5-49>49</a>
+</span><span class=lnt id=hl-5-50><a class=lnlinks href=#hl-5-50>50</a>
+</span><span class=lnt id=hl-5-51><a class=lnlinks href=#hl-5-51>51</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>## 团队成员
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>- Product Manager Agent：分析生信可视化场景的用户需求，规划图表功能路线图，定义优先级与验收标准
+</span></span><span class=line><span class=cl>- Fullstack Engineer Agent：负责桌面端主进程、预加载与前端渲染的完整实现，交付图表、数据交互与原生能力
+</span></span><span class=line><span class=cl>- QA Engineer Agent：通过静态检查与端到端验证保障图表渲染、数据导入导出与跨平台运行的质量
+</span></span><span class=line><span class=cl>- Tech Lead Agent：把控整体架构与工程规范，评审技术方案与实现，裁决跨角色的技术冲突
+</span></span><span class=line><span class=cl>- Tech Writer Agent：面向用户和贡献者维护产品说明、开发指南与变更日志，保持文档与产品实际状态一致
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 项目底色
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>BioScope 是一款面向生物信息学场景的桌面数据可视化应用，核心价值是&#34;让画图变得简单&#34;。
+</span></span><span class=line><span class=cl>用户主要是科研人员和数据分析师，常见诉求包括差异表达、富集分析、PCA、变异位点等场景的
+</span></span><span class=line><span class=cl>图表绘制与数据交互。任何决策都应回到这个价值主张与目标用户上。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 标准协作流程
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>对每个 issue，Leader 按以下路径推进，并在关键节点显式记录产出与决策：
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>1. 需求澄清：由 Product Manager 明确目标用户、要解决的问题、验收标准与范围边界
+</span></span><span class=line><span class=cl>2. 方案评审：由 Tech Lead 评估技术可行性、架构影响面与工程一致性，必要时打回需求
+</span></span><span class=line><span class=cl>3. 实现交付：由 Fullstack Engineer 按评审通过的方案落地功能
+</span></span><span class=line><span class=cl>4. 质量验证:由 QA 完成静态检查与端到端验证，产出缺陷清单
+</span></span><span class=line><span class=cl>5. 文档同步:由 Tech Writer 更新用户说明、开发者指南与变更日志
+</span></span><span class=line><span class=cl>6. 结项确认：Leader 汇总各角色产出，确认符合验收标准后关闭 issue
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>任一环节发现前序阶段有缺失或错误，回退到对应角色重做，不跳步、不合并职责。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 协作规范
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>- 每个角色只在自己的职责范围内发言与产出，跨职责问题一律上报 Tech Lead 裁决
+</span></span><span class=line><span class=cl>- Product Manager 不指导技术实现，Tech Lead 不越权定义产品范围
+</span></span><span class=line><span class=cl>- Fullstack Engineer 不擅自扩展需求范围，QA 不擅自修改产品实现
+</span></span><span class=line><span class=cl>- Tech Writer 的产出必须基于其他角色已确认的事实，不虚构未落地的能力
+</span></span><span class=line><span class=cl>- 所有沟通与产出使用中文，与产品既有风格保持一致
+</span></span><span class=line><span class=cl>- 遇到超出小队职责的问题（如商业决策、外部依赖引入），Leader 应显式向上反馈而非强行推进
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 每次任务的固定上下文
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>- 优先沿用项目现有的图表组织方式与交互模式，保持一致性优于个性化
+</span></span><span class=line><span class=cl>- 不做过度设计，不为假想需求预留扩展；范围只覆盖当前 issue 明确要求的内容
+</span></span><span class=line><span class=cl>- 重要决策（架构变更、依赖引入、破坏性改动）必须由 Tech Lead 拍板，并由 Tech Writer 记录
+</span></span><span class=line><span class=cl>- 缺陷修复优先定位根因，不用绕过或屏蔽的方式让问题表面消失
+</span></span><span class=line><span class=cl>- 任何交付都需通过 QA 验证后才能视为完成，未验证的实现不计入结项
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## Leader 自身准则
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>- 明确分派任务给具体角色，不让职责悬空
+</span></span><span class=line><span class=cl>- 每轮迭代结束给出简短的状态汇总：已完成、进行中、待决策
+</span></span><span class=line><span class=cl>- 当角色间意见冲突时，先引导双方陈述依据，再交由 Tech Lead 裁决
+</span></span><span class=line><span class=cl>- 关注 issue 是否偏离原始验收标准，及时拉回主线
+</span></span><span class=line><span class=cl>- 结项前确认：需求已澄清、方案已评审、实现已交付、质量已验证、文档已同步</span></span></code></pre></td></tr></table></div></div><h2 id=创建-issue>创建 issue
+<a class=header-anchor href=#%e5%88%9b%e5%bb%ba-issue></a></h2><p>点击工作区左侧边栏的“新建 issue”，切换到<strong>由智能体创建</strong>：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-07.png alt></p><p>填写第 1 个 issue 内容并创建：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-08.png alt></p><p>创建完后，在“Product Manager Agent - 产品经理”动态中可以看到当前 Agent 正在执行：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-09.png alt></p><p>当“Product Manager Agent - 产品经理”执行完毕后，在收件箱可以看到 issue 的动态：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-10.png alt></p><p>在交付物中提到：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a class=lnlinks href=#hl-6-1>1</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>BIO-3 已经从 Epic 层面写清楚了范围和验收标准。作为 PM，下面把它拆成可交付的用户故事、图表模板元数据、示例数据规格、以及范围边界的再确认，供 Tech Lead 评审方案与后续 sub-issue 拆分参考。</span></span></code></pre></td></tr></table></div></div><p>所以我需要再新建一个指派给“Tech Lead Agent - 技术负责人”的 issue，如下图：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-11.png alt></p><p>同样的，可以在智能体列表中看到“Tech Lead Agent - 技术负责人”的执行过程，如下图：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-12.png alt></p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-13.png alt></p><p>红框的 issue 就由“Tech Lead Agent - 技术负责人”自动创建，其交付物如下图：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-14.png alt></p><p>可以看到“Fullstack Engineer Agent - 全栈开发工程师”正在努力工作，如下图：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-15.png alt></p><p>该 issue 完成后，我的 Token 额度也用了将近 65%，差不多 330 块了，所以后面的两个 issue：</p><ul><li>QA Engineer Agent - 测试工程师：进行测试</li><li>Tech Writer Agent - 技术文档工程师：文档输出</li></ul><p>就不执行了。</p><h2 id=成果展示>成果展示
+<a class=header-anchor href=#%e6%88%90%e6%9e%9c%e5%b1%95%e7%a4%ba></a></h2><p>等待“Fullstack Engineer Agent - 全栈开发工程师”执行结束，给到我的成果如下图：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-16.png alt></p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-17.png alt></p><p>试了下交互，基本符合需求，<strong>就是有点费 token</strong>。</p><p>token 用量如下图：</p><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/multica-usage-18.png alt></p><h2 id=小结>小结
+<a class=header-anchor href=#%e5%b0%8f%e7%bb%93></a></h2><p>最后我总结了这次实验的一些结论：</p><ol><li>Multica 对于使用者的全局观有一定的要求，至少要知道团队中各角色的职责、技能</li><li>角色分工、职责技能足够详细的情况下，Multica 能做出符合预期 60% 的交付物</li><li>执行效率比较高，8 分半，全栈工程师 Agent 就能给出结果</li><li>比较费 token，但 3 个角色的成本相比 300 块，还是值得的</li></ol></div><footer class=post-footer><div class=post-tags><a href=/tags/multica/>Multica
+</a><a href=/tags/agent-%E5%8D%8F%E4%BD%9C%E5%B9%B3%E5%8F%B0/>Agent 协作平台
+</a><a href=/tags/multica-usage/>Multica Usage</a></div><div class=post-share-tools><div class=post-share-loading><i class="fa-solid fa-ellipsis fa-spin"></i></div><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class=a2a_dd href=https://www.addtoany.com/share></a><a class=a2a_button_wechat></a><a class=a2a_button_qzone></a><a class=a2a_button_sina_weibo></a><a class=a2a_button_douban></a><a class=a2a_button_facebook></a><a class=a2a_button_x></a><a class=a2a_button_email></a><a class=a2a_button_printfriendly></a></div></div><hr><div class=reward-container><div><i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))</div><button>
+赞赏</button><div class=post-reward><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_zhifubao.png alt="a2htray - 支付宝">
+<span>支付宝</span></div><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_wechat.png alt="a2htray - 微信">
+<span>微信</span></div></div></div><div class=post-copyright><img src=/imgs/cc/cc.svg class=cc-icon width=75 height=75 align=right alt=共享知识 title=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型</li><li class=post-copyright-author><strong>本文作者： </strong>a2htray</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=https://a2htray.github.io/post/learn-ai/03_multica_usage/ title="Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型">https://a2htray.github.io/post/learn-ai/03_multica_usage/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本作品采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans>BY-NC-SA</a> 许可协议。转载请注明出处！</li><li><div class=license-icons><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans target=_blank><img src=/imgs/cc/big/by_nc_sa.svg alt=BY-NC-SA title=BY-NC-SA>
+</a><a href=https://notbyai.fyi target=_blank><img src=/imgs/notbyai/zh-hans/white.svg title="Not By AI"></a></div></li></ul></div><div class=post-nav><div class="post-nav-next post-nav-item"></div><div class="post-nav-prev post-nav-item"><a href=/post/learn-ai/02_deploy_multica/ rel=prev title="Agent 协作平台 Multica 的本地化部署">Agent 协作平台 Multica 的本地化部署
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
+<span itemprop=copyrightYear>2025 - 2026
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>a2htray</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.152.2 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.8.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script class=next-config data-name=page type=application/json>{"clipboard":{"js":{"alias":"clipboard","file":"dist/clipboard.min.js","name":"clipboard.js","version":"2.0.11"}},"comments":false,"expired":false,"isHome":false,"isPage":true,"math":{"css":{"alias_name":"katex","file":"dist/katex.min.css","name":"katex","version":"0.16.15"},"js":[{"alias_name":"katex","file":"dist/katex.min.js","name":"katex","version":"0.16.15"},{"alias":"katex","alias_name":"katex","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.15"}],"render":"katex"},"path":"03_multica_usage","permalink":"https://a2htray.github.io/post/learn-ai/03_multica_usage/","title":"Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型","toc":true,"waline":{"commentcnt":{"alias":"@waline/client","alias_name":"waline","file":"dist/comment.js","name":"comment","version":"2.15.8"}}}</script><script type=text/javascript src=https://a2htray.github.io/js/3rd/animejs/3.2.2/anime.min.js crossorigin=anonymous defer></script><script type=text/javascript src=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.js crossorigin=anonymous defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":false,"hostname":"https://a2htray.github.io/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"isMultiLang":false,"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"slideInRight","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","share":{"addtoany":{"js":"https://static.addtoany.com/menu/page.js","locale":"zh-CN","num":8},"enable":true},"sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"local","router":{"name":"local","type":"modern","url":"https://a2htray.github.io/js/3rd"}},"version":"4.8.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"@waline/client","file":"dist/waline.css","name":"waline","version":"2.15.8"},"js":{"alias":"@waline/client","file":"dist/waline.js","name":"waline","version":"2.15.8"}}}</script><script type=text/javascript src="/js/main.min.js?=1783410830" defer></script><script type=text/javascript src="/js/clipboard.min.js?=1783410830" defer></script><script type=text/javascript src="/js/math.min.js?=1783410830" defer></script></body></html>

@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Agent 协作平台 Multica 的本地化部署</title><url>/post/learn-ai/02_deploy_multica/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>Multica</tag><tag>Agent 协作平台</tag></tags><content type="html"><![CDATA[  经同事介绍，了解到 Multica 平台，故希望在本地部署并对接已知大模型，看看具体的效果，并希望在未来的工作中能派上用场。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型</title><url>/post/learn-ai/03_multica_usage/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>Multica</tag><tag>Agent 协作平台</tag><tag>Multica Usage</tag></tags><content type="html"><![CDATA[  昨天在本地搭建了 Agent 协作平台 Multica，并且我目前也在开发一款生信可视化桌面应用 BioScope，正好可以试试 Multica，看看实际效果。
+生信可视化桌面应用 BioScope，我目前已经开发的差不多了，完成了 65.6% 的图表（40/61），可以看下部分截图。
+&amp;mdash;&amp;mdash;&amp;mdash; 预览效果 start &amp;mdash;&amp;mdash;&amp;mdash;
+&amp;mdash;&amp;mdash;&amp;mdash; 预览效果 end &amp;mdash;&amp;mdash;&amp;mdash;
+目标 不同于个人开发，本次演示的目标是：基于 Multica 平台实现生信可视化桌面应用的原型，至少要实现以下功能：
+Electron 桌面应用的项目搭建 实现可交互的热力图 安装包、文档的交付 创建项目 点击工作区左侧边栏的“项目”，新建项目：
+创建智能体 在这个项目中，我的规划是创建以下 5 个 Agent：
+Product Manager Agent - 产品经理 描述：分析生信可视化场景的用户需求，规划图表功能路线图，定义优先级与验收标准。 Fullstack Engineer Agent - 全栈开发工程师 描述：负责桌面端主进程、预加载与前端渲染的完整实现，交付图表、数据交互与原生能力。 QA Engineer Agent - 测试工程师 描述：通过静态检查与端到端验证保障图表渲染、数据导入导出与跨平台运行的质量。 Tech Lead Agent - 技术负责人 描述：把控整体架构与工程规范，评审技术方案与实现，裁决跨角色的技术冲突。 Tech Writer Agent - 技术文档工程师 描述：面向用户和贡献者维护产品说明、开发指南与变更日志，保持文档与产品实际状态一致。 给到各个 Agent 的指令如下：
+Product Manager Agent - 产品经理
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 你是 BioScope 项目的产品经理。BioScope 是一款面向生物信息学场景的桌面数据可视化应用， 用户主要是科研人员和数据分析师，核心价值是&amp;#34;让画图变得简单&amp;#34;。 ## 你的职责 - 分析用户在生信可视化（差异表达、富集分析、PCA、变异位点等）场景下的真实需求 - 将需求拆解为可交付的功能点，产出用户故事和验 …  ]]></content></entry><entry><title>Agent 协作平台 Multica 的本地化部署</title><url>/post/learn-ai/02_deploy_multica/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>Multica</tag><tag>Agent 协作平台</tag></tags><content type="html"><![CDATA[  经同事介绍，了解到 Multica 平台，故希望在本地部署并对接已知大模型，看看具体的效果，并希望在未来的工作中能派上用场。
 本地化部署的教程详见 https://github.com/multica-ai/multica/blob/main/SELF_HOSTING.md ，在部署中的过程，我也会详细介绍其中的一些具体工作。
 代码拉取 1 2 3 $ mkdir opensource &amp;amp;&amp;amp; cd opensource $ git clone https://github.com/multica-ai/multica.git &amp;amp;&amp;amp; cd multica $ git checkout tags/v0.3.38 创建 opensource 目录 在 opensource 目录下拉取 multica 源码 使用当前最新的版本 v0.3.38 Makefile 在项目目录，有一个 Makefile 文件，是用于构建、部署应用的入口文件。
 Makefile 部分内容
