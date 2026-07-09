@@ -1,9 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型</title><url>/post/learn-ai/03_multica_usage/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>Multica</tag><tag>Agent 协作平台</tag><tag>Multica Usage</tag></tags><content type="html"><![CDATA[  昨天在本地搭建了 Agent 协作平台 Multica，并且我目前也在开发一款生信可视化桌面应用 BioScope，正好可以试试 Multica，看看实际效果。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>生产力工具集成：Ollama + VS Code + Claude Code，效果不太行...</title><url>/post/learn-ai/04_ollama_and_vscode_claude_code/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>Ollama</tag><tag>VS Code</tag><tag>Claude Code</tag><tag>工具集成</tag><tag>工具安装</tag><tag>生产力工具</tag></tags><content type="html">  最近一直在捣鼓 AI 工具，想着说给我的开发工作提供强有力的帮助，但在使用的过程中，token 成本太高是我急需解决的一个问题。
+这让我想起了 Ollama，网上也查了相关资料，Claude Code 通过配置是可以和本地的大模型进行通信的，所以有了这篇文章。
+本文旨在分享将 Ollama、VS Code、Claude Code 生产力工具的集成过程。
+安装 Ollama Ollama 是轻量化本地大模型运行框架，可以一键拉取、调度、管理 LLM。安装过程可以参见之前写的文章 https://a2htray.github.io/post/learn-ai/01_deploy_ollama_on_local/ 。
+因为我是个人使用，所以下的是桌面版本，也可以直接在它的 github releases 中下载其二进制版本。
+安装好后，在终端验证是否安装完成：
+1 2 $ ollama -v ollama version is 0.31.1 考虑到这次是为了以后开发，所以咬咬牙就想下个大的，选择了 19G 的 qwen3-coder:30b。
+笔记本配置是 Apple M2 Pro 16G 内存。
+但实际下载后运行，实在是太卡了，CPU 直接飙到了 100%，笔记本也卡的厉害，最终选择了 qwen3.5:9b，6.6G。
+下载模型的过程如下：
+1 $ ollama pull qwen3.5:9b 安装 VS Code IDE 我用的是 VS Code，相信也是大多数开发者的首选，官网 https://code.visualstudio.com/ 下载安装包，点击安装即可。
+为了和 Claude Code 搭配起来，需要安装插件 Claude Code for VS Code，如下图：
+安装好后，显示右侧边，有 Claude Code 的 tab 的显示，如下图：
+在没有安装 Claude Code 或没配置之前，显示的是订阅信息，我是已经配置了，所以可以进行相关操作。
+安装 Claude Code 我本地的 Node、NPM 版本如下，供参考：
+1 2 3 4 $ node -v v24.15.0 $ npm -v 11.12.1 安装命令如下：
+1 $ npm install -g @anthropic-ai/claude-code 安装太慢，可以切换成国内的镜像源。安 …  </content></entry><entry><title>Agent 协作平台 Multica 的使用 - 生信可视化桌面应用原型</title><url>/post/learn-ai/03_multica_usage/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>Multica</tag><tag>Agent 协作平台</tag><tag>Multica Usage</tag></tags><content type="html"><![CDATA[  昨天在本地搭建了 Agent 协作平台 Multica，并且我目前也在开发一款生信可视化桌面应用 BioScope，正好可以试试 Multica，看看实际效果。
 生信可视化桌面应用 BioScope，我目前已经开发的差不多了，完成了 65.6% 的图表（40/61），可以看下部分截图。
 &amp;mdash;&amp;mdash;&amp;mdash; 预览效果 start &amp;mdash;&amp;mdash;&amp;mdash;
 &amp;mdash;&amp;mdash;&amp;mdash; 预览效果 end &amp;mdash;&amp;mdash;&amp;mdash;
 目标 不同于个人开发，本次演示的目标是：基于 Multica 平台实现生信可视化桌面应用的原型，至少要实现以下功能：
-Electron 桌面应用的项目搭建 实现可交互的热力图 安装包、文档的交付 创建项目 点击工作区左侧边栏的“项目”，新建项目：
+Electron 桌面应用的项目搭建 实现可交互的拆线图 安装包、文档的交付 创建项目 点击工作区左侧边栏的“项目”，新建项目：
 创建智能体 在这个项目中，我的规划是创建以下 5 个 Agent：
 Product Manager Agent - 产品经理 描述：分析生信可视化场景的用户需求，规划图表功能路线图，定义优先级与验收标准。 Fullstack Engineer Agent - 全栈开发工程师 描述：负责桌面端主进程、预加载与前端渲染的完整实现，交付图表、数据交互与原生能力。 QA Engineer Agent - 测试工程师 描述：通过静态检查与端到端验证保障图表渲染、数据导入导出与跨平台运行的质量。 Tech Lead Agent - 技术负责人 描述：把控整体架构与工程规范，评审技术方案与实现，裁决跨角色的技术冲突。 Tech Writer Agent - 技术文档工程师 描述：面向用户和贡献者维护产品说明、开发指南与变更日志，保持文档与产品实际状态一致。 给到各个 Agent 的指令如下：
 Product Manager Agent - 产品经理
