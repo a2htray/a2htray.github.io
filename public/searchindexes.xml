@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>生产力工具集成：Ollama + VS Code + Claude Code，效果不太行...</title><url>/post/learn-ai/04_ollama_and_vscode_claude_code/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>Ollama</tag><tag>VS Code</tag><tag>Claude Code</tag><tag>工具集成</tag><tag>工具安装</tag><tag>生产力工具</tag></tags><content type="html">  最近一直在捣鼓 AI 工具，想着说给我的开发工作提供强有力的帮助，但在使用的过程中，token 成本太高是我急需解决的一个问题。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>和 CodeBuddy 聊了 7 天，开发了一款财务系统</title><url>/post/learn-ai/04-codebuddy-build-system/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>CodeBuddy</tag><tag>财务系统</tag><tag>生产力工具</tag><tag>AI 辅助编码</tag></tags><content type="html"><![CDATA[  放在以前，单个这个标题，我一般就直接关闭了。因为我会想：
+“7 天开发一个系统，哪怕二次开发、CURD 也要半个月吧，做出来也是个没用的系统。”
+现在，对上述的观点，我保留一半，能不能要在后续的开发中持续验证。
+背景 朋友最近接手了一家小公司，有一些财务上的代帐和报税的需求，我爱人就跟我说：
+她是看了我发的关于 Multica 的公众号，所以才这么跟我说的。如果在以前，我都会直接拒绝，原因很简单：没个财务相关的领域知识，不好做。
+当时想法是，先找些一些现有的开源项目改改，再让 AI 改改，指不定能做出来。首先，我锁定了技术栈（Go 或 Python），然后，问了豆包，最后放弃了。原因有三：
+成熟财务系统以 Java 为主，看不懂 Go 或 Python 项目，功能不全，或不适配国内，或二次开发工作量大 没个背景，看懂源码是个问题 所以决定让 AI 写，让 AI 教我写。
+CodeBuddy 在用 CodeBuddy 之前，我用的是 Claude Code，平时用用 OpenRouter 的免费模型，但免费额度有限，也不好用。这个时候也正好看到 Hy3 的新闻，新用户免费试用两周，就在 VS Code 上安装了 CodeBuddy 插件并开始深度使用。
+开发过程 熟悉财务知识 了解新领域的知识，我一般都是从术语开始，对应用到系统开发中，它可能是一个实体模型、操作、流程等。刚开始还没有着急让 CodeBuddy 代码，就是和它聊天：
+账务系统都有哪些术语？ 个别术语都是什么意思？ 账务系统一般都有哪些功能？ 慢慢地，我缩小了问题的范围，有针对性地问：
+什么是帐套？ 会议科目都有哪些，怎么分类，借代方向又是什么意思？ 凭证有什么作用，如果做凭证，其数据来源是什么 资产怎么做帐，工资又怎么做帐？ 问了几轮后，一个账务系统的基本轮廓就已经出来了，如下：
+1 帐套 Book ──&amp;lt; BookUser &amp;gt;── 用户 User ──&amp;lt; UserRole &amp;gt;── 角色 Role ──&amp;lt; 权限 Permission 1 2 3 4 科目 Account（树形层级，余额方向借/贷） └─ 期初 OpeningBalance（期初/累计/年初，带符号） └─ 凭证 Voucher → JournalEntry（借贷分录） └─ 保存即更新 …  ]]></content></entry><entry><title>生产力工具集成：Ollama + VS Code + Claude Code，效果不太行...</title><url>/post/learn-ai/04_ollama_and_vscode_claude_code/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>Ollama</tag><tag>VS Code</tag><tag>Claude Code</tag><tag>工具集成</tag><tag>工具安装</tag><tag>生产力工具</tag></tags><content type="html">  最近一直在捣鼓 AI 工具，想着说给我的开发工作提供强有力的帮助，但在使用的过程中，token 成本太高是我急需解决的一个问题。
 这让我想起了 Ollama，网上也查了相关资料，Claude Code 通过配置是可以和本地的大模型进行通信的，所以有了这篇文章。
 本文旨在分享将 Ollama、VS Code、Claude Code 生产力工具的集成过程。
 安装 Ollama Ollama 是轻量化本地大模型运行框架，可以一键拉取、调度、管理 LLM。安装过程可以参见之前写的文章 https://a2htray.github.io/post/learn-ai/01_deploy_ollama_on_local/ 。
