@@ -1,14 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>和 CodeBuddy 聊了 7 天，开发了一款财务系统</title><url>/post/learn-ai/04-codebuddy-build-system/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>CodeBuddy</tag><tag>财务系统</tag><tag>生产力工具</tag><tag>AI 辅助编码</tag></tags><content type="html"><![CDATA[  放在以前，单个这个标题，我一般就直接关闭了。因为我会想：
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>下一代 Chatbot：MCP 扩展对话</title><url>/post/learn-ai/t_00_ai_chatbot_next_gen_chatbots/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag></tags><content type="html">  本文是 T 系列的第 00 篇，主要介绍下一代 Chatbot：MCP 扩展对话。
+T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。
+现代对话式人工智能的格局正朝着能够执行复杂、多轮任务的应用方向发展。这要求系统不仅限于简单的对话管理，而是需要能够与外部数据源和专业工具实现无缝交互。传统方法往往依赖脆弱的提示工程，难以扩展和维护。本文介绍“模型上下文协议”（MCP），作为构建下一代聊天机器人的基础框架。通过支持与外部工具进行结构化、多轮的交互，MCP 取代了传统的基于提示的临时性解决方案，采用了一种稳健且明确的智能体-工具逻辑。本系列将深入探讨 MCP 的架构设计、实现方式及实际应用场景，为开发者和研究人员提供技术层面的深度解析。
+MCP 为 LLM 提供了获取外部数据和执行外部工具的能力，使 LLM 不再局限于简单的提示词，而是基于工具上下文进行复杂的对话交互。
+传统 Chatbot 架构的局限性 常见的 Chatbot 架构，尤其是基于大语言模型（LLMs）构建的系统，通常采用临时提示增强或函数调用等技术与工具进行交互。尽管这些方法具备一定的功能，但受到若干关键缺陷的制约。
+临时提示增强：系统通过预定义的提示词扩展 LLM 的理解能力，或改写/扩展用户的输入和模型的输出，通常收敛于特定问题、时效性和通用性相对较弱。
+依赖脆弱的提示工程，使得这些系统容易受到用户输入或模型输出微小变化的影响。设计能够可靠地指导模型使用特定工具并提供正确参数的提示是一项具有挑战性且易出问题的工作。这可能导致意外故障，并使系统难以泛化。 缺乏对工具交互的明确状态管理，难以在涉及工具使用的多轮对话中保持上下文的一致性。如果聊天机器人需要先使用一个工具获取数据，再利用这些数据通过另一个工具执行操作，那么在基于提示的系统中管理这种依赖关系和数据流动就会变得复杂且容易出错。 有限的可观测性和调试能力会阻碍开发和维护，Agent 推理与工具交互逻辑之间缺乏明确的分离，使得难以判断问题是由模型误解还是工具调用错误引起的。 可扩展性和可重用性常常受到牺牲，嵌入提示中的工具逻辑通常与特定使用场景紧密耦合。在不同 Agent 或应用程序之间重用这些集成需要进行大量重构，从而阻碍了模块化和平台开发。 上述 4 点的根因在于 LLMs 过度依赖有限的提示词工程，对状态 …  </content></entry><entry><title>和 CodeBuddy 聊了 7 天，开发了一款财务系统</title><url>/post/learn-ai/04-codebuddy-build-system/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>CodeBuddy</tag><tag>财务系统</tag><tag>生产力工具</tag><tag>AI 辅助编码</tag></tags><content type="html"><![CDATA[  放在以前，单个这个标题，我一般就直接关闭了。因为我会想：
 “7 天开发一个系统，哪怕二次开发、CURD 也要半个月吧，做出来也是个没用的系统。”
-现在，对上述的观点，我保留一半，能不能要在后续的开发中持续验证。
+现在，对上述的观点，我保留一半，能不能用要在后续的开发中持续验证。
 背景 朋友最近接手了一家小公司，有一些财务上的代帐和报税的需求，我爱人就跟我说：
 她是看了我发的关于 Multica 的公众号，所以才这么跟我说的。如果在以前，我都会直接拒绝，原因很简单：没个财务相关的领域知识，不好做。
 当时想法是，先找些一些现有的开源项目改改，再让 AI 改改，指不定能做出来。首先，我锁定了技术栈（Go 或 Python），然后，问了豆包，最后放弃了。原因有三：
 成熟财务系统以 Java 为主，看不懂 Go 或 Python 项目，功能不全，或不适配国内，或二次开发工作量大 没个背景，看懂源码是个问题 所以决定让 AI 写，让 AI 教我写。
 CodeBuddy 在用 CodeBuddy 之前，我用的是 Claude Code，平时用用 OpenRouter 的免费模型，但免费额度有限，也不好用。这个时候也正好看到 Hy3 的新闻，新用户免费试用两周，就在 VS Code 上安装了 CodeBuddy 插件并开始深度使用。
-开发过程 熟悉财务知识 了解新领域的知识，我一般都是从术语开始，对应用到系统开发中，它可能是一个实体模型、操作、流程等。刚开始还没有着急让 CodeBuddy 代码，就是和它聊天：
-账务系统都有哪些术语？ 个别术语都是什么意思？ 账务系统一般都有哪些功能？ 慢慢地，我缩小了问题的范围，有针对性地问：
-什么是帐套？ 会议科目都有哪些，怎么分类，借代方向又是什么意思？ 凭证有什么作用，如果做凭证，其数据来源是什么 资产怎么做帐，工资又怎么做帐？ 问了几轮后，一个账务系统的基本轮廓就已经出来了，如下：
+开发过程 熟悉财务知识 了解新领域的知识，我一般都是从术语开始，对应用到系统开发中，它可能是一个实体模型、操作、流程等。刚开始还没有着急让 CodeBuddy 写代码，就是和它聊天：
+财务系统都有哪些术语？ 个别术语都是什么意思？ 财务系统一般都有哪些功能？ 慢慢地，我缩小了问题的范围，有针对性地问：
+什么是帐套？ 会计科目都有哪些，怎么分类，借代方向又是什么意思？ 凭证有什么作用，如果做凭证，其数据来源是什么 资产怎么做帐，工资又怎么做帐？ 问了几轮后，一个财务系统的基本轮廓就已经出来了，如下：
 1 帐套 Book ──&amp;lt; BookUser &amp;gt;── 用户 User ──&amp;lt; UserRole &amp;gt;── 角色 Role ──&amp;lt; 权限 Permission 1 2 3 4 科目 Account（树形层级，余额方向借/贷） └─ 期初 OpeningBalance（期初/累计/年初，带符号） └─ 凭证 Voucher → JournalEntry（借贷分录） └─ 保存即更新 …  ]]></content></entry><entry><title>生产力工具集成：Ollama + VS Code + Claude Code，效果不太行...</title><url>/post/learn-ai/04_ollama_and_vscode_claude_code/</url><categories><category>人工智能</category><category>应用平台</category></categories><tags><tag>Ollama</tag><tag>VS Code</tag><tag>Claude Code</tag><tag>工具集成</tag><tag>工具安装</tag><tag>生产力工具</tag></tags><content type="html">  最近一直在捣鼓 AI 工具，想着说给我的开发工作提供强有力的帮助，但在使用的过程中，token 成本太高是我急需解决的一个问题。
 这让我想起了 Ollama，网上也查了相关资料，Claude Code 通过配置是可以和本地的大模型进行通信的，所以有了这篇文章。
 本文旨在分享将 Ollama、VS Code、Claude Code 生产力工具的集成过程。
