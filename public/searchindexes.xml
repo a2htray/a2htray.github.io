@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>下一代 Chatbot：MCP 扩展对话</title><url>/post/learn-ai/t_00_ai_chatbot_next_gen_chatbots/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag></tags><content type="html">  本文是 T 系列的第 00 篇，主要介绍下一代 Chatbot：MCP 扩展对话。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Chatbot UI 与 MCP Server 通信</title><url>/post/learn-ai/t_01_ai_chatbot_communicate_with_mcp_server/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag></tags><content type="html"><![CDATA[  本文是 T 系列的第 01 篇，主要介绍 Chatbot UI 如何与 MCP Server 进行通信。
+T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。
+Chatbot 的用户界面（UI）正从简单的文本显示演变为一个动态客户端，能够与复杂的后端系统进行通信，而该后端通常由模型上下文协议（MCP）Agent 驱动。本文探讨了基于工具的聊天界面架构，重点分析前端与后端之间的通信流程。我们将逐步介绍用户请求的路由、调用外部工具以及实时流式响应的全过程。目标是清晰理解支持这些复杂交互的协议和设计模式，从而超越基础的请求-响应模型，构建出更稳健、可扩展且更易用的系统。
+关注点：前端与后端之间的通信 - 用户请求 -&amp;gt; 工具调用 -&amp;gt; 实时响应。
+前端-后端通信流程 工具支持的 Chatbot 的一个关键架构转变是职责分离。前端负责处理用户输入并渲染响应，后端（MCP Server）则协调 Agent 的逻辑，管理工具上下文，并与外部工具进行交互。这两层之间的通信必须具备高可靠性、高效性，能够支持多轮对话和实时更新。
+现实中的通信流程应该更为复杂，如后端可以进一步拆分：后端可自启 MCP Server 或调用外部 MCP Server。Agent 负责理解用户输入、生成工具调用、调用工具、解释调用结果，后端或 MCP 框架维护用户对话的上下文，并将结果返回给前端。
+用户请求到 Agent：
+当用户输入消息并按下回车键时，用户界面会向后端发送请求。这通常是一个异步调用到服务器端点。后端的任务是：
+接收用户的消息 将消息路由至 MCP Agent 启动 MCP 流程，该流程可能涉及一个或多个工具调用 这是一个前端如何通过简单的 fetch API 调用向后端发送请求的基本示例：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 // src/api/chat.ts interface ChatMessage { role: &amp;#39;user&amp;#39; | &amp;#39;assistant&amp;#39; | &amp;#39;tool&amp;#39;; content: string; } export async function …  ]]></content></entry><entry><title>下一代 Chatbot：MCP 扩展对话</title><url>/post/learn-ai/t_00_ai_chatbot_next_gen_chatbots/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag></tags><content type="html">  本文是 T 系列的第 00 篇，主要介绍下一代 Chatbot：MCP 扩展对话。
 T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。
 现代对话式人工智能的格局正朝着能够执行复杂、多轮任务的应用方向发展。这要求系统不仅限于简单的对话管理，而是需要能够与外部数据源和专业工具实现无缝交互。传统方法往往依赖脆弱的提示工程，难以扩展和维护。本文介绍“模型上下文协议”（MCP），作为构建下一代聊天机器人的基础框架。通过支持与外部工具进行结构化、多轮的交互，MCP 取代了传统的基于提示的临时性解决方案，采用了一种稳健且明确的智能体-工具逻辑。本系列将深入探讨 MCP 的架构设计、实现方式及实际应用场景，为开发者和研究人员提供技术层面的深度解析。
 MCP 为 LLM 提供了获取外部数据和执行外部工具的能力，使 LLM 不再局限于简单的提示词，而是基于工具上下文进行复杂的对话交互。
