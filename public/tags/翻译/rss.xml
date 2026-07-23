@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>翻译 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E7%BF%BB%E8%AF%91/</link><description>Recent content in 翻译 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 20 Jul 2026 15:15:14 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E7%BF%BB%E8%AF%91/rss.xml" rel="self" type="application/rss+xml"/><item><title>Chatbot UI 与 MCP Server 通信</title><link>https://a2htray.github.io/post/learn-ai/t_01_ai_chatbot_communicate_with_mcp_server/</link><pubDate>Mon, 20 Jul 2026 15:15:14 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_01_ai_chatbot_communicate_with_mcp_server/</guid><description>&lt;p&gt;本文是 T 系列的第 01 篇，主要介绍 Chatbot UI 如何与 MCP Server 进行通信。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>翻译 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E7%BF%BB%E8%AF%91/</link><description>Recent content in 翻译 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 23 Jul 2026 09:17:58 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E7%BF%BB%E8%AF%91/rss.xml" rel="self" type="application/rss+xml"/><item><title>MCP 在生产级别 Chatbot 中的安全机制</title><link>https://a2htray.github.io/post/learn-ai/t_04_ai_securing_chatbots_in_production/</link><pubDate>Thu, 23 Jul 2026 09:17:58 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_04_ai_securing_chatbots_in_production/</guid><description>&lt;p&gt;本文是 T 系列的第 04 篇，主要介绍 MCP 在生产级别 Chatbot 中的安全机制。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>基于 MCP 实现持久化记忆</title><link>https://a2htray.github.io/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</link><pubDate>Tue, 21 Jul 2026 14:20:19 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</guid><description>&lt;p&gt;本文是 T 系列的第 03 篇，主要介绍 MCP 如何实现持久化记忆。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;尽管 LLM 在处理和生成文本方面非常强大，但它们&lt;strong&gt;本质上是无状态的&lt;/strong&gt;。&lt;em&gt;每次 API 调用都被视为一个全新的独立请求，无法保留之前交互的任何记忆&lt;/em&gt;。要使 Chatbot 或虚拟助手真正有用，它必须具备记忆能力，能够记住用户的姓名、偏好或多轮对话的上下文。传统方法试图通过将整个聊天历史打包进 LLM 的提示中来解决这一问题，但这种方法效率低、成本高且容易出错。本文探讨了一种更稳健且可扩展的解决方案：利用模型上下文协议（MCP）将记忆实现为外部、可管理的工具。这种方法使 Agent 即使保持无状态，而有状态的工具则提供持久的记忆功能。&lt;/p&gt;</description></item><item><title>基于 MCP 构建可查询的 Chatbot</title><link>https://a2htray.github.io/post/learn-ai/t_02_ai_build_chatbot_with_mcp/</link><pubDate>Tue, 21 Jul 2026 09:40:10 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_02_ai_build_chatbot_with_mcp/</guid><description>&lt;p&gt;本文是 T 系列的第 02 篇，主要介绍 Chatbot UI 如何基于 MCP 构建可查询的 Chatbot。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>Chatbot UI 与 MCP Server 通信</title><link>https://a2htray.github.io/post/learn-ai/t_01_ai_chatbot_communicate_with_mcp_server/</link><pubDate>Mon, 20 Jul 2026 15:15:14 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_01_ai_chatbot_communicate_with_mcp_server/</guid><description>&lt;p&gt;本文是 T 系列的第 01 篇，主要介绍 Chatbot UI 如何与 MCP Server 进行通信。&lt;/p&gt;
 
  &lt;blockquote&gt;
  &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;
