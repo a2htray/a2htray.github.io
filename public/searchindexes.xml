@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>MCP 在生产级别 Chatbot 中的安全机制</title><url>/post/learn-ai/t_04_ai_securing_chatbots_in_production/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag><tag>安全机制</tag></tags><content type="html">  本文是 T 系列的第 04 篇，主要介绍 MCP 在生产级别 Chatbot 中的安全机制。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>客户服务 MCP：将 CRM 与聊天功能集成</title><url>/post/learn-ai/t_05_ai_mcp_for_customer_service/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag></tags><content type="html">  本文是 T 系列的第 05 篇，主要介绍 MCP 在 CRM 系统中的 Chatbot 应用。
+T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。
+在现代客户服务中，Chatbot 已不仅仅是常见的简单问题解答工具，它还是通往企业核心系统的重要入口，尤其是客户关系管理（CRM）平台。将 Chatbot 与 CRM 系统集成后，可处理诸如“查询我的工单状态”或“更新我的电话号码”等复杂且个性化的任务。要想安全可靠地实现这一功能，则需要一种相对简单、基于结构化提示词工程的方法。模型上下文协议（MCP）通过一套工具链，将 Chatbot 连接至 CRM 系统，确保写入操作的安全性、权限范围的精细化以及工具架构的清晰性。本文将展示如何使用 MCP 构建一个安全且功能完善的客户服务 Agent。
+架构：Agent、工具和 CRM 客户服务的 MCP 架构涉及明确的角色分工：
+Agent（例如 LLM）是推理引擎，它理解用户的意图并确定需要使用哪种工具。 MCP Server 充当安全的中介，提供一组受严格控制的工具，供客户端（即 Agent）调用。 CRM 系统是数据源，也是读写操作的对象。 Agent 从未直接与 CRM 的 API 交互，而是调用 MCP Server 上的工具，这是至关重要的安全措施。所有请求，包括写入操作，均通过 MCP Server 进行转发，该服务负责验证、身份认证和授权。
+工具定义 对于面向客户的使用场景，工具设计必须优先考虑安全性和数据完整性。每个工具都应具有清晰且明确的架构，以规定其用途、所需输入和可能的输出。
+以下是一些客服 Chatbot 的工具示例：
+get_ticket_status：用于获取特定支持工单状态的只读工具。 get_customer_info：用于获取客户基本信息的只读工具。 update_phone_number：可写操作，用于修改用户的联系方式。这是安全写操作的一个关键示例。 安全的写入操作是指经过设计后具有幂等性，并严格验证输入，以防止恶意数据被写入客户关系管理（CRM）系统。
+LLM 驱动的 Agent 是非确定性的：网络超时重试、自己重新规划、对结果不确定而再次尝试——同一个写工具很可能被触发多次。若写入不幂等（比如「新增记录」），一次用户请求可能往 CRM 塞进好几条重复 …  </content></entry><entry><title>MCP 在生产级别 Chatbot 中的安全机制</title><url>/post/learn-ai/t_04_ai_securing_chatbots_in_production/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag><tag>安全机制</tag></tags><content type="html">  本文是 T 系列的第 04 篇，主要介绍 MCP 在生产级别 Chatbot 中的安全机制。
 T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。
 将 Chatbot 部署到生产环境中会带来独特而复杂的安全挑战，与传统应用程序不同，基于大语言模型（LLM）的 Chatbot 可能生成并执行未知代码或命令，这使其成为潜在的安全攻击点，包括数据外泄、权限提升以及未经授权的系统访问。对于处理敏感数据的企业级应用而言，仅依赖 LLM 内部的安全防护机制或基础的提示工程，风险是不可接受的。MCP 提供了一套有原则的框架，通过强制细粒度控制、执行隔离和强大的审计机制来缓解这些风险。本文介绍了如何利用先进的架构模式（包括微虚拟机等沙箱技术以及全面的审计日志配置）来构建安全的 Chatbot 部署。
 安全模型：隔离和权限 MCP 部署的核心安全原则是将控制权从 LLM 转移到基础设施本身。基于 LLM 开发的 Agent 无法直接访问工具或外部系统，而是通过与一个受信任且隔离的 MCP Server 进行通信。MCP Server 充当守门人，负责代表代理验证、授权并安全执行所有工具调用。通过将 Agent 与工具解耦，MCP Server 的设计应基于最小权限原则，构建出更加安全、隔离且易于管理的架构。
