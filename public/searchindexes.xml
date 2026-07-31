@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Chatbot: MCP vs LangChain</title><url>/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag><tag>LangChain</tag><tag>ReAct</tag></tags><content type="html">  本文是 T 系列的第 06 篇，主要比较在构建 Chatbot 中，MCP 与 LangChain 之间的区别。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>浅尝一口 TabICL 的酒：大 A 的涨跌预测</title><url>/post/learn-ai/tabicl_01_classification_daa/</url><categories><category>人工智能</category><category>结构化大模型</category></categories><tags><tag>TabICL</tag><tag>结构化大模型</tag><tag>分类问题</tag></tags><content type="html">  TabICL 是一款开源表格基础模型，原生支持分类与回归任务，同时可拓展应用至时间序列预测等场景。它完整兼容 scikit-learn API，使用习惯对数据从业者十分友好。不同于传统机器学习模型，TabICL 在调用 fit 时仅缓存训练数据，真正基于上下文学习的推理计算，延后至 predict 阶段执行。
+安装 通过 pip 安装 TabICL：
+1 pip install tabicl 如果扩展到时间序列预测，则需要安装依赖：
+1 pip install &amp;amp;#34;tabicl[forecast]&amp;amp;#34; 功能介绍 TabICL 提供的功能包括：
+tabicl.TabICLClassifier - 实现表格数据分类 tabicl.TabICLRegressor - 实现表格数据回归 tabicl.forecast.TabICLForecaster - 实现时间序列预测 tabicl.TabICLUnsupervised - 实现无监督学习 tabicl.FinetunedTabICLClassifier - 微调 TabICL 权重实现分类 tabicl.FinetunedTabICLRegressor - 微调 TabICL 权重实现回归 原生模型（TabICLClassifier、TabICLRegressor）与微调模型（FinetunedTabICLClassifier、FinetunedTabICLRegressor）的区别：
+原生：上下文学习 ICL，全程不更新模型权重 微调：监督微调，使用目标数据集更新预训练权重 分类问题 结合现在大 A 的“水深火热”，回答一个最朴素的问题：“明天还会涨吗？”
+数据集介绍
+date：日期 open：开盘价 high：最高价 low：最低价 close：收盘价 ret_1d：一日收益率 ret_5d：五日收益率 ret_10d：十日收益率 vol_5：五日波动率 vol_10：十日波动率 ma5：五日均线 ma10：十日均线 ma20：十日均线 trend：次日涨跌标签，1 涨 0 跌 收集了 2021-08-13 到 2026-07-30 的上证指数数据，共计 1201 条数据。
+2026-07-30 预测 31 号的涨跌，所以试验中不用这条数据。
+完整代码如下：
+1 2 3 4 5 6 7 8 9 10 …  </content></entry><entry><title>Chatbot: MCP vs LangChain</title><url>/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag><tag>LangChain</tag><tag>ReAct</tag></tags><content type="html">  本文是 T 系列的第 06 篇，主要比较在构建 Chatbot 中，MCP 与 LangChain 之间的区别。
 T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。
 人工智能 Agent 的发展历程一直致力于超越简单的问答功能，迈向多步骤、工具支持的自动化。为应对这一挑战，已形成两种不同的理念：LangChain 所代表的 Agent 编排框架，以及基于协议的 Model Context Protocol（MCP）方法。尽管两者都支持 Agent 使用外部工具，但它们在技术栈的不同层级运行，导致了不同的架构设计、开发体验，以及对特定应用场景的适用性差异。
 架构设计和运行时控制 ReAct 是 LangChain 常常采用的推理模式，而 LangChain 本质上是编排框架，它的核心功能是提供控制 Agent 行为的逻辑。LangChain Agent 在一个“思考—行动—观察”循环中运行。Agent 的“大脑”通常是一个大语言模型（LLM），它接收用户的查询以及可用工具列表，然后生成一个“思考”，决定执行“行动”（即选择使用哪个工具），执行该工具，并获得一个“观察”。这一循环持续重复，直到模型确定最终答案为止。从推理到工具执行的整个过程，均由框架管理，该框架充当中央协调者和状态管理者。
@@ -21,18 +31,7 @@ T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同
 容器 vs 微虚拟机
 1. 容器：共享宿主机的内核，隔离靠的是命名空间/控制组，隔离强度较弱
 2. 微虚拟机（microVM，如 Firecracker）：每个进程跑在独立的虚拟化环境里，有各自独立的轻量内核，属于硬件级别隔离
-重用预先预热好的多个 …  </content></entry><entry><title>FastMCP 上下文状态管理机制</title><url>/post/learn-mcp/00_fastmcp_state_management/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>FastMCP</tag><tag>AI</tag><tag>Agent</tag><tag>智能体</tag></tags><content type="html"><![CDATA[  FastMCP: 3.4.4
-FastMCP 的状态不是靠&quot;把上一步结果塞回参数&quot;来维持的，而是服务端按会话持有 state。
-基础示例 先创建一个的 MCP Server 并启动：
-1 2 3 4 5 6 7 8 9 10 # server.py mcp = FastMCP(&#34;上下文状态管理&#34;) @mcp.tool( title=&#34;FastMCP 介绍&#34;, description=&#34;介绍 FastMCP 是什么，以及如何使用 FastMCP 进行上下文状态管理。&#34;, ) async def intro(): return &#34;FastMCP 是一个用于构建多轮对话的工具，支持上下文状态管理。&#34; 1 2 3 4 5 6 7 $ fastmcp run --no-banner --transport streamable-http server.py [07/21/26 19:02:21] INFO Starting MCP server &#39;上下文状态管理&#39; with transport &#39;streamable-http&#39; on transport.py:361 http://127.0.0.1:8000/mcp INFO: Started server process [29291] INFO: Waiting for application startup. INFO: Application startup complete. INFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit) --no-banner 终端不显示 banner --transport streamable-http HTTP 长连接双向流式、自动携带 SessionID，完整支持 Session State 会话持久化 获取工具信息 获取 MCP Server 工具信息的方式有两种：
-使用 FastMCP 的 Client 获取 使用 langchain_mcp_adapters 的 MultiServerMCPClient 获取 方式一：使用 FastMCP 的 Client 获取
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # agent.py import asyncio from fastmcp.client import Client async def tools_info_with_fastmcp(): client = Client(&#34;http://localhost:8000/mcp&#34;) async with client: tools = await client.list_tools() print(f&#34;共 {len(tools)} 个工具：&#34;) for tool in tools: print(f&#34; * Tool: {tool.name}, Description: {tool.description}&#34;) if __name__ == &#34;__main__&#34;: asyncio.run(tools_info_with_fastmcp()) 实例化 Client 类 调用实例的 list_tools() 方法获取工具列表 运行效果：
-1 2 3 $ python agent.py 共 1 个工具： * Tool: intro, Description: 介绍 FastMCP 是什么，以及如何使用 FastMCP 进行上下文状态管理。 方式二：使用 langchain_mcp_adapters 的 MultiServerMCPClient 获取
-源码学习 在源文件 fastmcp/server/context.py 中定义了 Context 类，用于管理对话上下文状态。
-第 83 行的：
-1 _current_context: ContextVar[Context | None] = ContextVar(&#34;context&#34;, default=None) 用来在异步/多协程环境下，安全存储当前请求/会话的 Context 对象；每个协程、每个请求拥有独立隔离的 _current_context，互不干扰。
-第 127 到 133 行：
-1 2 3 4 5 6 7 @contextmanager def set_context(context: Context) -&gt; Generator[Context, None, None]: token = _current_context.set(context) try: yield context finally: _current_context.reset(token) @contextmanager 装饰器用于创建上下文管理器，确保在进入和退出上下文时执行相应的逻辑。   ]]></content></entry><entry><title>基于 MCP 实现持久化记忆</title><url>/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag><tag>Memory</tag></tags><content type="html">  本文是 T 系列的第 03 篇，主要介绍 MCP 如何实现持久化记忆。
+重用预先预热好的多个 …  </content></entry><entry><title>基于 MCP 实现持久化记忆</title><url>/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</url><categories><category>人工智能</category><category>大语言模型</category></categories><tags><tag>MCP</tag><tag>翻译</tag><tag>Chatbot</tag><tag>T 系列</tag><tag>AI</tag><tag>Memory</tag></tags><content type="html">  本文是 T 系列的第 03 篇，主要介绍 MCP 如何实现持久化记忆。
 T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。
 尽管 LLM 在处理和生成文本方面非常强大，但它们本质上是无状态的。每次 API 调用都被视为一个全新的独立请求，无法保留之前交互的任何记忆。要使 Chatbot 或虚拟助手真正有用，它必须具备记忆能力，能够记住用户的姓名、偏好或多轮对话的上下文。传统方法试图通过将整个聊天历史打包进 LLM 的提示中来解决这一问题，但这种方法效率低、成本高且容易出错。本文探讨了一种更稳健且可扩展的解决方案：利用模型上下文协议（MCP）将记忆实现为外部、可管理的工具。这种方法使 Agent 即使保持无状态，而有状态的工具则提供持久的记忆功能。
 Agent 记忆用 MCP 的工具实现：Agent 通过工具调用获取记忆，并通过工具调用更新记忆，从而实现持久化记忆。

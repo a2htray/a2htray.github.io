@@ -64,4 +64,3 @@ MQTT 主要用来让 LLM 跟现实世界打通。设备通过 MQTT 把状态、�
 ## 资源
 
 * [MQTT 协议快速入门 2025：基础知识和实用教程](https://www.emqx.com/zh/blog/the-easiest-guide-to-getting-started-with-mqtt)
-* 

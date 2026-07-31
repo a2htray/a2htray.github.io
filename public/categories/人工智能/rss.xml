@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>人工智能 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link><description>Recent content in 人工智能 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sat, 25 Jul 2026 11:11:31 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/rss.xml" rel="self" type="application/rss+xml"/><item><title>Chatbot: MCP vs LangChain</title><link>https://a2htray.github.io/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</link><pubDate>Sat, 25 Jul 2026 11:11:31 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</guid><description>&lt;p&gt;本文是 T 系列的第 06 篇，主要比较在构建 Chatbot 中，MCP 与 LangChain 之间的区别。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>人工智能 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link><description>Recent content in 人工智能 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 31 Jul 2026 18:17:39 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/rss.xml" rel="self" type="application/rss+xml"/><item><title>浅尝一口 TabICL 的酒：大 A 的涨跌预测</title><link>https://a2htray.github.io/post/learn-ai/tabicl_01_classification_daa/</link><pubDate>Fri, 31 Jul 2026 18:17:39 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/tabicl_01_classification_daa/</guid><description>&lt;p&gt;&lt;code&gt;TabICL&lt;/code&gt; 是一款开源表格基础模型，原生支持&lt;strong&gt;分类&lt;/strong&gt;与&lt;strong&gt;回归&lt;/strong&gt;任务，同时可拓展应用至时间序列预测等场景。它完整兼容 &lt;code&gt;scikit-learn&lt;/code&gt; API，使用习惯对数据从业者十分友好。不同于传统机器学习模型，&lt;code&gt;TabICL&lt;/code&gt; 在调用 fit 时仅缓存训练数据，真正基于上下文学习的推理计算，延后至 predict 阶段执行。&lt;/p&gt;</description></item><item><title>Chatbot: MCP vs LangChain</title><link>https://a2htray.github.io/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</link><pubDate>Sat, 25 Jul 2026 11:11:31 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</guid><description>&lt;p&gt;本文是 T 系列的第 06 篇，主要比较在构建 Chatbot 中，MCP 与 LangChain 之间的区别。&lt;/p&gt;
 
  &lt;blockquote&gt;
  &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>客户服务 MCP：将 CRM 与聊天功能集成</title><link>https://a2htray.github.io/post/learn-ai/t_05_ai_mcp_for_customer_service/</link><pubDate>Fri, 24 Jul 2026 14:53:31 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_05_ai_mcp_for_customer_service/</guid><description>&lt;p&gt;本文是 T 系列的第 05 篇，主要介绍 MCP 在 CRM 系统中的 Chatbot 应用。&lt;/p&gt;
@@ -10,68 +10,7 @@
 &lt;p&gt;在现代客户服务中，Chatbot 已不仅仅是常见的简单问题解答工具，它还是通往企业核心系统的重要入口，尤其是客户关系管理（CRM）平台。将 Chatbot 与 CRM 系统集成后，可&lt;strong&gt;处理诸如“查询我的工单状态”或“更新我的电话号码”等复杂且个性化的任务&lt;/strong&gt;。要想安全可靠地实现这一功能，则需要一种相对简单、基于结构化提示词工程的方法。模型上下文协议（MCP）通过一套工具链，将 Chatbot 连接至 CRM 系统，确保&lt;strong&gt;写入操作的安全性&lt;/strong&gt;、&lt;strong&gt;权限范围的精细化&lt;/strong&gt;以及&lt;strong&gt;工具架构的清晰性&lt;/strong&gt;。本文将展示如何使用 MCP 构建一个安全且功能完善的&lt;strong&gt;客户服务 Agent&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>MCP 在生产级别 Chatbot 中的安全机制</title><link>https://a2htray.github.io/post/learn-ai/t_04_ai_securing_chatbots_in_production/</link><pubDate>Thu, 23 Jul 2026 09:17:58 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_04_ai_securing_chatbots_in_production/</guid><description>&lt;p&gt;本文是 T 系列的第 04 篇，主要介绍 MCP 在生产级别 Chatbot 中的安全机制。&lt;/p&gt;
 
  &lt;blockquote&gt;
- &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>FastMCP 上下文状态管理机制</title><link>https://a2htray.github.io/post/learn-mcp/00_fastmcp_state_management/</link><pubDate>Tue, 21 Jul 2026 16:00:35 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/00_fastmcp_state_management/</guid><description>&lt;p&gt;FastMCP: 3.4.4&lt;/p&gt;
-&lt;p&gt;FastMCP 的状态不是靠&amp;quot;把上一步结果塞回参数&amp;quot;来维持的，而是服务端按会话持有 state。&lt;/p&gt;
-&lt;h2 id="基础示例"&gt;基础示例
-&lt;a class="header-anchor" href="#%e5%9f%ba%e7%a1%80%e7%a4%ba%e4%be%8b"&gt;&lt;/a&gt;
-&lt;/h2&gt;&lt;p&gt;先创建一个的 MCP Server 并启动：&lt;/p&gt;
-
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt; 1&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-0-2"&gt;&lt;a class="lnlinks" href="#hl-0-2"&gt; 2&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-0-3"&gt;&lt;a class="lnlinks" href="#hl-0-3"&gt; 3&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-0-4"&gt;&lt;a class="lnlinks" href="#hl-0-4"&gt; 4&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-0-5"&gt;&lt;a class="lnlinks" href="#hl-0-5"&gt; 5&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-0-6"&gt;&lt;a class="lnlinks" href="#hl-0-6"&gt; 6&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-0-7"&gt;&lt;a class="lnlinks" href="#hl-0-7"&gt; 7&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-0-8"&gt;&lt;a class="lnlinks" href="#hl-0-8"&gt; 8&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-0-9"&gt;&lt;a class="lnlinks" href="#hl-0-9"&gt; 9&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-0-10"&gt;&lt;a class="lnlinks" href="#hl-0-10"&gt;10&lt;/a&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# server.py&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;mcp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FastMCP&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;上下文状态管理&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nd"&gt;@mcp.tool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;FastMCP 介绍&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;介绍 FastMCP 是什么，以及如何使用 FastMCP 进行上下文状态管理。&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;async&lt;/span&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;intro&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;FastMCP 是一个用于构建多轮对话的工具，支持上下文状态管理。&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
-&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-1-1"&gt;&lt;a class="lnlinks" href="#hl-1-1"&gt;1&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-1-2"&gt;&lt;a class="lnlinks" href="#hl-1-2"&gt;2&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-1-3"&gt;&lt;a class="lnlinks" href="#hl-1-3"&gt;3&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-1-4"&gt;&lt;a class="lnlinks" href="#hl-1-4"&gt;4&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-1-5"&gt;&lt;a class="lnlinks" href="#hl-1-5"&gt;5&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-1-6"&gt;&lt;a class="lnlinks" href="#hl-1-6"&gt;6&lt;/a&gt;
-&lt;/span&gt;&lt;span class="lnt" id="hl-1-7"&gt;&lt;a class="lnlinks" href="#hl-1-7"&gt;7&lt;/a&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class="lntd"&gt;
-&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ fastmcp run --no-banner --transport streamable-http server.py
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;07/21/26 19:02:21&lt;span class="o"&gt;]&lt;/span&gt; INFO Starting MCP server &lt;span class="s1"&gt;&amp;#39;上下文状态管理&amp;#39;&lt;/span&gt; with transport &lt;span class="s1"&gt;&amp;#39;streamable-http&amp;#39;&lt;/span&gt; on transport.py:361
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; http://127.0.0.1:8000/mcp 
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;INFO: Started server process &lt;span class="o"&gt;[&lt;/span&gt;29291&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;INFO: Waiting &lt;span class="k"&gt;for&lt;/span&gt; application startup.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;INFO: Application startup complete.
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;INFO: Uvicorn running on http://127.0.0.1:8000 &lt;span class="o"&gt;(&lt;/span&gt;Press CTRL+C to quit&lt;span class="o"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;--no-banner&lt;/code&gt; 终端不显示 banner&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--transport streamable-http&lt;/code&gt; HTTP 长连接双向流式、自动携带 SessionID，完整支持 Session State 会话持久化&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="获取工具信息"&gt;获取工具信息
-&lt;a class="header-anchor" href="#%e8%8e%b7%e5%8f%96%e5%b7%a5%e5%85%b7%e4%bf%a1%e6%81%af"&gt;&lt;/a&gt;
-&lt;/h3&gt;&lt;p&gt;获取 MCP Server 工具信息的方式有两种：&lt;/p&gt;</description></item><item><title>基于 MCP 实现持久化记忆</title><link>https://a2htray.github.io/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</link><pubDate>Tue, 21 Jul 2026 14:20:19 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</guid><description>&lt;p&gt;本文是 T 系列的第 03 篇，主要介绍 MCP 如何实现持久化记忆。&lt;/p&gt;
+ &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>基于 MCP 实现持久化记忆</title><link>https://a2htray.github.io/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</link><pubDate>Tue, 21 Jul 2026 14:20:19 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</guid><description>&lt;p&gt;本文是 T 系列的第 03 篇，主要介绍 MCP 如何实现持久化记忆。&lt;/p&gt;
 
  &lt;blockquote&gt;
  &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;
