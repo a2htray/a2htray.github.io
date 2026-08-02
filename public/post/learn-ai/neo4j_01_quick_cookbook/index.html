@@ -1,0 +1,241 @@
+<!doctype html><html lang=zh-CN data-theme=light><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.152.2"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon-32x32.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple-touch-icon.png><meta itemprop=name content="Neo4j Cypher 语法全量速查手册"><meta itemprop=description content="记录我的生活、工作与成长。"><meta name=description content="记录我的生活、工作与成长。"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://a2htray.github.io/imgs/my_avatar.jpg"><meta itemprop=keywords content="TabICL,结构化大模型,分类问题"><meta property="og:type" content="article"><meta property="og:title" content="Neo4j Cypher 语法全量速查手册"><meta property="og:description" content="记录我的生活、工作与成长。"><meta property="og:image" content="/imgs/my_avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://a2htray.github.io/post/learn-ai/neo4j_01_quick_cookbook/"><meta property="og:site_name" content="快乐冲浪与生活"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="a2htray"><meta property="article:published_time" content="2026-08-02 12:40:59 +0800 CST"><meta property="article:modified_time" content="2026-08-02 12:40:59 +0800 CST"><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/font-awesome/6.7.2/css/all.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.css><link rel=stylesheet href="/css/main.min.css?=1785647054"><style type=text/css>.post-footer hr:after{content:"~ 我可是有底线的哟 ~"}.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><link rel=stylesheet type=text/css href="/css/custom_style.css?=1785647054"><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return 0[0];const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),0[0]):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>Neo4j Cypher 语法全量速查手册 - 快乐冲浪与生活</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>快乐冲浪与生活</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>多体验、多体会、多体悟</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-tags"><a href=/tags/ class=hvr-icon-pulse rel=section><i class="fa fa-tag hvr-icon"></i>标签</a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#基础语法符号对照表必记>基础语法符号对照表（必记）</a></li><li><a href=#核心子句固定执行顺序>核心子句固定执行顺序</a></li><li><a href=#全量核心语法可直接运行代码案例>全量核心语法+可直接运行代码案例</a><ul><li><a href=#match-精准查询最核心最高频>MATCH 精准查询（最核心、最高频）</a><ul><li><a href=#节点查询>节点查询</a></li><li><a href=#关系查询>关系查询</a></li><li><a href=#可变长度路径图遍历核心>可变长度路径（图遍历核心）</a></li></ul></li><li><a href=#create-数据创建>CREATE 数据创建</a></li><li><a href=#merge-合并写入生产首选-upsert>MERGE 合并写入（生产首选 Upsert）</a></li><li><a href=#set--remove-属性更新>SET / REMOVE 属性更新</a></li><li><a href=#delete-数据删除>DELETE 数据删除</a></li><li><a href=#return-返回别名排序分页>RETURN 返回、别名、排序分页</a></li><li><a href=#with-管道传递复杂查询核心>WITH 管道传递（复杂查询核心）</a></li><li><a href=#常用聚合函数>常用聚合函数</a></li><li><a href=#where-高级筛选运算符>WHERE 高级筛选运算符</a></li><li><a href=#case-条件分支判断>CASE 条件分支判断</a></li><li><a href=#索引与约束性能优化核心>索引与约束（性能优化核心）</a></li><li><a href=#load-csv-批量数据导入>LOAD CSV 批量数据导入</a></li></ul></li><li><a href=#高频落地实操案例>高频落地实操案例</a></li><li><a href=#生产环境硬核避坑>生产环境硬核避坑</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=a2htray src=/imgs/img-lazy-loading.gif data-src=/imgs/my_avatar.jpg><p class=site-author-name itemprop=name>a2htray</p><div class=site-description itemprop=description>记录我的生活、工作与成长。</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/post/><span class=site-state-item-count>180</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>44</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>171</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/a2htray title="Github → https://github.com/a2htray" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/a2htray/a2htray.github.io rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentColor" class="octo-body"/></svg></a><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://a2htray.github.io/post/learn-ai/neo4j_01_quick_cookbook/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/my_avatar.jpg"><meta itemprop=name content="a2htray"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="a2htray"><meta itemprop=description content="记录我的生活、工作与成长。"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Neo4j Cypher 语法全量速查手册"><meta itemprop=description content="做图数据库开发、知识图谱搭建、关联数据分析，Cypher 是 Neo4j 必备核心工具。
+不同于 SQL 的二维表逻辑，Cypher 适配图数据“节点-关系”的核心结构，语法简洁、逻辑性强，贴合图遍历场景。"></span><header class=post-header><h1 class=post-title itemprop="name headline">Neo4j Cypher 语法全量速查手册
+<a href=https://github.com/a2htray/a2htray.github.io/tree/main/content/post/learn-ai/neo4j_01_quick_cookbook.md rel="noopener external nofollow noreferrer" target=_blank class="exturl post-edit-link" title=编辑><i class="fa fa-pen-nib"></i></a></h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2026-08-02 12:40:59 +08:00" itemprop="dateCreated datePublished" datetime="2026-08-02 12:40:59 +0800 CST">2026-08-02
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E7%BB%93%E6%9E%84%E5%8C%96%E5%A4%A7%E6%A8%A1%E5%9E%8B/ itemprop=url rel=index><span itemprop=name>人工智能/结构化大模型</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="fas fa-solid fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>3229</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="fas fa-solid fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>7分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="fas fa-solid fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/post/learn-ai/neo4j_01_quick_cookbook/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><p>做图数据库开发、知识图谱搭建、关联数据分析，Cypher 是 Neo4j 必备核心工具。</p><p>不同于 SQL 的二维表逻辑，Cypher 适配图数据“<strong>节点-关系</strong>”的核心结构，语法简洁、逻辑性强，贴合图遍历场景。</p><a id=more></a><p>本文整理全套可直接落地的 Cypher 语法，包含基础符号、固定执行顺序、核心子句、实操案例及生产避坑点，一次性搞定日常开发 99% 的图查询、写入、更新需求，建议收藏备用。</p><p><strong>核心底层逻辑：Cypher 四大核心元素</strong></p><p>所有 Cypher 语句均围绕四大要素构建，是读懂所有语法的基础：</p><ul><li>节点（Node）：图数据基础实体，对应业务对象（用户、商品、设备等）</li><li>关系（Relationship）：节点之间的关联逻辑，承载实体联动关系</li><li>标签（Label）：节点分类标识，用于区分不同实体类型</li><li>属性（Property）：节点/关系的键值对参数，存储具体业务数据</li></ul><h2 id=基础语法符号对照表必记>基础语法符号对照表（必记）
+<a class=header-anchor href=#%e5%9f%ba%e7%a1%80%e8%af%ad%e6%b3%95%e7%ac%a6%e5%8f%b7%e5%af%b9%e7%85%a7%e8%a1%a8%e5%bf%85%e8%ae%b0></a></h2><p>Cypher 语法符号辨识度极高，熟记后可快速读懂任意查询语句：</p><table><thead><tr><th>符号</th><th>技术释义</th></tr></thead><tbody><tr><td>()</td><td>节点，完整格式：变量:标签{属性 k:v}</td></tr><tr><td>[]</td><td>关系，完整格式：变量:关系类型{属性参数}</td></tr><tr><td>&ndash;></td><td>有向关系；&ndash; 代表无向关系</td></tr><tr><td>:</td><td>标签、关系类型前缀标识</td></tr><tr><td>{}</td><td>存储节点/关系的属性键值对</td></tr><tr><td>.</td><td>属性访问符，例：n.name 获取节点 name 属性</td></tr></tbody></table><h2 id=核心子句固定执行顺序>核心子句固定执行顺序
+<a class=header-anchor href=#%e6%a0%b8%e5%bf%83%e5%ad%90%e5%8f%a5%e5%9b%ba%e5%ae%9a%e6%89%a7%e8%a1%8c%e9%a1%ba%e5%ba%8f></a></h2><p>Cypher 子句执行顺序固定不可乱序，乱序会直接报错，这是新手最易踩坑的基础问题。查询类语句标准执行链路：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a class=lnlinks href=#hl-0-1>1</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>MATCH → WHERE → WITH → RETURN → ORDER BY → SKIP → LIMIT</span></span></code></pre></td></tr></table></div></div><p>写入更新类语句（按业务场景按需插入执行）：<code>CREATE / MERGE / SET / DELETE</code>。</p><h2 id=全量核心语法可直接运行代码案例>全量核心语法+可直接运行代码案例
+<a class=header-anchor href=#%e5%85%a8%e9%87%8f%e6%a0%b8%e5%bf%83%e8%af%ad%e6%b3%95%e5%8f%af%e7%9b%b4%e6%8e%a5%e8%bf%90%e8%a1%8c%e4%bb%a3%e7%a0%81%e6%a1%88%e4%be%8b></a></h2><h3 id=match-精准查询最核心最高频>MATCH 精准查询（最核心、最高频）
+<a class=header-anchor href=#match-%e7%b2%be%e5%87%86%e6%9f%a5%e8%af%a2%e6%9c%80%e6%a0%b8%e5%bf%83%e6%9c%80%e9%ab%98%e9%a2%91></a></h3><p>用于匹配节点、关系、路径，是所有图查询的基础，简单过滤可直接写在 MATCH 后，复杂条件统一用 WHERE。</p><h4 id=节点查询>节点查询
+<a class=header-anchor href=#%e8%8a%82%e7%82%b9%e6%9f%a5%e8%af%a2></a></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a class=lnlinks href=#hl-1-1> 1</a>
+</span><span class=lnt id=hl-1-2><a class=lnlinks href=#hl-1-2> 2</a>
+</span><span class=lnt id=hl-1-3><a class=lnlinks href=#hl-1-3> 3</a>
+</span><span class=lnt id=hl-1-4><a class=lnlinks href=#hl-1-4> 4</a>
+</span><span class=lnt id=hl-1-5><a class=lnlinks href=#hl-1-5> 5</a>
+</span><span class=lnt id=hl-1-6><a class=lnlinks href=#hl-1-6> 6</a>
+</span><span class=lnt id=hl-1-7><a class=lnlinks href=#hl-1-7> 7</a>
+</span><span class=lnt id=hl-1-8><a class=lnlinks href=#hl-1-8> 8</a>
+</span><span class=lnt id=hl-1-9><a class=lnlinks href=#hl-1-9> 9</a>
+</span><span class=lnt id=hl-1-10><a class=lnlinks href=#hl-1-10>10</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 匹配所有Person标签节点
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>)</span> RETURN n
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 字面量属性精准过滤
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span> RETURN n.name, n.age
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 复杂条件推荐用WHERE（多条件、模糊匹配）
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>WHERE n.age &gt;<span class=o>=</span> <span class=m>20</span> AND n.name CONTAINS <span class=s2>&#34;张&#34;</span>
+</span></span><span class=line><span class=cl>RETURN n</span></span></code></pre></td></tr></table></div></div><h4 id=关系查询>关系查询
+<a class=header-anchor href=#%e5%85%b3%e7%b3%bb%e6%9f%a5%e8%af%a2></a></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a class=lnlinks href=#hl-2-1> 1</a>
+</span><span class=lnt id=hl-2-2><a class=lnlinks href=#hl-2-2> 2</a>
+</span><span class=lnt id=hl-2-3><a class=lnlinks href=#hl-2-3> 3</a>
+</span><span class=lnt id=hl-2-4><a class=lnlinks href=#hl-2-4> 4</a>
+</span><span class=lnt id=hl-2-5><a class=lnlinks href=#hl-2-5> 5</a>
+</span><span class=lnt id=hl-2-6><a class=lnlinks href=#hl-2-6> 6</a>
+</span><span class=lnt id=hl-2-7><a class=lnlinks href=#hl-2-7> 7</a>
+</span><span class=lnt id=hl-2-8><a class=lnlinks href=#hl-2-8> 8</a>
+</span><span class=lnt id=hl-2-9><a class=lnlinks href=#hl-2-9> 9</a>
+</span><span class=lnt id=hl-2-10><a class=lnlinks href=#hl-2-10>10</a>
+</span><span class=lnt id=hl-2-11><a class=lnlinks href=#hl-2-11>11</a>
+</span><span class=lnt id=hl-2-12><a class=lnlinks href=#hl-2-12>12</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 单向好友关系查询
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>a:Person<span class=o>)</span>-<span class=o>[</span>r:FRIEND<span class=o>]</span>-&gt;<span class=o>(</span>b:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>RETURN a.name, r, b.name
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 不限定关系类型、不限定目标节点标签
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>a:Person<span class=o>)</span>-<span class=o>[</span>r<span class=o>]</span>-&gt;<span class=o>(</span>b<span class=o>)</span> RETURN *
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 无向关系查询（不区分上下游方向）
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>a<span class=o>)</span>-<span class=o>[</span>r:KNOWS<span class=o>]</span>-<span class=o>(</span>b<span class=o>)</span> RETURN *
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 带关系属性精准筛选
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>a<span class=o>)</span>-<span class=o>[</span>r:WORK<span class=o>{</span>dept:<span class=s2>&#34;研发&#34;</span><span class=o>}]</span>-&gt;<span class=o>(</span>b<span class=o>)</span> RETURN a,b</span></span></code></pre></td></tr></table></div></div><h4 id=可变长度路径图遍历核心>可变长度路径（图遍历核心）
+<a class=header-anchor href=#%e5%8f%af%e5%8f%98%e9%95%bf%e5%ba%a6%e8%b7%af%e5%be%84%e5%9b%be%e9%81%8d%e5%8e%86%e6%a0%b8%e5%bf%83></a></h4><p>适用于多层级关联查询，生产环境必须限制遍历深度，杜绝全图遍历。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a class=lnlinks href=#hl-3-1>1</a>
+</span><span class=lnt id=hl-3-2><a class=lnlinks href=#hl-3-2>2</a>
+</span><span class=lnt id=hl-3-3><a class=lnlinks href=#hl-3-3>3</a>
+</span><span class=lnt id=hl-3-4><a class=lnlinks href=#hl-3-4>4</a>
+</span><span class=lnt id=hl-3-5><a class=lnlinks href=#hl-3-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 限定1-3层关联路径（安全合规）
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>a:Person<span class=o>)</span>-<span class=o>[</span>*1..3<span class=o>]</span>-&gt;<span class=o>(</span>b<span class=o>)</span> WHERE a.name<span class=o>=</span><span class=s2>&#34;张三&#34;</span> RETURN b
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 无深度限制（生产禁用！大数据量会引发全表扫描、内存溢出）
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>a<span class=o>)</span>-<span class=o>[</span>*<span class=o>]</span>-&gt;<span class=o>(</span>b<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=create-数据创建>CREATE 数据创建
+<a class=header-anchor href=#create-%e6%95%b0%e6%8d%ae%e5%88%9b%e5%bb%ba></a></h3><p>用于新建节点、关联关系，无去重逻辑，重复执行会生成重复数据，仅适用于初始化新增场景。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a class=lnlinks href=#hl-4-1>1</a>
+</span><span class=lnt id=hl-4-2><a class=lnlinks href=#hl-4-2>2</a>
+</span><span class=lnt id=hl-4-3><a class=lnlinks href=#hl-4-3>3</a>
+</span><span class=lnt id=hl-4-4><a class=lnlinks href=#hl-4-4>4</a>
+</span><span class=lnt id=hl-4-5><a class=lnlinks href=#hl-4-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 创建单个带属性节点
+</span></span><span class=line><span class=cl>CREATE <span class=o>(</span>p:Person<span class=o>{</span>name:<span class=s2>&#34;李四&#34;</span>, age:28<span class=o>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 一次性创建双节点+定向关联关系
+</span></span><span class=line><span class=cl>CREATE <span class=o>(</span>a:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span>-<span class=o>[</span>:FRIEND<span class=o>{</span>since:2025<span class=o>}]</span>-&gt;<span class=o>(</span>b:Person<span class=o>{</span>name:<span class=s2>&#34;李四&#34;</span><span class=o>})</span></span></span></code></pre></td></tr></table></div></div><h3 id=merge-合并写入生产首选-upsert>MERGE 合并写入（生产首选 Upsert）
+<a class=header-anchor href=#merge-%e5%90%88%e5%b9%b6%e5%86%99%e5%85%a5%e7%94%9f%e4%ba%a7%e9%a6%96%e9%80%89-upsert></a></h3><p>等价于「存在则匹配更新，不存在则新建」，完美解决 CREATE 重复数据问题，是生产环境核心写入语法。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a class=lnlinks href=#hl-5-1>1</a>
+</span><span class=lnt id=hl-5-2><a class=lnlinks href=#hl-5-2>2</a>
+</span><span class=lnt id=hl-5-3><a class=lnlinks href=#hl-5-3>3</a>
+</span><span class=lnt id=hl-5-4><a class=lnlinks href=#hl-5-4>4</a>
+</span><span class=lnt id=hl-5-5><a class=lnlinks href=#hl-5-5>5</a>
+</span><span class=lnt id=hl-5-6><a class=lnlinks href=#hl-5-6>6</a>
+</span><span class=lnt id=hl-5-7><a class=lnlinks href=#hl-5-7>7</a>
+</span><span class=lnt id=hl-5-8><a class=lnlinks href=#hl-5-8>8</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 节点匹配/新建+差异化赋值
+</span></span><span class=line><span class=cl>MERGE <span class=o>(</span>p:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span>
+</span></span><span class=line><span class=cl>ON CREATE SET p.age<span class=o>=</span><span class=m>25</span>        // 仅新建节点时赋值
+</span></span><span class=line><span class=cl>ON MATCH SET p.updateTime<span class=o>=</span>timestamp<span class=o>()</span>  // 仅匹配到节点时更新时间
+</span></span><span class=line><span class=cl>RETURN p
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 合并创建关联关系（前置要求：节点必须可正常匹配）
+</span></span><span class=line><span class=cl>MERGE <span class=o>(</span>a:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span>-<span class=o>[</span>r:FRIEND<span class=o>]</span>-&gt;<span class=o>(</span>b:Person<span class=o>{</span>name:<span class=s2>&#34;李四&#34;</span><span class=o>})</span></span></span></code></pre></td></tr></table></div></div><h3 id=set--remove-属性更新>SET / REMOVE 属性更新
+<a class=header-anchor href=#set--remove-%e5%b1%9e%e6%80%a7%e6%9b%b4%e6%96%b0></a></h3><p>用于更新节点、关系的属性，支持新增、修改、删除属性及追加标签。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a class=lnlinks href=#hl-6-1>1</a>
+</span><span class=lnt id=hl-6-2><a class=lnlinks href=#hl-6-2>2</a>
+</span><span class=lnt id=hl-6-3><a class=lnlinks href=#hl-6-3>3</a>
+</span><span class=lnt id=hl-6-4><a class=lnlinks href=#hl-6-4>4</a>
+</span><span class=lnt id=hl-6-5><a class=lnlinks href=#hl-6-5>5</a>
+</span><span class=lnt id=hl-6-6><a class=lnlinks href=#hl-6-6>6</a>
+</span><span class=lnt id=hl-6-7><a class=lnlinks href=#hl-6-7>7</a>
+</span><span class=lnt id=hl-6-8><a class=lnlinks href=#hl-6-8>8</a>
+</span><span class=lnt id=hl-6-9><a class=lnlinks href=#hl-6-9>9</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 批量更新节点属性
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span>
+</span></span><span class=line><span class=cl>SET n.age<span class=o>=</span>30, n.city<span class=o>=</span><span class=s2>&#34;武汉&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 为节点追加新标签
+</span></span><span class=line><span class=cl>SET n:Employee
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 删除指定属性
+</span></span><span class=line><span class=cl>REMOVE n.city</span></span></code></pre></td></tr></table></div></div><h3 id=delete-数据删除>DELETE 数据删除
+<a class=header-anchor href=#delete-%e6%95%b0%e6%8d%ae%e5%88%a0%e9%99%a4></a></h3><p>普通删除需先解除节点关联关系，批量删除推荐使用 DETACH 模式，一步清空节点+关联关系。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-7-1><a class=lnlinks href=#hl-7-1>1</a>
+</span><span class=lnt id=hl-7-2><a class=lnlinks href=#hl-7-2>2</a>
+</span><span class=lnt id=hl-7-3><a class=lnlinks href=#hl-7-3>3</a>
+</span><span class=lnt id=hl-7-4><a class=lnlinks href=#hl-7-4>4</a>
+</span><span class=lnt id=hl-7-5><a class=lnlinks href=#hl-7-5>5</a>
+</span><span class=lnt id=hl-7-6><a class=lnlinks href=#hl-7-6>6</a>
+</span><span class=lnt id=hl-7-7><a class=lnlinks href=#hl-7-7>7</a>
+</span><span class=lnt id=hl-7-8><a class=lnlinks href=#hl-7-8>8</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 仅删除关系（保留两端节点）
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n<span class=o>)</span>-<span class=o>[</span>r:FRIEND<span class=o>]</span>-&gt;<span class=o>(</span>m<span class=o>)</span> DELETE r
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 普通删除节点（前提：节点无任何关联关系，否则报错）
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span> DELETE n
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 生产常用：强制删除节点+所有关联关系（无视关联状态）
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span> DETACH DELETE n</span></span></code></pre></td></tr></table></div></div><h3 id=return-返回别名排序分页>RETURN 返回、别名、排序分页
+<a class=header-anchor href=#return-%e8%bf%94%e5%9b%9e%e5%88%ab%e5%90%8d%e6%8e%92%e5%ba%8f%e5%88%86%e9%a1%b5></a></h3><p>定义返回字段、结果别名，支持升降序排序、分页截取数据，适配前端展示、数据导出场景。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-8-1><a class=lnlinks href=#hl-8-1>1</a>
+</span><span class=lnt id=hl-8-2><a class=lnlinks href=#hl-8-2>2</a>
+</span><span class=lnt id=hl-8-3><a class=lnlinks href=#hl-8-3>3</a>
+</span><span class=lnt id=hl-8-4><a class=lnlinks href=#hl-8-4>4</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>RETURN n.name AS 姓名, n.age AS 年龄
+</span></span><span class=line><span class=cl>ORDER BY n.age DESC    // DESC降序 / ASC升序
+</span></span><span class=line><span class=cl>SKIP <span class=m>2</span> LIMIT <span class=m>10</span>        // 跳过前2条数据，取后续10条</span></span></code></pre></td></tr></table></div></div><h3 id=with-管道传递复杂查询核心>WITH 管道传递（复杂查询核心）
+<a class=header-anchor href=#with-%e7%ae%a1%e9%81%93%e4%bc%a0%e9%80%92%e5%a4%8d%e6%9d%82%e6%9f%a5%e8%af%a2%e6%a0%b8%e5%bf%83></a></h3><p>核心作用：拆分多段逻辑、传递中间结果、替代子查询，让复杂嵌套查询逻辑清晰、可维护性更高。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-9-1><a class=lnlinks href=#hl-9-1>1</a>
+</span><span class=lnt id=hl-9-2><a class=lnlinks href=#hl-9-2>2</a>
+</span><span class=lnt id=hl-9-3><a class=lnlinks href=#hl-9-3>3</a>
+</span><span class=lnt id=hl-9-4><a class=lnlinks href=#hl-9-4>4</a>
+</span><span class=lnt id=hl-9-5><a class=lnlinks href=#hl-9-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 先筛选20岁以上用户，再查询其好友关系
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>WITH n, n.age AS age WHERE age &gt; <span class=m>20</span>
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n<span class=o>)</span>-<span class=o>[</span>:FRIEND<span class=o>]</span>-&gt;<span class=o>(</span>f<span class=o>)</span>
+</span></span><span class=line><span class=cl>RETURN n.name, f.name</span></span></code></pre></td></tr></table></div></div><h3 id=常用聚合函数>常用聚合函数
+<a class=header-anchor href=#%e5%b8%b8%e7%94%a8%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0></a></h3><p>支持统计、求和、均值、列表聚合，满足数据分析、报表统计需求：count()、sum()、avg()、min()、max()、collect()。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-10-1><a class=lnlinks href=#hl-10-1>1</a>
+</span><span class=lnt id=hl-10-2><a class=lnlinks href=#hl-10-2>2</a>
+</span><span class=lnt id=hl-10-3><a class=lnlinks href=#hl-10-3>3</a>
+</span><span class=lnt id=hl-10-4><a class=lnlinks href=#hl-10-4>4</a>
+</span><span class=lnt id=hl-10-5><a class=lnlinks href=#hl-10-5>5</a>
+</span><span class=lnt id=hl-10-6><a class=lnlinks href=#hl-10-6>6</a>
+</span><span class=lnt id=hl-10-7><a class=lnlinks href=#hl-10-7>7</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 人数统计、平均年龄计算
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>RETURN count<span class=o>(</span>n<span class=o>)</span> AS total, avg<span class=o>(</span>n.age<span class=o>)</span> AS avg_age
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 聚合好友名单为列表
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>)</span>-<span class=o>[</span>:FRIEND<span class=o>]</span>-&gt;<span class=o>(</span>f<span class=o>)</span>
+</span></span><span class=line><span class=cl>RETURN n.name, collect<span class=o>(</span>f.name<span class=o>)</span> AS friends</span></span></code></pre></td></tr></table></div></div><p>补充区别：count(*) 统计所有结果行；count(n) 仅统计非空有效节点。</p><h3 id=where-高级筛选运算符>WHERE 高级筛选运算符
+<a class=header-anchor href=#where-%e9%ab%98%e7%ba%a7%e7%ad%9b%e9%80%89%e8%bf%90%e7%ae%97%e7%ac%a6></a></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-11-1><a class=lnlinks href=#hl-11-1>1</a>
+</span><span class=lnt id=hl-11-2><a class=lnlinks href=#hl-11-2>2</a>
+</span><span class=lnt id=hl-11-3><a class=lnlinks href=#hl-11-3>3</a>
+</span><span class=lnt id=hl-11-4><a class=lnlinks href=#hl-11-4>4</a>
+</span><span class=lnt id=hl-11-5><a class=lnlinks href=#hl-11-5>5</a>
+</span><span class=lnt id=hl-11-6><a class=lnlinks href=#hl-11-6>6</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>)</span> WHERE
+</span></span><span class=line><span class=cl>n.age IN <span class=o>[</span>20,25,30<span class=o>]</span>          // 范围匹配
+</span></span><span class=line><span class=cl>AND n.name STARTS WITH <span class=s2>&#34;张&#34;</span>  // 前缀匹配
+</span></span><span class=line><span class=cl>AND n.name ENDS WITH <span class=s2>&#34;三&#34;</span>    // 后缀匹配
+</span></span><span class=line><span class=cl>AND n.name CONTAINS <span class=s2>&#34;三&#34;</span>     // 模糊匹配
+</span></span><span class=line><span class=cl>AND n.age IS NOT NULL        // 非空判断</span></span></code></pre></td></tr></table></div></div><h3 id=case-条件分支判断>CASE 条件分支判断
+<a class=header-anchor href=#case-%e6%9d%a1%e4%bb%b6%e5%88%86%e6%94%af%e5%88%a4%e6%96%ad></a></h3><p>实现多条件逻辑分支，适配数据分类、字段映射场景。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-12-1><a class=lnlinks href=#hl-12-1>1</a>
+</span><span class=lnt id=hl-12-2><a class=lnlinks href=#hl-12-2>2</a>
+</span><span class=lnt id=hl-12-3><a class=lnlinks href=#hl-12-3>3</a>
+</span><span class=lnt id=hl-12-4><a class=lnlinks href=#hl-12-4>4</a>
+</span><span class=lnt id=hl-12-5><a class=lnlinks href=#hl-12-5>5</a>
+</span><span class=lnt id=hl-12-6><a class=lnlinks href=#hl-12-6>6</a>
+</span><span class=lnt id=hl-12-7><a class=lnlinks href=#hl-12-7>7</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>MATCH <span class=o>(</span>n:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>RETURN n.name,
+</span></span><span class=line><span class=cl>CASE
+</span></span><span class=line><span class=cl>    WHEN n.age &gt;<span class=o>=</span> <span class=m>30</span> THEN <span class=s2>&#34;中年&#34;</span>
+</span></span><span class=line><span class=cl>    WHEN n.age &gt;<span class=o>=</span><span class=m>18</span> THEN <span class=s2>&#34;青年&#34;</span>
+</span></span><span class=line><span class=cl>    ELSE <span class=s2>&#34;少年&#34;</span>
+</span></span><span class=line><span class=cl>END AS age_group</span></span></code></pre></td></tr></table></div></div><h3 id=索引与约束性能优化核心>索引与约束（性能优化核心）
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e4%b8%8e%e7%ba%a6%e6%9d%9f%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96%e6%a0%b8%e5%bf%83></a></h3><p>大数据量场景必须建索引，大幅提升 MATCH 查询效率；唯一约束可保证数据唯一性，自动生成索引。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-13-1><a class=lnlinks href=#hl-13-1>1</a>
+</span><span class=lnt id=hl-13-2><a class=lnlinks href=#hl-13-2>2</a>
+</span><span class=lnt id=hl-13-3><a class=lnlinks href=#hl-13-3>3</a>
+</span><span class=lnt id=hl-13-4><a class=lnlinks href=#hl-13-4>4</a>
+</span><span class=lnt id=hl-13-5><a class=lnlinks href=#hl-13-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 为Person标签name属性创建普通索引
+</span></span><span class=line><span class=cl>CREATE INDEX idx_person_name FOR <span class=o>(</span>n:Person<span class=o>)</span> ON <span class=o>(</span>n.name<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 创建唯一约束（禁止name重复，自动绑定索引）
+</span></span><span class=line><span class=cl>CREATE CONSTRAINT unique_person_name FOR <span class=o>(</span>n:Person<span class=o>)</span> REQUIRE n.name IS UNIQUE</span></span></code></pre></td></tr></table></div></div><h3 id=load-csv-批量数据导入>LOAD CSV 批量数据导入
+<a class=header-anchor href=#load-csv-%e6%89%b9%e9%87%8f%e6%95%b0%e6%8d%ae%e5%af%bc%e5%85%a5></a></h3><p>用于离线批量导入结构化数据，是初始化图谱数据的核心方式。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-14-1><a class=lnlinks href=#hl-14-1>1</a>
+</span><span class=lnt id=hl-14-2><a class=lnlinks href=#hl-14-2>2</a>
+</span><span class=lnt id=hl-14-3><a class=lnlinks href=#hl-14-3>3</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 读取本地CSV文件，批量合并写入节点数据
+</span></span><span class=line><span class=cl>LOAD CSV WITH HEADERS FROM <span class=s2>&#34;file:///person.csv&#34;</span> AS row
+</span></span><span class=line><span class=cl>MERGE <span class=o>(</span>p:Person<span class=o>{</span>name:row.name, age:toInteger<span class=o>(</span>row.age<span class=o>)})</span></span></span></code></pre></td></tr></table></div></div><h2 id=高频落地实操案例>高频落地实操案例
+<a class=header-anchor href=#%e9%ab%98%e9%a2%91%e8%90%bd%e5%9c%b0%e5%ae%9e%e6%93%8d%e6%a1%88%e4%be%8b></a></h2><p><strong>案例1：查询指定用户所有直接好友</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-15-1><a class=lnlinks href=#hl-15-1>1</a>
+</span><span class=lnt id=hl-15-2><a class=lnlinks href=#hl-15-2>2</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>MATCH <span class=o>(</span>a:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span>-<span class=o>[</span>:FRIEND<span class=o>]</span>-&gt;<span class=o>(</span>friend<span class=o>)</span>
+</span></span><span class=line><span class=cl>RETURN friend.name</span></span></code></pre></td></tr></table></div></div><p><strong>案例2：经典社交场景-共同好友查询</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-16-1><a class=lnlinks href=#hl-16-1>1</a>
+</span><span class=lnt id=hl-16-2><a class=lnlinks href=#hl-16-2>2</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>MATCH <span class=o>(</span>a:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span>-<span class=o>[</span>:FRIEND<span class=o>]</span>-&gt;<span class=o>(</span>common<span class=o>)</span>&lt;-<span class=o>[</span>:FRIEND<span class=o>]</span>-<span class=o>(</span>b:Person<span class=o>{</span>name:<span class=s2>&#34;李四&#34;</span><span class=o>})</span>
+</span></span><span class=line><span class=cl>RETURN common.name AS 共同好友</span></span></code></pre></td></tr></table></div></div><p><strong>案例3：两点之间最短路径遍历</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-17-1><a class=lnlinks href=#hl-17-1>1</a>
+</span><span class=lnt id=hl-17-2><a class=lnlinks href=#hl-17-2>2</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>MATCH <span class=nv>p</span><span class=o>=</span>shortestPath<span class=o>((</span>a:Person<span class=o>{</span>name:<span class=s2>&#34;张三&#34;</span><span class=o>})</span>-<span class=o>[</span>*<span class=o>]</span>-<span class=o>(</span>b:Person<span class=o>{</span>name:<span class=s2>&#34;王五&#34;</span><span class=o>}))</span>
+</span></span><span class=line><span class=cl>RETURN p</span></span></code></pre></td></tr></table></div></div><h2 id=生产环境硬核避坑>生产环境硬核避坑
+<a class=header-anchor href=#%e7%94%9f%e4%ba%a7%e7%8e%af%e5%a2%83%e7%a1%ac%e6%a0%b8%e9%81%bf%e5%9d%91></a></h2><p>开发中 80% 的性能问题、数据异常，均来自基础语法使用不规范，重点规避以下问题：</p><ol><li>关系方向规范：大数据量查询必须指定关系方向，无向查询会遍历双向路径，性能损耗翻倍</li><li>禁止无边界遍历：裸写 [*] 会触发全图遍历，数据量过万必卡顿、内存溢出，必须限定深度 [*1..n]</li><li>删除逻辑规范：普通 DELETE 无法删除带关联关系的节点，批量删除优先使用 DETACH DELETE</li><li>MERGE 匹配规则：仅完整匹配所有属性才判定为重合，属性存在差异会直接新建节点，需精准控制匹配字段</li><li>过滤逻辑分层：简单常量过滤写在 MATCH，复杂多条件、计算逻辑统一放 WHERE，查询效率最优</li><li>大结果集限流：批量查询、遍历场景必须搭配 LIMIT，防止结果集过大拖垮服务</li></ol><hr><p>写在最后：Cypher 语法入门简单、精通在细节，核心是吃透“节点-关系”的图数据思维。这份速查手册覆盖日常开发、数据分析、图谱搭建全场景，无冗余话术，全是可直接落地的硬核代码，建议码住常备！</p></div><footer class=post-footer><div class=post-tags><a href=/tags/tabicl/>TabICL
+</a><a href=/tags/%E7%BB%93%E6%9E%84%E5%8C%96%E5%A4%A7%E6%A8%A1%E5%9E%8B/>结构化大模型
+</a><a href=/tags/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98/>分类问题</a></div><div class=post-share-tools><div class=post-share-loading><i class="fa-solid fa-ellipsis fa-spin"></i></div><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class=a2a_dd href=https://www.addtoany.com/share></a><a class=a2a_button_wechat></a><a class=a2a_button_qzone></a><a class=a2a_button_sina_weibo></a><a class=a2a_button_douban></a><a class=a2a_button_facebook></a><a class=a2a_button_x></a><a class=a2a_button_email></a><a class=a2a_button_printfriendly></a></div></div><hr><div class=reward-container><div><i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))</div><button>
+赞赏</button><div class=post-reward><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_zhifubao.png alt="a2htray - 支付宝">
+<span>支付宝</span></div><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_wechat.png alt="a2htray - 微信">
+<span>微信</span></div></div></div><div class=post-copyright><img src=/imgs/cc/cc.svg class=cc-icon width=75 height=75 align=right alt=共享知识 title=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+Neo4j Cypher 语法全量速查手册</li><li class=post-copyright-author><strong>本文作者： </strong>a2htray</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=https://a2htray.github.io/post/learn-ai/neo4j_01_quick_cookbook/ title="Neo4j Cypher 语法全量速查手册">https://a2htray.github.io/post/learn-ai/neo4j_01_quick_cookbook/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本作品采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans>BY-NC-SA</a> 许可协议。转载请注明出处！</li><li><div class=license-icons><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans target=_blank><img src=/imgs/cc/big/by_nc_sa.svg alt=BY-NC-SA title=BY-NC-SA>
+</a><a href=https://notbyai.fyi target=_blank><img src=/imgs/notbyai/zh-hans/white.svg title="Not By AI"></a></div></li></ul></div><div class=post-nav><div class="post-nav-next post-nav-item"></div><div class="post-nav-prev post-nav-item"><a href=/post/learn-ai/tabicl_01_classification_daa/ rel=prev title="浅尝一口 TabICL 的酒：大 A 的涨跌预测">浅尝一口 TabICL 的酒：大 A 的涨跌预测
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
+<span itemprop=copyrightYear>2025 - 2026
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>a2htray</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.152.2 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.8.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script class=next-config data-name=page type=application/json>{"clipboard":{"js":{"alias":"clipboard","file":"dist/clipboard.min.js","name":"clipboard.js","version":"2.0.11"}},"comments":false,"expired":false,"isHome":false,"isPage":true,"math":{"css":{"alias_name":"katex","file":"dist/katex.min.css","name":"katex","version":"0.16.15"},"js":[{"alias_name":"katex","file":"dist/katex.min.js","name":"katex","version":"0.16.15"},{"alias":"katex","alias_name":"katex","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.15"}],"render":"katex"},"path":"neo4j_01_quick_cookbook","permalink":"https://a2htray.github.io/post/learn-ai/neo4j_01_quick_cookbook/","title":"Neo4j Cypher 语法全量速查手册","toc":true,"waline":{"commentcnt":{"alias":"@waline/client","alias_name":"waline","file":"dist/comment.js","name":"comment","version":"2.15.8"}}}</script><script type=text/javascript src=https://a2htray.github.io/js/3rd/animejs/3.2.2/anime.min.js crossorigin=anonymous defer></script><script type=text/javascript src=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.js crossorigin=anonymous defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":false,"hostname":"https://a2htray.github.io/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"isMultiLang":false,"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"slideInRight","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","share":{"addtoany":{"js":"https://static.addtoany.com/menu/page.js","locale":"zh-CN","num":8},"enable":true},"sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"local","router":{"name":"local","type":"modern","url":"https://a2htray.github.io/js/3rd"}},"version":"4.8.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"@waline/client","file":"dist/waline.css","name":"waline","version":"2.15.8"},"js":{"alias":"@waline/client","file":"dist/waline.js","name":"waline","version":"2.15.8"}}}</script><script type=text/javascript src="/js/main.min.js?=1785647054" defer></script><script type=text/javascript src="/js/clipboard.min.js?=1785647054" defer></script><script type=text/javascript src="/js/math.min.js?=1785647054" defer></script></body></html>

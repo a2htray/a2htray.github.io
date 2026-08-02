@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>浅尝一口 TabICL 的酒：大 A 的涨跌预测</title><url>/post/learn-ai/tabicl_01_classification_daa/</url><categories><category>人工智能</category><category>结构化大模型</category></categories><tags><tag>TabICL</tag><tag>结构化大模型</tag><tag>分类问题</tag></tags><content type="html">  TabICL 是一款开源表格基础模型，原生支持分类与回归任务，同时可拓展应用至时间序列预测等场景。它完整兼容 scikit-learn API，使用习惯对数据从业者十分友好。不同于传统机器学习模型，TabICL 在调用 fit 时仅缓存训练数据，真正基于上下文学习的推理计算，延后至 predict 阶段执行。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Neo4j Cypher 语法全量速查手册</title><url>/post/learn-ai/neo4j_01_quick_cookbook/</url><categories><category>人工智能</category><category>结构化大模型</category></categories><tags><tag>TabICL</tag><tag>结构化大模型</tag><tag>分类问题</tag></tags><content type="html"><![CDATA[  做图数据库开发、知识图谱搭建、关联数据分析，Cypher 是 Neo4j 必备核心工具。
+不同于 SQL 的二维表逻辑，Cypher 适配图数据“节点-关系”的核心结构，语法简洁、逻辑性强，贴合图遍历场景。
+本文整理全套可直接落地的 Cypher 语法，包含基础符号、固定执行顺序、核心子句、实操案例及生产避坑点，一次性搞定日常开发 99% 的图查询、写入、更新需求，建议收藏备用。
+核心底层逻辑：Cypher 四大核心元素
+所有 Cypher 语句均围绕四大要素构建，是读懂所有语法的基础：
+节点（Node）：图数据基础实体，对应业务对象（用户、商品、设备等） 关系（Relationship）：节点之间的关联逻辑，承载实体联动关系 标签（Label）：节点分类标识，用于区分不同实体类型 属性（Property）：节点/关系的键值对参数，存储具体业务数据 基础语法符号对照表（必记） Cypher 语法符号辨识度极高，熟记后可快速读懂任意查询语句：
+符号 技术释义 () 节点，完整格式：变量:标签{属性 k:v} [] 关系，完整格式：变量:关系类型{属性参数} &amp;ndash;&amp;gt; 有向关系；&amp;ndash; 代表无向关系 : 标签、关系类型前缀标识 {} 存储节点/关系的属性键值对 . 属性访问符，例：n.name 获取节点 name 属性 核心子句固定执行顺序 Cypher 子句执行顺序固定不可乱序，乱序会直接报错，这是新手最易踩坑的基础问题。查询类语句标准执行链路：
+1 MATCH → WHERE → WITH → RETURN → ORDER BY → SKIP → LIMIT 写入更新类语句（按业务场景按需插入执行）：CREATE / MERGE / SET / DELETE。
+全量核心语法+可直接运行代码案例 MATCH 精准查询（最核心、最高频） 用于匹配节点、关系、路径，是所有图查询的基础，简单过滤可直接写在 MATCH 后，复杂条件统一用 WHERE。
+节点查询 1 2 3 4 5 6 7 8 9 10 // 匹配所有Person标签节点 MATCH (n:Person) RETURN n // 字面量属性精准过滤 MATCH (n:Person{name:&amp;#34;张三&amp;#34;}) RETURN n.name, n.age // 复杂条件推荐用 …  ]]></content></entry><entry><title>浅尝一口 TabICL 的酒：大 A 的涨跌预测</title><url>/post/learn-ai/tabicl_01_classification_daa/</url><categories><category>人工智能</category><category>结构化大模型</category></categories><tags><tag>TabICL</tag><tag>结构化大模型</tag><tag>分类问题</tag></tags><content type="html">  TabICL 是一款开源表格基础模型，原生支持分类与回归任务，同时可拓展应用至时间序列预测等场景。它完整兼容 scikit-learn API，使用习惯对数据从业者十分友好。不同于传统机器学习模型，TabICL 在调用 fit 时仅缓存训练数据，真正基于上下文学习的推理计算，延后至 predict 阶段执行。
 安装 通过 pip 安装 TabICL：
 1 pip install tabicl 如果扩展到时间序列预测，则需要安装依赖：
 1 pip install &amp;amp;#34;tabicl[forecast]&amp;amp;#34; 功能介绍 TabICL 提供的功能包括：
