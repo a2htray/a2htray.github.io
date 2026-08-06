@@ -2,8 +2,8 @@
 date = '2026-08-02T12:40:59+08:00'
 draft = false
 title = 'Neo4j Cypher 语法全量速查手册'
-categories = ['人工智能', '结构化大模型']
-tags = ['TabICL', '结构化大模型', '分类问题']
+categories = ['后端技术', '数据库']
+tags = ['Neo4j', 'Cypher', '图数据库', '速查手册']
 toc = true
 +++
 
@@ -246,6 +246,7 @@ RETURN friend.name
 **案例2：经典社交场景-共同好友查询**
 
 ```bash
+
 MATCH (a:Person{name:"张三"})-[:FRIEND]->(common)<-[:FRIEND]-(b:Person{name:"李四"})
 RETURN common.name AS 共同好友
 ```

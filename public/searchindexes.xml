@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Neo4j Cypher 语法全量速查手册</title><url>/post/learn-ai/neo4j_01_quick_cookbook/</url><categories><category>人工智能</category><category>结构化大模型</category></categories><tags><tag>TabICL</tag><tag>结构化大模型</tag><tag>分类问题</tag></tags><content type="html"><![CDATA[  做图数据库开发、知识图谱搭建、关联数据分析，Cypher 是 Neo4j 必备核心工具。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Neo4j 教程：图形查询语言的实用指南</title><url>/post/learn-ai/t_09_neo4j_02_practical_guide/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>T 系列</tag><tag>实用指南</tag></tags><content type="html"><![CDATA[  引言 Cypher 对于 Neo4j 就像 SQL 对于关系型数据库一样—，它是一种优雅的声明式查询语言，让你无需精确指定如何检索数据，即可描述想要从数据库中获取的内容。Cypher 的独特之处在于其基于 ASCII 艺术的可视化语法，能够模仿并匹配你图中所需的图形结构模式。
+ASCII 艺术（ASCII Art，简称 AA）是一种艺术形式，通过使用字符和符号来模仿图形、形状、图像或其他视觉效果。
+让我们通过实际例子来探索 Cypher，结合真实场景展示其强大功能和灵活性。
+开始使用 Cypher 语法 Cypher 的语法设计得直观且易于理解，节点用括号 () 表示，关系用箭头 -[]-&amp;gt; 表示。这使得查询语句易于阅读，类似于在白板上绘制想要查找的模式。
+节点与关系模式基础
+1 2 3 4 5 MATCH (p:Person {name: &amp;#34;John&amp;#34;}) RETURN p MATCH (p:Person {name: &amp;#34;John&amp;#34;})-[:FRIENDS_WITH]-&amp;gt;(friend) RETURN friend.name 在这些示例中：
+() 表示一个节点 :Person 是用于分类该节点的标签 {name: &amp;quot;John&amp;quot;} 是属性约束 -[:FRIENDS_WITH]-&amp;gt; 表示具有类型为 &amp;ldquo;FRIENDS_WITH&amp;rdquo; 的有向关系 使用 Cypher 创建数据 从创建一个小型社交网络数据集开始：
+创建节点
+1 2 3 4 5 6 7 8 9 10 11 CREATE (alice:Person {name: &amp;#34;Alice&amp;#34;, age: 32, occupation: &amp;#34;Data Scientist&amp;#34;}) CREATE (bob:Person {name: &amp;#34;Bob&amp;#34;, age: 35, occupation: &amp;#34;Software Engineer&amp;#34;}) CREATE (charlie:Person {name: &amp;#34;Charlie&amp;#34;, age: 28, occupation: &amp;#34;UX Designer&amp;#34;}) CREATE (diana:Person {name: …  ]]></content></entry><entry><title>Neo4j 教程：逻辑运算符与关系检索</title><url>/post/learn-ai/t_08_neo4j_01_operators/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>T 系列</tag><tag>运算符</tag></tags><content type="html"><![CDATA[  引言 在本教程中，将学习如何在 Cypher 查询中有效地使用逻辑运算符，并掌握在图数据库中创建、检索和修改关系的基本技能。
+关系是图数据库强大之处的核心，虽然节点存储着实体，但正是它们之间的关系才真正释放了像 Neo4j 这样的图数据库的价值所在。
+完成本教程后，你将能够熟练掌握如何操作关系，并结合逻辑运算符创建高效的查询。
+初始化数据库 在深入操作符和关系之前，先创建一个示例数据库来使用，构建一个简单的社交网络，包含用户、他们的兴趣以及他们之间的各种联系。
+创建 Person 节点
+1 2 3 4 5 6 CREATE (john:Person {name: &amp;#34;John&amp;#34;, age: 28, city: &amp;#34;New York&amp;#34;}) CREATE (sarah:Person {name: &amp;#34;Sarah&amp;#34;, age: 26, city: &amp;#34;Boston&amp;#34;}) CREATE (mike:Person {name: &amp;#34;Mike&amp;#34;, age: 32, city: &amp;#34;Chicago&amp;#34;}) CREATE (emily:Person {name: &amp;#34;Emily&amp;#34;, age: 24, city: &amp;#34;New York&amp;#34;}) CREATE (david:Person {name: &amp;#34;David&amp;#34;, age: 35, city: &amp;#34;San Francisco&amp;#34;}) CREATE (laura:Person {name: &amp;#34;Laura&amp;#34;, age: 29, city: &amp;#34;Chicago&amp;#34;}) 创建 Interest 节点
+1 2 3 4 5 CREATE (music:Interest {name: &amp;#34;Music&amp;#34;, type: &amp;#34;Art&amp;#34;}) CREATE (coding:Interest {name: &amp;#34;Coding&amp;#34;, type: &amp;#34;Technology&amp;#34;}) CREATE (hiking:Interest {name: &amp;#34;Hiking&amp;#34;, type: &amp;#34;Outdoor&amp;#34;}) CREATE …  ]]></content></entry><entry><title>Neo4j 教程：图数据库基础知识</title><url>/post/learn-ai/t_07_neo4j_00_introduction/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>T 系列</tag></tags><content type="html"><![CDATA[  引言 欢迎来到图数据库的世界！无论您是希望拓展知识的数据库专业人士，还是完全的新手，本指南都将帮助您理解为何在当今数据驱动的时代，图数据库正变得越来越重要。
+什么是图数据库？ 图数据库代表了我们存储和查询关联数据方式的范式转变，与传统关系型数据库使用表格和行不同，图数据库采用一种结构，这种结构直接映射到我们对信息的自然认知方式——即相互连接的实体。图数据库的核心组成部分：
+节点 - Node - 表示实体（例如人员、企业、账户或其他需要跟踪的项目） 关系 - Relationship - 连接节点，并表示实体之间的关联方式 属性 - Property - 提供有关节点和关系信息的特征 标签 - Label - 用于对节点进行分组和分类 为什么选择 Neo4j？ Neo4j 是全球领先的图数据库平台，从零开始设计，旨在充分利用数据本身以及数据之间的关系。以下是 Neo4j 为何脱颖而出的原因：
+原生图存储：专为存储和查询连接数据而优化 灵活的模式设计：无需昂贵迁移即可适应不断变化的业务需求 Cypher 查询语言：专为图结构设计的直观、声明式查询语言 ACID 合规性：确保数据的可靠性与完整性 高性能：高效处理关系遍历，即使在大规模场景下也能保持良好性能 丰富的生态系统：支持主流编程语言、可视化工具等组件 理解图数据模型 让我们通过一个简单的例子来探索图数据模型，该例子展示了如何在 Neo4j 中表示现实世界中的实体及其关系。
+假设，我们想建模一个基本的社交网络，包含人们、他们的关系以及兴趣：
+节点：人物（Alice、Bob、Charlie）和兴趣（骑行、阅读、电影） 关系：FRIENDS_WITH（人物之间的关系），INTERESTED_IN（将人物与兴趣关联） 属性：人物属性：姓名、年龄；兴趣属性：名称、类别 这在 Neo4j 的可视化表示中可能如下所示：
+1 2 3 4 5 6 7 (Alice:Person {name: &amp;#34;Alice&amp;#34;, age: 30})-[:FRIENDS_WITH]-&amp;gt;(Bob:Person {name: &amp;#34;Bob&amp;#34;, age: 32}) (Alice)-[:FRIENDS_WITH]-&amp;gt;(Charlie:Person {name: &amp;#34;Charlie&amp;#34;, age: 25}) …  ]]></content></entry><entry><title>Neo4j Cypher 语法全量速查手册</title><url>/post/learn-ai/neo4j_01_quick_cookbook/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>速查手册</tag></tags><content type="html"><![CDATA[  做图数据库开发、知识图谱搭建、关联数据分析，Cypher 是 Neo4j 必备核心工具。
 不同于 SQL 的二维表逻辑，Cypher 适配图数据“节点-关系”的核心结构，语法简洁、逻辑性强，贴合图遍历场景。
 本文整理全套可直接落地的 Cypher 语法，包含基础符号、固定执行顺序、核心子句、实操案例及生产避坑点，一次性搞定日常开发 99% 的图查询、写入、更新需求，建议收藏备用。
 核心底层逻辑：Cypher 四大核心元素
