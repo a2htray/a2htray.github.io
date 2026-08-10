@@ -3,7 +3,7 @@ date = '2026-08-03T10:59:14+08:00'
 draft = false
 title = 'Neo4j 教程：图数据库基础知识'
 categories = ['后端技术', '数据库']
-tags = ['Neo4j', 'Cypher', '图数据库', 'T 系列']
+tags = ['Neo4j', 'Cypher', '图数据库', 'T 系列', 'Neo4j 教程']
 toc = true
 +++
 
