@@ -1,7 +1,7 @@
 +++
 date = '2026-08-06T10:35:35+08:00'
 draft = false
-title = 'Neo4j教程：SKIP，LIMIT，MERGE 子句和聚合函数'
+title = 'Neo4j 教程：SKIP，LIMIT，MERGE 子句和聚合函数'
 categories = ['后端技术', '数据库']
 tags = ['Neo4j', 'Cypher', '图数据库', 'T 系列', 'Neo4j 语法', 'Neo4j 教程']
 toc = true
@@ -184,7 +184,7 @@ CREATE (julia)-[:FOLLOWS {since: date("2018-11-27")}]->(emma)
 
 ## SKIP 和 LIMIT：控制结果集
 
-**SKIP** 和 **LIMIT** 是控制查询结果数量和起始位置的关键子句，它们在分页和性能优化中尤为实用。
+**SKIP** 和 **LIMIT** 是控制查询结果**起始位置**和**数量**的关键子句，它们在分页和性能优化中尤为实用。
 
 ### LIMIT 基础用法
 
@@ -270,6 +270,8 @@ RETURN u
 - 如果未找到，则创建用户，设置 age 为 33，joined 为当天日期
 - 如果找到了，则将 lastSeen 属性更新为当天日期
 
+![](/imgs/learn-ai/Neo4j_05.png)
+
 ### MERGE 与关系一起使用
 
 MERGE 也可以用于关系，但需要谨慎：
@@ -282,7 +284,7 @@ ON CREATE SET r.level = "Beginner", r.since = date()
 RETURN u, r, i
 ```
 
-请注意，当对关系使用 MERGE 时，通常更好的做法是先 MATCH 节点，再 MERGE 它们之间的关系。
+请注意，当对关系使用 MERGE 时，通常更好的做法是**先 MATCH 节点，再 MERGE 它们之间的关系**。
 
 ### 实战示例：确保唯一的关注关系
 
@@ -296,7 +298,7 @@ RETURN alice.name, "now follows", david.name
 
 ## 聚合函数：分析图数据
 
-聚合函数允许你对分组记录进行计算，帮助你从图数据中获取有价值的洞察。
+聚合函数允许你对分组记录进行计算，帮助你从图数据中获取有价值的信息。
 
 ### COUNT：计数记录
 
@@ -305,7 +307,7 @@ COUNT 是最常用的聚合函数之一：
 ```bash
 // 统计用户总数
 MATCH (u:User)
-RETURN count(u) AS TotalUsers
+RETURN COUNT(u) AS TotalUsers
 ```
 
 ```bash
@@ -317,7 +319,7 @@ RETURN
     WHEN u.age >= 30 AND u.age < 40 THEN "30-39"
     ELSE "40+"
   END AS AgeGroup,
-  count(u) AS Count
+  COUNT(u) AS Count
 ORDER BY AgeGroup
 ```
 
@@ -329,18 +331,9 @@ ORDER BY AgeGroup
 // 计算用户年龄的平均值、最小值和最大值
 MATCH (u:User)
 RETURN 
-  avg(u.age) AS AverageAge,
-  min(u.age) AS YoungestAge,
-  max(u.age) AS OldestAge
-```
-
-### COLLECT：将值收集为集合
-
-COLLECT 函数将值聚合为一个数组：
-
-```bash
-// 收集每个用户的所有兴趣
-MATCH (u:User)-[:INTERESTED_IN]->(i:Interest)
+  AVG(u.age) AS AverageAge,
+  MIN(u.age) AS YoungestAge,
+  MAX(u.age) AS OldestAge
 ```
 
 ## 高级应用
@@ -434,15 +427,15 @@ ON CREATE SET f.since = date()
 
 ### 聚合函数使用技巧
 
-- 使用 `count(DISTINCT x)` 避免重复计数
+- 使用 `COUNT(DISTINCT x)` 避免重复计数
 - 在单个查询中组合多个聚合函数以提高效率
-- 使用别名（AS）使结果更易读
+- 使用别名关键字 `AS` 使结果更易读
 - 对于复杂聚合，考虑使用 WITH 处理中间结果
 
 ```bash
 // 使用 WITH 进行复杂聚合
 MATCH (u:User)-[:CREATED]->(p:Post)
-WITH u, count(p) AS PostCount
+WITH u, COUNT(p) AS PostCount
 WHERE PostCount > 1
 MATCH (u)-[:INTERESTED_IN]->(i:Interest)
 RETURN u.name AS User, PostCount, collect(i.name) AS Interests
