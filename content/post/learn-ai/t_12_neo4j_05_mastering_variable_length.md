@@ -3,7 +3,7 @@ date = '2026-08-11T09:23:27+08:00'
 draft = false
 title = 'Neo4j 教程：掌握变长关系与路径算法'
 categories = ['后端技术', '数据库']
-tags = ['Neo4j', 'Cypher', '图数据库', 'T 系列', '约束', 'Neo4j 教程']
+tags = ['Neo4j', 'Cypher', '图数据库', 'T 系列', '变长', '最短路径', 'Neo4j 教程']
 toc = true
 +++
 

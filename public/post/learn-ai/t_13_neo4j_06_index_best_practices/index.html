@@ -1,0 +1,340 @@
+<!doctype html><html lang=zh-CN data-theme=light><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.152.2"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon-32x32.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple-touch-icon.png><meta itemprop=name content="Neo4j 教程：Neo4j 索引全面指南"><meta itemprop=description content="记录我的生活、工作与成长。"><meta name=description content="记录我的生活、工作与成长。"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://a2htray.github.io/imgs/my_avatar.jpg"><meta itemprop=keywords content="Neo4j,Cypher,图数据库,T 系列,索引,Neo4j 教程"><meta property="og:type" content="article"><meta property="og:title" content="Neo4j 教程：Neo4j 索引全面指南"><meta property="og:description" content="记录我的生活、工作与成长。"><meta property="og:image" content="/imgs/my_avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://a2htray.github.io/post/learn-ai/t_13_neo4j_06_index_best_practices/"><meta property="og:site_name" content="快乐冲浪与生活"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="a2htray"><meta property="article:published_time" content="2026-08-11 14:13:34 +0800 CST"><meta property="article:modified_time" content="2026-08-11 14:13:34 +0800 CST"><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/font-awesome/6.7.2/css/all.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.css><link rel=stylesheet href="/css/main.min.css?=1786513198"><style type=text/css>.post-footer hr:after{content:"~ 我可是有底线的哟 ~"}.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><link rel=stylesheet type=text/css href="/css/custom_style.css?=1786513198"><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return 0[0];const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),0[0]):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>Neo4j 教程：Neo4j 索引全面指南 - 快乐冲浪与生活</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>快乐冲浪与生活</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>多体验、多体会、多体悟</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-tags"><a href=/tags/ class=hvr-icon-pulse rel=section><i class="fa fa-tag hvr-icon"></i>标签</a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#引言>引言</a></li><li><a href=#neo4j-索引基础>Neo4j 索引基础</a><ul><li><a href=#索引的工作原理>索引的工作原理</a></li><li><a href=#neo4j-索引架构>Neo4j 索引架构</a></li></ul></li><li><a href=#neo4j-索引类型>Neo4j 索引类型</a><ul><li><a href=#标准索引standard-index>标准索引（Standard Index）</a></li><li><a href=#范围索引range-index>范围索引（Range Index）</a></li><li><a href=#文本索引text-index>文本索引（Text Index）</a></li><li><a href=#点索引point-index>点索引（Point Index）</a></li><li><a href=#查找索引lookup-index>查找索引（Lookup Index）</a></li><li><a href=#全文索引full-text-index>全文索引（Full-text Index）</a></li><li><a href=#复合索引composite-index>复合索引（Composite Index）</a></li><li><a href=#小结>小结</a></li></ul></li><li><a href=#索引的战略实施>索引的战略实施</a><ul><li><a href=#索引创建的最佳实践>索引创建的最佳实践</a></li><li><a href=#索引感知的-schema-设计>索引感知的 Schema 设计</a></li></ul></li><li><a href=#性能影响分析>性能影响分析</a><ul><li><a href=#积极的性能影响>积极的性能影响</a></li><li><a href=#潜在的性能成本>潜在的性能成本</a></li></ul></li><li><a href=#高级索引管理>高级索引管理</a><ul><li><a href=#索引生命周期管理>索引生命周期管理</a></li><li><a href=#索引选项与配置>索引选项与配置</a></li><li><a href=#索引提示与强制使用>索引提示与强制使用</a></li><li><a href=#约束与隐式索引>约束与隐式索引</a></li></ul></li><li><a href=#索引使用分析与优化>索引使用分析与优化</a><ul><li><a href=#分析索引使用情况>分析索引使用情况</a></li><li><a href=#解读查询计划中的索引使用>解读查询计划中的索引使用</a></li><li><a href=#优化索引>优化索引</a></li></ul></li><li><a href=#多数据库索引管理>多数据库索引管理</a></li><li><a href=#真实索引优化案例研究>真实索引优化案例研究</a><ul><li><a href=#案例一电商产品目录5000-万产品>案例一：电商产品目录（5000 万产品）</a></li><li><a href=#案例二社交网络1000-万用户10-亿关系>案例二：社交网络（1000 万用户，10 亿关系）</a></li></ul></li><li><a href=#索引性能基准测试>索引性能基准测试</a></li><li><a href=#最佳实践与常见陷阱>最佳实践与常见陷阱</a><ul><li><a href=#最佳实践>最佳实践</a></li><li><a href=#常见陷阱>常见陷阱</a></li></ul></li><li><a href=#结语>结语</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=a2htray src=/imgs/img-lazy-loading.gif data-src=/imgs/my_avatar.jpg><p class=site-author-name itemprop=name>a2htray</p><div class=site-description itemprop=description>记录我的生活、工作与成长。</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/post/><span class=site-state-item-count>189</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>45</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>183</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/a2htray title="Github → https://github.com/a2htray" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/a2htray/a2htray.github.io rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentColor" class="octo-body"/></svg></a><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://a2htray.github.io/post/learn-ai/t_13_neo4j_06_index_best_practices/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/my_avatar.jpg"><meta itemprop=name content="a2htray"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="a2htray"><meta itemprop=description content="记录我的生活、工作与成长。"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Neo4j 教程：Neo4j 索引全面指南"><meta itemprop=description content="引言
+
+索引是 Neo4j 中至关重要的辅助数据结构，能够显著提升 Cypher 查询的性能。有了索引，数据库无需执行昂贵的全量扫描即可快速定位具有特定属性值的节点。
+Neo4j 索引基础
+
+索引的工作原理
+
+Neo4j 索引是将属性值映射到包含这些值的内部节点 ID。当 Cypher 查询中的 WHERE 子句对已索引的属性进行过滤时，Neo4j 可以快速查找相关节点，而无需扫描整个数据库。"></span><header class=post-header><h1 class=post-title itemprop="name headline">Neo4j 教程：Neo4j 索引全面指南
+<a href=https://github.com/a2htray/a2htray.github.io/tree/main/content/post/learn-ai/t_13_neo4j_06_index_best_practices.md rel="noopener external nofollow noreferrer" target=_blank class="exturl post-edit-link" title=编辑><i class="fa fa-pen-nib"></i></a></h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2026-08-11 14:13:34 +08:00" itemprop="dateCreated datePublished" datetime="2026-08-11 14:13:34 +0800 CST">2026-08-11
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/ itemprop=url rel=index><span itemprop=name>后端技术/数据库</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="fas fa-solid fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>4526</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="fas fa-solid fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>10分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="fas fa-solid fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/post/learn-ai/t_13_neo4j_06_index_best_practices/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><h2 id=引言>引言
+<a class=header-anchor href=#%e5%bc%95%e8%a8%80></a></h2><p>索引是 Neo4j 中至关重要的辅助数据结构，能够显著提升 Cypher 查询的性能。有了索引，数据库无需执行昂贵的全量扫描即可快速定位具有特定属性值的节点。</p><h2 id=neo4j-索引基础>Neo4j 索引基础
+<a class=header-anchor href=#neo4j-%e7%b4%a2%e5%bc%95%e5%9f%ba%e7%a1%80></a></h2><h3 id=索引的工作原理>索引的工作原理
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e7%9a%84%e5%b7%a5%e4%bd%9c%e5%8e%9f%e7%90%86></a></h3><p>Neo4j 索引是将属性值映射到包含这些值的内部节点 ID。当 Cypher 查询中的 WHERE 子句对已索引的属性进行过滤时，Neo4j 可以快速查找相关节点，而无需扫描整个数据库。</p><a id=more></a><p>没有索引时，Neo4j 必须执行标签扫描（检查所有带有某一标签的节点）来找到满足查询条件的节点——随着数据量增长，这种操作的代价会变得极其高昂。</p><h3 id=neo4j-索引架构>Neo4j 索引架构
+<a class=header-anchor href=#neo4j-%e7%b4%a2%e5%bc%95%e6%9e%b6%e6%9e%84></a></h3><p>Neo4j 采用分层索引架构：</p><ol><li><strong>模式层（Schema Layer）</strong>：定义哪些带标签的节点的哪些属性应被索引</li><li><strong>索引提供层（Index Provider Layer）</strong>：管理实际的索引数据结构</li><li><strong>存储层（Storage Layer）</strong>：处理索引条目的物理存储</li></ol><h2 id=neo4j-索引类型>Neo4j 索引类型
+<a class=header-anchor href=#neo4j-%e7%b4%a2%e5%bc%95%e7%b1%bb%e5%9e%8b></a></h2><p>在最新版本中，Neo4j 支持多种索引类型，每种类型都针对特定的查询模式进行了优化：</p><h3 id=标准索引standard-index>标准索引（Standard Index）
+<a class=header-anchor href=#%e6%a0%87%e5%87%86%e7%b4%a2%e5%bc%95standard-index></a></h3><p>标准索引为属性查找提供通用的索引支持，是最常用的类型。</p><p><strong>特点：</strong></p><ul><li>适用于<strong>等值匹配</strong></li><li>大多数操作都有良好的通用性能</li><li>内部自动实现为 <strong>B 树结构</strong></li></ul><p><strong>语法：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a class=lnlinks href=#hl-0-1>1</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>CREATE INDEX index_name IF NOT EXISTS FOR <span class=o>(</span>n:Label<span class=o>)</span> ON <span class=o>(</span>n.property<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=范围索引range-index>范围索引（Range Index）
+<a class=header-anchor href=#%e8%8c%83%e5%9b%b4%e7%b4%a2%e5%bc%95range-index></a></h3><p>专门针对涉及范围比较（<code>></code>、<code>&lt;</code>、<code>>=</code>、<code>&lt;=</code>）的查询优化。</p><p><strong>特点：</strong></p><ul><li>针对不等值比较优化</li><li>在范围查询方面比标准索引性能更好</li><li>非常适用于数值、日期/时间属性</li></ul><p><strong>语法：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a class=lnlinks href=#hl-1-1>1</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>CREATE RANGE INDEX product_price_idx IF NOT EXISTS FOR <span class=o>(</span>p:Product<span class=o>)</span> ON <span class=o>(</span>p.price<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=文本索引text-index>文本索引（Text Index）
+<a class=header-anchor href=#%e6%96%87%e6%9c%ac%e7%b4%a2%e5%bc%95text-index></a></h3><p>针对字符串属性的操作优化。</p><p><strong>特点：</strong></p><ul><li>更适合字符串等值匹配和 <code>STARTS WITH</code> 操作</li><li>不区分大小写的比较性能更好</li><li>适用于较短的文本字段</li></ul><p><strong>语法：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a class=lnlinks href=#hl-2-1>1</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>CREATE TEXT INDEX product_name_idx IF NOT EXISTS FOR <span class=o>(</span>p:Product<span class=o>)</span> ON <span class=o>(</span>p.name<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=点索引point-index>点索引（Point Index）
+<a class=header-anchor href=#%e7%82%b9%e7%b4%a2%e5%bc%95point-index></a></h3><p>专为包含坐标的空间数据设计。</p><p><strong>特点：</strong></p><ul><li>针对地理查询优化</li><li>支持 2D 和 3D 坐标</li><li>支持高效的邻近搜索和包含搜索</li></ul><p><strong>语法：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a class=lnlinks href=#hl-3-1>1</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>CREATE POINT INDEX location_idx IF NOT EXISTS FOR <span class=o>(</span>p:Place<span class=o>)</span> ON <span class=o>(</span>p.location<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=查找索引lookup-index>查找索引（Lookup Index）
+<a class=header-anchor href=#%e6%9f%a5%e6%89%be%e7%b4%a2%e5%bc%95lookup-index></a></h3><p>加速仅需找到所有具有特定标签的节点的查询。</p><p><strong>特点：</strong></p><ul><li>加速标签存在性检查</li><li>对度查询（查找具有特定关系数量的节点）有帮助</li><li>存储开销极低</li></ul><blockquote><p>度查询（Degree Query）指的是查询一个节点有多少条关系连接。</p></blockquote><p><strong>语法：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a class=lnlinks href=#hl-4-1>1</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>CREATE LOOKUP INDEX person_idx IF NOT EXISTS FOR <span class=o>(</span>:Person<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=全文索引full-text-index>全文索引（Full-text Index）
+<a class=header-anchor href=#%e5%85%a8%e6%96%87%e7%b4%a2%e5%bc%95full-text-index></a></h3><p>专门支持超越简单等值匹配的高级文本搜索能力。</p><p><strong>特点：</strong></p><ul><li>基于 Lucene 技术构建</li><li>支持模糊匹配、短语搜索和通配符</li><li>支持基于相关性的排序</li></ul><p><strong>语法：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a class=lnlinks href=#hl-5-1>1</a>
+</span><span class=lnt id=hl-5-2><a class=lnlinks href=#hl-5-2>2</a>
+</span><span class=lnt id=hl-5-3><a class=lnlinks href=#hl-5-3>3</a>
+</span><span class=lnt id=hl-5-4><a class=lnlinks href=#hl-5-4>4</a>
+</span><span class=lnt id=hl-5-5><a class=lnlinks href=#hl-5-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>CALL db.index.fulltext.createNodeIndex<span class=o>(</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;productSearch&#34;</span>,
+</span></span><span class=line><span class=cl>  <span class=o>[</span><span class=s2>&#34;Product&#34;</span><span class=o>]</span>, 
+</span></span><span class=line><span class=cl>  <span class=o>[</span><span class=s2>&#34;name&#34;</span>, <span class=s2>&#34;description&#34;</span>, <span class=s2>&#34;tags&#34;</span><span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=o>)</span></span></span></code></pre></td></tr></table></div></div><p><strong>查询示例：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a class=lnlinks href=#hl-6-1>1</a>
+</span><span class=lnt id=hl-6-2><a class=lnlinks href=#hl-6-2>2</a>
+</span><span class=lnt id=hl-6-3><a class=lnlinks href=#hl-6-3>3</a>
+</span><span class=lnt id=hl-6-4><a class=lnlinks href=#hl-6-4>4</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>CALL db.index.fulltext.queryNodes<span class=o>(</span><span class=s2>&#34;productSearch&#34;</span>, <span class=s2>&#34;machine AND learning&#34;</span><span class=o>)</span> 
+</span></span><span class=line><span class=cl>YIELD node, score
+</span></span><span class=line><span class=cl>RETURN node.property, score
+</span></span><span class=line><span class=cl>ORDER BY score DESC</span></span></code></pre></td></tr></table></div></div><h3 id=复合索引composite-index>复合索引（Composite Index）
+<a class=header-anchor href=#%e5%a4%8d%e5%90%88%e7%b4%a2%e5%bc%95composite-index></a></h3><p>跨多个属性的索引，优化对属性组合进行过滤的查询。</p><p><strong>特点：</strong></p><ul><li>属性顺序至关重要</li><li><strong>当查询过滤条件匹配索引顺序时效率最高</strong></li><li>可以减少对多个单属性索引的需求</li><li>在现代 Neo4j 版本中，仅使用前几个属性的部分匹配也能高效执行</li></ul><p><strong>语法：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-7-1><a class=lnlinks href=#hl-7-1>1</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>CREATE INDEX person_name_age IF NOT EXISTS FOR <span class=o>(</span>p:Person<span class=o>)</span> ON <span class=o>(</span>p.name, p.age<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=小结>小结
+<a class=header-anchor href=#%e5%b0%8f%e7%bb%93></a></h3><p>Neo4j 5.0 之后绝大多数场景只需 RANGE（默认）；TEXT/POINT/FULLTEXT 是针对字符串、空间、分词搜索的专用优化；COMPOSITE 是多属性打包；LOOKUP 是按标签/类型快速找节点；<strong>STANDARD 是旧版的遗留类型，已被 RANGE 取代</strong>。</p><ul><li>属性值（单属性）<ul><li>RANGE（范围） — B-tree 实现，是 5.0+ 的默认索引。等值 =、>、&lt;、STARTS WITH、排序、IN 都能命中。绝大多数建索引的场景用它就行。</li><li>TEXT（文本） — 专为字符串设计，对 STARTS WITH / ENDS WITH / CONTAINS 做了专门优化。注意：TEXT 索引不支持范围比较和排序，纯文本检索比 RANGE 更省空间。</li><li>POINT（点） — 给空间类型 point() 用，支持"某点 50 英里内"&ldquo;边界框内"这种地理查询，底层用空间填充曲线。</li><li>STANDARD（标准） — 旧版本（4.x 以前）的默认单属性 B-tree 索引，如今统一由 RANGE 接管，新项目不用再指定它。</li></ul></li><li>多属性组合<ul><li>COMPOSITE（复合） — 把多个属性建进同一个索引：CREATE INDEX FOR (p:Product) ON (p.category, p.status)。核心规则是最左前缀 + 高基数排前（就是前面讲的那条），它同时支持等值和范围，适合 WHERE category=x AND status=y 这类组合过滤。</li></ul></li><li>结构与全文检索<ul><li>LOOKUP（查找） — 不索引任何属性，只索引"哪些节点带 :Label、哪些关系带 :TYPE&rdquo;。作用是避免 MATCH (n) 全图扫描，加速"遍历所有 User"之类的操作。</li><li>FULLTEXT（全文） — 基于 Lucene，做分词检索：CONTAINS 子串、模糊匹配、多字段联合、带相关性评分。普通 RANGE/TEXT 做不到"文章中找关键词"，只有它行。</li></ul></li></ul><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-ai/Neo4j_07.png alt></p><h2 id=索引的战略实施>索引的战略实施
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e7%9a%84%e6%88%98%e7%95%a5%e5%ae%9e%e6%96%bd></a></h2><h3 id=索引创建的最佳实践>索引创建的最佳实践
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e5%88%9b%e5%bb%ba%e7%9a%84%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5></a></h3><p><strong>1. 标签特异性</strong></p><p>创建索引时，始终指定节点标签以限制范围：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-8-1><a class=lnlinks href=#hl-8-1>1</a>
+</span><span class=lnt id=hl-8-2><a class=lnlinks href=#hl-8-2>2</a>
+</span><span class=lnt id=hl-8-3><a class=lnlinks href=#hl-8-3>3</a>
+</span><span class=lnt id=hl-8-4><a class=lnlinks href=#hl-8-4>4</a>
+</span><span class=lnt id=hl-8-5><a class=lnlinks href=#hl-8-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 好的实践
+</span></span><span class=line><span class=cl>CREATE INDEX FOR <span class=o>(</span>p:Person<span class=o>)</span> ON <span class=o>(</span>p.email<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 避免这样做（范围太广）
+</span></span><span class=line><span class=cl>CREATE INDEX ON <span class=o>(</span>n<span class=o>)</span> ON <span class=o>(</span>n.email<span class=o>)</span>  // 已废弃语法</span></span></code></pre></td></tr></table></div></div><p><strong>2. 属性选择性考量</strong></p><p>索引具有高基数的属性（唯一值多）：</p><blockquote><p>高基数的属性（High Cardinality Property）是指该属性中不同取值的数量很多、重复率很低的属性。</p></blockquote><table><thead><tr><th>基数</th><th>示例</th><th>索引价值</th></tr></thead><tbody><tr><td>高</td><td>email, UUID, SSN</td><td>极佳</td></tr><tr><td>中</td><td>name, city, category</td><td>良好</td></tr><tr><td>低</td><td>gender, status, boolean flags</td><td>有限</td></tr></tbody></table><p><strong>3. 复合索引的属性顺序</strong></p><p>将选择性最高的属性放在复合索引的最前面：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-9-1><a class=lnlinks href=#hl-9-1>1</a>
+</span><span class=lnt id=hl-9-2><a class=lnlinks href=#hl-9-2>2</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 假设 name 比 age 更具唯一性，用于过滤时性能更好
+</span></span><span class=line><span class=cl>CREATE INDEX person_name_age IF NOT EXISTS FOR <span class=o>(</span>p:Person<span class=o>)</span> ON <span class=o>(</span>p.name, p.age<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><p><strong>4. 索引与查询对齐</strong></p><p>创建与你最频繁的查询模式相匹配的索引：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-10-1><a class=lnlinks href=#hl-10-1>1</a>
+</span><span class=lnt id=hl-10-2><a class=lnlinks href=#hl-10-2>2</a>
+</span><span class=lnt id=hl-10-3><a class=lnlinks href=#hl-10-3>3</a>
+</span><span class=lnt id=hl-10-4><a class=lnlinks href=#hl-10-4>4</a>
+</span><span class=lnt id=hl-10-5><a class=lnlinks href=#hl-10-5>5</a>
+</span><span class=lnt id=hl-10-6><a class=lnlinks href=#hl-10-6>6</a>
+</span><span class=lnt id=hl-10-7><a class=lnlinks href=#hl-10-7>7</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 如果这是常见的查询模式
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>p:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>WHERE p.email <span class=o>=</span> <span class=s1>&#39;john@example.com&#39;</span>
+</span></span><span class=line><span class=cl>RETURN p
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 创建对应的索引
+</span></span><span class=line><span class=cl>CREATE INDEX person_email IF NOT EXISTS FOR <span class=o>(</span>p:Person<span class=o>)</span> ON <span class=o>(</span>p.email<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><p><strong>5. 选择正确的索引类型</strong></p><p>将索引类型与你的查询模式匹配：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-11-1><a class=lnlinks href=#hl-11-1>1</a>
+</span><span class=lnt id=hl-11-2><a class=lnlinks href=#hl-11-2>2</a>
+</span><span class=lnt id=hl-11-3><a class=lnlinks href=#hl-11-3>3</a>
+</span><span class=lnt id=hl-11-4><a class=lnlinks href=#hl-11-4>4</a>
+</span><span class=lnt id=hl-11-5><a class=lnlinks href=#hl-11-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 对于范围查询（价格过滤）
+</span></span><span class=line><span class=cl>CREATE RANGE INDEX product_price IF NOT EXISTS FOR <span class=o>(</span>p:Product<span class=o>)</span> ON <span class=o>(</span>p.price<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 对于描述文本搜索
+</span></span><span class=line><span class=cl>CREATE TEXT INDEX product_desc IF NOT EXISTS FOR <span class=o>(</span>p:Product<span class=o>)</span> ON <span class=o>(</span>p.description<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=索引感知的-schema-设计>索引感知的 Schema 设计
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e6%84%9f%e7%9f%a5%e7%9a%84-schema-%e8%ae%be%e8%ae%a1></a></h3><p><strong>1. 战略性标签使用</strong></p><ul><li>使用具体标签来创建有针对性索引</li><li>考虑节点使用多标签以实现精确索引</li></ul><p><strong>2. 属性组织</strong></p><ul><li>将常被查询的属性放在节点上而不是关系上</li><li>考虑对某些属性进行反规范化以提高索引效率</li></ul><p><strong>3. 预计算属性</strong></p><ul><li>存储将被频繁查询的预计算值</li><li>示例：如果全名搜索很常见，除 <code>firstName</code> 和 <code>lastName</code> 外，额外存储 <code>fullName</code></li></ul><h2 id=性能影响分析>性能影响分析
+<a class=header-anchor href=#%e6%80%a7%e8%83%bd%e5%bd%b1%e5%93%8d%e5%88%86%e6%9e%90></a></h2><h3 id=积极的性能影响>积极的性能影响
+<a class=header-anchor href=#%e7%a7%af%e6%9e%81%e7%9a%84%e6%80%a7%e8%83%bd%e5%bd%b1%e5%93%8d></a></h3><p><strong>1. 查询速度提升</strong> 各工作负载的经验性测量数据：</p><table><thead><tr><th>查询类型</th><th>无索引</th><th>有索引</th><th>提升倍率</th></tr></thead><tbody><tr><td>精确匹配（唯一）</td><td>3200ms</td><td>4ms</td><td>800x</td></tr><tr><td>范围过滤</td><td>5800ms</td><td>65ms</td><td>89x</td></tr><tr><td>复合属性</td><td>7500ms</td><td>18ms</td><td>416x</td></tr><tr><td>文本搜索</td><td>9600ms</td><td>120ms</td><td>80x</td></tr></tbody></table><p><strong>2. 可扩展性增强</strong></p><ul><li>适当索引的数据库可以高效处理 10-100 倍的数据量</li><li>随着数据增长，索引查询性能保持稳定</li><li>支持更高的并发用户负载</li></ul><p><strong>3. 资源优化</strong></p><ul><li>减少读取密集型工作负载的 CPU 使用率</li><li>减少属性查找的 I/O 操作</li><li>查询执行期间更高效地使用内存</li></ul><h3 id=潜在的性能成本>潜在的性能成本
+<a class=header-anchor href=#%e6%bd%9c%e5%9c%a8%e7%9a%84%e6%80%a7%e8%83%bd%e6%88%90%e6%9c%ac></a></h3><p><strong>1. 写入性能影响</strong> 索引维护会增加写入操作的开销：</p><table><thead><tr><th>索引数量</th><th>写入性能影响</th></tr></thead><tbody><tr><td>1-3 个索引</td><td>慢 5-10%</td></tr><tr><td>4-10 个索引</td><td>慢 10-20%</td></tr><tr><td>10+ 个索引</td><td>慢 20-40%</td></tr></tbody></table><p><strong>2. 存储要求</strong> 索引会消耗额外的存储空间：</p><table><thead><tr><th>索引类型</th><th>大约存储开销</th></tr></thead><tbody><tr><td>标准</td><td>节点大小的 5-15%</td></tr><tr><td>复合（2 个属性）</td><td>节点大小的 10-20%</td></tr><tr><td>全文</td><td>索引文本大小的 30-100%</td></tr></tbody></table><p><strong>3. 索引维护成本</strong></p><ul><li>维护索引更新的后台进程</li><li>偶尔需要重建</li><li>监控和优化的管理开销</li></ul><h2 id=高级索引管理>高级索引管理
+<a class=header-anchor href=#%e9%ab%98%e7%ba%a7%e7%b4%a2%e5%bc%95%e7%ae%a1%e7%90%86></a></h2><h3 id=索引生命周期管理>索引生命周期管理
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f%e7%ae%a1%e7%90%86></a></h3><p><strong>1. 索引状态</strong>
+Neo4j 索引会经历以下几种状态：</p><ul><li><strong>POPULATING</strong>：正在构建中，尚不可用</li><li><strong>ONLINE</strong>：完全可用</li><li><strong>FAILED</strong>：创建失败</li></ul><p><strong>2. 在线索引操作</strong>
+Neo4j 支持多种无中断的索引操作：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-12-1><a class=lnlinks href=#hl-12-1>1</a>
+</span><span class=lnt id=hl-12-2><a class=lnlinks href=#hl-12-2>2</a>
+</span><span class=lnt id=hl-12-3><a class=lnlinks href=#hl-12-3>3</a>
+</span><span class=lnt id=hl-12-4><a class=lnlinks href=#hl-12-4>4</a>
+</span><span class=lnt id=hl-12-5><a class=lnlinks href=#hl-12-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 在线创建新索引
+</span></span><span class=line><span class=cl>CREATE INDEX new_index IF NOT EXISTS FOR <span class=o>(</span>n:Label<span class=o>)</span> ON <span class=o>(</span>n.property<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 删除现有索引
+</span></span><span class=line><span class=cl>DROP INDEX index_name IF EXISTS</span></span></code></pre></td></tr></table></div></div><p><strong>3. 索引监控</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-13-1><a class=lnlinks href=#hl-13-1> 1</a>
+</span><span class=lnt id=hl-13-2><a class=lnlinks href=#hl-13-2> 2</a>
+</span><span class=lnt id=hl-13-3><a class=lnlinks href=#hl-13-3> 3</a>
+</span><span class=lnt id=hl-13-4><a class=lnlinks href=#hl-13-4> 4</a>
+</span><span class=lnt id=hl-13-5><a class=lnlinks href=#hl-13-5> 5</a>
+</span><span class=lnt id=hl-13-6><a class=lnlinks href=#hl-13-6> 6</a>
+</span><span class=lnt id=hl-13-7><a class=lnlinks href=#hl-13-7> 7</a>
+</span><span class=lnt id=hl-13-8><a class=lnlinks href=#hl-13-8> 8</a>
+</span><span class=lnt id=hl-13-9><a class=lnlinks href=#hl-13-9> 9</a>
+</span><span class=lnt id=hl-13-10><a class=lnlinks href=#hl-13-10>10</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 查看所有索引
+</span></span><span class=line><span class=cl>SHOW INDEXES
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 详细的索引信息
+</span></span><span class=line><span class=cl>SHOW INDEXES YIELD name, labelsOrTypes, properties, type, uniqueness, entityType, options
+</span></span><span class=line><span class=cl>WHERE labelsOrTypes CONTAINS <span class=s1>&#39;Product&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 索引使用统计
+</span></span><span class=line><span class=cl>CALL db.stats.retrieve<span class=o>(</span><span class=s1>&#39;index.general&#39;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>CALL db.stats.retrieve<span class=o>(</span><span class=s1>&#39;index.population&#39;</span><span class=o>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=索引选项与配置>索引选项与配置
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e9%80%89%e9%a1%b9%e4%b8%8e%e9%85%8d%e7%bd%ae></a></h3><p>现代 Neo4j 版本支持通过选项自定义索引行为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-14-1><a class=lnlinks href=#hl-14-1>1</a>
+</span><span class=lnt id=hl-14-2><a class=lnlinks href=#hl-14-2>2</a>
+</span><span class=lnt id=hl-14-3><a class=lnlinks href=#hl-14-3>3</a>
+</span><span class=lnt id=hl-14-4><a class=lnlinks href=#hl-14-4>4</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 创建使用英文分析器的文本索引
+</span></span><span class=line><span class=cl>CREATE TEXT INDEX product_description IF NOT EXISTS FOR <span class=o>(</span>p:Product<span class=o>)</span> 
+</span></span><span class=line><span class=cl>ON <span class=o>(</span>p.description<span class=o>)</span>
+</span></span><span class=line><span class=cl>OPTIONS <span class=o>{</span>indexConfig: <span class=o>{</span><span class=sb>`</span>fulltext.analyzer<span class=sb>`</span>: <span class=s1>&#39;english&#39;</span><span class=o>}}</span></span></span></code></pre></td></tr></table></div></div><h3 id=索引提示与强制使用>索引提示与强制使用
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e6%8f%90%e7%a4%ba%e4%b8%8e%e5%bc%ba%e5%88%b6%e4%bd%bf%e7%94%a8></a></h3><p>当 Neo4j 查询规划器做出次优选择时，你可以强制使用特定索引：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-15-1><a class=lnlinks href=#hl-15-1>1</a>
+</span><span class=lnt id=hl-15-2><a class=lnlinks href=#hl-15-2>2</a>
+</span><span class=lnt id=hl-15-3><a class=lnlinks href=#hl-15-3>3</a>
+</span><span class=lnt id=hl-15-4><a class=lnlinks href=#hl-15-4>4</a>
+</span><span class=lnt id=hl-15-5><a class=lnlinks href=#hl-15-5>5</a>
+</span><span class=lnt id=hl-15-6><a class=lnlinks href=#hl-15-6>6</a>
+</span><span class=lnt id=hl-15-7><a class=lnlinks href=#hl-15-7>7</a>
+</span><span class=lnt id=hl-15-8><a class=lnlinks href=#hl-15-8>8</a>
+</span><span class=lnt id=hl-15-9><a class=lnlinks href=#hl-15-9>9</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 使用索引提示
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>p:Person USING INDEX p:Person<span class=o>(</span>name<span class=o>))</span>
+</span></span><span class=line><span class=cl>WHERE p.name <span class=o>=</span> <span class=s1>&#39;John&#39;</span> AND p.age &gt; <span class=m>30</span>
+</span></span><span class=line><span class=cl>RETURN p
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 强制使用特定的命名索引
+</span></span><span class=line><span class=cl>MATCH <span class=o>(</span>p:Person USING INDEX person_name_idx<span class=o>)</span>
+</span></span><span class=line><span class=cl>WHERE p.name <span class=o>=</span> <span class=s1>&#39;John&#39;</span>
+</span></span><span class=line><span class=cl>RETURN p</span></span></code></pre></td></tr></table></div></div><h3 id=约束与隐式索引>约束与隐式索引
+<a class=header-anchor href=#%e7%ba%a6%e6%9d%9f%e4%b8%8e%e9%9a%90%e5%bc%8f%e7%b4%a2%e5%bc%95></a></h3><p>Neo4j 约束会自动创建并使用对应的索引：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-16-1><a class=lnlinks href=#hl-16-1> 1</a>
+</span><span class=lnt id=hl-16-2><a class=lnlinks href=#hl-16-2> 2</a>
+</span><span class=lnt id=hl-16-3><a class=lnlinks href=#hl-16-3> 3</a>
+</span><span class=lnt id=hl-16-4><a class=lnlinks href=#hl-16-4> 4</a>
+</span><span class=lnt id=hl-16-5><a class=lnlinks href=#hl-16-5> 5</a>
+</span><span class=lnt id=hl-16-6><a class=lnlinks href=#hl-16-6> 6</a>
+</span><span class=lnt id=hl-16-7><a class=lnlinks href=#hl-16-7> 7</a>
+</span><span class=lnt id=hl-16-8><a class=lnlinks href=#hl-16-8> 8</a>
+</span><span class=lnt id=hl-16-9><a class=lnlinks href=#hl-16-9> 9</a>
+</span><span class=lnt id=hl-16-10><a class=lnlinks href=#hl-16-10>10</a>
+</span><span class=lnt id=hl-16-11><a class=lnlinks href=#hl-16-11>11</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 同时创建约束和支持索引
+</span></span><span class=line><span class=cl>CREATE CONSTRAINT unique_email IF NOT EXISTS
+</span></span><span class=line><span class=cl>FOR <span class=o>(</span>u:User<span class=o>)</span> REQUIRE u.email IS UNIQUE
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 复合唯一性约束
+</span></span><span class=line><span class=cl>CREATE CONSTRAINT user_identity IF NOT EXISTS
+</span></span><span class=line><span class=cl>FOR <span class=o>(</span>u:User<span class=o>)</span> REQUIRE <span class=o>(</span>u.firstName, u.lastName, u.dob<span class=o>)</span> IS NODE KEY
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 属性存在性约束
+</span></span><span class=line><span class=cl>CREATE CONSTRAINT product_name_exists IF NOT EXISTS
+</span></span><span class=line><span class=cl>FOR <span class=o>(</span>p:Product<span class=o>)</span> REQUIRE p.name IS NOT NULL</span></span></code></pre></td></tr></table></div></div><h2 id=索引使用分析与优化>索引使用分析与优化
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e4%bd%bf%e7%94%a8%e5%88%86%e6%9e%90%e4%b8%8e%e4%bc%98%e5%8c%96></a></h2><h3 id=分析索引使用情况>分析索引使用情况
+<a class=header-anchor href=#%e5%88%86%e6%9e%90%e7%b4%a2%e5%bc%95%e4%bd%bf%e7%94%a8%e6%83%85%e5%86%b5></a></h3><p>现代 Neo4j 提供了强大的工具来了解索引的使用方式：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-17-1><a class=lnlinks href=#hl-17-1>1</a>
+</span><span class=lnt id=hl-17-2><a class=lnlinks href=#hl-17-2>2</a>
+</span><span class=lnt id=hl-17-3><a class=lnlinks href=#hl-17-3>3</a>
+</span><span class=lnt id=hl-17-4><a class=lnlinks href=#hl-17-4>4</a>
+</span><span class=lnt id=hl-17-5><a class=lnlinks href=#hl-17-5>5</a>
+</span><span class=lnt id=hl-17-6><a class=lnlinks href=#hl-17-6>6</a>
+</span><span class=lnt id=hl-17-7><a class=lnlinks href=#hl-17-7>7</a>
+</span><span class=lnt id=hl-17-8><a class=lnlinks href=#hl-17-8>8</a>
+</span><span class=lnt id=hl-17-9><a class=lnlinks href=#hl-17-9>9</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 查看包含索引使用的执行计划
+</span></span><span class=line><span class=cl>EXPLAIN MATCH <span class=o>(</span>p:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>WHERE p.name <span class=o>=</span> <span class=s1>&#39;John&#39;</span>
+</span></span><span class=line><span class=cl>RETURN p
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 获取详细的执行指标
+</span></span><span class=line><span class=cl>PROFILE MATCH <span class=o>(</span>p:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>WHERE p.name <span class=o>=</span> <span class=s1>&#39;John&#39;</span>
+</span></span><span class=line><span class=cl>RETURN p</span></span></code></pre></td></tr></table></div></div><h3 id=解读查询计划中的索引使用>解读查询计划中的索引使用
+<a class=header-anchor href=#%e8%a7%a3%e8%af%bb%e6%9f%a5%e8%af%a2%e8%ae%a1%e5%88%92%e4%b8%ad%e7%9a%84%e7%b4%a2%e5%bc%95%e4%bd%bf%e7%94%a8></a></h3><p>检查查询计划时，寻找以下操作符来确认索引是否被使用：</p><ul><li><strong>NodeIndexSeek</strong>：使用索引的直接查找（最高效）</li><li><strong>NodeIndexScan</strong>：扫描索引中的一段值</li><li><strong>NodeByLabelScan</strong>：未使用索引，扫描所有带有该标签的节点（最低效）</li></ul><p>良好的索引使用示例计划输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-18-1><a class=lnlinks href=#hl-18-1>1</a>
+</span><span class=lnt id=hl-18-2><a class=lnlinks href=#hl-18-2>2</a>
+</span><span class=lnt id=hl-18-3><a class=lnlinks href=#hl-18-3>3</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Producing rows: 1
+</span></span><span class=line><span class=cl>→ NodeIndexSeek
+</span></span><span class=line><span class=cl>  →Expand(All)</span></span></code></pre></td></tr></table></div></div><h3 id=优化索引>优化索引
+<a class=header-anchor href=#%e4%bc%98%e5%8c%96%e7%b4%a2%e5%bc%95></a></h3><p><strong>1. 定期性能评估</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-19-1><a class=lnlinks href=#hl-19-1>1</a>
+</span><span class=lnt id=hl-19-2><a class=lnlinks href=#hl-19-2>2</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 获取索引大小信息
+</span></span><span class=line><span class=cl>CALL db.stats.retrieve<span class=o>(</span><span class=s1>&#39;index.general&#39;</span><span class=o>)</span></span></span></code></pre></td></tr></table></div></div><p><strong>2. 清理未使用的索引</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-20-1><a class=lnlinks href=#hl-20-1>1</a>
+</span><span class=lnt id=hl-20-2><a class=lnlinks href=#hl-20-2>2</a>
+</span><span class=lnt id=hl-20-3><a class=lnlinks href=#hl-20-3>3</a>
+</span><span class=lnt id=hl-20-4><a class=lnlinks href=#hl-20-4>4</a>
+</span><span class=lnt id=hl-20-5><a class=lnlinks href=#hl-20-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 查找未被使用的索引
+</span></span><span class=line><span class=cl>CALL db.stats.retrieve<span class=o>(</span><span class=s1>&#39;index.usage&#39;</span><span class=o>)</span> 
+</span></span><span class=line><span class=cl>YIELD value
+</span></span><span class=line><span class=cl>WHERE value.hits <span class=o>=</span> <span class=m>0</span> AND timestamp<span class=o>()</span> - value.lastUsed &gt; <span class=m>2592000000</span> // <span class=m>30</span> 天内未使用
+</span></span><span class=line><span class=cl>RETURN value.indexName</span></span></code></pre></td></tr></table></div></div><h2 id=多数据库索引管理>多数据库索引管理
+<a class=header-anchor href=#%e5%a4%9a%e6%95%b0%e6%8d%ae%e5%ba%93%e7%b4%a2%e5%bc%95%e7%ae%a1%e7%90%86></a></h2><p>适用于企业版的多数据库用户：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-21-1><a class=lnlinks href=#hl-21-1>1</a>
+</span><span class=lnt id=hl-21-2><a class=lnlinks href=#hl-21-2>2</a>
+</span><span class=lnt id=hl-21-3><a class=lnlinks href=#hl-21-3>3</a>
+</span><span class=lnt id=hl-21-4><a class=lnlinks href=#hl-21-4>4</a>
+</span><span class=lnt id=hl-21-5><a class=lnlinks href=#hl-21-5>5</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 在特定数据库中创建索引
+</span></span><span class=line><span class=cl>CREATE INDEX person_name ON neo4j.accounts FOR <span class=o>(</span>p:Person<span class=o>)</span> ON <span class=o>(</span>p.name<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 查看特定数据库的索引
+</span></span><span class=line><span class=cl>SHOW INDEXES ON neo4j.accounts</span></span></code></pre></td></tr></table></div></div><h2 id=真实索引优化案例研究>真实索引优化案例研究
+<a class=header-anchor href=#%e7%9c%9f%e5%ae%9e%e7%b4%a2%e5%bc%95%e4%bc%98%e5%8c%96%e6%a1%88%e4%be%8b%e7%a0%94%e7%a9%b6></a></h2><h3 id=案例一电商产品目录5000-万产品>案例一：电商产品目录（5000 万产品）
+<a class=header-anchor href=#%e6%a1%88%e4%be%8b%e4%b8%80%e7%94%b5%e5%95%86%e4%ba%a7%e5%93%81%e7%9b%ae%e5%bd%955000-%e4%b8%87%e4%ba%a7%e5%93%81></a></h3><p><strong>挑战：</strong></p><ul><li>品类浏览和过滤缓慢</li><li>搜索性能差</li><li>响应时间不稳定</li></ul><p><strong>解决方案：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-22-1><a class=lnlinks href=#hl-22-1> 1</a>
+</span><span class=lnt id=hl-22-2><a class=lnlinks href=#hl-22-2> 2</a>
+</span><span class=lnt id=hl-22-3><a class=lnlinks href=#hl-22-3> 3</a>
+</span><span class=lnt id=hl-22-4><a class=lnlinks href=#hl-22-4> 4</a>
+</span><span class=lnt id=hl-22-5><a class=lnlinks href=#hl-22-5> 5</a>
+</span><span class=lnt id=hl-22-6><a class=lnlinks href=#hl-22-6> 6</a>
+</span><span class=lnt id=hl-22-7><a class=lnlinks href=#hl-22-7> 7</a>
+</span><span class=lnt id=hl-22-8><a class=lnlinks href=#hl-22-8> 8</a>
+</span><span class=lnt id=hl-22-9><a class=lnlinks href=#hl-22-9> 9</a>
+</span><span class=lnt id=hl-22-10><a class=lnlinks href=#hl-22-10>10</a>
+</span><span class=lnt id=hl-22-11><a class=lnlinks href=#hl-22-11>11</a>
+</span><span class=lnt id=hl-22-12><a class=lnlinks href=#hl-22-12>12</a>
+</span><span class=lnt id=hl-22-13><a class=lnlinks href=#hl-22-13>13</a>
+</span><span class=lnt id=hl-22-14><a class=lnlinks href=#hl-22-14>14</a>
+</span><span class=lnt id=hl-22-15><a class=lnlinks href=#hl-22-15>15</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 主键查找（标准索引足以处理精确匹配）
+</span></span><span class=line><span class=cl>CREATE INDEX product_id IF NOT EXISTS FOR <span class=o>(</span>p:Product<span class=o>)</span> ON <span class=o>(</span>p.productId<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 品类浏览（字符串使用文本索引）
+</span></span><span class=line><span class=cl>CREATE TEXT INDEX product_category IF NOT EXISTS FOR <span class=o>(</span>p:Product<span class=o>)</span> ON <span class=o>(</span>p.category<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 价格过滤（数值比较使用范围索引）
+</span></span><span class=line><span class=cl>CREATE RANGE INDEX product_price IF NOT EXISTS FOR <span class=o>(</span>p:Product<span class=o>)</span> ON <span class=o>(</span>p.price<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 文本搜索
+</span></span><span class=line><span class=cl>CALL db.index.fulltext.createNodeIndex<span class=o>(</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;productSearch&#34;</span>,
+</span></span><span class=line><span class=cl>  <span class=o>[</span><span class=s2>&#34;Product&#34;</span><span class=o>]</span>, 
+</span></span><span class=line><span class=cl>  <span class=o>[</span><span class=s2>&#34;name&#34;</span>, <span class=s2>&#34;description&#34;</span>, <span class=s2>&#34;keywords&#34;</span><span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=o>)</span></span></span></code></pre></td></tr></table></div></div><p><strong>结果：</strong></p><ul><li>品类浏览：加速 96%</li><li>搜索响应时间：加速 98%</li><li>稳定的亚秒级响应</li></ul><h3 id=案例二社交网络1000-万用户10-亿关系>案例二：社交网络（1000 万用户，10 亿关系）
+<a class=header-anchor href=#%e6%a1%88%e4%be%8b%e4%ba%8c%e7%a4%be%e4%ba%a4%e7%bd%91%e7%bb%9c1000-%e4%b8%87%e7%94%a8%e6%88%b710-%e4%ba%bf%e5%85%b3%e7%b3%bb></a></h3><p><strong>挑战：</strong></p><ul><li>用户资料查找缓慢</li><li>好友推荐性能不佳</li><li>内容过滤问题</li></ul><p><strong>解决方案：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-23-1><a class=lnlinks href=#hl-23-1> 1</a>
+</span><span class=lnt id=hl-23-2><a class=lnlinks href=#hl-23-2> 2</a>
+</span><span class=lnt id=hl-23-3><a class=lnlinks href=#hl-23-3> 3</a>
+</span><span class=lnt id=hl-23-4><a class=lnlinks href=#hl-23-4> 4</a>
+</span><span class=lnt id=hl-23-5><a class=lnlinks href=#hl-23-5> 5</a>
+</span><span class=lnt id=hl-23-6><a class=lnlinks href=#hl-23-6> 6</a>
+</span><span class=lnt id=hl-23-7><a class=lnlinks href=#hl-23-7> 7</a>
+</span><span class=lnt id=hl-23-8><a class=lnlinks href=#hl-23-8> 8</a>
+</span><span class=lnt id=hl-23-9><a class=lnlinks href=#hl-23-9> 9</a>
+</span><span class=lnt id=hl-23-10><a class=lnlinks href=#hl-23-10>10</a>
+</span><span class=lnt id=hl-23-11><a class=lnlinks href=#hl-23-11>11</a>
+</span><span class=lnt id=hl-23-12><a class=lnlinks href=#hl-23-12>12</a>
+</span><span class=lnt id=hl-23-13><a class=lnlinks href=#hl-23-13>13</a>
+</span><span class=lnt id=hl-23-14><a class=lnlinks href=#hl-23-14>14</a>
+</span><span class=lnt id=hl-23-15><a class=lnlinks href=#hl-23-15>15</a>
+</span><span class=lnt id=hl-23-16><a class=lnlinks href=#hl-23-16>16</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 用户查找（精确匹配使用标准索引）
+</span></span><span class=line><span class=cl>CREATE INDEX user_id IF NOT EXISTS FOR <span class=o>(</span>u:User<span class=o>)</span> ON <span class=o>(</span>u.userId<span class=o>)</span>
+</span></span><span class=line><span class=cl>CREATE TEXT INDEX user_username IF NOT EXISTS FOR <span class=o>(</span>u:User<span class=o>)</span> ON <span class=o>(</span>u.username<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 基于位置的搜索（空间数据使用点索引）
+</span></span><span class=line><span class=cl>CREATE POINT INDEX user_location IF NOT EXISTS FOR <span class=o>(</span>u:User<span class=o>)</span> ON <span class=o>(</span>u.location<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 内容索引（自然语言处理使用全文索引）
+</span></span><span class=line><span class=cl>CALL db.index.fulltext.createNodeIndex<span class=o>(</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;contentSearch&#34;</span>,
+</span></span><span class=line><span class=cl>  <span class=o>[</span><span class=s2>&#34;Post&#34;</span>, <span class=s2>&#34;Comment&#34;</span><span class=o>]</span>, 
+</span></span><span class=line><span class=cl>  <span class=o>[</span><span class=s2>&#34;text&#34;</span>, <span class=s2>&#34;title&#34;</span><span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 用于过滤的复合索引
+</span></span><span class=line><span class=cl>CREATE INDEX content_date_type IF NOT EXISTS FOR <span class=o>(</span>c:Content<span class=o>)</span> ON <span class=o>(</span>c.date, c.type<span class=o>)</span></span></span></code></pre></td></tr></table></div></div><p><strong>结果：</strong></p><ul><li>资料访问：加速 99.5%</li><li>推荐生成：加速 89%</li><li>内容过滤：加速 95%</li></ul><h2 id=索引性能基准测试>索引性能基准测试
+<a class=header-anchor href=#%e7%b4%a2%e5%bc%95%e6%80%a7%e8%83%bd%e5%9f%ba%e5%87%86%e6%b5%8b%e8%af%95></a></h2><p>现代 Neo4j 安装应该通过自定义查询来测试索引性能：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-24-1><a class=lnlinks href=#hl-24-1> 1</a>
+</span><span class=lnt id=hl-24-2><a class=lnlinks href=#hl-24-2> 2</a>
+</span><span class=lnt id=hl-24-3><a class=lnlinks href=#hl-24-3> 3</a>
+</span><span class=lnt id=hl-24-4><a class=lnlinks href=#hl-24-4> 4</a>
+</span><span class=lnt id=hl-24-5><a class=lnlinks href=#hl-24-5> 5</a>
+</span><span class=lnt id=hl-24-6><a class=lnlinks href=#hl-24-6> 6</a>
+</span><span class=lnt id=hl-24-7><a class=lnlinks href=#hl-24-7> 7</a>
+</span><span class=lnt id=hl-24-8><a class=lnlinks href=#hl-24-8> 8</a>
+</span><span class=lnt id=hl-24-9><a class=lnlinks href=#hl-24-9> 9</a>
+</span><span class=lnt id=hl-24-10><a class=lnlinks href=#hl-24-10>10</a>
+</span><span class=lnt id=hl-24-11><a class=lnlinks href=#hl-24-11>11</a>
+</span><span class=lnt id=hl-24-12><a class=lnlinks href=#hl-24-12>12</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>// 创建索引之前，计时查询
+</span></span><span class=line><span class=cl>:time MATCH <span class=o>(</span>p:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>WHERE p.email <span class=o>=</span> <span class=s1>&#39;test@example.com&#39;</span>
+</span></span><span class=line><span class=cl>RETURN p
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 创建索引
+</span></span><span class=line><span class=cl>CREATE INDEX person_email IF NOT EXISTS FOR <span class=o>(</span>p:Person<span class=o>)</span> ON <span class=o>(</span>p.email<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 创建索引之后，再次计时
+</span></span><span class=line><span class=cl>:time MATCH <span class=o>(</span>p:Person<span class=o>)</span>
+</span></span><span class=line><span class=cl>WHERE p.email <span class=o>=</span> <span class=s1>&#39;test@example.com&#39;</span>
+</span></span><span class=line><span class=cl>RETURN p</span></span></code></pre></td></tr></table></div></div><h2 id=最佳实践与常见陷阱>最佳实践与常见陷阱
+<a class=header-anchor href=#%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5%e4%b8%8e%e5%b8%b8%e8%a7%81%e9%99%b7%e9%98%b1></a></h2><h3 id=最佳实践>最佳实践
+<a class=header-anchor href=#%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5></a></h3><ol><li><p><strong>索引策略规划</strong></p><ul><li>创建索引前先分析查询模式</li><li>聚焦于影响大、使用频率高的查询</li><li>同时考虑读和写的工作负载</li></ul></li><li><p><strong>定期索引维护</strong></p><ul><li>监控索引使用统计</li><li>重建性能下降的索引</li><li>删除未使用的索引</li></ul></li><li><p><strong>测试与验证</strong></p><ul><li>使用 <code>EXPLAIN</code> 和 <code>PROFILE</code> 验证索引使用</li><li>索引创建前后进行基准测试</li><li>使用真实数据量进行测试</li></ul></li><li><p><strong>有意识地选择索引类型</strong></p><ul><li>通用等值匹配用标准索引</li><li>数值比较用范围索引</li><li>字符串属性用文本索引</li><li>自然语言搜索用全文索引</li></ul></li></ol><h3 id=常见陷阱>常见陷阱
+<a class=header-anchor href=#%e5%b8%b8%e8%a7%81%e9%99%b7%e9%98%b1></a></h3><ol><li><p><strong>过度索引</strong></p><ul><li>创建太多索引会拖慢写入</li><li>冗余索引浪费资源</li><li>解决方案：聚焦于高影响力的属性</li></ul></li><li><p><strong>未充分利用复合索引</strong></p><ul><li>在复合索引更合适时创建多个单属性索引</li><li>解决方案：分析多属性过滤模式</li></ul></li><li><p><strong>对低选择性属性建立索引</strong></p><ul><li>对布尔属性或唯一值很少的属性创建索引</li><li>解决方案：聚焦于高基数属性</li></ul></li><li><p><strong>忽视索引维护</strong></p><ul><li>未能监控索引健康状态和性能</li><li>解决方案：定期进行索引检查和必要时的重建</li></ul></li><li><p><strong>索引类型选择不当</strong></p><ul><li>在范围索引或文本索引更高效的地方使用标准索引</li><li>解决方案：将索引类型与查询模式匹配</li></ul></li></ol><h2 id=结语>结语
+<a class=header-anchor href=#%e7%bb%93%e8%af%ad></a></h2><p>Neo4j 索引是数据库性能优化的关键环节。策略性的索引实施可以将缓慢、资源密集的操作转变为能够处理海量数据的极速查询。</p><p>成功的 Neo4j 索引关键在于：理解你的数据、分析查询模式、应用合适的索引类型，同时持续监控和优化你的策略。遵循本指南中概述的最佳实践，你可以实现最优的图数据库性能和可扩展性。</p></div><footer class=post-footer><div class=post-tags><a href=/tags/neo4j/>Neo4j
+</a><a href=/tags/cypher/>Cypher
+</a><a href=/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/>图数据库
+</a><a href=/tags/t-%E7%B3%BB%E5%88%97/>T 系列
+</a><a href=/tags/%E7%B4%A2%E5%BC%95/>索引
+</a><a href=/tags/neo4j-%E6%95%99%E7%A8%8B/>Neo4j 教程</a></div><div class=post-share-tools><div class=post-share-loading><i class="fa-solid fa-ellipsis fa-spin"></i></div><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class=a2a_dd href=https://www.addtoany.com/share></a><a class=a2a_button_wechat></a><a class=a2a_button_qzone></a><a class=a2a_button_sina_weibo></a><a class=a2a_button_douban></a><a class=a2a_button_facebook></a><a class=a2a_button_x></a><a class=a2a_button_email></a><a class=a2a_button_printfriendly></a></div></div><hr><div class=reward-container><div><i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))</div><button>
+赞赏</button><div class=post-reward><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_zhifubao.png alt="a2htray - 支付宝">
+<span>支付宝</span></div><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_wechat.png alt="a2htray - 微信">
+<span>微信</span></div></div></div><div class=post-copyright><img src=/imgs/cc/cc.svg class=cc-icon width=75 height=75 align=right alt=共享知识 title=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+Neo4j 教程：Neo4j 索引全面指南</li><li class=post-copyright-author><strong>本文作者： </strong>a2htray</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=https://a2htray.github.io/post/learn-ai/t_13_neo4j_06_index_best_practices/ title="Neo4j 教程：Neo4j 索引全面指南">https://a2htray.github.io/post/learn-ai/t_13_neo4j_06_index_best_practices/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本作品采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans>BY-NC-SA</a> 许可协议。转载请注明出处！</li><li><div class=license-icons><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans target=_blank><img src=/imgs/cc/big/by_nc_sa.svg alt=BY-NC-SA title=BY-NC-SA>
+</a><a href=https://notbyai.fyi target=_blank><img src=/imgs/notbyai/zh-hans/white.svg title="Not By AI"></a></div></li></ul></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/learn-ai/t_14_neo4j_07_handle_errors/ rel=next title="Neo4j 教程：处理数据库一致性错误"><i class="fa fa-chevron-left"></i> Neo4j 教程：处理数据库一致性错误</a></div><div class="post-nav-prev post-nav-item"><a href=/post/learn-ai/t_12_neo4j_05_mastering_variable_length/ rel=prev title="Neo4j 教程：掌握变长关系与路径算法">Neo4j 教程：掌握变长关系与路径算法
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
+<span itemprop=copyrightYear>2025 - 2026
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>a2htray</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.152.2 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.8.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script class=next-config data-name=page type=application/json>{"clipboard":{"js":{"alias":"clipboard","file":"dist/clipboard.min.js","name":"clipboard.js","version":"2.0.11"}},"comments":false,"expired":false,"isHome":false,"isPage":true,"math":{"css":{"alias_name":"katex","file":"dist/katex.min.css","name":"katex","version":"0.16.15"},"js":[{"alias_name":"katex","file":"dist/katex.min.js","name":"katex","version":"0.16.15"},{"alias":"katex","alias_name":"katex","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.15"}],"render":"katex"},"path":"t_13_neo4j_06_index_best_practices","permalink":"https://a2htray.github.io/post/learn-ai/t_13_neo4j_06_index_best_practices/","title":"Neo4j 教程：Neo4j 索引全面指南","toc":true,"waline":{"commentcnt":{"alias":"@waline/client","alias_name":"waline","file":"dist/comment.js","name":"comment","version":"2.15.8"}}}</script><script type=text/javascript src=https://a2htray.github.io/js/3rd/animejs/3.2.2/anime.min.js crossorigin=anonymous defer></script><script type=text/javascript src=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.js crossorigin=anonymous defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":false,"hostname":"https://a2htray.github.io/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"isMultiLang":false,"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"slideInRight","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","share":{"addtoany":{"js":"https://static.addtoany.com/menu/page.js","locale":"zh-CN","num":8},"enable":true},"sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"local","router":{"name":"local","type":"modern","url":"https://a2htray.github.io/js/3rd"}},"version":"4.8.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"@waline/client","file":"dist/waline.css","name":"waline","version":"2.15.8"},"js":{"alias":"@waline/client","file":"dist/waline.js","name":"waline","version":"2.15.8"}}}</script><script type=text/javascript src="/js/main.min.js?=1786513198" defer></script><script type=text/javascript src="/js/clipboard.min.js?=1786513198" defer></script><script type=text/javascript src="/js/math.min.js?=1786513198" defer></script></body></html>

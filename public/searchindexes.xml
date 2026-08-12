@@ -1,4 +1,41 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Neo4j 教程：掌握变长关系与路径算法</title><url>/post/learn-ai/t_12_neo4j_05_mastering_variable_length/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>T 系列</tag><tag>约束</tag><tag>Neo4j 教程</tag></tags><content type="html"><![CDATA[  引言 欢迎来到这篇深度教程，我们将探讨 Neo4j 最强大的特性之一：处理变长路径和关系。本指南将带你学习如何遍历复杂网络、查找实体之间的联系，以及在图数据中发现最优路线。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Neo4j 教程：处理数据库一致性错误</title><url>/post/learn-ai/t_14_neo4j_07_handle_errors/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>T 系列</tag><tag>错误处理</tag><tag>Neo4j 教程</tag></tags><content type="html"><![CDATA[  Neo4j 是领先的开源图数据库管理系统，并且完全符合 ACID 标准。然而在真实的运维环境中，像一致性错误这样的意外问题依然可能发生——尤其是在非正常关机、崩溃或磁盘故障之后。
+在本教程中，我们将学习：
+什么是 Neo4j 中的一致性错误 如何检测它们 如何修复它们 以及如何主动保护你的数据库 让我们深入探讨。
+什么是 Neo4j 一致性错误？ 简单来说：
+一致性错误发生在 Neo4j 的内部图结构（节点、关系、属性）变得损坏或与存储层不同步时。
+常见原因：
+服务器崩溃（非正常关机） 磁盘写满错误 硬件损坏 严重的软件 Bug（罕见） 图解：健康图与损坏图的区别 说明：
+在健康的图中，所有关系都正确地连接到有效的节点。 在损坏的图中，部分关系指向了缺失或无效的节点，从而导致数据不一致。 真实场景：断电导致崩溃 你正在生产环境运行 Neo4j 5.x。
+突然断电、服务器崩溃，没有正常关机。
+你重启 Neo4j 后看到如下提示：
+1 Database failed to start due to consistency errors. Please check database consistency. （数据库因一致性错误启动失败，请检查数据库一致性。）
+如何检测一致性问题 Neo4j 自带了一个内置工具：neo4j-admin check
+步骤：
+停止 Neo4j 服务： 1 neo4j stop 运行一致性检查： 1 neo4j-admin check --database=neo4j 输出结果：
+无错误：显示 &ldquo;No inconsistencies found.&quot;（未发现不一致） 有错误：详细报告缺失的节点、断裂的关系或属性链问题 如何修复一致性错误 最佳方案：从备份恢复 如果你有备份，永远优先选择恢复备份！
+1 neo4j-admin restore --from=/backups/backup-2024-04-26 --database=neo4j --overwrite-destination=true 恢复后，就能得到一个干净、可用的全新数据库。
+最后手段：手动修复 如果没有可用的备份：
+手动删除损坏的关系或节点（高级 Cypher &ldquo;手术&quot;操作） 手动重建索引 重建所有索引的示例：
+1 2 3 4 CALL db.indexes() YIELD name WITH name CALL db.resampleIndex(name) RETURN name; 警告： 手动修复存在风险，可能导致部分数据丢失。
+错误处理流程汇总表 阶段 操作 检测（Detect） 运行 neo4j-admin check 修复（Fix） 从备份恢复（首选方案） 手动（Manual） 必要时谨慎进行节点/索引恢复 预防（Prevention） 定期备份 + 正常关机 避免一致性错误的建议 开启频繁备份（根据工作负载，每日或每小时一次） 使用 RAID 磁盘以防范硬件故障 优雅关机：使用 neo4j stop 正常关闭 Neo4j 监控日志：在严重问题发生前，Neo4j 通常会先写入警告信息 结论 数据库一致性是不可妥协的——尤其是在图数据库中，每一条关系都至关重要。
+如果你悉心对待你的数据库：
+正常关机 持续备份 定期监控 你就能避免几乎所有现实世界中的损坏问题！
+当灾难降临时，Neo4j 也为你提供了检测、修复和恢复数据的工具。
+  ]]></content></entry><entry><title>Neo4j 教程：Neo4j 索引全面指南</title><url>/post/learn-ai/t_13_neo4j_06_index_best_practices/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>T 系列</tag><tag>索引</tag><tag>Neo4j 教程</tag></tags><content type="html"><![CDATA[  引言 索引是 Neo4j 中至关重要的辅助数据结构，能够显著提升 Cypher 查询的性能。有了索引，数据库无需执行昂贵的全量扫描即可快速定位具有特定属性值的节点。
+Neo4j 索引基础 索引的工作原理 Neo4j 索引是将属性值映射到包含这些值的内部节点 ID。当 Cypher 查询中的 WHERE 子句对已索引的属性进行过滤时，Neo4j 可以快速查找相关节点，而无需扫描整个数据库。
+没有索引时，Neo4j 必须执行标签扫描（检查所有带有某一标签的节点）来找到满足查询条件的节点——随着数据量增长，这种操作的代价会变得极其高昂。
+Neo4j 索引架构 Neo4j 采用分层索引架构：
+模式层（Schema Layer）：定义哪些带标签的节点的哪些属性应被索引 索引提供层（Index Provider Layer）：管理实际的索引数据结构 存储层（Storage Layer）：处理索引条目的物理存储 Neo4j 索引类型 在最新版本中，Neo4j 支持多种索引类型，每种类型都针对特定的查询模式进行了优化：
+标准索引（Standard Index） 标准索引为属性查找提供通用的索引支持，是最常用的类型。
+特点：
+适用于等值匹配 大多数操作都有良好的通用性能 内部自动实现为 B 树结构 语法：
+1 CREATE INDEX index_name IF NOT EXISTS FOR (n:Label) ON (n.property) 范围索引（Range Index） 专门针对涉及范围比较（&amp;gt;、&amp;lt;、&amp;gt;=、&amp;lt;=）的查询优化。
+特点：
+针对不等值比较优化 在范围查询方面比标准索引性能更好 非常适用于数值、日期/时间属性 语法：
+1 CREATE RANGE INDEX product_price_idx IF NOT EXISTS FOR (p:Product) ON (p.price) 文本索引（Text Index） 针对字符串属性的操作优化。
+特点：
+更适合字符串等值匹配和 STARTS WITH 操作 不区分大小写的比较性能更好 适用于较短的文本字段 语法：
+1 CREATE TEXT INDEX product_name_idx IF NOT EXISTS FOR (p:Product) ON (p.name) 点索引（Point Index） …  ]]></content></entry><entry><title>Neo4j 教程：掌握变长关系与路径算法</title><url>/post/learn-ai/t_12_neo4j_05_mastering_variable_length/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>T 系列</tag><tag>变长</tag><tag>最短路径</tag><tag>Neo4j 教程</tag></tags><content type="html"><![CDATA[  引言 欢迎来到这篇深度教程，我们将探讨 Neo4j 最强大的特性之一：处理变长路径和关系。本指南将带你学习如何遍历复杂网络、查找实体之间的联系，以及在图数据中发现最优路线。
 图数据库在分析关联数据方面表现卓越，Neo4j 提供了专门的语法和算法来高效探索这些联系。无论你是在构建社交网络、知识图谱、物流系统还是推荐引擎，本教程中介绍的技术都将帮助你从互联数据中挖掘出有价值的信息。
 通过本教程的学习，你将掌握以下能力：
 查询变长关系 查找节点之间的最短路径 发现节点之间的所有最短路径 将这些技术应用于解决实际问题 搭建示例数据库 在本教程中，我们将使用一个表示城市间公路连接的交通网络作为示例。这个例子将帮助我们理解如何在图中查找路线——这是图数据中路径查找的一个典型应用场景。
