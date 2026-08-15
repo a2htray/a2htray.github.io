@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Neo4j 搭建（Docker）与数据备份还原实战</title><url>/post/neo4j/docker_backup_restore/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>备份还原</tag></tags><content type="html">   适用版本：Neo4j 5.x（社区版 / 企业版） 环境：已安装 Docker 与 Docker Compose 的 Linux / macOS 主机
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>模型微调示例：油菜品种信息查询助手</title><url>/post/learn-ai/mlx-lm-model-finetuning/</url><categories><category>人工智能</category><category>大模型模型</category></categories><tags><tag>模型微调</tag><tag>大语言模型</tag><tag>LoRA</tag></tags><content type="html"><![CDATA[   在 Apple Silicon（M 系列芯片）上，用 MLX-LM 对一个开源大模型做 LoRA 微调， 把它变成一个&amp;quot;油菜品种信息查询&amp;quot;垂域助手，并对比微调前后的效果。 本文记录了从环境准备、数据构造、微调到评测的完整过程，以及踩过的几个版本坑。
+概述与背景 目标：构建一个能回答&amp;quot;某油菜品种生育期多长、含油量多少、适合种在哪里、抗什么病&amp;quot;等问题的垂域大模型。
+为什么用 MLX-LM：Apple Silicon 的 CPU / GPU / 神经网络引擎共享同一块物理内存（统一内存），MLX 利用这一点做到&amp;quot;零拷贝&amp;quot;，模型可以大到吃满整机内存，而不受独立显存限制。因此可以在没有独立显卡的 Mac 上，用接近 NumPy 的写法做 GPU/神经网络引擎加速的训练与推理。MLX-LM 是其在语言模型方向的开源实现，提供 generate / lora（微调）/ fuse（合并）等命令。
+基座模型选择：mlx-community/Qwen2.5-3B-Instruct-4bit（约 2GB、中文能力强、16GB 内存即可跑，且是 MLX 格式，开箱即用）。
+微调方式：LoRA（低秩适配）。只训练注入的一小部分低秩参数，基座权重冻结，显存占用小、训练快、训完权重只有几十 MB，且能直接合并回基座分发。
+环境准备 需要 macOS + Apple Silicon（M1 及以上），Python ≥ 3.9。本文所用环境为 conda mldl 环境。
+安装必要的依赖包：
+1 $ pip install -U mlx mlx-lm &amp;#34;huggingface_hub[cli]&amp;#34; hf_transfer rouge-score lm_eval 验证版本：
+1 2 3 4 5 $ pip list | grep -E &amp;#34;mlx-lm|huggingface_hub|hf_transfer|rouge_score&amp;#34; hf_transfer 0.1.9 huggingface_hub 1.27.0 mlx-lm 0.31.3 rouge_score 0.1.2 下载模型 新版的 Hugging Face 客户端把 huggingface-cli 整合进了 hf 命令。用 hf download 把模 …  ]]></content></entry><entry><title>Neo4j 搭建（Docker）与数据备份还原实战</title><url>/post/neo4j/docker_backup_restore/</url><categories><category>后端技术</category><category>数据库</category></categories><tags><tag>Neo4j</tag><tag>Cypher</tag><tag>图数据库</tag><tag>备份还原</tag><tag>Docker</tag></tags><content type="html">   适用版本：Neo4j 5.x（社区版 / 企业版） 环境：已安装 Docker 与 Docker Compose 的 Linux / macOS 主机
 前言 Neo4j 是目前最流行的原生图数据库，常用于知识图谱、关系网络、推荐系统等场景。使用 Docker 部署可以让环境保持一致、迁移方便，而图数据的备份与还原则是生产环境中不可忽视的一环。
 本文覆盖三部分：
 用 Docker / Docker Compose 快速搭建 Neo4j 三种数据备份方式：官方 dump、企业版在线 backup、APOC 导出 对应的数据还原方法，以及定时自动备份脚本 环境准备 确认 Docker 与 Docker Compose 已安装：

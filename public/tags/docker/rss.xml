@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/docker/</link><description>Recent content in Docker on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 04 Mar 2026 17:15:48 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/docker/rss.xml" rel="self" type="application/rss+xml"/><item><title>MQTT：Mosquitto 开源客户端 terdia/mqttui（三）</title><link>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</link><pubDate>Wed, 04 Mar 2026 17:15:48 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</guid><description>&lt;p&gt;项目地址：
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/docker/</link><description>Recent content in Docker on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Aug 2026 10:27:52 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/docker/rss.xml" rel="self" type="application/rss+xml"/><item><title>Neo4j 搭建（Docker）与数据备份还原实战</title><link>https://a2htray.github.io/post/neo4j/docker_backup_restore/</link><pubDate>Thu, 13 Aug 2026 10:27:52 +0800</pubDate><guid>https://a2htray.github.io/post/neo4j/docker_backup_restore/</guid><description>&lt;blockquote&gt;
+ &lt;p&gt;适用版本：Neo4j 5.x（社区版 / 企业版）
+环境：已安装 Docker 与 Docker Compose 的 Linux / macOS 主机&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="前言"&gt;前言
+&lt;a class="header-anchor" href="#%e5%89%8d%e8%a8%80"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;Neo4j 是目前最流行的原生图数据库，常用于知识图谱、关系网络、推荐系统等场景。使用 Docker 部署可以让环境保持一致、迁移方便，而图数据的备份与还原则是生产环境中不可忽视的一环。&lt;/p&gt;</description></item><item><title>MQTT：Mosquitto 开源客户端 terdia/mqttui（三）</title><link>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</link><pubDate>Wed, 04 Mar 2026 17:15:48 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mqtt/02_mosquitto_clients/</guid><description>&lt;p&gt;项目地址：
 &lt;a href="https://github.com/terdia/mqttui" title="https://github.com/terdia/mqttui" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://github.com/terdia/mqttui
  
