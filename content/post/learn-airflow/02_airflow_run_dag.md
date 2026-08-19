@@ -17,7 +17,7 @@ toc = true
 
 注意一个关键点：**Metadata DB 是所有组件的共享内存**。Scheduler、Executor、Webserver 之间不直接通信，它们都通过读写同一个数据库来协作。这也是为什么生产环境必须用 PostgreSQL 或 MySQL，不能用 sqlite——并发写入压力全压在这一个库上。
 
-![](.//imgs/learn-airflow/airflow_5_core_components.png)
+![](/imgs/learn-airflow/airflow_5_core_components.png)
 
 这种"以数据库为总线"的架构是 Airflow 的根本设计，理解了它，后面很多行为就好懂了。
 
@@ -97,7 +97,7 @@ Task 实例的可能状态：
 - **deferred**：deferrable operator 主动让出 worker，等外部事件恢复（Airflow 2.2+）
 - **removed**：DAG 从文件里删了，旧的 task 实例残留
 
-![](.//imgs/learn-airflow/airflow_task_status.png)
+![](/imgs/learn-airflow/airflow_task_status.png)
 
 排查问题时记住几个常见的"卡住"状态：
 
