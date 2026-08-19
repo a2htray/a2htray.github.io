@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>批处理 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%89%B9%E5%A4%84%E7%90%86/</link><description>Recent content in 批处理 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 19 Aug 2026 09:58:18 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%89%B9%E5%A4%84%E7%90%86/rss.xml" rel="self" type="application/rss+xml"/><item><title>Airflow 是怎么把 DAG 跑起来的</title><link>https://a2htray.github.io/post/learn-airflow/02_airflow_run_dag/</link><pubDate>Wed, 19 Aug 2026 09:58:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-airflow/02_airflow_run_dag/</guid><description>&lt;blockquote&gt;
+ &lt;p&gt;这是 Airflow 学习系列的第 2 篇。上一篇讲了 Airflow 是什么、为什么需要它、核心概念词汇表。这一篇钻进内部，把&amp;quot;齿轮怎么转&amp;quot;讲透——你看完之后，第 3 篇上手写 DAG 时，每一步操作都不会是黑盒。&lt;/p&gt;</description></item><item><title>Airflow 是什么，以及为什么你大概需要它</title><link>https://a2htray.github.io/post/learn-airflow/01_airflow_introdction/</link><pubDate>Tue, 18 Aug 2026 09:53:32 +0800</pubDate><guid>https://a2htray.github.io/post/learn-airflow/01_airflow_introdction/</guid><description>&lt;blockquote&gt;
+ &lt;p&gt;这是 Airflow 学习系列的第 1 篇。本篇不写代码，先讲清楚一件事：Airflow 到底解决什么问题，它的核心抽象是什么，以及它适合什么样的场景。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="凌晨三点的告警"&gt;凌晨三点的告警
+&lt;a class="header-anchor" href="#%e5%87%8c%e6%99%a8%e4%b8%89%e7%82%b9%e7%9a%84%e5%91%8a%e8%ad%a6"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;先讲一个场景。&lt;/p&gt;</description></item></channel></rss>

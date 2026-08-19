@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>模型 LoRA 微调示例：油菜品种信息查询助手</title><url>/post/learn-ai/mlx-lm-model-finetuning/</url><categories><category>人工智能</category><category>大模型模型</category></categories><tags><tag>模型微调</tag><tag>大语言模型</tag><tag>LoRA</tag></tags><content type="html"><![CDATA[   在 Apple Silicon（M 系列芯片）上，用 MLX-LM 对一个开源大模型做 LoRA 微调， 把它变成一个&amp;quot;油菜品种信息查询&amp;quot;垂域助手，并对比微调前后的效果。 本文记录了从环境准备、数据构造、微调到评测的完整过程，以及踩过的几个版本坑。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Airflow 是怎么把 DAG 跑起来的</title><url>/post/learn-airflow/02_airflow_run_dag/</url><categories><category>后端技术</category><category>Airflow</category></categories><tags><tag>Airflow</tag><tag>批处理</tag><tag>定时任务</tag><tag>DAG</tag></tags><content type="html"><![CDATA[   这是 Airflow 学习系列的第 2 篇。上一篇讲了 Airflow 是什么、为什么需要它、核心概念词汇表。这一篇钻进内部，把&amp;quot;齿轮怎么转&amp;quot;讲透——你看完之后，第 3 篇上手写 DAG 时，每一步操作都不会是黑盒。
+Airflow 组件 第 1 篇列了五大组件：Scheduler、Executor、Metadata DB、Webserver，外加你写的 DAG。那次是定义，这次讲它们怎么咬合。
+一句话总览：你写好 DAG 文件放进目录，Scheduler 发现它、决定何时触发、决定哪个 task 可以跑，把 task 交给 Executor 去实际执行，Executor 跑完把状态写回 Metadata DB，Webserver 读 Metadata DB 把这一切展示给你看。
+注意一个关键点：Metadata DB 是所有组件的共享内存。Scheduler、Executor、Webserver 之间不直接通信，它们都通过读写同一个数据库来协作。这也是为什么生产环境必须用 PostgreSQL 或 MySQL，不能用 sqlite——并发写入压力全压在这一个库上。
+这种&amp;quot;以数据库为总线&amp;quot;的架构是 Airflow 的根本设计，理解了它，后面很多行为就好懂了。
+DAG 发现：DagBag 你把 DAG 写成 .py 文件，丢进 Airflow 的 DAG 文件夹（默认 ~/airflow/dags）。Scheduler 不会立刻就知道它来了。
+Scheduler 内部有一个叫 DagBag 的东西，它会周期性地扫描 DAG 文件夹，把每个 .py 文件当作 Python 模块导入执行，提取里面定义的 DAG 对象。这个过程叫&amp;quot;收集&amp;quot;（collect）。
+这里有一个 Airflow 最重要的认知，也是无数初学者踩坑的地方：DAG 文件每次被扫描时，整个文件作为 Python 代码从头到尾执行一遍。这意味着你写在文件顶层的所有代码——import、函数定义、变量赋值、甚至网络请求——每次调度循环都会跑一次（实际频率是几秒到几十秒一次，取决于配置）。
+所以 Airflow 的铁律之一是：DAG 文件的顶层只放声明，不写实际做事的代码。不要在顶层发 HTTP 请求、连数据库、读大文件。这些动作应该放进 task 内 …  ]]></content></entry><entry><title>Airflow 是什么，以及为什么你大概需要它</title><url>/post/learn-airflow/01_airflow_introdction/</url><categories><category>后端技术</category><category>Airflow</category></categories><tags><tag>Airflow</tag><tag>批处理</tag><tag>定时任务</tag></tags><content type="html"><![CDATA[   这是 Airflow 学习系列的第 1 篇。本篇不写代码，先讲清楚一件事：Airflow 到底解决什么问题，它的核心抽象是什么，以及它适合什么样的场景。
+凌晨三点的告警 先讲一个场景。
+你负责一套数据管道，每天凌晨两点从业务库抽数到数仓，做几张宽表，跑几个聚合，最后刷新 BI 报表。整个链条七八个步骤，有的串行，有的并行。你用 cron 加一堆 shell 脚本串起来，每个脚本之间靠文件标记或者上一条命令的退出码做衔接。
+某个凌晨三点，你被告警吵醒。某一步失败了。
+问题立刻堆上来：是哪一步失败的？失败前跑了什么？现在数据停在哪个中间状态？要不要重跑，重跑会不会重复写入？下游报表显示的，是今天的旧数据还是错误数据？
+你爬起来，登服务器，翻日志，发现是第三步的某个 SQL 超时了。你手动补跑第三步，再接着跑第四五六七步。处理完天都快亮了。
+这套流程的问题不在&amp;quot;它会挂&amp;quot;——任何系统都会挂——而在&amp;quot;它挂了之后你很难干净地恢复&amp;quot;。没有依赖管理，没有状态记录，没有统一的重跑入口，没有全局视角的可观测性。你在黑暗里摸黑接线。
+Airflow 就是来处理这件事的，提供：
+管理依赖 记录状态 统一入口 可观测性 数据编排到底难在哪 把&amp;quot;按时跑一系列任务&amp;quot;这件事拆开看，难点其实集中在四个地方。
+依赖管理。任务之间有先后，有的还能并行。用脚本的话你得自己写 wait 逻辑、自己判断前置是否成功。任务一多，拓扑就乱。一个典型的 ETL 是这样的：取数有三路并行，取完汇总，汇总完分两路做特征和报表，特征做完再训模型。这种拓扑你手写 if/else 维护，迟早会出错。 失败与重跑。任务可能因为网络、数据质量、资源任何原因挂掉。挂了之后要能重跑，而且重跑不能搞坏数据——比如已经写入了一半的表，直接重跑会重复或冲突。理想情况是任务幂等，且编排系统能从失败点继续，而不是从头来。 可观测性。当前跑到哪一步了？每步花了多久？哪步慢了？失败原因是什么？历史趋势怎样？这些信息散在各个脚本日志里，基本等于没有。出了问题你只能挨个去翻。 回填。今天修了个 bug，想把它应用到过去三十天的历史数据上。你需要按日期逐天重跑那段管道。cron 做不到这件事，你得自己写循环、自己管日期边界、自己处理哪天已经跑过哪天没有。 这四个点，就是工作流编排器 …  ]]></content></entry><entry><title>模型 LoRA 微调示例：油菜品种信息查询助手</title><url>/post/learn-ai/mlx-lm-model-finetuning/</url><categories><category>人工智能</category><category>大模型模型</category></categories><tags><tag>模型微调</tag><tag>大语言模型</tag><tag>LoRA</tag></tags><content type="html"><![CDATA[   在 Apple Silicon（M 系列芯片）上，用 MLX-LM 对一个开源大模型做 LoRA 微调， 把它变成一个&amp;quot;油菜品种信息查询&amp;quot;垂域助手，并对比微调前后的效果。 本文记录了从环境准备、数据构造、微调到评测的完整过程，以及踩过的几个版本坑。
 概述与背景 目标：构建一个能回答&amp;quot;某油菜品种生育期多长、含油量多少、适合种在哪里、抗什么病&amp;quot;等问题的垂域大模型。
 为什么用 MLX-LM：Apple Silicon 的 CPU / GPU / 神经网络引擎共享同一块物理内存（统一内存），MLX 利用这一点做到&amp;quot;零拷贝&amp;quot;，模型可以大到吃满整机内存，而不受独立显存限制。因此可以在没有独立显卡的 Mac 上，用接近 NumPy 的写法做 GPU/神经网络引擎加速的训练与推理。MLX-LM 是其在语言模型方向的开源实现，提供 generate / lora（微调）/ fuse（合并）等命令。
 基座模型选择：mlx-community/Qwen2.5-3B-Instruct-4bit（约 2GB、中文能力强、16GB 内存即可跑，且是 MLX 格式，开箱即用）。
