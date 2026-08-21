@@ -2,7 +2,7 @@
 date = '2026-08-15T21:56:27+08:00'
 draft = false
 title = '模型 LoRA 微调示例：油菜品种信息查询助手'
-categories = ['人工智能', '大模型模型']
+categories = ['人工智能', '大语言模型']
 tags = ['模型微调', '大语言模型', 'LoRA']
 toc = true
 +++
