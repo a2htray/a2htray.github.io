@@ -2,7 +2,7 @@
 date = '2025-12-23T14:35:28+08:00'
 draft = false
 title = '使用 Excel 做线性回归分析'
-categories = ['数据分析', '机器学习']
+categories = ['算法', '机器学习']
 tags = ['Excel', '数据分析', '线性回归', '解决问题']
 +++
 

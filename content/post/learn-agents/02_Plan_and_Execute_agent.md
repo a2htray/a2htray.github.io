@@ -1,7 +1,7 @@
 +++
 date = '2026-08-21T10:52:54+08:00'
 draft = false
-title = 'Plan-and-Execute 架构详解：先规划,再执行'
+title = 'Plan-and-Execute 架构详解：先规划，再执行'
 categories = ['人工智能', '智能体']
 tags = ['AI Agent', 'Plan-and-Execute', 'LangChain', 'Agent 架构']
 toc = true

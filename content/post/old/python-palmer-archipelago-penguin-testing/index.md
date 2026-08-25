@@ -4,7 +4,7 @@ date: 2022-04-11T13:28:26+08:00
 draft: false
 reward: false
 categories:
- - 数据分析
+ - 算法
  - 机器学习
 tags:
  - Matplotlib

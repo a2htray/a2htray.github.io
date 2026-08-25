@@ -4,7 +4,7 @@ date: 2022-04-11T18:57:39+08:00
 draft: false
 reward: false
 categories:
- - 数据分析
+ - 算法
  - 机器学习
 tags:
  - Chi-Square
