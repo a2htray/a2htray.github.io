@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>NDCG 详解：以油菜育种品系排序为例</title><url>/post/learn-algo/ndcg/</url><categories><category>算法</category><category>机器学习</category></categories><tags><tag>排序评估</tag><tag>排序学习</tag><tag>NDCG</tag></tags><content type="html">  概念 NDCG（Normalized Discounted Cumulative Gain，归一化折损累计增益） 是信息检索与排序学习中用来评价排序质量的核心指标。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>PostgreSQL 时间序列扩展 - TimescaleDB</title><url>/post/learn-db/postgresql-timescaledb/</url><categories><category>后端技术</category><category>PostgreSQL</category></categories><tags><tag>PostgreSQL</tag><tag>TimescaleDB</tag><tag>数据库</tag></tags><content type="html"><![CDATA[  TimescaleDB 介绍 TimescaleDB 是一个基于 PostgreSQL 的时间序列数据库扩展（不是独立数据库），通过安装扩展把 Postgres 变成能高效处理时序数据的引擎，兼容所有 Postgres 生态。TimescaleDB 使用场景下的数据带有 3 个明显的特征：
+带时间戳：数据中包含时间戳字段，用于记录数据的采集时间 写入数据量大：持续高频追加 按时间查询：特定时间区间内计算聚合、趋势、同比等指标 六大核心概念 Hypertable（超表）
+对用户呈现的 &amp;ldquo;一张表&amp;rdquo;，内部按时间自动拆分成多张物理子表。
+超表本身不存数据，只存定义和 chunk 元信息 每次 INSERT 按策略自动路由到对应 chunk 创建超表后，应用层依然像操作普通 Postgres 表一样读写，无需关心底层分片 支持二级分区，将单个时间块再打散到多个 chunk，避免单个 chunk 过大、提升写入并发 Chunk（数据块）
+Chunk 是超表的基本单位，每个 chunk 包含一定时间范围内的数据。
+一个 chunk 对应一个物理子表，名字形如 _hyper_X_Y 查询命中时间条件时，TimescaleDB 会自动做分区裁剪（partition pruning），只扫描相关 chunk，跳过无关时间范围，这是时序查询快的核心原因 chunk 的数量、大小可通过 chunk_time_interval 调优：写入越密集，应设越小的区间以避免单 chunk 过大；查询跨度越大，适当放大区间减少 chunk 数量 可通过 timescaledb_information.chunks 视图查看每个 chunk 的时间范围与体积 Compression（压缩）
+TimescaleDB 的压缩不是简单的列存 ZIP，而是列式压缩 + 时序专用编码结合：
+默认对 chunk 启用压缩后，数据从行存转为列存，并对数值列使用 delta-of-delta、GORILLA、字典编码等算法 典型时序场景（高频、列相关性高）可获得 90%+ 的空间压缩比 压缩是按 chunk 异步进行的，默认只压缩&amp;quot;较旧、不再频繁写入&amp;quot;的 chunk，避免冻结正在写入的数据 压缩后的 chunk 仍然可查询，查询时透明解压，对应用无感 Continuous …  ]]></content></entry><entry><title>NDCG 详解：以油菜育种品系排序为例</title><url>/post/learn-algo/ndcg/</url><categories><category>算法</category><category>机器学习</category></categories><tags><tag>排序评估</tag><tag>排序学习</tag><tag>NDCG</tag></tags><content type="html">  概念 NDCG（Normalized Discounted Cumulative Gain，归一化折损累计增益） 是信息检索与排序学习中用来评价排序质量的核心指标。
 它由三个逐层递进的概念组成：
 CG（Cumulative Gain，累计增益）：把排序结果前 k 个位置的相关性得分直接相加。它不关心顺序 —— 排第 1 还是排第 100，贡献完全相同。 DCG（Discounted Cumulative Gain，折损累计增益）：在 CG 基础上，给越靠后的位置施加越大的折扣（惩罚）。因为决策者通常只关注前几位，排在前面的高相关项理应获得更高权重。 NDCG（归一化折损累计增益）：把 DCG 除以一个理想排序的 DCG（即 IDCG），把结果压缩到 [0, 1] 区间，方便不同任务之间横向比较。 一句话总结：NDCG 衡量的是真正重要的项，有没有被排在前面，并用 0~1 的分数表达。
 作用 NDCG 作为排序评价指标，其普适价值体现在以下几个方面：
