@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Reflexion 架构详解：让 Agent 学会自我纠错</title><url>/post/learn-agents/03_reflexion_agent/</url><categories><category>人工智能</category><category>智能体</category></categories><tags><tag>AI Agent</tag><tag>Reflexion</tag><tag>LangChain</tag><tag>Agent 架构</tag></tags><content type="html"><![CDATA[   系列文章第 3 篇 · AI Agent 六大主流架构拆解 本篇拆解 Reflexion，把“执行 → 评估 → 反思 → 记忆”的自我纠错循环装进 Agent，并把它落到油菜杂交组合配置方案的迭代优化这一典型“试错改进”任务上。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Router 架构详解：让 Agent 学会按需分发</title><url>/post/learn-agents/04_router_agent/</url><categories><category>人工智能</category><category>智能体</category></categories><tags><tag>AI Agent</tag><tag>Router</tag><tag>LangChain</tag><tag>Agent 架构</tag></tags><content type="html">   系列文章第 4 篇 · AI Agent 六大主流架构拆解
+本篇拆解 Router，解决一个入口、多个专长的分发问题，并把它落到油菜种植技术咨询这一典型多领域场景上。
+什么是 Router 核心思想一句话：前置一个路由器，先把输入按意图/领域分类，再分发给对应的领域子 Agent，各自处理后再以统一格式返回。
+一个最小运行单元：
+1 2 3 4 5 6 7 用户问题 ↓ Router 路由器：判定领域 ↓ 领域子 Agent A / B / C ↓ 汇聚输出 示例背景：油菜种植技术咨询 油菜种植涉及多个专业领域：栽培(播期、密度、灌溉)、植保(菌核病、蚜虫等病虫害防治)、土肥(施肥方案、硼肥等)。农户或农技人员问一个问题，往往只对应其中一个领域。
+如果用一个通用 Agent 回答所有问题，会面临三个麻烦：
+提示词臃肿：必须把栽培、植保、土肥三套知识、三套工具都塞进同一份 system prompt，互相干扰。 工具冲突：一个通用 Agent 可能同时拿到栽培工具和植保工具，在不确定领域时乱调用。 效果天花板低：每个领域都有专业术语与最佳实践，通用 Agent 很难在每个方向上都做深。 Router 的做法是：对外只暴露一个问答入口，对内按问题领域分发给专门的栽培 Agent、植保 Agent、土肥 Agent。 每个子 Agent 只配自己领域的提示词和工具，Router 则只做一件事——判定这个问题属于哪个领域。
+架构与运行机制 运行机制三要素：
+统一入口：用户只面对一个入口，不需要提前选择领域。 Router 路由器：根据输入语义判定领域/意图，返回路由结果(领域 + 理由)。 领域子 Agent + 结果汇聚：被命中的子 Agent 用专属提示词和工具处理问题，未命中时走兜底策略(通用 Agent 或追问澄清)，最后统一格式返回给用户。 关键设计点：
+Router 只做分类，不做业务逻辑：它不应该自己生成最终答案，只决定交给哪个子 Agent。 子 Agent 之间尽量解耦：每个子 Agent 的系统提示、工具集、输出格式只关心自己的领域，降低相互干扰。 路由判定的准确率是瓶颈：一旦分错，后续子 Agent 再强也救不回来。因此 Router 的 prompt 要给出清晰的领域定义与示例，必要时加兜底或二次确认。 输出格式最好统一：各子 Agent 返回的格 …  </content></entry><entry><title>Reflexion 架构详解：让 Agent 学会自我纠错</title><url>/post/learn-agents/03_reflexion_agent/</url><categories><category>人工智能</category><category>智能体</category></categories><tags><tag>AI Agent</tag><tag>Reflexion</tag><tag>LangChain</tag><tag>Agent 架构</tag></tags><content type="html"><![CDATA[   系列文章第 3 篇 · AI Agent 六大主流架构拆解 本篇拆解 Reflexion，把“执行 → 评估 → 反思 → 记忆”的自我纠错循环装进 Agent，并把它落到油菜杂交组合配置方案的迭代优化这一典型“试错改进”任务上。
 什么是 Reflexion 核心思想一句话：在执行循环外面再套一层 —— Actor 产出尝试，Evaluator 给评分与反馈，Self-Reflector 根据反馈生成反思经验存入 Memory；下一轮重试时把累积的经验注入上下文，逐轮逼近目标。
 Note：反思经验。
 一个最小运行单元：
