@@ -1,0 +1,735 @@
+<!doctype html><html lang=zh-CN data-theme=light><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.152.2"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon-32x32.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple-touch-icon.png><meta itemprop=name content="Multi-Agent 架构详解：让 Agent 组成团队分工协作"><meta itemprop=description content="记录我的生活、工作与成长。"><meta name=description content="记录我的生活、工作与成长。"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://a2htray.github.io/imgs/my_avatar.jpg"><meta itemprop=keywords content="AI Agent,Multi-Agent,LangChain,Agent 架构"><meta property="og:type" content="article"><meta property="og:title" content="Multi-Agent 架构详解：让 Agent 组成团队分工协作"><meta property="og:description" content="记录我的生活、工作与成长。"><meta property="og:image" content="/imgs/my_avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://a2htray.github.io/post/learn-agents/05_multi_agent_agent/"><meta property="og:site_name" content="快乐冲浪与生活"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="a2htray"><meta property="article:published_time" content="2026-09-02 11:11:02 +0800 CST"><meta property="article:modified_time" content="2026-09-02 11:11:02 +0800 CST"><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/font-awesome/6.7.2/css/all.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.css><link rel=stylesheet href="/css/main.min.css?=1788416253"><style type=text/css>.post-footer hr:after{content:"~ 我可是有底线的哟 ~"}.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><link rel=stylesheet type=text/css href="/css/custom_style.css?=1788416253"><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return 0[0];const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),0[0]):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>Multi-Agent 架构详解：让 Agent 组成团队分工协作 - 快乐冲浪与生活</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>快乐冲浪与生活</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>多体验、多体会、多体悟</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-tags"><a href=/tags/ class=hvr-icon-pulse rel=section><i class="fa fa-tag hvr-icon"></i>标签</a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#什么是-multi-agent>什么是 Multi-Agent</a></li><li><a href=#示例背景油菜新品种审定申报材料准备>示例背景：油菜新品种审定申报材料准备</a></li><li><a href=#架构与运行机制>架构与运行机制</a></li><li><a href=#基于-langchain-的代码演示>基于 LangChain 的代码演示</a><ul><li><a href=#定义三个领域工具>定义三个领域工具</a></li><li><a href=#定义三个专职-worker-agent>定义三个专职 Worker Agent</a></li><li><a href=#定义-supervisor-agent-和-reporter-agent>定义 Supervisor Agent 和 Reporter Agent</a></li><li><a href=#高度-执行-汇总>高度-执行-汇总</a></li><li><a href=#运行>运行</a></li></ul></li><li><a href=#优缺点>优缺点</a><ul><li><a href=#优点>优点</a></li><li><a href=#缺点>缺点</a></li></ul></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=a2htray src=/imgs/img-lazy-loading.gif data-src=/imgs/my_avatar.jpg><p class=site-author-name itemprop=name>a2htray</p><div class=site-description itemprop=description>记录我的生活、工作与成长。</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/post/><span class=site-state-item-count>201</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>47</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>202</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/a2htray title="Github → https://github.com/a2htray" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/a2htray/a2htray.github.io rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentColor" class="octo-body"/></svg></a><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://a2htray.github.io/post/learn-agents/05_multi_agent_agent/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/my_avatar.jpg"><meta itemprop=name content="a2htray"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="a2htray"><meta itemprop=description content="记录我的生活、工作与成长。"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="Multi-Agent 架构详解：让 Agent 组成团队分工协作"><meta itemprop=description content='
+    系列文章第 5 篇 · AI Agent 六大主流架构拆解
+本篇拆解 Multi-Agent 架构，从"一个 Agent 包打天下"走向"一个团队分工协作"，落到油菜新品种审定申报材料的协同准备这一典型多角色场景上。'></span><header class=post-header><h1 class=post-title itemprop="name headline">Multi-Agent 架构详解：让 Agent 组成团队分工协作
+<a href=https://github.com/a2htray/a2htray.github.io/tree/main/content/post/learn-agents/05_Multi_Agent_agent.md rel="noopener external nofollow noreferrer" target=_blank class="exturl post-edit-link" title=编辑><i class="fa fa-pen-nib"></i></a></h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2026-09-02 11:11:02 +08:00" itemprop="dateCreated datePublished" datetime="2026-09-02 11:11:02 +0800 CST">2026-09-02
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E6%99%BA%E8%83%BD%E4%BD%93/ itemprop=url rel=index><span itemprop=name>人工智能/智能体</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="fas fa-solid fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>8002</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="fas fa-solid fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>16分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="fas fa-solid fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/post/learn-agents/05_multi_agent_agent/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><blockquote><p>系列文章第 5 篇 · AI Agent 六大主流架构拆解
+本篇拆解 Multi-Agent 架构，从"一个 Agent 包打天下"走向"一个团队分工协作"，落到<strong>油菜新品种审定申报材料的协同准备</strong>这一典型多角色场景上。</p><a id=more></a></blockquote><h2 id=什么是-multi-agent>什么是 Multi-Agent
+<a class=header-anchor href=#%e4%bb%80%e4%b9%88%e6%98%af-multi-agent></a></h2><p>核心思想一句话：<strong>多个 Agent 各司其职，由一个 Supervisor 主管负责拆解任务、派发、回收结果、汇总。</strong></p><p>一个最小运行单元：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a class=lnlinks href=#hl-0-1> 1</a>
+</span><span class=lnt id=hl-0-2><a class=lnlinks href=#hl-0-2> 2</a>
+</span><span class=lnt id=hl-0-3><a class=lnlinks href=#hl-0-3> 3</a>
+</span><span class=lnt id=hl-0-4><a class=lnlinks href=#hl-0-4> 4</a>
+</span><span class=lnt id=hl-0-5><a class=lnlinks href=#hl-0-5> 5</a>
+</span><span class=lnt id=hl-0-6><a class=lnlinks href=#hl-0-6> 6</a>
+</span><span class=lnt id=hl-0-7><a class=lnlinks href=#hl-0-7> 7</a>
+</span><span class=lnt id=hl-0-8><a class=lnlinks href=#hl-0-8> 8</a>
+</span><span class=lnt id=hl-0-9><a class=lnlinks href=#hl-0-9> 9</a>
+</span><span class=lnt id=hl-0-10><a class=lnlinks href=#hl-0-10>10</a>
+</span><span class=lnt id=hl-0-11><a class=lnlinks href=#hl-0-11>11</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>用户任务
+</span></span><span class=line><span class=cl>  ↓
+</span></span><span class=line><span class=cl>Supervisor 主管:拆解任务 · 派发 Worker
+</span></span><span class=line><span class=cl>  ↓
+</span></span><span class=line><span class=cl>专职 Worker A / B / C（各挂一个领域工具）
+</span></span><span class=line><span class=cl>  ↓
+</span></span><span class=line><span class=cl>结果回传 Supervisor
+</span></span><span class=line><span class=cl>  ↓
+</span></span><span class=line><span class=cl>Supervisor:决定继续派发 / 收敛汇总
+</span></span><span class=line><span class=cl>  ↓
+</span></span><span class=line><span class=cl>汇总输出</span></span></code></pre></td></tr></table></div></div><p>Multi-Agent 不是简单的多 Agent 组合，关键在于<strong>角色化分工与统一调度</strong>：</p><ul><li><strong>角色化分工</strong>：每个 Worker 有专属的提示词、工具、记忆，为单一职责优化，效果上限远高于单个通用 Agent。</li><li><strong>统一调度</strong>：Supervisor 决定“该谁做 / 接下来做什么 / 何时收尾”，让多角色不互相推诿、也不无序循环。</li><li><strong>过程可观测</strong>：派发记录与中间产物即审计线索，便于复盘。</li></ul><h2 id=示例背景油菜新品种审定申报材料准备>示例背景：油菜新品种审定申报材料准备
+<a class=header-anchor href=#%e7%a4%ba%e4%be%8b%e8%83%8c%e6%99%af%e6%b2%b9%e8%8f%9c%e6%96%b0%e5%93%81%e7%a7%8d%e5%ae%a1%e5%ae%9a%e7%94%b3%e6%8a%a5%e6%9d%90%e6%96%99%e5%87%86%e5%a4%87></a></h2><p>油菜新品种要想拿到审定编号，需要向品种审定委员会提交一份完整、规范的申报材料包，典型包括：</p><ul><li>品种特征特性描述（亲本来源、生育期、株高、抗病性等 DUS 性状档案）。</li><li>DUS 测试报告核查（特异性 Distinctness、一致性 Uniformity、稳定性 Stability 三项是否达标）。</li><li>区域试验与生产试验总结（一般两年区试 + 一年生试）。</li><li>品质检测报告（芥酸、硫苷、含油量等是否达双低标准）。</li><li>栽培技术要点与适宜推广区域。</li></ul><p>这是一份<strong>多角色协作才能做好的工作</strong>：</p><ol><li><strong>田间调查员</strong>需要从品种档案库拉出 DUS 性状，回答「品种长什么样、怎么长的」。</li><li><strong>DUS 审查员</strong>需要核查三项测试是否达标，回答「品种够不够资格」。</li><li><strong>材料清单员</strong>需要给出按最新审定规则的申报材料清单与起草要点，回答「该准备哪些材料、怎么写」。</li></ol><p>如果用一个全能 Agent做，要么提示词塞得太满、工具冲突严重，要么某个角色做得不够深入。</p><p>Multi-Agent 的做法是：<strong>对内分三个专职 Worker，每个只关心自己的领域；对外由 Supervisor 统一调度，按需派发、回收、汇总，最终交付一份完整的申报材料草稿。</strong></p><h2 id=架构与运行机制>架构与运行机制
+<a class=header-anchor href=#%e6%9e%b6%e6%9e%84%e4%b8%8e%e8%bf%90%e8%a1%8c%e6%9c%ba%e5%88%b6></a></h2><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-agents/multi-agent-mechanism.png alt="Multi-Agent 运行机制"></p><p>运行机制三要素：</p><ul><li><strong>Supervisor 主管</strong>：唯一拥有<strong>调度权</strong>的 Agent，基于当前任务与已完成的派发记录，决定下一步派给谁、按什么指令做、何时结束。</li><li><strong>专职 Worker</strong>：每个 Worker 只做自己职责范围内的工作，可挂专属工具，可以独立被替换或迭代。</li><li><strong>派发—回收闭环</strong>：Supervisor 派发任务 → Worker 执行 → 结果回传 Supervisor → Supervisor 根据结果再次决策（继续派发 / 补充 / 收尾），<strong>多轮循环</strong>直至信息足够并汇总。</li></ul><p>关键设计点：</p><ul><li><strong>Supervisor 只调度，不亲自答题</strong>。这样不会和 Worker 抢活，也能让 Worker 持续优化迭代而 Supervisor 不动。</li><li><strong>派发指令要明确</strong>：Supervisor 给 Worker 的指令必须包含所需参数（如品种名、要查的字段），否则 Worker 容易因信息不足反复追问。</li><li><strong>结果回传要结构化</strong>：Worker 用 <code>response_format</code> 返回 Pydantic 结构化结果（含结论 + 关键字段），Supervisor 与汇总员直接基于字段复用，无需解析自然语言。</li><li><strong>轮次上限是硬安全网</strong>：Supervisor 自己决定何时结束，但若其陷入循环或漏派，需要 <code>max_rounds</code> 上限兜底，强制收尾走汇总。</li><li><strong>可选汇总员</strong>：多轮派发结束后，可单独由一个「汇总员」角色把派发记录与 Worker 输出合成最终报告，让 Supervisor 保持调度职责单一。</li></ul><h2 id=基于-langchain-的代码演示>基于 LangChain 的代码演示
+<a class=header-anchor href=#%e5%9f%ba%e4%ba%8e-langchain-%e7%9a%84%e4%bb%a3%e7%a0%81%e6%bc%94%e7%a4%ba></a></h2><h3 id=定义三个领域工具>定义三个领域工具
+<a class=header-anchor href=#%e5%ae%9a%e4%b9%89%e4%b8%89%e4%b8%aa%e9%a2%86%e5%9f%9f%e5%b7%a5%e5%85%b7></a></h3><p>每个 Worker 各挂一个工具，分别负责查询品种特征特性档案、DUS 测试结果、最新审定申报材料清单。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a class=lnlinks href=#hl-1-1> 1</a>
+</span><span class=lnt id=hl-1-2><a class=lnlinks href=#hl-1-2> 2</a>
+</span><span class=lnt id=hl-1-3><a class=lnlinks href=#hl-1-3> 3</a>
+</span><span class=lnt id=hl-1-4><a class=lnlinks href=#hl-1-4> 4</a>
+</span><span class=lnt id=hl-1-5><a class=lnlinks href=#hl-1-5> 5</a>
+</span><span class=lnt id=hl-1-6><a class=lnlinks href=#hl-1-6> 6</a>
+</span><span class=lnt id=hl-1-7><a class=lnlinks href=#hl-1-7> 7</a>
+</span><span class=lnt id=hl-1-8><a class=lnlinks href=#hl-1-8> 8</a>
+</span><span class=lnt id=hl-1-9><a class=lnlinks href=#hl-1-9> 9</a>
+</span><span class=lnt id=hl-1-10><a class=lnlinks href=#hl-1-10>10</a>
+</span><span class=lnt id=hl-1-11><a class=lnlinks href=#hl-1-11>11</a>
+</span><span class=lnt id=hl-1-12><a class=lnlinks href=#hl-1-12>12</a>
+</span><span class=lnt id=hl-1-13><a class=lnlinks href=#hl-1-13>13</a>
+</span><span class=lnt id=hl-1-14><a class=lnlinks href=#hl-1-14>14</a>
+</span><span class=lnt id=hl-1-15><a class=lnlinks href=#hl-1-15>15</a>
+</span><span class=lnt id=hl-1-16><a class=lnlinks href=#hl-1-16>16</a>
+</span><span class=lnt id=hl-1-17><a class=lnlinks href=#hl-1-17>17</a>
+</span><span class=lnt id=hl-1-18><a class=lnlinks href=#hl-1-18>18</a>
+</span><span class=lnt id=hl-1-19><a class=lnlinks href=#hl-1-19>19</a>
+</span><span class=lnt id=hl-1-20><a class=lnlinks href=#hl-1-20>20</a>
+</span><span class=lnt id=hl-1-21><a class=lnlinks href=#hl-1-21>21</a>
+</span><span class=lnt id=hl-1-22><a class=lnlinks href=#hl-1-22>22</a>
+</span><span class=lnt id=hl-1-23><a class=lnlinks href=#hl-1-23>23</a>
+</span><span class=lnt id=hl-1-24><a class=lnlinks href=#hl-1-24>24</a>
+</span><span class=lnt id=hl-1-25><a class=lnlinks href=#hl-1-25>25</a>
+</span><span class=lnt id=hl-1-26><a class=lnlinks href=#hl-1-26>26</a>
+</span><span class=lnt id=hl-1-27><a class=lnlinks href=#hl-1-27>27</a>
+</span><span class=lnt id=hl-1-28><a class=lnlinks href=#hl-1-28>28</a>
+</span><span class=lnt id=hl-1-29><a class=lnlinks href=#hl-1-29>29</a>
+</span><span class=lnt id=hl-1-30><a class=lnlinks href=#hl-1-30>30</a>
+</span><span class=lnt id=hl-1-31><a class=lnlinks href=#hl-1-31>31</a>
+</span><span class=lnt id=hl-1-32><a class=lnlinks href=#hl-1-32>32</a>
+</span><span class=lnt id=hl-1-33><a class=lnlinks href=#hl-1-33>33</a>
+</span><span class=lnt id=hl-1-34><a class=lnlinks href=#hl-1-34>34</a>
+</span><span class=lnt id=hl-1-35><a class=lnlinks href=#hl-1-35>35</a>
+</span><span class=lnt id=hl-1-36><a class=lnlinks href=#hl-1-36>36</a>
+</span><span class=lnt id=hl-1-37><a class=lnlinks href=#hl-1-37>37</a>
+</span><span class=lnt id=hl-1-38><a class=lnlinks href=#hl-1-38>38</a>
+</span><span class=lnt id=hl-1-39><a class=lnlinks href=#hl-1-39>39</a>
+</span><span class=lnt id=hl-1-40><a class=lnlinks href=#hl-1-40>40</a>
+</span><span class=lnt id=hl-1-41><a class=lnlinks href=#hl-1-41>41</a>
+</span><span class=lnt id=hl-1-42><a class=lnlinks href=#hl-1-42>42</a>
+</span><span class=lnt id=hl-1-43><a class=lnlinks href=#hl-1-43>43</a>
+</span><span class=lnt id=hl-1-44><a class=lnlinks href=#hl-1-44>44</a>
+</span><span class=lnt id=hl-1-45><a class=lnlinks href=#hl-1-45>45</a>
+</span><span class=lnt id=hl-1-46><a class=lnlinks href=#hl-1-46>46</a>
+</span><span class=lnt id=hl-1-47><a class=lnlinks href=#hl-1-47>47</a>
+</span><span class=lnt id=hl-1-48><a class=lnlinks href=#hl-1-48>48</a>
+</span><span class=lnt id=hl-1-49><a class=lnlinks href=#hl-1-49>49</a>
+</span><span class=lnt id=hl-1-50><a class=lnlinks href=#hl-1-50>50</a>
+</span><span class=lnt id=hl-1-51><a class=lnlinks href=#hl-1-51>51</a>
+</span><span class=lnt id=hl-1-52><a class=lnlinks href=#hl-1-52>52</a>
+</span><span class=lnt id=hl-1-53><a class=lnlinks href=#hl-1-53>53</a>
+</span><span class=lnt id=hl-1-54><a class=lnlinks href=#hl-1-54>54</a>
+</span><span class=lnt id=hl-1-55><a class=lnlinks href=#hl-1-55>55</a>
+</span><span class=lnt id=hl-1-56><a class=lnlinks href=#hl-1-56>56</a>
+</span><span class=lnt id=hl-1-57><a class=lnlinks href=#hl-1-57>57</a>
+</span><span class=lnt id=hl-1-58><a class=lnlinks href=#hl-1-58>58</a>
+</span><span class=lnt id=hl-1-59><a class=lnlinks href=#hl-1-59>59</a>
+</span><span class=lnt id=hl-1-60><a class=lnlinks href=#hl-1-60>60</a>
+</span><span class=lnt id=hl-1-61><a class=lnlinks href=#hl-1-61>61</a>
+</span><span class=lnt id=hl-1-62><a class=lnlinks href=#hl-1-62>62</a>
+</span><span class=lnt id=hl-1-63><a class=lnlinks href=#hl-1-63>63</a>
+</span><span class=lnt id=hl-1-64><a class=lnlinks href=#hl-1-64>64</a>
+</span><span class=lnt id=hl-1-65><a class=lnlinks href=#hl-1-65>65</a>
+</span><span class=lnt id=hl-1-66><a class=lnlinks href=#hl-1-66>66</a>
+</span><span class=lnt id=hl-1-67><a class=lnlinks href=#hl-1-67>67</a>
+</span><span class=lnt id=hl-1-68><a class=lnlinks href=#hl-1-68>68</a>
+</span><span class=lnt id=hl-1-69><a class=lnlinks href=#hl-1-69>69</a>
+</span><span class=lnt id=hl-1-70><a class=lnlinks href=#hl-1-70>70</a>
+</span><span class=lnt id=hl-1-71><a class=lnlinks href=#hl-1-71>71</a>
+</span><span class=lnt id=hl-1-72><a class=lnlinks href=#hl-1-72>72</a>
+</span><span class=lnt id=hl-1-73><a class=lnlinks href=#hl-1-73>73</a>
+</span><span class=lnt id=hl-1-74><a class=lnlinks href=#hl-1-74>74</a>
+</span><span class=lnt id=hl-1-75><a class=lnlinks href=#hl-1-75>75</a>
+</span><span class=lnt id=hl-1-76><a class=lnlinks href=#hl-1-76>76</a>
+</span><span class=lnt id=hl-1-77><a class=lnlinks href=#hl-1-77>77</a>
+</span><span class=lnt id=hl-1-78><a class=lnlinks href=#hl-1-78>78</a>
+</span><span class=lnt id=hl-1-79><a class=lnlinks href=#hl-1-79>79</a>
+</span><span class=lnt id=hl-1-80><a class=lnlinks href=#hl-1-80>80</a>
+</span><span class=lnt id=hl-1-81><a class=lnlinks href=#hl-1-81>81</a>
+</span><span class=lnt id=hl-1-82><a class=lnlinks href=#hl-1-82>82</a>
+</span><span class=lnt id=hl-1-83><a class=lnlinks href=#hl-1-83>83</a>
+</span><span class=lnt id=hl-1-84><a class=lnlinks href=#hl-1-84>84</a>
+</span><span class=lnt id=hl-1-85><a class=lnlinks href=#hl-1-85>85</a>
+</span><span class=lnt id=hl-1-86><a class=lnlinks href=#hl-1-86>86</a>
+</span><span class=lnt id=hl-1-87><a class=lnlinks href=#hl-1-87>87</a>
+</span><span class=lnt id=hl-1-88><a class=lnlinks href=#hl-1-88>88</a>
+</span><span class=lnt id=hl-1-89><a class=lnlinks href=#hl-1-89>89</a>
+</span><span class=lnt id=hl-1-90><a class=lnlinks href=#hl-1-90>90</a>
+</span><span class=lnt id=hl-1-91><a class=lnlinks href=#hl-1-91>91</a>
+</span><span class=lnt id=hl-1-92><a class=lnlinks href=#hl-1-92>92</a>
+</span><span class=lnt id=hl-1-93><a class=lnlinks href=#hl-1-93>93</a>
+</span><span class=lnt id=hl-1-94><a class=lnlinks href=#hl-1-94>94</a>
+</span><span class=lnt id=hl-1-95><a class=lnlinks href=#hl-1-95>95</a>
+</span><span class=lnt id=hl-1-96><a class=lnlinks href=#hl-1-96>96</a>
+</span><span class=lnt id=hl-1-97><a class=lnlinks href=#hl-1-97>97</a>
+</span><span class=lnt id=hl-1-98><a class=lnlinks href=#hl-1-98>98</a>
+</span><span class=lnt id=hl-1-99><a class=lnlinks href=#hl-1-99>99</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain.tools</span> <span class=kn>import</span> <span class=n>tool</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 定义工具</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 模拟品种特征特性档案（DUS 性状）</span>
+</span></span><span class=line><span class=cl><span class=n>VARIETY_PROFILE</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;秦油2026&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;亲本来源&#34;</span><span class=p>:</span> <span class=s2>&#34;陕油28 × 华油杂62R&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;生育期d&#34;</span><span class=p>:</span> <span class=mi>232</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;株高cm&#34;</span><span class=p>:</span> <span class=mi>168</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;一次分枝数&#34;</span><span class=p>:</span> <span class=mi>9</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;单株角果数&#34;</span><span class=p>:</span> <span class=mi>320</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;每角粒数&#34;</span><span class=p>:</span> <span class=mi>22</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;抗菌核病&#34;</span><span class=p>:</span> <span class=s2>&#34;高抗&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;抗病毒病&#34;</span><span class=p>:</span> <span class=s2>&#34;中抗&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;抗倒性&#34;</span><span class=p>:</span> <span class=s2>&#34;强&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 模拟 DUS 测试结果</span>
+</span></span><span class=line><span class=cl><span class=n>DUS_TEST</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;秦油2026&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;特异性(D)&#34;</span><span class=p>:</span> <span class=s2>&#34;通过（与近似品种差异显著）&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;一致性(U)&#34;</span><span class=p>:</span> <span class=s2>&#34;通过（变异系数 2.8%）&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;稳定性(S)&#34;</span><span class=p>:</span> <span class=s2>&#34;通过（两年繁殖性状稳定）&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 模拟最新审定申报材料清单</span>
+</span></span><span class=line><span class=cl><span class=n>APPROVAL_RULES</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;申报书&#34;</span><span class=p>:</span> <span class=s2>&#34;《非主要农作物品种登记申请表》或省级审定申请书&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;附件清单&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;品种选育报告&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;区域试验与生产试验总结（2 年区试 + 1 年生试）&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;DUS 测试报告&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;品质检测报告（双低指标）&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;抗病性鉴定报告&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;特征特性描述表&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;栽培技术要点与适宜区域说明&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;知识产权与育种者承诺书&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;栽培要点&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;长江中下游直播 9 月下旬至 10 月中旬,移栽提前 7–10 天。&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;直播每亩留苗 2.0–2.5 万株。&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;基肥每亩有机肥 1000–1500 kg + 复合肥 30–40 kg。&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;蕾薹期与初花期注意补硼防花而不实。&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>VarietyInput</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>variety_name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;品种名称,如 &#39;秦油2026&#39;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@tool</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>name_or_callable</span><span class=o>=</span><span class=s2>&#34;query_variety_profile&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>description</span><span class=o>=</span><span class=s2>&#34;查询品种特征特性档案（DUS 性状）&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>args_schema</span><span class=o>=</span><span class=n>VarietyInput</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>query_variety_profile</span><span class=p>(</span><span class=n>variety_name</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>variety_name</span> <span class=ow>in</span> <span class=n>VARIETY_PROFILE</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>p</span> <span class=o>=</span> <span class=n>VARIETY_PROFILE</span><span class=p>[</span><span class=n>variety_name</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=sa>f</span><span class=s2>&#34;品种 &#39;</span><span class=si>{</span><span class=n>variety_name</span><span class=si>}</span><span class=s2>&#39; 特征特性档案:</span><span class=se>\n</span><span class=s2>&#34;</span> <span class=o>+</span> <span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=sa>f</span><span class=s2>&#34;- </span><span class=si>{</span><span class=n>k</span><span class=si>}</span><span class=s2>: </span><span class=si>{</span><span class=n>v</span><span class=si>}</span><span class=s2>&#34;</span> <span class=k>for</span> <span class=n>k</span><span class=p>,</span> <span class=n>v</span> <span class=ow>in</span> <span class=n>p</span><span class=o>.</span><span class=n>items</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=sa>f</span><span class=s2>&#34;未找到品种 &#39;</span><span class=si>{</span><span class=n>variety_name</span><span class=si>}</span><span class=s2>&#39; 的档案。&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@tool</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>name_or_callable</span><span class=o>=</span><span class=s2>&#34;check_dus_test&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>description</span><span class=o>=</span><span class=s2>&#34;核查某品种的 DUS 测试结果（特异性/一致性/稳定性三项）&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>args_schema</span><span class=o>=</span><span class=n>VarietyInput</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>check_dus_test</span><span class=p>(</span><span class=n>variety_name</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>variety_name</span> <span class=ow>in</span> <span class=n>DUS_TEST</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>d</span> <span class=o>=</span> <span class=n>DUS_TEST</span><span class=p>[</span><span class=n>variety_name</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>lines</span> <span class=o>=</span> <span class=p>[</span><span class=sa>f</span><span class=s2>&#34;品种 &#39;</span><span class=si>{</span><span class=n>variety_name</span><span class=si>}</span><span class=s2>&#39; DUS 测试结果:&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>k</span><span class=p>,</span> <span class=n>v</span> <span class=ow>in</span> <span class=n>d</span><span class=o>.</span><span class=n>items</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=n>lines</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;- </span><span class=si>{</span><span class=n>k</span><span class=si>}</span><span class=s2>: </span><span class=si>{</span><span class=n>v</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>all_pass</span> <span class=o>=</span> <span class=nb>all</span><span class=p>(</span><span class=s2>&#34;通过&#34;</span> <span class=ow>in</span> <span class=n>v</span> <span class=k>for</span> <span class=n>v</span> <span class=ow>in</span> <span class=n>d</span><span class=o>.</span><span class=n>values</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>        <span class=n>lines</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>综合:</span><span class=si>{</span><span class=s1>&#39;三项全部达标,可申请审定&#39;</span> <span class=k>if</span> <span class=n>all_pass</span> <span class=k>else</span> <span class=s1>&#39;存在未达标项,需复核&#39;</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>lines</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=sa>f</span><span class=s2>&#34;未找到品种 &#39;</span><span class=si>{</span><span class=n>variety_name</span><span class=si>}</span><span class=s2>&#39; 的 DUS 测试结果。&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@tool</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>name_or_callable</span><span class=o>=</span><span class=s2>&#34;query_approval_rules&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>description</span><span class=o>=</span><span class=s2>&#34;查询当前品种审定申报材料清单与栽培要点&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>query_approval_rules</span><span class=p>()</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>rules</span> <span class=o>=</span> <span class=n>APPROVAL_RULES</span>
+</span></span><span class=line><span class=cl>    <span class=n>lines</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;品种审定申报材料清单:&#34;</span><span class=p>,</span> <span class=sa>f</span><span class=s2>&#34;- 申报书:</span><span class=si>{</span><span class=n>rules</span><span class=p>[</span><span class=s1>&#39;申报书&#39;</span><span class=p>]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>,</span> <span class=s2>&#34;- 附件清单:&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>item</span> <span class=ow>in</span> <span class=n>rules</span><span class=p>[</span><span class=s2>&#34;附件清单&#34;</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=n>lines</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;  · </span><span class=si>{</span><span class=n>item</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>lines</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=s2>&#34;- 栽培要点:&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>item</span> <span class=ow>in</span> <span class=n>rules</span><span class=p>[</span><span class=s2>&#34;栽培要点&#34;</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=n>lines</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;  · </span><span class=si>{</span><span class=n>item</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>lines</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=定义三个专职-worker-agent>定义三个专职 Worker Agent
+<a class=header-anchor href=#%e5%ae%9a%e4%b9%89%e4%b8%89%e4%b8%aa%e4%b8%93%e8%81%8c-worker-agent></a></h3><p>每个 Worker 只挂一个工具，system_prompt 只关心自己职责；更重要的一点：<strong>每个 Worker 都用 <code>response_format</code> 返回结构化结果</strong>，而不是纯文本——这样 Supervisor 与汇总员都能基于字段直接做后续操作，不必再解析自然语言。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a class=lnlinks href=#hl-2-1> 1</a>
+</span><span class=lnt id=hl-2-2><a class=lnlinks href=#hl-2-2> 2</a>
+</span><span class=lnt id=hl-2-3><a class=lnlinks href=#hl-2-3> 3</a>
+</span><span class=lnt id=hl-2-4><a class=lnlinks href=#hl-2-4> 4</a>
+</span><span class=lnt id=hl-2-5><a class=lnlinks href=#hl-2-5> 5</a>
+</span><span class=lnt id=hl-2-6><a class=lnlinks href=#hl-2-6> 6</a>
+</span><span class=lnt id=hl-2-7><a class=lnlinks href=#hl-2-7> 7</a>
+</span><span class=lnt id=hl-2-8><a class=lnlinks href=#hl-2-8> 8</a>
+</span><span class=lnt id=hl-2-9><a class=lnlinks href=#hl-2-9> 9</a>
+</span><span class=lnt id=hl-2-10><a class=lnlinks href=#hl-2-10>10</a>
+</span><span class=lnt id=hl-2-11><a class=lnlinks href=#hl-2-11>11</a>
+</span><span class=lnt id=hl-2-12><a class=lnlinks href=#hl-2-12>12</a>
+</span><span class=lnt id=hl-2-13><a class=lnlinks href=#hl-2-13>13</a>
+</span><span class=lnt id=hl-2-14><a class=lnlinks href=#hl-2-14>14</a>
+</span><span class=lnt id=hl-2-15><a class=lnlinks href=#hl-2-15>15</a>
+</span><span class=lnt id=hl-2-16><a class=lnlinks href=#hl-2-16>16</a>
+</span><span class=lnt id=hl-2-17><a class=lnlinks href=#hl-2-17>17</a>
+</span><span class=lnt id=hl-2-18><a class=lnlinks href=#hl-2-18>18</a>
+</span><span class=lnt id=hl-2-19><a class=lnlinks href=#hl-2-19>19</a>
+</span><span class=lnt id=hl-2-20><a class=lnlinks href=#hl-2-20>20</a>
+</span><span class=lnt id=hl-2-21><a class=lnlinks href=#hl-2-21>21</a>
+</span><span class=lnt id=hl-2-22><a class=lnlinks href=#hl-2-22>22</a>
+</span><span class=lnt id=hl-2-23><a class=lnlinks href=#hl-2-23>23</a>
+</span><span class=lnt id=hl-2-24><a class=lnlinks href=#hl-2-24>24</a>
+</span><span class=lnt id=hl-2-25><a class=lnlinks href=#hl-2-25>25</a>
+</span><span class=lnt id=hl-2-26><a class=lnlinks href=#hl-2-26>26</a>
+</span><span class=lnt id=hl-2-27><a class=lnlinks href=#hl-2-27>27</a>
+</span><span class=lnt id=hl-2-28><a class=lnlinks href=#hl-2-28>28</a>
+</span><span class=lnt id=hl-2-29><a class=lnlinks href=#hl-2-29>29</a>
+</span><span class=lnt id=hl-2-30><a class=lnlinks href=#hl-2-30>30</a>
+</span><span class=lnt id=hl-2-31><a class=lnlinks href=#hl-2-31>31</a>
+</span><span class=lnt id=hl-2-32><a class=lnlinks href=#hl-2-32>32</a>
+</span><span class=lnt id=hl-2-33><a class=lnlinks href=#hl-2-33>33</a>
+</span><span class=lnt id=hl-2-34><a class=lnlinks href=#hl-2-34>34</a>
+</span><span class=lnt id=hl-2-35><a class=lnlinks href=#hl-2-35>35</a>
+</span><span class=lnt id=hl-2-36><a class=lnlinks href=#hl-2-36>36</a>
+</span><span class=lnt id=hl-2-37><a class=lnlinks href=#hl-2-37>37</a>
+</span><span class=lnt id=hl-2-38><a class=lnlinks href=#hl-2-38>38</a>
+</span><span class=lnt id=hl-2-39><a class=lnlinks href=#hl-2-39>39</a>
+</span><span class=lnt id=hl-2-40><a class=lnlinks href=#hl-2-40>40</a>
+</span><span class=lnt id=hl-2-41><a class=lnlinks href=#hl-2-41>41</a>
+</span><span class=lnt id=hl-2-42><a class=lnlinks href=#hl-2-42>42</a>
+</span><span class=lnt id=hl-2-43><a class=lnlinks href=#hl-2-43>43</a>
+</span><span class=lnt id=hl-2-44><a class=lnlinks href=#hl-2-44>44</a>
+</span><span class=lnt id=hl-2-45><a class=lnlinks href=#hl-2-45>45</a>
+</span><span class=lnt id=hl-2-46><a class=lnlinks href=#hl-2-46>46</a>
+</span><span class=lnt id=hl-2-47><a class=lnlinks href=#hl-2-47>47</a>
+</span><span class=lnt id=hl-2-48><a class=lnlinks href=#hl-2-48>48</a>
+</span><span class=lnt id=hl-2-49><a class=lnlinks href=#hl-2-49>49</a>
+</span><span class=lnt id=hl-2-50><a class=lnlinks href=#hl-2-50>50</a>
+</span><span class=lnt id=hl-2-51><a class=lnlinks href=#hl-2-51>51</a>
+</span><span class=lnt id=hl-2-52><a class=lnlinks href=#hl-2-52>52</a>
+</span><span class=lnt id=hl-2-53><a class=lnlinks href=#hl-2-53>53</a>
+</span><span class=lnt id=hl-2-54><a class=lnlinks href=#hl-2-54>54</a>
+</span><span class=lnt id=hl-2-55><a class=lnlinks href=#hl-2-55>55</a>
+</span><span class=lnt id=hl-2-56><a class=lnlinks href=#hl-2-56>56</a>
+</span><span class=lnt id=hl-2-57><a class=lnlinks href=#hl-2-57>57</a>
+</span><span class=lnt id=hl-2-58><a class=lnlinks href=#hl-2-58>58</a>
+</span><span class=lnt id=hl-2-59><a class=lnlinks href=#hl-2-59>59</a>
+</span><span class=lnt id=hl-2-60><a class=lnlinks href=#hl-2-60>60</a>
+</span><span class=lnt id=hl-2-61><a class=lnlinks href=#hl-2-61>61</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain.agents</span> <span class=kn>import</span> <span class=n>create_agent</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain_ollama</span> <span class=kn>import</span> <span class=n>ChatOllama</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>langchain.agents.structured_output</span> <span class=kn>import</span> <span class=n>ToolStrategy</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>llm</span> <span class=o>=</span> <span class=n>ChatOllama</span><span class=p>(</span><span class=n>model</span><span class=o>=</span><span class=s2>&#34;qwen3.5:9b&#34;</span><span class=p>,</span> <span class=n>temperature</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>ProfileResult</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;田间调查员的结构化产出。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>variety_name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;品种名称&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>parents</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;亲本来源&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>key_traits</span><span class=p>:</span> <span class=nb>dict</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;关键 DUS 性状,含生育期/株高/分枝数/角果数/每角粒数等&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>disease_resistance</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;抗病性结论,含抗菌核病/抗病毒病/抗倒性&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>summary</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;一句话特征特性摘要&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>DusResult</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;DUS 审查员的结构化产出。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>distinctness</span><span class=p>:</span> <span class=nb>bool</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;特异性(D)是否通过&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>uniformity</span><span class=p>:</span> <span class=nb>bool</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;一致性(U)是否通过&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>stability</span><span class=p>:</span> <span class=nb>bool</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;稳定性(S)是否通过&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>all_passed</span><span class=p>:</span> <span class=nb>bool</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;三项是否全部达标&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>conclusion</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;是否可申请审定的结论&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>DocResult</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;材料清单员的结构化产出。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>application_form</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;申报书名称&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>attachments</span><span class=p>:</span> <span class=nb>list</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;附件清单,字符串数组&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>cultivation_points</span><span class=p>:</span> <span class=nb>list</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;栽培要点列表,字符串数组&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>profile_worker</span> <span class=o>=</span> <span class=n>create_agent</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>model</span><span class=o>=</span><span class=n>llm</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>query_variety_profile</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=n>system_prompt</span><span class=o>=</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;你是品种特征特性员。接到 Supervisor 的指令后,调用 query_variety_profile 查询品种档案,&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;把关键 DUS 性状整理成结构化结果返回。&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>response_format</span><span class=o>=</span><span class=n>ToolStrategy</span><span class=p>(</span><span class=n>ProfileResult</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>dus_worker</span> <span class=o>=</span> <span class=n>create_agent</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>model</span><span class=o>=</span><span class=n>llm</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>check_dus_test</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=n>system_prompt</span><span class=o>=</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;你是 DUS 审查员。接到 Supervisor 的指令后,调用 check_dus_test 核查三项 DUS 测试结果,&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;逐项给出是否通过以及是否可申请审定的结论,以结构化结果返回。&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>response_format</span><span class=o>=</span><span class=n>ToolStrategy</span><span class=p>(</span><span class=n>DusResult</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>doc_worker</span> <span class=o>=</span> <span class=n>create_agent</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>model</span><span class=o>=</span><span class=n>llm</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>query_approval_rules</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=n>system_prompt</span><span class=o>=</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;你是材料清单员。接到 Supervisor 的指令后,调用 query_approval_rules 拉取最新申报材料清单与栽培要点,&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;按申报书 / 附件清单 / 栽培要点 三段整理成结构化结果返回。&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>response_format</span><span class=o>=</span><span class=n>ToolStrategy</span><span class=p>(</span><span class=n>DocResult</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=定义-supervisor-agent-和-reporter-agent>定义 Supervisor Agent 和 Reporter Agent
+<a class=header-anchor href=#%e5%ae%9a%e4%b9%89-supervisor-agent-%e5%92%8c-reporter-agent></a></h3><p>Supervisor 用 <code>response_format</code> + Pydantic 模型做结构化输出，避免手工解析 LLM 输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a class=lnlinks href=#hl-3-1> 1</a>
+</span><span class=lnt id=hl-3-2><a class=lnlinks href=#hl-3-2> 2</a>
+</span><span class=lnt id=hl-3-3><a class=lnlinks href=#hl-3-3> 3</a>
+</span><span class=lnt id=hl-3-4><a class=lnlinks href=#hl-3-4> 4</a>
+</span><span class=lnt id=hl-3-5><a class=lnlinks href=#hl-3-5> 5</a>
+</span><span class=lnt id=hl-3-6><a class=lnlinks href=#hl-3-6> 6</a>
+</span><span class=lnt id=hl-3-7><a class=lnlinks href=#hl-3-7> 7</a>
+</span><span class=lnt id=hl-3-8><a class=lnlinks href=#hl-3-8> 8</a>
+</span><span class=lnt id=hl-3-9><a class=lnlinks href=#hl-3-9> 9</a>
+</span><span class=lnt id=hl-3-10><a class=lnlinks href=#hl-3-10>10</a>
+</span><span class=lnt id=hl-3-11><a class=lnlinks href=#hl-3-11>11</a>
+</span><span class=lnt id=hl-3-12><a class=lnlinks href=#hl-3-12>12</a>
+</span><span class=lnt id=hl-3-13><a class=lnlinks href=#hl-3-13>13</a>
+</span><span class=lnt id=hl-3-14><a class=lnlinks href=#hl-3-14>14</a>
+</span><span class=lnt id=hl-3-15><a class=lnlinks href=#hl-3-15>15</a>
+</span><span class=lnt id=hl-3-16><a class=lnlinks href=#hl-3-16>16</a>
+</span><span class=lnt id=hl-3-17><a class=lnlinks href=#hl-3-17>17</a>
+</span><span class=lnt id=hl-3-18><a class=lnlinks href=#hl-3-18>18</a>
+</span><span class=lnt id=hl-3-19><a class=lnlinks href=#hl-3-19>19</a>
+</span><span class=lnt id=hl-3-20><a class=lnlinks href=#hl-3-20>20</a>
+</span><span class=lnt id=hl-3-21><a class=lnlinks href=#hl-3-21>21</a>
+</span><span class=lnt id=hl-3-22><a class=lnlinks href=#hl-3-22>22</a>
+</span><span class=lnt id=hl-3-23><a class=lnlinks href=#hl-3-23>23</a>
+</span><span class=lnt id=hl-3-24><a class=lnlinks href=#hl-3-24>24</a>
+</span><span class=lnt id=hl-3-25><a class=lnlinks href=#hl-3-25>25</a>
+</span><span class=lnt id=hl-3-26><a class=lnlinks href=#hl-3-26>26</a>
+</span><span class=lnt id=hl-3-27><a class=lnlinks href=#hl-3-27>27</a>
+</span><span class=lnt id=hl-3-28><a class=lnlinks href=#hl-3-28>28</a>
+</span><span class=lnt id=hl-3-29><a class=lnlinks href=#hl-3-29>29</a>
+</span><span class=lnt id=hl-3-30><a class=lnlinks href=#hl-3-30>30</a>
+</span><span class=lnt id=hl-3-31><a class=lnlinks href=#hl-3-31>31</a>
+</span><span class=lnt id=hl-3-32><a class=lnlinks href=#hl-3-32>32</a>
+</span><span class=lnt id=hl-3-33><a class=lnlinks href=#hl-3-33>33</a>
+</span><span class=lnt id=hl-3-34><a class=lnlinks href=#hl-3-34>34</a>
+</span><span class=lnt id=hl-3-35><a class=lnlinks href=#hl-3-35>35</a>
+</span><span class=lnt id=hl-3-36><a class=lnlinks href=#hl-3-36>36</a>
+</span><span class=lnt id=hl-3-37><a class=lnlinks href=#hl-3-37>37</a>
+</span><span class=lnt id=hl-3-38><a class=lnlinks href=#hl-3-38>38</a>
+</span><span class=lnt id=hl-3-39><a class=lnlinks href=#hl-3-39>39</a>
+</span><span class=lnt id=hl-3-40><a class=lnlinks href=#hl-3-40>40</a>
+</span><span class=lnt id=hl-3-41><a class=lnlinks href=#hl-3-41>41</a>
+</span><span class=lnt id=hl-3-42><a class=lnlinks href=#hl-3-42>42</a>
+</span><span class=lnt id=hl-3-43><a class=lnlinks href=#hl-3-43>43</a>
+</span><span class=lnt id=hl-3-44><a class=lnlinks href=#hl-3-44>44</a>
+</span><span class=lnt id=hl-3-45><a class=lnlinks href=#hl-3-45>45</a>
+</span><span class=lnt id=hl-3-46><a class=lnlinks href=#hl-3-46>46</a>
+</span><span class=lnt id=hl-3-47><a class=lnlinks href=#hl-3-47>47</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Literal</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>DispatchDecision</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Supervisor 的单步调度决策。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>next_worker</span><span class=p>:</span> <span class=n>Literal</span><span class=p>[</span><span class=s2>&#34;田间调查员&#34;</span><span class=p>,</span> <span class=s2>&#34;DUS审查员&#34;</span><span class=p>,</span> <span class=s2>&#34;材料清单员&#34;</span><span class=p>,</span> <span class=s2>&#34;FINISH&#34;</span><span class=p>]</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>description</span><span class=o>=</span><span class=s2>&#34;下一步交给哪个 Worker;信息已足够汇总时填 FINISH&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>instruction</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>description</span><span class=o>=</span><span class=s2>&#34;交给该 Worker 的具体任务描述,必须包含所需参数(如品种名、要看哪些字段)&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>reason</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;一句话说明为什么选它 / 为什么可以收尾&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>SUPERVISOR_PROMPT</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;你是品种审定申报任务的 Supervisor，你手下有三个专职 Worker：</span><span class=se>\n\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;* 田间调查员(查品种 DUS 性状)</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;* DUS审查员(核查三项 DUS 测试是否达标)</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;* 材料清单员(按最新审定规则给出申报材料清单与栽培要点)</span><span class=se>\n\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;你的职责只有两件：1) 把总任务拆成派发指令分给合适的 Worker；2) 等信息足够后填 FINISH 结束调度。&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;不要替 Worker 回答他们的专业问题;不要重复派发已经做完的步骤;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;各 Worker 回传给你的都是结构化结果(含结论与关键字段),请基于这些字段判断信息是否足够;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;当三个 Worker 都把结果回传且足够支撑一份完整申报材料时,必须填 FINISH。&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>supervisor</span> <span class=o>=</span> <span class=n>create_agent</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>model</span><span class=o>=</span><span class=n>llm</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>tools</span><span class=o>=</span><span class=p>[],</span>
+</span></span><span class=line><span class=cl>    <span class=n>system_prompt</span><span class=o>=</span><span class=n>SUPERVISOR_PROMPT</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>response_format</span><span class=o>=</span><span class=n>ToolStrategy</span><span class=p>(</span><span class=n>DispatchDecision</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>reporter</span> <span class=o>=</span> <span class=n>create_agent</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>model</span><span class=o>=</span><span class=n>llm</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>tools</span><span class=o>=</span><span class=p>[],</span>
+</span></span><span class=line><span class=cl>    <span class=n>system_prompt</span><span class=o>=</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;你是申报材料汇总员。根据 Supervisor 给你的「总任务」与派发记录,把每个 Worker 的产出整理成&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;一份结构化的审定申报材料草稿,分『特征特性摘要』『DUS 核查结论』『申报材料清单与栽培要点』三部分输出。&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>WORKERS</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;田间调查员&#34;</span><span class=p>:</span> <span class=n>profile_worker</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;DUS审查员&#34;</span><span class=p>:</span> <span class=n>dus_worker</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;材料清单员&#34;</span><span class=p>:</span> <span class=n>doc_worker</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><h3 id=高度-执行-汇总>高度-执行-汇总
+<a class=header-anchor href=#%e9%ab%98%e5%ba%a6-%e6%89%a7%e8%a1%8c-%e6%b1%87%e6%80%bb></a></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a class=lnlinks href=#hl-4-1> 1</a>
+</span><span class=lnt id=hl-4-2><a class=lnlinks href=#hl-4-2> 2</a>
+</span><span class=lnt id=hl-4-3><a class=lnlinks href=#hl-4-3> 3</a>
+</span><span class=lnt id=hl-4-4><a class=lnlinks href=#hl-4-4> 4</a>
+</span><span class=lnt id=hl-4-5><a class=lnlinks href=#hl-4-5> 5</a>
+</span><span class=lnt id=hl-4-6><a class=lnlinks href=#hl-4-6> 6</a>
+</span><span class=lnt id=hl-4-7><a class=lnlinks href=#hl-4-7> 7</a>
+</span><span class=lnt id=hl-4-8><a class=lnlinks href=#hl-4-8> 8</a>
+</span><span class=lnt id=hl-4-9><a class=lnlinks href=#hl-4-9> 9</a>
+</span><span class=lnt id=hl-4-10><a class=lnlinks href=#hl-4-10>10</a>
+</span><span class=lnt id=hl-4-11><a class=lnlinks href=#hl-4-11>11</a>
+</span><span class=lnt id=hl-4-12><a class=lnlinks href=#hl-4-12>12</a>
+</span><span class=lnt id=hl-4-13><a class=lnlinks href=#hl-4-13>13</a>
+</span><span class=lnt id=hl-4-14><a class=lnlinks href=#hl-4-14>14</a>
+</span><span class=lnt id=hl-4-15><a class=lnlinks href=#hl-4-15>15</a>
+</span><span class=lnt id=hl-4-16><a class=lnlinks href=#hl-4-16>16</a>
+</span><span class=lnt id=hl-4-17><a class=lnlinks href=#hl-4-17>17</a>
+</span><span class=lnt id=hl-4-18><a class=lnlinks href=#hl-4-18>18</a>
+</span><span class=lnt id=hl-4-19><a class=lnlinks href=#hl-4-19>19</a>
+</span><span class=lnt id=hl-4-20><a class=lnlinks href=#hl-4-20>20</a>
+</span><span class=lnt id=hl-4-21><a class=lnlinks href=#hl-4-21>21</a>
+</span><span class=lnt id=hl-4-22><a class=lnlinks href=#hl-4-22>22</a>
+</span><span class=lnt id=hl-4-23><a class=lnlinks href=#hl-4-23>23</a>
+</span><span class=lnt id=hl-4-24><a class=lnlinks href=#hl-4-24>24</a>
+</span><span class=lnt id=hl-4-25><a class=lnlinks href=#hl-4-25>25</a>
+</span><span class=lnt id=hl-4-26><a class=lnlinks href=#hl-4-26>26</a>
+</span><span class=lnt id=hl-4-27><a class=lnlinks href=#hl-4-27>27</a>
+</span><span class=lnt id=hl-4-28><a class=lnlinks href=#hl-4-28>28</a>
+</span><span class=lnt id=hl-4-29><a class=lnlinks href=#hl-4-29>29</a>
+</span><span class=lnt id=hl-4-30><a class=lnlinks href=#hl-4-30>30</a>
+</span><span class=lnt id=hl-4-31><a class=lnlinks href=#hl-4-31>31</a>
+</span><span class=lnt id=hl-4-32><a class=lnlinks href=#hl-4-32>32</a>
+</span><span class=lnt id=hl-4-33><a class=lnlinks href=#hl-4-33>33</a>
+</span><span class=lnt id=hl-4-34><a class=lnlinks href=#hl-4-34>34</a>
+</span><span class=lnt id=hl-4-35><a class=lnlinks href=#hl-4-35>35</a>
+</span><span class=lnt id=hl-4-36><a class=lnlinks href=#hl-4-36>36</a>
+</span><span class=lnt id=hl-4-37><a class=lnlinks href=#hl-4-37>37</a>
+</span><span class=lnt id=hl-4-38><a class=lnlinks href=#hl-4-38>38</a>
+</span><span class=lnt id=hl-4-39><a class=lnlinks href=#hl-4-39>39</a>
+</span><span class=lnt id=hl-4-40><a class=lnlinks href=#hl-4-40>40</a>
+</span><span class=lnt id=hl-4-41><a class=lnlinks href=#hl-4-41>41</a>
+</span><span class=lnt id=hl-4-42><a class=lnlinks href=#hl-4-42>42</a>
+</span><span class=lnt id=hl-4-43><a class=lnlinks href=#hl-4-43>43</a>
+</span><span class=lnt id=hl-4-44><a class=lnlinks href=#hl-4-44>44</a>
+</span><span class=lnt id=hl-4-45><a class=lnlinks href=#hl-4-45>45</a>
+</span><span class=lnt id=hl-4-46><a class=lnlinks href=#hl-4-46>46</a>
+</span><span class=lnt id=hl-4-47><a class=lnlinks href=#hl-4-47>47</a>
+</span><span class=lnt id=hl-4-48><a class=lnlinks href=#hl-4-48>48</a>
+</span><span class=lnt id=hl-4-49><a class=lnlinks href=#hl-4-49>49</a>
+</span><span class=lnt id=hl-4-50><a class=lnlinks href=#hl-4-50>50</a>
+</span><span class=lnt id=hl-4-51><a class=lnlinks href=#hl-4-51>51</a>
+</span><span class=lnt id=hl-4-52><a class=lnlinks href=#hl-4-52>52</a>
+</span><span class=lnt id=hl-4-53><a class=lnlinks href=#hl-4-53>53</a>
+</span><span class=lnt id=hl-4-54><a class=lnlinks href=#hl-4-54>54</a>
+</span><span class=lnt id=hl-4-55><a class=lnlinks href=#hl-4-55>55</a>
+</span><span class=lnt id=hl-4-56><a class=lnlinks href=#hl-4-56>56</a>
+</span><span class=lnt id=hl-4-57><a class=lnlinks href=#hl-4-57>57</a>
+</span><span class=lnt id=hl-4-58><a class=lnlinks href=#hl-4-58>58</a>
+</span><span class=lnt id=hl-4-59><a class=lnlinks href=#hl-4-59>59</a>
+</span><span class=lnt id=hl-4-60><a class=lnlinks href=#hl-4-60>60</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>dataclass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>WorkerRun</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>agent_name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>instruction</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>output</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>multi_agent_run</span><span class=p>(</span><span class=n>question</span><span class=p>,</span> <span class=n>max_rounds</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>runs</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=n>WorkerRun</span><span class=p>]</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>max_rounds</span> <span class=o>+</span> <span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>prompt</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=sa>f</span><span class=s2>&#34;用户提问：</span><span class=si>{</span><span class=n>question</span><span class=si>}</span><span class=se>\n\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;已派发任务与结果：</span><span class=se>\n\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=o>+</span> <span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>join</span><span class=p>([</span><span class=sa>f</span><span class=s2>&#34;* </span><span class=si>{</span><span class=n>run</span><span class=o>.</span><span class=n>agent_name</span><span class=si>}</span><span class=s2>: </span><span class=si>{</span><span class=n>run</span><span class=o>.</span><span class=n>instruction</span><span class=si>}</span><span class=s2> -&gt; </span><span class=si>{</span><span class=n>run</span><span class=o>.</span><span class=n>output</span><span class=si>}</span><span class=s2>&#34;</span> <span class=k>for</span> <span class=n>run</span> <span class=ow>in</span> <span class=n>runs</span><span class=p>])</span> <span class=ow>or</span> <span class=s2>&#34;（暂无）&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=o>+</span> <span class=s2>&#34;</span><span class=se>\n\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;请基于上述结构化产出决定是否还需派发，或填 FINISH 结束调度。&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>resp</span> <span class=o>=</span> <span class=n>supervisor</span><span class=o>.</span><span class=n>invoke</span><span class=p>({</span><span class=s2>&#34;messages&#34;</span><span class=p>:</span> <span class=p>[{</span><span class=s2>&#34;role&#34;</span><span class=p>:</span> <span class=s2>&#34;user&#34;</span><span class=p>,</span> <span class=s2>&#34;content&#34;</span><span class=p>:</span> <span class=n>prompt</span><span class=p>}]})</span>
+</span></span><span class=line><span class=cl>        <span class=n>dispatch_decision</span><span class=p>:</span> <span class=n>DispatchDecision</span> <span class=o>=</span> <span class=n>resp</span><span class=p>[</span><span class=s2>&#34;structured_response&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>dispatch_decision</span><span class=o>.</span><span class=n>next_worker</span> <span class=o>==</span> <span class=s2>&#34;FINISH&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>dispatch_decision</span><span class=o>.</span><span class=n>next_worker</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>WORKERS</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>worker</span> <span class=o>=</span> <span class=n>WORKERS</span><span class=p>[</span><span class=n>dispatch_decision</span><span class=o>.</span><span class=n>next_worker</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>worker_prompt</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=sa>f</span><span class=s2>&#34;用户提问：</span><span class=si>{</span><span class=n>question</span><span class=si>}</span><span class=se>\n\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=sa>f</span><span class=s2>&#34;Supervisor 给你的任务：</span><span class=si>{</span><span class=n>dispatch_decision</span><span class=o>.</span><span class=n>instruction</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>worker_resp</span> <span class=o>=</span> <span class=n>worker</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span><span class=s2>&#34;messages&#34;</span><span class=p>:</span> <span class=p>[{</span><span class=s2>&#34;role&#34;</span><span class=p>:</span> <span class=s2>&#34;user&#34;</span><span class=p>,</span> <span class=s2>&#34;content&#34;</span><span class=p>:</span> <span class=n>worker_prompt</span><span class=p>}]}</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>result</span> <span class=o>=</span> <span class=n>worker_resp</span><span class=p>[</span><span class=s2>&#34;structured_response&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>runs</span><span class=o>.</span><span class=n>append</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=n>WorkerRun</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>                <span class=n>agent_name</span><span class=o>=</span><span class=n>dispatch_decision</span><span class=o>.</span><span class=n>next_worker</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=n>instruction</span><span class=o>=</span><span class=n>dispatch_decision</span><span class=o>.</span><span class=n>instruction</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=n>output</span><span class=o>=</span><span class=n>result</span><span class=o>.</span><span class=n>model_dump_json</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>            <span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>((</span>
+</span></span><span class=line><span class=cl>            <span class=sa>f</span><span class=s2>&#34;====== 第 </span><span class=si>{</span><span class=n>i</span><span class=si>}</span><span class=s2> 轮结果 ======</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=sa>f</span><span class=s2>&#34;Worker：</span><span class=si>{</span><span class=n>dispatch_decision</span><span class=o>.</span><span class=n>next_worker</span><span class=si>}</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=sa>f</span><span class=s2>&#34;任务：</span><span class=si>{</span><span class=n>dispatch_decision</span><span class=o>.</span><span class=n>instruction</span><span class=si>}</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=sa>f</span><span class=s2>&#34;理由：</span><span class=si>{</span><span class=n>dispatch_decision</span><span class=o>.</span><span class=n>reason</span><span class=si>}</span><span class=se>\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=sa>f</span><span class=s2>&#34;产出：</span><span class=si>{</span><span class=n>result</span><span class=o>.</span><span class=n>model_dump_json</span><span class=p>()</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>summary_prompt</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=sa>f</span><span class=s2>&#34;用户提问：</span><span class=si>{</span><span class=n>question</span><span class=si>}</span><span class=se>\n\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;各 Worker 的产出如下：</span><span class=se>\n\n</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>join</span><span class=p>([</span><span class=sa>f</span><span class=s2>&#34;* </span><span class=si>{</span><span class=n>run</span><span class=o>.</span><span class=n>agent_name</span><span class=si>}</span><span class=s2>: </span><span class=si>{</span><span class=n>run</span><span class=o>.</span><span class=n>instruction</span><span class=si>}</span><span class=s2> -&gt; </span><span class=si>{</span><span class=n>run</span><span class=o>.</span><span class=n>output</span><span class=si>}</span><span class=s2>&#34;</span> <span class=k>for</span> <span class=n>run</span> <span class=ow>in</span> <span class=n>runs</span><span class=p>])</span> <span class=ow>or</span> <span class=s2>&#34;（未派发任何 Worker）&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>final</span> <span class=o>=</span> <span class=n>reporter</span><span class=o>.</span><span class=n>invoke</span><span class=p>({</span><span class=s2>&#34;messages&#34;</span><span class=p>:</span> <span class=p>[{</span><span class=s2>&#34;role&#34;</span><span class=p>:</span> <span class=s2>&#34;user&#34;</span><span class=p>,</span> <span class=s2>&#34;content&#34;</span><span class=p>:</span> <span class=n>summary_prompt</span><span class=p>}]})</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>final</span><span class=p>[</span><span class=s2>&#34;messages&#34;</span><span class=p>][</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>content</span></span></span></code></pre></td></tr></table></div></div><h3 id=运行>运行
+<a class=header-anchor href=#%e8%bf%90%e8%a1%8c></a></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a class=lnlinks href=#hl-5-1>1</a>
+</span><span class=lnt id=hl-5-2><a class=lnlinks href=#hl-5-2>2</a>
+</span><span class=lnt id=hl-5-3><a class=lnlinks href=#hl-5-3>3</a>
+</span><span class=lnt id=hl-5-4><a class=lnlinks href=#hl-5-4>4</a>
+</span><span class=lnt id=hl-5-5><a class=lnlinks href=#hl-5-5>5</a>
+</span><span class=lnt id=hl-5-6><a class=lnlinks href=#hl-5-6>6</a>
+</span><span class=lnt id=hl-5-7><a class=lnlinks href=#hl-5-7>7</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>question</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;为油菜新品种 &#39;秦油2026&#39; 准备一份品种审定申报材料草稿:&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;核对特征特性档案、确认 DUS 测试是否达标、&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;理清申报材料清单并给出栽培要点。&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>multi_agent_run</span><span class=p>(</span><span class=n>question</span><span class=p>))</span></span></span></code></pre></td></tr></table></div></div><p>执行输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-6-1><a class=lnlinks href=#hl-6-1> 1</a>
+</span><span class=lnt id=hl-6-2><a class=lnlinks href=#hl-6-2> 2</a>
+</span><span class=lnt id=hl-6-3><a class=lnlinks href=#hl-6-3> 3</a>
+</span><span class=lnt id=hl-6-4><a class=lnlinks href=#hl-6-4> 4</a>
+</span><span class=lnt id=hl-6-5><a class=lnlinks href=#hl-6-5> 5</a>
+</span><span class=lnt id=hl-6-6><a class=lnlinks href=#hl-6-6> 6</a>
+</span><span class=lnt id=hl-6-7><a class=lnlinks href=#hl-6-7> 7</a>
+</span><span class=lnt id=hl-6-8><a class=lnlinks href=#hl-6-8> 8</a>
+</span><span class=lnt id=hl-6-9><a class=lnlinks href=#hl-6-9> 9</a>
+</span><span class=lnt id=hl-6-10><a class=lnlinks href=#hl-6-10>10</a>
+</span><span class=lnt id=hl-6-11><a class=lnlinks href=#hl-6-11>11</a>
+</span><span class=lnt id=hl-6-12><a class=lnlinks href=#hl-6-12>12</a>
+</span><span class=lnt id=hl-6-13><a class=lnlinks href=#hl-6-13>13</a>
+</span><span class=lnt id=hl-6-14><a class=lnlinks href=#hl-6-14>14</a>
+</span><span class=lnt id=hl-6-15><a class=lnlinks href=#hl-6-15>15</a>
+</span><span class=lnt id=hl-6-16><a class=lnlinks href=#hl-6-16>16</a>
+</span><span class=lnt id=hl-6-17><a class=lnlinks href=#hl-6-17>17</a>
+</span><span class=lnt id=hl-6-18><a class=lnlinks href=#hl-6-18>18</a>
+</span><span class=lnt id=hl-6-19><a class=lnlinks href=#hl-6-19>19</a>
+</span><span class=lnt id=hl-6-20><a class=lnlinks href=#hl-6-20>20</a>
+</span><span class=lnt id=hl-6-21><a class=lnlinks href=#hl-6-21>21</a>
+</span><span class=lnt id=hl-6-22><a class=lnlinks href=#hl-6-22>22</a>
+</span><span class=lnt id=hl-6-23><a class=lnlinks href=#hl-6-23>23</a>
+</span><span class=lnt id=hl-6-24><a class=lnlinks href=#hl-6-24>24</a>
+</span><span class=lnt id=hl-6-25><a class=lnlinks href=#hl-6-25>25</a>
+</span><span class=lnt id=hl-6-26><a class=lnlinks href=#hl-6-26>26</a>
+</span><span class=lnt id=hl-6-27><a class=lnlinks href=#hl-6-27>27</a>
+</span><span class=lnt id=hl-6-28><a class=lnlinks href=#hl-6-28>28</a>
+</span><span class=lnt id=hl-6-29><a class=lnlinks href=#hl-6-29>29</a>
+</span><span class=lnt id=hl-6-30><a class=lnlinks href=#hl-6-30>30</a>
+</span><span class=lnt id=hl-6-31><a class=lnlinks href=#hl-6-31>31</a>
+</span><span class=lnt id=hl-6-32><a class=lnlinks href=#hl-6-32>32</a>
+</span><span class=lnt id=hl-6-33><a class=lnlinks href=#hl-6-33>33</a>
+</span><span class=lnt id=hl-6-34><a class=lnlinks href=#hl-6-34>34</a>
+</span><span class=lnt id=hl-6-35><a class=lnlinks href=#hl-6-35>35</a>
+</span><span class=lnt id=hl-6-36><a class=lnlinks href=#hl-6-36>36</a>
+</span><span class=lnt id=hl-6-37><a class=lnlinks href=#hl-6-37>37</a>
+</span><span class=lnt id=hl-6-38><a class=lnlinks href=#hl-6-38>38</a>
+</span><span class=lnt id=hl-6-39><a class=lnlinks href=#hl-6-39>39</a>
+</span><span class=lnt id=hl-6-40><a class=lnlinks href=#hl-6-40>40</a>
+</span><span class=lnt id=hl-6-41><a class=lnlinks href=#hl-6-41>41</a>
+</span><span class=lnt id=hl-6-42><a class=lnlinks href=#hl-6-42>42</a>
+</span><span class=lnt id=hl-6-43><a class=lnlinks href=#hl-6-43>43</a>
+</span><span class=lnt id=hl-6-44><a class=lnlinks href=#hl-6-44>44</a>
+</span><span class=lnt id=hl-6-45><a class=lnlinks href=#hl-6-45>45</a>
+</span><span class=lnt id=hl-6-46><a class=lnlinks href=#hl-6-46>46</a>
+</span><span class=lnt id=hl-6-47><a class=lnlinks href=#hl-6-47>47</a>
+</span><span class=lnt id=hl-6-48><a class=lnlinks href=#hl-6-48>48</a>
+</span><span class=lnt id=hl-6-49><a class=lnlinks href=#hl-6-49>49</a>
+</span><span class=lnt id=hl-6-50><a class=lnlinks href=#hl-6-50>50</a>
+</span><span class=lnt id=hl-6-51><a class=lnlinks href=#hl-6-51>51</a>
+</span><span class=lnt id=hl-6-52><a class=lnlinks href=#hl-6-52>52</a>
+</span><span class=lnt id=hl-6-53><a class=lnlinks href=#hl-6-53>53</a>
+</span><span class=lnt id=hl-6-54><a class=lnlinks href=#hl-6-54>54</a>
+</span><span class=lnt id=hl-6-55><a class=lnlinks href=#hl-6-55>55</a>
+</span><span class=lnt id=hl-6-56><a class=lnlinks href=#hl-6-56>56</a>
+</span><span class=lnt id=hl-6-57><a class=lnlinks href=#hl-6-57>57</a>
+</span><span class=lnt id=hl-6-58><a class=lnlinks href=#hl-6-58>58</a>
+</span><span class=lnt id=hl-6-59><a class=lnlinks href=#hl-6-59>59</a>
+</span><span class=lnt id=hl-6-60><a class=lnlinks href=#hl-6-60>60</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>====== 第 1 轮结果 ======
+</span></span><span class=line><span class=cl>Worker：田间调查员
+</span></span><span class=line><span class=cl>任务：请核查油菜新品种&#39;秦油2026&#39;的特征特性档案，包括品种名称、特征特性描述、DUS测试数据等关键字段
+</span></span><span class=line><span class=cl>理由：首先需要核对特征特性档案，这是申报材料的基础信息
+</span></span><span class=line><span class=cl>产出：{&#34;variety_name&#34;:&#34;秦油2026&#34;,&#34;parents&#34;:&#34;陕油28 × 华油杂62R&#34;,&#34;key_traits&#34;:{&#34;一次分枝数&#34;:&#34;9个&#34;,&#34;单株角果数&#34;:&#34;320个&#34;,&#34;株高&#34;:&#34;168cm&#34;,&#34;每角粒数&#34;:&#34;22粒&#34;,&#34;生育期&#34;:&#34;232天&#34;},&#34;disease_resistance&#34;:&#34;抗菌核病: 高抗; 抗病毒病: 中抗; 抗倒性: 强&#34;,&#34;summary&#34;:&#34;秦油2026为陕油28与华油杂62R杂交选育的油菜新品种，生育期232天，株高168cm，一次分枝9个，单株角果320个，每角粒22粒，抗菌核病高抗、抗病毒病中抗、抗倒性强&#34;}
+</span></span><span class=line><span class=cl>====== 第 2 轮结果 ======
+</span></span><span class=line><span class=cl>Worker：DUS审查员
+</span></span><span class=line><span class=cl>任务：请核查油菜新品种&#39;秦油2026&#39;的三项DUS测试（特异性、一致性、稳定性）是否达标，需包含品种名称、DUS测试结果、达标结论等关键字段
+</span></span><span class=line><span class=cl>理由：田间调查员已完成特征特性档案核查，接下来需要确认DUS测试是否达标
+</span></span><span class=line><span class=cl>产出：{&#34;distinctness&#34;:true,&#34;uniformity&#34;:true,&#34;stability&#34;:true,&#34;all_passed&#34;:true,&#34;conclusion&#34;:&#34;可申请审定&#34;}
+</span></span><span class=line><span class=cl>====== 第 3 轮结果 ======
+</span></span><span class=line><span class=cl>Worker：材料清单员
+</span></span><span class=line><span class=cl>任务：请为油菜新品种&#39;秦油2026&#39;整理申报材料清单并给出栽培要点，需包含品种名称、申报材料清单（按最新审定规则）、栽培要点等关键字段
+</span></span><span class=line><span class=cl>理由：田间调查员和DUS审查员已完成工作，但材料清单员尚未参与，需要获取申报材料清单与栽培要点才能完成完整申报材料准备
+</span></span><span class=line><span class=cl>产出：{&#34;application_form&#34;:&#34;《非主要农作物品种登记申请表》或省级审定申请书&#34;,&#34;attachments&#34;:[&#34;品种选育报告&#34;,&#34;区域试验与生产试验总结（2年区试+1年生试）&#34;,&#34;DUS测试报告&#34;,&#34;品质检测报告（双低指标）&#34;,&#34;抗病性鉴定报告&#34;,&#34;特征特性描述表&#34;,&#34;栽培技术要点与适宜区域说明&#34;,&#34;知识产权与育种者承诺书&#34;],&#34;cultivation_points&#34;:[&#34;长江中下游直播9月下旬至10月中旬,移栽提前7–10天。&#34;,&#34;直播每亩留苗2.0–2.5万株。&#34;,&#34;基肥每亩有机肥1000–1500 kg + 复合肥30–40 kg。&#34;,&#34;蕾薹期与初花期注意补硼防花而不实。&#34;]}
+</span></span><span class=line><span class=cl># 油菜新品种 &#39;秦油 2026&#39; 品种审定申报材料草稿
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 一、特征特性摘要
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>*   **品种名称**：秦油 2026
+</span></span><span class=line><span class=cl>*   **亲本组合**：陕油 28 × 华油杂 62R
+</span></span><span class=line><span class=cl>*   **主要农艺性状**：
+</span></span><span class=line><span class=cl>    *   **生育期**：232 天（中熟）
+</span></span><span class=line><span class=cl>    *   **株高**：168cm
+</span></span><span class=line><span class=cl>    *   **一次分枝数**：9 个
+</span></span><span class=line><span class=cl>    *   **单株角果数**：320 个
+</span></span><span class=line><span class=cl>    *   **每角粒数**：22 粒
+</span></span><span class=line><span class=cl>*   **抗病性表现**：
+</span></span><span class=line><span class=cl>    *   **菌核病**：高抗
+</span></span><span class=line><span class=cl>    *   **病毒病**：中抗
+</span></span><span class=line><span class=cl>    *   **抗倒性**：强
+</span></span><span class=line><span class=cl>*   **品种简介**：秦油 2026 为陕油 28 与华油杂 62R 杂交选育的油菜新品种，具有生育期适中、株型紧凑、抗病性强等特点。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 二、DUS 核查结论
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>*   **特异性（Distinctness）**：达标 (True)
+</span></span><span class=line><span class=cl>*   **一致性（Uniformity）**：达标 (True)
+</span></span><span class=line><span class=cl>*   **稳定性（Stability）**：达标 (True)
+</span></span><span class=line><span class=cl>*   **综合判定**：三项测试全部通过，符合品种审定要求。
+</span></span><span class=line><span class=cl>*   **审查结论**：**可申请审定**。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 三、申报材料清单与栽培要点
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>### 1. 申报材料清单（按最新审定规则）
+</span></span><span class=line><span class=cl>*   **主表**：《非主要农作物品种登记申请表》或省级审定申请书
+</span></span><span class=line><span class=cl>*   **附件材料**：
+</span></span><span class=line><span class=cl>    1.  品种选育报告
+</span></span><span class=line><span class=cl>    2.  区域试验与生产试验总结（含 2 年区试 +1 年生试）
+</span></span><span class=line><span class=cl>    3.  DUS 测试报告
+</span></span><span class=line><span class=cl>    4.  品质检测报告（双低指标）
+</span></span><span class=line><span class=cl>    5.  抗病性鉴定报告
+</span></span><span class=line><span class=cl>    6.  特征特性描述表
+</span></span><span class=line><span class=cl>    7.  栽培技术要点与适宜区域说明
+</span></span><span class=line><span class=cl>    8.  知识产权与育种者承诺书
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>### 2. 栽培技术要点
+</span></span><span class=line><span class=cl>*   **播种时间**：长江中下游地区直播宜在 9 月下旬至 10 月中旬；若采用移栽方式，需提前 7–10 天。
+</span></span><span class=line><span class=cl>*   **种植密度**：直播每亩留苗 2.0–2.5 万株。
+</span></span><span class=line><span class=cl>*   **施肥管理**：基肥每亩施用有机肥 1000–1500 kg + 复合肥 30–40 kg。
+</span></span><span class=line><span class=cl>*   **关键农事**：蕾薹期与初花期注意补硼，以防花而不实。</span></span></code></pre></td></tr></table></div></div><p>所有的 Agent 都是结构化的返回，Supervisor 根据提问和上下文，依次调用了 Worker，并最终将结果汇总由 Reporter Agent 生成申报材料草稿。</p><h2 id=优缺点>优缺点
+<a class=header-anchor href=#%e4%bc%98%e7%bc%ba%e7%82%b9></a></h2><h3 id=优点>优点
+<a class=header-anchor href=#%e4%bc%98%e7%82%b9></a></h3><ul><li><strong>角色化分工</strong>：每个 Worker 按单一职责定制提示词与工具，深度更足。</li><li><strong>可并行与复用</strong>：多个 Worker 可并行推进，成熟 Worker 还能跨任务复用。</li><li><strong>能力可扩展</strong>：新增能力只需加一个 Worker，Supervisor 调度逻辑不变。</li><li><strong>过程可观测</strong>：派发记录与中间产物即审计线索，便于定位问题环节。</li></ul><h3 id=缺点>缺点
+<a class=header-anchor href=#%e7%bc%ba%e7%82%b9></a></h3><ul><li><strong>协调成本高</strong>：每轮派发都要过 Supervisor，token 与延迟成倍上升。</li><li><strong>上下文共享难</strong>：Worker 之间默认隔离，结果冲突与信息孤岛需额外机制。</li><li><strong>主管是单点</strong>：Supervisor 拆错或漏派，整个团队跟着空转。</li><li><strong>收敛难保证</strong>：多轮循环可能来回打转，需要轮次上限与终止条件。</li></ul></div><footer class=post-footer><div class=post-tags><a href=/tags/ai-agent/>AI Agent
+</a><a href=/tags/multi-agent/>Multi-Agent
+</a><a href=/tags/langchain/>LangChain
+</a><a href=/tags/agent-%E6%9E%B6%E6%9E%84/>Agent 架构</a></div><div class=post-share-tools><div class=post-share-loading><i class="fa-solid fa-ellipsis fa-spin"></i></div><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class=a2a_dd href=https://www.addtoany.com/share></a><a class=a2a_button_wechat></a><a class=a2a_button_qzone></a><a class=a2a_button_sina_weibo></a><a class=a2a_button_douban></a><a class=a2a_button_facebook></a><a class=a2a_button_x></a><a class=a2a_button_email></a><a class=a2a_button_printfriendly></a></div></div><hr><div class=reward-container><div><i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))</div><button>
+赞赏</button><div class=post-reward><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_zhifubao.png alt="a2htray - 支付宝">
+<span>支付宝</span></div><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_wechat.png alt="a2htray - 微信">
+<span>微信</span></div></div></div><div class=post-copyright><img src=/imgs/cc/cc.svg class=cc-icon width=75 height=75 align=right alt=共享知识 title=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+Multi-Agent 架构详解：让 Agent 组成团队分工协作</li><li class=post-copyright-author><strong>本文作者： </strong>a2htray</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=https://a2htray.github.io/post/learn-agents/05_multi_agent_agent/ title="Multi-Agent 架构详解：让 Agent 组成团队分工协作">https://a2htray.github.io/post/learn-agents/05_multi_agent_agent/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本作品采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans>BY-NC-SA</a> 许可协议。转载请注明出处！</li><li><div class=license-icons><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans target=_blank><img src=/imgs/cc/big/by_nc_sa.svg alt=BY-NC-SA title=BY-NC-SA>
+</a><a href=https://notbyai.fyi target=_blank><img src=/imgs/notbyai/zh-hans/white.svg title="Not By AI"></a></div></li></ul></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=/post/learn-agents/06_memory_augmented_agent/ rel=next title="Memory-Augmented 架构详解：让 Agent 记住你是谁"><i class="fa fa-chevron-left"></i> Memory-Augmented 架构详解：让 Agent 记住你是谁</a></div><div class="post-nav-prev post-nav-item"><a href=/post/learn-agents/04_router_agent/ rel=prev title="Router 架构详解：让 Agent 学会按需分发">Router 架构详解：让 Agent 学会按需分发
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
+<span itemprop=copyrightYear>2025 - 2026
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>a2htray</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.152.2 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.8.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script class=next-config data-name=page type=application/json>{"clipboard":{"js":{"alias":"clipboard","file":"dist/clipboard.min.js","name":"clipboard.js","version":"2.0.11"}},"comments":false,"expired":false,"isHome":false,"isPage":true,"math":{"css":{"alias_name":"katex","file":"dist/katex.min.css","name":"katex","version":"0.16.15"},"js":[{"alias_name":"katex","file":"dist/katex.min.js","name":"katex","version":"0.16.15"},{"alias":"katex","alias_name":"katex","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.15"}],"render":"katex"},"path":"05_multi_agent_agent","permalink":"https://a2htray.github.io/post/learn-agents/05_multi_agent_agent/","title":"Multi-Agent 架构详解：让 Agent 组成团队分工协作","toc":true,"waline":{"commentcnt":{"alias":"@waline/client","alias_name":"waline","file":"dist/comment.js","name":"comment","version":"2.15.8"}}}</script><script type=text/javascript src=https://a2htray.github.io/js/3rd/animejs/3.2.2/anime.min.js crossorigin=anonymous defer></script><script type=text/javascript src=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.js crossorigin=anonymous defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":false,"hostname":"https://a2htray.github.io/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"isMultiLang":false,"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"slideInRight","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","share":{"addtoany":{"js":"https://static.addtoany.com/menu/page.js","locale":"zh-CN","num":8},"enable":true},"sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"local","router":{"name":"local","type":"modern","url":"https://a2htray.github.io/js/3rd"}},"version":"4.8.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"@waline/client","file":"dist/waline.css","name":"waline","version":"2.15.8"},"js":{"alias":"@waline/client","file":"dist/waline.js","name":"waline","version":"2.15.8"}}}</script><script type=text/javascript src="/js/main.min.js?=1788416253" defer></script><script type=text/javascript src="/js/clipboard.min.js?=1788416253" defer></script><script type=text/javascript src="/js/math.min.js?=1788416253" defer></script></body></html>

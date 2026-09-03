@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Router 架构详解：让 Agent 学会按需分发</title><url>/post/learn-agents/04_router_agent/</url><categories><category>人工智能</category><category>智能体</category></categories><tags><tag>AI Agent</tag><tag>Router</tag><tag>LangChain</tag><tag>Agent 架构</tag></tags><content type="html">   系列文章第 4 篇 · AI Agent 六大主流架构拆解
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Memory-Augmented 架构详解：让 Agent 记住你是谁</title><url>/post/learn-agents/06_memory_augmented_agent/</url><categories><category>人工智能</category><category>智能体</category></categories><tags><tag>AI Agent</tag><tag>Multi-Agent</tag><tag>LangChain</tag><tag>Agent 架构</tag></tags><content type="html"><![CDATA[   系列文章第 6 篇 · AI Agent 六大主流架构拆解 本篇拆解 Memory-Augmented 架构，把&amp;quot;短期工作记忆 + 跨会话长期记忆 + 记忆控制器&amp;quot;装进 Agent，让它&amp;quot;记住用户、记住经验、记住你自己&amp;quot;，示例选择油菜表型采集这一典型&amp;quot;长期、连续、按口径&amp;quot;的任务。
+什么是 Memory-Augmented 核心思想一句话：在 Agent 外挂一层可读写的记忆层，让 Agent 不仅能调用工具，还能在多次会话之间累积&amp;quot;事实、偏好、经验&amp;quot; —— 下次对话时，Agent 知道你是谁、关心什么、按什么口径回答。
+一个最小运行单元：
+1 2 3 4 5 6 用户请求 → ① 记忆召回：从长期记忆库检索与本轮相关条目 → ② 推理与行动：注入上下文，Agent 照常思考与工具调用 → 最终应答：把结果回给用户 → ③ 编码与写入：抽取值得长期保留的信息，结构化落盘 → 整合与遗忘：去重 · 冲突消解 · 时间衰减(周期任务) Memory-Augmented 关注的是用户相关的事实与偏好 —— 会写、会更新、会随时间衰减、会冲突消解。
+记忆的划分 按时效性切分，记忆可分成三类：
+瞬时记忆（Immediate Memory / Sensory Memory）：单次上下文窗口内，对话结束即丢弃，存储内容包括：当前轮完整 Prompt、工具返回结果、最新的用户输入，原始流式上下文。 短期记忆（Short‑Term Memory / Working Memory）：一次会话周期（用户打开对话到关闭会话），保存会话内上下文，做压缩，规避窗口溢出，会话销毁后丢失。 长期记忆（Long‑Term Memory）：跨会话持久化存储，永久留存，可检索召回，存储内容包括：用户偏好、历史事实、过往经验、反思总结、知识库片段。 按内容性质切分，记忆可分成四类：
+陈述性记忆（Declarative Memory）：存放可被语言描述的事实、经历与知识，包含情景事件和语义常识。 程序性记忆（Procedural Memory）：存储从过往经验习得的行动策略、处理流程与做事范式，指导 Agent 如何执行动作。 反思记忆（Reflective Memory）：对历史执行结果复盘归因，产出错误教训与改进方案的高阶自 …  ]]></content></entry><entry><title>Multi-Agent 架构详解：让 Agent 组成团队分工协作</title><url>/post/learn-agents/05_multi_agent_agent/</url><categories><category>人工智能</category><category>智能体</category></categories><tags><tag>AI Agent</tag><tag>Multi-Agent</tag><tag>LangChain</tag><tag>Agent 架构</tag></tags><content type="html"><![CDATA[   系列文章第 5 篇 · AI Agent 六大主流架构拆解 本篇拆解 Multi-Agent 架构，从&amp;quot;一个 Agent 包打天下&amp;quot;走向&amp;quot;一个团队分工协作&amp;quot;，落到油菜新品种审定申报材料的协同准备这一典型多角色场景上。
+什么是 Multi-Agent 核心思想一句话：多个 Agent 各司其职，由一个 Supervisor 主管负责拆解任务、派发、回收结果、汇总。
+一个最小运行单元：
+1 2 3 4 5 6 7 8 9 10 11 用户任务 ↓ Supervisor 主管:拆解任务 · 派发 Worker ↓ 专职 Worker A / B / C（各挂一个领域工具） ↓ 结果回传 Supervisor ↓ Supervisor:决定继续派发 / 收敛汇总 ↓ 汇总输出 Multi-Agent 不是简单的多 Agent 组合，关键在于角色化分工与统一调度：
+角色化分工：每个 Worker 有专属的提示词、工具、记忆，为单一职责优化，效果上限远高于单个通用 Agent。 统一调度：Supervisor 决定“该谁做 / 接下来做什么 / 何时收尾”，让多角色不互相推诿、也不无序循环。 过程可观测：派发记录与中间产物即审计线索，便于复盘。 示例背景：油菜新品种审定申报材料准备 油菜新品种要想拿到审定编号，需要向品种审定委员会提交一份完整、规范的申报材料包，典型包括：
+品种特征特性描述（亲本来源、生育期、株高、抗病性等 DUS 性状档案）。 DUS 测试报告核查（特异性 Distinctness、一致性 Uniformity、稳定性 Stability 三项是否达标）。 区域试验与生产试验总结（一般两年区试 + 一年生试）。 品质检测报告（芥酸、硫苷、含油量等是否达双低标准）。 栽培技术要点与适宜推广区域。 这是一份多角色协作才能做好的工作：
+田间调查员需要从品种档案库拉出 DUS 性状，回答「品种长什么样、怎么长的」。 DUS 审查员需要核查三项测试是否达标，回答「品种够不够资格」。 材料清单员需要给出按最新审定规则的申报材料清单与起草要点，回答「该准备哪些材料、怎么写」。 如果用一个全能 Agent做，要么提示词塞得太满、工具冲突严重，要么某个角色做得不够深入。
+Multi-Agent 的做法是：对内分三个专职 Worker，每 …  ]]></content></entry><entry><title>Router 架构详解：让 Agent 学会按需分发</title><url>/post/learn-agents/04_router_agent/</url><categories><category>人工智能</category><category>智能体</category></categories><tags><tag>AI Agent</tag><tag>Router</tag><tag>LangChain</tag><tag>Agent 架构</tag></tags><content type="html">   系列文章第 4 篇 · AI Agent 六大主流架构拆解
 本篇拆解 Router，解决一个入口、多个专长的分发问题，并把它落到油菜种植技术咨询这一典型多领域场景上。
 什么是 Router 核心思想一句话：前置一个路由器，先把输入按意图/领域分类，再分发给对应的领域子 Agent，各自处理后再以统一格式返回。
 一个最小运行单元：
