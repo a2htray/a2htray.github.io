@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文本相似度 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%96%87%E6%9C%AC%E7%9B%B8%E4%BC%BC%E5%BA%A6/</link><description>Recent content in 文本相似度 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 04 Sep 2026 10:39:44 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%96%87%E6%9C%AC%E7%9B%B8%E4%BC%BC%E5%BA%A6/rss.xml" rel="self" type="application/rss+xml"/><item><title>文本相似度计算：Jaccard 和 Dice 系数介绍与示例</title><link>https://a2htray.github.io/post/learn-nlp/jaccard-dice-index-introduction/</link><pubDate>Fri, 04 Sep 2026 10:39:44 +0800</pubDate><guid>https://a2htray.github.io/post/learn-nlp/jaccard-dice-index-introduction/</guid><description>&lt;h2 id="文本相似度"&gt;文本相似度
+&lt;a class="header-anchor" href="#%e6%96%87%e6%9c%ac%e7%9b%b8%e4%bc%bc%e5%ba%a6"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;文本相似度，简单说就是量化两段文本的&lt;strong&gt;内容重合&lt;/strong&gt;、&lt;strong&gt;语义相近程度&lt;/strong&gt;，是 NLP 最基础、最高频的任务之一。&lt;/p&gt;
+&lt;p&gt;日常业务中随处可见：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文章查重、内容去重&lt;/li&gt;
+&lt;li&gt;问答系统：用户提问与历史问题匹配&lt;/li&gt;
+&lt;li&gt;搜索推荐：相似内容召回&lt;/li&gt;
+&lt;li&gt;评论舆情：重复言论过滤&lt;/li&gt;
+&lt;li&gt;短文本匹配、指令对齐&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;文本相似度算法主要分两类：&lt;/p&gt;</description></item></channel></rss>

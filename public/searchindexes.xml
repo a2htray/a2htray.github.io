@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>Memory-Augmented 架构详解：让 Agent 记住你是谁</title><url>/post/learn-agents/06_memory_augmented_agent/</url><categories><category>人工智能</category><category>智能体</category></categories><tags><tag>AI Agent</tag><tag>Multi-Agent</tag><tag>LangChain</tag><tag>Agent 架构</tag></tags><content type="html"><![CDATA[   系列文章第 6 篇 · AI Agent 六大主流架构拆解 本篇拆解 Memory-Augmented 架构，把&amp;quot;短期工作记忆 + 跨会话长期记忆 + 记忆控制器&amp;quot;装进 Agent，让它&amp;quot;记住用户、记住经验、记住你自己&amp;quot;，示例选择油菜表型采集这一典型&amp;quot;长期、连续、按口径&amp;quot;的任务。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>文本相似度计算：Jaccard 和 Dice 系数介绍与示例</title><url>/post/learn-nlp/jaccard-dice-index-introduction/</url><categories><category>人工智能</category><category>自然语言处理</category></categories><tags><tag>自然语言处理</tag><tag>文本相似度</tag><tag>Jaccard 系数</tag><tag>Dice 系数</tag></tags><content type="html">  文本相似度 文本相似度，简单说就是量化两段文本的内容重合、语义相近程度，是 NLP 最基础、最高频的任务之一。
+日常业务中随处可见：
+文章查重、内容去重 问答系统：用户提问与历史问题匹配 搜索推荐：相似内容召回 评论舆情：重复言论过滤 短文本匹配、指令对齐 文本相似度算法主要分两类：
+基于集合的离散匹配：Jaccard、Dice（只看词语「是否存在」，不看出现次数） 基于向量的语义匹配：余弦相似度、Embedding 相似度（考虑词频、语义空间） 对于短文本、口语化文本、去重场景，不需要复杂向量计算，Jaccard 和 Dice 足够好用，且速度更快、结果可解释。
+Jaccard 和 Dice 系数公式 将两段文本分词、去重后得到两个词语集合 $A$、$B$。
+交集 $A \cap B = \{a \in A \land a \in B\}$：两段文本共同包含的词语 并集 $A \cup B = \{a \in A \lor a \in B\}$：两段文本所有不重复词语的总和 Jaccard 系数
+$$ J(A, B) = \frac{|A \cap B|}{|A \cup B|} $$即共同词语个数除以所有不重复词语个数，范围 $[0, 1]$。
+特点：对文本差异更敏感，适合查重、去重、精准区分相似文本。
+Dice 系数
+$$ Dice(A,B) = \frac{2\cdot|A \cap B|}{|A|+|B|} $$即 2 倍共同词语个数除以所有词语总数，范围 $[0, 1]$。
+特点：放大共同特征权重，弱化独有词语干扰，适合模糊匹配、相似召回、内容对齐。
+文本特征提取 Jaccard、Dice 是集合算法，只能对离散、去重、标准化的词语集合计算，所以要先对文本进行分词、去重、标准化处理，步骤如下：
+文本清洗：移除、替换特殊字符等，保留有效词语 分词处理：将文本转换为词语序列，去除停用词、标点符号等 语义归一：将词语转换为统一的表示，统一同义表述 集合构建：将分词后的词语转换为集合，去重 计算相似度：根据 Jaccard 或 Dice 系数公式，计算两段文本的相似度 代码演示 文本清洗
+全角字符统一转为半角：消除肉眼相同但编码不同的字符变体，保障分词、过滤、同义词匹配与特征提取的准确性 移除特殊字符：如标点符号、特殊字符等，保留有效词语 1 2 3 4 5 6 …  </content></entry><entry><title>Memory-Augmented 架构详解：让 Agent 记住你是谁</title><url>/post/learn-agents/06_memory_augmented_agent/</url><categories><category>人工智能</category><category>智能体</category></categories><tags><tag>AI Agent</tag><tag>Memory-Augmented</tag><tag>LangChain</tag><tag>Agent 架构</tag></tags><content type="html"><![CDATA[   系列文章第 6 篇 · AI Agent 六大主流架构拆解 本篇拆解 Memory-Augmented 架构，把&amp;quot;短期工作记忆 + 跨会话长期记忆 + 记忆控制器&amp;quot;装进 Agent，让它&amp;quot;记住用户、记住经验、记住你自己&amp;quot;，示例选择油菜表型采集这一典型&amp;quot;长期、连续、按口径&amp;quot;的任务。
 什么是 Memory-Augmented 核心思想一句话：在 Agent 外挂一层可读写的记忆层，让 Agent 不仅能调用工具，还能在多次会话之间累积&amp;quot;事实、偏好、经验&amp;quot; —— 下次对话时，Agent 知道你是谁、关心什么、按什么口径回答。
 一个最小运行单元：
 1 2 3 4 5 6 用户请求 → ① 记忆召回：从长期记忆库检索与本轮相关条目 → ② 推理与行动：注入上下文，Agent 照常思考与工具调用 → 最终应答：把结果回给用户 → ③ 编码与写入：抽取值得长期保留的信息，结构化落盘 → 整合与遗忘：去重 · 冲突消解 · 时间衰减(周期任务) Memory-Augmented 关注的是用户相关的事实与偏好 —— 会写、会更新、会随时间衰减、会冲突消解。

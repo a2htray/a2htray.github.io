@@ -3,7 +3,7 @@ date = '2026-09-03T14:15:35+08:00'
 draft = false
 title = 'Memory-Augmented 架构详解：让 Agent 记住你是谁'
 categories = ['人工智能', '智能体']
-tags = ['AI Agent', 'Multi-Agent', 'LangChain', 'Agent 架构']
+tags = ['AI Agent', 'Memory-Augmented', 'LangChain', 'Agent 架构']
 toc = true
 +++
 
