@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>文本相似度计算：Jaccard 和 Dice 系数介绍与示例</title><url>/post/learn-nlp/jaccard-dice-index-introduction/</url><categories><category>人工智能</category><category>自然语言处理</category></categories><tags><tag>自然语言处理</tag><tag>文本相似度</tag><tag>Jaccard 系数</tag><tag>Dice 系数</tag></tags><content type="html">  文本相似度 文本相似度，简单说就是量化两段文本的内容重合、语义相近程度，是 NLP 最基础、最高频的任务之一。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>给 PostgreSQL 装上"向量引擎"：pgvector</title><url>/post/learn-db/postgresql-pgvector/</url><categories><category>后端技术</category><category>PostgreSQL</category></categories><tags><tag>PostgreSQL</tag><tag>pgvector</tag><tag>数据库</tag><tag>向量数据库</tag></tags><content type="html"><![CDATA[  
+在大模型时代，应用须提供语义搜索或知识检索功能，如果后端数据库本身使用的就是 PG，则可以直接使用 pgvector 来实现，无需额外的数据库组件。
+什么是 pgvector pgvector 是 PostgreSQL 的一个开源扩展，它让 PG 能够原生存储、索引和检索高维向量（embedding）。 它把&amp;quot;向量相似度搜索&amp;quot;这一原本需要专门向量数据库的能力，直接下沉到了你熟悉的关系型数据库里。常用于语义搜索、RAG 检索、推荐系统等 AI 场景，让应用用一条 SQL 就能做&amp;quot;找最相似的 N 条数据&amp;quot;。
+如何使用 pgvector 下面用 Docker 起一个 PG，再启用扩展，这是最省心的落地方式：
+直接用社区维护好的预装镜像 ankane/pgvector：
+1 2 3 4 5 6 7 $ docker run -d \ --name pgvector \ -e POSTGRES_PASSWORD=yourpassword \ -e POSTGRES_USER=postgres \ -e POSTGRES_DB=testdb \ -p 5432:5432 \ ankane/pgvector:latest 只需一条 SQL 启用扩展（每个数据库执行一次），在宿主机上执行：
+1 2 $ docker exec -t pgvector psql -U postgres -d testdb -c &amp;#34;CREATE EXTENSION vector;&amp;#34; CREATE EXTENSION 验证是否启用成功：
+1 2 3 4 5 $ docker exec -t pgvector psql -U postgres -d testdb -c &amp;#34;SELECT extname, extversion FROM pg_extension WHERE extname = &amp;#39;vector&amp;#39;;&amp;#34; extname | extversion ---------+------------ vector | 0.5.1 (1 row) 如果是使用原生 PostgreSQL 镜像或主机安装 PG 服务，则需要先编译安装扩展源码，或在宿主机用 apt/yum 安装 postgresql-&amp;lt;版本 …  ]]></content></entry><entry><title>文本相似度计算：Jaccard 和 Dice 系数介绍与示例</title><url>/post/learn-nlp/jaccard-dice-index-introduction/</url><categories><category>人工智能</category><category>自然语言处理</category></categories><tags><tag>自然语言处理</tag><tag>文本相似度</tag><tag>Jaccard 系数</tag><tag>Dice 系数</tag></tags><content type="html">  文本相似度 文本相似度，简单说就是量化两段文本的内容重合、语义相近程度，是 NLP 最基础、最高频的任务之一。
 日常业务中随处可见：
 文章查重、内容去重 问答系统：用户提问与历史问题匹配 搜索推荐：相似内容召回 评论舆情：重复言论过滤 短文本匹配、指令对齐 文本相似度算法主要分两类：
 基于集合的离散匹配：Jaccard、Dice（只看词语「是否存在」，不看出现次数） 基于向量的语义匹配：余弦相似度、Embedding 相似度（考虑词频、语义空间） 对于短文本、口语化文本、去重场景，不需要复杂向量计算，Jaccard 和 Dice 足够好用，且速度更快、结果可解释。
