@@ -52,8 +52,6 @@ extname | extversion
 
 ## pgvector 的优势
 
-## 3. pgvector 的优势
-
 pgvector 优势在于它**最省事、最契合已有架构**，如果现有应用中已使用到了 PG，则只需要安装、启用 pgvector 扩展即可，没有技术负担。
 
 | 工程维度       | pgvector 的优势        | 说明                                                    |
