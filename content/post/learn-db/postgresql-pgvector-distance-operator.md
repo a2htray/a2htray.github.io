@@ -7,6 +7,8 @@ tags = ['PostgreSQL', 'pgvector', '数据库', '距离度量', '运算符']
 toc = true
 +++
 
+![](/imgs/learn-db/ScreenShot_2026-09-11_181757_166.png)
+
 ## 距离度量的重要性
 
 pgvector 提供 6 种距离度量方式，选择合适的距离度量方式对于数据库的检索效果有着重大影响。
