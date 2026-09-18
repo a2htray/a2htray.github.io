@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>基于词袋的概率检索模型 BM25 详解</title><url>/post/learn-nlp/best-matching-25-details/</url><categories><category>人工智能</category><category>自然语言处理</category></categories><tags><tag>自然语言处理</tag><tag>文本检索</tag><tag>BM25</tag><tag>概率检索模型</tag></tags><content type="html"><![CDATA[  
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>可视化 - 线图：matplotlib vs. ggplot2</title><url>/post/learn-vis/01_lines_plot/</url><categories><category>后端技术</category><category>可视化</category></categories><tags><tag>Python</tag><tag>可视化</tag><tag>matplotlib</tag><tag>ggplot2</tag><tag>线图</tag><tag>R</tag></tags><content type="html"><![CDATA[  
+本文为可视化系列第 01 篇，将介绍线图的基础概念、适用场景与数据集选取，并分别使用 Python Matplotlib 和 R ggplot2 两套工具，演示绘制同一幅线图。
+线图 线图通过线段连接离散的数据点，用来呈现指标沿着连续变量（最常见为时间）的变化情况，能够直观反映数值的增减波动、变化快慢以及拐点与周期特征，多系列线图还可以同时对比多组数据的走势差异。
+适用场景：
+展示数据随时间的连续变化（如每日股价、月度营收） 观察指标变化趋势、周期性波动、增长 / 衰减速率 多组同维度数据趋势对比 不适合：分类项目大小对比、占比展示。
+数据集选取 数据集 1 - 油菜生育期动态数据集：rape_growth_dynamics.csv
+展示油菜播种后随生育天数推进，株高、叶面积、干物质积累的连续变化趋势。
+字段 释义 单位 day_after_sowing 播种后天数 d plant_height_min_cm 株高最小值 cm plant_height_max_cm 株高最大值 cm plant_height_mean_cm 株高平均值 cm leaf_area_min_cm2 单株叶面积最小值 cm² leaf_area_max_cm2 单株叶面积最大值 cm² leaf_area_mean_cm2 单株叶面积平均值 cm² dry_matter_g 单株干物质积累量 g 可视化 1 - 油菜株高随播种后天数变化 Python Matplotlib
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 import matplotlib.pyplot as plt import pandas as pd df = pd.read_csv(&amp;#34;../data/rape_growth_dynamics.csv&amp;#34;) plt.rcParams[&amp;#34;font.sans-serif&amp;#34;] = [&amp;#34;Heiti TC&amp;#34;] plt.rcParams[&amp;#34;axes.unicode_minus&amp;#34;] = False fig, ax = plt.subplots(figsize=(10, 6)) ax.plot(df[&amp;#34;day_after_sowing&amp;#34;], …  ]]></content></entry><entry><title>基于词袋的概率检索模型 BM25 详解</title><url>/post/learn-nlp/best-matching-25-details/</url><categories><category>人工智能</category><category>自然语言处理</category></categories><tags><tag>自然语言处理</tag><tag>文本检索</tag><tag>BM25</tag><tag>概率检索模型</tag></tags><content type="html"><![CDATA[  
 BM25（Best Matching 25）是基于词袋的概率检索模型，目前是搜索引擎、ES/OpenSearch 全文检索默认的相关性打分算法，用来计算查询词 Q 和文档 D 的相关性分数。
 核心思想：文档 D 与查询词 Q 的相关性分数越高，则表示越相似（相关）。
 前置基础 - TF 和 IDF TF（Term Frequency）：词频，即词 t 在文档 D 中出现的次数。

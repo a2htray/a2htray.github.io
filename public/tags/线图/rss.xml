@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>线图 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E7%BA%BF%E5%9B%BE/</link><description>Recent content in 线图 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 18 Sep 2026 10:52:03 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E7%BA%BF%E5%9B%BE/rss.xml" rel="self" type="application/rss+xml"/><item><title>可视化 - 线图：matplotlib vs. ggplot2</title><link>https://a2htray.github.io/post/learn-vis/01_lines_plot/</link><pubDate>Fri, 18 Sep 2026 10:52:03 +0800</pubDate><guid>https://a2htray.github.io/post/learn-vis/01_lines_plot/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-vis/ScreenShot_2026-09-18_105617_844.png" alt="" /&gt;&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;本文为可视化系列第 01 篇，将介绍线图的基础概念、适用场景与数据集选取，并分别使用 Python Matplotlib 和 R ggplot2 两套工具，演示绘制同一幅线图。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="线图"&gt;线图
+&lt;a class="header-anchor" href="#%e7%ba%bf%e5%9b%be"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;线图通过&lt;strong&gt;线段连接离散的数据点&lt;/strong&gt;，用来呈现指标沿着连续变量（最常见为时间）的变化情况，能够直观反映数值的增减波动、变化快慢以及拐点与周期特征，多系列线图还可以同时对比多组数据的走势差异。&lt;/p&gt;</description></item></channel></rss>
