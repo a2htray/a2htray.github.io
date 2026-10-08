@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>人工智能 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link><description>Recent content in 人工智能 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 14 Sep 2026 17:20:12 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/rss.xml" rel="self" type="application/rss+xml"/><item><title>基于词袋的概率检索模型 BM25 详解</title><link>https://a2htray.github.io/post/learn-nlp/best-matching-25-details/</link><pubDate>Mon, 14 Sep 2026 17:20:12 +0800</pubDate><guid>https://a2htray.github.io/post/learn-nlp/best-matching-25-details/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-nlp/ScreenShot_2026-09-15_163226_605.png" alt="" /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>人工智能 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link><description>Recent content in 人工智能 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 18 Sep 2026 14:10:32 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/rss.xml" rel="self" type="application/rss+xml"/><item><title>MCP vs. API：为什么传统 API 撑不起 AI Agent</title><link>https://a2htray.github.io/post/learn-ai/t_15_api_vs_mcp/</link><pubDate>Fri, 18 Sep 2026 14:10:32 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_15_api_vs_mcp/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-ai/api_vs_mcp_cover.png" alt="" /&gt;&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;本文为 dev.to 上的文章，原文地址：
+&lt;a href="https://dev.to/cpathirage/mcp-vs-api-why-traditional-apis-arent-enough-for-ai-agents-go2" title="https://dev.to/cpathirage/mcp-vs-api-why-traditional-apis-arent-enough-for-ai-agents-go2" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://dev.to/cpathirage/mcp-vs-api-why-traditional-apis-arent-enough-for-ai-agents-go2
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;API 没有坏。&lt;/p&gt;
+&lt;p&gt;几十年来，它支撑着互联网、移动应用、SaaS 平台和分布式系统。&lt;/p&gt;
+&lt;p&gt;但有些东西变了。&lt;/p&gt;
+&lt;p&gt;软件 API 的消费方，不再总是开发者写的另一段软件。&lt;/p&gt;</description></item><item><title>基于词袋的概率检索模型 BM25 详解</title><link>https://a2htray.github.io/post/learn-nlp/best-matching-25-details/</link><pubDate>Mon, 14 Sep 2026 17:20:12 +0800</pubDate><guid>https://a2htray.github.io/post/learn-nlp/best-matching-25-details/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-nlp/ScreenShot_2026-09-15_163226_605.png" alt="" /&gt;&lt;/p&gt;
 &lt;p&gt;BM25（Best Matching 25）是&lt;strong&gt;基于词袋的概率检索模型&lt;/strong&gt;，目前是搜索引擎、ES/OpenSearch 全文检索默认的相关性打分算法，用来计算&lt;strong&gt;查询词 Q 和文档 D 的相关性分数&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>结构化大模型 TabICL、Limix 和 Nori 比较</title><link>https://a2htray.github.io/post/learn-ai/tabicl-limix-nori-compare/</link><pubDate>Mon, 14 Sep 2026 15:47:21 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/tabicl-limix-nori-compare/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-ai/ScreenShot_2026-09-14_161016_415.png" alt="" /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;TabICL&lt;/strong&gt;：主打&lt;strong&gt;大规模表格分类 + 回归&lt;/strong&gt;，解决传统表格 ICL 样本上限瓶颈，两阶段嵌入，大数据集速度优势最强。&lt;/li&gt;

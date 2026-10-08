@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>API on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/api/</link><description>Recent content in API on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 18 Sep 2026 14:10:32 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/api/rss.xml" rel="self" type="application/rss+xml"/><item><title>MCP vs. API：为什么传统 API 撑不起 AI Agent</title><link>https://a2htray.github.io/post/learn-ai/t_15_api_vs_mcp/</link><pubDate>Fri, 18 Sep 2026 14:10:32 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_15_api_vs_mcp/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-ai/api_vs_mcp_cover.png" alt="" /&gt;&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;本文为 dev.to 上的文章，原文地址：
+&lt;a href="https://dev.to/cpathirage/mcp-vs-api-why-traditional-apis-arent-enough-for-ai-agents-go2" title="https://dev.to/cpathirage/mcp-vs-api-why-traditional-apis-arent-enough-for-ai-agents-go2" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://dev.to/cpathirage/mcp-vs-api-why-traditional-apis-arent-enough-for-ai-agents-go2
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;API 没有坏。&lt;/p&gt;
+&lt;p&gt;几十年来，它支撑着互联网、移动应用、SaaS 平台和分布式系统。&lt;/p&gt;
+&lt;p&gt;但有些东西变了。&lt;/p&gt;
+&lt;p&gt;软件 API 的消费方，不再总是开发者写的另一段软件。&lt;/p&gt;</description></item></channel></rss>

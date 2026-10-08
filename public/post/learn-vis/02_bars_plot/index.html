@@ -1,0 +1,519 @@
+<!doctype html><html lang=zh-CN data-theme=light><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#222" media="(prefers-color-scheme: light)"><meta name=generator content="Hugo 0.152.2"><link rel="shortcut icon" type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/x-icon href=/imgs/icons/favicon.ico><link rel=icon type=image/png sizes=16x16 href=/imgs/icons/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=/imgs/icons/favicon-32x32.png><link rel=apple-touch-icon sizes=180x180 href=/imgs/icons/apple-touch-icon.png><meta itemprop=name content="可视化 - 柱状图：matplotlib vs. ggplot2"><meta itemprop=description content="记录我的生活、工作与成长。"><meta name=description content="记录我的生活、工作与成长。"><meta itemprop=datePublished zgotmplz><meta itemprop=dateModified zgotmplz><meta itemprop=image content="https://a2htray.github.io/imgs/my_avatar.jpg"><meta itemprop=keywords content="Python,可视化,matplotlib,ggplot2,柱状图,R"><meta property="og:type" content="article"><meta property="og:title" content="可视化 - 柱状图：matplotlib vs. ggplot2"><meta property="og:description" content="记录我的生活、工作与成长。"><meta property="og:image" content="/imgs/my_avatar.jpg"><meta property="og:image:width" content="312"><meta property="og:image:height" content="312"><meta property="og:image:type" content="image/jpeg/png/svg/jpg"><meta property="og:url" content="https://a2htray.github.io/post/learn-vis/02_bars_plot/"><meta property="og:site_name" content="快乐冲浪与生活"><meta property="og:locale" content="zh-CN"><meta property="article:author" content="a2htray"><meta property="article:published_time" content="2026-10-08 14:43:29 +0800 CST"><meta property="article:modified_time" content="2026-10-08 14:43:29 +0800 CST"><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/font-awesome/6.7.2/css/all.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/animate.css/3.1.1/animate.min.css><link type=text/css rel=stylesheet href=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.css><link rel=stylesheet href="/css/main.min.css?=1791443413"><style type=text/css>.post-footer hr:after{content:"~ 我可是有底线的哟 ~"}.flinks-list-footer hr:after{content:"~ 我可是有底线的哟 ~"}</style><link rel=stylesheet type=text/css href="/css/custom_style.css?=1791443413"><script type=text/javascript>(function(){localDB={set:function(e,t,n){if(n===0)return;const s=new Date,o=n*864e5,i={value:t,expiry:s.getTime()+o};localStorage.setItem(e,JSON.stringify(i))},get:function(e){const t=localStorage.getItem(e);if(!t)return 0[0];const n=JSON.parse(t),s=new Date;return s.getTime()>n.expiry?(localStorage.removeItem(e),0[0]):n.value}},theme={active:function(){const e=localDB.get("theme");if(e==null)return;theme.toggle(e),window.matchMedia("(prefers-color-scheme: dark)").addListener(function(e){theme.toggle(e.matches?"dark":"light")})},toggle:function(e){document.documentElement.setAttribute("data-theme",e),localDB.set("theme",e,2);const t=document.querySelector("iframe.giscus-frame");if(t){const n={setConfig:{theme:e}};t.contentWindow.postMessage({giscus:n},"https://giscus.app")}}},theme.active()})(window)</script><script type=text/javascript>document.addEventListener("DOMContentLoaded",()=>{var e=document.createElement("script");e.charset="UTF-8",e.src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",e.async=!1,e.defer=!0,document.head.appendChild(e),e.onload=function(){NexT.utils.fmtBusuanzi()}})</script><title>可视化 - 柱状图：matplotlib vs. ggplot2 - 快乐冲浪与生活</title><noscript><link rel=stylesheet href=/css/noscript.css></noscript></head><body itemscope itemtype=http://schema.org/WebPage class=use-motion><div class=headband></div><main class=main><header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle aria-label role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class=site-meta><a href=/ class=brand rel=start><i class=logo-line></i><h1 class=site-title>快乐冲浪与生活</h1><i class=logo-line></i></a><p class=site-subtitle itemprop=description>多体验、多体会、多体悟</p></div><div class=site-nav-right><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href=/ class=hvr-icon-pulse rel=section><i class="fa fa-home hvr-icon"></i>首页</a></li><li class="menu-item menu-item-tags"><a href=/tags/ class=hvr-icon-pulse rel=section><i class="fa fa-tag hvr-icon"></i>标签</a></li><li class="menu-item menu-item-search"><a role=button class="popup-trigger hvr-icon-pulse"><i class="fa fa-search fa-fw hvr-icon"></i>搜索</a></li></ul></nav><div class=search-pop-overlay><div class="popup search-popup"><div class=search-header><span class=search-icon><i class="fa fa-search"></i></span><div class=search-input-container><input autocomplete=off autocapitalize=off maxlength=80 placeholder=搜索... spellcheck=false type=search class=search-input></div><span class=popup-btn-close role=button><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class=search-result-icon><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role=button><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div><aside class=sidebar><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class=sidebar-nav><li class=sidebar-nav-toc>文章目录</li><li class=sidebar-nav-overview>站点概览</li></ul><div class=sidebar-panel-container><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><nav id=TableOfContents><ul><li><a href=#柱状图>柱状图</a></li><li><a href=#单系列柱状图>单系列柱状图</a></li><li><a href=#分组柱状图>分组柱状图</a></li><li><a href=#堆叠柱状图>堆叠柱状图</a></li></ul></nav></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image alt=a2htray src=/imgs/img-lazy-loading.gif data-src=/imgs/my_avatar.jpg><p class=site-author-name itemprop=name>a2htray</p><div class=site-description itemprop=description>记录我的生活、工作与成长。</div></div><div class="site-state-wrap site-overview-item animated"><nav class=site-state><div class="site-state-item site-state-posts"><a href=/post/><span class=site-state-item-count>211</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=/categories/><span class=site-state-item-count>48</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=/tags/><span class=site-state-item-count>223</span>
+<span class=site-state-item-name>标签</span></a></div></nav></div><div class="links-of-social site-overview-item animated"><span class=links-of-social-item><a href=https://github.com/a2htray title="Github → https://github.com/a2htray" rel=noopener class=hvr-icon-pulse target=_blank><i class="fab fa-github fa-fw hvr-icon"></i>
+Github</a></span></div><div class="cc-license animated" itemprop=license><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans class=cc-opacity rel=noopener target=_blank title=共享知识><img src=/imgs/img-lazy-loading.gif data-src=/imgs/cc/big/by_nc_sa.svg alt=共享知识></a></div></div></div></div></aside><div class=sidebar-dimmer></div></header><div class=tool-buttons><div id=toggle-theme class=button title=深浅模式切换><i class="fas fa-adjust"></i></div><div class=back-to-top role=button title=返回顶部><i class="fa fa-arrow-up"></i>
+<span>0%</span></div></div><div class=reading-progress-bar></div><a role=button class="book-mark-link book-mark-link-fixed"></a><a href=https://github.com/a2htray/a2htray.github.io rel="noopener external nofollow noreferrer" target=_blank title="Follow me on GitHub" class="exturl github-corner"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115h15l12 27L250 250V0z"/><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4l13.9-13.8C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8z" fill="currentColor" class="octo-body"/></svg></a><noscript><div class=noscript-warning>Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class=post-block><article itemscope itemtype=http://schema.org/Article class=post-content lang><link itemprop=mainEntityOfPage href=https://a2htray.github.io/post/learn-vis/02_bars_plot/><span hidden itemprop=author itemscope itemtype=http://schema.org/Person><meta itemprop=image content="/imgs/my_avatar.jpg"><meta itemprop=name content="a2htray"></span><span hidden itemprop=publisher itemscope itemtype=http://schema.org/Organization><meta itemprop=name content="a2htray"><meta itemprop=description content="记录我的生活、工作与成长。"></span><span hidden itemprop=post itemscope itemtype=http://schema.org/CreativeWork><meta itemprop=name content="可视化 - 柱状图：matplotlib vs. ggplot2"><meta itemprop=description content="
+
+  
+    本文为可视化系列第 02 篇，将介绍柱状图的基础概念、适用场景与数据集选取，并分别使用 Python Matplotlib 和 R ggplot2 两套工具，演示绘制同一幅柱状图。
+
+  
+柱状图
+
+柱状图，也叫条形图，是最常用的数据可视化图表之一，用矩形柱子的高度（垂直柱状图）或长度（水平柱状图）代表数值大小，用来对比不同类别数据。"></span><header class=post-header><h1 class=post-title itemprop="name headline">可视化 - 柱状图：matplotlib vs. ggplot2
+<a href=https://github.com/a2htray/a2htray.github.io/tree/main/content/post/learn-vis/02_bars_plot.md rel="noopener external nofollow noreferrer" target=_blank class="exturl post-edit-link" title=编辑><i class="fa fa-pen-nib"></i></a></h1><div class=post-meta-container><div class=post-meta-items><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-calendar"></i>
+</span><span class=post-meta-item-text title=发表于>发表于：
+</span><time title="创建时间：2026-10-08 14:43:29 +08:00" itemprop="dateCreated datePublished" datetime="2026-10-08 14:43:29 +0800 CST">2026-10-08
+</time></span><span class=post-meta-item><span class=post-meta-item-icon><i class="fas fa-solid fa-folder-open"></i>
+</span><span class=post-meta-item-text title=分类于>分类于：
+</span><span itemprop=about itemscope itemtype=http://schema.org/Thing><a href=/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/ itemprop=url rel=index><span itemprop=name>后端技术/可视化</span></a></span></span></div><div class=post-meta-items><span class=post-meta-item title=字数><span class=post-meta-item-icon><i class="fas fa-solid fa-file-word"></i>
+</span><span class=post-meta-item-text>字数：</span>
+<span>3716</span>
+</span><span class=post-meta-item title=阅读><span class=post-meta-item-icon><i class="fas fa-solid fa-clock"></i>
+</span><span class=post-meta-item-text>阅读：&ap;</span>
+<span>8分钟</span>
+</span><span class=post-meta-item title=浏览><span class=post-meta-item-icon><i class="fas fa-solid fa-eye"></i>
+</span><span class=post-meta-item-text>浏览：
+</span><span id=busuanzi_value_page_pv data-path=/post/learn-vis/02_bars_plot/><i class="fa fa-sync fa-spin"></i></span></span></div></div></header><div class="post-body autonumber" itemprop=articleBody><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-vis/ScreenShot_2026-10-08_105617_844.png alt></p><blockquote><p>本文为可视化系列第 02 篇，将介绍柱状图的基础概念、适用场景与数据集选取，并分别使用 Python Matplotlib 和 R ggplot2 两套工具，演示绘制同一幅柱状图。</p></blockquote><h2 id=柱状图>柱状图
+<a class=header-anchor href=#%e6%9f%b1%e7%8a%b6%e5%9b%be></a></h2><p>柱状图，也叫条形图，是最常用的数据可视化图表之一，<strong>用矩形柱子的高度（垂直柱状图）或长度（水平柱状图）代表数值大小</strong>，用来对比不同类别数据。</p><a id=more></a><p>适用场景：</p><ul><li>不同类别数据大小对比 -> 单系列柱状图</li><li>同一维度下多组数据并列对比 -> 分组柱状图</li><li>看总量及内部组成占比 -> 堆叠柱状图</li></ul><h2 id=单系列柱状图>单系列柱状图
+<a class=header-anchor href=#%e5%8d%95%e7%b3%bb%e5%88%97%e6%9f%b1%e7%8a%b6%e5%9b%be></a></h2><p>单系列柱状图是柱状图最基础的形式，只包含一组数据，它借助柱子的高度来对比多个独立类别对应的数值，能够直观展现同一个指标在不同分类下的大小差异。</p><p><strong>Python Matplotlib</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-0-1><a class=lnlinks href=#hl-0-1> 1</a>
+</span><span class=lnt id=hl-0-2><a class=lnlinks href=#hl-0-2> 2</a>
+</span><span class=lnt id=hl-0-3><a class=lnlinks href=#hl-0-3> 3</a>
+</span><span class=lnt id=hl-0-4><a class=lnlinks href=#hl-0-4> 4</a>
+</span><span class=lnt id=hl-0-5><a class=lnlinks href=#hl-0-5> 5</a>
+</span><span class=lnt id=hl-0-6><a class=lnlinks href=#hl-0-6> 6</a>
+</span><span class=lnt id=hl-0-7><a class=lnlinks href=#hl-0-7> 7</a>
+</span><span class=lnt id=hl-0-8><a class=lnlinks href=#hl-0-8> 8</a>
+</span><span class=lnt id=hl-0-9><a class=lnlinks href=#hl-0-9> 9</a>
+</span><span class=lnt id=hl-0-10><a class=lnlinks href=#hl-0-10>10</a>
+</span><span class=lnt id=hl-0-11><a class=lnlinks href=#hl-0-11>11</a>
+</span><span class=lnt id=hl-0-12><a class=lnlinks href=#hl-0-12>12</a>
+</span><span class=lnt id=hl-0-13><a class=lnlinks href=#hl-0-13>13</a>
+</span><span class=lnt id=hl-0-14><a class=lnlinks href=#hl-0-14>14</a>
+</span><span class=lnt id=hl-0-15><a class=lnlinks href=#hl-0-15>15</a>
+</span><span class=lnt id=hl-0-16><a class=lnlinks href=#hl-0-16>16</a>
+</span><span class=lnt id=hl-0-17><a class=lnlinks href=#hl-0-17>17</a>
+</span><span class=lnt id=hl-0-18><a class=lnlinks href=#hl-0-18>18</a>
+</span><span class=lnt id=hl-0-19><a class=lnlinks href=#hl-0-19>19</a>
+</span><span class=lnt id=hl-0-20><a class=lnlinks href=#hl-0-20>20</a>
+</span><span class=lnt id=hl-0-21><a class=lnlinks href=#hl-0-21>21</a>
+</span><span class=lnt id=hl-0-22><a class=lnlinks href=#hl-0-22>22</a>
+</span><span class=lnt id=hl-0-23><a class=lnlinks href=#hl-0-23>23</a>
+</span><span class=lnt id=hl-0-24><a class=lnlinks href=#hl-0-24>24</a>
+</span><span class=lnt id=hl-0-25><a class=lnlinks href=#hl-0-25>25</a>
+</span><span class=lnt id=hl-0-26><a class=lnlinks href=#hl-0-26>26</a>
+</span><span class=lnt id=hl-0-27><a class=lnlinks href=#hl-0-27>27</a>
+</span><span class=lnt id=hl-0-28><a class=lnlinks href=#hl-0-28>28</a>
+</span><span class=lnt id=hl-0-29><a class=lnlinks href=#hl-0-29>29</a>
+</span><span class=lnt id=hl-0-30><a class=lnlinks href=#hl-0-30>30</a>
+</span><span class=lnt id=hl-0-31><a class=lnlinks href=#hl-0-31>31</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>matplotlib.pyplot</span> <span class=k>as</span> <span class=nn>plt</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>rcParams</span><span class=p>[</span><span class=s2>&#34;font.sans-serif&#34;</span><span class=p>]</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;Heiti TC&#34;</span><span class=p>,</span> <span class=s2>&#34;SimHei&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>rcParams</span><span class=p>[</span><span class=s2>&#34;axes.unicode_minus&#34;</span><span class=p>]</span> <span class=o>=</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;city&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;上海&#34;</span><span class=p>,</span> <span class=s2>&#34;北京&#34;</span><span class=p>,</span> <span class=s2>&#34;深圳&#34;</span><span class=p>,</span> <span class=s2>&#34;重庆&#34;</span><span class=p>,</span> <span class=s2>&#34;广州&#34;</span><span class=p>,</span> <span class=s2>&#34;苏州&#34;</span><span class=p>,</span> <span class=s2>&#34;成都&#34;</span><span class=p>,</span> <span class=s2>&#34;杭州&#34;</span><span class=p>,</span> <span class=s2>&#34;武汉&#34;</span><span class=p>,</span> <span class=s2>&#34;南京&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;gdp&#34;</span><span class=p>:</span> <span class=p>[</span><span class=mf>56708.71</span><span class=p>,</span> <span class=mf>52073.40</span><span class=p>,</span> <span class=mf>38731.80</span><span class=p>,</span> <span class=mf>33753.93</span><span class=p>,</span> <span class=mf>32039.46</span><span class=p>,</span> <span class=mf>27695.10</span><span class=p>,</span> <span class=mf>24763.60</span><span class=p>,</span> <span class=mf>23011.00</span><span class=p>,</span> <span class=mf>22147.35</span><span class=p>,</span> <span class=mf>19428.78</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>bars</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>bar</span><span class=p>(</span><span class=n>df</span><span class=p>[</span><span class=s2>&#34;city&#34;</span><span class=p>],</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;gdp&#34;</span><span class=p>],</span> <span class=n>width</span><span class=o>=</span><span class=mf>0.6</span><span class=p>,</span> <span class=n>color</span><span class=o>=</span><span class=s2>&#34;#E4C21A&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>bar</span> <span class=ow>in</span> <span class=n>bars</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>height</span> <span class=o>=</span> <span class=n>bar</span><span class=o>.</span><span class=n>get_height</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>bar</span><span class=o>.</span><span class=n>get_x</span><span class=p>()</span> <span class=o>+</span> <span class=n>bar</span><span class=o>.</span><span class=n>get_width</span><span class=p>()</span> <span class=o>/</span> <span class=mi>2</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>height</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>height</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>rotation</span><span class=o>=</span><span class=mi>30</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>ha</span><span class=o>=</span><span class=s2>&#34;center&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>va</span><span class=o>=</span><span class=s2>&#34;bottom&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>fontsize</span><span class=o>=</span><span class=mi>10</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>title</span><span class=p>(</span><span class=s2>&#34;2025 年中国城市 GDP 前十&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>xlabel</span><span class=p>(</span><span class=s2>&#34;城市&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>ylabel</span><span class=p>(</span><span class=s2>&#34;GDP（亿元）&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>ylim</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;gdp&#34;</span><span class=p>]</span><span class=o>.</span><span class=n>max</span><span class=p>()</span> <span class=o>*</span> <span class=mf>1.2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>savefig</span><span class=p>(</span><span class=s2>&#34;city_gdp_by_matplotlib.png&#34;</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div><ul><li><code>plt.bar()</code> 方法绘制柱状图，<code>width</code> 参数设置柱子宽度，<code>color</code> 参数设置柱子颜色；</li><li><code>plt.text()</code> 方法在柱子上添加数值标签：<ul><li><code>rotation</code> 参数设置标签旋转角度；</li><li><code>ha</code> 参数设置标签水平对齐方式；</li><li><code>va</code> 参数设置标签垂直对齐方式；</li><li><code>fontsize</code> 参数设置标签字体大小；</li></ul></li><li><code>plt.ylim()</code> 方法设置 y 轴范围，确保所有数值都能被显示出来。</li></ul><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-vis/city_gdp_by_matplotlib.png alt></p><p><strong>R ggplot2</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-1-1><a class=lnlinks href=#hl-1-1> 1</a>
+</span><span class=lnt id=hl-1-2><a class=lnlinks href=#hl-1-2> 2</a>
+</span><span class=lnt id=hl-1-3><a class=lnlinks href=#hl-1-3> 3</a>
+</span><span class=lnt id=hl-1-4><a class=lnlinks href=#hl-1-4> 4</a>
+</span><span class=lnt id=hl-1-5><a class=lnlinks href=#hl-1-5> 5</a>
+</span><span class=lnt id=hl-1-6><a class=lnlinks href=#hl-1-6> 6</a>
+</span><span class=lnt id=hl-1-7><a class=lnlinks href=#hl-1-7> 7</a>
+</span><span class=lnt id=hl-1-8><a class=lnlinks href=#hl-1-8> 8</a>
+</span><span class=lnt id=hl-1-9><a class=lnlinks href=#hl-1-9> 9</a>
+</span><span class=lnt id=hl-1-10><a class=lnlinks href=#hl-1-10>10</a>
+</span><span class=lnt id=hl-1-11><a class=lnlinks href=#hl-1-11>11</a>
+</span><span class=lnt id=hl-1-12><a class=lnlinks href=#hl-1-12>12</a>
+</span><span class=lnt id=hl-1-13><a class=lnlinks href=#hl-1-13>13</a>
+</span><span class=lnt id=hl-1-14><a class=lnlinks href=#hl-1-14>14</a>
+</span><span class=lnt id=hl-1-15><a class=lnlinks href=#hl-1-15>15</a>
+</span><span class=lnt id=hl-1-16><a class=lnlinks href=#hl-1-16>16</a>
+</span><span class=lnt id=hl-1-17><a class=lnlinks href=#hl-1-17>17</a>
+</span><span class=lnt id=hl-1-18><a class=lnlinks href=#hl-1-18>18</a>
+</span><span class=lnt id=hl-1-19><a class=lnlinks href=#hl-1-19>19</a>
+</span><span class=lnt id=hl-1-20><a class=lnlinks href=#hl-1-20>20</a>
+</span><span class=lnt id=hl-1-21><a class=lnlinks href=#hl-1-21>21</a>
+</span><span class=lnt id=hl-1-22><a class=lnlinks href=#hl-1-22>22</a>
+</span><span class=lnt id=hl-1-23><a class=lnlinks href=#hl-1-23>23</a>
+</span><span class=lnt id=hl-1-24><a class=lnlinks href=#hl-1-24>24</a>
+</span><span class=lnt id=hl-1-25><a class=lnlinks href=#hl-1-25>25</a>
+</span><span class=lnt id=hl-1-26><a class=lnlinks href=#hl-1-26>26</a>
+</span><span class=lnt id=hl-1-27><a class=lnlinks href=#hl-1-27>27</a>
+</span><span class=lnt id=hl-1-28><a class=lnlinks href=#hl-1-28>28</a>
+</span><span class=lnt id=hl-1-29><a class=lnlinks href=#hl-1-29>29</a>
+</span><span class=lnt id=hl-1-30><a class=lnlinks href=#hl-1-30>30</a>
+</span><span class=lnt id=hl-1-31><a class=lnlinks href=#hl-1-31>31</a>
+</span><span class=lnt id=hl-1-32><a class=lnlinks href=#hl-1-32>32</a>
+</span><span class=lnt id=hl-1-33><a class=lnlinks href=#hl-1-33>33</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-r data-lang=r><span class=line><span class=cl><span class=nf>library</span><span class=p>(</span><span class=n>ggplot2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>font_family</span> <span class=o>&lt;-</span> <span class=s>&#34;Heiti TC&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>&lt;-</span> <span class=nf>data.frame</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>city</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#34;上海&#34;</span><span class=p>,</span> <span class=s>&#34;北京&#34;</span><span class=p>,</span> <span class=s>&#34;深圳&#34;</span><span class=p>,</span> <span class=s>&#34;重庆&#34;</span><span class=p>,</span> <span class=s>&#34;广州&#34;</span><span class=p>,</span> <span class=s>&#34;苏州&#34;</span><span class=p>,</span> <span class=s>&#34;成都&#34;</span><span class=p>,</span> <span class=s>&#34;杭州&#34;</span><span class=p>,</span> <span class=s>&#34;武汉&#34;</span><span class=p>,</span> <span class=s>&#34;南京&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>gdp</span>  <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>56708.71</span><span class=p>,</span> <span class=m>52073.40</span><span class=p>,</span> <span class=m>38731.80</span><span class=p>,</span> <span class=m>33753.93</span><span class=p>,</span> <span class=m>32039.46</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>           <span class=m>27695.10</span><span class=p>,</span> <span class=m>24763.60</span><span class=p>,</span> <span class=m>23011.00</span><span class=p>,</span> <span class=m>22147.35</span><span class=p>,</span> <span class=m>19428.78</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>p</span> <span class=o>&lt;-</span> <span class=nf>ggplot</span><span class=p>(</span><span class=n>df</span><span class=p>,</span> <span class=nf>aes</span><span class=p>(</span><span class=n>x</span> <span class=o>=</span> <span class=nf>reorder</span><span class=p>(</span><span class=n>city</span><span class=p>,</span> <span class=o>-</span><span class=n>gdp</span><span class=p>),</span> <span class=n>y</span> <span class=o>=</span> <span class=n>gdp</span><span class=p>))</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>geom_col</span><span class=p>(</span><span class=n>fill</span> <span class=o>=</span> <span class=s>&#34;#E4C21A&#34;</span><span class=p>,</span> <span class=n>width</span> <span class=o>=</span> <span class=m>0.6</span><span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>geom_text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nf>aes</span><span class=p>(</span><span class=n>label</span> <span class=o>=</span> <span class=nf>sprintf</span><span class=p>(</span><span class=s>&#34;%.2f&#34;</span><span class=p>,</span> <span class=n>gdp</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>    <span class=n>angle</span> <span class=o>=</span> <span class=m>30</span><span class=p>,</span> <span class=n>hjust</span> <span class=o>=</span> <span class=m>0.5</span><span class=p>,</span> <span class=n>vjust</span> <span class=o>=</span> <span class=m>0</span><span class=p>,</span> <span class=n>size</span> <span class=o>=</span> <span class=m>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>nudge_y</span> <span class=o>=</span> <span class=nf>max</span><span class=p>(</span><span class=n>df</span><span class=o>$</span><span class=n>gdp</span><span class=p>)</span> <span class=o>*</span> <span class=m>0.04</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>scale_y_continuous</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=s>&#34;GDP（亿元）&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>limits</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=nf>max</span><span class=p>(</span><span class=n>df</span><span class=o>$</span><span class=n>gdp</span><span class=p>)</span> <span class=o>*</span> <span class=m>1.2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>labs</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>title</span> <span class=o>=</span> <span class=s>&#34;2025 年中国城市 GDP 前十&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>x</span> <span class=o>=</span> <span class=s>&#34;城市&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>theme_minimal</span><span class=p>()</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>theme</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>text</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>family</span> <span class=o>=</span> <span class=n>font_family</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>plot.title</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>size</span> <span class=o>=</span> <span class=m>12</span><span class=p>,</span> <span class=n>hjust</span> <span class=o>=</span> <span class=m>0.5</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>axis.title</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>size</span> <span class=o>=</span> <span class=m>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nf>ggsave</span><span class=p>(</span><span class=s>&#34;city_gdp_by_r.png&#34;</span><span class=p>,</span> <span class=n>p</span><span class=p>,</span> <span class=n>width</span> <span class=o>=</span> <span class=m>9</span><span class=p>,</span> <span class=n>height</span> <span class=o>=</span> <span class=m>6</span><span class=p>,</span> <span class=n>dpi</span> <span class=o>=</span> <span class=m>150</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-vis/city_gdp_by_r.png alt></p><ul><li><code>reorder()</code> 方法将类别按数值大小排序，确保柱子按数值大小排序，<code>-gdp</code> 表示按 GDP 从大到小排序；</li><li><code>geom_text()</code> 的 <code>nudge_y</code> 参数设置标签垂直偏移量，确保标签与柱子不重叠；</li></ul><h2 id=分组柱状图>分组柱状图
+<a class=header-anchor href=#%e5%88%86%e7%bb%84%e6%9f%b1%e7%8a%b6%e5%9b%be></a></h2><p>分组柱状图属于柱状图的一种，在同一个分类下并列放置多根柱子。它可以同时对比两组及以上系列的数据，直观展现不同组别之间的差异。该图表适合分析同一类别下多个指标的横向对比关系。</p><p><strong>Python Matplotlib</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-2-1><a class=lnlinks href=#hl-2-1> 1</a>
+</span><span class=lnt id=hl-2-2><a class=lnlinks href=#hl-2-2> 2</a>
+</span><span class=lnt id=hl-2-3><a class=lnlinks href=#hl-2-3> 3</a>
+</span><span class=lnt id=hl-2-4><a class=lnlinks href=#hl-2-4> 4</a>
+</span><span class=lnt id=hl-2-5><a class=lnlinks href=#hl-2-5> 5</a>
+</span><span class=lnt id=hl-2-6><a class=lnlinks href=#hl-2-6> 6</a>
+</span><span class=lnt id=hl-2-7><a class=lnlinks href=#hl-2-7> 7</a>
+</span><span class=lnt id=hl-2-8><a class=lnlinks href=#hl-2-8> 8</a>
+</span><span class=lnt id=hl-2-9><a class=lnlinks href=#hl-2-9> 9</a>
+</span><span class=lnt id=hl-2-10><a class=lnlinks href=#hl-2-10>10</a>
+</span><span class=lnt id=hl-2-11><a class=lnlinks href=#hl-2-11>11</a>
+</span><span class=lnt id=hl-2-12><a class=lnlinks href=#hl-2-12>12</a>
+</span><span class=lnt id=hl-2-13><a class=lnlinks href=#hl-2-13>13</a>
+</span><span class=lnt id=hl-2-14><a class=lnlinks href=#hl-2-14>14</a>
+</span><span class=lnt id=hl-2-15><a class=lnlinks href=#hl-2-15>15</a>
+</span><span class=lnt id=hl-2-16><a class=lnlinks href=#hl-2-16>16</a>
+</span><span class=lnt id=hl-2-17><a class=lnlinks href=#hl-2-17>17</a>
+</span><span class=lnt id=hl-2-18><a class=lnlinks href=#hl-2-18>18</a>
+</span><span class=lnt id=hl-2-19><a class=lnlinks href=#hl-2-19>19</a>
+</span><span class=lnt id=hl-2-20><a class=lnlinks href=#hl-2-20>20</a>
+</span><span class=lnt id=hl-2-21><a class=lnlinks href=#hl-2-21>21</a>
+</span><span class=lnt id=hl-2-22><a class=lnlinks href=#hl-2-22>22</a>
+</span><span class=lnt id=hl-2-23><a class=lnlinks href=#hl-2-23>23</a>
+</span><span class=lnt id=hl-2-24><a class=lnlinks href=#hl-2-24>24</a>
+</span><span class=lnt id=hl-2-25><a class=lnlinks href=#hl-2-25>25</a>
+</span><span class=lnt id=hl-2-26><a class=lnlinks href=#hl-2-26>26</a>
+</span><span class=lnt id=hl-2-27><a class=lnlinks href=#hl-2-27>27</a>
+</span><span class=lnt id=hl-2-28><a class=lnlinks href=#hl-2-28>28</a>
+</span><span class=lnt id=hl-2-29><a class=lnlinks href=#hl-2-29>29</a>
+</span><span class=lnt id=hl-2-30><a class=lnlinks href=#hl-2-30>30</a>
+</span><span class=lnt id=hl-2-31><a class=lnlinks href=#hl-2-31>31</a>
+</span><span class=lnt id=hl-2-32><a class=lnlinks href=#hl-2-32>32</a>
+</span><span class=lnt id=hl-2-33><a class=lnlinks href=#hl-2-33>33</a>
+</span><span class=lnt id=hl-2-34><a class=lnlinks href=#hl-2-34>34</a>
+</span><span class=lnt id=hl-2-35><a class=lnlinks href=#hl-2-35>35</a>
+</span><span class=lnt id=hl-2-36><a class=lnlinks href=#hl-2-36>36</a>
+</span><span class=lnt id=hl-2-37><a class=lnlinks href=#hl-2-37>37</a>
+</span><span class=lnt id=hl-2-38><a class=lnlinks href=#hl-2-38>38</a>
+</span><span class=lnt id=hl-2-39><a class=lnlinks href=#hl-2-39>39</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>matplotlib.pyplot</span> <span class=k>as</span> <span class=nn>plt</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>rcParams</span><span class=p>[</span><span class=s2>&#34;font.sans-serif&#34;</span><span class=p>]</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;Heiti TC&#34;</span><span class=p>,</span> <span class=s2>&#34;SimHei&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>rcParams</span><span class=p>[</span><span class=s2>&#34;axes.unicode_minus&#34;</span><span class=p>]</span> <span class=o>=</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;city&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;上海&#34;</span><span class=p>,</span> <span class=s2>&#34;北京&#34;</span><span class=p>,</span> <span class=s2>&#34;深圳&#34;</span><span class=p>,</span> <span class=s2>&#34;重庆&#34;</span><span class=p>,</span> <span class=s2>&#34;广州&#34;</span><span class=p>,</span> <span class=s2>&#34;苏州&#34;</span><span class=p>,</span> <span class=s2>&#34;成都&#34;</span><span class=p>,</span> <span class=s2>&#34;杭州&#34;</span><span class=p>,</span> <span class=s2>&#34;武汉&#34;</span><span class=p>,</span> <span class=s2>&#34;南京&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;primary&#34;</span><span class=p>:</span> <span class=p>[</span><span class=mf>99.39</span><span class=p>,</span> <span class=mf>109.20</span><span class=p>,</span> <span class=mf>28.04</span><span class=p>,</span> <span class=mf>1860.12</span><span class=p>,</span> <span class=mf>317.02</span><span class=p>,</span> <span class=mf>208.90</span><span class=p>,</span> <span class=mf>493.70</span><span class=p>,</span> <span class=mf>356.00</span><span class=p>,</span> <span class=mf>481.21</span><span class=p>,</span> <span class=mf>338.50</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;secondary&#34;</span><span class=p>:</span> <span class=p>[</span><span class=mf>11650.62</span><span class=p>,</span> <span class=mf>7187.40</span><span class=p>,</span> <span class=mf>14500.00</span><span class=p>,</span> <span class=mf>13174.83</span><span class=p>,</span> <span class=mf>7710.27</span><span class=p>,</span> <span class=mf>12844.40</span><span class=p>,</span> <span class=mf>8472.70</span><span class=p>,</span> <span class=mf>7246.00</span><span class=p>,</span> <span class=mf>6589.72</span><span class=p>,</span> <span class=mf>5873.07</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;tertiary&#34;</span><span class=p>:</span> <span class=p>[</span><span class=mf>44958.70</span><span class=p>,</span> <span class=mf>44776.90</span><span class=p>,</span> <span class=mf>24203.76</span><span class=p>,</span> <span class=mf>18718.98</span><span class=p>,</span> <span class=mf>24012.17</span><span class=p>,</span> <span class=mf>14641.80</span><span class=p>,</span> <span class=mf>15797.20</span><span class=p>,</span> <span class=mf>15409.00</span><span class=p>,</span> <span class=mf>15076.42</span><span class=p>,</span> <span class=mf>13217.21</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>width</span> <span class=o>=</span> <span class=mf>0.3</span>
+</span></span><span class=line><span class=cl><span class=n>x</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>df</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>12</span><span class=p>,</span><span class=mi>7</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>bar1</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>bar</span><span class=p>(</span><span class=n>x</span> <span class=o>-</span> <span class=n>width</span><span class=p>,</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;primary&#34;</span><span class=p>],</span> <span class=n>width</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;第一产业&#34;</span><span class=p>,</span> <span class=n>color</span><span class=o>=</span><span class=s2>&#34;#5B9BD5&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>bar2</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>bar</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;secondary&#34;</span><span class=p>],</span> <span class=n>width</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;第二产业&#34;</span><span class=p>,</span> <span class=n>color</span><span class=o>=</span><span class=s2>&#34;#ED7D31&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>bar3</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>bar</span><span class=p>(</span><span class=n>x</span> <span class=o>+</span> <span class=n>width</span><span class=p>,</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;tertiary&#34;</span><span class=p>],</span> <span class=n>width</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;第三产业&#34;</span><span class=p>,</span> <span class=n>color</span><span class=o>=</span><span class=s2>&#34;#70AD47&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>add_label</span><span class=p>(</span><span class=n>bars</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>bar</span> <span class=ow>in</span> <span class=n>bars</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>h</span> <span class=o>=</span> <span class=n>bar</span><span class=o>.</span><span class=n>get_height</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>plt</span><span class=o>.</span><span class=n>text</span><span class=p>(</span><span class=n>bar</span><span class=o>.</span><span class=n>get_x</span><span class=p>()</span> <span class=o>+</span> <span class=n>bar</span><span class=o>.</span><span class=n>get_width</span><span class=p>()</span><span class=o>/</span><span class=mi>2</span><span class=p>,</span> <span class=n>h</span><span class=p>,</span> <span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>h</span><span class=si>:</span><span class=s2>.0f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>ha</span><span class=o>=</span><span class=s2>&#34;center&#34;</span><span class=p>,</span> <span class=n>va</span><span class=o>=</span><span class=s2>&#34;bottom&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>8</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>add_label</span><span class=p>(</span><span class=n>bar1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>add_label</span><span class=p>(</span><span class=n>bar2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>add_label</span><span class=p>(</span><span class=n>bar3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>title</span><span class=p>(</span><span class=s2>&#34;2025 年中国 GDP 前十城市三次产业增加值&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>14</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>xlabel</span><span class=p>(</span><span class=s2>&#34;城市&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>ylabel</span><span class=p>(</span><span class=s2>&#34;增加值（亿元）&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>xticks</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;city&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>legend</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>tight_layout</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>savefig</span><span class=p>(</span><span class=s2>&#34;city_3industry_group_gdp_by_matplotlib.png&#34;</span><span class=p>,</span> <span class=n>dpi</span><span class=o>=</span><span class=mi>300</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div><ul><li><code>plt.bar()</code> 方法绘制柱状图，第 1 个参数用于设置分组内柱子的位置；</li><li><code>plt.text()</code> 方法绘制柱子上的数值文本；</li></ul><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-vis/city_3industry_group_gdp_by_matplotlib.png alt></p><p><strong>R ggplot2</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-3-1><a class=lnlinks href=#hl-3-1> 1</a>
+</span><span class=lnt id=hl-3-2><a class=lnlinks href=#hl-3-2> 2</a>
+</span><span class=lnt id=hl-3-3><a class=lnlinks href=#hl-3-3> 3</a>
+</span><span class=lnt id=hl-3-4><a class=lnlinks href=#hl-3-4> 4</a>
+</span><span class=lnt id=hl-3-5><a class=lnlinks href=#hl-3-5> 5</a>
+</span><span class=lnt id=hl-3-6><a class=lnlinks href=#hl-3-6> 6</a>
+</span><span class=lnt id=hl-3-7><a class=lnlinks href=#hl-3-7> 7</a>
+</span><span class=lnt id=hl-3-8><a class=lnlinks href=#hl-3-8> 8</a>
+</span><span class=lnt id=hl-3-9><a class=lnlinks href=#hl-3-9> 9</a>
+</span><span class=lnt id=hl-3-10><a class=lnlinks href=#hl-3-10>10</a>
+</span><span class=lnt id=hl-3-11><a class=lnlinks href=#hl-3-11>11</a>
+</span><span class=lnt id=hl-3-12><a class=lnlinks href=#hl-3-12>12</a>
+</span><span class=lnt id=hl-3-13><a class=lnlinks href=#hl-3-13>13</a>
+</span><span class=lnt id=hl-3-14><a class=lnlinks href=#hl-3-14>14</a>
+</span><span class=lnt id=hl-3-15><a class=lnlinks href=#hl-3-15>15</a>
+</span><span class=lnt id=hl-3-16><a class=lnlinks href=#hl-3-16>16</a>
+</span><span class=lnt id=hl-3-17><a class=lnlinks href=#hl-3-17>17</a>
+</span><span class=lnt id=hl-3-18><a class=lnlinks href=#hl-3-18>18</a>
+</span><span class=lnt id=hl-3-19><a class=lnlinks href=#hl-3-19>19</a>
+</span><span class=lnt id=hl-3-20><a class=lnlinks href=#hl-3-20>20</a>
+</span><span class=lnt id=hl-3-21><a class=lnlinks href=#hl-3-21>21</a>
+</span><span class=lnt id=hl-3-22><a class=lnlinks href=#hl-3-22>22</a>
+</span><span class=lnt id=hl-3-23><a class=lnlinks href=#hl-3-23>23</a>
+</span><span class=lnt id=hl-3-24><a class=lnlinks href=#hl-3-24>24</a>
+</span><span class=lnt id=hl-3-25><a class=lnlinks href=#hl-3-25>25</a>
+</span><span class=lnt id=hl-3-26><a class=lnlinks href=#hl-3-26>26</a>
+</span><span class=lnt id=hl-3-27><a class=lnlinks href=#hl-3-27>27</a>
+</span><span class=lnt id=hl-3-28><a class=lnlinks href=#hl-3-28>28</a>
+</span><span class=lnt id=hl-3-29><a class=lnlinks href=#hl-3-29>29</a>
+</span><span class=lnt id=hl-3-30><a class=lnlinks href=#hl-3-30>30</a>
+</span><span class=lnt id=hl-3-31><a class=lnlinks href=#hl-3-31>31</a>
+</span><span class=lnt id=hl-3-32><a class=lnlinks href=#hl-3-32>32</a>
+</span><span class=lnt id=hl-3-33><a class=lnlinks href=#hl-3-33>33</a>
+</span><span class=lnt id=hl-3-34><a class=lnlinks href=#hl-3-34>34</a>
+</span><span class=lnt id=hl-3-35><a class=lnlinks href=#hl-3-35>35</a>
+</span><span class=lnt id=hl-3-36><a class=lnlinks href=#hl-3-36>36</a>
+</span><span class=lnt id=hl-3-37><a class=lnlinks href=#hl-3-37>37</a>
+</span><span class=lnt id=hl-3-38><a class=lnlinks href=#hl-3-38>38</a>
+</span><span class=lnt id=hl-3-39><a class=lnlinks href=#hl-3-39>39</a>
+</span><span class=lnt id=hl-3-40><a class=lnlinks href=#hl-3-40>40</a>
+</span><span class=lnt id=hl-3-41><a class=lnlinks href=#hl-3-41>41</a>
+</span><span class=lnt id=hl-3-42><a class=lnlinks href=#hl-3-42>42</a>
+</span><span class=lnt id=hl-3-43><a class=lnlinks href=#hl-3-43>43</a>
+</span><span class=lnt id=hl-3-44><a class=lnlinks href=#hl-3-44>44</a>
+</span><span class=lnt id=hl-3-45><a class=lnlinks href=#hl-3-45>45</a>
+</span><span class=lnt id=hl-3-46><a class=lnlinks href=#hl-3-46>46</a>
+</span><span class=lnt id=hl-3-47><a class=lnlinks href=#hl-3-47>47</a>
+</span><span class=lnt id=hl-3-48><a class=lnlinks href=#hl-3-48>48</a>
+</span><span class=lnt id=hl-3-49><a class=lnlinks href=#hl-3-49>49</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-r data-lang=r><span class=line><span class=cl><span class=nf>library</span><span class=p>(</span><span class=n>ggplot2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>font_family</span> <span class=o>&lt;-</span> <span class=s>&#34;Heiti TC&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>&lt;-</span> <span class=nf>data.frame</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>city</span>      <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#34;上海&#34;</span><span class=p>,</span> <span class=s>&#34;北京&#34;</span><span class=p>,</span> <span class=s>&#34;深圳&#34;</span><span class=p>,</span> <span class=s>&#34;重庆&#34;</span><span class=p>,</span> <span class=s>&#34;广州&#34;</span><span class=p>,</span> <span class=s>&#34;苏州&#34;</span><span class=p>,</span> <span class=s>&#34;成都&#34;</span><span class=p>,</span> <span class=s>&#34;杭州&#34;</span><span class=p>,</span> <span class=s>&#34;武汉&#34;</span><span class=p>,</span> <span class=s>&#34;南京&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>primary</span>   <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>99.39</span><span class=p>,</span> <span class=m>109.20</span><span class=p>,</span> <span class=m>28.04</span><span class=p>,</span> <span class=m>1860.12</span><span class=p>,</span> <span class=m>317.02</span><span class=p>,</span> <span class=m>208.90</span><span class=p>,</span> <span class=m>493.70</span><span class=p>,</span> <span class=m>356.00</span><span class=p>,</span> <span class=m>481.21</span><span class=p>,</span> <span class=m>338.50</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>secondary</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>11650.62</span><span class=p>,</span> <span class=m>7187.40</span><span class=p>,</span> <span class=m>14500.00</span><span class=p>,</span> <span class=m>13174.83</span><span class=p>,</span> <span class=m>7710.27</span><span class=p>,</span> <span class=m>12844.40</span><span class=p>,</span> <span class=m>8472.70</span><span class=p>,</span> <span class=m>7246.00</span><span class=p>,</span> <span class=m>6589.72</span><span class=p>,</span> <span class=m>5873.07</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>tertiary</span>  <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>44958.70</span><span class=p>,</span> <span class=m>44776.90</span><span class=p>,</span> <span class=m>24203.76</span><span class=p>,</span> <span class=m>18718.98</span><span class=p>,</span> <span class=m>24012.17</span><span class=p>,</span> <span class=m>14641.80</span><span class=p>,</span> <span class=m>15797.20</span><span class=p>,</span> <span class=m>15409.00</span><span class=p>,</span> <span class=m>15076.42</span><span class=p>,</span> <span class=m>13217.21</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df_long</span> <span class=o>&lt;-</span> <span class=nf>data.frame</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>city</span>     <span class=o>=</span> <span class=nf>rep</span><span class=p>(</span><span class=n>df</span><span class=o>$</span><span class=n>city</span><span class=p>,</span> <span class=m>3</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>industry</span> <span class=o>=</span> <span class=nf>rep</span><span class=p>(</span><span class=nf>c</span><span class=p>(</span><span class=s>&#34;第一产业&#34;</span><span class=p>,</span> <span class=s>&#34;第二产业&#34;</span><span class=p>,</span> <span class=s>&#34;第三产业&#34;</span><span class=p>),</span> <span class=n>each</span> <span class=o>=</span> <span class=nf>nrow</span><span class=p>(</span><span class=n>df</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>  <span class=n>value</span>    <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=n>df</span><span class=o>$</span><span class=n>primary</span><span class=p>,</span> <span class=n>df</span><span class=o>$</span><span class=n>secondary</span><span class=p>,</span> <span class=n>df</span><span class=o>$</span><span class=n>tertiary</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>df_long</span><span class=o>$</span><span class=n>industry</span> <span class=o>&lt;-</span> <span class=nf>factor</span><span class=p>(</span><span class=n>df_long</span><span class=o>$</span><span class=n>industry</span><span class=p>,</span> <span class=n>levels</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#34;第一产业&#34;</span><span class=p>,</span> <span class=s>&#34;第二产业&#34;</span><span class=p>,</span> <span class=s>&#34;第三产业&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>totals</span> <span class=o>&lt;-</span> <span class=nf>data.frame</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>city</span>  <span class=o>=</span> <span class=n>df</span><span class=o>$</span><span class=n>city</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>total</span> <span class=o>=</span> <span class=n>df</span><span class=o>$</span><span class=n>primary</span> <span class=o>+</span> <span class=n>df</span><span class=o>$</span><span class=n>secondary</span> <span class=o>+</span> <span class=n>df</span><span class=o>$</span><span class=n>tertiary</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>ord</span> <span class=o>&lt;-</span> <span class=nf>order</span><span class=p>(</span><span class=n>totals</span><span class=o>$</span><span class=n>total</span><span class=p>,</span> <span class=n>decreasing</span> <span class=o>=</span> <span class=kc>TRUE</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>df_long</span><span class=o>$</span><span class=n>city</span> <span class=o>&lt;-</span> <span class=nf>factor</span><span class=p>(</span><span class=n>df_long</span><span class=o>$</span><span class=n>city</span><span class=p>,</span> <span class=n>levels</span> <span class=o>=</span> <span class=n>totals</span><span class=o>$</span><span class=n>city[ord]</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>p</span> <span class=o>&lt;-</span> <span class=nf>ggplot</span><span class=p>(</span><span class=n>df_long</span><span class=p>,</span> <span class=nf>aes</span><span class=p>(</span><span class=n>x</span> <span class=o>=</span> <span class=n>city</span><span class=p>,</span> <span class=n>y</span> <span class=o>=</span> <span class=n>value</span><span class=p>,</span> <span class=n>fill</span> <span class=o>=</span> <span class=n>industry</span><span class=p>))</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>geom_col</span><span class=p>(</span><span class=n>width</span> <span class=o>=</span> <span class=m>1</span><span class=p>,</span> <span class=n>position</span> <span class=o>=</span> <span class=nf>position_dodge</span><span class=p>(</span><span class=m>0.9</span><span class=p>))</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>geom_text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nf>aes</span><span class=p>(</span><span class=n>label</span> <span class=o>=</span> <span class=nf>sprintf</span><span class=p>(</span><span class=s>&#34;%.0f&#34;</span><span class=p>,</span> <span class=n>value</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>    <span class=n>position</span> <span class=o>=</span> <span class=nf>position_dodge</span><span class=p>(</span><span class=m>1</span><span class=p>),</span> <span class=n>vjust</span> <span class=o>=</span> <span class=m>-0.1</span><span class=p>,</span> <span class=n>hjust</span> <span class=o>=</span> <span class=m>0.5</span><span class=p>,</span> <span class=n>size</span> <span class=o>=</span> <span class=m>2.8</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>scale_fill_manual</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=s>&#34;产业&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>values</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#34;第一产业&#34;</span> <span class=o>=</span> <span class=s>&#34;#5B9BD5&#34;</span><span class=p>,</span> <span class=s>&#34;第二产业&#34;</span> <span class=o>=</span> <span class=s>&#34;#ED7D31&#34;</span><span class=p>,</span> <span class=s>&#34;第三产业&#34;</span> <span class=o>=</span> <span class=s>&#34;#70AD47&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>scale_y_continuous</span><span class=p>(</span><span class=n>expand</span> <span class=o>=</span> <span class=nf>expansion</span><span class=p>(</span><span class=n>mult</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=m>0.1</span><span class=p>)))</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>labs</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>title</span> <span class=o>=</span> <span class=s>&#34;2025 年中国 GDP 前十城市三次产业增加值&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>x</span> <span class=o>=</span> <span class=s>&#34;城市&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>y</span> <span class=o>=</span> <span class=s>&#34;增加值（亿元）&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>theme_minimal</span><span class=p>()</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>theme</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>text</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>family</span> <span class=o>=</span> <span class=n>font_family</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>plot.title</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>size</span> <span class=o>=</span> <span class=m>14</span><span class=p>,</span> <span class=n>hjust</span> <span class=o>=</span> <span class=m>0.5</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>axis.title</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>size</span> <span class=o>=</span> <span class=m>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nf>ggsave</span><span class=p>(</span><span class=s>&#34;city_3industry_group_gdp_by_r.png&#34;</span><span class=p>,</span> <span class=n>p</span><span class=p>,</span> <span class=n>width</span> <span class=o>=</span> <span class=m>12</span><span class=p>,</span> <span class=n>height</span> <span class=o>=</span> <span class=m>7</span><span class=p>,</span> <span class=n>dpi</span> <span class=o>=</span> <span class=m>300</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div><ul><li><code>df_long &lt;- data.frame(...)</code> 每个城市重复 3 行；industry 设为因子并固定层级，决定堆叠/图例顺序；</li><li><code>totals &lt;- data.frame(...)</code> 各城市总增加值，用于柱顶标签；</li><li><code>ord &lt;- order(totals$total, decreasing = TRUE)</code> 按总增加值降序重排 city 因子层级，使 x 轴从左到右由大到小；</li><li><code>geom_col(...)</code> 中的 <code>position = position_dodge(0.9)</code> 使柱子并列且彼此贴合。</li></ul><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-vis/city_3industry_group_gdp_by_r.png alt></p><h2 id=堆叠柱状图>堆叠柱状图
+<a class=header-anchor href=#%e5%a0%86%e5%8f%a0%e6%9f%b1%e7%8a%b6%e5%9b%be></a></h2><p>堆叠柱状图是柱状图的一种，它将同一分类下不同系列的数据依次叠放在一根柱子上。柱子总高度代表该分类下的总量，各分段的高度则对应各个组成部分的数值。它适合同时观察整体总量和内部各部分的构成情况。</p><p><strong>Python Matplotlib</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-4-1><a class=lnlinks href=#hl-4-1> 1</a>
+</span><span class=lnt id=hl-4-2><a class=lnlinks href=#hl-4-2> 2</a>
+</span><span class=lnt id=hl-4-3><a class=lnlinks href=#hl-4-3> 3</a>
+</span><span class=lnt id=hl-4-4><a class=lnlinks href=#hl-4-4> 4</a>
+</span><span class=lnt id=hl-4-5><a class=lnlinks href=#hl-4-5> 5</a>
+</span><span class=lnt id=hl-4-6><a class=lnlinks href=#hl-4-6> 6</a>
+</span><span class=lnt id=hl-4-7><a class=lnlinks href=#hl-4-7> 7</a>
+</span><span class=lnt id=hl-4-8><a class=lnlinks href=#hl-4-8> 8</a>
+</span><span class=lnt id=hl-4-9><a class=lnlinks href=#hl-4-9> 9</a>
+</span><span class=lnt id=hl-4-10><a class=lnlinks href=#hl-4-10>10</a>
+</span><span class=lnt id=hl-4-11><a class=lnlinks href=#hl-4-11>11</a>
+</span><span class=lnt id=hl-4-12><a class=lnlinks href=#hl-4-12>12</a>
+</span><span class=lnt id=hl-4-13><a class=lnlinks href=#hl-4-13>13</a>
+</span><span class=lnt id=hl-4-14><a class=lnlinks href=#hl-4-14>14</a>
+</span><span class=lnt id=hl-4-15><a class=lnlinks href=#hl-4-15>15</a>
+</span><span class=lnt id=hl-4-16><a class=lnlinks href=#hl-4-16>16</a>
+</span><span class=lnt id=hl-4-17><a class=lnlinks href=#hl-4-17>17</a>
+</span><span class=lnt id=hl-4-18><a class=lnlinks href=#hl-4-18>18</a>
+</span><span class=lnt id=hl-4-19><a class=lnlinks href=#hl-4-19>19</a>
+</span><span class=lnt id=hl-4-20><a class=lnlinks href=#hl-4-20>20</a>
+</span><span class=lnt id=hl-4-21><a class=lnlinks href=#hl-4-21>21</a>
+</span><span class=lnt id=hl-4-22><a class=lnlinks href=#hl-4-22>22</a>
+</span><span class=lnt id=hl-4-23><a class=lnlinks href=#hl-4-23>23</a>
+</span><span class=lnt id=hl-4-24><a class=lnlinks href=#hl-4-24>24</a>
+</span><span class=lnt id=hl-4-25><a class=lnlinks href=#hl-4-25>25</a>
+</span><span class=lnt id=hl-4-26><a class=lnlinks href=#hl-4-26>26</a>
+</span><span class=lnt id=hl-4-27><a class=lnlinks href=#hl-4-27>27</a>
+</span><span class=lnt id=hl-4-28><a class=lnlinks href=#hl-4-28>28</a>
+</span><span class=lnt id=hl-4-29><a class=lnlinks href=#hl-4-29>29</a>
+</span><span class=lnt id=hl-4-30><a class=lnlinks href=#hl-4-30>30</a>
+</span><span class=lnt id=hl-4-31><a class=lnlinks href=#hl-4-31>31</a>
+</span><span class=lnt id=hl-4-32><a class=lnlinks href=#hl-4-32>32</a>
+</span><span class=lnt id=hl-4-33><a class=lnlinks href=#hl-4-33>33</a>
+</span><span class=lnt id=hl-4-34><a class=lnlinks href=#hl-4-34>34</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>matplotlib.pyplot</span> <span class=k>as</span> <span class=nn>plt</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>rcParams</span><span class=p>[</span><span class=s2>&#34;font.sans-serif&#34;</span><span class=p>]</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;Heiti TC&#34;</span><span class=p>,</span> <span class=s2>&#34;SimHei&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>rcParams</span><span class=p>[</span><span class=s2>&#34;axes.unicode_minus&#34;</span><span class=p>]</span> <span class=o>=</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;city&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;上海&#34;</span><span class=p>,</span> <span class=s2>&#34;北京&#34;</span><span class=p>,</span> <span class=s2>&#34;深圳&#34;</span><span class=p>,</span> <span class=s2>&#34;重庆&#34;</span><span class=p>,</span> <span class=s2>&#34;广州&#34;</span><span class=p>,</span> <span class=s2>&#34;苏州&#34;</span><span class=p>,</span> <span class=s2>&#34;成都&#34;</span><span class=p>,</span> <span class=s2>&#34;杭州&#34;</span><span class=p>,</span> <span class=s2>&#34;武汉&#34;</span><span class=p>,</span> <span class=s2>&#34;南京&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;primary&#34;</span><span class=p>:</span> <span class=p>[</span><span class=mf>99.39</span><span class=p>,</span> <span class=mf>109.20</span><span class=p>,</span> <span class=mf>28.04</span><span class=p>,</span> <span class=mf>1860.12</span><span class=p>,</span> <span class=mf>317.02</span><span class=p>,</span> <span class=mf>208.90</span><span class=p>,</span> <span class=mf>493.70</span><span class=p>,</span> <span class=mf>356.00</span><span class=p>,</span> <span class=mf>481.21</span><span class=p>,</span> <span class=mf>338.50</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;secondary&#34;</span><span class=p>:</span> <span class=p>[</span><span class=mf>11650.62</span><span class=p>,</span> <span class=mf>7187.40</span><span class=p>,</span> <span class=mf>14500.00</span><span class=p>,</span> <span class=mf>13174.83</span><span class=p>,</span> <span class=mf>7710.27</span><span class=p>,</span> <span class=mf>12844.40</span><span class=p>,</span> <span class=mf>8472.70</span><span class=p>,</span> <span class=mf>7246.00</span><span class=p>,</span> <span class=mf>6589.72</span><span class=p>,</span> <span class=mf>5873.07</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;tertiary&#34;</span><span class=p>:</span> <span class=p>[</span><span class=mf>44958.70</span><span class=p>,</span> <span class=mf>44776.90</span><span class=p>,</span> <span class=mf>24203.76</span><span class=p>,</span> <span class=mf>18718.98</span><span class=p>,</span> <span class=mf>24012.17</span><span class=p>,</span> <span class=mf>14641.80</span><span class=p>,</span> <span class=mf>15797.20</span><span class=p>,</span> <span class=mf>15409.00</span><span class=p>,</span> <span class=mf>15076.42</span><span class=p>,</span> <span class=mf>13217.21</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>width</span> <span class=o>=</span> <span class=mf>0.6</span>
+</span></span><span class=line><span class=cl><span class=n>x</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>df</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>12</span><span class=p>,</span><span class=mi>7</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>bar1</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>bar</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;primary&#34;</span><span class=p>],</span> <span class=n>width</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;第一产业&#34;</span><span class=p>,</span> <span class=n>color</span><span class=o>=</span><span class=s2>&#34;#5B9BD5&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>bar2</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>bar</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;secondary&#34;</span><span class=p>],</span> <span class=n>width</span><span class=p>,</span> <span class=n>bottom</span><span class=o>=</span><span class=n>df</span><span class=p>[</span><span class=s2>&#34;primary&#34;</span><span class=p>],</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;第二产业&#34;</span><span class=p>,</span> <span class=n>color</span><span class=o>=</span><span class=s2>&#34;#ED7D31&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>bar3</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>bar</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;tertiary&#34;</span><span class=p>],</span> <span class=n>width</span><span class=p>,</span> <span class=n>bottom</span><span class=o>=</span><span class=n>df</span><span class=p>[</span><span class=s2>&#34;primary&#34;</span><span class=p>]</span> <span class=o>+</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;secondary&#34;</span><span class=p>],</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;第三产业&#34;</span><span class=p>,</span> <span class=n>color</span><span class=o>=</span><span class=s2>&#34;#70AD47&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>totals</span> <span class=o>=</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;primary&#34;</span><span class=p>]</span> <span class=o>+</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;secondary&#34;</span><span class=p>]</span> <span class=o>+</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;tertiary&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>xi</span><span class=p>,</span> <span class=n>t</span> <span class=ow>in</span> <span class=nb>zip</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>totals</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>text</span><span class=p>(</span><span class=n>xi</span><span class=p>,</span> <span class=n>t</span><span class=p>,</span> <span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>t</span><span class=si>:</span><span class=s2>.1f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>ha</span><span class=o>=</span><span class=s2>&#34;center&#34;</span><span class=p>,</span> <span class=n>va</span><span class=o>=</span><span class=s2>&#34;bottom&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>9</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>title</span><span class=p>(</span><span class=s2>&#34;2025 年中国 GDP 前十城市三次产业增加值&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>14</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>xlabel</span><span class=p>(</span><span class=s2>&#34;城市&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>ylabel</span><span class=p>(</span><span class=s2>&#34;增加值（亿元）&#34;</span><span class=p>,</span> <span class=n>fontsize</span><span class=o>=</span><span class=mi>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>xticks</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>df</span><span class=p>[</span><span class=s2>&#34;city&#34;</span><span class=p>],</span> <span class=n>ha</span><span class=o>=</span><span class=s2>&#34;center&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>legend</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>tight_layout</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>savefig</span><span class=p>(</span><span class=s2>&#34;city_gdp_3industry_stacked_by_matplotlib.png&#34;</span><span class=p>,</span> <span class=n>dpi</span><span class=o>=</span><span class=mi>300</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div><ul><li><code>plt.bar()</code> 方法绘制柱状图，<code>bottom</code> 参数设置柱子底部位置，<code>label</code> 参数设置柱子标签，<code>color</code> 参数设置柱子颜色；</li><li><code>plt.text()</code> 方法在柱子上添加数值标签；</li><li><code>plt.tight_layout()</code> 方法调整子图参数，确保子图之间有足够的空间。</li></ul><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-vis/city_gdp_3industry_stacked_by_matplotlib.png alt></p><p><strong>R ggplot2</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt id=hl-5-1><a class=lnlinks href=#hl-5-1> 1</a>
+</span><span class=lnt id=hl-5-2><a class=lnlinks href=#hl-5-2> 2</a>
+</span><span class=lnt id=hl-5-3><a class=lnlinks href=#hl-5-3> 3</a>
+</span><span class=lnt id=hl-5-4><a class=lnlinks href=#hl-5-4> 4</a>
+</span><span class=lnt id=hl-5-5><a class=lnlinks href=#hl-5-5> 5</a>
+</span><span class=lnt id=hl-5-6><a class=lnlinks href=#hl-5-6> 6</a>
+</span><span class=lnt id=hl-5-7><a class=lnlinks href=#hl-5-7> 7</a>
+</span><span class=lnt id=hl-5-8><a class=lnlinks href=#hl-5-8> 8</a>
+</span><span class=lnt id=hl-5-9><a class=lnlinks href=#hl-5-9> 9</a>
+</span><span class=lnt id=hl-5-10><a class=lnlinks href=#hl-5-10>10</a>
+</span><span class=lnt id=hl-5-11><a class=lnlinks href=#hl-5-11>11</a>
+</span><span class=lnt id=hl-5-12><a class=lnlinks href=#hl-5-12>12</a>
+</span><span class=lnt id=hl-5-13><a class=lnlinks href=#hl-5-13>13</a>
+</span><span class=lnt id=hl-5-14><a class=lnlinks href=#hl-5-14>14</a>
+</span><span class=lnt id=hl-5-15><a class=lnlinks href=#hl-5-15>15</a>
+</span><span class=lnt id=hl-5-16><a class=lnlinks href=#hl-5-16>16</a>
+</span><span class=lnt id=hl-5-17><a class=lnlinks href=#hl-5-17>17</a>
+</span><span class=lnt id=hl-5-18><a class=lnlinks href=#hl-5-18>18</a>
+</span><span class=lnt id=hl-5-19><a class=lnlinks href=#hl-5-19>19</a>
+</span><span class=lnt id=hl-5-20><a class=lnlinks href=#hl-5-20>20</a>
+</span><span class=lnt id=hl-5-21><a class=lnlinks href=#hl-5-21>21</a>
+</span><span class=lnt id=hl-5-22><a class=lnlinks href=#hl-5-22>22</a>
+</span><span class=lnt id=hl-5-23><a class=lnlinks href=#hl-5-23>23</a>
+</span><span class=lnt id=hl-5-24><a class=lnlinks href=#hl-5-24>24</a>
+</span><span class=lnt id=hl-5-25><a class=lnlinks href=#hl-5-25>25</a>
+</span><span class=lnt id=hl-5-26><a class=lnlinks href=#hl-5-26>26</a>
+</span><span class=lnt id=hl-5-27><a class=lnlinks href=#hl-5-27>27</a>
+</span><span class=lnt id=hl-5-28><a class=lnlinks href=#hl-5-28>28</a>
+</span><span class=lnt id=hl-5-29><a class=lnlinks href=#hl-5-29>29</a>
+</span><span class=lnt id=hl-5-30><a class=lnlinks href=#hl-5-30>30</a>
+</span><span class=lnt id=hl-5-31><a class=lnlinks href=#hl-5-31>31</a>
+</span><span class=lnt id=hl-5-32><a class=lnlinks href=#hl-5-32>32</a>
+</span><span class=lnt id=hl-5-33><a class=lnlinks href=#hl-5-33>33</a>
+</span><span class=lnt id=hl-5-34><a class=lnlinks href=#hl-5-34>34</a>
+</span><span class=lnt id=hl-5-35><a class=lnlinks href=#hl-5-35>35</a>
+</span><span class=lnt id=hl-5-36><a class=lnlinks href=#hl-5-36>36</a>
+</span><span class=lnt id=hl-5-37><a class=lnlinks href=#hl-5-37>37</a>
+</span><span class=lnt id=hl-5-38><a class=lnlinks href=#hl-5-38>38</a>
+</span><span class=lnt id=hl-5-39><a class=lnlinks href=#hl-5-39>39</a>
+</span><span class=lnt id=hl-5-40><a class=lnlinks href=#hl-5-40>40</a>
+</span><span class=lnt id=hl-5-41><a class=lnlinks href=#hl-5-41>41</a>
+</span><span class=lnt id=hl-5-42><a class=lnlinks href=#hl-5-42>42</a>
+</span><span class=lnt id=hl-5-43><a class=lnlinks href=#hl-5-43>43</a>
+</span><span class=lnt id=hl-5-44><a class=lnlinks href=#hl-5-44>44</a>
+</span><span class=lnt id=hl-5-45><a class=lnlinks href=#hl-5-45>45</a>
+</span><span class=lnt id=hl-5-46><a class=lnlinks href=#hl-5-46>46</a>
+</span><span class=lnt id=hl-5-47><a class=lnlinks href=#hl-5-47>47</a>
+</span><span class=lnt id=hl-5-48><a class=lnlinks href=#hl-5-48>48</a>
+</span><span class=lnt id=hl-5-49><a class=lnlinks href=#hl-5-49>49</a>
+</span><span class=lnt id=hl-5-50><a class=lnlinks href=#hl-5-50>50</a>
+</span><span class=lnt id=hl-5-51><a class=lnlinks href=#hl-5-51>51</a>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-r data-lang=r><span class=line><span class=cl><span class=nf>library</span><span class=p>(</span><span class=n>ggplot2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>font_family</span> <span class=o>&lt;-</span> <span class=s>&#34;Heiti TC&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>&lt;-</span> <span class=nf>data.frame</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>city</span>      <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#34;上海&#34;</span><span class=p>,</span> <span class=s>&#34;北京&#34;</span><span class=p>,</span> <span class=s>&#34;深圳&#34;</span><span class=p>,</span> <span class=s>&#34;重庆&#34;</span><span class=p>,</span> <span class=s>&#34;广州&#34;</span><span class=p>,</span> <span class=s>&#34;苏州&#34;</span><span class=p>,</span> <span class=s>&#34;成都&#34;</span><span class=p>,</span> <span class=s>&#34;杭州&#34;</span><span class=p>,</span> <span class=s>&#34;武汉&#34;</span><span class=p>,</span> <span class=s>&#34;南京&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>primary</span>   <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>99.39</span><span class=p>,</span> <span class=m>109.20</span><span class=p>,</span> <span class=m>28.04</span><span class=p>,</span> <span class=m>1860.12</span><span class=p>,</span> <span class=m>317.02</span><span class=p>,</span> <span class=m>208.90</span><span class=p>,</span> <span class=m>493.70</span><span class=p>,</span> <span class=m>356.00</span><span class=p>,</span> <span class=m>481.21</span><span class=p>,</span> <span class=m>338.50</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>secondary</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>11650.62</span><span class=p>,</span> <span class=m>7187.40</span><span class=p>,</span> <span class=m>14500.00</span><span class=p>,</span> <span class=m>13174.83</span><span class=p>,</span> <span class=m>7710.27</span><span class=p>,</span> <span class=m>12844.40</span><span class=p>,</span> <span class=m>8472.70</span><span class=p>,</span> <span class=m>7246.00</span><span class=p>,</span> <span class=m>6589.72</span><span class=p>,</span> <span class=m>5873.07</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>tertiary</span>  <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>44958.70</span><span class=p>,</span> <span class=m>44776.90</span><span class=p>,</span> <span class=m>24203.76</span><span class=p>,</span> <span class=m>18718.98</span><span class=p>,</span> <span class=m>24012.17</span><span class=p>,</span> <span class=m>14641.80</span><span class=p>,</span> <span class=m>15797.20</span><span class=p>,</span> <span class=m>15409.00</span><span class=p>,</span> <span class=m>15076.42</span><span class=p>,</span> <span class=m>13217.21</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df_long</span> <span class=o>&lt;-</span> <span class=nf>data.frame</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>city</span>    <span class=o>=</span> <span class=nf>rep</span><span class=p>(</span><span class=n>df</span><span class=o>$</span><span class=n>city</span><span class=p>,</span> <span class=m>3</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=n>industry</span> <span class=o>=</span> <span class=nf>rep</span><span class=p>(</span><span class=nf>c</span><span class=p>(</span><span class=s>&#34;第一产业&#34;</span><span class=p>,</span> <span class=s>&#34;第二产业&#34;</span><span class=p>,</span> <span class=s>&#34;第三产业&#34;</span><span class=p>),</span> <span class=n>each</span> <span class=o>=</span> <span class=nf>nrow</span><span class=p>(</span><span class=n>df</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>  <span class=n>value</span>   <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=n>df</span><span class=o>$</span><span class=n>primary</span><span class=p>,</span> <span class=n>df</span><span class=o>$</span><span class=n>secondary</span><span class=p>,</span> <span class=n>df</span><span class=o>$</span><span class=n>tertiary</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>df_long</span><span class=o>$</span><span class=n>industry</span> <span class=o>&lt;-</span> <span class=nf>factor</span><span class=p>(</span><span class=n>df_long</span><span class=o>$</span><span class=n>industry</span><span class=p>,</span> <span class=n>levels</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#34;第一产业&#34;</span><span class=p>,</span> <span class=s>&#34;第二产业&#34;</span><span class=p>,</span> <span class=s>&#34;第三产业&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>totals</span> <span class=o>&lt;-</span> <span class=nf>data.frame</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=n>city</span>  <span class=o>=</span> <span class=n>df</span><span class=o>$</span><span class=n>city</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=n>total</span> <span class=o>=</span> <span class=n>df</span><span class=o>$</span><span class=n>primary</span> <span class=o>+</span> <span class=n>df</span><span class=o>$</span><span class=n>secondary</span> <span class=o>+</span> <span class=n>df</span><span class=o>$</span><span class=n>tertiary</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>ord</span> <span class=o>&lt;-</span> <span class=nf>order</span><span class=p>(</span><span class=n>totals</span><span class=o>$</span><span class=n>total</span><span class=p>,</span> <span class=n>decreasing</span> <span class=o>=</span> <span class=kc>TRUE</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>df_long</span><span class=o>$</span><span class=n>city</span> <span class=o>&lt;-</span> <span class=nf>factor</span><span class=p>(</span><span class=n>df_long</span><span class=o>$</span><span class=n>city</span><span class=p>,</span> <span class=n>levels</span> <span class=o>=</span> <span class=n>totals</span><span class=o>$</span><span class=n>city[ord]</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>p</span> <span class=o>&lt;-</span> <span class=nf>ggplot</span><span class=p>(</span><span class=n>df_long</span><span class=p>,</span> <span class=nf>aes</span><span class=p>(</span><span class=n>x</span> <span class=o>=</span> <span class=n>city</span><span class=p>,</span> <span class=n>y</span> <span class=o>=</span> <span class=n>value</span><span class=p>,</span> <span class=n>fill</span> <span class=o>=</span> <span class=n>industry</span><span class=p>))</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>geom_col</span><span class=p>(</span><span class=n>width</span> <span class=o>=</span> <span class=m>0.6</span><span class=p>,</span> <span class=n>position</span> <span class=o>=</span> <span class=nf>position_stack</span><span class=p>(</span><span class=n>reverse</span> <span class=o>=</span> <span class=kc>TRUE</span><span class=p>))</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>geom_text</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>data</span> <span class=o>=</span> <span class=n>totals</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nf>aes</span><span class=p>(</span><span class=n>x</span> <span class=o>=</span> <span class=n>city</span><span class=p>,</span> <span class=n>y</span> <span class=o>=</span> <span class=n>total</span><span class=p>,</span> <span class=n>label</span> <span class=o>=</span> <span class=nf>sprintf</span><span class=p>(</span><span class=s>&#34;%.1f&#34;</span><span class=p>,</span> <span class=n>total</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>    <span class=n>vjust</span> <span class=o>=</span> <span class=m>-0.2</span><span class=p>,</span> <span class=n>size</span> <span class=o>=</span> <span class=m>3</span><span class=p>,</span> <span class=n>inherit.aes</span> <span class=o>=</span> <span class=kc>FALSE</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>scale_fill_manual</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=s>&#34;产业&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>values</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#34;第一产业&#34;</span> <span class=o>=</span> <span class=s>&#34;#5B9BD5&#34;</span><span class=p>,</span> <span class=s>&#34;第二产业&#34;</span> <span class=o>=</span> <span class=s>&#34;#ED7D31&#34;</span><span class=p>,</span> <span class=s>&#34;第三产业&#34;</span> <span class=o>=</span> <span class=s>&#34;#70AD47&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>scale_y_continuous</span><span class=p>(</span><span class=n>expand</span> <span class=o>=</span> <span class=nf>expansion</span><span class=p>(</span><span class=n>mult</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=m>0.1</span><span class=p>)))</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>labs</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>title</span> <span class=o>=</span> <span class=s>&#34;2025 年中国 GDP 前十城市三次产业增加值&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>x</span> <span class=o>=</span> <span class=s>&#34;城市&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>y</span> <span class=o>=</span> <span class=s>&#34;增加值（亿元）&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>theme_minimal</span><span class=p>()</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>  <span class=nf>theme</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>text</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>family</span> <span class=o>=</span> <span class=n>font_family</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>plot.title</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>size</span> <span class=o>=</span> <span class=m>14</span><span class=p>,</span> <span class=n>hjust</span> <span class=o>=</span> <span class=m>0.5</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>axis.title</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>size</span> <span class=o>=</span> <span class=m>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nf>ggsave</span><span class=p>(</span><span class=s>&#34;city_gdp_3industry_stacked_by_r.png&#34;</span><span class=p>,</span> <span class=n>p</span><span class=p>,</span> <span class=n>width</span> <span class=o>=</span> <span class=m>12</span><span class=p>,</span> <span class=n>height</span> <span class=o>=</span> <span class=m>7</span><span class=p>,</span> <span class=n>dpi</span> <span class=o>=</span> <span class=m>300</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div><ul><li><code>df_long &lt;- data.frame(...)</code> 每个城市重复 3 行；industry 设为因子并固定层级，决定堆叠/图例顺序；</li><li><code>totals &lt;- data.frame(...)</code> 各城市总增加值，用于柱顶标签；</li><li><code>ord &lt;- order(totals$total, decreasing = TRUE)</code> 按总增加值降序重排 city 因子层级，使 x 轴从左到右由大到小；</li><li><code>geom_col(width = 0.6, position = position_stack(reverse = TRUE))</code> 绘制堆叠柱状图，<code>width</code> 参数设置柱子宽度，<code>position</code> 参数设置柱子位置，<code>reverse</code> 参数设置是否反转堆叠顺序。</li></ul><p><img src=/imgs/img-lazy-loading.gif data-src=/imgs/learn-vis/city_gdp_3industry_stacked_by_r.png alt></p></div><footer class=post-footer><div class=post-tags><a href=/tags/python/>Python
+</a><a href=/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/>可视化
+</a><a href=/tags/matplotlib/>matplotlib
+</a><a href=/tags/ggplot2/>ggplot2
+</a><a href=/tags/%E6%9F%B1%E7%8A%B6%E5%9B%BE/>柱状图
+</a><a href=/tags/r/>R</a></div><div class=post-share-tools><div class=post-share-loading><i class="fa-solid fa-ellipsis fa-spin"></i></div><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class=a2a_dd href=https://www.addtoany.com/share></a><a class=a2a_button_wechat></a><a class=a2a_button_qzone></a><a class=a2a_button_sina_weibo></a><a class=a2a_button_douban></a><a class=a2a_button_facebook></a><a class=a2a_button_x></a><a class=a2a_button_email></a><a class=a2a_button_printfriendly></a></div></div><hr><div class=reward-container><div><i class="fa-solid fa-mug-hot"></i>请我喝杯咖啡吧 ヾ(^▽^*)))</div><button>
+赞赏</button><div class=post-reward><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_zhifubao.png alt="a2htray - 支付宝">
+<span>支付宝</span></div><div class=post-reward-item><img src=/imgs/img-lazy-loading.gif data-src=/imgs/pay_wechat.png alt="a2htray - 微信">
+<span>微信</span></div></div></div><div class=post-copyright><img src=/imgs/cc/cc.svg class=cc-icon width=75 height=75 align=right alt=共享知识 title=共享知识><ul><li class=post-copyright-title><strong>文章标题：</strong>
+可视化 - 柱状图：matplotlib vs. ggplot2</li><li class=post-copyright-author><strong>本文作者： </strong>a2htray</li><li class=post-copyright-link><strong>本文链接：</strong>
+<a id=post-cr-link href=https://a2htray.github.io/post/learn-vis/02_bars_plot/ title="可视化 - 柱状图：matplotlib vs. ggplot2">https://a2htray.github.io/post/learn-vis/02_bars_plot/</a></li><li class=post-copyright-license><strong>版权声明： </strong>本作品采用 <i class="fab fa-fw fa-creative-commons"></i><a target=_blank href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans>BY-NC-SA</a> 许可协议。转载请注明出处！</li><li><div class=license-icons><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans target=_blank><img src=/imgs/cc/big/by_nc_sa.svg alt=BY-NC-SA title=BY-NC-SA>
+</a><a href=https://notbyai.fyi target=_blank><img src=/imgs/notbyai/zh-hans/white.svg title="Not By AI"></a></div></li></ul></div><div class=post-nav><div class="post-nav-next post-nav-item"></div><div class="post-nav-prev post-nav-item"><a href=/post/learn-ai/t_15_api_vs_mcp/ rel=prev title="MCP vs. API：为什么传统 API 撑不起 AI Agent">MCP vs. API：为什么传统 API 撑不起 AI Agent
+<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class=footer><div class=footer-inner><div class=copyright>&copy;
+<span itemprop=copyrightYear>2025 - 2026
+</span><span class=with-love><i class="fa fa-heart"></i>
+</span><span class=author itemprop=copyrightHolder>a2htray</span></div><div class=powered-by>由 <a href=https://gohugo.io title=0.152.2 target=_blank>Hugo</a> & <a href=https://github.com/hugo-next/hugo-theme-next title=4.8.3 target=_blank>Hugo NexT.Gemini</a> 强力驱动</div></div></footer><script class=next-config data-name=page type=application/json>{"clipboard":{"js":{"alias":"clipboard","file":"dist/clipboard.min.js","name":"clipboard.js","version":"2.0.11"}},"comments":false,"expired":false,"isHome":false,"isPage":true,"math":{"css":{"alias_name":"katex","file":"dist/katex.min.css","name":"katex","version":"0.16.15"},"js":[{"alias_name":"katex","file":"dist/katex.min.js","name":"katex","version":"0.16.15"},{"alias":"katex","alias_name":"katex","file":"dist/contrib/auto-render.min.js","name":"auto-render","version":"0.16.15"}],"render":"katex"},"path":"02_bars_plot","permalink":"https://a2htray.github.io/post/learn-vis/02_bars_plot/","title":"可视化 - 柱状图：matplotlib vs. ggplot2","toc":true,"waline":{"commentcnt":{"alias":"@waline/client","alias_name":"waline","file":"dist/comment.js","name":"comment","version":"2.15.8"}}}</script><script type=text/javascript src=https://a2htray.github.io/js/3rd/animejs/3.2.2/anime.min.js crossorigin=anonymous defer></script><script type=text/javascript src=https://a2htray.github.io/js/3rd/viewerjs/1.11.6/viewer.min.js crossorigin=anonymous defer></script><script class=next-config data-name=main type=application/json>{"bookmark":{"color":"#222","enable":true,"save":"manual"},"copybtn":true,"darkmode":false,"hostname":"https://a2htray.github.io/","i18n":{"ds_day":" 天前","ds_days":" 天 ","ds_hour":" 小时前","ds_hours":" 小时 ","ds_just":"刚刚","ds_min":" 分钟前","ds_mins":" 分钟","ds_month":" 个月前","ds_years":" 年 ","empty":"没有找到任何搜索结果：${query}","hits":"找到 ${hits} 个搜索结果","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","placeholder":"搜索..."},"isMultiLang":false,"lang":"zh-CN","lazyload":false,"localSearch":{"enable":true,"limit":1e3,"path":"/searchindexes.xml","preload":false,"topnperarticle":-1,"trigger":"auto","unescape":false},"motion":{"async":true,"enable":true,"transition":{"collheader":"slideInRight","postblock":"fadeIn","postbody":"fadeInDown","postheader":"fadeInDown","sidebar":"fadeInUp"}},"postmeta":{"comments":{"enable":true,"plugin":"waline"},"views":{"enable":true,"plugin":"busuanzi"}},"root":"/","scheme":"Gemini","share":{"addtoany":{"js":"https://static.addtoany.com/menu/page.js","locale":"zh-CN","num":8},"enable":true},"sidebar":{"display":"post","offset":12,"padding":18,"position":"left","width":256},"vendor":{"plugins":"local","router":{"name":"local","type":"modern","url":"https://a2htray.github.io/js/3rd"}},"version":"4.8.3","waline":{"cfg":{"emoji":false,"imguploader":false,"placeholder":"请文明发言哟 ヾ(≧▽≦*)o","reaction":true,"reactiontext":["点赞","踩一下","得意","不屑","尴尬","睡觉"],"reactiontitle":"你认为这篇文章怎么样？","requiredmeta":["nick","mail"],"serverurl":null,"sofa":"快来发表你的意见吧 (≧∀≦)ゞ","wordlimit":200},"css":{"alias":"@waline/client","file":"dist/waline.css","name":"waline","version":"2.15.8"},"js":{"alias":"@waline/client","file":"dist/waline.js","name":"waline","version":"2.15.8"}}}</script><script type=text/javascript src="/js/main.min.js?=1791443413" defer></script><script type=text/javascript src="/js/clipboard.min.js?=1791443413" defer></script><script type=text/javascript src="/js/math.min.js?=1791443413" defer></script></body></html>

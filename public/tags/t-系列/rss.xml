@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>T 系列 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/t-%E7%B3%BB%E5%88%97/</link><description>Recent content in T 系列 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 12 Aug 2026 11:11:11 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/t-%E7%B3%BB%E5%88%97/rss.xml" rel="self" type="application/rss+xml"/><item><title>Neo4j 教程：处理数据库一致性错误</title><link>https://a2htray.github.io/post/learn-ai/t_14_neo4j_07_handle_errors/</link><pubDate>Wed, 12 Aug 2026 11:11:11 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_14_neo4j_07_handle_errors/</guid><description>&lt;p&gt;&lt;strong&gt;Neo4j&lt;/strong&gt; 是领先的开源图数据库管理系统，并且完全符合 ACID 标准。然而在真实的运维环境中，像&lt;strong&gt;一致性错误&lt;/strong&gt;这样的意外问题依然可能发生——尤其是在非正常关机、崩溃或磁盘故障之后。&lt;/p&gt;</description></item><item><title>Neo4j 教程：Neo4j 索引全面指南</title><link>https://a2htray.github.io/post/learn-ai/t_13_neo4j_06_index_best_practices/</link><pubDate>Tue, 11 Aug 2026 14:13:34 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_13_neo4j_06_index_best_practices/</guid><description>&lt;h2 id="引言"&gt;引言
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>T 系列 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/t-%E7%B3%BB%E5%88%97/</link><description>Recent content in T 系列 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 18 Sep 2026 14:10:32 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/t-%E7%B3%BB%E5%88%97/rss.xml" rel="self" type="application/rss+xml"/><item><title>MCP vs. API：为什么传统 API 撑不起 AI Agent</title><link>https://a2htray.github.io/post/learn-ai/t_15_api_vs_mcp/</link><pubDate>Fri, 18 Sep 2026 14:10:32 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_15_api_vs_mcp/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-ai/api_vs_mcp_cover.png" alt="" /&gt;&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;本文为 dev.to 上的文章，原文地址：
+&lt;a href="https://dev.to/cpathirage/mcp-vs-api-why-traditional-apis-arent-enough-for-ai-agents-go2" title="https://dev.to/cpathirage/mcp-vs-api-why-traditional-apis-arent-enough-for-ai-agents-go2" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
+ https://dev.to/cpathirage/mcp-vs-api-why-traditional-apis-arent-enough-for-ai-agents-go2
+ 
+ &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
+ 
+&lt;/a&gt;。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;API 没有坏。&lt;/p&gt;
+&lt;p&gt;几十年来，它支撑着互联网、移动应用、SaaS 平台和分布式系统。&lt;/p&gt;
+&lt;p&gt;但有些东西变了。&lt;/p&gt;
+&lt;p&gt;软件 API 的消费方，不再总是开发者写的另一段软件。&lt;/p&gt;</description></item><item><title>Neo4j 教程：处理数据库一致性错误</title><link>https://a2htray.github.io/post/learn-ai/t_14_neo4j_07_handle_errors/</link><pubDate>Wed, 12 Aug 2026 11:11:11 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_14_neo4j_07_handle_errors/</guid><description>&lt;p&gt;&lt;strong&gt;Neo4j&lt;/strong&gt; 是领先的开源图数据库管理系统，并且完全符合 ACID 标准。然而在真实的运维环境中，像&lt;strong&gt;一致性错误&lt;/strong&gt;这样的意外问题依然可能发生——尤其是在非正常关机、崩溃或磁盘故障之后。&lt;/p&gt;</description></item><item><title>Neo4j 教程：Neo4j 索引全面指南</title><link>https://a2htray.github.io/post/learn-ai/t_13_neo4j_06_index_best_practices/</link><pubDate>Tue, 11 Aug 2026 14:13:34 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_13_neo4j_06_index_best_practices/</guid><description>&lt;h2 id="引言"&gt;引言
 &lt;a class="header-anchor" href="#%e5%bc%95%e8%a8%80"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;索引是 Neo4j 中至关重要的辅助数据结构，能够显著提升 Cypher 查询的性能。有了索引，数据库无需执行昂贵的全量扫描即可快速定位具有特定属性值的节点。&lt;/p&gt;
 &lt;h2 id="neo4j-索引基础"&gt;Neo4j 索引基础
