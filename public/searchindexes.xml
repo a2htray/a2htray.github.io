@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>可视化 - 柱状图：matplotlib vs. ggplot2</title><url>/post/learn-vis/02_bars_plot/</url><categories><category>后端技术</category><category>可视化</category></categories><tags><tag>Python</tag><tag>可视化</tag><tag>matplotlib</tag><tag>ggplot2</tag><tag>柱状图</tag><tag>R</tag></tags><content type="html"><![CDATA[  
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>LeetCode 2. 两数相加</title><url>/post/learn-algo/leetcode/2/</url><categories><category>算法</category><category>LeetCode</category></categories><tags><tag>LeetCode</tag><tag>算法实现</tag></tags><content type="html">  给你两个非空的链表，表示两个非负的整数。它们每位数字都是按照逆序的方式存储的，并且每个节点只能存储一位数字。
+请你将两个数相加，并以相同形式返回一个表示和的链表。
+你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+示例 1：
+输入：l1 = [2,4,3], l2 = [5,6,4] 输出：[7,0,8] 解释：342 + 465 = 807.
+示例 2：
+输入：l1 = [0], l2 = [0] 输出：[0]
+示例 3：
+输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9] 输出：[8,9,9,9,0,0,0,1]
+提示：
+每个链表中的节点数在范围 [1, 100] 内 $0 \leq Node.val \leq 9$ 题目数据保证列表表示的数字不含前导零   </content></entry><entry><title>LeetCode 1. 两数之和</title><url>/post/learn-algo/leetcode/1/</url><categories><category>算法</category><category>LeetCode</category></categories><tags><tag>LeetCode</tag><tag>算法实现</tag></tags><content type="html">  给定一个整数数组 nums 和一个整数目标值target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。
+你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。
+你可以按任意顺序返回答案。
+示例 1：
+输入：nums = [2,7,11,15], target = 9 输出：[0,1] 解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+示例 2：
+输入：nums = [3,2,4], target = 6 输出：[1,2]
+示例 3：
+输入：nums = [3,3], target = 6 输出：[0,1]
+提示：
+$2 \leq nums.length \leq 10^4$ $-10^9 \leq nums[i] \leq 10^9$ $-10^9 \leq target \leq 10^9$ 只会存在一个有效答案 解法 思路一：暴力枚举
+1 2 3 4 5 6 7 8 class Solution: def twoSum(self, nums: list[int], target: int) -&amp;gt; list[int]: n = len(nums) for i, v1 in enumerate(nums): for j in range(i+1, n): if v1 + nums[j] == target: return [i, j] return [-1, -1] 时间复杂度：$O(n^2)$ 思路二：通过哈希表，空间换时间
+1 2 3 4 5 6 7 8 9 class Solution: def twoSum(self, nums: list[int], target: int) -&amp;gt; list[int]: seen = {} for i, v1 in enumerate(nums): v2 = target - v1 if v2 in seen: return [i, seen[v2]] seen[v1] = i return [-1, -1] 时间复杂度：$O(n)$ 题干中的“可以按任意顺序返回答案”是思路二可行的关键，否则需要额外的结构保存排序   </content></entry><entry><title>PostgreSQL：查询结果输出到文件</title><url>/post/learn-db/postgresql-export-result-to-file/</url><categories><category>后端技术</category><category>PostgreSQL</category></categories><tags><tag>PostgreSQL</tag><tag>查询持久化</tag><tag>数据库</tag></tags><content type="html"><![CDATA[  
+起因是今天在开发过程中需要将 PG 的查询结果输出到文件，方便后续分析。 问题已经解决，使用的 \copy 命令，然后跟 Buddy 也沟通了下，它还列举了其他一些方法，所以在这篇文章中做个小结。 本文内容大部分由 Buddy 生成，本人则对脚本、结论进行验证，已确认有效。
+认识一个区别 \copy 和 COPY，它们不一样。
+客户端写文件（\copy、psql 重定向）：文件落在连库的那台机器上，普通账号就能用。 服务端写文件（COPY ... TO）：文件落在数据库服务器的磁盘上，路径是服务器的路径，需要服务端写权限（superuser 或 pg_write_server_files 角色）。 区别：文件的落盘位置不同。
+方式一：\copy psql 的元命令，文件写在客户端机器上。
+1 2 3 4 5 6 -- 导出为 CSV，带表头 \copy (SELECT id, name, created_at FROM users WHERE created_at &amp;gt; &amp;#39;2026-01-01&amp;#39;) TO &amp;#39;/tmp/users.csv&amp;#39; WITH (FORMAT CSV, HEADER); -- 导出纯文本（默认 tab 分隔） \copy (SELECT * FROM orders LIMIT 100) TO &amp;#39;/tmp/orders.txt&amp;#39;; \copy 是 psql 命令，不是 SQL，不能在应用程序的驱动里调用，只能在 psql 交互或 -f 脚本里用。 路径 /tmp/users.csv 是本地机器的路径，不需要任何服务端权限，普通账号即可。 方式二：COPY ... TO 真正的 SQL 命令，文件写在数据库服务器。
+1 2 3 4 5 6 7 8 -- 服务端 CSV 导出（需 superuser 或 pg_write_server_files） COPY ( SELECT id, name, created_at FROM users WHERE created_at &amp;gt; &amp;#39;2026-01-01&amp;#39; ) TO &amp;#39;/var/lib/postgresql/exports/users.csv&amp;#39; WITH (FORMAT CSV, HEADER); -- 直接导出整张 …  ]]></content></entry><entry><title>可视化 - 柱状图：matplotlib vs. ggplot2</title><url>/post/learn-vis/02_bars_plot/</url><categories><category>后端技术</category><category>可视化</category></categories><tags><tag>Python</tag><tag>可视化</tag><tag>matplotlib</tag><tag>ggplot2</tag><tag>柱状图</tag><tag>R</tag></tags><content type="html"><![CDATA[  
 本文为可视化系列第 02 篇，将介绍柱状图的基础概念、适用场景与数据集选取，并分别使用 Python Matplotlib 和 R ggplot2 两套工具，演示绘制同一幅柱状图。
 柱状图 柱状图，也叫条形图，是最常用的数据可视化图表之一，用矩形柱子的高度（垂直柱状图）或长度（水平柱状图）代表数值大小，用来对比不同类别数据。
 适用场景：
