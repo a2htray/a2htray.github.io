@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ORM on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/orm/</link><description>Recent content in ORM on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 09 Apr 2026 14:28:13 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/orm/rss.xml" rel="self" type="application/rss+xml"/><item><title>SQLAlchemy 查询按字段降序或升序</title><link>https://a2htray.github.io/post/learn-backend/python-sqlalchemy-sort-by-desc-asc/</link><pubDate>Thu, 09 Apr 2026 14:28:13 +0800</pubDate><guid>https://a2htray.github.io/post/learn-backend/python-sqlalchemy-sort-by-desc-asc/</guid><description>&lt;p&gt;在数据库中，查询按某一字段降序和升序的关键字，分别是 &lt;strong&gt;DESC&lt;/strong&gt; 和 &lt;strong&gt;ASC&lt;/strong&gt;，不指定则默认按升序，也就是 &lt;strong&gt;ASC&lt;/strong&gt;，如下面三个查询：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ORM on 快乐冲浪与生活</title><link>http://localhost:1313/tags/orm/</link><description>Recent content in ORM on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 09 Apr 2026 14:28:13 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/orm/rss.xml" rel="self" type="application/rss+xml"/><item><title>SQLAlchemy 查询按字段降序或升序</title><link>http://localhost:1313/post/learn-backend/python-sqlalchemy-sort-by-desc-asc/</link><pubDate>Thu, 09 Apr 2026 14:28:13 +0800</pubDate><guid>http://localhost:1313/post/learn-backend/python-sqlalchemy-sort-by-desc-asc/</guid><description>&lt;p&gt;在数据库中，查询按某一字段降序和升序的关键字，分别是 &lt;strong&gt;DESC&lt;/strong&gt; 和 &lt;strong&gt;ASC&lt;/strong&gt;，不指定则默认按升序，也就是 &lt;strong&gt;ASC&lt;/strong&gt;，如下面三个查询：&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;不指定&lt;/em&gt;&lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -10,7 +10,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-backend/sql-query-01.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="http://localhost:1313/imgs/learn-backend/sql-query-01.png" alt="" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;指定 ASC&lt;/em&gt;&lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
@@ -22,4 +22,4 @@
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-backend/sql-query-02.png" alt="" /&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="http://localhost:1313/imgs/learn-backend/sql-query-02.png" alt="" /&gt;&lt;/p&gt;</description></item></channel></rss>
