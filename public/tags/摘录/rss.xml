@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>摘录 on 快乐冲浪与生活</title><link>http://localhost:1313/tags/%E6%91%98%E5%BD%95/</link><description>Recent content in 摘录 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 13 Mar 2026 10:34:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%91%98%E5%BD%95/rss.xml" rel="self" type="application/rss+xml"/><item><title>前端组件封装原则</title><link>http://localhost:1313/post/learn-frontend/00_component_design_mindmap/</link><pubDate>Fri, 13 Mar 2026 10:34:30 +0800</pubDate><guid>http://localhost:1313/post/learn-frontend/00_component_design_mindmap/</guid><description>&lt;p&gt;早上地铁上刷掘金，看了篇文章，记录一下。&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="http://localhost:1313/imgs/learn-frontend/ScreenShot_2026-03-13_103153_031.png" alt="" /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>摘录 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%91%98%E5%BD%95/</link><description>Recent content in 摘录 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 13 Mar 2026 10:34:30 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%91%98%E5%BD%95/rss.xml" rel="self" type="application/rss+xml"/><item><title>前端组件封装原则</title><link>https://a2htray.github.io/post/learn-frontend/00_component_design_mindmap/</link><pubDate>Fri, 13 Mar 2026 10:34:30 +0800</pubDate><guid>https://a2htray.github.io/post/learn-frontend/00_component_design_mindmap/</guid><description>&lt;p&gt;早上地铁上刷掘金，看了篇文章，记录一下。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-frontend/ScreenShot_2026-03-13_103153_031.png" alt="" /&gt;&lt;/p&gt;
 &lt;p&gt;原文章：
 &lt;a href="https://juejin.cn/post/7615869634304737320" title="https://juejin.cn/post/7615869634304737320" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://juejin.cn/post/7615869634304737320
  
  &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
  
-&lt;/a&gt;&lt;/p&gt;</description></item><item><title>构建 MCP 服务端</title><link>http://localhost:1313/post/learn-mcp/build-mcp-server/</link><pubDate>Fri, 13 Feb 2026 09:30:18 +0800</pubDate><guid>http://localhost:1313/post/learn-mcp/build-mcp-server/</guid><description>&lt;ul&gt;
+&lt;/a&gt;&lt;/p&gt;</description></item><item><title>构建 MCP 服务端</title><link>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</link><pubDate>Fri, 13 Feb 2026 09:30:18 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/build-mcp-server/</guid><description>&lt;ul&gt;
 &lt;li&gt;学习来源：
 &lt;a href="https://modelcontextprotocol.io/docs/develop/build-server" title="https://modelcontextprotocol.io/docs/develop/build-server" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://modelcontextprotocol.io/docs/develop/build-server
@@ -32,7 +32,7 @@
 &lt;/ul&gt;
 &lt;h2 id="注意事项"&gt;注意事项
 &lt;a class="header-anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9"&gt;&lt;/a&gt;
-&lt;/h2&gt;&lt;p&gt;根据实现的 MCP Server 的类型不同，做日志功能时需要注意：&lt;/p&gt;</description></item><item><title>MCP：服务器和客户端</title><link>http://localhost:1313/post/learn-mcp/server-and-client/</link><pubDate>Thu, 05 Feb 2026 16:06:49 +0800</pubDate><guid>http://localhost:1313/post/learn-mcp/server-and-client/</guid><description>&lt;p&gt;本文继续做官方文档的学习和摘录，在服务器和客户端这一块，理解有效，有些翻译甚至有些勉强。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;根据实现的 MCP Server 的类型不同，做日志功能时需要注意：&lt;/p&gt;</description></item><item><title>MCP：服务器和客户端</title><link>https://a2htray.github.io/post/learn-mcp/server-and-client/</link><pubDate>Thu, 05 Feb 2026 16:06:49 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/server-and-client/</guid><description>&lt;p&gt;本文继续做官方文档的学习和摘录，在服务器和客户端这一块，理解有效，有些翻译甚至有些勉强。&lt;/p&gt;
 &lt;p&gt;学习来源：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -54,7 +54,7 @@
 &lt;a class="header-anchor" href="#%e6%9c%8d%e5%8a%a1%e7%ab%af"&gt;&lt;/a&gt;
 &lt;/h2&gt;
  &lt;blockquote&gt;
- &lt;p&gt;MCP servers are programs that expose specific capabilities to AI applications through standardized protocol interfaces.&lt;/p&gt;</description></item><item><title>MCP：基础概念</title><link>http://localhost:1313/post/learn-mcp/basic-mcp/</link><pubDate>Thu, 29 Jan 2026 15:01:42 +0800</pubDate><guid>http://localhost:1313/post/learn-mcp/basic-mcp/</guid><description>&lt;p&gt;做项目要用到 MCP，所以对官方的文档进行学习及摘录，不然做出的东西一知半解，不深入。&lt;/p&gt;
+ &lt;p&gt;MCP servers are programs that expose specific capabilities to AI applications through standardized protocol interfaces.&lt;/p&gt;</description></item><item><title>MCP：基础概念</title><link>https://a2htray.github.io/post/learn-mcp/basic-mcp/</link><pubDate>Thu, 29 Jan 2026 15:01:42 +0800</pubDate><guid>https://a2htray.github.io/post/learn-mcp/basic-mcp/</guid><description>&lt;p&gt;做项目要用到 MCP，所以对官方的文档进行学习及摘录，不然做出的东西一知半解，不深入。&lt;/p&gt;
 &lt;p&gt;学习来源：
 &lt;a href="https://modelcontextprotocol.io" title="https://modelcontextprotocol.io" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://modelcontextprotocol.io

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RocketMQ on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/rocketmq/</link><description>Recent content in RocketMQ on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 15 Oct 2026 09:54:28 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/rocketmq/rss.xml" rel="self" type="application/rss+xml"/><item><title>RocketMQ 的 NameServer 介绍</title><link>https://a2htray.github.io/post/learn-rocketmq/nameserver/</link><pubDate>Thu, 15 Oct 2026 09:54:28 +0800</pubDate><guid>https://a2htray.github.io/post/learn-rocketmq/nameserver/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-rocketmq/20261015.png" alt="" /&gt;&lt;/p&gt;
+&lt;h2 id="为什么需要-nameserver"&gt;为什么需要 NameServer
+&lt;a class="header-anchor" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81-nameserver"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;没有 NameServer 时，生产者 / 消费者必须&lt;strong&gt;写死 Broker 的 IP 和端口&lt;/strong&gt;。一旦遇到下面任何一种情况，所有客户端都得改配置、重启：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Broker &lt;strong&gt;扩容&lt;/strong&gt;（新增节点）；&lt;/li&gt;
+&lt;li&gt;Broker &lt;strong&gt;宕机&lt;/strong&gt;或&lt;strong&gt;换机器&lt;/strong&gt;（IP 变了）；&lt;/li&gt;
+&lt;li&gt;主从切换、集群拓扑调整。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在分布式系统里，这种&lt;strong&gt;客户端直连、地址硬编码&lt;/strong&gt;的方式完全不可维护。因此需要一层&lt;strong&gt;路由注册中心&lt;/strong&gt;来解耦：客户端不必知道 Broker 在哪，只要知道&lt;strong&gt;去哪查路由&lt;/strong&gt;即可。&lt;/p&gt;</description></item></channel></rss>
