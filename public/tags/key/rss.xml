@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Key on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/key/</link><description>Recent content in Key on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 16 Oct 2026 09:58:22 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/key/rss.xml" rel="self" type="application/rss+xml"/><item><title>RocketMQ 核心概念：Topic、队列、Tag、Key</title><link>https://a2htray.github.io/post/learn-rocketmq/core-concepts/</link><pubDate>Fri, 16 Oct 2026 09:58:22 +0800</pubDate><guid>https://a2htray.github.io/post/learn-rocketmq/core-concepts/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-rocketmq/20261016.png" alt="" /&gt;&lt;/p&gt;
+&lt;h2 id="topic队列tagkey"&gt;Topic、队列、Tag、Key
+&lt;a class="header-anchor" href="#topic%e9%98%9f%e5%88%97tagkey"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;海量消息如何分类？&lt;/strong&gt; 订单消息、日志消息、通知消息混在一起怎么区分？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用 &lt;strong&gt;Topic&lt;/strong&gt; 做一级分类。&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;&lt;strong&gt;同一主题下如何让多个消费者并行处理、提升吞吐？&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用 &lt;strong&gt;Message Queue（队列）&lt;/strong&gt; 做物理分片，它等于&amp;quot;并行度单位&amp;quot;。&lt;/p&gt;</description></item></channel></rss>
