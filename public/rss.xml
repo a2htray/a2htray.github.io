@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 22 Oct 2026 15:45:48 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>学习 Langchain Langgraph：代码也给你</title><link>https://a2htray.github.io/post/learn-agents/learn-langchain-langgraph/</link><pubDate>Thu, 22 Oct 2026 15:45:48 +0800</pubDate><guid>https://a2htray.github.io/post/learn-agents/learn-langchain-langgraph/</guid><description>&lt;p&gt;本文演示跑通 LangChain、LangGraph 相关概念的最小代码示例。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 23 Oct 2026 14:22:46 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>LangChain/LangGraph 流式输出：stream_mode 不同值的效果 2</title><link>https://a2htray.github.io/post/learn-agents/stream-mode2/</link><pubDate>Fri, 23 Oct 2026 14:22:46 +0800</pubDate><guid>https://a2htray.github.io/post/learn-agents/stream-mode2/</guid><description>&lt;h2 id="stream_modecheckpoints"&gt;stream_mode=checkpoints
+&lt;a class="header-anchor" href="#stream_modecheckpoints"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;触发时机：每一次 super-step（超步）生成 checkpoint 之后，就产出一个 chunk&lt;/li&gt;
+&lt;li&gt;适用场景：
+&lt;ul&gt;
+&lt;li&gt;拿到 &lt;code&gt;checkpoint_id&lt;/code&gt; 就可以从这个快照恢复执行&lt;/li&gt;
+&lt;li&gt;长时间运行的任务、故障恢复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="stream_modetasks"&gt;stream_mode=tasks
+&lt;a class="header-anchor" href="#stream_modetasks"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;按单个 Task 的生命周期推送事件：Task Start、Task Finish，一般返回的 chunk 两个为一个 Task。&lt;/p&gt;</description></item><item><title>LangChain/LangGraph 流式输出：stream_mode 不同值的效果 1</title><link>https://a2htray.github.io/post/learn-agents/stream-mode/</link><pubDate>Fri, 23 Oct 2026 09:35:50 +0800</pubDate><guid>https://a2htray.github.io/post/learn-agents/stream-mode/</guid><description>&lt;blockquote&gt;
+ &lt;p&gt;演示 stream_mode 为 values、updates、messages 的效果。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-agents/20261023.png" alt="" /&gt;&lt;/p&gt;
+&lt;h2 id="vs-invoke"&gt;vs. invoke
+&lt;a class="header-anchor" href="#vs-invoke"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;invoke&lt;/code&gt; 方法直接返回模型的最终结果，屏蔽了模型内部的工作流程，&lt;code&gt;stream&lt;/code&gt; 方法则会返回一个迭代器，逐步 yield 中间状态。&lt;/p&gt;</description></item><item><title>学习 Langchain Langgraph：代码也给你</title><link>https://a2htray.github.io/post/learn-agents/learn-langchain-langgraph/</link><pubDate>Thu, 22 Oct 2026 15:45:48 +0800</pubDate><guid>https://a2htray.github.io/post/learn-agents/learn-langchain-langgraph/</guid><description>&lt;p&gt;本文演示跑通 LangChain、LangGraph 相关概念的最小代码示例。&lt;/p&gt;
 &lt;h2 id="c1-创建智能体"&gt;C1 创建智能体
 &lt;a class="header-anchor" href="#c1-%e5%88%9b%e5%bb%ba%e6%99%ba%e8%83%bd%e4%bd%93"&gt;&lt;/a&gt;
 &lt;/h2&gt;
