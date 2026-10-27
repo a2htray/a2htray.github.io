@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>React useCallback Hook - 缓存函数引用</title><url>/post/learn-frontend/react-usecallback-hook/</url><categories><category>前端技术</category><category>React</category></categories><tags><tag>React</tag><tag>React Hooks</tag><tag>useCallback</tag></tags><content type="html"><![CDATA[  什么是 useCallback 区别于 useMemo，useCallback 缓存函数引用，依赖不变时，多次渲染返回同一个函数对象，不是缓存函数执行结果。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>LeetCode 5. 最长回文子串</title><url>/post/learn-algo/leetcode/5/</url><categories><category>算法</category><category>LeetCode</category></categories><tags><tag>LeetCode</tag><tag>算法实现</tag></tags><content type="html"><![CDATA[  给你一个字符串 s，找到 s 中最长的回文子串。
+示例 1：
+输入：s = &ldquo;babad&rdquo; 输出：&ldquo;bab&rdquo; 解释：&ldquo;aba&rdquo; 同样是符合题意的答案。
+示例 2：
+输入：s = &ldquo;cbbd&rdquo; 输出：&ldquo;bb&rdquo;
+提示：
+1 &lt;= s.length &lt;= 1000 s 仅由数字和英文字母组成 解法 思路一：暴力枚举 + 递归判断回文
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 class Solution: def longestPalindrome(self, s: str) -&gt; str: longest = s[0] for i in range(len(s)): for j in range(i+1, len(s)+1): current = s[i:j] if self.isPalindrome(current) and len(current) &gt; len(longest): longest = current return longest def isPalindrome(self, s: str) -&gt; bool: if len(s) &lt;= 1: return True else: return s[0] == s[-1] and self.isPalindrome(s[1:-1]) 时间复杂度：$O(n^3)$ 两层循环枚举所有子串 每个子串递归判断是否为回文 思路二：中心扩展法
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 class Solution: def longestPalindrome(self, s: str) -&gt; str: def expand(left, right): while left &gt;= 0 and right &lt; len(s) and s[left] == s[right]: left -= 1 right += 1 return s[left+1:right] longest = &#34;&#34; for i in range(len(s)): current = expand(i, i) if len(current) &gt; len(longest): longest = current current = expand(i, i+1) if len(current) &gt; len(longest): longest = current return longest 时间复杂度：$O(n^2)$ 定义帮助函数 expand，返回的必然是一个回文子串 从中心向左右扩展，直到不相等 expand(i, i) 以单个字符为中心扩展，处理奇数长度的回文子串 expand(i, i+1) 以两个字符为中心扩展，处理偶数长度的回文子串   ]]></content></entry><entry><title>React useCallback Hook - 缓存函数引用</title><url>/post/learn-frontend/react-usecallback-hook/</url><categories><category>前端技术</category><category>React</category></categories><tags><tag>React</tag><tag>React Hooks</tag><tag>useCallback</tag></tags><content type="html"><![CDATA[  什么是 useCallback 区别于 useMemo，useCallback 缓存函数引用，依赖不变时，多次渲染返回同一个函数对象，不是缓存函数执行结果。
 格式如下：
 1 2 3 4 5 6 const memoFn = useCallback( (...args) =&gt; { // 你的逻辑 }, [deps] ) 参数 1：要缓存的函数 参数 2：依赖数组，依赖不变时，函数引用不变 返回值：缓存后的函数引用 与 useMemo 的等价写法：
 1 2 3 useCallback(fn, deps) useMemo(() =&gt; fn, deps) 使用场景 场景 1：搭配 React.memo - 减少子组件渲染
