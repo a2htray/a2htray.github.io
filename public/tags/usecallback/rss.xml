@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>UseCallback on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/usecallback/</link><description>Recent content in UseCallback on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 27 Oct 2026 10:02:45 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/usecallback/rss.xml" rel="self" type="application/rss+xml"/><item><title>React useCallback Hook - 缓存函数引用</title><link>https://a2htray.github.io/post/learn-frontend/react-usecallback-hook/</link><pubDate>Tue, 27 Oct 2026 10:02:45 +0800</pubDate><guid>https://a2htray.github.io/post/learn-frontend/react-usecallback-hook/</guid><description>&lt;h2 id="什么是-usecallback"&gt;什么是 useCallback
+&lt;a class="header-anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af-usecallback"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;区别于 &lt;code&gt;useMemo&lt;/code&gt;，&lt;code&gt;useCallback&lt;/code&gt; &lt;strong&gt;缓存函数引用，依赖不变时，多次渲染返回同一个函数对象&lt;/strong&gt;，不是缓存函数执行结果。&lt;/p&gt;
+&lt;p&gt;格式如下：&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-2"&gt;&lt;a class="lnlinks" href="#hl-0-2"&gt;2&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-3"&gt;&lt;a class="lnlinks" href="#hl-0-3"&gt;3&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-4"&gt;&lt;a class="lnlinks" href="#hl-0-4"&gt;4&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-5"&gt;&lt;a class="lnlinks" href="#hl-0-5"&gt;5&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-6"&gt;&lt;a class="lnlinks" href="#hl-0-6"&gt;6&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;memoFn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;useCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;(...&lt;/span&gt;&lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;// 你的逻辑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;deps&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;参数 1：要缓存的函数&lt;/li&gt;
+&lt;li&gt;参数 2：依赖数组，依赖不变时，函数引用不变&lt;/li&gt;
+&lt;li&gt;返回值：缓存后的函数引用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;与 &lt;code&gt;useMemo&lt;/code&gt; 的等价写法：&lt;/p&gt;</description></item></channel></rss>

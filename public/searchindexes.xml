@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>React useMemo Hook - 缓存函数调用结果</title><url>/post/learn-frontend/react-usememo-hook/</url><categories><category>前端技术</category><category>React</category></categories><tags><tag>React</tag><tag>React Hooks</tag><tag>useMemo</tag></tags><content type="html"><![CDATA[  什么是 useMemo useMemo 是 React 提供的一个 Hook，用来将计算结果缓存起来，只有当依赖项发生变化时才会才会重新计算。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>React useCallback Hook - 缓存函数引用</title><url>/post/learn-frontend/react-usecallback-hook/</url><categories><category>前端技术</category><category>React</category></categories><tags><tag>React</tag><tag>React Hooks</tag><tag>useCallback</tag></tags><content type="html"><![CDATA[  什么是 useCallback 区别于 useMemo，useCallback 缓存函数引用，依赖不变时，多次渲染返回同一个函数对象，不是缓存函数执行结果。
+格式如下：
+1 2 3 4 5 6 const memoFn = useCallback( (...args) =&gt; { // 你的逻辑 }, [deps] ) 参数 1：要缓存的函数 参数 2：依赖数组，依赖不变时，函数引用不变 返回值：缓存后的函数引用 与 useMemo 的等价写法：
+1 2 3 useCallback(fn, deps) useMemo(() =&gt; fn, deps) 使用场景 场景 1：搭配 React.memo - 减少子组件渲染
+1 2 3 4 5 6 7 const Child = React.memo(({ onClick }) =&gt; &lt;button onClick={onClick} /&gt;) // 父组件 const handleClick = useCallback(() =&gt; { console.log(&#39;click&#39;) }, []) &lt;Child onClick={handleClick} /&gt; 用 useCallback 固定函数引用，依赖不变时，传给子组件的回调不变，React.memo 生效。
+场景 2：函数作为 useEffect 的依赖项
+1 2 3 4 5 6 7 const loadList = useCallback(async () =&gt; { const res = await fetch(`/api/list?id=${id}`) }, [id]) useEffect(() =&gt; { loadList() }, [loadList]) 用 useCallback 固定函数引用，依赖不变时，useEffect 依赖项不变，避免重复执行。适用于：
+接口请求函数 定时器回调 事件订阅解绑函数   ]]></content></entry><entry><title>React useMemo Hook - 缓存函数调用结果</title><url>/post/learn-frontend/react-usememo-hook/</url><categories><category>前端技术</category><category>React</category></categories><tags><tag>React</tag><tag>React Hooks</tag><tag>useMemo</tag></tags><content type="html"><![CDATA[  什么是 useMemo useMemo 是 React 提供的一个 Hook，用来将计算结果缓存起来，只有当依赖项发生变化时才会才会重新计算。
 useMemo 不保证一定缓存命中，在内存压力、并发渲染等情况下，React 可能丢弃缓存并在下次渲染时重新计算。
 使用场景 场景 1：大量的同步计算
 比如大列表过滤、排序、复杂数学运算、大数据遍历，渲染频繁触发时。
