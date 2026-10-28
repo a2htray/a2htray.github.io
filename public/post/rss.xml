@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 快乐冲浪与生活</title><link>https://a2htray.github.io/post/</link><description>Recent content in Posts on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 27 Oct 2026 10:36:59 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>LeetCode 5. 最长回文子串</title><link>https://a2htray.github.io/post/learn-algo/leetcode/5/</link><pubDate>Tue, 27 Oct 2026 10:36:59 +0800</pubDate><guid>https://a2htray.github.io/post/learn-algo/leetcode/5/</guid><description>&lt;p&gt;给你一个字符串 s，找到 s 中最长的&lt;strong&gt;回文子串&lt;/strong&gt;。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 快乐冲浪与生活</title><link>https://a2htray.github.io/post/</link><description>Recent content in Posts on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 27 Oct 2026 16:32:28 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>声明式访问控制引擎 Casbin</title><link>https://a2htray.github.io/post/learn-backend/casbin/</link><pubDate>Tue, 27 Oct 2026 16:32:28 +0800</pubDate><guid>https://a2htray.github.io/post/learn-backend/casbin/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-backend/2026-10-28.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;Casbin 是一个基于声明式访问控制引擎，用于在应用中实现&lt;strong&gt;访问控制策略&lt;/strong&gt;。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Casbin 只负责授权，不负责认证。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="基础概念"&gt;基础概念
+&lt;a class="header-anchor" href="#%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;Casbin 包含 5 个核心组件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;模型（Model）&lt;/strong&gt;：定义一套权限“语法框架”，规定请求长什么样、策略字段有哪些、怎么匹配、命中后怎么算结果。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;策略（Policy）&lt;/strong&gt;：具体的权限记录，是填充到 Model 模板里的实例数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行器（Enforcer）&lt;/strong&gt;：调度中心，绑定 Model + Adapter，对外提供鉴权、策略管理 API。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适配器（Adapter）&lt;/strong&gt;：隔离 Enforcer 和存储介质，负责 Policy 的读。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;匹配器（Matcher）&lt;/strong&gt;：定义了主体和资源的匹配规则，用于判断是否命中策略。&lt;/li&gt;
+&lt;/ol&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Enforcer &lt;strong&gt;不是线程安全&lt;/strong&gt;。生产一般全局单例；写策略的时候建议加锁。&lt;/p&gt;</description></item><item><title>LeetCode 5. 最长回文子串</title><link>https://a2htray.github.io/post/learn-algo/leetcode/5/</link><pubDate>Tue, 27 Oct 2026 10:36:59 +0800</pubDate><guid>https://a2htray.github.io/post/learn-algo/leetcode/5/</guid><description>&lt;p&gt;给你一个字符串 s，找到 s 中最长的&lt;strong&gt;回文子串&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;示例 1：&lt;/strong&gt;&lt;/p&gt;
 
  &lt;blockquote&gt;

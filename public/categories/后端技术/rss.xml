@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>后端技术 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/</link><description>Recent content in 后端技术 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 16 Oct 2026 18:16:05 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/rss.xml" rel="self" type="application/rss+xml"/><item><title>RocketMQ：使用 5.x 客户端及代码示例</title><link>https://a2htray.github.io/post/learn-rocketmq/use-5x-client/</link><pubDate>Fri, 16 Oct 2026 18:16:05 +0800</pubDate><guid>https://a2htray.github.io/post/learn-rocketmq/use-5x-client/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-rocketmq/20261019-2.png" alt="" /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>后端技术 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/</link><description>Recent content in 后端技术 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 27 Oct 2026 16:32:28 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/%E5%90%8E%E7%AB%AF%E6%8A%80%E6%9C%AF/rss.xml" rel="self" type="application/rss+xml"/><item><title>声明式访问控制引擎 Casbin</title><link>https://a2htray.github.io/post/learn-backend/casbin/</link><pubDate>Tue, 27 Oct 2026 16:32:28 +0800</pubDate><guid>https://a2htray.github.io/post/learn-backend/casbin/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-backend/2026-10-28.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;Casbin 是一个基于声明式访问控制引擎，用于在应用中实现&lt;strong&gt;访问控制策略&lt;/strong&gt;。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Casbin 只负责授权，不负责认证。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="基础概念"&gt;基础概念
+&lt;a class="header-anchor" href="#%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;Casbin 包含 5 个核心组件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;模型（Model）&lt;/strong&gt;：定义一套权限“语法框架”，规定请求长什么样、策略字段有哪些、怎么匹配、命中后怎么算结果。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;策略（Policy）&lt;/strong&gt;：具体的权限记录，是填充到 Model 模板里的实例数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行器（Enforcer）&lt;/strong&gt;：调度中心，绑定 Model + Adapter，对外提供鉴权、策略管理 API。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适配器（Adapter）&lt;/strong&gt;：隔离 Enforcer 和存储介质，负责 Policy 的读。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;匹配器（Matcher）&lt;/strong&gt;：定义了主体和资源的匹配规则，用于判断是否命中策略。&lt;/li&gt;
+&lt;/ol&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Enforcer &lt;strong&gt;不是线程安全&lt;/strong&gt;。生产一般全局单例；写策略的时候建议加锁。&lt;/p&gt;</description></item><item><title>RocketMQ：使用 5.x 客户端及代码示例</title><link>https://a2htray.github.io/post/learn-rocketmq/use-5x-client/</link><pubDate>Fri, 16 Oct 2026 18:16:05 +0800</pubDate><guid>https://a2htray.github.io/post/learn-rocketmq/use-5x-client/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-rocketmq/20261019-2.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="vs-4x-客户端"&gt;vs. 4.x 客户端
 &lt;a class="header-anchor" href="#vs-4x-%e5%ae%a2%e6%88%b7%e7%ab%af"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;Python 4.x SDK 是 Remoting TCP 协议的老富客户端；Python 5.x（&lt;code&gt;rocketmq-python-client&lt;/code&gt;）是全新 gRPC 协议 SDK，两套代码完全重构，API 不兼容，不是简单小版本升级&lt;/p&gt;</description></item><item><title>RocketMQ 消息类型：同步、异步、顺序、延时、事务</title><link>https://a2htray.github.io/post/learn-rocketmq/message-types/</link><pubDate>Fri, 16 Oct 2026 14:42:37 +0800</pubDate><guid>https://a2htray.github.io/post/learn-rocketmq/message-types/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-rocketmq/20261016-3.png" alt="" /&gt;&lt;/p&gt;

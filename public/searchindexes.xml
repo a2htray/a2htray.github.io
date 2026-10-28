@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>LeetCode 5. 最长回文子串</title><url>/post/learn-algo/leetcode/5/</url><categories><category>算法</category><category>LeetCode</category></categories><tags><tag>LeetCode</tag><tag>算法实现</tag></tags><content type="html"><![CDATA[  给你一个字符串 s，找到 s 中最长的回文子串。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>声明式访问控制引擎 Casbin</title><url>/post/learn-backend/casbin/</url><categories><category>后端技术</category><category>Casbin</category></categories><tags><tag>Python</tag><tag>Casbin</tag><tag>权限控制</tag></tags><content type="html"><![CDATA[  
+Casbin 是一个基于声明式访问控制引擎，用于在应用中实现访问控制策略。
+Casbin 只负责授权，不负责认证。
+基础概念 Casbin 包含 5 个核心组件：
+模型（Model）：定义一套权限“语法框架”，规定请求长什么样、策略字段有哪些、怎么匹配、命中后怎么算结果。 策略（Policy）：具体的权限记录，是填充到 Model 模板里的实例数据。 执行器（Enforcer）：调度中心，绑定 Model + Adapter，对外提供鉴权、策略管理 API。 适配器（Adapter）：隔离 Enforcer 和存储介质，负责 Policy 的读。 匹配器（Matcher）：定义了主体和资源的匹配规则，用于判断是否命中策略。 Enforcer 不是线程安全。生产一般全局单例；写策略的时候建议加锁。
+5 个组件之间的关系如下图：
+配置文件 Casbin 配置文件（model.conf）是一个包含权限“语法框架”的文件，用于定义主体、资源和操作的类型，包括：
+1 2 3 4 5 [request_definition] # r：请求结构 [policy_definition] # p：单条策略结构 [role_definition] # g：角色/分组关系（RBAC专属） [policy_effect] # e：多条策略冲突时的判定规则 [matchers] # m：匹配表达式（核心逻辑） 权限模型 ACL - 控制访问列表 ACL 控制访问列表是最简单的权限模型，直接定义每一个主体对某一资源的访问权限。
+配置文件 model.conf 如下：
+1 2 3 4 5 6 7 8 9 10 11 [request_definition] r = sub, obj, act [policy_definition] p = sub, obj, act [policy_effect] e = some(where (p.eft == allow)) [matchers] m = r.sub == p.sub &amp;amp;&amp;amp; r.obj == p.obj &amp;amp;&amp;amp; r.act == p.act 策略文件 policy.csv 如下：
+1 2 3 p, alice, article, read p, alice, article, write p, bob, …  ]]></content></entry><entry><title>LeetCode 5. 最长回文子串</title><url>/post/learn-algo/leetcode/5/</url><categories><category>算法</category><category>LeetCode</category></categories><tags><tag>LeetCode</tag><tag>算法实现</tag></tags><content type="html"><![CDATA[  给你一个字符串 s，找到 s 中最长的回文子串。
 示例 1：
 输入：s = &ldquo;babad&rdquo; 输出：&ldquo;bab&rdquo; 解释：&ldquo;aba&rdquo; 同样是符合题意的答案。
 示例 2：
