@@ -1,4 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GUI on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/gui/</link><description>Recent content in GUI on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 30 Oct 2026 16:12:58 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/gui/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 窗口生命周期：show、close、hide、事件、窗口标志 WindowFlags</title><link>https://a2htray.github.io/post/learn-qt/02-window-lifespan/</link><pubDate>Fri, 30 Oct 2026 16:12:58 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/02-window-lifespan/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover2.png" alt="" /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GUI on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/gui/</link><description>Recent content in GUI on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 03 Nov 2026 10:50:32 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/gui/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 信号与槽函数进阶：自定义信号、传参信号、Lambda 槽函数</title><link>https://a2htray.github.io/post/learn-qt/04-signal-slot-advanced/</link><pubDate>Tue, 03 Nov 2026 10:50:32 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/04-signal-slot-advanced/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover4.png" alt="" /&gt;&lt;/p&gt;
+&lt;h2 id="概述"&gt;概述
+&lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;在上一篇文章
+&lt;a href="https://a2htray.github.io/post/learn-qt/03-signal-slot/" title="《PySide6 信号与槽（Signal &amp;amp; Slot）：Qt 最核心机制，写法详解》" &gt;
+ 《PySide6 信号与槽（Signal &amp;amp; Slot）：Qt 最核心机制，写法详解》
+ 
+&lt;/a&gt;中，学习了如何使用内置信号、槽函数绑定、自定义信号，本文将回顾与学习以下一些进阶内容：&lt;/p&gt;</description></item><item><title>PySide6 信号与槽（Signal &amp; Slot）：Qt 最核心机制，写法详解</title><link>https://a2htray.github.io/post/learn-qt/03-signal-slot/</link><pubDate>Mon, 02 Nov 2026 09:40:45 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/03-signal-slot/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover3.png" alt="" /&gt;&lt;/p&gt;
+&lt;h2 id="信号与槽"&gt;信号与槽
+&lt;a class="header-anchor" href="#%e4%bf%a1%e5%8f%b7%e4%b8%8e%e6%a7%bd"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;信号(Signal)&lt;/strong&gt;：对象在状态发生变化时主动发出的通知，本身不包含业务逻辑。
+&lt;ul&gt;
+&lt;li&gt;由 Qt 内置控件预先定义（&lt;code&gt;clicked&lt;/code&gt; / &lt;code&gt;textChanged&lt;/code&gt; / &lt;code&gt;valueChanged&lt;/code&gt;），或者自定义信号&lt;/li&gt;
+&lt;li&gt;信号可以携带参数，用于把数据传递给接收方&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;槽(Slot)&lt;/strong&gt;：普通可调用函数（方法），用来响应信号；&lt;strong&gt;信号触发时，槽函数被执行&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;可以是类成员方法、普通函数、lambda&lt;/li&gt;
+&lt;li&gt;槽的参数数量 ≤ 信号参数数量；多余参数可以设置默认值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;核心优势：&lt;strong&gt;解耦&lt;/strong&gt;。发送方只负责发信号，不需要知道谁接收；接收方只负责处理，不需要持有发送方强依赖。
+底层：属于&lt;strong&gt;发布订阅模型&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>PySide6 窗口生命周期：show、close、hide、事件、窗口标志 WindowFlags</title><link>https://a2htray.github.io/post/learn-qt/02-window-lifespan/</link><pubDate>Fri, 30 Oct 2026 16:12:58 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/02-window-lifespan/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover2.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="前言"&gt;前言
 &lt;a class="header-anchor" href="#%e5%89%8d%e8%a8%80"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;窗口有一套完整的&lt;strong&gt;生命周期&lt;/strong&gt;：对象实例化 → 准备显示 → 显示 → 隐藏 → 关闭 → 对象销毁。同时配套 &lt;code&gt;show()&lt;/code&gt; / &lt;code&gt;hide()&lt;/code&gt; / &lt;code&gt;close()&lt;/code&gt; 三个核心方法，以及窗口标志 &lt;code&gt;Qt.WindowFlags&lt;/code&gt; 控制窗口样式（有无标题栏、是否置顶、弹窗样式等）。&lt;/p&gt;</description></item><item><title>PySide6 窗口基础：QWidget / QMainWindow / QDialog 三大顶层窗口区别</title><link>https://a2htray.github.io/post/learn-qt/01-three-top-classes/</link><pubDate>Thu, 29 Oct 2026 17:28:37 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/01-three-top-classes/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover1.png" alt="" /&gt;&lt;/p&gt;
