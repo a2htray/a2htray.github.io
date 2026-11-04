@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 快乐冲浪与生活</title><link>https://a2htray.github.io/post/</link><description>Recent content in Posts on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 03 Nov 2026 10:50:32 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 信号与槽函数进阶：自定义信号、传参信号、Lambda 槽函数</title><link>https://a2htray.github.io/post/learn-qt/04-signal-slot-advanced/</link><pubDate>Tue, 03 Nov 2026 10:50:32 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/04-signal-slot-advanced/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover4.png" alt="" /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 快乐冲浪与生活</title><link>https://a2htray.github.io/post/</link><description>Recent content in Posts on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 04 Nov 2026 09:39:38 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/post/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 文本控件：QLabel、QLineEdit、QTextEdit、QPlainTextEdit 使用全解</title><link>https://a2htray.github.io/post/learn-qt/05-text-widget/</link><pubDate>Wed, 04 Nov 2026 09:39:38 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/05-text-widget/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover5.png" alt="" /&gt;&lt;/p&gt;
+&lt;h2 id="文本控件"&gt;文本控件
+&lt;a class="header-anchor" href="#%e6%96%87%e6%9c%ac%e6%8e%a7%e4%bb%b6"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;PySide6 提供了多种文本控件，用于显示和编辑文本，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;QLabel：用于显示文本，不支持编辑&lt;/li&gt;
+&lt;li&gt;QLineEdit：用于编辑文本，支持输入&lt;/li&gt;
+&lt;li&gt;QTextEdit：用于编辑多行文本，支持格式化&lt;/li&gt;
+&lt;li&gt;QPlainTextEdit：用于编辑多行文本，不支持格式化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;一图全览&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>PySide6 信号与槽函数进阶：自定义信号、传参信号、Lambda 槽函数</title><link>https://a2htray.github.io/post/learn-qt/04-signal-slot-advanced/</link><pubDate>Tue, 03 Nov 2026 10:50:32 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/04-signal-slot-advanced/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover4.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="概述"&gt;概述
 &lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;在上一篇文章
