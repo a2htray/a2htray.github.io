@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PySide6 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/pyside6/</link><description>Recent content in PySide6 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 05 Nov 2026 09:47:33 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/pyside6/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 扩展文本控件（一）：QTextBrowser、QLCDNumber</title><link>https://a2htray.github.io/post/learn-qt/06-text-extend-widgets/</link><pubDate>Thu, 05 Nov 2026 09:47:33 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/06-text-extend-widgets/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover6.png" alt="" /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PySide6 on 快乐冲浪与生活</title><link>https://a2htray.github.io/categories/pyside6/</link><description>Recent content in PySide6 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 06 Nov 2026 16:20:42 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/categories/pyside6/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 按钮类控件（一）：QPushButton、QRadioButton</title><link>https://a2htray.github.io/post/learn-qt/08-btn-widgets/</link><pubDate>Fri, 06 Nov 2026 16:20:42 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/08-btn-widgets/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover8.png" alt="" /&gt;&lt;/p&gt;
+&lt;h2 id="前言"&gt;前言
+&lt;a class="header-anchor" href="#%e5%89%8d%e8%a8%80"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;按钮承担着 GUI 程序里最基础的交互职责：接收用户的点击，触发对应的事件，完成相应的业务。PySide6 中所有按钮都继承自同一个基类，&lt;/p&gt;
+
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt" id="hl-0-1"&gt;&lt;a class="lnlinks" href="#hl-0-1"&gt;1&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-2"&gt;&lt;a class="lnlinks" href="#hl-0-2"&gt;2&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-3"&gt;&lt;a class="lnlinks" href="#hl-0-3"&gt;3&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-4"&gt;&lt;a class="lnlinks" href="#hl-0-4"&gt;4&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-5"&gt;&lt;a class="lnlinks" href="#hl-0-5"&gt;5&lt;/a&gt;
+&lt;/span&gt;&lt;span class="lnt" id="hl-0-6"&gt;&lt;a class="lnlinks" href="#hl-0-6"&gt;6&lt;/a&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;QWidget
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - QAbstractButton
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - QPushButton
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - QRadioButton
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - QCheckBox
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; - QToolButton&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如下图：&lt;/p&gt;</description></item><item><title>PySide6 扩展文本控件（二）：QKeySequenceEdit、QFontComboBox、QGraphicsTextItem</title><link>https://a2htray.github.io/post/learn-qt/07-text-extend-widgets2/</link><pubDate>Thu, 05 Nov 2026 17:06:54 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/07-text-extend-widgets2/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover7.png" alt="" /&gt;&lt;/p&gt;
+&lt;h2 id="另外-3-个文本扩展控件"&gt;另外 3 个文本扩展控件
+&lt;a class="header-anchor" href="#%e5%8f%a6%e5%a4%96-3-%e4%b8%aa%e6%96%87%e6%9c%ac%e6%89%a9%e5%b1%95%e6%8e%a7%e4%bb%b6"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;承接上文 
+&lt;a href="https://a2htray.github.io/post/learn-qt/06-text-extend-widgets/" title="PySide6 扩展文本控件（一）：QTextBrowser、QLCDNumber" &gt;
+ PySide6 扩展文本控件（一）：QTextBrowser、QLCDNumber
+ 
+&lt;/a&gt;，本文介绍另外 3 个文本扩展控件。&lt;/p&gt;</description></item><item><title>PySide6 扩展文本控件（一）：QTextBrowser、QLCDNumber</title><link>https://a2htray.github.io/post/learn-qt/06-text-extend-widgets/</link><pubDate>Thu, 05 Nov 2026 09:47:33 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/06-text-extend-widgets/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover6.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="扩展控件"&gt;扩展控件
 &lt;a class="header-anchor" href="#%e6%89%a9%e5%b1%95%e6%8e%a7%e4%bb%b6"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;基础的四个控件（&lt;code&gt;QLabel / QLineEdit / QTextEdit / QPlainTextEdit&lt;/code&gt;）能覆盖绝大多数场景，但 PySide6 还提供了一批&amp;quot;特定用途&amp;quot;的文本相关控件。这些扩展控件专用于某一特定场景的需求：&lt;/p&gt;</description></item><item><title>PySide6 文本控件：QLabel、QLineEdit、QTextEdit、QPlainTextEdit 使用全解</title><link>https://a2htray.github.io/post/learn-qt/05-text-widget/</link><pubDate>Wed, 04 Nov 2026 09:39:38 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/05-text-widget/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover5.png" alt="" /&gt;&lt;/p&gt;
