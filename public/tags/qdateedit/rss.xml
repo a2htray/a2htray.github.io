@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>QDateEdit on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/qdateedit/</link><description>Recent content in QDateEdit on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Nov 2026 09:27:09 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/qdateedit/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 选择输入控件（二）：QDoubleSpinBox、QDateEdit、QTimeEdit</title><link>https://a2htray.github.io/post/learn-qt/11-input-widgets2/</link><pubDate>Tue, 10 Nov 2026 09:27:09 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/11-input-widgets2/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover11.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;本文继续讲解数值与时间类选择输入控件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;浮点数微调框&lt;/strong&gt;：QDoubleSpinBox&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;日期选择框&lt;/strong&gt;：QDateEdit&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间选择框&lt;/strong&gt;：QTimeEdit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这类控件内置&lt;strong&gt;格式化、范围校验&lt;/strong&gt;，非常适合表单里的浮点参数、日期、时间录入场景。&lt;/p&gt;</description></item></channel></rss>

@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sat, 07 Nov 2026 17:27:14 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 按钮类控件（二）：QCheckBox、QToolButton</title><link>https://a2htray.github.io/post/learn-qt/09-btn-widgets2/</link><pubDate>Sat, 07 Nov 2026 17:27:14 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/09-btn-widgets2/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover9.png" alt="" /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>快乐冲浪与生活</title><link>https://a2htray.github.io/</link><description>Recent content on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Nov 2026 09:27:09 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 选择输入控件（二）：QDoubleSpinBox、QDateEdit、QTimeEdit</title><link>https://a2htray.github.io/post/learn-qt/11-input-widgets2/</link><pubDate>Tue, 10 Nov 2026 09:27:09 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/11-input-widgets2/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover11.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;本文继续讲解数值与时间类选择输入控件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;浮点数微调框&lt;/strong&gt;：QDoubleSpinBox&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;日期选择框&lt;/strong&gt;：QDateEdit&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间选择框&lt;/strong&gt;：QTimeEdit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这类控件内置&lt;strong&gt;格式化、范围校验&lt;/strong&gt;，非常适合表单里的浮点参数、日期、时间录入场景。&lt;/p&gt;</description></item><item><title>PySide6 选择输入控件（一）：QComboBox、QSpinBox</title><link>https://a2htray.github.io/post/learn-qt/10-input-widgets/</link><pubDate>Mon, 09 Nov 2026 09:42:07 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/10-input-widgets/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover10.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;本文介绍选择输入类控件，包括 QComboBox、QSpinBox：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;QComboBox&lt;/strong&gt;：聚焦下拉选择框&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;QSpinBox&lt;/strong&gt;：数值微调框&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="qcombobox"&gt;QComboBox
+&lt;a class="header-anchor" href="#qcombobox"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;QComboBox&lt;/code&gt; 是 PySide6（Qt Widgets）里的&lt;strong&gt;下拉组合框&lt;/strong&gt;，把按钮 + 弹出列表合在一起：&lt;/p&gt;</description></item><item><title>PySide6 按钮类控件（二）：QCheckBox、QToolButton</title><link>https://a2htray.github.io/post/learn-qt/09-btn-widgets2/</link><pubDate>Sat, 07 Nov 2026 17:27:14 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/09-btn-widgets2/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover9.png" alt="" /&gt;&lt;/p&gt;
 &lt;p&gt;承接上文
 &lt;a href="https://a2htray.github.io/post/learn-qt/08-btn-widgets/" title="PySide6 按钮类控件（一）：QPushButton、QRadioButton" &gt;
  PySide6 按钮类控件（一）：QPushButton、QRadioButton
