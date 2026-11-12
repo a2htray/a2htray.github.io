@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>滑块 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%BB%91%E5%9D%97/</link><description>Recent content in 滑块 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 11 Nov 2026 09:17:17 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%BB%91%E5%9D%97/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 滑块与进度：QSlider、QProgressBar、QDial</title><link>https://a2htray.github.io/post/learn-qt/12-slider-widgets/</link><pubDate>Wed, 11 Nov 2026 09:17:17 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/12-slider-widgets/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover12.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;本文介绍的 3 个控件处理的是连续量，用拖拽的方式在一段区间里取一个值，或者把一件事情的完成程度可视化表示出来，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;QSlider&lt;/code&gt;：滑块&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;QProgressBar&lt;/code&gt;：进度条&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;QDial&lt;/code&gt;：仪表盘&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;程序界面中的音量、亮度、缩放、导出进度等，都是用这 3 个控件实现。&lt;/p&gt;</description></item></channel></rss>
