@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>QFileDialog on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/qfiledialog/</link><description>Recent content in QFileDialog on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 12 Nov 2026 14:53:17 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/qfiledialog/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 弹窗对话框（二）：QFileDialog、QColorDialog</title><link>https://a2htray.github.io/post/learn-qt/14-dialog-widgets2/</link><pubDate>Thu, 12 Nov 2026 14:53:17 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/14-dialog-widgets2/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover14.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;QFileDialog&lt;/code&gt; 控件是&lt;strong&gt;文件 / 目录&lt;/strong&gt;选择对话框，用来和本地文件系统交互，使用场景包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;编辑器：打开 txt、md、csv、json；导出文件&lt;/li&gt;
+&lt;li&gt;图片工具：加载图片、保存图片&lt;/li&gt;
+&lt;li&gt;数据处理程序：选择数据集、选择输出目录&lt;/li&gt;
+&lt;li&gt;配置工具：选择资源文件夹、模型权重文件&lt;/li&gt;
+&lt;li&gt;导入导出：导入 Excel、导出报表&lt;/li&gt;
+&lt;li&gt;批量处理：选择多个文件批量转换&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;QColorDialog&lt;/code&gt; 控件是&lt;strong&gt;颜色拾取&lt;/strong&gt;对话框，用来选取 RGB/HSV 颜色，支持透明度通道，使用场景包括：&lt;/p&gt;</description></item></channel></rss>
