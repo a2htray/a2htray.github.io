@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>查询优化 on 快乐冲浪与生活</title><link>http://localhost:1313/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</link><description>Recent content in 查询优化 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Mar 2026 18:41:08 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/rss.xml" rel="self" type="application/rss+xml"/><item><title>MySQL OR 查询优化为 UNION/UNION AL 验证</title><link>http://localhost:1313/post/learn-db/01_or_operation_testing/</link><pubDate>Sun, 08 Mar 2026 18:41:08 +0800</pubDate><guid>http://localhost:1313/post/learn-db/01_or_operation_testing/</guid><description>&lt;p&gt;验证目标：在特定场景下（OR 连接不同字段的条件），将 OR 查询拆分为 UNION ALL 能显著提升查询效率。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>查询优化 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</link><description>Recent content in 查询优化 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 08 Mar 2026 18:41:08 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/rss.xml" rel="self" type="application/rss+xml"/><item><title>MySQL OR 查询优化为 UNION/UNION AL 验证</title><link>https://a2htray.github.io/post/learn-db/01_or_operation_testing/</link><pubDate>Sun, 08 Mar 2026 18:41:08 +0800</pubDate><guid>https://a2htray.github.io/post/learn-db/01_or_operation_testing/</guid><description>&lt;p&gt;验证目标：在特定场景下（OR 连接不同字段的条件），将 OR 查询拆分为 UNION ALL 能显著提升查询效率。&lt;/p&gt;
 &lt;h2 id="通过-docker-运行-mysql-服务"&gt;通过 Docker 运行 MySQL 服务
 &lt;a class="header-anchor" href="#%e9%80%9a%e8%bf%87-docker-%e8%bf%90%e8%a1%8c-mysql-%e6%9c%8d%e5%8a%a1"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -29,7 +29,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;p&gt;查看服务运行状态：&lt;/p&gt;</description></item><item><title>MySQL 查询优化技巧</title><link>http://localhost:1313/post/learn-db/00_mysql_query_optimizing/</link><pubDate>Fri, 06 Mar 2026 09:18:58 +0800</pubDate><guid>http://localhost:1313/post/learn-db/00_mysql_query_optimizing/</guid><description>&lt;p&gt;基础查询、关联查询、排序与分组、特殊场景、索引设计&lt;/p&gt;
+&lt;p&gt;查看服务运行状态：&lt;/p&gt;</description></item><item><title>MySQL 查询优化技巧</title><link>https://a2htray.github.io/post/learn-db/00_mysql_query_optimizing/</link><pubDate>Fri, 06 Mar 2026 09:18:58 +0800</pubDate><guid>https://a2htray.github.io/post/learn-db/00_mysql_query_optimizing/</guid><description>&lt;p&gt;基础查询、关联查询、排序与分组、特殊场景、索引设计&lt;/p&gt;
 &lt;h2 id="基础查询优化"&gt;基础查询优化
 &lt;a class="header-anchor" href="#%e5%9f%ba%e7%a1%80%e6%9f%a5%e8%af%a2%e4%bc%98%e5%8c%96"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;🎯 目标：规避全表扫描、减少网络 / 内存开销，让查询更轻量化&lt;/strong&gt;&lt;/p&gt;
