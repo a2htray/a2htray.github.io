@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PAT on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/pat/</link><description>Recent content in PAT on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 26 Mar 2023 11:32:42 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/pat/rss.xml" rel="self" type="application/rss+xml"/><item><title>PAT 乙级 1046</title><link>https://a2htray.github.io/post/old/pat-basic-level/1046/</link><pubDate>Sun, 26 Mar 2023 11:32:42 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1046/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1046.png" alt="" /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PAT on 快乐冲浪与生活</title><link>http://localhost:1313/tags/pat/</link><description>Recent content in PAT on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sun, 26 Mar 2023 11:32:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/pat/rss.xml" rel="self" type="application/rss+xml"/><item><title>PAT 乙级 1046</title><link>http://localhost:1313/post/old/pat-basic-level/1046/</link><pubDate>Sun, 26 Mar 2023 11:32:42 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1046/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1046.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -61,7 +61,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1044</title><link>https://a2htray.github.io/post/old/pat-basic-level/1044/</link><pubDate>Sat, 25 Mar 2023 18:46:30 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1044/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1044.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1044</title><link>http://localhost:1313/post/old/pat-basic-level/1044/</link><pubDate>Sat, 25 Mar 2023 18:46:30 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1044/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1044.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -200,7 +200,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;to_earth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1043</title><link>https://a2htray.github.io/post/old/pat-basic-level/1043/</link><pubDate>Sat, 25 Mar 2023 15:50:40 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1043/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1043.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1043</title><link>http://localhost:1313/post/old/pat-basic-level/1043/</link><pubDate>Sat, 25 Mar 2023 15:50:40 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1043/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1043.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -283,7 +283,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1042</title><link>https://a2htray.github.io/post/old/pat-basic-level/1042/</link><pubDate>Sat, 25 Mar 2023 15:30:03 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1042/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1042.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1042</title><link>http://localhost:1313/post/old/pat-basic-level/1042/</link><pubDate>Sat, 25 Mar 2023 15:30:03 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1042/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1042.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -336,7 +336,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;chr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;ord&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;stat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_num&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt; &lt;span class="n"&gt;max_num&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1041</title><link>https://a2htray.github.io/post/old/pat-basic-level/1041/</link><pubDate>Sat, 25 Mar 2023 15:07:42 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1041/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1041.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1041</title><link>http://localhost:1313/post/old/pat-basic-level/1041/</link><pubDate>Sat, 25 Mar 2023 15:07:42 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1041/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1041.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -387,7 +387,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;student_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1040</title><link>https://a2htray.github.io/post/old/pat-basic-level/1040/</link><pubDate>Sat, 25 Mar 2023 14:56:07 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1040/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1040.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1040</title><link>http://localhost:1313/post/old/pat-basic-level/1040/</link><pubDate>Sat, 25 Mar 2023 14:56:07 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1040/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1040.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -446,7 +446,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num_pat&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;1000000007&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1039</title><link>https://a2htray.github.io/post/old/pat-basic-level/1039/</link><pubDate>Sat, 25 Mar 2023 14:27:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1039/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1039.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1039</title><link>http://localhost:1313/post/old/pat-basic-level/1039/</link><pubDate>Sat, 25 Mar 2023 14:27:25 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1039/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1039.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -533,7 +533,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;absent&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1038</title><link>https://a2htray.github.io/post/old/pat-basic-level/1038/</link><pubDate>Thu, 23 Mar 2023 23:52:27 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1038/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1038.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1038</title><link>http://localhost:1313/post/old/pat-basic-level/1038/</link><pubDate>Thu, 23 Mar 2023 23:52:27 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1038/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1038.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -592,7 +592,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;counts&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1037</title><link>https://a2htray.github.io/post/old/pat-basic-level/1037/</link><pubDate>Thu, 23 Mar 2023 23:52:23 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1037/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1037.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1037</title><link>http://localhost:1313/post/old/pat-basic-level/1037/</link><pubDate>Thu, 23 Mar 2023 23:52:23 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1037/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1037.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -657,7 +657,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;flag&lt;/span&gt;&lt;span class="si"&gt;}{&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;.&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;.&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1036</title><link>https://a2htray.github.io/post/old/pat-basic-level/1036/</link><pubDate>Thu, 23 Mar 2023 23:52:18 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1036/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1036.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1036</title><link>http://localhost:1313/post/old/pat-basic-level/1036/</link><pubDate>Thu, 23 Mar 2023 23:52:18 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1036/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1036.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -730,7 +730,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;continue&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1033</title><link>https://a2htray.github.io/post/old/pat-basic-level/1033/</link><pubDate>Thu, 23 Mar 2023 23:49:46 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1033/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1033.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1033</title><link>http://localhost:1313/post/old/pat-basic-level/1033/</link><pubDate>Thu, 23 Mar 2023 23:49:46 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1033/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1033.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -781,7 +781,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1031</title><link>https://a2htray.github.io/post/old/pat-basic-level/1031/</link><pubDate>Sun, 12 Mar 2023 23:10:04 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1031/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1031.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1031</title><link>http://localhost:1313/post/old/pat-basic-level/1031/</link><pubDate>Sun, 12 Mar 2023 23:10:04 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1031/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1031.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -884,7 +884,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;for&lt;/span&gt; item in not_passed:
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; print&lt;span class="o"&gt;(&lt;/span&gt;item&lt;span class="o"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1029</title><link>https://a2htray.github.io/post/old/pat-basic-level/1029/</link><pubDate>Sun, 12 Mar 2023 23:05:13 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1029/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1029.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1029</title><link>http://localhost:1313/post/old/pat-basic-level/1029/</link><pubDate>Sun, 12 Mar 2023 23:05:13 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1029/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1029.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -937,7 +937,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; got_dict&lt;span class="o"&gt;[&lt;/span&gt;c&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; True
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; print&lt;span class="o"&gt;(&lt;/span&gt;c, &lt;span class="nv"&gt;end&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1026</title><link>https://a2htray.github.io/post/old/pat-basic-level/1026/</link><pubDate>Thu, 09 Mar 2023 23:50:37 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1026/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1026.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1026</title><link>http://localhost:1313/post/old/pat-basic-level/1026/</link><pubDate>Thu, 09 Mar 2023 23:50:37 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1026/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1026.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -992,7 +992,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%02d&lt;/span&gt;&lt;span class="s1"&gt;:&lt;/span&gt;&lt;span class="si"&gt;%02d&lt;/span&gt;&lt;span class="s1"&gt;:&lt;/span&gt;&lt;span class="si"&gt;%02d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1024</title><link>https://a2htray.github.io/post/old/pat-basic-level/1024/</link><pubDate>Wed, 08 Mar 2023 22:51:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1024/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1024.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1024</title><link>http://localhost:1313/post/old/pat-basic-level/1024/</link><pubDate>Wed, 08 Mar 2023 22:51:25 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1024/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1024.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1089,7 +1089,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;sci_number&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SciNumber&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sci_number&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sign&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sci_number&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_number&lt;/span&gt;&lt;span class="p"&gt;()))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1023</title><link>https://a2htray.github.io/post/old/pat-basic-level/1023/</link><pubDate>Wed, 08 Mar 2023 21:43:35 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1023/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1023.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1023</title><link>http://localhost:1313/post/old/pat-basic-level/1023/</link><pubDate>Wed, 08 Mar 2023 21:43:35 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1023/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1023.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1148,7 +1148,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;break&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;digits&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1021</title><link>https://a2htray.github.io/post/old/pat-basic-level/1021/</link><pubDate>Wed, 08 Mar 2023 21:08:17 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1021/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1021.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1021</title><link>http://localhost:1313/post/old/pat-basic-level/1021/</link><pubDate>Wed, 08 Mar 2023 21:08:17 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1021/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1021.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1191,7 +1191,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt;:&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1020</title><link>https://a2htray.github.io/post/old/pat-basic-level/1020/</link><pubDate>Wed, 08 Mar 2023 21:08:14 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1020/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1020.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1020</title><link>http://localhost:1313/post/old/pat-basic-level/1020/</link><pubDate>Wed, 08 Mar 2023 21:08:14 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1020/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1020.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1290,7 +1290,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%.2f&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;sale_price&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1019</title><link>https://a2htray.github.io/post/old/pat-basic-level/1019/</link><pubDate>Wed, 08 Mar 2023 21:08:10 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1019/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1019.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1019</title><link>http://localhost:1313/post/old/pat-basic-level/1019/</link><pubDate>Wed, 08 Mar 2023 21:08:10 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1019/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1019.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1371,7 +1371,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;num1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;num2&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;num1&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;04d&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt; - &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;num2&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;04d&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt; = &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt;&lt;span class="si"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;04d&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1018</title><link>https://a2htray.github.io/post/old/pat-basic-level/1018/</link><pubDate>Wed, 08 Mar 2023 21:08:06 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1018/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1018.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1018</title><link>http://localhost:1313/post/old/pat-basic-level/1018/</link><pubDate>Wed, 08 Mar 2023 21:08:06 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1018/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1018.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1466,7 +1466,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;alphabet&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;))],&lt;/span&gt; &lt;span class="n"&gt;alphabet&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt;&lt;span class="p"&gt;))])&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1022</title><link>https://a2htray.github.io/post/old/pat-basic-level/1022/</link><pubDate>Wed, 08 Mar 2023 21:02:22 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1022/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1022.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1022</title><link>http://localhost:1313/post/old/pat-basic-level/1022/</link><pubDate>Wed, 08 Mar 2023 21:02:22 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1022/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1022.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1529,7 +1529,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1013</title><link>https://a2htray.github.io/post/old/pat-basic-level/1013/</link><pubDate>Wed, 08 Mar 2023 20:47:11 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1013/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1013.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1013</title><link>http://localhost:1313/post/old/pat-basic-level/1013/</link><pubDate>Wed, 08 Mar 2023 20:47:11 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1013/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1013.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1606,7 +1606,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output_nums&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;output_nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]]))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1009</title><link>https://a2htray.github.io/post/old/pat-basic-level/1009/</link><pubDate>Wed, 08 Mar 2023 20:46:58 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1009/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1009.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1009</title><link>http://localhost:1313/post/old/pat-basic-level/1009/</link><pubDate>Wed, 08 Mar 2023 20:46:58 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1009/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1009.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1641,7 +1641,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;statement&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;statement&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1007</title><link>https://a2htray.github.io/post/old/pat-basic-level/1007/</link><pubDate>Wed, 08 Mar 2023 20:46:54 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1007/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1007.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1007</title><link>http://localhost:1313/post/old/pat-basic-level/1007/</link><pubDate>Wed, 08 Mar 2023 20:46:54 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1007/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1007.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1728,7 +1728,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1006</title><link>https://a2htray.github.io/post/old/pat-basic-level/1006/</link><pubDate>Wed, 08 Mar 2023 20:46:43 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1006/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1006.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1006</title><link>http://localhost:1313/post/old/pat-basic-level/1006/</link><pubDate>Wed, 08 Mar 2023 20:46:43 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1006/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1006.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1787,7 +1787,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bs_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;bs_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;tail&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1005</title><link>https://a2htray.github.io/post/old/pat-basic-level/1005/</link><pubDate>Wed, 08 Mar 2023 20:46:39 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1005/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1005.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1005</title><link>http://localhost:1313/post/old/pat-basic-level/1005/</link><pubDate>Wed, 08 Mar 2023 20:46:39 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1005/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1005.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1890,7 +1890,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;key_nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;key_nums&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1004</title><link>https://a2htray.github.io/post/old/pat-basic-level/1004/</link><pubDate>Wed, 08 Mar 2023 20:45:38 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1004/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1004.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1004</title><link>http://localhost:1313/post/old/pat-basic-level/1004/</link><pubDate>Wed, 08 Mar 2023 20:45:38 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1004/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1004.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1953,7 +1953,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;students&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;students&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;students&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;students&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;students&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;students&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1017</title><link>https://a2htray.github.io/post/old/pat-basic-level/1017/</link><pubDate>Sun, 05 Mar 2023 23:28:59 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1017/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1017.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1017</title><link>http://localhost:1313/post/old/pat-basic-level/1017/</link><pubDate>Sun, 05 Mar 2023 23:28:59 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1017/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1017.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -1988,7 +1988,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1016</title><link>https://a2htray.github.io/post/old/pat-basic-level/1016/</link><pubDate>Sun, 05 Mar 2023 23:28:55 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1016/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1016.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1016</title><link>http://localhost:1313/post/old/pat-basic-level/1016/</link><pubDate>Sun, 05 Mar 2023 23:28:55 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1016/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1016.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -2065,7 +2065,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pad&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;strings&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;a_count&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pad&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;strings&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;b_count&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1015</title><link>https://a2htray.github.io/post/old/pat-basic-level/1015/</link><pubDate>Sun, 05 Mar 2023 23:28:52 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1015/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1015.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1015</title><link>http://localhost:1313/post/old/pat-basic-level/1015/</link><pubDate>Sun, 05 Mar 2023 23:28:52 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1015/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1015.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -2198,7 +2198,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;student&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;students&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;student&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;student&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;student&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1014</title><link>https://a2htray.github.io/post/old/pat-basic-level/1014/</link><pubDate>Sun, 05 Mar 2023 23:28:48 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1014/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1014.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1014</title><link>http://localhost:1313/post/old/pat-basic-level/1014/</link><pubDate>Sun, 05 Mar 2023 23:28:48 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1014/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1014.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -2353,7 +2353,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;week&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;hour&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;:&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;second&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1002</title><link>https://a2htray.github.io/post/old/pat-basic-level/1002/</link><pubDate>Tue, 28 Feb 2023 20:52:15 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1002/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1002.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1002</title><link>http://localhost:1313/post/old/pat-basic-level/1002/</link><pubDate>Tue, 28 Feb 2023 20:52:15 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1002/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1002.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -2432,7 +2432,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;output:
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;san si&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>PAT 乙级 1001</title><link>https://a2htray.github.io/post/old/pat-basic-level/1001/</link><pubDate>Tue, 28 Feb 2023 20:34:14 +0800</pubDate><guid>https://a2htray.github.io/post/old/pat-basic-level/1001/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="1001.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>PAT 乙级 1001</title><link>http://localhost:1313/post/old/pat-basic-level/1001/</link><pubDate>Tue, 28 Feb 2023 20:34:14 +0800</pubDate><guid>http://localhost:1313/post/old/pat-basic-level/1001/</guid><description>&lt;p&gt;&lt;img src="http://localhost:1313/imgs/img-lazy-loading.gif" data-src="1001.png" alt="" /&gt;&lt;/p&gt;
 &lt;h2 id="代码"&gt;代码
 &lt;a class="header-anchor" href="#%e4%bb%a3%e7%a0%81"&gt;&lt;/a&gt;
 &lt;/h2&gt;
@@ -2487,7 +2487,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;output:
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="m"&gt;18&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>Python PAT 甲级 1003</title><link>https://a2htray.github.io/post/old/python-pat-1004/</link><pubDate>Wed, 03 Aug 2022 00:33:33 +0800</pubDate><guid>https://a2htray.github.io/post/old/python-pat-1004/</guid><description>&lt;p&gt;PAT 甲级 1003 。&lt;/p&gt;
+&lt;/div&gt;</description></item><item><title>Python PAT 甲级 1003</title><link>http://localhost:1313/post/old/python-pat-1004/</link><pubDate>Wed, 03 Aug 2022 00:33:33 +0800</pubDate><guid>http://localhost:1313/post/old/python-pat-1004/</guid><description>&lt;p&gt;PAT 甲级 1003 。&lt;/p&gt;
 
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
 &lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
@@ -2566,7 +2566,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;p&gt;测试点 4 没过，应该是没有理解 &lt;em&gt;The input ends with N being 0. That case must NOT be processed.&lt;/em&gt; 的原因，因为不知道要输出什么。&lt;/p&gt;</description></item><item><title>Python PAT 甲级 1003</title><link>https://a2htray.github.io/post/old/python-pat-1003/</link><pubDate>Mon, 01 Aug 2022 23:24:15 +0800</pubDate><guid>https://a2htray.github.io/post/old/python-pat-1003/</guid><description>&lt;p&gt;PAT 甲级 1003 。&lt;/p&gt;
+&lt;p&gt;测试点 4 没过，应该是没有理解 &lt;em&gt;The input ends with N being 0. That case must NOT be processed.&lt;/em&gt; 的原因，因为不知道要输出什么。&lt;/p&gt;</description></item><item><title>Python PAT 甲级 1003</title><link>http://localhost:1313/post/old/python-pat-1003/</link><pubDate>Mon, 01 Aug 2022 23:24:15 +0800</pubDate><guid>http://localhost:1313/post/old/python-pat-1003/</guid><description>&lt;p&gt;PAT 甲级 1003 。&lt;/p&gt;
 &lt;!-- more --&gt;
 
 &lt;div class="highlight"&gt;&lt;div class="chroma"&gt;

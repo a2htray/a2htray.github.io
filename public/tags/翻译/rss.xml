@@ -1,34 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>翻译 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E7%BF%BB%E8%AF%91/</link><description>Recent content in 翻译 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sat, 25 Jul 2026 11:11:31 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E7%BF%BB%E8%AF%91/rss.xml" rel="self" type="application/rss+xml"/><item><title>Chatbot: MCP vs LangChain</title><link>https://a2htray.github.io/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</link><pubDate>Sat, 25 Jul 2026 11:11:31 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</guid><description>&lt;p&gt;本文是 T 系列的第 06 篇，主要比较在构建 Chatbot 中，MCP 与 LangChain 之间的区别。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>翻译 on 快乐冲浪与生活</title><link>http://localhost:1313/tags/%E7%BF%BB%E8%AF%91/</link><description>Recent content in 翻译 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sat, 25 Jul 2026 11:11:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BF%BB%E8%AF%91/rss.xml" rel="self" type="application/rss+xml"/><item><title>Chatbot: MCP vs LangChain</title><link>http://localhost:1313/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</link><pubDate>Sat, 25 Jul 2026 11:11:31 +0800</pubDate><guid>http://localhost:1313/post/learn-ai/t_06_ai_mcp_vs_langchain_react_for_chatbots/</guid><description>&lt;p&gt;本文是 T 系列的第 06 篇，主要比较在构建 Chatbot 中，MCP 与 LangChain 之间的区别。&lt;/p&gt;
 
  &lt;blockquote&gt;
- &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>客户服务 MCP：将 CRM 与聊天功能集成</title><link>https://a2htray.github.io/post/learn-ai/t_05_ai_mcp_for_customer_service/</link><pubDate>Fri, 24 Jul 2026 14:53:31 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_05_ai_mcp_for_customer_service/</guid><description>&lt;p&gt;本文是 T 系列的第 05 篇，主要介绍 MCP 在 CRM 系统中的 Chatbot 应用。&lt;/p&gt;
-
- &lt;blockquote&gt;
- &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-&lt;p&gt;在现代客户服务中，Chatbot 已不仅仅是常见的简单问题解答工具，它还是通往企业核心系统的重要入口，尤其是客户关系管理（CRM）平台。将 Chatbot 与 CRM 系统集成后，可&lt;strong&gt;处理诸如“查询我的工单状态”或“更新我的电话号码”等复杂且个性化的任务&lt;/strong&gt;。要想安全可靠地实现这一功能，则需要一种相对简单、基于结构化提示词工程的方法。模型上下文协议（MCP）通过一套工具链，将 Chatbot 连接至 CRM 系统，确保&lt;strong&gt;写入操作的安全性&lt;/strong&gt;、&lt;strong&gt;权限范围的精细化&lt;/strong&gt;以及&lt;strong&gt;工具架构的清晰性&lt;/strong&gt;。本文将展示如何使用 MCP 构建一个安全且功能完善的&lt;strong&gt;客户服务 Agent&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>MCP 在生产级别 Chatbot 中的安全机制</title><link>https://a2htray.github.io/post/learn-ai/t_04_ai_securing_chatbots_in_production/</link><pubDate>Thu, 23 Jul 2026 09:17:58 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_04_ai_securing_chatbots_in_production/</guid><description>&lt;p&gt;本文是 T 系列的第 04 篇，主要介绍 MCP 在生产级别 Chatbot 中的安全机制。&lt;/p&gt;
-
- &lt;blockquote&gt;
- &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>基于 MCP 实现持久化记忆</title><link>https://a2htray.github.io/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</link><pubDate>Tue, 21 Jul 2026 14:20:19 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</guid><description>&lt;p&gt;本文是 T 系列的第 03 篇，主要介绍 MCP 如何实现持久化记忆。&lt;/p&gt;
+ &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>客户服务 MCP：将 CRM 与聊天功能集成</title><link>http://localhost:1313/post/learn-ai/t_05_ai_mcp_for_customer_service/</link><pubDate>Fri, 24 Jul 2026 14:53:31 +0800</pubDate><guid>http://localhost:1313/post/learn-ai/t_05_ai_mcp_for_customer_service/</guid><description>&lt;p&gt;本文是 T 系列的第 05 篇，主要介绍 MCP 在 CRM 系统中的 Chatbot 应用。&lt;/p&gt;
 
  &lt;blockquote&gt;
  &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;
 
  &lt;/blockquote&gt;
-&lt;p&gt;尽管 LLM 在处理和生成文本方面非常强大，但它们&lt;strong&gt;本质上是无状态的&lt;/strong&gt;。&lt;em&gt;每次 API 调用都被视为一个全新的独立请求，无法保留之前交互的任何记忆&lt;/em&gt;。要使 Chatbot 或虚拟助手真正有用，它必须具备记忆能力，能够记住用户的姓名、偏好或多轮对话的上下文。传统方法试图通过将整个聊天历史打包进 LLM 的提示中来解决这一问题，但这种方法效率低、成本高且容易出错。本文探讨了一种更稳健且可扩展的解决方案：利用模型上下文协议（MCP）将记忆实现为外部、可管理的工具。这种方法使 Agent 即使保持无状态，而有状态的工具则提供持久的记忆功能。&lt;/p&gt;</description></item><item><title>基于 MCP 构建可查询的 Chatbot</title><link>https://a2htray.github.io/post/learn-ai/t_02_ai_build_chatbot_with_mcp/</link><pubDate>Tue, 21 Jul 2026 09:40:10 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_02_ai_build_chatbot_with_mcp/</guid><description>&lt;p&gt;本文是 T 系列的第 02 篇，主要介绍 Chatbot UI 如何基于 MCP 构建可查询的 Chatbot。&lt;/p&gt;
+&lt;p&gt;在现代客户服务中，Chatbot 已不仅仅是常见的简单问题解答工具，它还是通往企业核心系统的重要入口，尤其是客户关系管理（CRM）平台。将 Chatbot 与 CRM 系统集成后，可&lt;strong&gt;处理诸如“查询我的工单状态”或“更新我的电话号码”等复杂且个性化的任务&lt;/strong&gt;。要想安全可靠地实现这一功能，则需要一种相对简单、基于结构化提示词工程的方法。模型上下文协议（MCP）通过一套工具链，将 Chatbot 连接至 CRM 系统，确保&lt;strong&gt;写入操作的安全性&lt;/strong&gt;、&lt;strong&gt;权限范围的精细化&lt;/strong&gt;以及&lt;strong&gt;工具架构的清晰性&lt;/strong&gt;。本文将展示如何使用 MCP 构建一个安全且功能完善的&lt;strong&gt;客户服务 Agent&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>MCP 在生产级别 Chatbot 中的安全机制</title><link>http://localhost:1313/post/learn-ai/t_04_ai_securing_chatbots_in_production/</link><pubDate>Thu, 23 Jul 2026 09:17:58 +0800</pubDate><guid>http://localhost:1313/post/learn-ai/t_04_ai_securing_chatbots_in_production/</guid><description>&lt;p&gt;本文是 T 系列的第 04 篇，主要介绍 MCP 在生产级别 Chatbot 中的安全机制。&lt;/p&gt;
 
  &lt;blockquote&gt;
- &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>Chatbot UI 与 MCP Server 通信</title><link>https://a2htray.github.io/post/learn-ai/t_01_ai_chatbot_communicate_with_mcp_server/</link><pubDate>Mon, 20 Jul 2026 15:15:14 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_01_ai_chatbot_communicate_with_mcp_server/</guid><description>&lt;p&gt;本文是 T 系列的第 01 篇，主要介绍 Chatbot UI 如何与 MCP Server 进行通信。&lt;/p&gt;
+ &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>基于 MCP 实现持久化记忆</title><link>http://localhost:1313/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</link><pubDate>Tue, 21 Jul 2026 14:20:19 +0800</pubDate><guid>http://localhost:1313/post/learn-ai/t_03_ai_persistent_memory_with_mcp/</guid><description>&lt;p&gt;本文是 T 系列的第 03 篇，主要介绍 MCP 如何实现持久化记忆。&lt;/p&gt;
 
  &lt;blockquote&gt;
  &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;
 
  &lt;/blockquote&gt;
-&lt;p&gt;Chatbot 的用户界面（UI）正从简单的文本显示演变为一个动态客户端，能够与复杂的后端系统进行通信，而该后端通常由模型上下文协议（MCP）Agent 驱动。本文探讨了基于工具的聊天界面架构，&lt;strong&gt;重点分析前端与后端之间的通信流程&lt;/strong&gt;。我们将逐步介绍用户请求的路由、调用外部工具以及实时流式响应的全过程。目标是清晰理解支持这些复杂交互的协议和设计模式，从而超越基础的请求-响应模型，构建出更稳健、可扩展且更易用的系统。&lt;/p&gt;</description></item><item><title>下一代 Chatbot：MCP 扩展对话</title><link>https://a2htray.github.io/post/learn-ai/t_00_ai_chatbot_next_gen_chatbots/</link><pubDate>Mon, 20 Jul 2026 10:35:29 +0800</pubDate><guid>https://a2htray.github.io/post/learn-ai/t_00_ai_chatbot_next_gen_chatbots/</guid><description>&lt;p&gt;本文是 T 系列的第 00 篇，主要介绍下一代 Chatbot：MCP 扩展对话。&lt;/p&gt;
+&lt;p&gt;尽管 LLM 在处理和生成文本方面非常强大，但它们&lt;strong&gt;本质上是无状态的&lt;/strong&gt;。&lt;em&gt;每次 API 调用都被视为一个全新的独立请求，无法保留之前交互的任何记忆&lt;/em&gt;。要使 Chatbot 或虚拟助手真正有用，它必须具备记忆能力，能够记住用户的姓名、偏好或多轮对话的上下文。传统方法试图通过将整个聊天历史打包进 LLM 的提示中来解决这一问题，但这种方法效率低、成本高且容易出错。本文探讨了一种更稳健且可扩展的解决方案：利用模型上下文协议（MCP）将记忆实现为外部、可管理的工具。这种方法使 Agent 即使保持无状态，而有状态的工具则提供持久的记忆功能。&lt;/p&gt;</description></item><item><title>基于 MCP 构建可查询的 Chatbot</title><link>http://localhost:1313/post/learn-ai/t_02_ai_build_chatbot_with_mcp/</link><pubDate>Tue, 21 Jul 2026 09:40:10 +0800</pubDate><guid>http://localhost:1313/post/learn-ai/t_02_ai_build_chatbot_with_mcp/</guid><description>&lt;p&gt;本文是 T 系列的第 02 篇，主要介绍 Chatbot UI 如何基于 MCP 构建可查询的 Chatbot。&lt;/p&gt;
 
  &lt;blockquote&gt;
- &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>Go 泛型函数 - 解构类型参数</title><link>https://a2htray.github.io/post/old/go/deconstructing-type-in-go-with-a-example/</link><pubDate>Sun, 07 Jan 2024 14:41:11 +0800</pubDate><guid>https://a2htray.github.io/post/old/go/deconstructing-type-in-go-with-a-example/</guid><description>&lt;p&gt;原文地址：
+ &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>Chatbot UI 与 MCP Server 通信</title><link>http://localhost:1313/post/learn-ai/t_01_ai_chatbot_communicate_with_mcp_server/</link><pubDate>Mon, 20 Jul 2026 15:15:14 +0800</pubDate><guid>http://localhost:1313/post/learn-ai/t_01_ai_chatbot_communicate_with_mcp_server/</guid><description>&lt;p&gt;本文是 T 系列的第 01 篇，主要介绍 Chatbot UI 如何与 MCP Server 进行通信。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;Chatbot 的用户界面（UI）正从简单的文本显示演变为一个动态客户端，能够与复杂的后端系统进行通信，而该后端通常由模型上下文协议（MCP）Agent 驱动。本文探讨了基于工具的聊天界面架构，&lt;strong&gt;重点分析前端与后端之间的通信流程&lt;/strong&gt;。我们将逐步介绍用户请求的路由、调用外部工具以及实时流式响应的全过程。目标是清晰理解支持这些复杂交互的协议和设计模式，从而超越基础的请求-响应模型，构建出更稳健、可扩展且更易用的系统。&lt;/p&gt;</description></item><item><title>下一代 Chatbot：MCP 扩展对话</title><link>http://localhost:1313/post/learn-ai/t_00_ai_chatbot_next_gen_chatbots/</link><pubDate>Mon, 20 Jul 2026 10:35:29 +0800</pubDate><guid>http://localhost:1313/post/learn-ai/t_00_ai_chatbot_next_gen_chatbots/</guid><description>&lt;p&gt;本文是 T 系列的第 00 篇，主要介绍下一代 Chatbot：MCP 扩展对话。&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;T 系列为技术文章翻译系列，加以本人的一些拙见，如有雷同，实属正常，如有不同，欢迎交流。&lt;/p&gt;</description></item><item><title>Go 泛型函数 - 解构类型参数</title><link>http://localhost:1313/post/old/go/deconstructing-type-in-go-with-a-example/</link><pubDate>Sun, 07 Jan 2024 14:41:11 +0800</pubDate><guid>http://localhost:1313/post/old/go/deconstructing-type-in-go-with-a-example/</guid><description>&lt;p&gt;原文地址：
 &lt;a href="https://go.dev/blog/deconstructing-type-parameters" title="https://go.dev/blog/deconstructing-type-parameters" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://go.dev/blog/deconstructing-type-parameters
  
@@ -36,7 +36,7 @@
  
 &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;译者评论&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用&lt;font color="#0d6efd" style="font-weight: bold;"&gt;类型推断&lt;/font&gt;完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 &lt;font color="#0d6efd" style="font-weight: bold;"&gt;~ 符号&lt;/font&gt;，即用于指定类型的底层类型。&lt;/p&gt;</description></item><item><title>如何高效地使用 useRef、useMemo 和 useCallback</title><link>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</link><pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/react/react-hooks-useref-usememo-usecallback/</guid><description>&lt;p&gt;这是一篇关于 React Hooks 的技术文章翻译，原文地址：
+&lt;p&gt;本文通过 slices.Clone 泛型函数介绍了 Go 是如何使用&lt;font color="#0d6efd" style="font-weight: bold;"&gt;类型推断&lt;/font&gt;完成参数类型的解构。简单来说，如果第一个类型参数是一个复合类型，则可以通过第二、第三或更多的类型参数约束复杂类型中的类型参数，而类型推断则可以通过第一个参数推断出后续类型参数的实际类型。另外本文还说明为消除歧义而引入 &lt;font color="#0d6efd" style="font-weight: bold;"&gt;~ 符号&lt;/font&gt;，即用于指定类型的底层类型。&lt;/p&gt;</description></item><item><title>如何高效地使用 useRef、useMemo 和 useCallback</title><link>http://localhost:1313/post/old/react/react-hooks-useref-usememo-usecallback/</link><pubDate>Wed, 03 Jan 2024 22:38:25 +0800</pubDate><guid>http://localhost:1313/post/old/react/react-hooks-useref-usememo-usecallback/</guid><description>&lt;p&gt;这是一篇关于 React Hooks 的技术文章翻译，原文地址：
 
 &lt;a href="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" title="https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://dev.to/michael_osas/understanding-react-hooks-how-to-use-useref-usememo-and-usecallback-for-more-efficient-code-3ceh
@@ -45,14 +45,14 @@
  
 &lt;/a&gt;，翻译不当之处请指正。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;译者评价&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;文章主要介绍了 useRef、useMemo 和 useCallback 3 个 React Hook，读者可以通过此文了解 3 种 Hook 的使用方式、场景，但文章也存在一些缺点：&lt;/p&gt;</description></item><item><title>Go slog 标准包功能详细指南</title><link>https://a2htray.github.io/post/old/go/go-slog-package-translate/</link><pubDate>Sun, 03 Sep 2023 16:51:25 +0800</pubDate><guid>https://a2htray.github.io/post/old/go/go-slog-package-translate/</guid><description>&lt;p&gt;在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。&lt;/p&gt;
+&lt;p&gt;文章主要介绍了 useRef、useMemo 和 useCallback 3 个 React Hook，读者可以通过此文了解 3 种 Hook 的使用方式、场景，但文章也存在一些缺点：&lt;/p&gt;</description></item><item><title>Go slog 标准包功能详细指南</title><link>http://localhost:1313/post/old/go/go-slog-package-translate/</link><pubDate>Sun, 03 Sep 2023 16:51:25 +0800</pubDate><guid>http://localhost:1313/post/old/go/go-slog-package-translate/</guid><description>&lt;p&gt;在学习 log/slog 标准包的过程中，我搜索到一篇全面讲解 log/slog 标准包的文章，感受良多，故将其翻译成中文并分享到微信公众号。&lt;/p&gt;
 &lt;p&gt;原文地址：
 &lt;a href="https://betterstack.com/community/guides/logging/logging-in-go/" title="https://betterstack.com/community/guides/logging/logging-in-go/" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  https://betterstack.com/community/guides/logging/logging-in-go/
  
  &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
  
-&lt;/a&gt;&lt;/p&gt;</description></item><item><title>如何使用 Python 复制文件</title><link>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</link><pubDate>Thu, 15 Jun 2023 20:44:17 +0800</pubDate><guid>https://a2htray.github.io/post/old/python/how-to-copy-a-file-with-python/</guid><description>&lt;p&gt;
+&lt;/a&gt;&lt;/p&gt;</description></item><item><title>如何使用 Python 复制文件</title><link>http://localhost:1313/post/old/python/how-to-copy-a-file-with-python/</link><pubDate>Thu, 15 Jun 2023 20:44:17 +0800</pubDate><guid>http://localhost:1313/post/old/python/how-to-copy-a-file-with-python/</guid><description>&lt;p&gt;
 &lt;a href="https://builtin.com/data-science/copy-a-file-with-python" title="原文 How to Copy a File With Python" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  原文 How to Copy a File With Python
  
@@ -64,7 +64,7 @@
  &lt;p&gt;Python 的 shutil 模块提供了 4 种复制文件的方法，根据你的实际情况选择合适的方法。或许，本文的内容可能帮助到你。&lt;/p&gt;
 
  &lt;/blockquote&gt;
-&lt;p&gt;  在每天的软件开发过程中，通过程序复制文件是一项平常的工作任务。我们将学习 Python &lt;code&gt;shutil&lt;/code&gt; 模块提供的 4 种方法来完成文件复制，包括：&lt;/p&gt;</description></item><item><title>Bash：单括号与双括号的区别</title><link>https://a2htray.github.io/post/old/linux-shell/single-and-double-brackets/</link><pubDate>Thu, 23 Mar 2023 22:47:16 +0800</pubDate><guid>https://a2htray.github.io/post/old/linux-shell/single-and-double-brackets/</guid><description>&lt;p&gt;
+&lt;p&gt;  在每天的软件开发过程中，通过程序复制文件是一项平常的工作任务。我们将学习 Python &lt;code&gt;shutil&lt;/code&gt; 模块提供的 4 种方法来完成文件复制，包括：&lt;/p&gt;</description></item><item><title>Bash：单括号与双括号的区别</title><link>http://localhost:1313/post/old/linux-shell/single-and-double-brackets/</link><pubDate>Thu, 23 Mar 2023 22:47:16 +0800</pubDate><guid>http://localhost:1313/post/old/linux-shell/single-and-double-brackets/</guid><description>&lt;p&gt;
 &lt;a href="https://www.baeldung.com/linux/bash-single-vs-double-brackets" title="原文：Differences Between Single and Double Brackets in Bash" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  原文：Differences Between Single and Double Brackets in Bash
  
@@ -74,13 +74,13 @@
 &lt;h2 id="概述"&gt;概述
 &lt;a class="header-anchor" href="#%e6%a6%82%e8%bf%b0"&gt;&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;当我们在 Bash 中做变量比较时，通常可以交换地使用单括号 &lt;code&gt;[]&lt;/code&gt; 和双括号 &lt;code&gt;[[]]&lt;/code&gt;。比如，我们可以使用表达式 &lt;code&gt;[ 3 -eq 3 ]&lt;/code&gt; 或 &lt;code&gt;[[ 3 -eq 3 ]]&lt;/code&gt; 来比较 &lt;code&gt;3&lt;/code&gt; 是否等于 &lt;code&gt;3&lt;/code&gt;。两个表达式都会执行成功，那两者的区别是什么呢？&lt;/p&gt;
-&lt;p&gt;在本文中，我们会讨论单括号和双括号之间的一些区别。&lt;/p&gt;</description></item><item><title>Go Slice 的使用</title><link>https://a2htray.github.io/post/old/go-slice-usage/</link><pubDate>Mon, 19 Sep 2022 23:33:58 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-slice-usage/</guid><description>&lt;p&gt;原文：
+&lt;p&gt;在本文中，我们会讨论单括号和双括号之间的一些区别。&lt;/p&gt;</description></item><item><title>Go Slice 的使用</title><link>http://localhost:1313/post/old/go-slice-usage/</link><pubDate>Mon, 19 Sep 2022 23:33:58 +0800</pubDate><guid>http://localhost:1313/post/old/go-slice-usage/</guid><description>&lt;p&gt;原文：
 &lt;a href="https://yourbasic.org/golang/slices-explained/" title="Slices/arrays explained: create, index, slice, iterate" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  Slices/arrays explained: create, index, slice, iterate
  
  &lt;i class="fa fa-external-link-alt"&gt;&lt;/i&gt;
  
-&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Go 的错误处理</title><link>https://a2htray.github.io/post/old/go-error-handling/</link><pubDate>Mon, 22 Aug 2022 23:40:01 +0800</pubDate><guid>https://a2htray.github.io/post/old/go-error-handling/</guid><description>&lt;p&gt;原文：
+&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Go 的错误处理</title><link>http://localhost:1313/post/old/go-error-handling/</link><pubDate>Mon, 22 Aug 2022 23:40:01 +0800</pubDate><guid>http://localhost:1313/post/old/go-error-handling/</guid><description>&lt;p&gt;原文：
 &lt;a href="https://go.dev/blog/error-handling-and-go" title="Error handling and Go" rel="noopener external nofollow noreferrer" target="_blank" class=" exturl"&gt;
  Error handling and Go
  
