@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>样式 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%A0%B7%E5%BC%8F/</link><description>Recent content in 样式 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 18 Nov 2026 11:08:12 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%A0%B7%E5%BC%8F/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 QSS 入门：基础语法、选择器、颜色、边框、圆角</title><link>https://a2htray.github.io/post/learn-qt/19-qss/</link><pubDate>Wed, 18 Nov 2026 11:08:12 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/19-qss/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover19.png" alt="" /&gt;&lt;/p&gt;
+
+ &lt;blockquote&gt;
+ &lt;p&gt;如果你有 CSS 的基础，掌握 QSS 会更快速。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;h2 id="前言"&gt;前言
+&lt;a class="header-anchor" href="#%e5%89%8d%e8%a8%80"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;QSS 全称 Qt Style Sheets，语法借鉴 CSS，用于设置 Qt 应用的样式，包括给 &lt;code&gt;Qt/PySide6&lt;/code&gt; 控件上色、改边框、做圆角、定义交互悬浮效果等。&lt;/p&gt;</description></item></channel></rss>

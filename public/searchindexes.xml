@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>PySide6 QFormLayout 表单布局</title><url>/post/learn-qt/17-form-layout/</url><categories><category>后端技术</category><category>PySide6</category></categories><tags><tag>Python</tag><tag>PySide6</tag><tag>GUI</tag><tag>布局</tag><tag>QFormLayout</tag></tags><content type="html"><![CDATA[  
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>PySide6 QSS 入门：基础语法、选择器、颜色、边框、圆角</title><url>/post/learn-qt/19-qss/</url><categories><category>后端技术</category><category>PySide6</category></categories><tags><tag>Python</tag><tag>PySide6</tag><tag>GUI</tag><tag>QSS</tag><tag>样式</tag></tags><content type="html"><![CDATA[  
+如果你有 CSS 的基础，掌握 QSS 会更快速。
+前言 QSS 全称 Qt Style Sheets，语法借鉴 CSS，用于设置 Qt 应用的样式，包括给 Qt/PySide6 控件上色、改边框、做圆角、定义交互悬浮效果等。
+本文从基础语法讲起，介绍选择器、颜色、边框、圆角等知识点，同时介绍项目里最常用的独立 .qss 文件方案，实现样式与业务代码解耦，方便后续维护、换肤和迭代。
+基础语法 用规则定义样式，规则的格式如下：
+1 2 3 选择器 { 属性: 值; } 选择器：选择要应用样式的控件 属性：要应用的样式属性 值：属性的具体值 规则使用 /*、*/ 注释，注释内容不会被应用，并严格区分大小写。
+应用样式的方式有三：
+内联样式：直接在控件上设置样式，格式为 控件.setStyleSheet(样式) 全局样式：在应用启动时设置全局样式，格式为 window.setStyleSheet(样式) 独立 .qss 文件：将样式写入独立的 .qss 文件，格式为 window.setStyleSheet(&amp;quot;qss 文件内容&amp;quot;)，等同于方式二 选择器 QSS 的选择器包括类型选择器、ID 选择器、动态属性选择器、后代选择器和伪类选择器等。
+类型选择器
+1 2 3 4 /* 所有 QPushButton */ QPushButton { } /* 所有 QLabel */ QLabel { } ID 选择器
+1 btn.setObjectName(&amp;#34;submit_btn&amp;#34;) 1 2 3 #submit_btn { background-color: green; } 动态属性选择器
+1 btn.setProperty(&amp;#34;btn-type&amp;#34;, &amp;#34;danger&amp;#34;) 1 2 3 QPushButton[btn-type=&amp;#34;danger&amp;#34;] { background-color: #dc2626; } 后代选择器
+1 2 /* QWidget 里面所有 QLabel */ QWidget QLabel { color: #666; } 伪类选择器
+1 2 3 4 5 6 7 8 /* 鼠标悬浮 */ QPushButton:hover {} /* 按下 */ …  ]]></content></entry><entry><title>PySide6 布局进阶：伸缩因子 stretch、间距、边距、SizePolicy 尺寸策略</title><url>/post/learn-qt/18-layout-advanced/</url><categories><category>后端技术</category><category>PySide6</category></categories><tags><tag>Python</tag><tag>PySide6</tag><tag>GUI</tag><tag>布局</tag></tags><content type="html"><![CDATA[  
+前言 初学 PySide6 布局时，只会简单 addWidget，界面一缩放就失控：控件挤在一起、空白乱飘、控件不会跟着窗口拉伸、或者拉得过大变形。 布局看起来是 “摆放控件”，本质是尺寸分配规则。
+核心有四块：
+stretch 伸缩因子：空间怎么分 spacing：控件之间的间距 contentsMargins：布局四边的边距 SizePolicy：控件自身的伸缩策略 伸缩因子 stretch stretch 只分配&amp;quot;布局放完所有控件最小尺寸之后剩下的空闲空间&amp;quot;，按比例瓜分这份空白，不是直接平分整个容器宽度/高度。
+stretch 的基本规则是：
+stretch=0：不主动抢多余空间，窗口拉大，它的大小不变 stretch&amp;gt;0：数值是相对比例，数值越大，分配的空闲空间越多 相关方法有：
+layout.addWidget(widget, stretch=0) layout.addLayout(sub_layout, stretch=0) layout.addStretch(stretch=1) QGridLayout.setColumnStretch(col_idx, val) / QGridLayout.setRowStretch(row_idx, val) 下面演示一个二行三列的布局（QVBoxLayout 套两个 QHBoxLayout），形如：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 import sys from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit class MyWindow(QWidget): def __init__(self): super().__init__() self.setWindowTitle(&amp;#34;stretch 演示&amp;#34;) self.resize(450, 260) self.initUI() def initUI(self): &amp;#34;&amp;#34;&amp;#34;初始化 …  ]]></content></entry><entry><title>PySide6 QFormLayout 表单布局</title><url>/post/learn-qt/17-form-layout/</url><categories><category>后端技术</category><category>PySide6</category></categories><tags><tag>Python</tag><tag>PySide6</tag><tag>GUI</tag><tag>布局</tag><tag>QFormLayout</tag></tags><content type="html"><![CDATA[  
 在先前的文章中，学习了 QVBoxLayout、QHBoxLayout、QGridLayout 3 个布局类，今天来学习 QFormLayout，这是一个专门用于表单布局的布局类。
 前言 QFormLayout 就是 Qt 专门为“标签 + 输入控件”这种两列表单场景封装的布局管理器，不用手动管理行列，自带标签关联、跨平台对齐规则、自适应换行能力，非常适合做各类工具的参数配置面板。
 QFormLayout 固定是多行两列结构：
