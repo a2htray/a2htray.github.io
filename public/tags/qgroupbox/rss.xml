@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>QGroupBox on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/qgroupbox/</link><description>Recent content in QGroupBox on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 23 Nov 2026 17:18:59 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/qgroupbox/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 QGroupBox、QFrame 分组容器，界面分区</title><link>https://a2htray.github.io/post/learn-qt/22-group-container/</link><pubDate>Mon, 23 Nov 2026 17:18:59 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/22-group-container/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover22.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;本文讲解两个最常用的分区容器：&lt;strong&gt;QGroupBox（带标题分组框）&lt;/strong&gt;、&lt;strong&gt;QFrame（纯边框分区面板）&lt;/strong&gt;，两个控件的适用场景分别是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;QGroupBox&lt;/strong&gt;：需要分组显示控件，且分组有标题时使用，如功能模块分组、参数面板、设置项分组等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;QFrame&lt;/strong&gt;：需要分组显示控件，且分组无标题时使用，卡片、分割面板、视觉区块、自定义边框面板等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="qgroupbox"&gt;QGroupBox
+&lt;a class="header-anchor" href="#qgroupbox"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;QGroupBox，是一个带标题的分组框，最核心特色：&lt;code&gt;checkable&lt;/code&gt; 开关，勾选时自动启用 / 禁用内部所有子控件。&lt;/p&gt;</description></item></channel></rss>
