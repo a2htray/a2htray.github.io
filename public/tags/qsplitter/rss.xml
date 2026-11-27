@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>QSplitter on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/qsplitter/</link><description>Recent content in QSplitter on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 27 Nov 2026 13:33:56 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/qsplitter/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6 QSplitter 可拖动分割面板，左右/上下分栏</title><link>https://a2htray.github.io/post/learn-qt/25-qsplitter-widget/</link><pubDate>Fri, 27 Nov 2026 13:33:56 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/25-qsplitter-widget/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover25.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;在桌面 GUI 开发中，可自由拖动的分割面板是非常高频的需求，如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码编辑器左右分栏&lt;/li&gt;
+&lt;li&gt;资源管理器侧边栏&lt;/li&gt;
+&lt;li&gt;上下预览面板&lt;/li&gt;
+&lt;li&gt;三栏结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Qt 自带的 &lt;code&gt;QSplitter&lt;/code&gt; 就是专门用来实现该效果的控件，&lt;strong&gt;不需要自己监听鼠标拖拽、绘制分割线，开箱即用&lt;/strong&gt;，同时支持水平、垂直以及多层嵌套布局。&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>标签页控件 on 快乐冲浪与生活</title><link>https://a2htray.github.io/tags/%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%8E%A7%E4%BB%B6/</link><description>Recent content in 标签页控件 on 快乐冲浪与生活</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 24 Nov 2026 09:20:44 +0800</lastBuildDate><atom:link href="https://a2htray.github.io/tags/%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%8E%A7%E4%BB%B6/rss.xml" rel="self" type="application/rss+xml"/><item><title>PySide6：QStackedWidget 堆栈窗口</title><link>https://a2htray.github.io/post/learn-qt/24-qstackedwidget/</link><pubDate>Tue, 24 Nov 2026 09:20:44 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/24-qstackedwidget/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover24.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;QStackedWidget 是一个堆栈式页面容器&lt;/strong&gt;，里面可以放多个子页面（QWidget），&lt;strong&gt;所有页面是叠在一起的&lt;/strong&gt;，同一时间只会显示其中一个，其余页面自动隐藏。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;QStackedWidget&lt;/code&gt; &lt;strong&gt;没有自带导航栏、标签按钮&lt;/strong&gt;，本身不会提供切换入口，切换页面需要你自己通过代码调用 &lt;code&gt;setCurrentIndex&lt;/code&gt; / &lt;code&gt;setCurrentWidget&lt;/code&gt; 来控制。适合的场景有：&lt;/p&gt;</description></item><item><title>PySide6：QTabWidget 标签页控件</title><link>https://a2htray.github.io/post/learn-qt/23-qtabwidget/</link><pubDate>Mon, 23 Nov 2026 22:58:39 +0800</pubDate><guid>https://a2htray.github.io/post/learn-qt/23-qtabwidget/</guid><description>&lt;p&gt;&lt;img src="https://a2htray.github.io/imgs/img-lazy-loading.gif" data-src="https://a2htray.github.io/imgs/learn-qt/cover23.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;QTabWidget&lt;/code&gt; 是标签页容器，每个标签对应一个页面（&lt;code&gt;QWidget&lt;/code&gt;），用户可以通过点击标签来切换不同的页面。&lt;/p&gt;
+&lt;h2 id="信号与方法"&gt;信号与方法
+&lt;a class="header-anchor" href="#%e4%bf%a1%e5%8f%b7%e4%b8%8e%e6%96%b9%e6%b3%95"&gt;&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;常用信号包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;currentChanged(int)&lt;/code&gt;：当用户切换到不同的标签时触发，参数为当前选中的标签索引。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tabCloseRequested(int)&lt;/code&gt;：当用户点击关闭按钮时触发，参数为要关闭的标签索引。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tabBarClicked(int)&lt;/code&gt;：当用户点击标签页时触发，参数为点击的标签索引。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;常用方法包括：&lt;/p&gt;</description></item></channel></rss>
